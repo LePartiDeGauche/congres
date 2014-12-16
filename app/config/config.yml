@@ -82,3 +82,7 @@ fos_user:
     profile:
         form:
             type: app_user_profile
+
+twig:
+    form:
+        resources: ['bootstrap_3_layout.html.twig']
