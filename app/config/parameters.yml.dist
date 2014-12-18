@@ -6,6 +6,11 @@ parameters:
     database_name:     symfony
     database_user:     root
     database_password: ~
+    # This must be defined in order to test to work when database is not
+    # set up (eg. on travis), otherwise Doctrine will try to connect the
+    # database and generate error. See : https://github.com/symfony/symfony-standard/issues/748
+    # This value is only used in config_test.yml so it does not really matter.
+    database_server_version : "5.0"
     # You should uncomment this if you want use pdo_sqlite
     # database_path: "%kernel.root_dir%/data.db3"
 
