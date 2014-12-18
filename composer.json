@@ -1,6 +1,7 @@
 {
     "name": "partidegauche/congres",
-    "license": "AGPL",
+    "description": "Gestion des phases précédant le Congrès 2015 du Parti de Gauche",
+    "license": "AGPL-3.0",
     "type": "project",
     "autoload": {
         "psr-0": { "": "src/", "SymfonyStandard": "app/" }
