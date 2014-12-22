@@ -5,7 +5,7 @@ namespace AppBundle\Entity\Congres;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Table()
+ * @ORM\Table(name="contributions")
  * @ORM\Entity(repositoryClass="AppBundle\Entity\Congres\ContributionsRepository")
  * @ORM\InheritanceType("SINGLE_TABLE")
  * @ORM\DiscriminatorColumn(name="contribution_type", type="string")
@@ -20,29 +20,29 @@ class Contributions
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
      *
      * @ORM\Column(name="title", type="text")
      */
-    private $title;
+    protected $title;
 
     /**
      * @var string
      *
      * @ORM\Column(name="content", type="text")
      */
-    private $content;
+    protected $content;
 
     /**
      * @var \stdClass
      *
-     * @ORM\Column(name="status", type="object")
+     * @ORM\ManyToOne(targetEntity="ContributionStatus") 
+     * @ORM\JoinColumn(name="status_id", referencedColumnName="id")
      */
-    private $status;
-
+    protected $status;
 
     /**
      * Get id
@@ -100,14 +100,13 @@ class Contributions
         return $this->content;
     }
 
-
     /**
      * Set status
      *
-     * @param \stdClass $status
+     * @param \AppBundle\Entity\Congres\ContributionStatus $status
      * @return Contributions
      */
-    public function setStatus($status)
+    public function setStatus(\AppBundle\Entity\Congres\ContributionStatus $status = null)
     {
         $this->status = $status;
 
@@ -117,7 +116,7 @@ class Contributions
     /**
      * Get status
      *
-     * @return \stdClass 
+     * @return \AppBundle\Entity\Congres\ContributionStatus 
      */
     public function getStatus()
     {

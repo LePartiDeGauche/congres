@@ -7,7 +7,6 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * ThematicContributions
  *
- * @ORM\Table()
  * @ORM\Entity(repositoryClass="AppBundle\Entity\Congres\ThematicContributionsRepository")
  */
 class ThematicContributions extends Contributions
@@ -15,12 +14,39 @@ class ThematicContributions extends Contributions
 
     /**
      * @var integer
-     *
-     * @ORM\Column(name="vote", type="integer")
-     * FIXME
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\User")
+     * @ORM\JoinTable(name="thematic_votes")
+     * 
      */
-    private $vote;
+    protected $votes;
 
+    /**
+     * @var integer
+     */
+    protected $id;
+
+    /**
+     * @var string
+     */
+    protected $title;
+
+    /**
+     * @var string
+     */
+    protected $content;
+
+    /**
+     * @var \AppBundle\Entity\Congres\ContributionStatus
+     */
+    protected $status;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->votes = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
@@ -33,25 +59,104 @@ class ThematicContributions extends Contributions
     }
 
     /**
-     * Set vote
+     * Set title
      *
-     * @param integer $vote
+     * @param string $title
      * @return ThematicContributions
      */
-    public function setVote($vote)
+    public function setTitle($title)
     {
-        $this->vote = $vote;
+        $this->title = $title;
 
         return $this;
     }
 
     /**
-     * Get vote
+     * Get title
      *
-     * @return integer 
+     * @return string 
      */
-    public function getVote()
+    public function getTitle()
     {
-        return $this->vote;
+        return $this->title;
+    }
+
+    /**
+     * Set content
+     *
+     * @param string $content
+     * @return ThematicContributions
+     */
+    public function setContent($content)
+    {
+        $this->content = $content;
+
+        return $this;
+    }
+
+    /**
+     * Get content
+     *
+     * @return string 
+     */
+    public function getContent()
+    {
+        return $this->content;
+    }
+
+    /**
+     * Add votes
+     *
+     * @param \AppBundle\Entity\User $votes
+     * @return ThematicContributions
+     */
+    public function addVote(\AppBundle\Entity\User $votes)
+    {
+        $this->votes[] = $votes;
+
+        return $this;
+    }
+
+    /**
+     * Remove votes
+     *
+     * @param \AppBundle\Entity\User $votes
+     */
+    public function removeVote(\AppBundle\Entity\User $votes)
+    {
+        $this->votes->removeElement($votes);
+    }
+
+    /**
+     * Get votes
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getVotes()
+    {
+        return $this->votes;
+    }
+
+    /**
+     * Set status
+     *
+     * @param \AppBundle\Entity\Congres\ContributionStatus $status
+     * @return ThematicContributions
+     */
+    public function setStatus(\AppBundle\Entity\Congres\ContributionStatus $status = null)
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * Get status
+     *
+     * @return \AppBundle\Entity\Congres\ContributionStatus 
+     */
+    public function getStatus()
+    {
+        return $this->status;
     }
 }
