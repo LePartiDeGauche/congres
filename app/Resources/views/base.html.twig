@@ -2,12 +2,39 @@
 <html>
     <head>
         <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="{{ asset('css/main.css') }}" />
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
+        <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Menu</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">
+                        <img src="{{ asset('img/logo.png') }}" alt="Logo du Parti de Gauche"/>
+                    </a>
+                </div>
+                <div class="collapse navbar-collapse">
+                    {% block navbar %}
+                        <ul class="nav navbar-nav">
+                            {% block navLinks %}
+                            {% endblock %}
+                        </ul>
+                    {% endblock %}
+                </div><!--/.nav-collapse -->
+            </div>
+        </div>
         {% block body %}{% endblock %}
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
         {% block javascripts %}{% endblock %}
     </body>
 </html>

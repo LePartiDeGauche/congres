@@ -4,6 +4,13 @@ parameters:
 #    parameter_name: value
 
 services:
-#    service_name:
-#        class: AppBundle\Directory\ClassName
-#        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+    app.user.registration.form.type:
+        class: AppBundle\Form\Type\RegistrationType
+        arguments: [%fos_user.model.user.class%]
+        tags:
+            - { name: form.type, alias: app_user_registration }
+    app.user.profile.form.type:
+        class: AppBundle\Form\Type\ProfileType
+        arguments: [%fos_user.model.user.class%]
+        tags:
+            - { name: form.type, alias: app_user_profile }
