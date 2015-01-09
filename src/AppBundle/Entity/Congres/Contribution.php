@@ -6,13 +6,16 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Table(name="contributions")
- * @ORM\Entity(repositoryClass="AppBundle\Entity\Congres\ContributionsRepository")
+ * @ORM\Entity(repositoryClass="AppBundle\Entity\Congres\ContributionRepository")
  * @ORM\InheritanceType("SINGLE_TABLE")
  * @ORM\DiscriminatorColumn(name="contribution_type", type="string")
- * @ORM\DiscriminatorMap({"platform" = "PlatformContributions", "thematic" = "ThematicContributions"})
+ * @ORM\DiscriminatorMap({"platform" = "PlatformContribution", "thematic" = "ThematicContribution"})
  */
-class Contributions
+class Contribution
 {
+    const STATUS_SIGNATURES_CLOSED = 'signatures closed';
+    const STATUS_SIGNATURES_OPEN = 'signatures open';
+
     /**
      * @var integer
      *
@@ -25,7 +28,7 @@ class Contributions
     /**
      * @var string
      *
-     * @ORM\Column(name="title", type="text")
+     * @ORM\Column(name="title", type="string", length=255)
      */
     protected $title;
 
@@ -37,17 +40,16 @@ class Contributions
     protected $content;
 
     /**
-     * @var \stdClass
+     * @var string
      *
-     * @ORM\ManyToOne(targetEntity="ContributionStatus") 
-     * @ORM\JoinColumn(name="status_id", referencedColumnName="id")
+     * @ORM\Column(name="status", type="string", length=255)
      */
     protected $status;
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -58,7 +60,7 @@ class Contributions
      * Set title
      *
      * @param string $title
-     * @return Contributions
+     * @return Contribution
      */
     public function setTitle($title)
     {
@@ -70,7 +72,7 @@ class Contributions
     /**
      * Get title
      *
-     * @return string 
+     * @return string
      */
     public function getTitle()
     {
@@ -81,7 +83,7 @@ class Contributions
      * Set content
      *
      * @param string $content
-     * @return Contributions
+     * @return Contribution
      */
     public function setContent($content)
     {
@@ -93,7 +95,7 @@ class Contributions
     /**
      * Get content
      *
-     * @return string 
+     * @return string
      */
     public function getContent()
     {
@@ -103,11 +105,15 @@ class Contributions
     /**
      * Set status
      *
-     * @param \AppBundle\Entity\Congres\ContributionStatus $status
-     * @return Contributions
+     * @param string $status
+     * @return Contribution
      */
-    public function setStatus(\AppBundle\Entity\Congres\ContributionStatus $status = null)
+    public function setStatus($status)
     {
+        if (!in_array($status, array(self::STATUS_SIGNATURES_OPEN, self::STATUS_SIGNATURES_CLOSED))) {
+            throw new \InvalidArgumentException("Invalid status");
+        }
+
         $this->status = $status;
 
         return $this;
@@ -116,7 +122,7 @@ class Contributions
     /**
      * Get status
      *
-     * @return \AppBundle\Entity\Congres\ContributionStatus 
+     * @return string
      */
     public function getStatus()
     {
