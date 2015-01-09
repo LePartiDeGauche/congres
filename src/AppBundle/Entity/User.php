@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity
  * @ORM\Table(name="users")
  */
-class User extends BaseUser
+final class User extends BaseUser
 {
     /**
      * @ORM\Id
@@ -18,6 +18,18 @@ class User extends BaseUser
      */
     protected $id;
 
+    /**
+     * The collection of instances the user is member of.
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Instance", inversedBy="users")
+     * @ORM\JoinTable(name="users_instances")
+     */
+    private $instances;
+
+    /**
+     * Constructor
+     */
     public function __construct()
     {
         parent::__construct();
@@ -25,10 +37,23 @@ class User extends BaseUser
         // As we removed the username field from forms, we do this so
         // FOSUserBundle validation does not complain about empty username.
         $this->username = 'username';
+
+        // Initialize collection
+        $this->instances = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
-     * Set email, and set usename at same time.
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set email, and set username at same time.
      * @param string $email Email
      */
     public function setEmail($email)
@@ -36,15 +61,5 @@ class User extends BaseUser
         $this->setUsername($email);
 
         return parent::setEmail($email);
-    }
-
-    /**
-     * Get id
-     *
-     * @return integer 
-     */
-    public function getId()
-    {
-        return $this->id;
     }
 }
