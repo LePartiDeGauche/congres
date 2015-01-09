@@ -11,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\DiscriminatorColumn(name="contribution_type", type="string")
  * @ORM\DiscriminatorMap({"platform" = "PlatformContribution", "thematic" = "ThematicContribution"})
  */
-class Contribution
+abstract class Contribution
 {
     const STATUS_SIGNATURES_CLOSED = 'signatures closed';
     const STATUS_SIGNATURES_OPEN = 'signatures open';
