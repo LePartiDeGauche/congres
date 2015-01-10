@@ -50,14 +50,26 @@ assetic:
 # Doctrine Configuration
 doctrine:
     dbal:
-        driver:   "%database_driver%"
-        host:     "%database_host%"
-        port:     "%database_port%"
-        dbname:   "%database_name%"
-        user:     "%database_user%"
-        password: "%database_password%"
-        charset:  UTF8
-        server_version: %database_server_version%
+        default_connection: default
+        connections:
+            default:
+                driver:   "%database_driver%"
+                host:     "%database_host%"
+                port:     "%database_port%"
+                dbname:   "%database_name%"
+                user:     "%database_user%"
+                password: "%database_password%"
+                charset:  UTF8
+                server_version: %database_server_version%
+            legacy:
+                driver:   "%database_driver%"
+                host:     "%database_host%"
+                port:     "%database_port%"
+                dbname:   "%legacy_database_name%"
+                user:     "%database_user%"
+                password: "%database_password%"
+                charset:  UTF8
+                server_version: %database_server_version%
         # if using pdo_sqlite as your database driver:
         #   1. add the path in parameters.yml
         #     e.g. database_path: "%kernel.root_dir%/data/data.db3"
@@ -67,7 +79,21 @@ doctrine:
 
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
-        auto_mapping: true
+        #auto_mapping: true
+        default_entity_manager: default
+        entity_managers:
+            default:
+                connection: default
+                #auto_mapping: true
+                mappings:
+                    FOSUserBundle: ~
+                    AppBundle: ~
+                    #DatabaseImporterBundle: 
+                    #    mapping: false
+            legacy:
+                connection: legacy
+                mappings:
+                    DatabaseImporterBundle: ~
 
 doctrine_migrations:
     dir_name: %kernel.root_dir%/DoctrineMigrations
@@ -88,6 +114,7 @@ swiftmailer:
 # FOSUserBundle
 fos_user:
     db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
+    model_manager_name: default
     firewall_name: main
     user_class: AppBundle\Entity\User
     from_email:
