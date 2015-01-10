@@ -3,6 +3,7 @@
 namespace AppBundle\Entity\Congres;
 
 use Doctrine\ORM\Mapping as ORM;
+use AppBundle\Entity\User as User;
 
 /**
  * ThematicContribution.
@@ -34,7 +35,7 @@ class ThematicContribution extends Contribution
      *
      * @return ThematicContribution
      */
-    public function addVote(\AppBundle\Entity\User $votes)
+    public function addVote(User $votes)
     {
         $this->votes[] = $votes;
 
@@ -44,9 +45,9 @@ class ThematicContribution extends Contribution
     /**
      * Remove votes.
      *
-     * @param \AppBundle\Entity\User $votes
+     * @param AppBundle\Entity\User $votes
      */
-    public function removeVote(\AppBundle\Entity\User $votes)
+    public function removeVote(User $votes)
     {
         $this->votes->removeElement($votes);
     }
