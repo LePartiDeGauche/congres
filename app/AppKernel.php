@@ -39,6 +39,7 @@ class AppKernel extends Kernel
 
             // Our app
             new AppBundle\AppBundle(),
+            new DatabaseImporterBundle\DatabaseImporterBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
