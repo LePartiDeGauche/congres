@@ -24,6 +24,13 @@ final class Adherent
     /**
      * @var string
      *
+     * @ORM\Column(name="email", type="string", length=255)
+     */
+    private $email;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="lastname", type="string", length=255)
      */
     private $lastname;
@@ -50,6 +57,14 @@ final class Adherent
      * @ORM\JoinTable(name="users_instances")
      */
     private $instances;
+
+    /**
+     * The user associated to this adherent profile.
+     * @var User
+     *
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\User", mappedBy="profile")
+     */
+    private $user;
 
     /**
      * Constructor
@@ -137,5 +152,63 @@ final class Adherent
     public function getBirthdate()
     {
         return $this->birthdate;
+    }
+
+    /**
+     * Set email
+     *
+     * @param string $email
+     * @return Adherent
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * Get email
+     *
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * Add instances
+     *
+     * @param \AppBundle\Entity\Instance $instances
+     * @return Adherent
+     */
+    public function addInstance(\AppBundle\Entity\Instance $instance)
+    {
+        $this->instances[] = $instance;
+        $instance->addAdherent($this);
+
+        return $this;
+    }
+
+    /**
+     * Remove instances
+     *
+     * @param \AppBundle\Entity\Instance $instances
+     */
+    public function removeInstance(\AppBundle\Entity\Instance $instance)
+    {
+        $this->instances->removeElement($instance);
+        $instance->removeAdherent($this);
+    }
+
+    /**
+     * Get instances
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getInstances()
+    {
+        return $this->instances;
     }
 }

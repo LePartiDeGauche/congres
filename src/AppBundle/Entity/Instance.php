@@ -69,4 +69,46 @@ final class Instance
     {
         return $this->name;
     }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->adherents = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add adherents
+     *
+     * @param \AppBundle\Entity\Adherent $adherent
+     * @return Instance
+     */
+    public function addAdherent(\AppBundle\Entity\Adherent $adherent)
+    {
+        $this->adherents[] = $adherents;
+        $adherent->addInstance($this);
+
+        return $this;
+    }
+
+    /**
+     * Remove adherents
+     *
+     * @param \AppBundle\Entity\Adherent $adherents
+     */
+    public function removeAdherent(\AppBundle\Entity\Adherent $adherent)
+    {
+        $this->adherents->removeElement($adherent);
+        $adherent->removeElement($this);
+    }
+
+    /**
+     * Get adherents
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getAdherents()
+    {
+        return $this->adherents;
+    }
 }

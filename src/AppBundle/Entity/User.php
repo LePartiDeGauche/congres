@@ -2,7 +2,7 @@
 
 namespace AppBundle\Entity;
 
-use FOS\UserBundle\Entity\User as BaseUser;
+use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -17,6 +17,14 @@ final class User extends BaseUser
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
+
+    /**
+     * The adherent profile associated to the user.
+     * @var Adherent
+     *
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Adherent", inversedBy="user")
+     */
+    protected $profile;
 
     /**
      * Constructor
@@ -49,5 +57,25 @@ final class User extends BaseUser
         $this->setUsername($email);
 
         return parent::setEmail($email);
+    }
+
+    /**
+     * Set profile, and set email at the same time.
+     * @param Adherent $profile Profile
+     */
+    public function setProfile(Adherent $profile)
+    {
+        $this->profile = $profile;
+        $this->setEmail($profile->getEmail());
+    }
+
+    /**
+     * Get profile
+     *
+     * @return \AppBundle\Entity\Adherent
+     */
+    public function getProfile()
+    {
+        return $this->profile;
     }
 }
