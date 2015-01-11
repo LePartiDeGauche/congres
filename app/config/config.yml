@@ -29,6 +29,8 @@ framework:
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
+    form:
+        resources: ['bootstrap_3_layout.html.twig']
 
 # Assetic Configuration
 assetic:
@@ -83,7 +85,3 @@ fos_user:
     profile:
         form:
             type: app_user_profile
-
-twig:
-    form:
-        resources: ['bootstrap_3_layout.html.twig']
