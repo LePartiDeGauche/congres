@@ -14,4 +14,12 @@ class DefaultController extends Controller
     {
         return $this->render('default/index.html.twig');
     }
+
+    /**
+     * @Route("/depot-contribution")
+     */
+    public function redirectionDepotContributionAction()
+    {
+        return $this->redirect($this->generateUrl('contribution_submit'));
+    }
 }

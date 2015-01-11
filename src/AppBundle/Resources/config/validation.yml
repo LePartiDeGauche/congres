@@ -1,0 +1,20 @@
+AppBundle\Entity\Congres\Contribution:
+    properties:
+        title:
+            - Length:
+                max: 250
+                maxMessage: "Le titre ne peut pas être plus long que {{ limit }} caractères."
+
+AppBundle\Entity\Congres\GeneralContribution:
+    properties:
+        content:
+            - Length:
+                max: 20000
+                maxMessage: "Le texte ne peut pas être plus long que {{ limit }} caractères."
+
+AppBundle\Entity\Congres\ThematicContribution:
+    properties:
+        content:
+            - Length:
+                max: 8000
+                maxMessage: "Le texte ne peut pas être plus long que {{ limit }} caractères."
