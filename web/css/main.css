@@ -24,6 +24,9 @@ a:focus {
   outline-offset: -2px;
 }
 
+/**
+ * Navbars
+ */
 .navbar-brand {
   padding: 0px;
 }
@@ -86,6 +89,13 @@ a:focus {
   color: #fff;
   background-color: #950004;
 }
+.navbar-inverse .navbar-link {
+  color: #999;
+}
+.navbar-inverse .navbar-link:hover {
+  color: #fff;
+}
+
 @media (max-width: 767px) {
   .navbar-inverse .navbar-nav .open .dropdown-menu > .dropdown-header {
     border-color: #950004;
@@ -114,13 +124,10 @@ a:focus {
     background-color: transparent;
   }
 }
-.navbar-inverse .navbar-link {
-  color: #999;
-}
-.navbar-inverse .navbar-link:hover {
-  color: #fff;
-}
 
+/**
+ * Forms
+ */
 .btn-primary {
   color: #fff;
   background-color: #84B71A;
@@ -162,10 +169,12 @@ fieldset[disabled] .btn-primary.active {
   color: #84B71A;
   background-color: #fff;
 }
-
 .form-control:focus {
   border-color: #84B71A;
   outline: 0;
   -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(132, 183, 26, .6);
           box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(132, 183, 26, .6);
+}
+textarea {
+  min-height: 250px;
 }
