@@ -32,10 +32,10 @@ final class Instance
      * The collection of user members of the instance.
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\User", mappedBy="instances")
-     * @ORM\JoinTable(name="users_instances")
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Adherent", mappedBy="instances")
+     * @ORM\JoinTable(name="adherents_instances")
      */
-    private $users;
+    private $adherents;
 
     /**
      * Get id

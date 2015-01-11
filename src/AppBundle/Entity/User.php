@@ -19,15 +19,6 @@ final class User extends BaseUser
     protected $id;
 
     /**
-     * The collection of instances the user is member of.
-     * @var \Doctrine\Common\Collections\Collection
-     *
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Instance", inversedBy="users")
-     * @ORM\JoinTable(name="users_instances")
-     */
-    private $instances;
-
-    /**
      * Constructor
      */
     public function __construct()
@@ -37,9 +28,6 @@ final class User extends BaseUser
         // As we removed the username field from forms, we do this so
         // FOSUserBundle validation does not complain about empty username.
         $this->username = 'username';
-
-        // Initialize collection
-        $this->instances = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
