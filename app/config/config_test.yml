@@ -14,3 +14,12 @@ web_profiler:
 
 swiftmailer:
     disable_delivery: true
+
+## to make authentication easier in tests
+security:
+    firewalls:
+        main:
+            http_basic:
+                provider: testing
+    encoders:
+        Symfony\Component\Security\Core\User\User: plaintext

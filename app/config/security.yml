@@ -9,6 +9,12 @@ security:
     providers:
         fos_userbundle:
             id: fos_user.user_provider.username
+        testing:
+             memory:
+                users:
+                    user:  { password: user, roles: 'ROLE_USER' }
+                    admin: { password: admin, roles: 'ROLE_ADMIN' }
+
 
     firewalls:
         main:

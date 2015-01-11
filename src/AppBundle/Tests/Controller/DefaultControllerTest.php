@@ -6,12 +6,25 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class DefaultControllerTest extends WebTestCase
 {
-    public function testIndex()
+    /** @dataProvider provideUrls */
+    public function testUserPages($url)
     {
-        $client = static::createClient();
+        $client = static::createClient(array(), array(
+            'PHP_AUTH_USER' => 'user',
+            'PHP_AUTH_PW'   => 'user',
+        ));
+        $client->followRedirects();
 
-        $crawler = $client->request('GET', '/');
+        $client->request('GET', $url);
 
-        $this->assertTrue($crawler->filter('html:contains("Homepage")')->count() > 0);
+        $this->assertTrue($client->getResponse()->isSuccessful());
+    }
+
+    public function provideUrls()
+    {
+        return array(
+            array('/'),
+            array('/depot-contribution'),
+        );
     }
 }
