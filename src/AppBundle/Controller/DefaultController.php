@@ -22,4 +22,19 @@ class DefaultController extends Controller
     {
         return $this->redirect($this->generateUrl('contribution_submit'));
     }
+
+    /**
+     * @Route("inscription/check-email/{email}", name="custom_user_registration_check_email")
+     * Replace default FOSUserBundle check email controller to work even if user does not exist.
+     */
+    public function customUserRegistrationCheckEmailAction($email)
+    {
+
+        $user = new \AppBundle\Entity\User();
+        $user->setEmail($email);
+
+        return $this->render('FOSUserBundle:Registration:checkEmail.html.twig', array(
+            'user' => $user,
+        ));
+    }
 }
