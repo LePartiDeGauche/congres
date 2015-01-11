@@ -17,6 +17,9 @@ security:
 
 
     firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
         main:
             pattern: ^/
             form_login:
@@ -24,9 +27,6 @@ security:
                 csrf_provider: form.csrf_provider
             logout:       true
             anonymous:    true
-        dev:
-            pattern: ^/(_(profiler|wdt)|css|images|js)/
-            security: false
 
         default:
             anonymous: ~
