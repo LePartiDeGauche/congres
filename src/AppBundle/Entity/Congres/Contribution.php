@@ -9,12 +9,13 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity(repositoryClass="AppBundle\Entity\Congres\ContributionRepository")
  * @ORM\InheritanceType("SINGLE_TABLE")
  * @ORM\DiscriminatorColumn(name="contribution_type", type="string")
- * @ORM\DiscriminatorMap({"platform" = "PlatformContribution", "thematic" = "ThematicContribution"})
+ * @ORM\DiscriminatorMap({"general" = "GeneralContribution", "thematic" = "ThematicContribution"})
  */
 abstract class Contribution
 {
     const STATUS_SIGNATURES_CLOSED = 'signatures closed';
     const STATUS_SIGNATURES_OPEN = 'signatures open';
+    const STATUS_NEW = 'new contribution';
 
     /**
      * @var integer
@@ -22,8 +23,16 @@ abstract class Contribution
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     *
      */
     protected $id;
+
+    /**
+     * The author of the contribution.
+     * @var \AppBundle\Entity\User
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User")
+     */
+    protected $author;
 
     /**
      * @var string
@@ -54,6 +63,29 @@ abstract class Contribution
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set author
+     *
+     * @param \AppBundle\Entity\User $author
+     * @return Contribution
+     */
+    public function setAuthor(\AppBundle\Entity\User $author)
+    {
+        $this->author = $author;
+
+        return $this;
+    }
+
+    /**
+     * Get author
+     *
+     * @return \AppBundle\Entity\User
+     */
+    public function getAuthor()
+    {
+        return $this->author;
     }
 
     /**
@@ -110,7 +142,11 @@ abstract class Contribution
      */
     public function setStatus($status)
     {
-        if (!in_array($status, array(self::STATUS_SIGNATURES_OPEN, self::STATUS_SIGNATURES_CLOSED))) {
+        if (!in_array($status, array(
+            self::STATUS_SIGNATURES_OPEN,
+            self::STATUS_SIGNATURES_CLOSED,
+            self::STATUS_NEW,
+        ))) {
             throw new \InvalidArgumentException("Invalid status");
         }
 

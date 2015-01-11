@@ -5,18 +5,18 @@ namespace AppBundle\Entity\Congres;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * PlatformContribution
+ * GeneralContribution
  *
- *  @ORM\Entity(repositoryClass="AppBundle\Entity\Congres\PlatformContributionRepository")
+ *  @ORM\Entity(repositoryClass="AppBundle\Entity\Congres\GeneralContributionRepository")
  *
  */
-final class PlatformContribution extends Contribution
+final class GeneralContribution extends Contribution
 {
     /**
      * @var \AppBundle\Entity\User
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User")
-     * @ORM\JoinColumn(name="platform_vote_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="general_vote_id", referencedColumnName="id")
      *
      */
     protected $vote;
@@ -25,7 +25,7 @@ final class PlatformContribution extends Contribution
      * Set vote
      *
      * @param \AppBundle\Entity\User $vote
-     * @return PlatformContributions
+     * @return GeneralContributions
      */
     public function setVote(\AppBundle\Entity\User $vote = null)
     {
