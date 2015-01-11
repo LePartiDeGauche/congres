@@ -78,7 +78,7 @@ abstract class Contribution
     /**
      * Set author
      *
-     * @param \AppBundle\Entity\User $author
+     * @param  \AppBundle\Entity\User $author
      * @return Contribution
      */
     public function setAuthor(\AppBundle\Entity\User $author)
@@ -101,7 +101,7 @@ abstract class Contribution
     /**
      * Set title
      *
-     * @param string $title
+     * @param  string       $title
      * @return Contribution
      */
     public function setTitle($title)
@@ -124,7 +124,7 @@ abstract class Contribution
     /**
      * Set content
      *
-     * @param string $content
+     * @param  string       $content
      * @return Contribution
      */
     public function setContent($content)
@@ -147,7 +147,7 @@ abstract class Contribution
     /**
      * Set status
      *
-     * @param string $status
+     * @param  string       $status
      * @return Contribution
      */
     public function setStatus($status)

@@ -3,7 +3,6 @@
 namespace AppBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Entity\Congres\Contribution;
@@ -51,7 +50,7 @@ class ContributionController extends Controller
         }
 
         return $this->render('contribution/submit.html.twig', array(
-            'form' => isset($displayedForm) ? $displayedForm->createView(): $formGeneral->createView(),
+            'form' => isset($displayedForm) ? $displayedForm->createView() : $formGeneral->createView(),
         ));
     }
 

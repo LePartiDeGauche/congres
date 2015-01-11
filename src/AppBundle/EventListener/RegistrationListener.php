@@ -62,7 +62,7 @@ class RegistrationListener implements EventSubscriberInterface
     public function onRegistrationSuccess(FormEvent $event)
     {
         $url = $this->router->generate('custom_user_registration_check_email', array(
-            'email' => $user->getEmail()
+            'email' => $user->getEmail(),
         ));
         $event->setResponse(new RedirectResponse($url));
     }
@@ -110,7 +110,7 @@ class RegistrationListener implements EventSubscriberInterface
         $this->mailer->send($message);
 
         $url = $this->router->generate('custom_user_registration_check_email', array(
-            'email' => $user->getEmail()
+            'email' => $user->getEmail(),
         ));
         $event->setResponse(new RedirectResponse($url));
     }

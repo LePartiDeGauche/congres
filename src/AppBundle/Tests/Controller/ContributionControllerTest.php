@@ -12,5 +12,4 @@ class ContributionControllerTest extends WebTestCase
 
         $crawler = $client->request('GET', '/soumettre');
     }
-
 }

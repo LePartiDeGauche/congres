@@ -11,7 +11,6 @@ use Doctrine\ORM\Mapping as ORM;
  */
 final class ThematicContribution extends Contribution
 {
-
     /**
      * @var \Doctrine\Common\Collections\Collection
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\User")
@@ -32,7 +31,7 @@ final class ThematicContribution extends Contribution
     /**
      * Add votes
      *
-     * @param \AppBundle\Entity\User $votes
+     * @param  \AppBundle\Entity\User $votes
      * @return ThematicContribution
      */
     public function addVote(\AppBundle\Entity\User $votes)

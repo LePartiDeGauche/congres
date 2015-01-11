@@ -29,7 +29,6 @@ class DefaultController extends Controller
      */
     public function customUserRegistrationCheckEmailAction($email)
     {
-
         $user = new \AppBundle\Entity\User();
         $user->setEmail($email);
 

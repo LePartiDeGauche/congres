@@ -86,9 +86,19 @@ final class Adherent
     }
 
     /**
+     * Get user
+     *
+     * @return User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
      * Set lastname
      *
-     * @param string $lastname
+     * @param  string   $lastname
      * @return Adherent
      */
     public function setLastname($lastname)
@@ -111,7 +121,7 @@ final class Adherent
     /**
      * Set firstname
      *
-     * @param string $firstname
+     * @param  string   $firstname
      * @return Adherent
      */
     public function setFirstname($firstname)
@@ -134,7 +144,7 @@ final class Adherent
     /**
      * Set birthdate
      *
-     * @param \DateTime $birthdate
+     * @param  \DateTime $birthdate
      * @return Adherent
      */
     public function setBirthdate($birthdate)
@@ -157,7 +167,7 @@ final class Adherent
     /**
      * Set email
      *
-     * @param string $email
+     * @param  string   $email
      * @return Adherent
      */
     public function setEmail($email)
@@ -180,7 +190,7 @@ final class Adherent
     /**
      * Add instances
      *
-     * @param \AppBundle\Entity\Instance $instances
+     * @param  \AppBundle\Entity\Instance $instances
      * @return Adherent
      */
     public function addInstance(\AppBundle\Entity\Instance $instance)

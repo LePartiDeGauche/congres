@@ -24,7 +24,7 @@ final class GeneralContribution extends Contribution
     /**
      * Set vote
      *
-     * @param \AppBundle\Entity\User $vote
+     * @param  \AppBundle\Entity\User $vote
      * @return GeneralContributions
      */
     public function setVote(\AppBundle\Entity\User $vote = null)

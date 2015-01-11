@@ -50,7 +50,7 @@ final class Instance
     /**
      * Set name
      *
-     * @param string $name
+     * @param  string   $name
      * @return Instance
      */
     public function setName($name)
@@ -80,7 +80,7 @@ final class Instance
     /**
      * Add adherents
      *
-     * @param \AppBundle\Entity\Adherent $adherent
+     * @param  \AppBundle\Entity\Adherent $adherent
      * @return Instance
      */
     public function addAdherent(\AppBundle\Entity\Adherent $adherent)
