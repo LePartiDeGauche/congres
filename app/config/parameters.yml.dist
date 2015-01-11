@@ -4,6 +4,7 @@ parameters:
     database_host:     127.0.0.1
     database_port:     ~
     database_name:     symfony
+    legacy_database_name: legacy
     database_user:     root
     database_password: ~
     # This must be defined in order for tests to work when database is not
