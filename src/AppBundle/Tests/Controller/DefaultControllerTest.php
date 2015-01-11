@@ -24,7 +24,6 @@ class DefaultControllerTest extends WebTestCase
     {
         return array(
             array('/'),
-            array('/depot-contribution'),
         );
     }
 }

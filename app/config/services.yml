@@ -14,3 +14,8 @@ services:
         arguments: [%fos_user.model.user.class%]
         tags:
             - { name: form.type, alias: app_user_profile }
+    app.congres.contribution_voter:
+        class:      AppBundle\Security\Congres\ContributionVoter
+        public:     false
+        tags:
+           - { name: security.voter }

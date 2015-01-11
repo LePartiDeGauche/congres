@@ -3,7 +3,7 @@
 namespace AppBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Entity\Congres\Contribution;
@@ -74,10 +74,11 @@ class ContributionController extends Controller
 
     /**
      * @Route("/lire/{id}", name="contribution_view")
-     * @ParamConverter("contrib", class="AppBundle:Congres\Contribution")
      */
     public function viewAction(Contribution $contrib)
     {
+        $this->denyAccessUnlessGranted('view', $contrib);
+
         return $this->render('contribution/view.html.twig', array(
             'contrib' => $contrib,
         ));
