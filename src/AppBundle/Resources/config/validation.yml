@@ -6,6 +6,10 @@ AppBundle\Entity\Congres\Contribution:
                 maxMessage: "Le titre ne peut pas être plus long que {{ limit }} caractères."
 
 AppBundle\Entity\Congres\GeneralContribution:
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+            fields: author
+            message: "Tu ne peux poster qu'une seule contribution générale."
     properties:
         content:
             - Length:

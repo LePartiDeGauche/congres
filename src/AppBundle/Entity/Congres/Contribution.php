@@ -56,6 +56,16 @@ abstract class Contribution
     protected $status;
 
     /**
+     * Constructor
+     * @param \AppBundle\Entity\User $author The author of the contribution.
+     */
+    public function __construct(\AppBundle\Entity\User $author)
+    {
+        $this->setAuthor($author);
+        $this->setStatus(self::STATUS_NEW);
+    }
+
+    /**
      * Get id
      *
      * @return integer

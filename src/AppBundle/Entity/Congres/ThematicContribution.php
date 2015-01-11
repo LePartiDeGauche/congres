@@ -23,8 +23,9 @@ final class ThematicContribution extends Contribution
     /**
      * Constructor
      */
-    public function __construct()
+    public function __construct(\AppBundle\Entity\User $user)
     {
+        parent::__construct($user);
         $this->votes = new \Doctrine\Common\Collections\ArrayCollection();
     }
 

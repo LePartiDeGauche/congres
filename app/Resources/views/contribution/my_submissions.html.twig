@@ -1,0 +1,23 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}Mes contributions{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <h1>Listes de mes contributions</h1>
+            {% if generalContrib is not null %}
+                <p>Contribution générale : <a href="{{ path('contribution_view', {id: generalContrib.id}) }}">{{ generalContrib.title }}</a></p>
+            {% else %}
+                <p>Pas de contribution générale.</p>
+            {% endif %}
+            {% if thematicContribs is not empty %}
+                {% for contrib in thematicContribs %}
+                    <p>Contribution thématique : <a href="{{ path('contribution_view', {id: contrib.id}) }}">{{ contrib.title }}</a></p>
+                {% endfor %}
+            {% else %}
+                <p>Pas de contribution thématique.</p>
+            {% endif %}
+        </div>
+</div>
+{% endblock %}

@@ -3,8 +3,10 @@
 namespace AppBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use AppBundle\Entity\Congres\Contribution;
 use AppBundle\Entity\Congres\GeneralContribution;
 use AppBundle\Entity\Congres\ThematicContribution;
 use AppBundle\Form\Type\NewCongresContributionType;
@@ -15,7 +17,7 @@ use AppBundle\Form\Type\NewCongresContributionType;
 class ContributionController extends Controller
 {
     /**
-     * @Route("/soumettre", name="contribution_submit")
+     * @Route("/envoyer", name="contribution_submit")
      */
     public function submitAction(Request $request)
     {
@@ -25,33 +27,59 @@ class ContributionController extends Controller
          * arbitrarily one of those, both are handled, and only one is processed
          * depending of the type of contribution chosen.
          */
-        $generalContrib = new GeneralContribution();
-        $thematicContrib = new ThematicContribution();
-        $formGeneral = $this->createForm(new NewCongresContributionType(), $generalContrib);
-        $formThematic = $this->createForm(new NewCongresContributionType(), $thematicContrib);
+        $formGeneral = $this->createForm(new NewCongresContributionType(), new GeneralContribution($this->getUser()));
+        $formThematic = $this->createForm(new NewCongresContributionType(), new ThematicContribution($this->getUser()));
 
         $formGeneral->handleRequest($request);
         $formThematic->handleRequest($request);
-        $displayedForm = $formGeneral; // by default
 
         if ($formGeneral->isSubmitted() || $formThematic->isSubmitted()) {
             $type = $formGeneral->get('type')->getData();
+
             if ('generale' === $type) {
                 $displayedForm = $formGeneral;
-
-                if ($formGeneral->isValid()) {
-                    // do stuff
-                }
             } elseif ('thematique' === $type) {
                 $displayedForm = $formThematic;
-                if ($formThematic->isValid()) {
-                    // do stuff
-                }
+            }
+
+            if ($displayedForm->isValid()) {
+                $this->getDoctrine()->getManager()->persist($displayedForm->getData());
+                $this->getDoctrine()->getManager()->flush();
+
+                return $this->redirect($this->generateUrl('contribution_my_submissions'));
             }
         }
 
         return $this->render('contribution/submit.html.twig', array(
-            'form' => $displayedForm->createView(),
+            'form' => isset($displayedForm) ? $displayedForm->createView(): $formGeneral->createView(),
+        ));
+    }
+
+    /**
+     * @Route("/mes-contributions", name="contribution_my_submissions")
+     */
+    public function mySubmissionsAction()
+    {
+        $repo = $this->getDoctrine()->getRepository('AppBundle:Congres\GeneralContribution');
+        $generalContrib = $repo->findOneByAuthor($this->getUser());
+
+        $repo = $this->getDoctrine()->getRepository('AppBundle:Congres\ThematicContribution');
+        $thematicContribs = $repo->findByAuthor($this->getUser());
+
+        return $this->render('contribution/my_submissions.html.twig', array(
+            'generalContrib' => $generalContrib,
+            'thematicContribs' => $thematicContribs,
+        ));
+    }
+
+    /**
+     * @Route("/lire/{id}", name="contribution_view")
+     * @ParamConverter("contrib", class="AppBundle:Congres\Contribution")
+     */
+    public function viewAction(Contribution $contrib)
+    {
+        return $this->render('contribution/view.html.twig', array(
+            'contrib' => $contrib,
         ));
     }
 }
