@@ -2,7 +2,11 @@
 
 {% block fos_user_content %}
 {% if error %}
-    <div>{{ error|trans({}, 'FOSUserBundle') }}</div>
+    <div class="alert alert-danger" role="alert">
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        <span class="sr-only">Error:</span>
+        {{ error.messageKey|trans(error.messageData, 'security') }}
+    </div>
 {% endif %}
 
 <form action="{{ path("fos_user_security_check") }}" method="post">
