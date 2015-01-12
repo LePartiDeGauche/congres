@@ -96,6 +96,17 @@ final class Adherent
     }
 
     /**
+     * Set id
+     *
+     * @return integer
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+        return $this;
+    }
+
+    /**
      * Set lastname
      *
      * @param  string   $lastname
