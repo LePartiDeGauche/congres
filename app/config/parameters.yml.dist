@@ -19,6 +19,7 @@ parameters:
     mailer_user:       ~
     mailer_password:   ~
     mailer_sender_address: postmaster@example.com
+    mailer_auth_mode:  ~
 
     locale:            en
 
