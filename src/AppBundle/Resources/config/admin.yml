@@ -1,0 +1,21 @@
+services:
+    sonata.admin.adherent:
+        class: AppBundle\Admin\AdherentAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Fichier", label: "Adhérents"}
+        arguments:
+            - ~
+            - AppBundle\Entity\Adherent
+            - ~
+        calls:
+            - [ setTranslationDomain, [AppBundle] ]
+    sonata.admin.user:
+        class: AppBundle\Admin\UserAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Application", label: "Utilisateurs"}
+        arguments:
+            - ~
+            - AppBundle\Entity\User
+            - ~
+        calls:
+            - [ setTranslationDomain, [AppBundle] ]

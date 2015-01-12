@@ -76,13 +76,27 @@ swiftmailer:
     sender_address: %mailer_sender_address%
     spool:     { type: memory }
 
+# FOSUserBundle
 fos_user:
     db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
     firewall_name: main
     user_class: AppBundle\Entity\User
     registration:
+        confirmation:
+            enabled: true
         form:
             type: app_user_registration
     profile:
         form:
             type: app_user_profile
+
+# Sonata Admin
+sonata_block:
+    default_contexts: [cms]
+    blocks:
+        # Enable the SonataAdminBundle block
+        sonata.admin.block.admin_list:
+            contexts:   [admin]
+sonata_admin:
+    title: Administration
+    title_logo: img/logo.png
