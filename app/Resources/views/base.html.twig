@@ -41,7 +41,7 @@
                             <li><a href="{{ path('sonata_admin_dashboard') }}">Administration</a></li>
                         {% endif %}
                         {% if is_granted('ROLE_USER') %}
-                            <li><a href="{{ path('fos_user_change_password') }}">Mon compte</a></li>
+                            <li><a href="{{ path('fos_user_change_password') }}">Mon compte ({{ app.user.email }})</a></li>
                             <li><a href="{{ path('fos_user_security_logout') }}">Déconnexion</a></li>
                         {% else %}
                             <li><a href="{{ path('fos_user_registration_register') }}">Inscription</a></li>
