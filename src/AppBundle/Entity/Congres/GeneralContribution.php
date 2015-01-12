@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  *  @ORM\Entity(repositoryClass="AppBundle\Entity\Congres\GeneralContributionRepository")
  *
  */
-final class GeneralContribution extends Contribution
+class GeneralContribution extends Contribution
 {
     /**
      * @var \AppBundle\Entity\User

@@ -7,7 +7,7 @@ use Sonata\AdminBUndle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 
-final class AdherentAdmin extends Admin
+class AdherentAdmin extends Admin
 {
     protected $baseRouteName = 'adherents';
     protected $baseRoutePattern = 'adherents';

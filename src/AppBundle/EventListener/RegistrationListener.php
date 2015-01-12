@@ -61,8 +61,14 @@ class RegistrationListener implements EventSubscriberInterface
      */
     public function onRegistrationSuccess(FormEvent $event)
     {
+        $user = $event->getForm()->getData();
+        $profile = $this->em
+            ->getRepository('AppBundle:Adherent')
+            ->findOneByEmail($user->getEmail());
+        $user->setProfile($profile);
+
         $url = $this->router->generate('custom_user_registration_check_email', array(
-            'email' => $event->getForm()->getData()->getEmail(),
+            'email' => $user->getEmail(),
         ));
         $event->setResponse(new RedirectResponse($url));
     }
@@ -89,8 +95,6 @@ class RegistrationListener implements EventSubscriberInterface
 
         // If profile exists, registration authorized, FOSUserBundle proceed.
         if ($profile) {
-            $user->setProfile($profile);
-
             return true;
         }
 

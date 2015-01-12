@@ -56,6 +56,10 @@ final class User extends BaseUser
     {
         $this->setUsername($email);
 
+        if ($this->profile && $this->profile->getEmail() !== $email) {
+            $this->profile->setEmail($email);
+        }
+
         return parent::setEmail($email);
     }
 

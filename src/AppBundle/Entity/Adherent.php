@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="adherents")
  * @ORM\Entity
  */
-final class Adherent
+class Adherent
 {
     /**
      * @var integer
@@ -184,6 +184,10 @@ final class Adherent
     public function setEmail($email)
     {
         $this->email = $email;
+
+        if ($this->user && $this->user->GetEmail() !== $email) {
+            $this->user->setEmail();
+        }
 
         return $this;
     }

@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Entity(repositoryClass="AppBundle\Entity\Congres\ThematicContributionRepository")
  */
-final class ThematicContribution extends Contribution
+class ThematicContribution extends Contribution
 {
     /**
      * @var \Doctrine\Common\Collections\Collection
