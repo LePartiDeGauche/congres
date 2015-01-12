@@ -13,34 +13,56 @@ use Doctrine\ORM\Mapping as ORM;
 class GeneralContribution extends Contribution
 {
     /**
-     * @var \AppBundle\Entity\User
-     *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User")
-     * @ORM\JoinColumn(name="general_vote_id", referencedColumnName="id")
+     * @var \Doctrine\Common\Collections\Collection
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\User")
+     * @ORM\JoinTable(
+     *     name="general_votes",
+     *     joinColumns={@ORM\JoinColumn(name="contribution_id", referencedColumnName="id")},
+     *     inverseJoinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id", unique=true)}
+     * )
      *
      */
-    protected $vote;
+    protected $votes;
 
     /**
-     * Set vote
-     *
-     * @param  \AppBundle\Entity\User $vote
-     * @return GeneralContributions
+     * Constructor
      */
-    public function setVote(\AppBundle\Entity\User $vote = null)
+    public function __construct(\AppBundle\Entity\User $user)
     {
-        $this->vote = $vote;
+        parent::__construct($user);
+        $this->votes = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add votes
+     *
+     * @param  \AppBundle\Entity\User $votes
+     * @return ThematicContribution
+     */
+    public function addVote(\AppBundle\Entity\User $votes)
+    {
+        $this->votes[] = $votes;
 
         return $this;
     }
 
     /**
-     * Get vote
+     * Remove votes
      *
-     * @return \AppBundle\Entity\User
+     * @param \AppBundle\Entity\User $votes
      */
-    public function getVote()
+    public function removeVote(\AppBundle\Entity\User $votes)
     {
-        return $this->vote;
+        $this->votes->removeElement($votes);
+    }
+
+    /**
+     * Get votes
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getVotes()
+    {
+        return $this->votes;
     }
 }
