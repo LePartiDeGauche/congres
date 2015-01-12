@@ -52,7 +52,7 @@ class RegistrationListener implements EventSubscriberInterface
     {
         return array(
             FOSUserEvents::REGISTRATION_INITIALIZE => 'onRegistrationInitialize',
-            FOSUserEvents::REGISTRATION_SUCCESS => 'onRegistrationSuccess',
+            FOSUserEvents::REGISTRATION_SUCCESS => array('onRegistrationSuccess', -1),
         );
     }
 
