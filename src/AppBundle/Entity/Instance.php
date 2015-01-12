@@ -11,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  * indexes ={@ORM\Index(name="name", columns={"name"})})
  * @ORM\Entity
  */
-final class Instance
+class Instance
 {
     /**
      * @var integer
