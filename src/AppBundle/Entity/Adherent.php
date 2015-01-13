@@ -72,7 +72,7 @@ class Adherent
      * The user associated to this adherent profile.
      * @var User
      *
-     * @ORM\OneToOne(targetEntity="AppBundle\Entity\User", mappedBy="profile")
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\User", mappedBy="profile", orphanRemoval=true)
      */
     private $user;
 
