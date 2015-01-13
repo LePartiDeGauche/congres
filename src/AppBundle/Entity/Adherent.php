@@ -12,6 +12,9 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Adherent
 {
+    const STATUS_OK = 'À jour de cotisation.';
+    const STATUS_ATTENTE_RENOUVELLEMENT = 'En attente de renouvellement.';
+
     /**
      * @var integer
      *
@@ -24,7 +27,7 @@ class Adherent
     /**
      * @var string
      *
-     * @ORM\Column(name="email", type="string", length=255, unique=true)
+     * @ORM\Column(name="email", type="string", length=255, unique=true, nullable=true)
      */
     private $email;
 
@@ -48,6 +51,13 @@ class Adherent
      * @ORM\Column(name="birthdate", type="date")
      */
     private $birthdate;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="status", type="string", length=255)
+     */
+    private $status;
 
     /**
      * The collection of instances the user is member of.
@@ -200,6 +210,36 @@ class Adherent
     public function getEmail()
     {
         return $this->email;
+    }
+
+    /**
+     * Set status
+     *
+     * @param string $status
+     * @return Adherent
+     */
+    public function setStatus($status)
+    {
+        if (!in_array($status, array(
+            self::STATUS_OK,
+            self::STATUS_ATTENTE_RENOUVELLEMENT,
+        ))) {
+            throw new \InvalidArgumentException('Invalid status');
+        }
+
+        $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * Get status
+     *
+     * @return string
+     */
+    public function getStatus()
+    {
+        return $this->status;
     }
 
     /**

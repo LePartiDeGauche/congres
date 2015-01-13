@@ -31,14 +31,22 @@ class ContributionAdmin extends Admin
         $datagridMapper
             ->add('title', null, array('label' => 'Titre'))
             ->add('author.profile.lastname', null, array('label' => 'Nom de l\'auteur'))
-            ->add('author.profile.firstname', null, array('label' => 'Prénom de l\'auteur'));
+            ->add('author.profile.firstname', null, array('label' => 'Prénom de l\'auteur'))
+            ->add('status', null, array('label' => 'Statut'), 'choice', array(
+                'choices' => array(
+                    Contribution::STATUS_SIGNATURES_CLOSED => 'Signatures récoltés',
+                    Contribution::STATUS_SIGNATURES_OPEN => 'Ouverte aux signatures',
+                    Contribution::STATUS_NEW => 'Envoyée mais non validée (non publique)',
+                ),
+                'multiple' => false,
+            ));
     }
 
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
             ->addIdentifier('title', null, array('label' => 'Titre'))
-            ->add('author.profile.lastname', null, array('label' => 'Nom'))
+            ->add('author.profile', null, array('label' => 'Nom', 'associated_property' => 'lastname'))
             ->add('author.profile.firstname', null, array('label' => 'Prénom'))
             ->add('status', 'choice', array(
                 'label' => 'Statut',

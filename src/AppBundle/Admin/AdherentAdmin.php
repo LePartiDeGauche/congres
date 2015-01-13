@@ -2,6 +2,7 @@
 
 namespace AppBundle\Admin;
 
+use AppBundle\Entity\Adherent;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBUndle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
@@ -32,16 +33,26 @@ class AdherentAdmin extends Admin
             ->add('email')
             ->add('lastname', null, array('label' => 'Nom'))
             ->add('firstname', null, array('label' => 'Prénom'))
-            ->add('birthdate', null, array('label' => 'Date de naissance'));
+            ->add('birthdate', null, array('label' => 'Date de naissance'))
+            ->add('status', null, array('label' => 'Statut'), 'choice', array(
+                'choices' => array(
+                    Adherent::STATUS_OK => 'À jour.',
+                    Adherent::STATUS_ATTENTE_RENOUVELLEMENT => 'En attente.',
+                ),
+                'multiple' => false,
+            ))
+            ->add('instances', null, array(), null, array('property' => 'name'));
     }
 
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
             ->addIdentifier('email')
-            ->add('lastname', null, array('label' => 'Nom'))
-            ->add('firstname', null, array('label' => 'Prénom'))
+            ->addIdentifier('lastname', null, array('label' => 'Nom'))
+            ->addIdentifier('firstname', null, array('label' => 'Prénom'))
             ->add('birthdate', null, array('label' => 'Date de naissance'))
-            ->add('user', null, array('label' => 'Compte'));
+            ->add('user', null, array('label' => 'Compte'))
+            ->add('status', null, array('Statut'))
+            ->add('instances', null, array('associated_property' => 'name'));
     }
 }

@@ -157,7 +157,7 @@ abstract class Contribution
             self::STATUS_SIGNATURES_CLOSED,
             self::STATUS_NEW,
         ))) {
-            throw new \InvalidArgumentException("Invalid status");
+            throw new \InvalidArgumentException('Invalid status');
         }
 
         $this->status = $status;
