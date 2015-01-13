@@ -39,6 +39,15 @@ class ContributionAdmin extends Admin
         $listMapper
             ->addIdentifier('title', null, array('label' => 'Titre'))
             ->add('author.profile.lastname', null, array('label' => 'Nom'))
-            ->add('author.profile.firstname', null, array('label' => 'Prénom'));
+            ->add('author.profile.firstname', null, array('label' => 'Prénom'))
+            ->add('status', 'choice', array(
+                'label' => 'Statut',
+                'choices' => array(
+                    Contribution::STATUS_SIGNATURES_CLOSED => 'Signatures récoltés',
+                    Contribution::STATUS_SIGNATURES_OPEN => 'Ouverte aux signatures',
+                    Contribution::STATUS_NEW => 'Envoyée mais non validée (non publique)',
+                ),
+                'editable' => true,
+            ));
     }
 }
