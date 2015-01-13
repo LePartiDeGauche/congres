@@ -13,6 +13,10 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Instance
 {
+    const INSTANCE_CN = 'Conseil National';
+    const INSTANCE_BN = 'Bureau National';
+    const INSTANCE_SN = 'Secrétariat National';
+
     /**
      * @var integer
      *
@@ -28,6 +32,12 @@ class Instance
      * @ORM\Column(name="name", type="string", length=255, unique=true)
      */
     private $name;
+
+    /**
+     * @var string
+     * @ORM\Column(name="date", type="date", nullable=true)
+     */
+    private $electionDate;
 
     /**
      * The collection of user members of the instance.
@@ -56,6 +66,14 @@ class Instance
      */
     public function setName($name)
     {
+        if (!in_array($name, array(
+            self::INSTANCE_SN,
+            self::INSTANCE_BN,
+            self::INSTANCE_CN,
+        ))) {
+            throw new \InvalidArgumentException("Invalid status");
+        }
+
         $this->name = $name;
 
         return $this;
@@ -70,6 +88,7 @@ class Instance
     {
         return $this->name;
     }
+
     /**
      * Constructor
      */
@@ -109,5 +128,28 @@ class Instance
     public function getAdherents()
     {
         return $this->adherents;
+    }
+
+    /**
+     * Set election date
+     *
+     * @param \DateTime $date
+     * @return Instance
+     */
+    public function setElectionDate(\DateTime $date)
+    {
+        $this->electionDate = $date;
+
+        return $this;
+    }
+
+    /**
+     * Get election date
+     *
+     * @return \DateTime
+     */
+    public function getElectionDate()
+    {
+        return $this->electionDate;
     }
 }
