@@ -6,17 +6,44 @@
 <div class="container">
     <div class="row">
         <h1>Listes de mes contributions</h1>
-            {% if generalContrib is not null %}
-                <p>Contribution générale : <a href="{{ path('contribution_view', {id: generalContrib.id}) }}">{{ generalContrib.title }}</a></p>
+            {% if generalContrib is null and thematicContribs is empty %}
+                <p>Pas de contribution envoyée.</p>
             {% else %}
-                <p>Pas de contribution générale.</p>
-            {% endif %}
-            {% if thematicContribs is not empty %}
-                {% for contrib in thematicContribs %}
-                    <p>Contribution thématique : <a href="{{ path('contribution_view', {id: contrib.id}) }}">{{ contrib.title }}</a></p>
-                {% endfor %}
-            {% else %}
-                <p>Pas de contribution thématique.</p>
+                <table class="table">
+                    <tr>
+                        <th>Type</th><th>Titre</th><th>Supprimer</th>
+                    </tr>
+                    {% if generalContrib is not null %}
+                        <tr>
+                            <td>Contribution générale</td>
+                            <td>
+                                <a href="{{ path('contribution_view', {id: generalContrib.id}) }}">{{ generalContrib.title }}</a>
+                            </td>
+                            <td>
+                                <a class="btn btn-default btn-sm" href="{{ path('contribution_delete', {id: generalContrib.id}) }}">
+                                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                                    <span class="sr-only">Supprimer</span>
+                                </a>
+                            </td>
+                        </tr>
+                    {% endif %}
+                    {% if thematicContribs is not empty %}
+                        {% for contrib in thematicContribs %}
+                            <tr>
+                                <td>Contribution thématique</td>
+                                <td>
+                                    <a href="{{ path('contribution_view', {id: contrib.id}) }}">{{ contrib.title }}</a>
+                                </td>
+                                <td>
+                                    <a class="btn btn-default btn-sm" href="{{ path('contribution_delete', {id: contrib.id}) }}">
+                                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                                        <span class="sr-only">Supprimer</span>
+                                    </a>
+                                </td>
+                            </p>
+                        {% endfor %}
+                    {% endif %}
+                </table>
             {% endif %}
         </div>
 </div>

@@ -82,4 +82,29 @@ class ContributionController extends Controller
             'contrib' => $contrib,
         ));
     }
+
+    /**
+     * @Route("/supprimer/{id}", name="contribution_delete")
+     */
+    public function deleteAction(Contribution $contrib, Request $request)
+    {
+        $this->denyAccessUnlessGranted('delete', $contrib);
+
+        $form = $this->createFormBuilder()
+            ->getForm();
+
+        $form->handleRequest($request);
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($contrib);
+            $em->flush();
+
+            return $this->redirect($this->generateUrl('contribution_my_submissions'));
+        }
+
+        return $this->render('contribution/delete.html.twig', array(
+            'contrib' => $contrib,
+            'form' => $form->createView()
+        ));
+    }
 }

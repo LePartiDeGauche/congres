@@ -1,0 +1,20 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}Supprimer {{ contrib.title }}{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <h1>Supprimer une contribution</h1>
+            <form method="post" action="{{ path('contribution_delete', {id: contrib.id}) }}">
+                {{ form_widget(form) }}
+                <p>Veux-tu vraiment supprimer la contribution {{ contrib.title }} ?</p>
+                <div class="pull-right">
+                    <input type="submit" class="btn btn-danger" value="Supprimer" />
+                    <a class="btn btn-default" href="{{ path('contribution_my_submissions') }}">Annuler</a>
+                </div>
+            </form>
+        </div>
+</div>
+{% endblock %}
