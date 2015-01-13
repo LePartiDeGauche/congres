@@ -25,7 +25,7 @@ class Instance
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=255)
+     * @ORM\Column(name="name", type="string", length=255, unique=true)
      */
     private $name;
 
@@ -86,8 +86,7 @@ class Instance
      */
     public function addAdherent(\AppBundle\Entity\Adherent $adherent)
     {
-        $this->adherents[] = $adherents;
-        $adherent->addInstance($this);
+        $this->adherents->add($adherent);
 
         return $this;
     }
@@ -100,7 +99,6 @@ class Instance
     public function removeAdherent(\AppBundle\Entity\Adherent $adherent)
     {
         $this->adherents->removeElement($adherent);
-        $adherent->removeElement($this);
     }
 
     /**

@@ -24,7 +24,7 @@ class Adherent
     /**
      * @var string
      *
-     * @ORM\Column(name="email", type="string", length=255)
+     * @ORM\Column(name="email", type="string", length=255, unique=true)
      */
     private $email;
 
@@ -53,7 +53,7 @@ class Adherent
      * The collection of instances the user is member of.
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Instance", inversedBy="adherents")
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Instance", inversedBy="adherents", cascade={"persist"})
      * @ORM\JoinTable(name="users_instances")
      */
     private $instances;
@@ -210,8 +210,7 @@ class Adherent
      */
     public function addInstance(\AppBundle\Entity\Instance $instance)
     {
-        $this->instances[] = $instance;
-        $instance->addAdherent($this);
+        $this->instances->add($instance);
 
         return $this;
     }
@@ -224,7 +223,6 @@ class Adherent
     public function removeInstance(\AppBundle\Entity\Instance $instance)
     {
         $this->instances->removeElement($instance);
-        $instance->removeAdherent($this);
     }
 
     /**
