@@ -9,6 +9,16 @@ services:
             - ~
         calls:
             - [ setTranslationDomain, [AppBundle] ]
+    sonata.admin.instance:
+        class: AppBundle\Admin\InstanceAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Fichier", label: "Instances"}
+        arguments:
+            - ~
+            - AppBundle\Entity\Instance
+            - ~
+        calls:
+            - [ setTranslationDomain, [AppBundle] ]
     sonata.admin.user:
         class: AppBundle\Admin\UserAdmin
         tags:
