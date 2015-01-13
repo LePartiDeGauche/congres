@@ -19,3 +19,23 @@ services:
             - ~
         calls:
             - [ setTranslationDomain, [AppBundle] ]
+    sonata.admin.congres.thematic_contribution:
+        class: AppBundle\Admin\Congres\ThematicContributionAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Congrès 2015", label: "Contributions thématiques"}
+        arguments:
+            - ~
+            - AppBundle\Entity\Congres\ThematicContribution
+            - ~
+        calls:
+            - [ setTranslationDomain, [AppBundle] ]
+    sonata.admin.congres.general_contribution:
+        class: AppBundle\Admin\Congres\GeneralContributionAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Congrès 2015", label: "Contributions générales"}
+        arguments:
+            - ~
+            - AppBundle\Entity\Congres\GeneralContribution
+            - ~
+        calls:
+            - [ setTranslationDomain, [AppBundle] ]
