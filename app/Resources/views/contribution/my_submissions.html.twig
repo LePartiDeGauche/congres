@@ -5,7 +5,8 @@
 {% block body %}
 <div class="container">
     <div class="row">
-        <h1>Listes de mes contributions</h1>
+        <div class="col-md-12">
+            <h1>Listes de mes contributions</h1>
             {% if generalContrib is null and thematicContribs is empty %}
                 <p>Pas de contribution envoyée.</p>
             {% else %}
@@ -40,11 +41,15 @@
                                         <span class="sr-only">Supprimer</span>
                                     </a>
                                 </td>
-                            </p>
+                            </tr>
                         {% endfor %}
                     {% endif %}
                 </table>
+                <p>
+                    Pour modifier une contribution, il suffit simplement de la supprimer et d'envoyer la nouvelle version.
+                </p>
             {% endif %}
-        </div>
-</div>
+        </div><!-- .col-md-12 -->
+    </div><!-- .row -->
+</div><!-- .container -->
 {% endblock %}

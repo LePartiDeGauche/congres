@@ -78,8 +78,21 @@ class ContributionController extends Controller
     {
         $this->denyAccessUnlessGranted('view', $contrib);
 
+        switch (get_class($contrib)) {
+            case 'AppBundle\Entity\Congres\GeneralContribution':
+                $type = 'general';
+                break;
+            case 'AppBundle\Entity\Congres\ThematicContribution':
+                $type = 'thematic';
+                break;
+            default:
+                return $this->createNotFoundException();
+                break;
+        }
+
         return $this->render('contribution/view.html.twig', array(
             'contrib' => $contrib,
+            'type' => $type,
         ));
     }
 

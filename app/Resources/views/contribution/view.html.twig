@@ -6,7 +6,15 @@
 <div class="container">
     <div class="row">
         <h1>{{ contrib.title }}</h1>
-            <p>{{ contrib.content }}</p>
-        </div>
+        <p class="small text-muted">
+            Type :
+            {% if 'general' == type %}contribution générale{% endif %}
+            {% if 'thematic' == type %}contribution thématique{% endif %}
+            |
+            Auteur :
+            {{ contrib.author.profile.firstname }} {{ contrib.author.profile.lastname }}
+        </p>
+        <p>{{ contrib.content|nl2br }}</p>
+    </div>
 </div>
 {% endblock %}
