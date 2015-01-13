@@ -57,7 +57,7 @@ class RegistrationListener implements EventSubscriberInterface
     }
 
     /**
-     * When user created
+     * When user created we link adherent profile to user.
      */
     public function onRegistrationSuccess(FormEvent $event)
     {
@@ -74,7 +74,8 @@ class RegistrationListener implements EventSubscriberInterface
     }
 
     /**
-     * If form is valid but profile does not exists.
+     * If form is valid but profile does not exists, we fake correct registration
+     * otherwise anyone could known who is member of the Parti de Gauche.
      */
     public function onRegistrationInitialize(GetResponseUserEvent $event)
     {
