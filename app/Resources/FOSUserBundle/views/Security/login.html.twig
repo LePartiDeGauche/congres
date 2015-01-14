@@ -1,6 +1,11 @@
 {% extends "FOSUserBundle::layout.html.twig" %}
 
 {% block fos_user_content %}
+<p class="text-justify text-muted text-small">
+    Si vous ne vous êtes jamais connecté sur le site Congrès, il faut vous inscrire en utilisant
+    le lien inscription en haut à droite. Les contributions sont publiques et soumises à signatures
+    du lundi 19 au 30 janvier. Pour tout problème, contacter congres2015@lepartidegauche.fr.
+</p>
 {% if error %}
     <div class="alert alert-danger" role="alert">
         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
