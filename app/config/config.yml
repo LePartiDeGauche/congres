@@ -84,6 +84,7 @@ fos_user:
     user_class: AppBundle\Entity\User
     from_email:
         address: %mailer_sender_address%
+        sender_name: "Congrès Parti de Gauche"
     registration:
         confirmation:
             enabled: true
