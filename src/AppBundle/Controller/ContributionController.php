@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Entity\Congres\Contribution;
@@ -17,6 +18,7 @@ class ContributionController extends Controller
 {
     /**
      * @Route("/envoyer", name="contribution_submit")
+     * Security("is_granted('view',app.request.get('_route'))")
      */
     public function submitAction(Request $request)
     {
@@ -119,6 +121,7 @@ class ContributionController extends Controller
 
     /**
      * @Route("/voter/{id}", name="contribution_vote")
+     * Security("is_granted('view',app.request.get('_route'))")
      */
     public function voteAction(Contribution $contrib, Request $request)
     {
@@ -152,6 +155,7 @@ class ContributionController extends Controller
 
     /**
      * @Route("/supprimer/{id}", name="contribution_delete")
+     * Security("is_granted('view',app.request.get('_route'))")
      */
     public function deleteAction(Contribution $contrib, Request $request)
     {
