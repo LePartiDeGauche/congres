@@ -3,7 +3,8 @@
 namespace AppBundle\Entity\Congres;
 
 use Doctrine\ORM\EntityRepository;
-
+use Doctrine\Common\Collections\Criteria;
+use AppBundle\Entity\Instance;
 /**
  * GeneralContributionRepository
  *
@@ -12,4 +13,16 @@ use Doctrine\ORM\EntityRepository;
  */
 class GeneralContributionRepository extends EntityRepository
 {
+    public function getCNVotesCount($contrib)
+    {
+        // TODO
+        return 0;
+
+    }
+
+    public function getVotesCount($contrib)
+    {
+        // TODO
+        return 0;
+    }
 }

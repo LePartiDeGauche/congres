@@ -3,6 +3,7 @@
 namespace AppBundle\Entity\Congres;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\Common\Collections\Criteria;
 
 /**
  * ThematicContributionsRepository
@@ -12,4 +13,15 @@ use Doctrine\ORM\EntityRepository;
  */
 class ThematicContributionRepository extends EntityRepository
 {
+    public function getCNVotesCount()
+    {
+        // TODO
+        return 0;
+    }
+
+    public function getVotesCount()
+    {
+        // TODO
+        return 0;
+    }
 }
