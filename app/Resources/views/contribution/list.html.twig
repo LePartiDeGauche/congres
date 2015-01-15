@@ -1,0 +1,101 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}Liste des Contributions{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>Liste des contributions</h1>
+            <h2>Contributions soumises au vote</h2>
+            {% if generalOpenContribs is null and thematicOpenContribs is empty %}
+                <p>Pas de contribution envoyée.</p>
+            {% else %}
+                <table class="table">
+                    <tr>
+                        <th>Type</th><th>Titre</th><th>Voter</th>
+                    </tr>
+                    {% if generalOpenContribs is not null %}
+                        {% for contrib in generalOpenContribs %}
+                            <tr>
+                                <td>Contribution générale</td>
+                                <td>
+                                    <a href="{{ path('contribution_view', {id: contrib.id}) }}">{{ contrib.title }}</a>
+                                </td>
+                                <td>
+                                    <a class="btn btn-default btn-sm" href="{{ path('contribution_vote',
+{id: contrib.id}) }}">
+                                        <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+                                        <span class="sr-only">Voter</span>
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    {% endif %}
+                    {% if thematicOpenContribs is not empty %}
+                        {% for contrib in thematicOpenContribs %}
+                            <tr>
+                                <td>Contribution thématique</td>
+                                <td>
+                                    <a href="{{ path('contribution_view', {id: contrib.id}) }}">{{ contrib.title }}</a>
+                                </td>
+                                <td>
+                                    <a class="btn btn-default btn-sm" href="{{
+path('contribution_vote', {id: contrib.id}) }}">
+                                        <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+                                        <span class="sr-only">Voter</span>
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    {% endif %}
+                </table>
+            {% endif %}
+            <h2>Contributions validées</h2>
+            {% if generalClosedContribs is null and thematicClosedContribs is empty %}
+                <p>Pas de contribution envoyée.</p>
+            {% else %}
+                <table class="table">
+                    <tr>
+                        <th>Type</th><th>Titre</th><th>Voter</th>
+                    </tr>
+                    {% if generalClosedContribs is not null %}
+                        {% for contrib in generalClosedContribs %}
+                            <tr>
+                                <td>Contribution générale</td>
+                                <td>
+                                    <a href="{{ path('contribution_view', {id: contrib.id}) }}">{{ contrib.title }}</a>
+                                </td>
+                                <td>
+                                    <a class="btn btn-default btn-sm" href="{{ path('contribution_vote',
+{id: contrib.id}) }}">
+                                        <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+                                        <span class="sr-only">Voter</span>
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    {% endif %}
+                    {% if thematicClosedContribs is not empty %}
+                        {% for contrib in thematicClosedContribs %}
+                            <tr>
+                                <td>Contribution thématique</td>
+                                <td>
+                                    <a href="{{ path('contribution_view', {id: contrib.id}) }}">{{ contrib.title }}</a>
+                                </td>
+                                <td>
+                                    <a class="btn btn-default btn-sm" href="{{
+path('contribution_vote', {id: contrib.id}) }}">
+                                        <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+                                        <span class="sr-only">Voter</span>
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    {% endif %}
+                </table>
+            {% endif %}
+        </div><!-- .col-md-12 -->
+    </div><!-- .row -->
+</div><!-- .container -->
+{% endblock %}

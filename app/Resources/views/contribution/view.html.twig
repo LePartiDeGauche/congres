@@ -15,6 +15,11 @@
             {{ contrib.author.profile.firstname }} {{ contrib.author.profile.lastname }}
         </p>
         <p>{{ contrib.content|nl2br }}</p>
+        <p>
+            <a class="btn btn-default btn-sm" href="{{path('contribution_vote', {id: contrib.id}) }}">
+            <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+            <span class="sr-only">Voter</span>
+        <p>
     </div>
 </div>
 {% endblock %}
