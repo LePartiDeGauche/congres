@@ -23,11 +23,13 @@
                                     <a href="{{ path('contribution_view', {id: contrib.id}) }}">{{ contrib.title }}</a>
                                 </td>
                                 <td>
-                                    <a class="btn btn-default btn-sm" href="{{ path('contribution_vote',
-{id: contrib.id}) }}">
+                                    {% if is_granted("vote", contrib, app.user) %}
+                                        <a class="btn btn-default btn-sm" href="{{path('contribution_vote', {id: contrib.id}) }}">
                                         <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
-                                        <span class="sr-only">Voter</span>
-                                    </a>
+                                    {% else %}
+                                        <span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span>
+                                    {% endif %}
+                                    <span class="sr-only">Voter</span>
                                 </td>
                             </tr>
                         {% endfor %}
@@ -40,11 +42,13 @@
                                     <a href="{{ path('contribution_view', {id: contrib.id}) }}">{{ contrib.title }}</a>
                                 </td>
                                 <td>
-                                    <a class="btn btn-default btn-sm" href="{{
-path('contribution_vote', {id: contrib.id}) }}">
+                                    {% if is_granted("vote", contrib, app.user) %}
+                                        <a class="btn btn-default btn-sm" href="{{path('contribution_vote', {id: contrib.id}) }}">
                                         <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
-                                        <span class="sr-only">Voter</span>
-                                    </a>
+                                    {% else %}
+                                        <span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span>
+                                    {% endif %}
+                                    <span class="sr-only">Voter</span>
                                 </td>
                             </tr>
                         {% endfor %}
@@ -67,11 +71,13 @@ path('contribution_vote', {id: contrib.id}) }}">
                                     <a href="{{ path('contribution_view', {id: contrib.id}) }}">{{ contrib.title }}</a>
                                 </td>
                                 <td>
-                                    <a class="btn btn-default btn-sm" href="{{ path('contribution_vote',
-{id: contrib.id}) }}">
+                                    {% if is_granted("vote", contrib, app.user) %}
+                                        <a class="btn btn-default btn-sm" href="{{path('contribution_vote', {id: contrib.id}) }}">
                                         <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
-                                        <span class="sr-only">Voter</span>
-                                    </a>
+                                    {% else %}
+                                        <span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span>
+                                    {% endif %}
+                                    <span class="sr-only">Voter</span>
                                 </td>
                             </tr>
                         {% endfor %}
@@ -84,11 +90,13 @@ path('contribution_vote', {id: contrib.id}) }}">
                                     <a href="{{ path('contribution_view', {id: contrib.id}) }}">{{ contrib.title }}</a>
                                 </td>
                                 <td>
-                                    <a class="btn btn-default btn-sm" href="{{
-path('contribution_vote', {id: contrib.id}) }}">
+                                    {% if is_granted("vote", contrib, app.user) %}
+                                        <a class="btn btn-default btn-sm" href="{{path('contribution_vote', {id: contrib.id}) }}">
                                         <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
-                                        <span class="sr-only">Voter</span>
-                                    </a>
+                                    {% else %}
+                                        <span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span>
+                                    {% endif %}
+                                    <span class="sr-only">Voter</span>
                                 </td>
                             </tr>
                         {% endfor %}
