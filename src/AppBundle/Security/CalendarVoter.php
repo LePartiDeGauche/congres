@@ -28,7 +28,7 @@ final class CalendarVoter extends AbstractVoter
  
         if ($attribute === self::VIEW) {
 
-            $now = new \DateTime('now');
+            $now = new \DateTime();
             $em = $this->entityManager;
             $access = $em->createQueryBuilder()
                 ->select('a')

@@ -2,6 +2,8 @@
 namespace AppBundle\Security\Congres;
 
 use AppBundle\Entity\Congres\Contribution;
+use AppBundle\Entity\Congres\ThematicContribution;
+use AppBundle\Entity\Congres\GeneralContribution;
 use Symfony\Component\Security\Core\Authorization\Voter\AbstractVoter;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -11,9 +13,13 @@ final class ContributionVoter extends AbstractVoter
 
     const DELETE = 'delete';
 
+    const VOTE = 'vote';
+
+    private $entityManager;
+
     protected function getSupportedAttributes()
     {
-        return array(self::VIEW, self::DELETE);
+        return array(self::VIEW, self::DELETE, self::VOTE);
     }
 
     protected function getSupportedClasses()
@@ -43,6 +49,27 @@ final class ContributionVoter extends AbstractVoter
             return in_array('ROLE_ADMIN', $user->getRoles(), true);
         }
 
+        if ($attribute === self::VOTE) {
+
+            if (Contribution::STATUS_NEW !== $contrib->getStatus()) {
+
+                $em = $this->entityManager;
+                if (is_a($contrib, "AppBundle\Entity\Congres\GeneralContribution" )) {
+                    return !$em->getRepository('AppBundle:Congres\GeneralContribution')->hasVoted($user);
+                }
+                else
+                {
+                    return !$em->getRepository('AppBundle:Congres\ThematicContribution')->hasAlreadyVoted($contrib, $user);
+                }
+
+            }
+        }
+
         return false;
+    }
+
+    public function __construct($entityManager)
+    {
+        $this->entityManager = $entityManager;
     }
 }

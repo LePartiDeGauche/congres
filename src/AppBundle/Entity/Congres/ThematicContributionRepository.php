@@ -24,4 +24,19 @@ class ThematicContributionRepository extends EntityRepository
         // TODO
         return 0;
     }
+
+    public function hasAlreadyVoted($contrib, $user)
+    {
+        $hasAlreadyVoted = $this->createQueryBuilder('tc')
+            ->select('COUNT(tc)')
+            ->innerJoin('tc.votes', 'u')
+            ->where('u.id = :user')
+            ->andWhere('tc.id = :id')
+            ->setParameter('user', $user->getId())
+            ->setParameter('id', $contrib->getId())
+            ->getQuery()->getSingleScalarResult();
+
+        var_dump($hasAlreadyVoted);
+        return $hasAlreadyVoted;
+    }
 }

@@ -16,7 +16,7 @@
         </p>
         <p>{{ contrib.content|nl2br }}</p>
         <p>
-{% if is_granted("vote", contrib, app.user) %}
+{% if is_granted('vote', contrib, app.user) %}
             <a class="btn btn-default btn-sm" href="{{path('contribution_vote', {id: contrib.id}) }}">
             <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
 {% else %}

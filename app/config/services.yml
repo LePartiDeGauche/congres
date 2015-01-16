@@ -28,6 +28,7 @@ services:
     app.congres.contribution_voter:
         class:      AppBundle\Security\Congres\ContributionVoter
         public:     false
+        arguments: [@doctrine.orm.entity_manager]
         tags:
            - { name: security.voter }
 

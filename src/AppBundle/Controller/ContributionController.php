@@ -127,11 +127,11 @@ class ContributionController extends Controller
     public function voteAction(Contribution $contrib, Request $request)
     {
         $this->denyAccessUnlessGranted('view', new RouteString($request->get('_route')), $this->getUser());
-        //TODO validation constraints
+        $this->denyAccessUnlessGranted('vote', $contrib, $this->getUser());
 
         $em = $this->getDoctrine()->getManager();
 
-        if (is_a($contrib, "GeneralContribution" ))
+        if (is_a($contrib, "AppBundle\Entity\Congres\GeneralContribution" ))
             $contrib_repo = $em->getRepository("AppBundle:Congres\GeneralContribution");
         else
             $contrib_repo = $em->getRepository("AppBundle:Congres\ThematicContribution");

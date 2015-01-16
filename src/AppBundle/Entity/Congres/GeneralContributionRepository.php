@@ -13,6 +13,7 @@ use AppBundle\Entity\Instance;
  */
 class GeneralContributionRepository extends EntityRepository
 {
+
     public function getCNVotesCount($contrib)
     {
         // TODO
@@ -24,5 +25,29 @@ class GeneralContributionRepository extends EntityRepository
     {
         // TODO
         return 0;
+    }
+    public function hasVoted($user)
+    {
+        $hasVoted = $this->createQueryBuilder('gc')
+            ->select('COUNT(gc)')
+            ->innerJoin('gc.votes', 'u')
+            ->where('u.id = :user')
+            ->setParameter('user', $user->getId())
+            ->getQuery()->getSingleScalarResult();
+
+        return $hasVoted;
+    }
+
+    public function hasAlreadyVoted($contrib, $user)
+    {
+        $hasAlreadyVoted = $this->createQueryBuilder('gc')
+            ->select('COUNT(gc)')
+            ->innerJoin('gc.votes', 'u')
+            ->where('u.id = :user')
+            ->andWhere('gc.id = :id')
+            ->setParameter('user', $user->getId())
+            ->setParameter('id', $contrib->getId())
+            ->getQuery()->getSingleScalarResult();
+        return $hasAlreadyVoted;
     }
 }
