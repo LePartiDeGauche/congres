@@ -14,11 +14,6 @@ class AdherentAdmin extends Admin
     protected $baseRouteName = 'adherents';
     protected $baseRoutePattern = 'adherents';
 
-    protected function configureRoutes(RouteCollection $collection)
-    {
-        $collection->remove('create');
-    }
-
     protected function configureFormFields(FormMapper $formMapper)
     {
         $roles = $this
