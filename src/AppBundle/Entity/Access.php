@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Access
  *
- * @ORM\Table()
+ * @ORM\Table(name="access")
  * @ORM\Entity
  */
 class Access
@@ -42,6 +42,12 @@ class Access
      */
     private $route;
 
+    public function __construct ()
+    { 
+        $begin = new \DateTime();
+        $end = new \DateTime();
+    
+    }
 
 
     /**
@@ -98,5 +104,28 @@ class Access
     public function getEnd()
     {
         return $this->end;
+    }
+
+    /**
+     * Set route
+     *
+     * @param string $route
+     * @return Access
+     */
+    public function setRoute($route)
+    {
+        $this->route = $route;
+
+        return $this;
+    }
+
+    /**
+     * Get route
+     *
+     * @return string 
+     */
+    public function getRoute()
+    {
+        return $this->route;
     }
 }

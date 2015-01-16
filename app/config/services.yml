@@ -31,6 +31,13 @@ services:
         tags:
            - { name: security.voter }
 
+    app.calendar_voter:
+        class:      AppBundle\Security\CalendarVoter
+        public:     false
+        arguments: [@doctrine.orm.entity_manager]
+        tags:
+           - { name: security.voter }
+
 # Import admin services
 imports:
     - { resource: @AppBundle/Resources/config/admin.yml }

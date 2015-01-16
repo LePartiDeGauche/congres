@@ -29,6 +29,16 @@ services:
             - ~
         calls:
             - [ setTranslationDomain, [AppBundle] ]
+    sonata.admin.acces:
+        class: AppBundle\Admin\AccessAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Application", label: "Gestion des accès"}
+        arguments:
+            - ~
+            - AppBundle\Entity\Access
+            - ~
+        calls:
+            - [ setTranslationDomain, [AppBundle] ]
     sonata.admin.congres.thematic_contribution:
         class: AppBundle\Admin\Congres\ThematicContributionAdmin
         tags:

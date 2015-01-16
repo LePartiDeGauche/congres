@@ -10,6 +10,7 @@ use AppBundle\Entity\Congres\Contribution;
 use AppBundle\Entity\Congres\GeneralContribution;
 use AppBundle\Entity\Congres\ThematicContribution;
 use AppBundle\Form\Type\NewCongresContributionType;
+use AppBundle\RouteString;
 
 /**
  * @Route("/contribution")
@@ -18,10 +19,11 @@ class ContributionController extends Controller
 {
     /**
      * @Route("/envoyer", name="contribution_submit")
-     * Security("is_granted('view',app.request.get('_route'))")
      */
     public function submitAction(Request $request)
     {
+        $this->denyAccessUnlessGranted('view', new RouteString($request->get('_route')), $this->getUser());
+
         /* We don't know if we are going to create a PlateformContribution or a
          * Thematic contribution. So we create two identical forms (except for
          * the underlying object) which will both handle request. We display
@@ -121,10 +123,10 @@ class ContributionController extends Controller
 
     /**
      * @Route("/voter/{id}", name="contribution_vote")
-     * Security("is_granted('view',app.request.get('_route'))")
      */
     public function voteAction(Contribution $contrib, Request $request)
     {
+        $this->denyAccessUnlessGranted('view', new RouteString($request->get('_route')), $this->getUser());
         //TODO validation constraints
 
         $em = $this->getDoctrine()->getManager();
@@ -155,10 +157,10 @@ class ContributionController extends Controller
 
     /**
      * @Route("/supprimer/{id}", name="contribution_delete")
-     * Security("is_granted('view',app.request.get('_route'))")
      */
     public function deleteAction(Contribution $contrib, Request $request)
     {
+        $this->denyAccessUnlessGranted('view', new RouteString($request->get('_route')), $this->getUser());
         $this->denyAccessUnlessGranted('delete', $contrib);
 
         $form = $this->createFormBuilder()
