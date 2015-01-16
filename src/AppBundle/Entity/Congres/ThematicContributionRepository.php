@@ -3,7 +3,7 @@
 namespace AppBundle\Entity\Congres;
 
 use Doctrine\ORM\EntityRepository;
-use Doctrine\Common\Collections\Criteria;
+use AppBundle\Entity\Instance;
 
 /**
  * ThematicContributionsRepository
@@ -13,16 +13,31 @@ use Doctrine\Common\Collections\Criteria;
  */
 class ThematicContributionRepository extends EntityRepository
 {
-    public function getCNVotesCount()
+    public function getCNVotesCount($contrib)
     {
-        // TODO
-        return 0;
+        $CNCount = $this->createQueryBuilder('tc')
+            ->select('COUNT(tc)')
+            ->innerJoin('tc.votes', 'u')
+            ->innerJoin('u.profile', 'adh')
+            ->innerJoin('adh.instances', 'i')
+            ->where('tc.id = :contrib')
+            ->andWhere('i.name = :iname')
+            ->setParameter('contrib', $contrib->getId())
+            ->setParameter('iname', Instance::INSTANCE_CN)
+            ->getQuery()->getSingleScalarResult();
+        return $CNCount;
+
     }
 
-    public function getVotesCount()
+    public function getVotesCount($contrib)
     {
-        // TODO
-        return 0;
+        $VoteCount = $this->createQueryBuilder('tc')
+            ->select('COUNT(tc)')
+            ->innerJoin('tc.votes', 'u')
+            ->where('tc.id = :contrib')
+            ->setParameter('contrib', $contrib->getId())
+            ->getQuery()->getSingleScalarResult();
+        return $VoteCount;
     }
 
     public function hasAlreadyVoted($contrib, $user)

@@ -3,7 +3,6 @@
 namespace AppBundle\Entity\Congres;
 
 use Doctrine\ORM\EntityRepository;
-use Doctrine\Common\Collections\Criteria;
 use AppBundle\Entity\Instance;
 /**
  * GeneralContributionRepository
@@ -16,15 +15,29 @@ class GeneralContributionRepository extends EntityRepository
 
     public function getCNVotesCount($contrib)
     {
-        // TODO
-        return 0;
+        $CNCount = $this->createQueryBuilder('gc')
+            ->select('COUNT(gc)')
+            ->innerJoin('gc.votes', 'u')
+            ->innerJoin('u.profile', 'adh')
+            ->innerJoin('adh.instances', 'i')
+            ->where('gc.id = :contrib')
+            ->andWhere('i.name = :iname')
+            ->setParameter('contrib', $contrib->getId())
+            ->setParameter('iname', Instance::INSTANCE_CN)
+            ->getQuery()->getSingleScalarResult();
+        return $CNCount;
 
     }
 
     public function getVotesCount($contrib)
     {
-        // TODO
-        return 0;
+        $VoteCount = $this->createQueryBuilder('gc')
+            ->select('COUNT(gc)')
+            ->innerJoin('gc.votes', 'u')
+            ->where('gc.id = :contrib')
+            ->setParameter('contrib', $contrib->getId())
+            ->getQuery()->getSingleScalarResult();
+        return $VoteCount;
     }
     public function hasVoted($user)
     {
