@@ -6,7 +6,7 @@
 <div class="container">
     <div class="row">
         <h1>{{ contrib.title }}</h1>
-        <p class="small text-muted">
+        <p class="small text-muted text-justify">
             Type :
             {% if 'general' == type %}contribution générale{% endif %}
             {% if 'thematic' == type %}contribution thématique{% endif %}
@@ -17,18 +17,18 @@
         <p>{{ contrib.content|nl2br }}</p>
 
         <p>
-{% if votes.uservote %}
-                                        <span class="glyphicon glyphicon-check" aria-hidden="true"></span>
-                                    {% else %}
-                                    {% if isVoteAllowed %}
-                                        <a class="btn btn-default btn-sm" href="{{path('contribution_vote', {id: contrib.id}) }}">
-                                        <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
-                                    {% else %}
-                                        <span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span>
-                                    {% endif %}
-{% endif %}
-            <span class="sr-only">Voter</span>
-        <p>
+        {% if votes.uservote %}
+            <span class="glyphicon glyphicon-check" aria-hidden="true"></span>
+        {% else %}
+           {% if isVoteAllowed %}
+                <a class="btn btn-default btn-sm" href="{{path('contribution_vote', {id: contrib.id}) }}">
+                    Voter
+                    <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+                </a>
+        
+            {% endif %}
+        {% endif %}
+    <p>
 <p>Tous les votes : {{ votes.adhvote }}</p>
 <p>Votes du Conseil National : {{ votes.cnvote }}</p>
     </div>

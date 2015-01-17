@@ -22,7 +22,7 @@ class ContributionController extends Controller
      */
     public function submitAction(Request $request)
     {
-        $this->denyAccessUnlessGranted('view', new RouteString($request->get('_route')), $this->getUser());
+        $this->denyAccessUnlessGranted('view', new RouteString($request->get('_route')));
 
         /* We don't know if we are going to create a PlateformContribution or a
          * Thematic contribution. So we create two identical forms (except for
@@ -116,7 +116,7 @@ class ContributionController extends Controller
      */
     public function listAction(Request $request)
     {
-        $this->denyAccessUnlessGranted('view', new RouteString($request->get('_route')), $this->getUser());
+        $this->denyAccessUnlessGranted('view', new RouteString($request->get('_route')));
 
         $generalRepo = $this->getDoctrine()->getRepository('AppBundle:Congres\GeneralContribution');
         $generalOpenContribs = $generalRepo->findByStatusWithVotes(Contribution::STATUS_SIGNATURES_OPEN, $this->getUser());
@@ -145,7 +145,7 @@ class ContributionController extends Controller
      */
     public function voteAction(Contribution $contrib, Request $request)
     {
-        $this->denyAccessUnlessGranted('view', new RouteString($request->get('_route')), $this->getUser());
+        $this->denyAccessUnlessGranted('view', new RouteString($request->get('_route')));
         $this->denyAccessUnlessGranted('vote', $contrib, $this->getUser());
 
         $em = $this->getDoctrine()->getManager();
@@ -177,7 +177,7 @@ class ContributionController extends Controller
      */
     public function deleteAction(Contribution $contrib, Request $request)
     {
-        $this->denyAccessUnlessGranted('view', new RouteString($request->get('_route')), $this->getUser());
+        $this->denyAccessUnlessGranted('view', new RouteString($request->get('_route')));
         $this->denyAccessUnlessGranted('delete', $contrib);
 
         $form = $this->createFormBuilder()
