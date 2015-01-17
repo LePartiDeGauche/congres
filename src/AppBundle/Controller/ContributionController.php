@@ -126,9 +126,6 @@ class ContributionController extends Controller
         $thematicOpenContribs = $repo->findByStatusWithVotes(Contribution::STATUS_SIGNATURES_OPEN, $this->getUser());
         $thematicClosedContribs = $repo->findByStatusWithVotes(Contribution::STATUS_SIGNATURES_CLOSED, $this->getUser());
 
-        //var_dump($generalOpenContribs);
-        //die();
-
         $isVoteOpen = $this->get('security.authorization_checker')->isGranted('view', new RouteString('contribution_vote'), $this->getUser());
 
         $isGeneralContribVoteAllowed = !$generalRepo->hasVoted($this->getUser());
@@ -159,7 +156,6 @@ class ContributionController extends Controller
             $contrib_repo = $em->getRepository("AppBundle:Congres\ThematicContribution");
         }
 
-        //$contrib = $contrib_repo->find($contrib);
 
         if (!$contrib->getVotes()->contains($this->getUser())) {
             $contrib->addVote($this->getUser());
