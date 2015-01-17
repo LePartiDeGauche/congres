@@ -1,7 +1,6 @@
 <?php
 namespace AppBundle\Security;
 
-use AppBundle\Entity\Congres\Contribution;
 use AppBundle\Entity\Access;
 use Symfony\Component\Security\Core\Authorization\Voter\AbstractVoter;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -25,9 +24,8 @@ final class CalendarVoter extends AbstractVoter
         if (!$user instanceof UserInterface) {
             return false;
         }
- 
-        if ($attribute === self::VIEW) {
 
+        if ($attribute === self::VIEW) {
             $now = new \DateTime();
             $em = $this->entityManager;
             $access = $em->createQueryBuilder()
@@ -42,8 +40,8 @@ final class CalendarVoter extends AbstractVoter
 
             return ($access || in_array('ROLE_ADMIN', $user->getRoles(), true));
         }
-        return false;
 
+        return false;
     }
     public function __construct($entityManager)
     {

@@ -50,18 +50,13 @@ final class ContributionVoter extends AbstractVoter
         }
 
         if ($attribute === self::VOTE) {
-
             if (Contribution::STATUS_NEW !== $contrib->getStatus()) {
-
                 $em = $this->entityManager;
-                if (is_a($contrib, "AppBundle\Entity\Congres\GeneralContribution" )) {
+                if (is_a($contrib, "AppBundle\Entity\Congres\GeneralContribution")) {
                     return !$em->getRepository('AppBundle:Congres\GeneralContribution')->hasVoted($user);
-                }
-                else
-                {
+                } else {
                     return !$em->getRepository('AppBundle:Congres\ThematicContribution')->hasAlreadyVoted($contrib, $user);
                 }
-
             }
         }
 

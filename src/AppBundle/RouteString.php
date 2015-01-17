@@ -1,9 +1,6 @@
 <?php
 namespace AppBundle;
 
-use AppBundle\Entity\Congres\Contribution;
-use Symfony\Component\Security\Core\Authorization\Voter\AbstractVoter;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 final class RouteString
 {
@@ -18,5 +15,4 @@ final class RouteString
     {
         $this->route = $route;
     }
-
 }

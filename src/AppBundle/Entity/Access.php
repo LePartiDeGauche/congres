@@ -42,18 +42,16 @@ class Access
      */
     private $route;
 
-    public function __construct ()
-    { 
+    public function __construct()
+    {
         $begin = new \DateTime();
         $end = new \DateTime();
-    
     }
-
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -63,7 +61,7 @@ class Access
     /**
      * Set begin
      *
-     * @param \DateTime $begin
+     * @param  \DateTime $begin
      * @return Access
      */
     public function setBegin($begin)
@@ -76,7 +74,7 @@ class Access
     /**
      * Get begin
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getBegin()
     {
@@ -86,7 +84,7 @@ class Access
     /**
      * Set end
      *
-     * @param \DateTime $end
+     * @param  \DateTime $end
      * @return Access
      */
     public function setEnd($end)
@@ -99,7 +97,7 @@ class Access
     /**
      * Get end
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getEnd()
     {
@@ -109,7 +107,7 @@ class Access
     /**
      * Set route
      *
-     * @param string $route
+     * @param  string $route
      * @return Access
      */
     public function setRoute($route)
@@ -122,7 +120,7 @@ class Access
     /**
      * Get route
      *
-     * @return string 
+     * @return string
      */
     public function getRoute()
     {

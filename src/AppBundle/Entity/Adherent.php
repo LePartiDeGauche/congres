@@ -113,6 +113,7 @@ class Adherent
     public function setId($id)
     {
         $this->id = $id;
+
         return $this;
     }
 
@@ -215,7 +216,7 @@ class Adherent
     /**
      * Set status
      *
-     * @param string $status
+     * @param  string   $status
      * @return Adherent
      */
     public function setStatus($status)

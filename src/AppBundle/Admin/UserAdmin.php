@@ -28,7 +28,7 @@ final class UserAdmin extends Admin
                 'choices' => $roles,
                 'multiple' => true,
                 'required' => false,
-                'expanded' => true
+                'expanded' => true,
             ));
     }
 
@@ -38,7 +38,6 @@ final class UserAdmin extends Admin
             ->add('email')
             ->add('roles')
             ->add('enabled', null, array('label' => 'Compte Actif'));
-        ;
     }
 
     protected function configureListFields(ListMapper $listMapper)
