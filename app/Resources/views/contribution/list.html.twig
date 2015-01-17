@@ -13,7 +13,11 @@
             {% else %}
                 <table class="table">
                     <tr>
-                        <th>Type</th><th>Titre</th><th>Voter</th>
+                        <th>Type</th>
+<th>Titre</th>
+<th>Tous le votes</th> 
+<th>Vote des Conseillers Nationaux</th>
+<th>Voter</th>
                     </tr>
                     {% if generalOpenContribs is not null %}
                         {% for contrib in generalOpenContribs %}
@@ -22,13 +26,19 @@
                                 <td>
                                     <a href="{{ path('contribution_view', {id: contrib.id}) }}">{{ contrib.title }}</a>
                                 </td>
+<td>{{ contrib.adhvote}}</td>
+<td>{{ contrib.cnvote}}</td>
                                 <td>
-                                    {% if is_granted("vote", contrib, app.user) %}
+{% if contrib.uservote %}
+                                        <span class="glyphicon glyphicon-check" aria-hidden="true"></span>
+                                    {% else %}
+                                    {% if isVoteOpen and isGeneralContribVoteAllowed %}
                                         <a class="btn btn-default btn-sm" href="{{path('contribution_vote', {id: contrib.id}) }}">
                                         <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
                                     {% else %}
                                         <span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span>
                                     {% endif %}
+{% endif %}
                                     <span class="sr-only">Voter</span>
                                 </td>
                             </tr>
@@ -41,13 +51,19 @@
                                 <td>
                                     <a href="{{ path('contribution_view', {id: contrib.id}) }}">{{ contrib.title }}</a>
                                 </td>
+<td>{{ contrib.adhvote}}</td>
+<td>{{ contrib.cnvote}}</td>
                                 <td>
-                                    {% if is_granted("vote", contrib, app.user) %}
+{% if contrib.uservote %}
+                                        <span class="glyphicon glyphicon-check" aria-hidden="true"></span>
+                                    {% else %}
+                                    {% if isVoteOpen %}
                                         <a class="btn btn-default btn-sm" href="{{path('contribution_vote', {id: contrib.id}) }}">
                                         <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
                                     {% else %}
                                         <span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span>
                                     {% endif %}
+{% endif %}
                                     <span class="sr-only">Voter</span>
                                 </td>
                             </tr>
@@ -61,7 +77,10 @@
             {% else %}
                 <table class="table">
                     <tr>
-                        <th>Type</th><th>Titre</th><th>Voter</th>
+                        <th>Type</th><th>Titre</th>
+<th>Tous le votes</th> 
+<th>Vote des Conseillers Nationaux</th>
+<th>Voter</th>
                     </tr>
                     {% if generalClosedContribs is not null %}
                         {% for contrib in generalClosedContribs %}
@@ -70,13 +89,19 @@
                                 <td>
                                     <a href="{{ path('contribution_view', {id: contrib.id}) }}">{{ contrib.title }}</a>
                                 </td>
+<td>{{ contrib.adhvote}}</td>
+<td>{{ contrib.cnvote}}</td>
                                 <td>
-                                    {% if is_granted("vote", contrib, app.user) %}
+{% if contrib.uservote %}
+                                        <span class="glyphicon glyphicon-check" aria-hidden="true"></span>
+                                    {% else %}
+                                    {% if isVoteOpen and isGeneralContribVoteAllowed %}
                                         <a class="btn btn-default btn-sm" href="{{path('contribution_vote', {id: contrib.id}) }}">
                                         <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
                                     {% else %}
                                         <span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span>
                                     {% endif %}
+{% endif %}
                                     <span class="sr-only">Voter</span>
                                 </td>
                             </tr>
@@ -89,13 +114,19 @@
                                 <td>
                                     <a href="{{ path('contribution_view', {id: contrib.id}) }}">{{ contrib.title }}</a>
                                 </td>
+<td>{{ contrib.adhvote}}</td>
+<td>{{ contrib.cnvote}}</td>
                                 <td>
-                                    {% if is_granted("vote", contrib, app.user) %}
+{% if contrib.uservote %}
+                                        <span class="glyphicon glyphicon-check" aria-hidden="true"></span>
+                                    {% else %}
+                                    {% if isVoteOpen %}
                                         <a class="btn btn-default btn-sm" href="{{path('contribution_vote', {id: contrib.id}) }}">
                                         <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
                                     {% else %}
                                         <span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span>
                                     {% endif %}
+{% endif %}
                                     <span class="sr-only">Voter</span>
                                 </td>
                             </tr>

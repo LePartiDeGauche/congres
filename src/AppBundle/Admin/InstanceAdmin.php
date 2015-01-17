@@ -22,9 +22,9 @@ class InstanceAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('name', 'choice', array(
+            ->add('name', 'doctrine_orm_choice', array(
                 'label' => 'Nom',
-                'choices' => array(
+                'doctrine_orm_choices' => array(
                     Instance::INSTANCE_BN,
                     Instance::INSTANCE_SN,
                     Instance::INSTANCE_CN,
@@ -37,9 +37,9 @@ class InstanceAdmin extends Admin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('name', 'choice', array(
+            ->add('name', 'doctrine_orm_choice', array(
                 'label' => 'Nom',
-                'choices' => array(
+                'doctrine_orm_choices' => array(
                     Instance::INSTANCE_BN,
                     Instance::INSTANCE_SN,
                     Instance::INSTANCE_CN,
@@ -52,9 +52,9 @@ class InstanceAdmin extends Admin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->addIdentifier('name', 'choice', array(
+            ->addIdentifier('name', 'doctrine_orm_choice', array(
                 'label' => 'Nom',
-                'choices' => array(
+                'doctrine_orm_choices' => array(
                     Instance::INSTANCE_BN,
                     Instance::INSTANCE_SN,
                     Instance::INSTANCE_CN,

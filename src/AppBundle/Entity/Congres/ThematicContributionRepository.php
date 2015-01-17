@@ -25,8 +25,8 @@ class ThematicContributionRepository extends EntityRepository
             ->setParameter('contrib', $contrib->getId())
             ->setParameter('iname', Instance::INSTANCE_CN)
             ->getQuery()->getSingleScalarResult();
-        return $CNCount;
 
+        return $CNCount;
     }
 
     public function getVotesCount($contrib)
@@ -37,7 +37,69 @@ class ThematicContributionRepository extends EntityRepository
             ->where('tc.id = :contrib')
             ->setParameter('contrib', $contrib->getId())
             ->getQuery()->getSingleScalarResult();
+
         return $VoteCount;
+    }
+
+    public function findByStatusWithVotes($status, $user)
+    {
+        $contribs =
+            $this->getEntityManager()->createQuery('
+SELECT tc.id id, tc.title title,
+COUNT(av) adhvote, (
+SELECT COUNT(tc2)
+FROM  AppBundle\Entity\Congres\ThematicContribution tc2
+LEFT JOIN  tc2.votes cnv
+LEFT JOIN  cnv.profile adh
+LEFT JOIN  adh.instances inst
+WHERE tc.id = tc2.id AND inst.name = :iname
+) cnvote,
+(
+SELECT COUNT(tc3)
+FROM  AppBundle\Entity\Congres\ThematicContribution tc3
+LEFT JOIN  tc3.votes uv
+WHERE tc.id = tc3.id AND uv.id = :user
+) uservote
+FROM AppBundle\Entity\Congres\ThematicContribution tc
+LEFT JOIN tc.votes av
+WHERE tc.status = :status
+GROUP BY id, title')
+            ->setParameter('user', $user->getId())
+            ->setParameter('status', $status)
+            ->setParameter('iname', Instance::INSTANCE_CN)
+            ->execute();
+
+        return $contribs;
+    }
+
+    public function getVotes($contrib, $user)
+    {
+        $contribs =
+            $this->getEntityManager()->createQuery('
+SELECT COUNT(av) adhvote,
+(
+SELECT COUNT(tc2)
+FROM  AppBundle\Entity\Congres\ThematicContribution tc2
+LEFT JOIN  tc2.votes cnv
+LEFT JOIN  cnv.profile adh
+LEFT JOIN  adh.instances inst
+WHERE tc.id = tc2.id AND inst.name = :iname
+) cnvote,
+(
+SELECT COUNT(tc3)
+FROM  AppBundle\Entity\Congres\ThematicContribution tc3
+LEFT JOIN  tc3.votes uv
+WHERE tc.id = tc3.id AND uv.id = :user
+) uservote
+FROM AppBundle\Entity\Congres\ThematicContribution tc
+LEFT JOIN tc.votes av
+WHERE tc.id = :id')
+            ->setParameter('user', $user->getId())
+            ->setParameter('id', $contrib->getId())
+            ->setParameter('iname', Instance::INSTANCE_CN)
+            ->getSingleResult();
+
+        return $contribs;
     }
 
     public function hasAlreadyVoted($contrib, $user)
@@ -51,7 +113,6 @@ class ThematicContributionRepository extends EntityRepository
             ->setParameter('id', $contrib->getId())
             ->getQuery()->getSingleScalarResult();
 
-        var_dump($hasAlreadyVoted);
         return $hasAlreadyVoted;
     }
 }

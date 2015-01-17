@@ -12,7 +12,6 @@ use AppBundle\Entity\Instance;
  */
 class GeneralContributionRepository extends EntityRepository
 {
-
     public function getCNVotesCount($contrib)
     {
         $CNCount = $this->createQueryBuilder('gc')
@@ -25,8 +24,8 @@ class GeneralContributionRepository extends EntityRepository
             ->setParameter('contrib', $contrib->getId())
             ->setParameter('iname', Instance::INSTANCE_CN)
             ->getQuery()->getSingleScalarResult();
-        return $CNCount;
 
+        return $CNCount;
     }
 
     public function getVotesCount($contrib)
@@ -37,7 +36,65 @@ class GeneralContributionRepository extends EntityRepository
             ->where('gc.id = :contrib')
             ->setParameter('contrib', $contrib->getId())
             ->getQuery()->getSingleScalarResult();
+
         return $VoteCount;
+    }
+
+    public function findByStatusWithVotes($status, $user)
+    {
+        $contribs = $this->getEntityManager()->createQuery('
+SELECT gc.id id, gc.title title,
+COUNT(av) adhvote, (
+SELECT COUNT(gc2)
+FROM  AppBundle\Entity\Congres\GeneralContribution gc2
+LEFT JOIN  gc2.votes cnv
+LEFT JOIN  cnv.profile adh
+LEFT JOIN  adh.instances inst
+WHERE gc.id = gc2.id AND inst.name = :iname
+) cnvote,
+(
+SELECT COUNT(gc3)
+FROM  AppBundle\Entity\Congres\GeneralContribution gc3
+LEFT JOIN  gc3.votes uv
+WHERE gc.id = gc3.id AND uv.id = :user
+) uservote
+FROM AppBundle\Entity\Congres\GeneralContribution gc
+LEFT JOIN gc.votes av
+WHERE gc.status = :status
+GROUP BY id, title')
+            ->setParameter('user', $user->getId())
+            ->setParameter('status', $status)
+            ->setParameter('iname', Instance::INSTANCE_CN)
+            ->execute();
+
+        return $contribs;
+    }
+    public function getVotes($contrib, $user)
+    {
+        $contribs = $this->getEntityManager()->createQuery('
+SELECT COUNT(av) adhvote, (
+SELECT COUNT(gc2)
+FROM  AppBundle\Entity\Congres\GeneralContribution gc2
+LEFT JOIN  gc2.votes cnv
+LEFT JOIN  cnv.profile adh
+LEFT JOIN  adh.instances inst
+WHERE gc.id = gc2.id AND inst.name = :iname
+) cnvote,
+(
+SELECT COUNT(gc3)
+FROM  AppBundle\Entity\Congres\GeneralContribution gc3
+LEFT JOIN  gc3.votes uv
+WHERE gc.id = gc3.id AND uv.id = :user
+) uservote
+FROM AppBundle\Entity\Congres\GeneralContribution gc
+LEFT JOIN gc.votes av
+WHERE gc.id = :id')
+            ->setParameter('user', $user->getId())
+            ->setParameter('id', $contrib->getId())
+            ->setParameter('iname', Instance::INSTANCE_CN)
+            ->getSingleResult();
+
+        return $contribs;
     }
     public function hasVoted($user)
     {
@@ -61,6 +118,7 @@ class GeneralContributionRepository extends EntityRepository
             ->setParameter('user', $user->getId())
             ->setParameter('id', $contrib->getId())
             ->getQuery()->getSingleScalarResult();
+
         return $hasAlreadyVoted;
     }
 }

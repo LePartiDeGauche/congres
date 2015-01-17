@@ -133,7 +133,7 @@ class Instance
     /**
      * Set election date
      *
-     * @param \DateTime $date
+     * @param  \DateTime $date
      * @return Instance
      */
     public function setElectionDate(\DateTime $date)
