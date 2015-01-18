@@ -83,29 +83,27 @@ class ContributionController extends Controller
         $this->denyAccessUnlessGranted('view', $contrib);
         $isVoteAllowed =
             $this->get('security.authorization_checker')
-            ->isGranted('view', new RouteString('contribution_vote'), $this->getUser());
+            ->isGranted('vote', new RouteString('contribution_vote'), $this->getUser());
 
         switch (get_class($contrib)) {
             case 'AppBundle\Entity\Congres\GeneralContribution':
                 $type = 'general';
                 $repo  = $this->getDoctrine()->getRepository('AppBundle:Congres\GeneralContribution');
-                $votes = $repo->getVotes($contrib, $this->getUser());
-                $isVoteAllowed = $isVoteAllowed && $repo->hasVoted($this->getUser());
                 break;
             case 'AppBundle\Entity\Congres\ThematicContribution':
                 $type = 'thematic';
                 $repo  = $this->getDoctrine()->getRepository('AppBundle:Congres\ThematicContribution');
-                $votes = $repo->getVotes($contrib, $this->getUser());
                 break;
             default:
                 return $this->createNotFoundException();
                 break;
         }
 
+        $votes = $repo->getVotes($contrib, $this->getUser());
+
         return $this->render('contribution/view.html.twig', array(
             'contrib' => $contrib,
             'votes' => $votes,
-            'isVoteAllowed' => $isVoteAllowed,
             'type' => $type,
         ));
     }
@@ -115,7 +113,7 @@ class ContributionController extends Controller
      */
     public function listAction(Request $request)
     {
-        $this->denyAccessUnlessGranted('view', new RouteString($request->get('_route')));
+        $this->denyAccessUnlessGranted('view', new RouteString('contribution_vote'));
 
         $generalRepo = $this->getDoctrine()->getRepository('AppBundle:Congres\GeneralContribution');
         $generalOpenContribs = $generalRepo->findByStatusWithVotes(Contribution::STATUS_SIGNATURES_OPEN, $this->getUser());
@@ -125,17 +123,11 @@ class ContributionController extends Controller
         $thematicOpenContribs = $repo->findByStatusWithVotes(Contribution::STATUS_SIGNATURES_OPEN, $this->getUser());
         $thematicClosedContribs = $repo->findByStatusWithVotes(Contribution::STATUS_SIGNATURES_CLOSED, $this->getUser());
 
-        $isVoteOpen = $this->get('security.authorization_checker')->isGranted('view', new RouteString('contribution_vote'), $this->getUser());
-
-        $isGeneralContribVoteAllowed = !$generalRepo->hasVoted($this->getUser());
-
         return $this->render('contribution/list.html.twig', array(
                 'generalOpenContribs' => $generalOpenContribs,
                 'generalClosedContribs' => $generalClosedContribs,
                 'thematicOpenContribs' => $thematicOpenContribs,
                 'thematicClosedContribs' => $thematicClosedContribs,
-                'isVoteOpen' => $isVoteOpen,
-                'isGeneralContribVoteAllowed' => $isGeneralContribVoteAllowed,
             ));
     }
 
@@ -145,18 +137,22 @@ class ContributionController extends Controller
     public function voteAction(Contribution $contrib, Request $request)
     {
         $this->denyAccessUnlessGranted('view', new RouteString($request->get('_route')));
-        $this->denyAccessUnlessGranted('vote', $contrib, $this->getUser());
+        $this->denyAccessUnlessGranted('vote', $contrib);
 
-        $em = $this->getDoctrine()->getManager();
+        $form = $this->createFormBuilder()
+            ->getForm();
 
-        if (is_a($contrib, "AppBundle\Entity\Congres\GeneralContribution")) {
-            $contrib_repo = $em->getRepository("AppBundle:Congres\GeneralContribution");
-        } else {
-            $contrib_repo = $em->getRepository("AppBundle:Congres\ThematicContribution");
-        }
+        $form->handleRequest($request);
 
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
 
-        if (!$contrib->getVotes()->contains($this->getUser())) {
+            if (is_a($contrib, "AppBundle\Entity\Congres\GeneralContribution")) {
+                $contrib_repo = $em->getRepository("AppBundle:Congres\GeneralContribution");
+            } else {
+                $contrib_repo = $em->getRepository("AppBundle:Congres\ThematicContribution");
+            }
+
             $contrib->addVote($this->getUser());
 
             if ($contrib_repo->getCNVotesCount($contrib) >= 10 ||
@@ -165,11 +161,13 @@ class ContributionController extends Controller
             }
 
             $em->flush();
+
+            return $this->redirect($this->generateUrl('contribution_list'));
         }
 
-        return $this->redirect($this->generateUrl(
-            'contribution_view',
-            array('id' => $contrib->getId())
+        return $this->render('contribution/vote.html.twig', array(
+            'contrib' => $contrib,
+            'form' => $form->createView(),
         ));
     }
 

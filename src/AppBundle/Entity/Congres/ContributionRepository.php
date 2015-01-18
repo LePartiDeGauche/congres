@@ -3,6 +3,8 @@
 namespace AppBundle\Entity\Congres;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Mapping\ClassMetadata;
+use AppBundle\Entity\Instance;
 
 /**
  * ContributionRepository
@@ -12,4 +14,109 @@ use Doctrine\ORM\EntityRepository;
  */
 class ContributionRepository extends EntityRepository
 {
+    private $classname;
+
+    public function __construct($em, ClassMetadata $class)
+    {
+        parent::__construct($em, $class);
+        $this->classname = $class->getName();
+    }
+
+    public function getCNVotesCount($contrib)
+    {
+        $CNCount = $this->createQueryBuilder('contrib')
+            ->select('COUNT(contrib)')
+            ->innerJoin('contrib.votes', 'u')
+            ->innerJoin('u.profile', 'adh')
+            ->innerJoin('adh.instances', 'i')
+            ->where('contrib.id = :contrib')
+            ->andWhere('i.name = :iname')
+            ->setParameter('contrib', $contrib->getId())
+            ->setParameter('iname', Instance::INSTANCE_CN)
+            ->getQuery()->getSingleScalarResult();
+
+        return $CNCount;
+    }
+
+    public function getVotesCount($contrib)
+    {
+        $VoteCount = $this->createQueryBuilder('contrib')
+            ->select('COUNT(contrib)')
+            ->innerJoin('contrib.votes', 'u')
+            ->where('contrib.id = :contrib')
+            ->setParameter('contrib', $contrib->getId())
+            ->getQuery()->getSingleScalarResult();
+
+        return $VoteCount;
+    }
+
+    public function findByStatusWithVotes($status, $user)
+    {
+        $contribs = $this->getEntityManager()->createQuery('
+SELECT contrib entity, contrib.id id,
+COUNT(av) adhvote, (
+SELECT COUNT(contrib2)
+FROM ' . $this->classname . ' contrib2
+LEFT JOIN  contrib2.votes cnv
+LEFT JOIN  cnv.profile adh
+LEFT JOIN  adh.instances inst
+WHERE contrib.id = contrib2.id AND inst.name = :iname
+) cnvote,
+(
+SELECT COUNT(contrib3)
+FROM ' . $this->classname . ' contrib3
+LEFT JOIN  contrib3.votes uv
+WHERE contrib.id = contrib3.id AND uv.id = :user
+) uservote
+FROM ' . $this->classname . ' contrib
+LEFT JOIN contrib.votes av
+WHERE contrib.status = :status
+GROUP BY contrib.id')
+            ->setParameter('user', $user->getId())
+            ->setParameter('status', $status)
+            ->setParameter('iname', Instance::INSTANCE_CN)
+            ->execute();
+
+        return $contribs;
+    }
+
+    public function getVotes($contrib, $user)
+    {
+        $contribs = $this->getEntityManager()->createQuery('
+SELECT COUNT(av) adhvote, (
+SELECT COUNT(contrib2)
+FROM ' . $this->classname . ' contrib2
+LEFT JOIN  contrib2.votes cnv
+LEFT JOIN  cnv.profile adh
+LEFT JOIN  adh.instances inst
+WHERE contrib.id = contrib2.id AND inst.name = :iname
+) cnvote,
+(
+SELECT COUNT(contrib3)
+FROM ' . $this->classname . ' contrib3
+LEFT JOIN  contrib3.votes uv
+WHERE contrib.id = contrib3.id AND uv.id = :user
+) uservote
+FROM ' . $this->classname . ' contrib
+LEFT JOIN contrib.votes av
+WHERE contrib.id = :id')
+            ->setParameter('user', $user->getId())
+            ->setParameter('id', $contrib->getId())
+            ->setParameter('iname', Instance::INSTANCE_CN)
+            ->getSingleResult();
+
+        return $contribs;
+    }
+
+    public function hasVoted($user)
+    {
+        $hasVoted = $this->createQueryBuilder('contrib')
+            ->select('COUNT(contrib)')
+            ->innerJoin('contrib.votes', 'u')
+            ->where('u.id = :user')
+            ->setParameter('user', $user->getId())
+            ->getQuery()->getSingleScalarResult();
+
+        return $hasVoted;
+    }
 }

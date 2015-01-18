@@ -1,0 +1,24 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}Signer la contribution : "{{ contrib.title }}"{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <h1>Signer une contribution</h1>
+            <form method="post" action="{{ path('contribution_vote', {id: contrib.id}) }}">
+                {{ form_widget(form) }}
+                <p>
+                    Veux-tu vraiment signer la contribution "{{ contrib.title }}" ? Il n'est
+                    pas possible d'annuler cette opération. Tu ne peux signer qu'une seule contribution
+                    générale, et autant de contributions thématiques que tu le souhaites.
+                </p>
+                <div class="pull-right">
+                    <input type="submit" class="btn btn-primary" value="Signer" />
+                    <a class="btn btn-default" href="{{ path('contribution_list') }}">Annuler</a>
+                </div>
+            </form>
+        </div>
+</div>
+{% endblock %}

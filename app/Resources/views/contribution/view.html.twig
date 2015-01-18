@@ -16,21 +16,31 @@
         </p>
         <p>{{ contrib.content|nl2br }}</p>
 
+        <h3>Signatures</h3>
         <p>
         {% if votes.uservote %}
-            <span class="glyphicon glyphicon-check" aria-hidden="true"></span>
-        {% else %}
-           {% if isVoteAllowed %}
-                <a class="btn btn-default btn-sm" href="{{path('contribution_vote', {id: contrib.id}) }}">
-                    Voter
-                    <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
-                </a>
-        
-            {% endif %}
+            Déja signée <span class="glyphicon glyphicon-check" aria-hidden="true"></span> |
+        {% elseif is_granted('vote', contrib) %}
+            <a class="btn btn-default btn-sm" href="{{path('contribution_vote', {id: contrib.id}) }}">
+                Voter
+                <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+            </a><br/>
         {% endif %}
-    <p>
-<p>Tous les votes : {{ votes.adhvote }}</p>
-<p>Votes du Conseil National : {{ votes.cnvote }}</p>
+            Tous les votes : {{ votes.adhvote }} |
+            Votes du Conseil National : {{ votes.cnvote }}
+        </p>
+        <p>
+            {% if contrib.votes is not empty %}
+                <h4>Signataires</h4>
+                <ul>
+                    {% for user in contrib.votes %}
+                        <li>
+                            {{ user.profile.firstname }} {{ user.profile.lastname }}
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </p>
     </div>
 </div>
 {% endblock %}

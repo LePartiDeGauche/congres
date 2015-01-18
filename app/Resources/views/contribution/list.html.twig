@@ -8,38 +8,36 @@
         <div class="col-md-12">
             <h1>Liste des contributions</h1>
             <h2>Contributions soumises au vote</h2>
-            {% if generalOpenContribs is null and thematicOpenContribs is empty %}
+            {% if generalOpenContribs is empty and thematicOpenContribs is empty %}
                 <p>Pas de contribution envoyée.</p>
             {% else %}
                 <table class="table">
                     <tr>
                         <th>Type</th>
-<th>Titre</th>
-<th>Tous le votes</th> 
-<th>Vote des Conseillers Nationaux</th>
-<th>Voter</th>
+                        <th>Titre</th>
+                        <th>Tous le votes</th>
+                        <th>Vote des Conseillers Nationaux</th>
+                        <th>Signer</th>
                     </tr>
-                    {% if generalOpenContribs is not null %}
+                    {% if generalOpenContribs is not empty %}
                         {% for contrib in generalOpenContribs %}
                             <tr>
                                 <td>Contribution générale</td>
                                 <td>
-                                    <a href="{{ path('contribution_view', {id: contrib.id}) }}">{{ contrib.title }}</a>
+                                    <a href="{{ path('contribution_view', {id: contrib.entity.id}) }}">{{ contrib.entity.title }}</a>
                                 </td>
-<td>{{ contrib.adhvote}}</td>
-<td>{{ contrib.cnvote}}</td>
+                                <td>{{ contrib.adhvote}}</td>
+                                <td>{{ contrib.cnvote}}</td>
                                 <td>
-{% if contrib.uservote %}
-                                        <span class="glyphicon glyphicon-check" aria-hidden="true"></span>
-                                    {% else %}
-                                    {% if isVoteOpen and isGeneralContribVoteAllowed %}
+                                    {% if contrib.uservote %}
+                                            <span class="glyphicon glyphicon-check" aria-hidden="true"></span>
+                                    {% elseif is_granted('vote', contrib.entity) %}
                                         <a class="btn btn-default btn-sm" href="{{path('contribution_vote', {id: contrib.id}) }}">
                                         <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
                                     {% else %}
                                         <span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span>
                                     {% endif %}
-{% endif %}
-                                    <span class="sr-only">Voter</span>
+                                    <span class="sr-only">Signer</span>
                                 </td>
                             </tr>
                         {% endfor %}
@@ -49,22 +47,20 @@
                             <tr>
                                 <td>Contribution thématique</td>
                                 <td>
-                                    <a href="{{ path('contribution_view', {id: contrib.id}) }}">{{ contrib.title }}</a>
+                                    <a href="{{ path('contribution_view', {id: contrib.entity.id}) }}">{{ contrib.entity.title }}</a>
                                 </td>
-<td>{{ contrib.adhvote}}</td>
-<td>{{ contrib.cnvote}}</td>
+                                <td>{{ contrib.adhvote}}</td>
+                                <td>{{ contrib.cnvote}}</td>
                                 <td>
-{% if contrib.uservote %}
+                                    {% if contrib.uservote %}
                                         <span class="glyphicon glyphicon-check" aria-hidden="true"></span>
-                                    {% else %}
-                                    {% if isVoteOpen %}
+                                    {% elseif is_granted('vote', contrib.entity) %}
                                         <a class="btn btn-default btn-sm" href="{{path('contribution_vote', {id: contrib.id}) }}">
                                         <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
                                     {% else %}
                                         <span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span>
                                     {% endif %}
-{% endif %}
-                                    <span class="sr-only">Voter</span>
+                                    <span class="sr-only">Signer</span>
                                 </td>
                             </tr>
                         {% endfor %}
@@ -72,15 +68,15 @@
                 </table>
             {% endif %}
             <h2>Contributions validées</h2>
-            {% if generalClosedContribs is null and thematicClosedContribs is empty %}
+            {% if generalClosedContribs is empty and thematicClosedContribs is empty %}
                 <p>Pas de contribution envoyée.</p>
             {% else %}
                 <table class="table">
                     <tr>
                         <th>Type</th><th>Titre</th>
-<th>Tous le votes</th> 
-<th>Vote des Conseillers Nationaux</th>
-<th>Voter</th>
+                        <th>Tous le votes</th>
+                        <th>Vote des Conseillers Nationaux</th>
+                        <th>Signée</th>
                     </tr>
                     {% if generalClosedContribs is not null %}
                         {% for contrib in generalClosedContribs %}
@@ -89,20 +85,13 @@
                                 <td>
                                     <a href="{{ path('contribution_view', {id: contrib.id}) }}">{{ contrib.title }}</a>
                                 </td>
-<td>{{ contrib.adhvote}}</td>
-<td>{{ contrib.cnvote}}</td>
+                                <td>{{ contrib.adhvote}}</td>
+                                <td>{{ contrib.cnvote}}</td>
                                 <td>
-{% if contrib.uservote %}
+                                    {% if contrib.uservote %}
                                         <span class="glyphicon glyphicon-check" aria-hidden="true"></span>
-                                    {% else %}
-                                    {% if isVoteOpen and isGeneralContribVoteAllowed %}
-                                        <a class="btn btn-default btn-sm" href="{{path('contribution_vote', {id: contrib.id}) }}">
-                                        <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
-                                    {% else %}
-                                        <span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span>
                                     {% endif %}
-{% endif %}
-                                    <span class="sr-only">Voter</span>
+                                    <span class="sr-only">Signée</span>
                                 </td>
                             </tr>
                         {% endfor %}
@@ -114,20 +103,13 @@
                                 <td>
                                     <a href="{{ path('contribution_view', {id: contrib.id}) }}">{{ contrib.title }}</a>
                                 </td>
-<td>{{ contrib.adhvote}}</td>
-<td>{{ contrib.cnvote}}</td>
+                                <td>{{ contrib.adhvote}}</td>
+                                <td>{{ contrib.cnvote}}</td>
                                 <td>
-{% if contrib.uservote %}
+                                    {% if contrib.uservote %}
                                         <span class="glyphicon glyphicon-check" aria-hidden="true"></span>
-                                    {% else %}
-                                    {% if isVoteOpen %}
-                                        <a class="btn btn-default btn-sm" href="{{path('contribution_vote', {id: contrib.id}) }}">
-                                        <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
-                                    {% else %}
-                                        <span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span>
                                     {% endif %}
-{% endif %}
-                                    <span class="sr-only">Voter</span>
+                                    <span class="sr-only">Signée</span>
                                 </td>
                             </tr>
                         {% endfor %}

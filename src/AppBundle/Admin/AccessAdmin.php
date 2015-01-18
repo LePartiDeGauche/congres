@@ -16,7 +16,6 @@ final class AccessAdmin extends Admin
     {
         return array(
             'contribution_submit' => 'Envoie et suppression des contributions.',
-            'contribution_list' => 'Liste des contributions.',
             'contribution_vote' => 'Signature des contributions.',
         );
     }
