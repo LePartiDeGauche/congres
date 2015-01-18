@@ -7,7 +7,7 @@
     <div class="row">
         <div class="col-md-12">
             <h1>Liste des contributions</h1>
-            <h2>Contributions générales soumises au vote</h2>
+            <h2>Contributions générales soumises à signature</h2>
             {% if generalOpenContribs is empty %}
                 <p>Pas de contribution.</p>
             {% else %}
@@ -16,8 +16,8 @@
                         <th>Type</th>
                         <th>Titre</th>
                         <th>Auteur</th>
-                        <th>Tous le votes</th>
-                        <th>Vote des Conseillers Nationaux</th>
+                        <th>Signatures</th>
+                        <th>dont CN</th>
                         <th>Signer</th>
                     </tr>
                     {% for contrib in generalOpenContribs %}
@@ -44,7 +44,7 @@
                     {% endfor %}
                 </table>
             {% endif %}
-            <h2>Contributions thématiques soumises au vote</h2>
+            <h2>Contributions thématiques soumises à signature</h2>
             {% if thematicOpenContribs is empty %}
                 <p>Pas de contribution.</p>
             {% else %}
@@ -53,8 +53,8 @@
                         <th>Type</th>
                         <th>Titre</th>
                         <th>Auteur</th>
-                        <th>Tous les votes</th>
-                        <th>Vote des Conseillers Nationaux</th>
+                        <th>Signatures</th>
+                        <th>dont CN</th>
                         <th>Signer</th>
                     </tr>
                     {% for contrib in thematicOpenContribs %}
@@ -91,8 +91,8 @@
                         <th>Type</th>
                         <th>Titre</th>
                         <th>Auteur</th>
-                        <th>Tous les votes</th>
-                        <th>Vote des Conseillers Nationaux</th>
+                        <th>Signatures</th>
+                        <th>dont CN</th>
                         <th>Signée</th>
                     </tr>
                     {% for contrib in generalClosedContribs %}
@@ -122,8 +122,8 @@
                     <tr>
                         <th>Type</th><th>Titre</th>
                         <th>Auteur</th>
-                        <th>Tous le votes</th>
-                        <th>Vote des Conseillers Nationaux</th>
+                        <th>Signatures</th>
+                        <th>dont CN</th>
                         <th>Signée</th>
                     </tr>
                     {% for contrib in thematicClosedContribs %}

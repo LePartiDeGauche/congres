@@ -26,8 +26,8 @@
                 <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
             </a><br/>
         {% endif %}
-            Tous les votes : {{ votes.adhvote }} |
-            Votes du Conseil National : {{ votes.cnvote }}
+            Signatures : {{ votes.adhvote }} |
+            Dont CN : {{ votes.cnvote }}
         </p>
         <p>
             {% if contrib.votes is not empty %}
