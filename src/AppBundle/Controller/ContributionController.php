@@ -86,21 +86,20 @@ class ContributionController extends Controller
             ->isGranted('view', new RouteString('contribution_vote'), $this->getUser());
 
         switch (get_class($contrib)) {
-        case 'AppBundle\Entity\Congres\GeneralContribution':
-            $type = 'general';
-            $repo  = $this->getDoctrine()->getRepository('AppBundle:Congres\GeneralContribution');
-            $votes = $repo->getVotes($contrib, $this->getUser());
-            $isVoteAllowed = $isVoteAllowed && $repo->hasVoted($this->getUser());
-
-            break;
-        case 'AppBundle\Entity\Congres\ThematicContribution':
-            $type = 'thematic';
-            $repo  = $this->getDoctrine()->getRepository('AppBundle:Congres\ThematicContribution');
-            $votes = $repo->getVotes($contrib, $this->getUser());
-            break;
-        default:
-            return $this->createNotFoundException();
-            break;
+            case 'AppBundle\Entity\Congres\GeneralContribution':
+                $type = 'general';
+                $repo  = $this->getDoctrine()->getRepository('AppBundle:Congres\GeneralContribution');
+                $votes = $repo->getVotes($contrib, $this->getUser());
+                $isVoteAllowed = $isVoteAllowed && $repo->hasVoted($this->getUser());
+                break;
+            case 'AppBundle\Entity\Congres\ThematicContribution':
+                $type = 'thematic';
+                $repo  = $this->getDoctrine()->getRepository('AppBundle:Congres\ThematicContribution');
+                $votes = $repo->getVotes($contrib, $this->getUser());
+                break;
+            default:
+                return $this->createNotFoundException();
+                break;
         }
 
         return $this->render('contribution/view.html.twig', array(
@@ -168,8 +167,10 @@ class ContributionController extends Controller
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('contribution_view',
-            array('id' => $contrib->getId())));
+        return $this->redirect($this->generateUrl(
+            'contribution_view',
+            array('id' => $contrib->getId())
+        ));
     }
 
     /**
