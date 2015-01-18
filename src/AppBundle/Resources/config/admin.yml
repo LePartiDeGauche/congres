@@ -46,7 +46,7 @@ services:
         arguments:
             - ~
             - AppBundle\Entity\Congres\ThematicContribution
-            - ~
+            - AppBundle:ContributionAdmin
         calls:
             - [ setTranslationDomain, [AppBundle] ]
     sonata.admin.congres.general_contribution:
@@ -56,6 +56,6 @@ services:
         arguments:
             - ~
             - AppBundle\Entity\Congres\GeneralContribution
-            - ~
+            - AppBundle:ContributionAdmin
         calls:
             - [ setTranslationDomain, [AppBundle] ]

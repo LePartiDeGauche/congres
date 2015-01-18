@@ -58,4 +58,31 @@ class ContributionAdmin extends Admin
                 'editable' => true,
             ));
     }
+
+    public function getBatchActions()
+    {
+        $actions = parent::getBatchActions();
+
+        if (
+          $this->hasRoute('edit') && $this->isGranted('EDIT') &&
+          $this->hasRoute('delete') && $this->isGranted('DELETE')
+        ) {
+            $actions['edit_status_new'] = array(
+                'label' => 'Modifier le statut : envoyée mais non validée.',
+                'ask_confirmation' => true
+            );
+
+            $actions['edit_status_open'] = array(
+                'label' => 'Modifier le statut : ouverte aux signatures.',
+                'ask_confirmation' => true
+            );
+
+            $actions['edit_status_closed'] = array(
+                'label' => 'Modifier le statut : signatures récoltées.',
+                'ask_confirmation' => true
+            );
+        }
+
+        return $actions;
+}
 }
