@@ -83,7 +83,7 @@
                             <tr>
                                 <td>Contribution générale</td>
                                 <td>
-                                    <a href="{{ path('contribution_view', {id: contrib.id}) }}">{{ contrib.title }}</a>
+                                    <a href="{{ path('contribution_view', {id: contrib..entity.id}) }}">{{ contrib.entity.title }}</a>
                                 </td>
                                 <td>{{ contrib.adhvote}}</td>
                                 <td>{{ contrib.cnvote}}</td>
@@ -101,7 +101,7 @@
                             <tr>
                                 <td>Contribution thématique</td>
                                 <td>
-                                    <a href="{{ path('contribution_view', {id: contrib.id}) }}">{{ contrib.title }}</a>
+                                    <a href="{{ path('contribution_view', {id: contrib.entity.id}) }}">{{ contrib.entity.title }}</a>
                                 </td>
                                 <td>{{ contrib.adhvote}}</td>
                                 <td>{{ contrib.cnvote}}</td>
