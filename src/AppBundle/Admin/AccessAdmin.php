@@ -12,13 +12,29 @@ final class AccessAdmin extends Admin
     protected $baseRouteName = 'acces';
     protected $baseRoutePattern = 'acces';
 
+    private function listRoutes()
+    {
+        return array(
+            'contribution_submit' => 'Envoie et suppression des contributions.',
+            'contribution_list' => 'Liste des contributions.',
+            'contribution_vote' => 'Signature des contributions.',
+        );
+    }
+
+    public function setRouter($router)
+    {
+        $this->router = $router;
+    }
+
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('route', null, array('label' => 'Chemin d\'acces'))
+            ->add('route', 'choice', array(
+                'label' => 'Chemin d\'acces',
+                'choices' => $this->listRoutes(),
+            ))
             ->add('begin', null, array('label' => 'Date de début'))
-            ->add('end', null, array('label' => 'Date de fin'))
-            ;
+            ->add('end', null, array('label' => 'Date de fin'));
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)

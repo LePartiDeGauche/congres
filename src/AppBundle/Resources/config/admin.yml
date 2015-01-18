@@ -39,6 +39,7 @@ services:
             - ~
         calls:
             - [ setTranslationDomain, [AppBundle] ]
+            - [ setRouter, [@router] ]
     sonata.admin.congres.thematic_contribution:
         class: AppBundle\Admin\Congres\ThematicContributionAdmin
         tags:

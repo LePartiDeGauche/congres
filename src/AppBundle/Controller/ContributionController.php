@@ -177,7 +177,7 @@ class ContributionController extends Controller
      */
     public function deleteAction(Contribution $contrib, Request $request)
     {
-        $this->denyAccessUnlessGranted('view', new RouteString($request->get('_route')));
+        $this->denyAccessUnlessGranted('view', new RouteString('contribution_submit'));
         $this->denyAccessUnlessGranted('delete', $contrib);
 
         $form = $this->createFormBuilder()
