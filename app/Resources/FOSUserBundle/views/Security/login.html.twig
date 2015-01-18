@@ -1,43 +1,53 @@
 {% extends "FOSUserBundle::layout.html.twig" %}
 
 {% block fos_user_content %}
-<p class="text-justify text-muted text-small">
-    Si vous ne vous êtes jamais connecté sur le site Congrès, il faut vous inscrire en utilisant
-    le lien inscription en haut à droite. Les contributions sont publiques et soumises à signatures
-    du lundi 19 au 30 janvier. Pour tout problème, contacter congres2015@lepartidegauche.fr.
-</p>
-{% if error %}
-    <div class="alert alert-danger" role="alert">
-        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-        <span class="sr-only">Error:</span>
-        {{ error.messageKey|trans(error.messageData, 'security') }}
-    </div>
-{% endif %}
-
-<form action="{{ path("fos_user_security_check") }}" method="post">
-    <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
-    <div class="form-group">
-        <label for="username">
-            {{ 'form.email'|trans({}, 'FOSUserBundle') }}
-        </label>
-        <input type="text" class="form-control" id="username" name="_username" value="{{ last_username }}" required="required" />
-    </div>
-
-    <div class="form-group">
-        <label for="password">{{ 'security.login.password'|trans({}, 'FOSUserBundle') }}</label>
-        <input type="password" class="form-control" id="password" name="_password" required="required" />
-        <div class="small text-right">
-            <a href="{{ path("fos_user_resetting_request") }}">Mot de passe oublié</a>
+<div class="row">
+    <p class="text-justify text-muted text-small">
+        Si vous ne vous êtes jamais connecté sur le site Congrès, il faut vous inscrire en utilisant
+        le lien inscription en haut à droite. Les contributions sont publiques et soumises à signatures
+        du lundi 19 au 30 janvier. Pour tout problème, contacter congres2015@lepartidegauche.fr.
+    </p>
+    {% if error %}
+        <div class="alert alert-danger" role="alert">
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            <span class="sr-only">Error:</span>
+            {{ error.messageKey|trans(error.messageData, 'security') }}
         </div>
-    </div>
+    {% endif %}
 
-    <div class="form-group">
-        <label>
-            <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
-            {{ 'security.login.remember_me'|trans({}, 'FOSUserBundle') }}
-        </label>
-    </div>
+    <form action="{{ path("fos_user_security_check") }}" method="post">
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+        <div class="form-group">
+            <label for="username">
+                {{ 'form.email'|trans({}, 'FOSUserBundle') }}
+            </label>
+            <input type="text" class="form-control" id="username" name="_username" value="{{ last_username }}" required="required" />
+        </div>
 
-    <input type="submit" class="btn btn-default" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}" />
-</form>
+        <div class="form-group">
+            <label for="password">{{ 'security.login.password'|trans({}, 'FOSUserBundle') }}</label>
+            <input type="password" class="form-control" id="password" name="_password" required="required" />
+            <div class="small text-right">
+                <a href="{{ path("fos_user_resetting_request") }}">Mot de passe oublié</a>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>
+                <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
+                {{ 'security.login.remember_me'|trans({}, 'FOSUserBundle') }}
+            </label>
+        </div>
+
+        <input type="submit" class="btn btn-default" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}" />
+    </form>
+</div>
+<div class="row">
+    <div class="alert alert-warning text-justify" role="alert">
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        L'équipe de développeurs bénévoles a besoin de se renforcer ! N'hésitez pas à envoyer un e-mail à
+        congres2015@lepartidegauche.fr si vous pouvez aider. L'application est codée en PHP sous Symfony
+        2.6. Le code source est entièrement disponible <a href="https://github.com/LePartiDeGauche/congres">ici</a>.
+    </div>
+</div>
 {% endblock fos_user_content %}
