@@ -1,0 +1,20 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}Il y a eu une erreur : {{ status_text }}{% endblock %}
+
+{% block navbar %}{% endblock %}
+    
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>Ooups! Il y a eu une erreur.</h1>
+            <h2>Le serveur a retourné une erreur "{{ status_code }} {{ status_text }}".</h2>
+
+            <div>
+                Quelque chose ne fonctionne pas. <a href="{{ path('homepage') }}">Retourner à l'accueil</a>.
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
