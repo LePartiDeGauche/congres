@@ -59,7 +59,7 @@ abstract class Contribution
      * Constructor
      * @param \AppBundle\Entity\User $author The author of the contribution.
      */
-    public function __construct(\AppBundle\Entity\User $author)
+    public function __construct(\AppBundle\Entity\User $author = null)
     {
         $this->setAuthor($author);
         $this->setStatus(self::STATUS_NEW);
@@ -81,7 +81,7 @@ abstract class Contribution
      * @param  \AppBundle\Entity\User $author
      * @return Contribution
      */
-    public function setAuthor(\AppBundle\Entity\User $author)
+    public function setAuthor(\AppBundle\Entity\User $author = null)
     {
         $this->author = $author;
 

@@ -15,6 +15,28 @@ class ContributionAdmin extends Admin
         $formMapper
             ->add('title', null, array('label' => 'Titre'))
             ->add('content', null, array('label' => 'Texte'))
+            ->add('author', 'sonata_type_model_autocomplete', array(
+                'label' => 'Auteur',
+                'property' => array('profile.firstname', 'profile.lastname', 'email'),
+                'callback' => function ($admin, $property, $value) {
+                    $datagrid = $admin->getDatagrid();
+                    $queryBuilder = $datagrid->getQuery();
+                    $queryBuilder
+                        ->leftJoin($queryBuilder->getRootAlias() . '. profile', 'profile')
+                        ->andWhere('profile.firstname LIKE :value')
+                        ->orWhere('profile.lastname LIKE :value')
+                        ->orWhere($queryBuilder->getRootAlias() . '.email LIKE :value')
+                        ->setParameter('value', '%' . $value . '%')
+                    ;
+                },
+                'to_string_callback' => function($user, $property) {
+                    $firstname = $user->getProfile()->getFirstname();
+                    $lastname = $user->getProfile()->getLastname();
+                    $email = $user->getEmail();
+
+                    return $firstname . ' ' . $lastname . ' &lt;' . $email . '&gt;';
+                },
+            ))
             ->add('status', 'choice', array(
                 'label' => 'Statut',
                 'choices' => array(
@@ -84,5 +106,5 @@ class ContributionAdmin extends Admin
         }
 
         return $actions;
-}
+    }
 }

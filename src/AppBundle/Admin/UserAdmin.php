@@ -37,7 +37,9 @@ final class UserAdmin extends Admin
         $datagridMapper
             ->add('email')
             ->add('roles')
-            ->add('enabled', null, array('label' => 'Compte Actif'));
+            ->add('enabled', null, array('label' => 'Compte Actif'))
+            ->add('profile.firstname', null, array('label' => 'Prénom'))
+            ->add('profile.lastname', null, array('label' => 'Nom'));
     }
 
     protected function configureListFields(ListMapper $listMapper)
