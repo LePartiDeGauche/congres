@@ -30,9 +30,9 @@ class ContributionRepository extends EntityRepository
             ->innerJoin('u.profile', 'adh')
             ->innerJoin('adh.instances', 'i')
             ->where('contrib.id = :contrib')
-            ->andWhere('i.name = :iname')
+            ->andWhere('i.name IN (:iname)')
             ->setParameter('contrib', $contrib->getId())
-            ->setParameter('iname', Instance::INSTANCE_CN)
+            ->setParameter('iname', array(Instance::INSTANCE_CN, Instance::INSTANCE_BN))
             ->getQuery()->getSingleScalarResult();
 
         return $CNCount;
@@ -60,7 +60,7 @@ FROM ' . $this->classname . ' contrib2
 LEFT JOIN  contrib2.votes cnv
 LEFT JOIN  cnv.profile adh
 LEFT JOIN  adh.instances inst
-WHERE contrib.id = contrib2.id AND inst.name = :iname
+WHERE contrib.id = contrib2.id AND inst.name IN (:iname)
 ) cnvote,
 (
 SELECT COUNT(contrib3)
@@ -74,7 +74,7 @@ WHERE contrib.status = :status
 GROUP BY contrib.id')
             ->setParameter('user', $user->getId())
             ->setParameter('status', $status)
-            ->setParameter('iname', Instance::INSTANCE_CN)
+            ->setParameter('iname', array(Instance::INSTANCE_CN, Instance::INSTANCE_BN))
             ->execute();
 
         return $contribs;
@@ -89,7 +89,7 @@ FROM ' . $this->classname . ' contrib2
 LEFT JOIN  contrib2.votes cnv
 LEFT JOIN  cnv.profile adh
 LEFT JOIN  adh.instances inst
-WHERE contrib.id = contrib2.id AND inst.name = :iname
+WHERE contrib.id = contrib2.id AND inst.name IN (:iname)
 ) cnvote,
 (
 SELECT COUNT(contrib3)
@@ -102,7 +102,7 @@ LEFT JOIN contrib.votes av
 WHERE contrib.id = :id')
             ->setParameter('user', $user->getId())
             ->setParameter('id', $contrib->getId())
-            ->setParameter('iname', Instance::INSTANCE_CN)
+            ->setParameter('iname', array(Instance::INSTANCE_CN, Instance::INSTANCE_BN))
             ->getSingleResult();
 
         return $contribs;
