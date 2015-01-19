@@ -2,7 +2,6 @@
 namespace AppBundle\Security\Congres;
 
 use AppBundle\Entity\Congres\Contribution;
-use AppBundle\Entity\Congres\GeneralContribution;
 use Symfony\Component\Security\Core\Authorization\Voter\AbstractVoter;
 use Symfony\Component\Security\Core\User\UserInterface;
 
