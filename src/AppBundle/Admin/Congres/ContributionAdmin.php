@@ -18,6 +18,7 @@ class ContributionAdmin extends Admin
             ->add('author', 'sonata_type_model_autocomplete', array(
                 'label' => 'Auteur',
                 'property' => array('profile.firstname', 'profile.lastname', 'email'),
+                'placeholder' => 'Rechercher un nom ou un email',
                 'callback' => function ($admin, $property, $value) {
                     $datagrid = $admin->getDatagrid();
                     $queryBuilder = $datagrid->getQuery();
