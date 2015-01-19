@@ -8,9 +8,4 @@ class ThematicContributionAdmin extends ContributionAdmin
 {
     protected $baseRouteName = 'congres/contributions/thematiques';
     protected $baseRoutePattern = 'congres/contributions/thematiques';
-
-    protected function configureRoutes(RouteCollection $collection)
-    {
-        $collection->remove('create');
-    }
 }
