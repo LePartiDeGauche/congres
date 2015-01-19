@@ -155,6 +155,7 @@ class ContributionController extends Controller
             }
 
             $contrib->addVote($this->getUser());
+            $em->flush();
 
             if ($contrib_repo->getCNVotesCount($contrib) >= 10 ||
                 $contrib_repo->getVotesCount($contrib) >= 50) {
