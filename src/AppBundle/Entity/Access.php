@@ -44,8 +44,8 @@ class Access
 
     public function __construct()
     {
-        $begin = new \DateTime();
-        $end = new \DateTime();
+        $this->begin = new \DateTime();
+        $this->end = new \DateTime();
     }
 
     /**

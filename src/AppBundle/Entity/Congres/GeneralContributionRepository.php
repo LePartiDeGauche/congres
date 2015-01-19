@@ -2,8 +2,6 @@
 
 namespace AppBundle\Entity\Congres;
 
-use Doctrine\ORM\EntityRepository;
-
 /**
  * GeneralContributionRepository
  *

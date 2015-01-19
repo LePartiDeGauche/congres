@@ -7,7 +7,6 @@ use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBUndle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Route\RouteCollection;
 
 class AdherentAdmin extends Admin
 {
@@ -16,11 +15,6 @@ class AdherentAdmin extends Admin
 
     protected function configureFormFields(FormMapper $formMapper)
     {
-        $roles = $this
-            ->getConfigurationPool()
-            ->getContainer()
-            ->getParameter('security.role_hierarchy.roles');
-
         $formMapper
             ->add('email')
             ->add('lastname', null, array('label' => 'Nom'))

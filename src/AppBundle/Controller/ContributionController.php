@@ -3,7 +3,6 @@
 namespace AppBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Entity\Congres\Contribution;
@@ -81,9 +80,6 @@ class ContributionController extends Controller
     public function viewAction(Contribution $contrib)
     {
         $this->denyAccessUnlessGranted('view', $contrib);
-        $isVoteAllowed =
-            $this->get('security.authorization_checker')
-            ->isGranted('vote', new RouteString('contribution_vote'), $this->getUser());
 
         switch (get_class($contrib)) {
             case 'AppBundle\Entity\Congres\GeneralContribution':

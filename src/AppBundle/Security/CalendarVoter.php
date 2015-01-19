@@ -1,13 +1,18 @@
 <?php
 namespace AppBundle\Security;
 
-use AppBundle\Entity\Access;
 use Symfony\Component\Security\Core\Authorization\Voter\AbstractVoter;
 use Symfony\Component\Security\Core\User\UserInterface;
+
 final class CalendarVoter extends AbstractVoter
 {
     const VIEW = 'view';
     private $entityManager;
+
+    public function __construct($entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
 
     protected function getSupportedAttributes()
     {
@@ -42,9 +47,5 @@ final class CalendarVoter extends AbstractVoter
         }
 
         return false;
-    }
-    public function __construct($entityManager)
-    {
-        $this->entityManager = $entityManager;
     }
 }

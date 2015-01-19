@@ -6,6 +6,7 @@ use AppBundle\Entity\Congres\Contribution;
 use Sonata\AdminBundle\Controller\CRUDController;
 use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\Security\Core\AccessDeniedException;
 
 class ContributionAdminController extends CRUDCOntroller
 {
