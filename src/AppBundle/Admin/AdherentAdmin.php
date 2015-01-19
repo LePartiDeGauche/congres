@@ -19,7 +19,15 @@ class AdherentAdmin extends Admin
             ->add('email')
             ->add('lastname', null, array('label' => 'Nom'))
             ->add('firstname', null, array('label' => 'Prénom'))
-            ->add('birthdate', 'birthday', array('label' => 'Date de naissance'));
+            ->add('birthdate', 'birthday', array('label' => 'Date de naissance'))
+            ->add('status', 'choice', array(
+                'label' => 'Statut',
+                'choices' => array(
+                    Adherent::STATUS_OK => 'À jour.',
+                    Adherent::STATUS_ATTENTE_RENOUVELLEMENT => 'En attente.',
+                ),
+                'multiple' => false,
+            ));
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
