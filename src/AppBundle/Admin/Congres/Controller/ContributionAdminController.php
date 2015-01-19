@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Controller;
+namespace AppBundle\Admin\Congres\Controller;
 
 use AppBundle\Entity\Congres\Contribution;
 use Sonata\AdminBundle\Controller\CRUDController;
