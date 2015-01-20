@@ -7,144 +7,162 @@
     <div class="row">
         <div class="col-md-12">
             <h1>Liste des contributions</h1>
-            <h2>Contributions générales soumises à signature</h2>
-            {% if generalOpenContribs is empty %}
-                <p>Pas de contribution.</p>
-            {% else %}
-                <table class="table">
-                    <tr>
-                        <th>Type</th>
-                        <th>Titre</th>
-                        <th>Auteur</th>
-                        <th>Signatures</th>
-                        <th>dont CN</th>
-                        <th>Signer</th>
-                    </tr>
-                    {% for contrib in generalOpenContribs %}
-                        <tr>
-                            <td>Contribution générale</td>
-                            <td>
-                                <a href="{{ path('contribution_view', {id: contrib.entity.id}) }}">{{ contrib.entity.title }}</a>
-                            </td>
-                            <td>{{ contrib.entity.author.profile.firstname }} {{ contrib.entity.author.profile.lastname }}</td>
-                            <td>{{ contrib.adhvote }}</td>
-                            <td>{{ contrib.cnvote }}</td>
-                            <td>
-                                {% if contrib.uservote %}
-                                        <span class="glyphicon glyphicon-check" aria-hidden="true"></span>
-                                {% elseif is_granted('vote', contrib.entity) %}
-                                    <a class="btn btn-default btn-sm" href="{{path('contribution_vote', {id: contrib.id}) }}">
-                                    <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
-                                {% else %}
-                                    <span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span>
-                                {% endif %}
-                                <span class="sr-only">Signer</span>
-                            </td>
-                        </tr>
-                    {% endfor %}
-                </table>
-            {% endif %}
-            <h2>Contributions thématiques soumises à signature</h2>
-            {% if thematicOpenContribs is empty %}
-                <p>Pas de contribution.</p>
-            {% else %}
-                <table class="table">
-                    <tr>
-                        <th>Type</th>
-                        <th>Titre</th>
-                        <th>Auteur</th>
-                        <th>Signatures</th>
-                        <th>dont CN</th>
-                        <th>Signer</th>
-                    </tr>
-                    {% for contrib in thematicOpenContribs %}
-                        <tr>
-                            <td>Contribution thématique</td>
-                            <td>
-                                <a href="{{ path('contribution_view', {id: contrib.entity.id}) }}">{{ contrib.entity.title }}</a>
-                            </td>
-                            <td>{{ contrib.entity.author.profile.firstname }} {{ contrib.entity.author.profile.lastname }}</td>
-                            <td>{{ contrib.adhvote }}</td>
-                            <td>{{ contrib.cnvote }}</td>
-                            <td>
-                                {% if contrib.uservote %}
-                                    <span class="glyphicon glyphicon-check" aria-hidden="true"></span>
-                                {% elseif is_granted('vote', contrib.entity) %}
-                                    <a class="btn btn-default btn-sm" href="{{path('contribution_vote', {id: contrib.id}) }}">
-                                    <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
-                                {% else %}
-                                    <span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span>
-                                {% endif %}
-                                <span class="sr-only">Signer</span>
-                            </td>
-                        </tr>
-                    {% endfor %}
-                </table>
-            {% endif %}
+            <div role="tabpanel">
+                <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active"><a href="#validated" aria-controls="validated" role="tab" data-toggle="tab">
+                        Contributions validées
+                    </a></li>
+                    <li role="presentation"><a href="#signatures" aria-controls="signatures" role="tab" data-toggle="tab">
+                        Contributions soumises à signatures
+                    </a></li>
+                </ul>
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active" id="validated">
+                        <h2>Contributions générales validées</h2>
+                        {% if generalClosedContribs is empty %}
+                            <p>Pas de contribution validée.</p>
+                        {% else %}
+                            <table class="table">
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Titre</th>
+                                    <th>Auteur</th>
+                                    <th>Signatures</th>
+                                    <th>dont CN</th>
+                                    <th>Signée</th>
+                                </tr>
+                                {% for contrib in generalClosedContribs %}
+                                    <tr>
+                                        <td>Contribution générale</td>
+                                        <td>
+                                            <a href="{{ path('contribution_view', {id: contrib.entity.id}) }}">{{ contrib.entity.title }}</a>
+                                        </td>
+                                        <td>{{ contrib.entity.author.profile.firstname }} {{ contrib.entity.author.profile.lastname }}</td>
+                                        <td>{{ contrib.adhvote }}</td>
+                                        <td>{{ contrib.cnvote }}</td>
+                                        <td>
+                                            {% if contrib.uservote %}
+                                                <span class="glyphicon glyphicon-check" aria-hidden="true"></span>
+                                            {% endif %}
+                                            <span class="sr-only">Signée</span>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </table>
+                        {% endif %}
 
-            <h2>Contributions générales validées</h2>
-            {% if generalClosedContribs is empty %}
-                <p>Pas de contribution validée.</p>
-            {% else %}
-                <table class="table">
-                    <tr>
-                        <th>Type</th>
-                        <th>Titre</th>
-                        <th>Auteur</th>
-                        <th>Signatures</th>
-                        <th>dont CN</th>
-                        <th>Signée</th>
-                    </tr>
-                    {% for contrib in generalClosedContribs %}
-                        <tr>
-                            <td>Contribution générale</td>
-                            <td>
-                                <a href="{{ path('contribution_view', {id: contrib.entity.id}) }}">{{ contrib.entity.title }}</a>
-                            </td>
-                            <td>{{ contrib.entity.author.profile.firstname }} {{ contrib.entity.author.profile.lastname }}</td>
-                            <td>{{ contrib.adhvote }}</td>
-                            <td>{{ contrib.cnvote }}</td>
-                            <td>
-                                {% if contrib.uservote %}
-                                    <span class="glyphicon glyphicon-check" aria-hidden="true"></span>
-                                {% endif %}
-                                <span class="sr-only">Signée</span>
-                            </td>
-                        </tr>
-                    {% endfor %}
-                </table>
-            {% endif %}
-            <h2>Contributions thématiques validées</h2>
-            {% if thematicClosedContribs is empty %}
-                <p>Pas de contribution validée.</p>
-            {% else %}
-                <table class="table">
-                    <tr>
-                        <th>Type</th><th>Titre</th>
-                        <th>Auteur</th>
-                        <th>Signatures</th>
-                        <th>dont CN</th>
-                        <th>Signée</th>
-                    </tr>
-                    {% for contrib in thematicClosedContribs %}
-                        <tr>
-                            <td>Contribution thématique</td>
-                            <td>
-                                <a href="{{ path('contribution_view', {id: contrib.entity.id}) }}">{{ contrib.entity.title }}</a>
-                            </td>
-                            <td>{{ contrib.entity.author.profile.firstname }} {{ contrib.entity.author.profile.lastname }}</td>
-                            <td>{{ contrib.adhvote}}</td>
-                            <td>{{ contrib.cnvote}}</td>
-                            <td>
-                                {% if contrib.uservote %}
-                                    <span class="glyphicon glyphicon-check" aria-hidden="true"></span>
-                                {% endif %}
-                                <span class="sr-only">Signée</span>
-                            </td>
-                        </tr>
-                    {% endfor %}
-                </table>
-            {% endif %}
+                        <h2>Contributions thématiques validées</h2>
+                        {% if thematicClosedContribs is empty %}
+                            <p>Pas de contribution validée.</p>
+                        {% else %}
+                            <table class="table">
+                                <tr>
+                                    <th>Type</th><th>Titre</th>
+                                    <th>Auteur</th>
+                                    <th>Signatures</th>
+                                    <th>dont CN</th>
+                                    <th>Signée</th>
+                                </tr>
+                                {% for contrib in thematicClosedContribs %}
+                                    <tr>
+                                        <td>Contribution thématique</td>
+                                        <td>
+                                            <a href="{{ path('contribution_view', {id: contrib.entity.id}) }}">{{ contrib.entity.title }}</a>
+                                        </td>
+                                        <td>{{ contrib.entity.author.profile.firstname }} {{ contrib.entity.author.profile.lastname }}</td>
+                                        <td>{{ contrib.adhvote}}</td>
+                                        <td>{{ contrib.cnvote}}</td>
+                                        <td>
+                                            {% if contrib.uservote %}
+                                                <span class="glyphicon glyphicon-check" aria-hidden="true"></span>
+                                            {% endif %}
+                                            <span class="sr-only">Signée</span>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </table>
+                        {% endif %}
+                    </div>
+
+                    <div role="tabpanel" class="tab-pane" id="signatures">
+                        <h2>Contributions générales soumises à signature</h2>
+                        {% if generalOpenContribs is empty %}
+                            <p>Pas de contribution.</p>
+                        {% else %}
+                            <table class="table">
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Titre</th>
+                                    <th>Auteur</th>
+                                    <th>Signatures</th>
+                                    <th>dont CN</th>
+                                    <th>Signer</th>
+                                </tr>
+                                {% for contrib in generalOpenContribs %}
+                                    <tr>
+                                        <td>Contribution générale</td>
+                                        <td>
+                                            <a href="{{ path('contribution_view', {id: contrib.entity.id}) }}">{{ contrib.entity.title }}</a>
+                                        </td>
+                                        <td>{{ contrib.entity.author.profile.firstname }} {{ contrib.entity.author.profile.lastname }}</td>
+                                        <td>{{ contrib.adhvote }}</td>
+                                        <td>{{ contrib.cnvote }}</td>
+                                        <td>
+                                            {% if contrib.uservote %}
+                                                <span class="glyphicon glyphicon-check" aria-hidden="true"></span>
+                                            {% elseif is_granted('vote', contrib.entity) %}
+                                                <a class="btn btn-default btn-sm" href="{{path('contribution_vote', {id: contrib.id}) }}">
+                                                <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+                                            {% else %}
+                                                <span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span>
+                                            {% endif %}
+                                            <span class="sr-only">Signer</span>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </table>
+                        {% endif %}
+
+                        <h2>Contributions thématiques soumises à signature</h2>
+                        {% if thematicOpenContribs is empty %}
+                            <p>Pas de contribution.</p>
+                        {% else %}
+                            <table class="table">
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Titre</th>
+                                    <th>Auteur</th>
+                                    <th>Signatures</th>
+                                    <th>dont CN</th>
+                                    <th>Signer</th>
+                                </tr>
+                                {% for contrib in thematicOpenContribs %}
+                                    <tr>
+                                        <td>Contribution thématique</td>
+                                        <td>
+                                            <a href="{{ path('contribution_view', {id: contrib.entity.id}) }}">{{ contrib.entity.title }}</a>
+                                        </td>
+                                        <td>{{ contrib.entity.author.profile.firstname }} {{ contrib.entity.author.profile.lastname }}</td>
+                                        <td>{{ contrib.adhvote }}</td>
+                                        <td>{{ contrib.cnvote }}</td>
+                                        <td>
+                                            {% if contrib.uservote %}
+                                                <span class="glyphicon glyphicon-check" aria-hidden="true"></span>
+                                            {% elseif is_granted('vote', contrib.entity) %}
+                                                <a class="btn btn-default btn-sm" href="{{path('contribution_vote', {id: contrib.id}) }}">
+                                                <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+                                            {% else %}
+                                                <span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span>
+                                            {% endif %}
+                                            <span class="sr-only">Signer</span>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </table>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
         </div><!-- .col-md-12 -->
     </div><!-- .row -->
 </div><!-- .container -->
