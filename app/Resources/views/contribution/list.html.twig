@@ -110,13 +110,16 @@
                                         <td>
                                             {% if contrib.uservote %}
                                                 <span class="glyphicon glyphicon-check" aria-hidden="true"></span>
+                                                <span class="sr-only">Signée</span>
                                             {% elseif is_granted('vote', contrib.entity) %}
                                                 <a class="btn btn-default btn-sm" href="{{path('contribution_vote', {id: contrib.id}) }}">
-                                                <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+                                                    <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+                                                    <span class="sr-only">Signer</span>
+                                                </a>
                                             {% else %}
                                                 <span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span>
+                                                <span class="sr-only">Signature impossible</span>
                                             {% endif %}
-                                            <span class="sr-only">Signer</span>
                                         </td>
                                     </tr>
                                 {% endfor %}
@@ -148,13 +151,16 @@
                                         <td>
                                             {% if contrib.uservote %}
                                                 <span class="glyphicon glyphicon-check" aria-hidden="true"></span>
+                                                <span class="sr-only">Signée</span>
                                             {% elseif is_granted('vote', contrib.entity) %}
                                                 <a class="btn btn-default btn-sm" href="{{path('contribution_vote', {id: contrib.id}) }}">
-                                                <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+                                                    <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+                                                    <span class="sr-only">Signer</span>
+                                                </a>
                                             {% else %}
                                                 <span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span>
+                                                <span class="sr-only">Signature impossible</span>
                                             {% endif %}
-                                            <span class="sr-only">Signer</span>
                                         </td>
                                     </tr>
                                 {% endfor %}
