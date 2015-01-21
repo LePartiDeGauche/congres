@@ -82,17 +82,17 @@ class ContributionController extends Controller
         $this->denyAccessUnlessGranted('view', $contrib);
 
         switch (get_class($contrib)) {
-            case 'AppBundle\Entity\Congres\GeneralContribution':
-                $type = 'general';
-                $repo  = $this->getDoctrine()->getRepository('AppBundle:Congres\GeneralContribution');
-                break;
-            case 'AppBundle\Entity\Congres\ThematicContribution':
-                $type = 'thematic';
-                $repo  = $this->getDoctrine()->getRepository('AppBundle:Congres\ThematicContribution');
-                break;
-            default:
-                return $this->createNotFoundException();
-                break;
+        case 'AppBundle\Entity\Congres\GeneralContribution':
+            $type = 'general';
+            $repo  = $this->getDoctrine()->getRepository('AppBundle:Congres\GeneralContribution');
+            break;
+        case 'AppBundle\Entity\Congres\ThematicContribution':
+            $type = 'thematic';
+            $repo  = $this->getDoctrine()->getRepository('AppBundle:Congres\ThematicContribution');
+            break;
+        default:
+            return $this->createNotFoundException();
+            break;
         }
 
         $votes = $repo->getVotes($contrib, $this->getUser());
@@ -125,11 +125,11 @@ class ContributionController extends Controller
         shuffle($thematicClosedContribs);
 
         return $this->render('contribution/list.html.twig', array(
-                'generalOpenContribs' => $generalOpenContribs,
-                'generalClosedContribs' => $generalClosedContribs,
-                'thematicOpenContribs' => $thematicOpenContribs,
-                'thematicClosedContribs' => $thematicClosedContribs,
-            ));
+            'generalOpenContribs' => $generalOpenContribs,
+            'generalClosedContribs' => $generalClosedContribs,
+            'thematicOpenContribs' => $thematicOpenContribs,
+            'thematicClosedContribs' => $thematicClosedContribs,
+        ));
     }
 
     /**
@@ -140,6 +140,12 @@ class ContributionController extends Controller
         $this->denyAccessUnlessGranted('view', new RouteString($request->get('_route')));
         $this->denyAccessUnlessGranted('vote', $contrib);
 
+        if (is_a($contrib, "AppBundle\Entity\Congres\GeneralContribution")) {
+            $type = 'general';
+        } else {
+            $type = 'thematic';
+        }
+
         $form = $this->createFormBuilder()
             ->getForm();
 
@@ -148,7 +154,7 @@ class ContributionController extends Controller
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
 
-            if (is_a($contrib, "AppBundle\Entity\Congres\GeneralContribution")) {
+            if ($type = 'general') {
                 $contrib_repo = $em->getRepository("AppBundle:Congres\GeneralContribution");
             } else {
                 $contrib_repo = $em->getRepository("AppBundle:Congres\ThematicContribution");
@@ -170,6 +176,7 @@ class ContributionController extends Controller
         return $this->render('contribution/vote.html.twig', array(
             'contrib' => $contrib,
             'form' => $form->createView(),
+            'type' => $type
         ));
     }
 

@@ -10,9 +10,14 @@
             <form method="post" action="{{ path('contribution_vote', {id: contrib.id}) }}">
                 {{ form_widget(form) }}
                 <p>
-                    Veux-tu vraiment signer la contribution "{{ contrib.title }}" ? Il n'est
-                    pas possible d'annuler cette opération. Tu ne peux signer qu'une seule contribution
-                    générale, et autant de contributions thématiques que tu le souhaites.
+Veux-tu vraiment signer la <strong> contribution {% if type == 'general' %}générale
+{% elseif type == 'thematic' %}thématique{%endif%}</strong> "{{ contrib.title }}"?
+                </p>
+                <p>
+                Il n'est pas possible d'annuler cette opération.
+                {% if type == 'general' %}<br />
+<strong>On ne peut voter que pour une seule contribution générale</strong>
+                {%endif%}
                 </p>
                 <div class="pull-right">
                     <input type="submit" class="btn btn-primary" value="Signer" />
