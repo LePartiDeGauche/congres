@@ -154,7 +154,7 @@ class ContributionController extends Controller
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
 
-            if ($type = 'general') {
+            if ($type === 'general') {
                 $contrib_repo = $em->getRepository("AppBundle:Congres\GeneralContribution");
             } else {
                 $contrib_repo = $em->getRepository("AppBundle:Congres\ThematicContribution");
