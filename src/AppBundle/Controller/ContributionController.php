@@ -163,6 +163,9 @@ class ContributionController extends Controller
             $contrib->addVote($this->getUser());
             $em->flush();
 
+            dump($contrib_repo->getCNVotesCount($contrib));
+            dump($contrib_repo->getVotesCount($contrib));
+
             if ($contrib_repo->getCNVotesCount($contrib) >= 10 ||
                 $contrib_repo->getVotesCount($contrib) >= 50) {
                 $contrib->setStatus(Contribution::STATUS_SIGNATURES_CLOSED);

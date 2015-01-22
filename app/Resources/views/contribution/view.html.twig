@@ -22,7 +22,7 @@
             Déja signée <span class="glyphicon glyphicon-check" aria-hidden="true"></span> |
         {% elseif is_granted('vote', contrib) %}
             <a class="btn btn-default btn-sm" href="{{path('contribution_vote', {id: contrib.id}) }}">
-                Voter
+                Signer
                 <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
             </a><br/>
         {% endif %}
