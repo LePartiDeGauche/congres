@@ -3,13 +3,27 @@
 {% block body %}
     <div class="container">
         <div class="row">
-            <h1>Mon profil</h1>
+<h1>Bonjour, {{ app.user.profile.firstname}}</h1>
             <p>
-                Prénom : {{ app.user.profile.firstname}}<br/>
-                Nom : {{ app.user.profile.lastname }}<br/>
-                Date de naissance : {{ app.user.profile.birthdate | date("d/m/Y") }}<br/>
-                Adresse email : {{ app.user.email }}
+Bienvenue sur le site du congrès ! <br />
+            </p>
+            <p>
+Pour lire et signer des contributions <a href="{{ path('contribution_list') }}">C'est ici</a>
+            </p>
+            <p>
+Pour rappel, en accord avec règlement interieur du congrès,on ne peut signer <strong>qu'une
+seule</strong> contribution générale ! <br/>
+<strong>Le vote pour une contribution est définitif.</strong>
+
             </p>
         </div>
+    <div class="row">
+        <div class="alert alert-warning text-justify" role="alert">
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        L'équipe de développeurs bénévoles a besoin de se renforcer ! N'hésitez pas à envoyer un e-mail à
+        congres2015@lepartidegauche.fr si vous pouvez aider. L'application est codée en PHP sous Symfony
+        2.6. Le code source est entièrement disponible <a href="https://github.com/LePartiDeGauche/congres">ici</a>.
+        </div>
     </div>
+</div>
 {% endblock %}

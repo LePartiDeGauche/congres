@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <h1>Mon profil</h1>
+            <h2>
+                <span class="text-capitalize">{{ app.user.profile.firstname}}</span>
+                <span class="text-capitalize"> {{ app.user.profile.lastname }}</span>
+            </h2>
+            <p>
+                Né(e) le : {{ app.user.profile.birthdate | date("d/m/Y") }}<br/>
+                Courriel : {{ app.user.email }}
+            </p>
+        </div>
+    <div class="alert alert-info text-justify" role="alert">
+        <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+Pour faire modifier ces informations dans la base des adhérents, vous pouvez contacter le pôle
+organisation sur l'extranet ou par courriel à l'adresse <a
+href="mailto:militants@lepartidegauche.fr">militants@lepartidegauche.fr</a>.
+    </div>
+    </div>
+{% endblock %}
