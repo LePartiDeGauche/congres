@@ -10,4 +10,5 @@ namespace AppBundle\Entity\Congres;
  */
 class ThematicContributionRepository extends ContributionRepository
 {
+    protected $classname = 'AppBundle\Entity\Congres\ThematicContribution';
 }

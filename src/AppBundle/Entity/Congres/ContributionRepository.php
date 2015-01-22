@@ -14,13 +14,7 @@ use AppBundle\Entity\Instance;
  */
 class ContributionRepository extends EntityRepository
 {
-    private $classname;
-
-    public function __construct($em, ClassMetadata $class)
-    {
-        parent::__construct($em, $class);
-        $this->classname = $class->getName();
-    }
+    protected $classname;
 
     public function getCNVotesCount($contrib)
     {
@@ -53,7 +47,7 @@ class ContributionRepository extends EntityRepository
     public function findByStatusWithVotes($status, $user)
     {
         $contribs = $this->getEntityManager()->createQuery('
-SELECT contrib entity, contrib.id id,
+SELECT contrib entity, author, profile, contrib.id id,
 COUNT(av) adhvote, (
 SELECT COUNT(contrib2)
 FROM ' . $this->classname . ' contrib2
@@ -70,6 +64,8 @@ WHERE contrib.id = contrib3.id AND uv.id = :user
 ) uservote
 FROM ' . $this->classname . ' contrib
 LEFT JOIN contrib.votes av
+LEFT JOIN contrib.author author
+LEFT JOIN author.profile profile
 WHERE contrib.status = :status
 GROUP BY contrib.id')
             ->setParameter('user', $user->getId())
