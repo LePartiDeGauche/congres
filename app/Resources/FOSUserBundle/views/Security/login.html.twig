@@ -1,12 +1,10 @@
 {% extends "FOSUserBundle::layout.html.twig" %}
 
 {% block fos_user_content %}
+
 <div class="row">
-    <p class="text-justify text-muted text-small">
-        Si vous ne vous êtes jamais connecté sur le site Congrès, il faut vous inscrire en utilisant
-        le lien inscription en haut à droite. Les contributions sont publiques et soumises à signatures
-        du lundi 19 au 30 janvier. Pour tout problème, contacter congres2015@lepartidegauche.fr.
-    </p>
+<h1>Connexion</h1>
+<p class="text-muted">Saisir vos identifiants</p>
     {% if error %}
         <div class="alert alert-danger" role="alert">
             <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
@@ -43,6 +41,12 @@
     </form>
 </div>
 <div class="row">
+    <div class="alert alert-info text-justify" role="alert">
+        <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+        Si vous ne vous êtes jamais connecté sur le site Congrès, il faut vous inscrire en utilisant
+        le lien inscription en haut à droite. Les contributions sont publiques et soumises à signatures
+        du lundi 19 au 30 janvier. Pour tout problème, contacter congres2015@lepartidegauche.fr.
+    </div>
     <div class="alert alert-warning text-justify" role="alert">
         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
         L'équipe de développeurs bénévoles a besoin de se renforcer ! N'hésitez pas à envoyer un e-mail à
