@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class DefaultController extends Controller
 {
@@ -21,6 +22,20 @@ class DefaultController extends Controller
     public function redirectionDepotContributionAction()
     {
         return $this->redirect($this->generateUrl('contribution_submit'));
+    }
+
+    /**
+     * @Route("/downloads/{filename}", name="downloads")
+     */
+    public function downloadAction($filename)
+    {
+        $filename = str_replace('../', '', $filename);
+        $filename = __DIR__.'/../../../app/Resources/downloads/'.$filename;
+        if (!file_exists($filename)) {
+            throw $this->createNotFoundException('Ce fichier n\'existe pas.');
+        }
+
+        return new BinaryFileResponse($filename);
     }
 
     /**
