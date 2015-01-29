@@ -35,7 +35,12 @@
                 <ul>
                     {% for user in contrib.votes %}
                         <li>
-                            {{ user.profile.firstname }} {{ user.profile.lastname }}
+                        {{ user.profile.firstname }} {{ user.profile.lastname }}
+                        {% for instance in user.profile.instances%}
+                            {% if instance.name is constant('AppBundle\\Entity\\Instance::INSTANCE_CN') %}
+                                (CN)
+                            {% endif %}
+                        {% endfor %}
                         </li>
                     {% endfor %}
                 </ul>
