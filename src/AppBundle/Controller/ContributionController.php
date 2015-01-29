@@ -120,9 +120,7 @@ class ContributionController extends Controller
         $thematicClosedContribs = $repo->findByStatusWithVotes(Contribution::STATUS_SIGNATURES_CLOSED, $this->getUser());
 
         shuffle($generalOpenContribs);
-        shuffle($generalClosedContribs);
         shuffle($thematicOpenContribs);
-        shuffle($thematicClosedContribs);
 
         return $this->render('contribution/list.html.twig', array(
             'generalOpenContribs' => $generalOpenContribs,
