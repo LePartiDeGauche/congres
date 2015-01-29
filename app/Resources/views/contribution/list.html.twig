@@ -1,6 +1,21 @@
 {% extends '::base.html.twig' %}
 
 {% block title %}Liste des Contributions{% endblock %}
+{% block javascripts %}
+{{ parent() }}
+        <script type="text/javascript" src="{{ asset('js/jquery.tablesorter.min.js') }}"></script>
+<script type="text/javascript">
+$(document).ready(function() 
+    { 
+    $(".tablesorter").tablesorter({ 
+        cssAsc: "glyphicon glyphicon-sort-by-attributes",
+        cssDesc: "glyphicon glyphicon-sort-by-attributes-alt",
+        } 
+); 
+    } 
+); 
+</script>
+{% endblock %}
 
 {% block body %}
 <div class="container">
@@ -22,7 +37,8 @@
                         {% if generalClosedContribs is empty %}
                             <p>Pas de contribution validée.</p>
                         {% else %}
-                            <table class="table">
+                            <table class="table tablesorter">
+<thead>
                                 <tr>
                                     <th>Type</th>
                                     <th>Titre</th>
@@ -31,6 +47,8 @@
                                     <th>dont CN</th>
                                     <th>Signée</th>
                                 </tr>
+</thead>
+<tbody>
                                 {% for contrib in generalClosedContribs %}
                                     <tr>
                                         <td>Contribution générale</td>
@@ -48,6 +66,7 @@
                                         </td>
                                     </tr>
                                 {% endfor %}
+</tbody>
                             </table>
                         {% endif %}
 
@@ -55,7 +74,8 @@
                         {% if thematicClosedContribs is empty %}
                             <p>Pas de contribution validée.</p>
                         {% else %}
-                            <table class="table">
+                            <table class="table tablesorter">
+<thead>
                                 <tr>
                                     <th>Type</th><th>Titre</th>
                                     <th>Auteur</th>
@@ -63,6 +83,8 @@
                                     <th>dont CN</th>
                                     <th>Signée</th>
                                 </tr>
+</thead>
+<tbody>
                                 {% for contrib in thematicClosedContribs %}
                                     <tr>
                                         <td>Contribution thématique</td>
@@ -80,6 +102,7 @@
                                         </td>
                                     </tr>
                                 {% endfor %}
+</tbody>
                             </table>
                         {% endif %}
                     </div>
@@ -89,7 +112,8 @@
                         {% if generalOpenContribs is empty %}
                             <p>Pas de contribution.</p>
                         {% else %}
-                            <table class="table">
+                            <table class="table tablesorter">
+<thead>
                                 <tr>
                                     <th>Type</th>
                                     <th>Titre</th>
@@ -98,6 +122,8 @@
                                     <th>dont CN</th>
                                     <th>Signer</th>
                                 </tr>
+</thead>
+<tbody>
                                 {% for contrib in generalOpenContribs %}
                                     <tr>
                                         <td>Contribution générale</td>
@@ -123,6 +149,7 @@
                                         </td>
                                     </tr>
                                 {% endfor %}
+</tbody>
                             </table>
                         {% endif %}
 
@@ -130,7 +157,8 @@
                         {% if thematicOpenContribs is empty %}
                             <p>Pas de contribution.</p>
                         {% else %}
-                            <table class="table">
+                            <table id="open-thematic-contrib" class="table tablesorter">
+<thead>
                                 <tr>
                                     <th>Type</th>
                                     <th>Titre</th>
@@ -139,6 +167,9 @@
                                     <th>dont CN</th>
                                     <th>Signer</th>
                                 </tr>
+</thead>
+<tbody>
+
                                 {% for contrib in thematicOpenContribs %}
                                     <tr>
                                         <td>Contribution thématique</td>
@@ -164,6 +195,7 @@
                                         </td>
                                     </tr>
                                 {% endfor %}
+</tbody>
                             </table>
                         {% endif %}
                     </div>
