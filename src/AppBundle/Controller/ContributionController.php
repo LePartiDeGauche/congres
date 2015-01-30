@@ -9,7 +9,6 @@ use AppBundle\Entity\Congres\Contribution;
 use AppBundle\Entity\Congres\GeneralContribution;
 use AppBundle\Entity\Congres\ThematicContribution;
 use AppBundle\Form\Type\NewCongresContributionType;
-use AppBundle\RouteString;
 
 /**
  * @Route("/contribution")
@@ -21,7 +20,7 @@ class ContributionController extends Controller
      */
     public function submitAction(Request $request)
     {
-        $this->denyAccessUnlessGranted('view', new RouteString($request->get('_route')));
+        $this->denyAccessUnlessGranted('CALENDAR_contribution_submit');
 
         /* We don't know if we are going to create a PlateformContribution or a
          * Thematic contribution. So we create two identical forms (except for
@@ -109,7 +108,7 @@ class ContributionController extends Controller
      */
     public function listAction(Request $request)
     {
-        $this->denyAccessUnlessGranted('view', new RouteString('contribution_vote'));
+        $this->denyAccessUnlessGranted('CALENDAR_contribution_vote');
 
         $generalRepo = $this->getDoctrine()->getRepository('AppBundle:Congres\GeneralContribution');
         $generalOpenContribs = $generalRepo->findByStatusWithVotes(Contribution::STATUS_SIGNATURES_OPEN, $this->getUser());
@@ -135,7 +134,7 @@ class ContributionController extends Controller
      */
     public function voteAction(Contribution $contrib, Request $request)
     {
-        $this->denyAccessUnlessGranted('view', new RouteString($request->get('_route')));
+        $this->denyAccessUnlessGranted('CALENDAR_contribution_vote');
         $this->denyAccessUnlessGranted('vote', $contrib);
 
         if (is_a($contrib, "AppBundle\Entity\Congres\GeneralContribution")) {
@@ -183,7 +182,7 @@ class ContributionController extends Controller
      */
     public function deleteAction(Contribution $contrib, Request $request)
     {
-        $this->denyAccessUnlessGranted('view', new RouteString('contribution_submit'));
+        $this->denyAccessUnlessGranted('CALENDAR_contribution_submit');
         $this->denyAccessUnlessGranted('delete', $contrib);
 
         $form = $this->createFormBuilder()
