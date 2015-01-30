@@ -14,6 +14,7 @@ final class ContributionVoter extends AbstractVoter
     const VOTE = 'vote';
 
     private $entityManager;
+    private $container;
 
     protected function getSupportedAttributes()
     {
@@ -31,39 +32,49 @@ final class ContributionVoter extends AbstractVoter
             return false;
         }
 
-        if ($attribute === self::VIEW) {
-            if (Contribution::STATUS_NEW === $contrib->getStatus()) {
-                return ($user === $contrib->getAuthor() || in_array('ROLE_ADMIN', $user->getRoles(), true));
-            }
-
-            return true;
-        }
-
-        if ($attribute === self::DELETE) {
-            if (Contribution::STATUS_NEW === $contrib->getStatus()) {
-                return ($user === $contrib->getAuthor() || in_array('ROLE_ADMIN', $user->getRoles(), true));
-            }
-
-            return in_array('ROLE_ADMIN', $user->getRoles(), true);
-        }
-
-        if ($attribute === self::VOTE) {
-            if (Contribution::STATUS_SIGNATURES_OPEN == $contrib->getStatus()) {
-                $em = $this->entityManager;
-
-                if (is_a($contrib, 'AppBundle\Entity\Congres\GeneralContribution')) {
-                    return !$em->getRepository('AppBundle:Congres\GeneralContribution')->hasVoted($user);
+        if ($this->container->get('security.context')->isGranted('CALENDAR_contribution_submit')
+        || $this->container->get('security.context')->isGranted('CALENDAR_contribution_vote')) {
+            if ($attribute === self::VIEW) {
+                if (Contribution::STATUS_NEW === $contrib->getStatus()) {
+                    return ($user === $contrib->getAuthor() || in_array('ROLE_ADMIN', $user->getRoles(), true));
                 }
 
-                return !$contrib->getVotes()->contains($user);
+                return true;
             }
+
+            if ($attribute === self::DELETE) {
+                if (Contribution::STATUS_NEW === $contrib->getStatus()) {
+                    return ($user === $contrib->getAuthor() || in_array('ROLE_ADMIN', $user->getRoles(), true));
+                }
+
+                return in_array('ROLE_ADMIN', $user->getRoles(), true);
+            }
+
+            if ($attribute === self::VOTE) {
+                if (Contribution::STATUS_SIGNATURES_OPEN == $contrib->getStatus()) {
+                    $em = $this->entityManager;
+
+                    if (is_a($contrib, 'AppBundle\Entity\Congres\GeneralContribution')) {
+                        return !$em->getRepository('AppBundle:Congres\GeneralContribution')->hasVoted($user);
+                    }
+
+                    return !$contrib->getVotes()->contains($user);
+                }
+            }
+
+            return false;
+        }
+
+        if ($this->container->get('security.context')->isGranted('CALENDAR_contribution_read')) {
+            return (Contribution::STATUS_SIGNATURES_CLOSED || in_array('ROLE_ADMIN', $user->getRoles(), true));
         }
 
         return false;
     }
 
-    public function __construct($entityManager)
+    public function __construct($entityManager, $container)
     {
         $this->entityManager = $entityManager;
+        $this->container = $container;
     }
 }

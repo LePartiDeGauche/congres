@@ -1,0 +1,78 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}Liste des Contributions{% endblock %}
+{% block javascripts %}
+{{ parent() }}
+        <script type="text/javascript" src="{{ asset('js/jquery.tablesorter.min.js') }}"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $(".tablesorter").tablesorter({
+        cssAsc: "glyphicon glyphicon-sort-by-attributes-alt",
+        cssDesc: "glyphicon glyphicon-sort-by-attributes",
+    });
+}
+);
+</script>
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>Liste des contributions</h1>
+                <h2>Contributions générales validées</h2>
+                {% if generalClosedContribs is empty %}
+                    <p>Pas de contribution validée.</p>
+                {% else %}
+                    <table class="table tablesorter">
+                        <thead>
+                            <tr>
+                                <th>Type</th>
+                                <th>Titre</th>
+                                <th>Auteur</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for contrib in generalClosedContribs %}
+                                <tr>
+                                    <td>Contribution générale</td>
+                                    <td>
+                                        <a href="{{ path('contribution_view', {id: contrib.id}) }}">{{ contrib.title }}</a>
+                                    </td>
+                                    <td>{{ contrib.author.profile.firstname }} {{ contrib.author.profile.lastname }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                {% endif %}
+
+                <h2>Contributions thématiques validées</h2>
+                {% if thematicClosedContribs is empty %}
+                    <p>Pas de contribution validée.</p>
+                {% else %}
+                    <table class="table tablesorter">
+                        <thead>
+                            <tr>
+                                <th>Type</th><th>Titre</th>
+                                <th>Auteur</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for contrib in thematicClosedContribs %}
+                                <tr>
+                                    <td>Contribution thématique</td>
+                                    <td>
+                                        <a href="{{ path('contribution_view', {id: contrib.id}) }}">{{ contrib.title }}</a>
+                                    </td>
+                                    <td>{{ contrib.author.profile.firstname }} {{ contrib.author.profile.lastname }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                {% endif %}
+            </div>
+
+        </div><!-- .col-md-12 -->
+    </div><!-- .row -->
+</div><!-- .container -->
+{% endblock %}
