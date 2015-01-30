@@ -16,8 +16,8 @@
         </p>
         <p class="text-justify">{{ contrib.content|nl2br }}</p>
 
-        <h3>Signatures</h3>
         {% if is_granted('CALENDAR_contribution_vote') %}
+            <h3>Signatures</h3>
             <p>
                 {% if votes.uservote %}
                     Déja signée <span class="glyphicon glyphicon-check" aria-hidden="true"></span> |
@@ -30,24 +30,24 @@
                 Signatures : {{ votes.adhvote }} |
                 Dont CN : {{ votes.cnvote }}
             </p>
-        {% endif %}
-        <p>
-            {% if contrib.votes is not empty %}
-                <h4>Signataires</h4>
-                <ul>
-                    {% for user in contrib.votes %}
-                        <li>
-                        {{ user.profile.firstname }} {{ user.profile.lastname }}
-                        {% for instance in user.profile.instances%}
-                            {% if instance.name is constant('AppBundle\\Entity\\Instance::INSTANCE_CN') %}
-                                (CN)
-                            {% endif %}
+            <p>
+                {% if contrib.votes is not empty %}
+                    <h4>Signataires</h4>
+                    <ul>
+                        {% for user in contrib.votes %}
+                            <li>
+                            {{ user.profile.firstname }} {{ user.profile.lastname }}
+                            {% for instance in user.profile.instances%}
+                                {% if instance.name is constant('AppBundle\\Entity\\Instance::INSTANCE_CN') %}
+                                    (CN)
+                                {% endif %}
+                            {% endfor %}
+                            </li>
                         {% endfor %}
-                        </li>
-                    {% endfor %}
-                </ul>
-            {% endif %}
-        </p>
+                    </ul>
+                {% endif %}
+            </p>
+        {% endif %}
     </div>
 </div>
 {% endblock %}
