@@ -17,18 +17,20 @@
         <p class="text-justify">{{ contrib.content|nl2br }}</p>
 
         <h3>Signatures</h3>
-        <p>
-        {% if votes.uservote %}
-            Déja signée <span class="glyphicon glyphicon-check" aria-hidden="true"></span> |
-        {% elseif is_granted('vote', contrib) %}
-            <a class="btn btn-default btn-sm" href="{{path('contribution_vote', {id: contrib.id}) }}">
-                Signer
-                <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
-            </a><br/>
+        {% if is_granted('CALENDAR_contribution_vote') %}
+            <p>
+                {% if votes.uservote %}
+                    Déja signée <span class="glyphicon glyphicon-check" aria-hidden="true"></span> |
+                {% elseif is_granted('vote', contrib) %}
+                    <a class="btn btn-default btn-sm" href="{{path('contribution_vote', {id: contrib.id}) }}">
+                        Signer
+                        <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+                    </a><br/>
+                {% endif %}
+                Signatures : {{ votes.adhvote }} |
+                Dont CN : {{ votes.cnvote }}
+            </p>
         {% endif %}
-            Signatures : {{ votes.adhvote }} |
-            Dont CN : {{ votes.cnvote }}
-        </p>
         <p>
             {% if contrib.votes is not empty %}
                 <h4>Signataires</h4>
