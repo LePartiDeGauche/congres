@@ -41,6 +41,9 @@
                                 {% if instance.name is constant('AppBundle\\Entity\\Instance::INSTANCE_CN') %}
                                     (CN)
                                 {% endif %}
+                                {% if instance.name is constant('AppBundle\\Entity\\Instance::INSTANCE_BN') %}
+                                    (BN)
+                                {% endif %}
                             {% endfor %}
                             </li>
                         {% endfor %}
