@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * EventRole
  *
- * @ORM\Table()
+ * @ORM\Table(name="event_role")
  * @ORM\Entity
  */
 class EventRole
@@ -26,6 +26,7 @@ class EventRole
      *
      * @ORM\Column(name="event", type="object")
      */
+    //FIXME
     private $event;
 
     /**
@@ -47,6 +48,7 @@ class EventRole
      *
      * @ORM\Column(name="required_responsability", type="object")
      */
+    //FIXME
     private $requiredResponsability;
 
 

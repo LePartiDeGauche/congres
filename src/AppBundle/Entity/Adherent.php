@@ -25,7 +25,7 @@ class Adherent
     private $id;
 
     /**
-     * @var string
+     * @var string 
      *
      * @ORM\Column(name="email", type="string", length=255, unique=true, nullable=true)
      */

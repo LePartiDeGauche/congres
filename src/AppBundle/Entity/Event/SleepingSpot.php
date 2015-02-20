@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * SleepingSpot
  *
- * @ORM\Table()
+ * @ORM\Table(name="sleeping_spot")
  * @ORM\Entity
  */
 class SleepingSpot
@@ -34,6 +34,14 @@ class SleepingSpot
      * @ORM\Column(name="description", type="text")
      */
     private $description;
+    
+    /**
+     * @var \stdClass
+     *
+     * @ORM\Column(name="sleeping_site")
+     * @ORM\ManyToOne(targetEntity="SleepingSite")
+     */
+    private $sleepingSite;
 
 
     /**

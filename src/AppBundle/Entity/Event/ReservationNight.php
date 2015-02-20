@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * ReservationNight
  *
- * @ORM\Table()
+ * @ORM\Table(name="reservation_night")
  * @ORM\Entity
  */
 class ReservationNight
@@ -31,10 +31,12 @@ class ReservationNight
     /**
      * @var \stdClass
      *
-     * @ORM\Column(name="sleepingSite", type="object")
+     * @ORM\Column(name="event")
+     * @ORM\ManyToOne(targetEntity="Event")
      */
-    private $sleepingSite;
-
+    private $event;
+    
+    private $sleepingSites;
 
     /**
      * Get id

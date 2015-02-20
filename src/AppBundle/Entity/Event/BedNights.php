@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * BedNights
  *
- * @ORM\Table()
+ * @ORM\Table(name="bednights")
  * @ORM\Entity
  */
 class BedNights
@@ -26,6 +26,7 @@ class BedNights
      *
      * @ORM\Column(name="sleepingSpot", type="object")
      */
+    //FIXME
     private $sleepingSpot;
 
     /**
@@ -33,6 +34,7 @@ class BedNights
      *
      * @ORM\Column(name="night", type="object")
      */
+    //FIXME
     private $night;
 
     /**
@@ -40,6 +42,7 @@ class BedNights
      *
      * @ORM\Column(name="payment", type="object")
      */
+    //FIXME
     private $payment;
 
     /**

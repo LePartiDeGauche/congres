@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Payment:Payment
  *
- * @ORM\Table()
+ * @ORM\Table(name="payment")
  * @ORM\Entity
  */
 class Payment
@@ -33,6 +33,7 @@ class Payment
      *
      * @ORM\Column(name="method", type="object")
      */
+    //FIXME
     private $method;
 
     /**
@@ -47,6 +48,7 @@ class Payment
      *
      * @ORM\Column(name="drawer", type="object")
      */
+    //FIXME
     private $drawer;
 
     /**
@@ -54,6 +56,7 @@ class Payment
      *
      * @ORM\Column(name="recipient", type="object")
      */
+    //FIXME
     private $recipient;
 
     /**
@@ -61,6 +64,7 @@ class Payment
      *
      * @ORM\Column(name="author", type="object")
      */
+    //FIXME
     private $author;
 
     /**

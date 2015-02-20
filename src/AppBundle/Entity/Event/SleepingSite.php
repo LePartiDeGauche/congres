@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * SleepingSite
  *
- * @ORM\Table()
+ * @ORM\Table(name="sleeping_site")
  * @ORM\Entity
  */
 class SleepingSite
@@ -38,14 +38,25 @@ class SleepingSite
     /**
      * @var \stdClass
      *
-     * @ORM\Column(name="beds", type="object")
+     * @ORM\Column(name="sleeping_facility")
+     * @ORM\ManyToOne(targetEntity="SleepingFacility")
      */
-    private $beds;
+    private $sleepingFacility;
 
     /**
      * @var \stdClass
      *
-     * @ORM\Column(name="reservations_night", type="object")
+     * @ORM\OneToMany(targetEntity="SleepingSpot", mappedBy="sleepingSite",
+      * cascade={"persist", "remove", "merge"}, orphanRemoval=true)
+     */
+    
+    private $sleepingSpots;
+
+    /**
+     * @var \stdClass
+     *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Event\ReservationNight", inversedBy="sleepingSites")
+     *
      */
     private $reservationNights;
 

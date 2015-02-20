@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Event
  *
- * @ORM\Table()
+ * @ORM\Table(name="event")
  * @ORM\Entity
  */
 class Event
@@ -24,7 +24,18 @@ class Event
     /**
      * @var \stdClass
      *
-     * @ORM\Column(name="participants", type="object")
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Adherent")
+     * @ORM\JoinTable(
+     *      name="event_participant",
+     *      joinColumns={
+     *          @ORM\JoinColumn(name="event_id", referencedColumnName="id")
+     *      },
+     *      inverseJoinColumns={
+     *          @ORM\JoinColumn(name="participant_id",    
+     *              referencedColumnName="id", unique=true)
+     *      }
+     *  )
+     * 
      */
     private $participants;
 
@@ -44,23 +55,35 @@ class Event
 
     /**
      * @var \stdClass
-     *
      * @ORM\Column(name="roles", type="object")
      */
+    // FIXME
     private $roles;
 
     /**
      * @var \stdClass
      *
-     * @ORM\Column(name="sleepingFacilities", type="object")
+     * @ORM\OneToMany(targetEntity="SleepingFacility", mappedBy="event",
+     * cascade={"persist", "remove", "merge"}, orphanRemoval=true)
      */
     private $sleepingFacilities;
 
     /**
      * @var \stdClass
      *
+     * @ORM\OneToMany(targetEntity="ReservationNight", mappedBy="event",
+     * cascade={"persist", "remove", "merge"}, orphanRemoval=true)
+     */
+    private $reservationNights;
+
+
+
+    /**
+     * @var \stdClass
+     *
      * @ORM\Column(name="payments", type="object")
      */
+    // FIXME
     private $payments;
 
 
