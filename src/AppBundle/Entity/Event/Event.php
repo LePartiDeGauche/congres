@@ -3,6 +3,8 @@
 namespace AppBundle\Entity\Event;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+
 
 /**
  * Event
@@ -55,9 +57,10 @@ class Event
 
     /**
      * @var \stdClass
-     * @ORM\Column(name="roles", type="object")
+     *
+     * @ORM\OneToMany(targetEntity="EventRole", mappedBy="event",
+     * cascade={"persist", "remove", "merge"}, orphanRemoval=true)
      */
-    // FIXME
     private $roles;
 
     /**
@@ -156,6 +159,17 @@ class Event
         return $this;
     }
 
+    public function addRole(EventRole $role)
+    {
+        $role->setEvent($this);
+
+        $this->roles->add($role);
+    }
+
+    public function removeRole(EventRole $role)
+    {
+        $this->roles->remove($role);
+    }
     /**
      * Get description
      *
@@ -234,4 +248,10 @@ class Event
     {
         return $this->payments;
     }
+
+    public function __construct()
+    {
+        $this->roles = new ArrayCollection();
+    }
+
 }

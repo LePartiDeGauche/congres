@@ -24,9 +24,9 @@ class EventRole
     /**
      * @var \stdClass
      *
-     * @ORM\Column(name="event", type="object")
+     * @ORM\ManyToOne(targetEntity="Event", inversedBy="roles")
+     * @ORM\JoinColumn(name="event", referencedColumnName="id")
      */
-    //FIXME
     private $event;
 
     /**
@@ -39,17 +39,16 @@ class EventRole
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="text")
+     * @ORM\Column(name="description", type="text", nullable=true)
      */
     private $description;
 
     /**
      * @var \stdClass
      *
-     * @ORM\Column(name="required_responsability", type="object")
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Instance")
      */
-    //FIXME
-    private $requiredResponsability;
+    private $requiredResponsabilities;
 
 
     /**
@@ -65,10 +64,10 @@ class EventRole
     /**
      * Set event
      *
-     * @param \stdClass $event
+     * @param Event $event
      * @return EventRole
      */
-    public function setEvent($event)
+    public function setEvent(Event $event)
     {
         $this->event = $event;
 
@@ -137,9 +136,9 @@ class EventRole
      * @param \stdClass $requieredResponsa
      * @return EventRole
      */
-    public function setRequieredResponsa($requieredResponsa)
+    public function setRequiredResponsabilities($requieredResponsa)
     {
-        $this->requieredResponsa = $requieredResponsa;
+        $this->requiredResponsabilities = $requieredResponsa;
 
         return $this;
     }
@@ -149,8 +148,8 @@ class EventRole
      *
      * @return \stdClass 
      */
-    public function getRequieredResponsa()
+    public function getRequiredResponsabilities()
     {
-        return $this->requieredResponsa;
+        return $this->requiredResponsabilities;
     }
 }
