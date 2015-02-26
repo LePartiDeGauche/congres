@@ -71,7 +71,7 @@ class Instance
             self::INSTANCE_BN,
             self::INSTANCE_CN,
         ))) {
-            throw new \InvalidArgumentException("Invalid status");
+        throw new \InvalidArgumentException("Invalid status");
         }
 
         $this->name = $name;
@@ -151,5 +151,10 @@ class Instance
     public function getElectionDate()
     {
         return $this->electionDate;
+    }
+
+    public function __toString()
+    {
+        return $this->name;
     }
 }

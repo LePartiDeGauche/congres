@@ -64,3 +64,20 @@ services:
         class: AppBundle\Admin\Congres\Controller\ContributionAdminController
         calls:
             - [ setContainer, [@service_container] ]
+
+    app.admin.event:
+        class: AppBundle\Admin\EventAdmin
+        arguments: [~, AppBundle\Entity\Event\Event, AppBundle:EventAdmin]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: "Evenements", label: "Évenements"}
+
+    app.admin.event_role:
+        class: AppBundle\Admin\EventRoleAdmin
+        arguments: [~, AppBundle\Entity\Event\EventRole, SonataAdminBundle:CRUD]
+        tags:
+
+    app.admin.sleeping_facility:
+        class: AppBundle\Admin\SleepingFacilityAdmin
+        arguments: [~, AppBundle\Entity\Event\SleepingFacility, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: "Evenements", label: SleepingFacility}

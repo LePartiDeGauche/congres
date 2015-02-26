@@ -3,6 +3,7 @@
 namespace AppBundle\Entity\Event;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * EventRole
@@ -151,5 +152,15 @@ class EventRole
     public function getRequiredResponsabilities()
     {
         return $this->requiredResponsabilities;
+    }
+
+    public function __construct()
+    {
+        $this->requiredResponsabilities = new ArrayCollection();
+    }
+
+    public function __toString()
+    {
+        return $this->name;
     }
 }
