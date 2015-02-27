@@ -56,7 +56,7 @@ class SleepingFacility
     /**
      * @var string
      *
-     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Address",cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Address",cascade={"persist", "remove", "merge"}, orphanRemoval=true)
      * @ORM\JoinColumn(nullable=false)
      */
     private $address;
