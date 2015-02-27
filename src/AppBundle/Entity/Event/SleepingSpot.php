@@ -38,8 +38,8 @@ class SleepingSpot
     /**
      * @var \stdClass
      *
-     * @ORM\Column(name="sleeping_site")
-     * @ORM\ManyToOne(targetEntity="SleepingSite")
+     * @ORM\ManyToOne(targetEntity="SleepingSite", inversedBy="sleepingSpots")
+     * @ORM\JoinColumn(name="sleeping_site", nullable=false)
      */
     private $sleepingSite;
 

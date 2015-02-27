@@ -252,6 +252,7 @@ class Event
     public function __construct()
     {
         $this->roles = new ArrayCollection();
+        $this->sleepingFacilities = new ArrayCollection();
     }
 
 }

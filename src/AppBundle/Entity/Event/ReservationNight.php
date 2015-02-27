@@ -31,11 +31,17 @@ class ReservationNight
     /**
      * @var \stdClass
      *
-     * @ORM\Column(name="event")
-     * @ORM\ManyToOne(targetEntity="Event")
+     * @ORM\ManyToOne(targetEntity="Event", inversedBy="reservationNights")
+     * @ORM\JoinColumn(name="event")
      */
     private $event;
-    
+
+    /**
+     * @var \stdClass
+     *
+     * @ORM\ManyToMany(targetEntity="SleepingSite", 
+     * inversedBy="reservationNights")
+     */
     private $sleepingSites;
 
     /**

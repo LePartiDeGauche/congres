@@ -18,7 +18,7 @@ class EventAdmin extends Admin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('id')
+           // ->add('id')
             ->add('name')
             ->add('description')
             ;
@@ -63,18 +63,6 @@ class EventAdmin extends Admin
                 'required' => false,
             )
         )
-            ->add('sleepingFacilities', 'sonata_type_collection', array(
-                'type_options' => array(
-                    'delete' => false
-                )
-            ), array(
-                'edit' => 'inline',
-                'inline' => 'table',
-                'sortable' => 'position',
-            ), array(
-                'required' => false,
-            )
-        )
         ;
     }
 
@@ -84,7 +72,7 @@ class EventAdmin extends Admin
     protected function configureShowFields(ShowMapper $showMapper)
     {
         $showMapper
-            ->add('id')
+        //    ->add('id')
             ->add('name')
             ->add('description')
             ->add('roles', 'sonata_type_collection')

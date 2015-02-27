@@ -25,8 +25,8 @@ class SleepingFacility
     /**
      * @var \stdClass
      *
-     * @ORM\Column(name="event")
-     * @ORM\ManyToOne(targetEntity="Event")
+     * @ORM\ManyToOne(targetEntity="Event", inversedBy="sleepingFacilities")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $event;
 

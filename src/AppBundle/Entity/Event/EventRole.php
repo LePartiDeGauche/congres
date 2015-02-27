@@ -134,7 +134,7 @@ class EventRole
     /**
      * Set requieredResponsa
      *
-     * @param \stdClass $requieredResponsa
+     * @param \stdClass $requieredResponsabilities
      * @return EventRole
      */
     public function setRequiredResponsabilities($requieredResponsa)
@@ -145,7 +145,7 @@ class EventRole
     }
 
     /**
-     * Get requieredResponsa
+     * Get requiredResponsabilities
      *
      * @return \stdClass 
      */

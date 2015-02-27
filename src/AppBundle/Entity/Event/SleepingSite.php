@@ -38,8 +38,8 @@ class SleepingSite
     /**
      * @var \stdClass
      *
-     * @ORM\Column(name="sleeping_facility")
-     * @ORM\ManyToOne(targetEntity="SleepingFacility")
+     * @ORM\ManyToOne(targetEntity="SleepingFacility", inversedBy="sleepingSites")
+     * @ORM\JoinColumn(name="sleeping_facility", nullable=false)
      */
     private $sleepingFacility;
 
@@ -55,7 +55,8 @@ class SleepingSite
     /**
      * @var \stdClass
      *
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Event\ReservationNight", inversedBy="sleepingSites")
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Event\ReservationNight", mappedBy="sleepingSites")
+     * 
      *
      */
     private $reservationNights;

@@ -18,6 +18,7 @@ class SleepingFacilityAdmin extends Admin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
+            ->add('event')
             ->add('name')
             ->add('description')
             ->add('address')
@@ -31,6 +32,7 @@ class SleepingFacilityAdmin extends Admin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
+            ->add('event')
             ->add('name')
             ->add('description')
             ->add('address')
@@ -51,6 +53,7 @@ class SleepingFacilityAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
+            ->add('event', 'sonata_type_model')
             ->add('name')
             ->add('description')
             ->add('address', 'sonata_type_admin',array(
@@ -67,6 +70,7 @@ class SleepingFacilityAdmin extends Admin
     protected function configureShowFields(ShowMapper $showMapper)
     {
         $showMapper
+            ->add('event')
             ->add('name')
             ->add('description')
             ->add('address')
