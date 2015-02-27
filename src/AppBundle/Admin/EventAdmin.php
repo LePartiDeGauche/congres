@@ -53,17 +53,7 @@ class EventAdmin extends Admin
             ->add('description')
             ->add('roles', 'sonata_type_collection', array(
                 'type_options' => array(
-                    // Prevents the "Delete" option from being displayed
-                    'delete' => false,
-                    'delete_options' => array(
-                        // You may otherwise choose to put the field but hide it
-                        'type'         => 'hidden',
-                        // In that case, you need to fill in the options as well
-                        'type_options' => array(
-                            'mapped'   => false,
-                            'required' => false,
-                        )
-                    )
+                    'delete' => false
                 )
             ), array(
                 'edit' => 'inline',
@@ -71,9 +61,21 @@ class EventAdmin extends Admin
                 'sortable' => 'position',
             ), array(
                 'required' => false,
-                // 'by_reference' => false
             )
-        );
+        )
+            ->add('sleepingFacilities', 'sonata_type_collection', array(
+                'type_options' => array(
+                    'delete' => false
+                )
+            ), array(
+                'edit' => 'inline',
+                'inline' => 'table',
+                'sortable' => 'position',
+            ), array(
+                'required' => false,
+            )
+        )
+        ;
     }
 
     /**
@@ -86,6 +88,7 @@ class EventAdmin extends Admin
             ->add('name')
             ->add('description')
             ->add('roles', 'sonata_type_collection')
+            ->add('sleepingFacilities', 'sonata_type_collection')
             ;
     }
 

@@ -10,8 +10,8 @@ use Sonata\AdminBundle\Show\ShowMapper;
 
 class EventRoleAdmin extends Admin
 {
-    protected $baseRouteName = 'events_roles';
-    protected $baseRoutePattern = 'events_roles';
+    protected $baseRouteName = 'events_role';
+    protected $baseRoutePattern = 'events_role';
     /**
      * @param DatagridMapper $datagridMapper
      */

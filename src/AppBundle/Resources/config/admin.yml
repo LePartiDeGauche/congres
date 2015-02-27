@@ -75,9 +75,16 @@ services:
         class: AppBundle\Admin\EventRoleAdmin
         arguments: [~, AppBundle\Entity\Event\EventRole, SonataAdminBundle:CRUD]
         tags:
+            - {name: sonata.admin, manager_type: orm, group: "Evenements", label: EventRole}
 
     app.admin.sleeping_facility:
         class: AppBundle\Admin\SleepingFacilityAdmin
         arguments: [~, AppBundle\Entity\Event\SleepingFacility, SonataAdminBundle:CRUD]
         tags:
             - {name: sonata.admin, manager_type: orm, group: "Evenements", label: SleepingFacility}
+
+    app.admin.address:
+        class: AppBundle\Admin\AddressAdmin
+        arguments: [~, AppBundle\Entity\Address, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin, label: Address}

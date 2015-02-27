@@ -3,6 +3,7 @@
 namespace AppBundle\Entity\Event;
 
 use Doctrine\ORM\Mapping as ORM;
+use AppBundle\Entity\Address;
 
 /**
  * SleepingFacility
@@ -51,10 +52,12 @@ class SleepingFacility
      */
     private $description;
 
+
     /**
      * @var string
      *
-     * @ORM\Column(name="address", type="string", length=255)
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Address",cascade={"persist"})
+     * @ORM\JoinColumn(nullable=false)
      */
     private $address;
 
@@ -189,5 +192,68 @@ class SleepingFacility
     public function getPositionDescription()
     {
         return $this->positionDescription;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->sleepingSites = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Set event
+     *
+     * @param string $event
+     * @return SleepingFacility
+     */
+    public function setEvent($event)
+    {
+        $this->event = $event;
+
+        return $this;
+    }
+
+    /**
+     * Get event
+     *
+     * @return string 
+     */
+    public function getEvent()
+    {
+        return $this->event;
+    }
+
+    /**
+     * Add sleepingSites
+     *
+     * @param \AppBundle\Entity\Event\SleepingSite $sleepingSites
+     * @return SleepingFacility
+     */
+    public function addSleepingSite(\AppBundle\Entity\Event\SleepingSite $sleepingSites)
+    {
+        $this->sleepingSites[] = $sleepingSites;
+
+        return $this;
+    }
+
+    /**
+     * Remove sleepingSites
+     *
+     * @param \AppBundle\Entity\Event\SleepingSite $sleepingSites
+     */
+    public function removeSleepingSite(\AppBundle\Entity\Event\SleepingSite $sleepingSites)
+    {
+        $this->sleepingSites->removeElement($sleepingSites);
+    }
+
+    /**
+     * Get sleepingSites
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getSleepingSites()
+    {
+        return $this->sleepingSites;
     }
 }
