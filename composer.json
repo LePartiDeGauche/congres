@@ -26,7 +26,7 @@
         "sonata-project/admin-bundle": "~2.3",
         "sonata-project/doctrine-orm-admin-bundle": "~2.3",
         "knplabs/knp-markdown-bundle": "~1.3",
-         "knplabs/knp-snappy-bundle": "dev-master",
+        "knplabs/knp-snappy-bundle": "dev-master",
         "lexik/paybox-bundle": "dev-master",
         "stfalcon/tinymce-bundle": "dev-master", 
         "nickcernis/html-to-markdown": "dev-master"
