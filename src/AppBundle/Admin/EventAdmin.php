@@ -85,12 +85,20 @@ class EventAdmin extends Admin
         foreach ($object->getRoles() as $role) {
             $role->setEvent($object);
         }
+
+        foreach ($object->getSleepingFacilities() as $sf) {
+            $sf->setEvent($object);
+        }
     }
 
     public function preUpdate($object)
     {
         foreach ($object->getRoles() as $role) {
             $role->setEvent($object);
+        }
+
+        foreach ($object->getSleepingFacilities() as $sf) {
+            $sf->setEvent($object);
         }
     }
 }
