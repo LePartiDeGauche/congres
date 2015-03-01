@@ -88,3 +88,9 @@ services:
         arguments: [~, AppBundle\Entity\Address, SonataAdminBundle:CRUD]
         tags:
             - {name: sonata.admin, manager_type: orm, group: admin, label: Address}
+
+    app.admin.text_group:
+        class: AppBundle\Admin\TextGroupAdmin
+        arguments: [~, AppBundle\Entity\Text\TextGroup, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin, label: TextGroup}

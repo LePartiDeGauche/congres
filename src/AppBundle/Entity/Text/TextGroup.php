@@ -12,6 +12,13 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class TextGroup
 {
+
+    const VOTETYPE_COLLECTIVE = "collective";
+    const VOTETYPE_INDIVIDUAL = "individual";
+
+    const VOTEMODALITY_VALIDATION = "validation";
+    const VOTEMODALITY_REFERENDUM = "referendum";
+
     /**
      * @var integer
      *
@@ -309,28 +316,6 @@ class TextGroup
         return $this->author;
     }
 
-    /**
-     * Set voteMode
-     *
-     * @param string $voteMode
-     * @return TextGroup
-     */
-    public function setVoteMode($voteMode)
-    {
-        $this->voteMode = $voteMode;
-
-        return $this;
-    }
-
-    /**
-     * Get voteMode
-     *
-     * @return string 
-     */
-    public function getVoteMode()
-    {
-        return $this->voteMode;
-    }
 
     /**
      * Set organTypeVoters
@@ -399,5 +384,151 @@ class TextGroup
     public function getResponsabilityVoters()
     {
         return $this->responsabilityVoters;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->texts = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->organVoteRules = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->voteRules = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Set voteType
+     *
+     * @param string $voteType
+     * @return TextGroup
+     */
+    public function setVoteType($voteType)
+    {
+        if (!in_array($voteType, array(
+            self::VOTETYPE_COLLECTIVE,
+            self::VOTETYPE_INDIVIDUAL,
+        ))) {
+            throw new \InvalidArgumentException('Invalid votetype');
+        }
+        $this->voteType = $voteType;
+
+        return $this;
+    }
+
+    /**
+     * Get voteType
+     *
+     * @return string 
+     */
+    public function getVoteType()
+    {
+        return $this->voteType;
+    }
+
+    /**
+     * Set voteModality
+     *
+     * @param string $voteModality
+     * @return TextGroup
+     */
+    public function setVoteModality($voteModality)
+    {
+        if (!in_array($voteModality, array(
+            self::VOTEMODALITY_VALIDATION,
+            self::VOTEMODALITY_REFERENDUM,
+        ))) {
+            throw new \InvalidArgumentException('Invalid votetype');
+        }
+        $this->voteModality = $voteModality;
+
+        return $this;
+    }
+
+    /**
+     * Get voteModality
+     *
+     * @return string 
+     */
+    public function getVoteModality()
+    {
+        return $this->voteModality;
+    }
+
+    /**
+     * Add texts
+     *
+     * @param \AppBundle\Entity\Text\Text $texts
+     * @return TextGroup
+     */
+    public function addText(\AppBundle\Entity\Text\Text $texts)
+    {
+        $this->texts[] = $texts;
+
+        return $this;
+    }
+
+    /**
+     * Remove texts
+     *
+     * @param \AppBundle\Entity\Text\Text $texts
+     */
+    public function removeText(\AppBundle\Entity\Text\Text $texts)
+    {
+        $this->texts->removeElement($texts);
+    }
+
+    /**
+     * Add organVoteRules
+     *
+     * @param \AppBundle\Entity\Vote\OrganVoteRule $organVoteRules
+     * @return TextGroup
+     */
+    public function addOrganVoteRule(\AppBundle\Entity\Vote\OrganVoteRule $organVoteRules)
+    {
+        $this->organVoteRules[] = $organVoteRules;
+
+        return $this;
+    }
+
+    /**
+     * Remove organVoteRules
+     *
+     * @param \AppBundle\Entity\Vote\OrganVoteRule $organVoteRules
+     */
+    public function removeOrganVoteRule(\AppBundle\Entity\Vote\OrganVoteRule $organVoteRules)
+    {
+        $this->organVoteRules->removeElement($organVoteRules);
+    }
+
+    /**
+     * Get organVoteRules
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getOrganVoteRules()
+    {
+        return $this->organVoteRules;
+    }
+
+    /**
+     * Add voteRules
+     *
+     * @param \AppBundle\Entity\Vote\VoteRule $voteRules
+     * @return TextGroup
+     */
+    public function addVoteRule(\AppBundle\Entity\Vote\VoteRule $voteRules)
+    {
+        $this->voteRules[] = $voteRules;
+
+        return $this;
+    }
+
+    /**
+     * Remove voteRules
+     *
+     * @param \AppBundle\Entity\Vote\VoteRule $voteRules
+     */
+    public function removeVoteRule(\AppBundle\Entity\Vote\VoteRule $voteRules)
+    {
+        $this->voteRules->removeElement($voteRules);
     }
 }

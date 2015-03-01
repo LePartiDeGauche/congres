@@ -278,4 +278,90 @@ class Text
     {
         return $this->textGroup;
     }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->adherentVotes = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Set organVotes
+     *
+     * @param \stdClass $organVotes
+     * @return Text
+     */
+    public function setOrganVotes($organVotes)
+    {
+        $this->organVotes = $organVotes;
+
+        return $this;
+    }
+
+    /**
+     * Get organVotes
+     *
+     * @return \stdClass 
+     */
+    public function getOrganVotes()
+    {
+        return $this->organVotes;
+    }
+
+    /**
+     * Set organ
+     *
+     * @param \AppBundle\Entity\Organ\Organ $organ
+     * @return Text
+     */
+    public function setOrgan(\AppBundle\Entity\Organ\Organ $organ)
+    {
+        $this->organ = $organ;
+
+        return $this;
+    }
+
+    /**
+     * Get organ
+     *
+     * @return \AppBundle\Entity\Organ\Organ 
+     */
+    public function getOrgan()
+    {
+        return $this->organ;
+    }
+
+    /**
+     * Add adherentVotes
+     *
+     * @param \AppBundle\Entity\Vote\IndividualTextVote $adherentVotes
+     * @return Text
+     */
+    public function addAdherentVote(\AppBundle\Entity\Vote\IndividualTextVote $adherentVotes)
+    {
+        $this->adherentVotes[] = $adherentVotes;
+
+        return $this;
+    }
+
+    /**
+     * Remove adherentVotes
+     *
+     * @param \AppBundle\Entity\Vote\IndividualTextVote $adherentVotes
+     */
+    public function removeAdherentVote(\AppBundle\Entity\Vote\IndividualTextVote $adherentVotes)
+    {
+        $this->adherentVotes->removeElement($adherentVotes);
+    }
+
+    /**
+     * Get adherentVotes
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getAdherentVotes()
+    {
+        return $this->adherentVotes;
+    }
 }

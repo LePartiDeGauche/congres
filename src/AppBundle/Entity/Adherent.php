@@ -241,4 +241,8 @@ class Adherent
         return $this->status;
     }
 
+    public function __toString()
+    {
+        return $this->firstname . ' ' . $this->lastname;
+    }
 }
