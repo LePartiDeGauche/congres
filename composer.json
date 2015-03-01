@@ -25,7 +25,10 @@
         "friendsofsymfony/user-bundle": "2.0.*@dev",
         "ircmaxell/password-compat": "~1.0",
         "sonata-project/admin-bundle": "~2.3",
-        "sonata-project/doctrine-orm-admin-bundle": "~2.3"
+        "sonata-project/doctrine-orm-admin-bundle": "~2.3",
+        "knplabs/knp-markdown-bundle": "~1.3",
+        "lexik/paybox-bundle": "dev-master"
+
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"
