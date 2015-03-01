@@ -47,7 +47,7 @@ class EventRole
     /**
      * @var \stdClass
      *
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Instance")
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Responsability")
      */
     private $requiredResponsabilities;
 

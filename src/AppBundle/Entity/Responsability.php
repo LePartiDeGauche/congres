@@ -11,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  * indexes ={@ORM\Index(name="name", columns={"name"})})
  * @ORM\Entity
  */
-class Instance
+class Responsability
 {
     const INSTANCE_CN = 'Conseil National';
     const INSTANCE_BN = 'Bureau National';
@@ -43,10 +43,18 @@ class Instance
      * The collection of user members of the instance.
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Adherent", mappedBy="instances")
-     * @ORM\JoinTable(name="adherents_instances")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\AdherentResponsability", mappedBy="responsability")
      */
-    private $adherents;
+    private $adherentResponsabilities;
+
+    /**
+     * The collection of user members of the instance.
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Organ\OrganType",
+     * inversedBy="participationAllowedBy")
+     */
+    private $allowsParticipations;
 
     /**
      * Get id

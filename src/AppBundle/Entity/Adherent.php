@@ -60,13 +60,12 @@ class Adherent
     private $status;
 
     /**
-     * The collection of instances the user is member of.
-     * @var \Doctrine\Common\Collections\Collection
+     * @var string
      *
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Instance", inversedBy="adherents", cascade={"persist"})
-     * @ORM\JoinTable(name="users_instances")
+     * @ORM\OneToMany(targetEntity="AdherentResponsability", mappedBy="adherent")
+     *
      */
-    private $instances;
+    private $responsabilities;
 
     /**
      * The user associated to this adherent profile.
@@ -82,7 +81,6 @@ class Adherent
     public function __construct()
     {
         // Initialize collection
-        $this->instances = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -243,36 +241,4 @@ class Adherent
         return $this->status;
     }
 
-    /**
-     * Add instances
-     *
-     * @param  \AppBundle\Entity\Instance $instances
-     * @return Adherent
-     */
-    public function addInstance(\AppBundle\Entity\Instance $instance)
-    {
-        $this->instances->add($instance);
-
-        return $this;
-    }
-
-    /**
-     * Remove instances
-     *
-     * @param \AppBundle\Entity\Instance $instances
-     */
-    public function removeInstance(\AppBundle\Entity\Instance $instance)
-    {
-        $this->instances->removeElement($instance);
-    }
-
-    /**
-     * Get instances
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getInstances()
-    {
-        return $this->instances;
-    }
 }
