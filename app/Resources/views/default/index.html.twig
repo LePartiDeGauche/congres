@@ -1,28 +1,28 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class="container">
-        <div class="row">
-<h1>Bonjour, {{ app.user.profile.firstname}}</h1>
-            <p>
-Bienvenue sur le site du congrès ! <br />
-            </p>
-            <p>
-Pour lire et signer des contributions <a href="{{ path('contribution_list') }}">C'est ici</a>
-            </p>
-            <p>
-Pour rappel, en accord avec règlement interieur du congrès,on ne peut signer <strong>qu'une
-seule</strong> contribution générale ! <br/>
-<strong>Le vote pour une contribution est définitif.</strong>
+<div class="container">
+    <div class="row">
+        <h1>Bonjour, {{ app.user.profile.firstname}}</h1>
 
-            </p>
-        </div>
+        <p>
+        Bienvenue sur le site du congrès ! <br />
+        </p>
+
+        <p>
+        Pour lire les contributions, c’est ici <a href="{{ path('contribution_list') }}">C'est ici</a>
+        </p>
+        <p>
+        Pour lire la plateforme du BN, c’est ici <a href="{{ path('downloads', {filename:
+'PlateformeBN_LaVieEstANous.pdf'}) }}">C'est ici</a>
+        </p>
+    </div>
     <div class="row">
         <div class="alert alert-warning text-justify" role="alert">
             <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-        L'équipe de développeurs bénévoles a besoin de se renforcer ! N'hésitez pas à envoyer un e-mail à
-        congres2015@lepartidegauche.fr si vous pouvez aider. L'application est codée en PHP sous Symfony
-        2.6. Le code source est entièrement disponible <a href="https://github.com/LePartiDeGauche/congres">ici</a>.
+            L'équipe de développeurs bénévoles a besoin de se renforcer ! N'hésitez pas à envoyer un e-mail à
+            congres2015@lepartidegauche.fr si vous pouvez aider. L'application est codée en PHP sous Symfony
+            2.6. Le code source est entièrement disponible <a href="https://github.com/LePartiDeGauche/congres">ici</a>.
         </div>
     </div>
 </div>
