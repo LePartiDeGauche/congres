@@ -394,6 +394,11 @@ class TextGroup
         $this->organVoteRules = new \Doctrine\Common\Collections\ArrayCollection();
         $this->voteRules = new \Doctrine\Common\Collections\ArrayCollection();
     }
+     
+    public function __toString()
+    {
+        return $this->name;
+    }
 
     /**
      * Set voteType

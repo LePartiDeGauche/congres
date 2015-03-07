@@ -1,0 +1,63 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}Liste des text de {{textGroup.name}}{% endblock %}
+{% block javascripts %}
+{{ parent() }}
+<script type="text/javascript" src="{{ asset('js/jquery.tablesorter.min.js') }}"></script>
+<script type="text/javascript">
+$(document).ready(function() 
+        { 
+            $(".tablesorter").tablesorter({ 
+                cssAsc: "glyphicon glyphicon-sort-by-attributes-alt",
+                cssDesc: "glyphicon glyphicon-sort-by-attributes",
+            } 
+            ); 
+        } 
+        ); 
+</script>
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>Liste des texte de {{ textGroup.name }}</h1>
+            <div role="tabpanel">
+                <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active">
+                        <a href="#proposed" aria-controls="proposed" role="tab" data-toggle="tab">
+                            Proposés 
+                        </a>
+                    </li>
+                </ul>
+
+                <div role="tabpanel" class="tab-pane" id="proposed">
+                    <h2>Textes Proposés</h2>
+                    <table class="table tablesorter">
+                        <thead>
+                            <tr>
+                                <th>Titre</th>
+                                <th>Auteur</th>
+                                <th>Pour</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for text in texts %}
+                            {% if text.status == constant('AppBundle\\Entity\\Text\\Text::STATUS_PROPOSED') %}
+                            <tr>
+                                <td>
+                                    <a href="{{ path('text_show', {group_id: textGroup.id, text_id: text.id}) }}">{{ text.title }}</a>
+                                </td>
+                                <td>{{ text.author.firstname }} {{ text.author.lastname }}</td>
+                                <td>{% if text.organ %} {{ text.organ.name }} {% endif %}</td>
+                            </tr>
+                            {% endif %}
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div><!-- .col-md-12 -->
+    </div><!-- .row -->
+</div><!-- .container -->
+{% endblock %}

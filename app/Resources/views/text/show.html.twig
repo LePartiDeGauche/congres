@@ -1,0 +1,16 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}{{textGroup.name}} - {{ text.title }}{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <h1>{{textGroup.name}} - {{ text.title }}</h1>
+        <p class="small text-muted">
+            Auteur :
+            {{ text.author.firstname }} {{ text.author.lastname }}
+        </p>
+        <p class="text-justify">{{ text.content | markdown }}</p>
+    </div>
+</div>
+{% endblock %}

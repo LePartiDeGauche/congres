@@ -7,6 +7,7 @@
         {% block stylesheets %}
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
         <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
         <link rel="stylesheet" href="{{ asset('css/main.css') }}" />
         {% endblock %}
 
@@ -79,25 +80,8 @@
         </div>
         {% block body %}{% endblock %}
         {% block javascripts %}
-        <script src=//code.jquery.com/jquery-1.11.2.min.js"></script>
+        <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-
-        {# Only Needed for hallo.js might be displaced #}
-        <script src=//code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
-        <script src="http://rangy.googlecode.com/svn/trunk/currentrelease/rangy-core.js"></script>
-        <script src="{{ asset('js/hallo.js') }}"></script>
-        <script type="text/javascript">
-jQuery('.editable').hallo({
-  plugins: {
-    'halloformat': {},
-    'halloheadings' : {},
-    'hallojustify' : {},
-    'hallolists' : {},
-    'halloreundo' : {},
-    'halloblacklist' : {}
-  }
-});
-</script>
         {% endblock %}
     </body>
 </html>

@@ -44,7 +44,7 @@ class AdherentAdmin extends Admin
                 ),
                 'multiple' => false,
             ))
-            ->add('instances', null, array(), null, array('property' => 'name'));
+            ->add('responsabilities', null, array(), null, array('property' => 'responsability'));
     }
 
     protected function configureListFields(ListMapper $listMapper)
@@ -56,6 +56,6 @@ class AdherentAdmin extends Admin
             ->add('birthdate', null, array('label' => 'Date de naissance'))
             ->add('user', null, array('label' => 'Compte'))
             ->add('status', null, array('Statut'))
-            ->add('instances', null, array('associated_property' => 'name'));
+            ->add('responsabilities', null, array('associated_property' => 'responsability'));
     }
 }

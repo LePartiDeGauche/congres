@@ -12,8 +12,8 @@ use AppBundle\Entity\Text\TextGroup;
 
 class TextGroupAdmin extends Admin
 {
-    protected $baseRouteName = 'textgroup';
-    protected $baseRoutePattern = 'textgroup';
+    protected $baseRouteName = 'textgroup_admin';
+    protected $baseRoutePattern = 'textgroup_admin';
     /**
      * @param DatagridMapper $datagridMapper
      */
@@ -38,7 +38,7 @@ class TextGroupAdmin extends Admin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            //->add('id')
+            ->add('id')
             ->add('author', 'sonata_type_model_autocomplete', array('property'=>'lastname'))
             ->add('name')
             ->add('description')
@@ -123,9 +123,30 @@ class TextGroupAdmin extends Admin
     protected function configureShowFields(ShowMapper $showMapper)
     {
         $showMapper
-            //->add('id')
+            ->add('id')
             ->add('name')
-            ->add('author', 'sonata_type_model_autocomplete', array('property'=>array('firstname', 'lastname')))
+            ->add('author', 'sonata_type_model_autocomplete', array(
+                'label' => 'Auteur',
+                'property' => array('profile.firstname', 'profile.lastname', 'email'),
+                'placeholder' => 'Rechercher un nom ou un email',
+                'callback' => function ($admin, $property, $value) {
+                    $datagrid = $admin->getDatagrid();
+                    $queryBuilder = $datagrid->getQuery();
+                    $queryBuilder
+                        ->andWhere($queryBuilder->getRootAlias() . '.firstname LIKE :value')
+                        ->orWhere($queryBuilder->getRootAlias() . '.lastname LIKE :value')
+                        ->orWhere($queryBuilder->getRootAlias() . '.email LIKE :value')
+                        ->setParameter('value', '%' . $value . '%')
+                    ;
+                },
+                'to_string_callback' => function($user, $property) {
+                    $firstname = $user->getProfile()->getFirstname();
+                    $lastname = $user->getProfile()->getLastname();
+                    $email = $user->getEmail();
+
+                    return $firstname . ' ' . $lastname . ' &lt;' . $email . '&gt;';
+                },
+            ))
             ->add('description')
             ->add('submissionOpening')
             ->add('submissionClosing')

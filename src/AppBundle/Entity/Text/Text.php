@@ -12,6 +12,11 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Text
 {
+    const STATUS_NEW = 'new';
+    const STATUS_PROPOSED = 'proposed';
+    const STATUS_VOTING = 'voting';
+    const STATUS_ADOPTED = 'adopted';
+    const STATUS_REJECTED = 'rejected';
     /**
      * @var integer
      *
@@ -33,14 +38,13 @@ class Text
      * @var \stdClass
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Organ\Organ")
-     * @ORM\JoinColumn(nullable=false)
      */
     private $organ;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="title", type="text")
+     * @ORM\Column(name="title", type="string", length=255)
      */
     private $title;
 
@@ -195,6 +199,16 @@ class Text
      */
     public function setStatus($status)
     {
+        if (!in_array($status, array(
+            self::STATUS_NEW,
+            self::STATUS_PROPOSED,
+            self::STATUS_VOTING,
+            self::STATUS_ADOPTED,
+            self::STATUS_REJECTED,
+        ))) {
+            throw new \InvalidArgumentException('Invalid status');
+        }
+
         $this->status = $status;
 
         return $this;
@@ -281,8 +295,10 @@ class Text
     /**
      * Constructor
      */
-    public function __construct()
+    public function __construct(\AppBundle\Entity\Adherent $author = null)
     {
+        $this->setAuthor($author);
+        $this->setStatus(self::STATUS_NEW);
         $this->adherentVotes = new \Doctrine\Common\Collections\ArrayCollection();
     }
 

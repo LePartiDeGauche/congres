@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "605c22fd19c320470af45a6ab5470b0f",
+    "hash": "3482f8a7925d1ac4a833885a54da2a3a",
     "packages": [
         {
             "name": "alexandresalome/doctrine-extra-bundle",
@@ -13,12 +13,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/alexandresalome/doctrine-extra-bundle.git",
-                "reference": "64fb1725221c1ad9bcac77dc7e9834cd09dfcdfb"
+                "reference": "4f6de243e8a473583cddb267c71130c3f41e2d28"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/alexandresalome/doctrine-extra-bundle/zipball/64fb1725221c1ad9bcac77dc7e9834cd09dfcdfb",
-                "reference": "64fb1725221c1ad9bcac77dc7e9834cd09dfcdfb",
+                "url": "https://api.github.com/repos/alexandresalome/doctrine-extra-bundle/zipball/4f6de243e8a473583cddb267c71130c3f41e2d28",
+                "reference": "4f6de243e8a473583cddb267c71130c3f41e2d28",
                 "shasum": ""
             },
             "require": {
@@ -36,7 +36,7 @@
                 "MIT"
             ],
             "description": "Extra features for Doctrine, as a Symfony bundle",
-            "time": "2013-10-27 10:45:08"
+            "time": "2015-03-07 16:45:43"
         },
         {
             "name": "alom/graphviz",
@@ -790,12 +790,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/migrations.git",
-                "reference": "312fb5939d5b9dbd66e515374533933e7c5cc8a6"
+                "reference": "fca67c4a5a6f4334e8b6a57410f7b386b012ab01"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/migrations/zipball/312fb5939d5b9dbd66e515374533933e7c5cc8a6",
-                "reference": "312fb5939d5b9dbd66e515374533933e7c5cc8a6",
+                "url": "https://api.github.com/repos/doctrine/migrations/zipball/fca67c4a5a6f4334e8b6a57410f7b386b012ab01",
+                "reference": "fca67c4a5a6f4334e8b6a57410f7b386b012ab01",
                 "shasum": ""
             },
             "require": {
@@ -840,7 +840,7 @@
                 "database",
                 "migrations"
             ],
-            "time": "2015-03-02 18:28:52"
+            "time": "2015-03-06 20:53:13"
         },
         {
             "name": "doctrine/orm",
@@ -921,12 +921,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSUserBundle.git",
-                "reference": "f54031a652846cd8e7b12119fe713eae90e24cf9"
+                "reference": "2684b0dddff35b4de40920b11972b71ae386b9f5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/f54031a652846cd8e7b12119fe713eae90e24cf9",
-                "reference": "f54031a652846cd8e7b12119fe713eae90e24cf9",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/2684b0dddff35b4de40920b11972b71ae386b9f5",
+                "reference": "2684b0dddff35b4de40920b11972b71ae386b9f5",
                 "shasum": ""
             },
             "require": {
@@ -980,7 +980,7 @@
             "keywords": [
                 "User management"
             ],
-            "time": "2015-01-20 09:35:03"
+            "time": "2015-03-06 14:51:30"
         },
         {
             "name": "incenteev/composer-parameter-handler",
@@ -1536,16 +1536,16 @@
         },
         {
             "name": "monolog/monolog",
-            "version": "1.12.0",
+            "version": "1.13.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/monolog.git",
-                "reference": "1fbe8c2641f2b163addf49cc5e18f144bec6b19f"
+                "reference": "c41c218e239b50446fd883acb1ecfd4b770caeae"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/1fbe8c2641f2b163addf49cc5e18f144bec6b19f",
-                "reference": "1fbe8c2641f2b163addf49cc5e18f144bec6b19f",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/c41c218e239b50446fd883acb1ecfd4b770caeae",
+                "reference": "c41c218e239b50446fd883acb1ecfd4b770caeae",
                 "shasum": ""
             },
             "require": {
@@ -1562,6 +1562,7 @@
                 "phpunit/phpunit": "~4.0",
                 "raven/raven": "~0.5",
                 "ruflin/elastica": "0.90.*",
+                "swiftmailer/swiftmailer": "~5.3",
                 "videlalvaro/php-amqplib": "~2.4"
             },
             "suggest": {
@@ -1578,7 +1579,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.12.x-dev"
+                    "dev-master": "1.13.x-dev"
                 }
             },
             "autoload": {
@@ -1604,7 +1605,53 @@
                 "logging",
                 "psr-3"
             ],
-            "time": "2014-12-29 21:29:35"
+            "time": "2015-03-05 01:12:12"
+        },
+        {
+            "name": "nickcernis/html-to-markdown",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nickcernis/html-to-markdown.git",
+                "reference": "7263d2ce65011b050fa7ecda0cbe09b23e84271d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nickcernis/html-to-markdown/zipball/7263d2ce65011b050fa7ecda0cbe09b23e84271d",
+                "reference": "7263d2ce65011b050fa7ecda0cbe09b23e84271d",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3"
+            },
+            "require-dev": {
+                "php": ">=5.3.3",
+                "phpunit/phpunit": "4.*"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "HTML_To_Markdown.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nick Cernis",
+                    "email": "nick@cern.is",
+                    "homepage": "http://modernnerd.net"
+                }
+            ],
+            "description": "An HTML-to-markdown conversion helper for PHP",
+            "homepage": "https://github.com/nickcernis/html-to-markdown",
+            "keywords": [
+                "html",
+                "markdown"
+            ],
+            "time": "2015-02-22 12:59:02"
         },
         {
             "name": "psr/log",
@@ -2250,6 +2297,64 @@
             "time": "2014-09-11 09:05:40"
         },
         {
+            "name": "stfalcon/tinymce-bundle",
+            "version": "dev-master",
+            "target-dir": "Stfalcon/Bundle/TinymceBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/stfalcon/TinymceBundle.git",
+                "reference": "758c19947b04d93d9d79e0ae8432beaccc0097f2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/stfalcon/TinymceBundle/zipball/758c19947b04d93d9d79e0ae8432beaccc0097f2",
+                "reference": "758c19947b04d93d9d79e0ae8432beaccc0097f2",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0",
+                "symfony/symfony": ">=2.1"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.3.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Stfalcon\\Bundle\\TinymceBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Stepan Tanasiychuk",
+                    "email": "ceo@stfalcon.com",
+                    "homepage": "http://blog.stfalcon.com"
+                },
+                {
+                    "name": "Igor Negrutsa",
+                    "email": "progi2007@gmail.com",
+                    "homepage": "http://igor-negrutsa.info"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://github.com/stfalcon/TinymceBundle/contributors"
+                }
+            ],
+            "description": "This Bundle integrates TinyMCE WYSIWYG editor into a Symfony2 project.",
+            "keywords": [
+                "editor",
+                "tinymce",
+                "wysiwyg"
+            ],
+            "time": "2014-09-15 12:37:07"
+        },
+        {
             "name": "swiftmailer/swiftmailer",
             "version": "v5.3.1",
             "source": {
@@ -2716,7 +2821,9 @@
         "doctrine/doctrine-migrations-bundle": 20,
         "alexandresalome/doctrine-extra-bundle": 20,
         "friendsofsymfony/user-bundle": 20,
-        "lexik/paybox-bundle": 20
+        "lexik/paybox-bundle": 20,
+        "stfalcon/tinymce-bundle": 20,
+        "nickcernis/html-to-markdown": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

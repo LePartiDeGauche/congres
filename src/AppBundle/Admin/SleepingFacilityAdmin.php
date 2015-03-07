@@ -58,7 +58,8 @@ class SleepingFacilityAdmin extends Admin
             ->add('description')
             ->add('address', 'sonata_type_admin',array(
                 'delete' => false,
-                'required' => true
+                'required' => true,
+                'btn_add' => false,
             ))
             ->add('positionDescription')
             ;
