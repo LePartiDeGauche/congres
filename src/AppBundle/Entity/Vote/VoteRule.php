@@ -9,6 +9,9 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="vote_rule")
  * @ORM\Entity
+ * @ORM\InheritanceType("SINGLE_TABLE")
+ * @ORM\DiscriminatorColumn(name="rule_type", type="string")
+ * @ORM\DiscriminatorMap({"threshold" = "ThresholdVoteRule"})
  */
 class VoteRule
 {
@@ -22,9 +25,8 @@ class VoteRule
     private $id;
 
     /**
-     * @var \stdClass
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Responsability")
      *
-     * @ORM\Column(name="concernedResponsability", type="object")
      */
     private $concernedResponsability;
 

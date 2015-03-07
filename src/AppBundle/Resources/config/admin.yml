@@ -94,3 +94,11 @@ services:
         arguments: [~, AppBundle\Entity\Text\TextGroup, SonataAdminBundle:CRUD]
         tags:
             - {name: sonata.admin, manager_type: orm, group: admin, label: TextGroup}
+
+    app.admin.vote_rule:
+        class: AppBundle\Admin\VoteRuleAdmin
+        arguments: [~, AppBundle\Entity\Vote\VoteRule, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin, label: VoteRule}
+        calls:
+            - [setSubClasses, [{threshold: AppBundle\Entity\Vote\ThresholdVoteRule}]]

@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="threshold_voterule")
  * @ORM\Entity
  */
-class ThresholdVoteRule
+class ThresholdVoteRule extends VoteRule
 {
     /**
      * @var integer

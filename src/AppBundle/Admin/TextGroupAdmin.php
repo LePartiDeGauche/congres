@@ -62,6 +62,7 @@ class TextGroupAdmin extends Admin
                 ),
                 'multiple' => false,
             ))
+            ->add('voteRules', 'sonata_type_collection')
             ->add('_action', 'actions', array(
                 'actions' => array(
                     'show' => array(),
@@ -102,6 +103,17 @@ class TextGroupAdmin extends Admin
                 ),
                 'multiple' => false,
             ))
+            ->add('voteRules', 'sonata_type_collection', array(
+                'type_options' => array(
+                    'delete' => false,
+                )), array(
+                    'edit' => 'inline',
+                    'inline' => 'table',
+                    'sortable' => 'position',
+                ), array(
+                    'required' => false,
+                )
+            )
             ;
     }
 
@@ -135,6 +147,7 @@ class TextGroupAdmin extends Admin
                 ),
                 'multiple' => false,
             ))
+            ->add('voteRules', 'sonata_type_collection')
             ;
     }
     public function getNewInstance()
@@ -143,7 +156,7 @@ class TextGroupAdmin extends Admin
         $user = $this->getConfigurationPool()->getContainer()->get('security.context')->getToken()->getUser();
         //$repo = $this->getDoctrine()->getRepository('AppBundle:Adherent')->findId($user->adherent);
 
-        
+
         if ($instance->getAuthor() == NULL)
         {
             $instance->setAuthor($user->getProfile());
