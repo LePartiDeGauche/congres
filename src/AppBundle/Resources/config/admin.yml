@@ -10,12 +10,12 @@ services:
         calls:
             - [ setTranslationDomain, [AppBundle] ]
     sonata.admin.instance:
-        class: AppBundle\Admin\InstanceAdmin
+        class: AppBundle\Admin\ResponsabilityAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: "Fichier", label: "Instances"}
+            - { name: sonata.admin, manager_type: orm, group: "Fichier", label: "Responsabilités"}
         arguments:
             - ~
-            - AppBundle\Entity\Instance
+            - AppBundle\Entity\Responsability
             - ~
         calls:
             - [ setTranslationDomain, [AppBundle] ]
@@ -64,3 +64,47 @@ services:
         class: AppBundle\Admin\Congres\Controller\ContributionAdminController
         calls:
             - [ setContainer, [@service_container] ]
+
+    app.admin.event:
+        class: AppBundle\Admin\EventAdmin
+        arguments: [~, AppBundle\Entity\Event\Event, AppBundle:EventAdmin]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: "Evenements", label: "Évenements"}
+
+    app.admin.event_role:
+        class: AppBundle\Admin\EventRoleAdmin
+        arguments: [~, AppBundle\Entity\Event\EventRole, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: "Evenements", label: "Rôles d'évenements"}
+
+    app.admin.sleeping_facility:
+        class: AppBundle\Admin\SleepingFacilityAdmin
+        arguments: [~, AppBundle\Entity\Event\SleepingFacility, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: "Evenements", label: "Lieu de couchage"}
+
+    app.admin.address:
+        class: AppBundle\Admin\AddressAdmin
+        arguments: [~, AppBundle\Entity\Address, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin, label: Address}
+
+    app.admin.text_group:
+        class: AppBundle\Admin\TextGroupAdmin
+        arguments: [~, AppBundle\Entity\Text\TextGroup, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: "Texte", label: "Groupes de textes"}
+
+    app.admin.vote_rule:
+        class: AppBundle\Admin\VoteRuleAdmin
+        arguments: [~, AppBundle\Entity\Vote\VoteRule, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: "Texte", label: "Règles de votes"}
+        calls:
+            - [setSubClasses, [{threshold: AppBundle\Entity\Vote\ThresholdVoteRule}]]
+
+    app.admin.text:
+        class: AppBundle\Admin\TextAdmin
+        arguments: [~, AppBundle\Entity\Text\Text, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: "Texte", label: "Textes"}

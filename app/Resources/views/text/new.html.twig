@@ -1,0 +1,21 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}Soumettre un texte de {{ textGroup.name }}{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <h1>Soumettre un texte de {{ textGroup.name }}</h1>
+        <form method="post" action="{{ path('text_create', {'group_id' : textGroup.id}) }}">
+    <label for="title">{{ form_label(form.title)}}</label>
+            {{ form_widget(form.title) }}
+            {{ form_widget(form.raw_content, { 'attr': {'class': 'tinymce', 'data-theme' : 'markdown'} }) }}
+            {{ form_widget(form)}}
+        </form>
+    </div>
+</div>
+{% endblock %}
+{% block javascripts %}
+{{ parent () }}
+{{ tinymce_init() }}
+{% endblock %}

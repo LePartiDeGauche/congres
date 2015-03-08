@@ -4,7 +4,7 @@ namespace AppBundle\Entity\Congres;
 
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Mapping\ClassMetadata;
-use AppBundle\Entity\Instance;
+use AppBundle\Entity\Responsability;
 
 /**
  * ContributionRepository
@@ -22,11 +22,12 @@ class ContributionRepository extends EntityRepository
             ->select('COUNT(contrib)')
             ->innerJoin('contrib.votes', 'u')
             ->innerJoin('u.profile', 'adh')
-            ->innerJoin('adh.instances', 'i')
+            ->innerJoin('adh.responsabilities', 'ar')
+            ->innerJoin('ar.responsability', 'r')
             ->where('contrib.id = :contrib')
-            ->andWhere('i.name IN (:iname)')
+            ->andWhere('r.name IN (:rname)')
             ->setParameter('contrib', $contrib->getId())
-            ->setParameter('iname', array(Instance::INSTANCE_CN, Instance::INSTANCE_BN))
+            ->setParameter('rname', array(Responsability::INSTANCE_CN, Responsability::INSTANCE_BN))
             ->getQuery()->getSingleScalarResult();
 
         return $CNCount;
@@ -53,8 +54,9 @@ SELECT COUNT(contrib2)
 FROM ' . $this->classname . ' contrib2
 LEFT JOIN  contrib2.votes cnv
 LEFT JOIN  cnv.profile adh
-LEFT JOIN  adh.instances inst
-WHERE contrib.id = contrib2.id AND inst.name IN (:iname)
+LEFT JOIN adh.responsabilities adhres
+LEFT JOIN adhres.responsability res
+WHERE contrib.id = contrib2.id AND res.name IN (:iname)
 ) cnvote,
 (
 SELECT COUNT(contrib3)
@@ -70,7 +72,7 @@ WHERE contrib.status = :status
 GROUP BY contrib.id')
             ->setParameter('user', $user->getId())
             ->setParameter('status', $status)
-            ->setParameter('iname', array(Instance::INSTANCE_CN, Instance::INSTANCE_BN))
+            ->setParameter('iname', array(Responsability::INSTANCE_CN, Responsability::INSTANCE_BN))
             ->execute();
 
         return $contribs;
@@ -84,8 +86,9 @@ SELECT COUNT(contrib2)
 FROM ' . $this->classname . ' contrib2
 LEFT JOIN  contrib2.votes cnv
 LEFT JOIN  cnv.profile adh
-LEFT JOIN  adh.instances inst
-WHERE contrib.id = contrib2.id AND inst.name IN (:iname)
+LEFT JOIN adh.responsabilities adhres
+LEFT JOIN adhres.responsability res
+WHERE contrib.id = contrib2.id AND res.name IN (:iname)
 ) cnvote,
 (
 SELECT COUNT(contrib3)
@@ -98,7 +101,7 @@ LEFT JOIN contrib.votes av
 WHERE contrib.id = :id')
             ->setParameter('user', $user->getId())
             ->setParameter('id', $contrib->getId())
-            ->setParameter('iname', array(Instance::INSTANCE_CN, Instance::INSTANCE_BN))
+            ->setParameter('iname', array(Responsability::INSTANCE_CN, Responsability::INSTANCE_BN))
             ->getSingleResult();
 
         return $contribs;

@@ -1,0 +1,20 @@
+{% block role_list %}
+<ul>
+    {% for role in roles %}
+    <li>
+        <ul>
+            <li>Nom : {{role.name}}</li>
+            <li>Description : {{role.description}}</li>
+            <li>Responsabilités :
+                {% for respo in role.requiredResponsabilities %}
+                <ul>
+                    <li>respo.name</li>
+                </ul>
+                {% endfor %}
+            </li>
+
+        </ul>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}

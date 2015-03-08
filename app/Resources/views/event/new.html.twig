@@ -1,0 +1,32 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+<h1>Créer un évenement</h1>
+
+{{ form_start(form) }}
+
+{{ form_row(form.name) }}
+{{ form_row(form.description) }}
+
+<h3>{{ form_label(form.roles) }}</h3>
+<ul class="roles" data-prototype="{{ form_widget(form.roles.vars.prototype)|e }}">
+    {# iterate over each existing tag and render its only field: name #}
+    {% for role in form.roles %}
+    <li>{{ form_widget(role.name) }}</li>
+    {% endfor %}
+</ul>
+
+{{ form_end(form) }}
+
+<ul class="record_actions">
+    <li>
+        <a href="{{ path('evenement') }}">
+            Back to the list
+        </a>
+    </li>
+</ul>
+{% endblock %}
+{% block javascripts %}
+{{ parent() }}
+<script src="{{ asset('js/event.js') }}"></script>
+{% endblock %}

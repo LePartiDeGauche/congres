@@ -1,4 +1,7 @@
 <?php
+/* 
+ * Deprecated, will be removed in further version
+ */
 
 namespace AppBundle\Admin\Congres;
 

@@ -7,6 +7,7 @@
         {% block stylesheets %}
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
         <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
         <link rel="stylesheet" href="{{ asset('css/main.css') }}" />
         {% endblock %}
 
@@ -71,33 +72,36 @@ role="button" aria-expanded="false">Conseil National<span class="caret"></span><
                                     </li>
                                     </li>
                                 {% endif %}
-                            {% endblock %}
-                        </ul>
-                        <ul class="nav navbar-nav navbar-right">
-                            {% if is_granted('ROLE_ADMIN') %}
-                                <li><a href="{{ path('sonata_admin_dashboard') }}">Administration</a></li>
-                            {% endif %}
-                            {% if is_granted('ROLE_USER') %}
-                                <li class="dropdown">
-                                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Mon compte ({{ app.user.email }})<span class="caret"></span></a>
-                                    <ul class="dropdown-menu" role="menu">
-                                        <li><a href="{{ path('adherent_profile') }}">Mon profil</a></li>
-                                        <li><a href="{{ path('fos_user_change_password') }}">Changer de mot de passe</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="{{ path('fos_user_security_logout') }}">Déconnexion</a></li>
-                            {% else %}
-                                <li><a href="{{ path('fos_user_registration_register') }}">Inscription</a></li>
-                                <li><a href="{{ path('fos_user_security_login') }}">Connexion</a></li>
-                            {% endif %}
-                        </ul>
+                            </ul>
+                        </li>
+                        {% endif %}
+                        {% endblock %}
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        {% if is_granted('ROLE_ADMIN') %}
+                        <li><a href="{{ path('sonata_admin_dashboard') }}">Administration</a></li>
+                        {% endif %}
+                        {% if is_granted('ROLE_USER') %}
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Mon compte ({{ app.user.email }})<span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="{{ path('adherent_profile') }}">Mon profil</a></li>
+                                <li><a href="{{ path('fos_user_change_password') }}">Changer de mot de passe</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="{{ path('fos_user_security_logout') }}">Déconnexion</a></li>
+                        {% else %}
+                        <li><a href="{{ path('fos_user_registration_register') }}">Inscription</a></li>
+                        <li><a href="{{ path('fos_user_security_login') }}">Connexion</a></li>
+                        {% endif %}
+                    </ul>
                     {% endblock %}
                 </div><!--/.nav-collapse -->
             </div>
         </div>
         {% block body %}{% endblock %}
         {% block javascripts %}
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
         {% endblock %}
     </body>

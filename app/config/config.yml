@@ -110,3 +110,37 @@ sonata_block:
 sonata_admin:
     title: Administration
     title_logo: img/logo.png
+
+stfalcon_tinymce:
+    include_jquery: false
+    tinymce_jquery: true
+    selector: ".tinymce"
+    language: %locale%
+
+    theme:
+        markdown:
+            plugins:
+                - "autolink lists link charmap hr"
+                - "searchreplace wordcount visualchars code"
+                - "paste"
+            toolbar1: "undo redo | styleselect | bold italic | alignjustify | bullist numlist outdent indent"
+            toolbar2: "link unlink | removeformat cleanup"
+            paste_word_valid_elements: "b,strong,i,em,h1,h2,h3,h4,h5,h6,ul,ol,li,a,hr,blockquote,cite,q,code,p"
+            paste_merge_formats: true
+            paste_webkit_styles: none
+            paste_retain_style_properties: none
+            valid_elements: "a[!href],-strong/b,-em/i,h1,h2,h3,h4,h5,h6,ul,ol,li,hr,blockquote/cite/q,code,p"
+            menubar: false
+            fix_list_elements : true
+            valid_styles:
+                "*": ""
+            valid_classes: 
+                "*": ""
+
+            style_formats :
+                - {title : 'Titre 1', block : 'h1'}
+                - {title : 'Titre 2', block : 'h2'}
+                - {title : 'Titre 3', block : 'h3'}
+                - {title : 'Titre 4', block : 'h4'}
+                - {title : 'Titre 5', block : 'h5'}
+                - {title : 'Titre 6', block : 'h6'}
