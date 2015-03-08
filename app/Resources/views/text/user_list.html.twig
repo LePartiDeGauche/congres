@@ -1,0 +1,49 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}Liste des textes de {{adherent.firstname}} {{ adherent.lastname }}{% endblock %}
+{% block javascripts %}
+{{ parent() }}
+<script type="text/javascript" src="{{ asset('js/jquery.tablesorter.min.js') }}"></script>
+<script type="text/javascript">
+$(document).ready(function() 
+        { 
+            $(".tablesorter").tablesorter({ 
+                cssAsc: "glyphicon glyphicon-sort-by-attributes-alt",
+                cssDesc: "glyphicon glyphicon-sort-by-attributes",
+            } 
+            ); 
+        } 
+        ); 
+</script>
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>Liste des texte de {{ adherent.firstname }} {{ adherent.lastname}}</h1>
+            <table class="table tablesorter">
+                <thead>
+                    <tr>
+                        <th>Groupe de texte</th>
+                        <th>Titre</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for text in texts %}
+                    <tr>
+                        <td>
+                            <a href="{{ path('text_list', {group_id: text.textGroup.id}) }}">
+                                {{text.textGroup.name }}</a>
+                        </td>
+                        <td>
+                            <a href="{{ path('text_show', {group_id: text.textGroup.id, text_id: text.id}) }}">{{ text.title }}</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div><!-- .col-md-12 -->
+    </div><!-- .row -->
+</div><!-- .container -->
+{% endblock %}
