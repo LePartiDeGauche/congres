@@ -50,7 +50,7 @@ class TextAdmin extends Admin
                 'required' => true
             ))
             ->add('title')
-            ->add('rawContent', 'html')
+            //->add('rawContent', 'html')
             ->add('status', 'choice', array(
                 'label' => 'Statut',
                 'choices' => array(
