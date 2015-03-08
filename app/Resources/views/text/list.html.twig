@@ -1,6 +1,6 @@
 {% extends '::base.html.twig' %}
 
-{% block title %}Liste des text de {{textGroup.name}}{% endblock %}
+{% block title %}Liste des textes de {{textGroup.name}}{% endblock %}
 {% block javascripts %}
 {{ parent() }}
 <script type="text/javascript" src="{{ asset('js/jquery.tablesorter.min.js') }}"></script>
@@ -21,7 +21,7 @@ $(document).ready(function()
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <h1>Liste des texte de {{ textGroup.name }}</h1>
+            <h1>Liste des textes de {{ textGroup.name }}</h1>
             <div role="tabpanel">
                 <ul class="nav nav-tabs" role="tablist">
                     <li role="presentation" class="active">
@@ -32,7 +32,7 @@ $(document).ready(function()
                 </ul>
 
                 <div role="tabpanel" class="tab-pane" id="proposed">
-                    <h2>Textes Proposés</h2>
+                    <h2>Textes proposés</h2>
                     <table class="table tablesorter">
                         <thead>
                             <tr>

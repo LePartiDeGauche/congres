@@ -9,44 +9,13 @@
         <form method="post" action="{{ path('text_create', {'group_id' : textGroup.id}) }}">
     <label for="title">{{ form_label(form.title)}}</label>
             {{ form_widget(form.title) }}
-
-    <label for="content-wysiwyg">{{ form_label(form.content)}}</label>
-        <div id="content-wysiwyg" class="editable" style="width: 100%; min-height: 100px; border: 1px solid">
-        </div>
-            <div style="display:none">
-            {{ form_widget(form.content) }}
-            </div>
+            {{ form_widget(form.raw_content, { 'attr': {'class': 'tinymce', 'data-theme' : 'markdown'} }) }}
             {{ form_widget(form)}}
         </form>
     </div>
 </div>
 {% endblock %}
-{% block stylesheets %}
-{{ parent () }}
-<link href="//code.jquery.com/ui/1.11.3/themes/ui-lightness/jquery-ui.min.css" rel="stylesheet">
-{% endblock %}
 {% block javascripts %}
 {{ parent () }}
-<script src="//code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
-<script src="//rangy.googlecode.com/svn/trunk/currentrelease/rangy-core.js"></script>
-<script src="{{ asset('js/hallo.js') }}"></script>
-<script src="{{ asset('js/he.js') }}"></script>
-<script src="{{ asset('js/to-markdown.js') }}"></script>
-<script type="text/javascript">
-$('.editable').hallo({
-    plugins: {
-        'halloformat': {},
-        'halloheadings' : {},
-        'hallojustify' : {},
-        'hallolists' : {},
-        'halloreundo' : {},
-        'halloblacklist' : {}
-    }, 
-    editable: true,
-    toolbar: 'halloToolbarFixed'
-});
-$('#appbundle_text_text_submit').click(function () {
-    $('#appbundle_text_text_content').val(toMarkdown($('#content-wysiwyg').html()));
-});
-</script>
+{{ tinymce_init() }}
 {% endblock %}

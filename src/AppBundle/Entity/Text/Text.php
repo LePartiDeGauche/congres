@@ -51,9 +51,9 @@ class Text
     /**
      * @var string
      *
-     * @ORM\Column(name="content", type="text")
+     * @ORM\Column(name="raw_content", type="text")
      */
-    private $content;
+    private $rawContent;
 
     /**
      * @var string
@@ -166,29 +166,6 @@ class Text
     public function getTitle()
     {
         return $this->title;
-    }
-
-    /**
-     * Set content
-     *
-     * @param string $content
-     * @return Text
-     */
-    public function setContent($content)
-    {
-        $this->content = $content;
-
-        return $this;
-    }
-
-    /**
-     * Get content
-     *
-     * @return string 
-     */
-    public function getContent()
-    {
-        return $this->content;
     }
 
     /**
@@ -379,5 +356,28 @@ class Text
     public function getAdherentVotes()
     {
         return $this->adherentVotes;
+    }
+
+    /**
+     * Set rawContent
+     *
+     * @param string $rawContent
+     * @return Text
+     */
+    public function setRawContent($rawContent)
+    {
+        $this->rawContent = $rawContent;
+
+        return $this;
+    }
+
+    /**
+     * Get rawContent
+     *
+     * @return string 
+     */
+    public function getRawContent()
+    {
+        return $this->rawContent;
     }
 }

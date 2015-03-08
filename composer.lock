@@ -4,90 +4,8 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "3482f8a7925d1ac4a833885a54da2a3a",
+    "hash": "67595fbb67775e94433d5c9e0ec27c24",
     "packages": [
-        {
-            "name": "alexandresalome/doctrine-extra-bundle",
-            "version": "dev-master",
-            "target-dir": "Alex/DoctrineExtraBundle",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/alexandresalome/doctrine-extra-bundle.git",
-                "reference": "4f6de243e8a473583cddb267c71130c3f41e2d28"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/alexandresalome/doctrine-extra-bundle/zipball/4f6de243e8a473583cddb267c71130c3f41e2d28",
-                "reference": "4f6de243e8a473583cddb267c71130c3f41e2d28",
-                "shasum": ""
-            },
-            "require": {
-                "alom/graphviz": "~1.0",
-                "doctrine/orm": "~2.3"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "Alex\\DoctrineExtraBundle": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "Extra features for Doctrine, as a Symfony bundle",
-            "time": "2015-03-07 16:45:43"
-        },
-        {
-            "name": "alom/graphviz",
-            "version": "v1.0.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/alexandresalome/graphviz.git",
-                "reference": "f510f5dad3f69e831c3c00918ae52d2a4680daa8"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/alexandresalome/graphviz/zipball/f510f5dad3f69e831c3c00918ae52d2a4680daa8",
-                "reference": "f510f5dad3f69e831c3c00918ae52d2a4680daa8",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "3.7.*"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "Alom": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Alexandre Salomé",
-                    "email": "alexandre.salome@gmail.com",
-                    "homepage": "http://alexandre-salome.fr"
-                }
-            ],
-            "description": "Graphviz generation for PHP",
-            "homepage": "http://github.com/alexandresalome/graphviz",
-            "keywords": [
-                "dot",
-                "graphviz"
-            ],
-            "time": "2014-05-21 13:52:13"
-        },
         {
             "name": "doctrine/annotations",
             "version": "v1.2.3",
@@ -1302,6 +1220,125 @@
                 "menu"
             ],
             "time": "2014-08-01 09:57:23"
+        },
+        {
+            "name": "knplabs/knp-snappy",
+            "version": "0.3.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/KnpLabs/snappy.git",
+                "reference": "4d46c5d2229981a20c45570d044ef9d926431a9b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/KnpLabs/snappy/zipball/4d46c5d2229981a20c45570d044ef9d926431a9b",
+                "reference": "4d46c5d2229981a20c45570d044ef9d926431a9b",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "symfony/process": "~2.1"
+            },
+            "suggest": {
+                "h4cc/wkhtmltopdf-amd64": "Provide wkhtmltopdf-amd64 binary, use version `0.12.0` as dependency",
+                "h4cc/wkhtmltopdf-i386": "Provide wkhtmltopdf-i386 binary, use version `0.12.0` as dependency"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.3.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Knp\\Snappy": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "KnpLabs Team",
+                    "homepage": "http://knplabs.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "http://github.com/KnpLabs/snappy/contributors"
+                }
+            ],
+            "description": "PHP5 library allowing thumbnail, snapshot or PDF generation from a url or a html page. Wrapper for wkhtmltopdf/wkhtmltoimage.",
+            "homepage": "http://github.com/KnpLabs/snappy",
+            "keywords": [
+                "knp",
+                "knplabs",
+                "pdf",
+                "snapshot",
+                "thumbnail",
+                "wkhtmltopdf"
+            ],
+            "time": "2014-12-18 23:24:44"
+        },
+        {
+            "name": "knplabs/knp-snappy-bundle",
+            "version": "dev-master",
+            "target-dir": "Knp/Bundle/SnappyBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/KnpLabs/KnpSnappyBundle.git",
+                "reference": "6e6ac3ec3c41f25bd59c9e2e9b4cbf794cf36772"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/KnpLabs/KnpSnappyBundle/zipball/6e6ac3ec3c41f25bd59c9e2e9b4cbf794cf36772",
+                "reference": "6e6ac3ec3c41f25bd59c9e2e9b4cbf794cf36772",
+                "shasum": ""
+            },
+            "require": {
+                "knplabs/knp-snappy": "*",
+                "php": ">=5.3.2",
+                "symfony/finder": ">=2.0.0",
+                "symfony/framework-bundle": ">=2.0.0",
+                "symfony/validator": ">=2.0.0"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.2.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Knp\\Bundle\\SnappyBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "KnpLabs Team",
+                    "homepage": "http://knplabs.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "http://github.com/KnpLabs/KnpSnappyBundle/contributors"
+                }
+            ],
+            "description": "Easily create PDF and images in Symfony2 by converting Twig/HTML templates.",
+            "homepage": "http://github.com/KnpLabs/KnpSnappyBundle",
+            "keywords": [
+                "bundle",
+                "knp",
+                "knplabs",
+                "pdf",
+                "snappy"
+            ],
+            "time": "2015-02-19 09:36:46"
         },
         {
             "name": "kriswallsmith/assetic",
@@ -2813,17 +2850,101 @@
             "time": "2015-01-25 17:32:08"
         }
     ],
-    "packages-dev": [],
+    "packages-dev": [
+        {
+            "name": "alexandresalome/doctrine-extra-bundle",
+            "version": "dev-master",
+            "target-dir": "Alex/DoctrineExtraBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/alexandresalome/doctrine-extra-bundle.git",
+                "reference": "4f6de243e8a473583cddb267c71130c3f41e2d28"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/alexandresalome/doctrine-extra-bundle/zipball/4f6de243e8a473583cddb267c71130c3f41e2d28",
+                "reference": "4f6de243e8a473583cddb267c71130c3f41e2d28",
+                "shasum": ""
+            },
+            "require": {
+                "alom/graphviz": "~1.0",
+                "doctrine/orm": "~2.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Alex\\DoctrineExtraBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Extra features for Doctrine, as a Symfony bundle",
+            "time": "2015-03-07 16:45:43"
+        },
+        {
+            "name": "alom/graphviz",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/alexandresalome/graphviz.git",
+                "reference": "f510f5dad3f69e831c3c00918ae52d2a4680daa8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/alexandresalome/graphviz/zipball/f510f5dad3f69e831c3c00918ae52d2a4680daa8",
+                "reference": "f510f5dad3f69e831c3c00918ae52d2a4680daa8",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "3.7.*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Alom": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Alexandre Salomé",
+                    "email": "alexandre.salome@gmail.com",
+                    "homepage": "http://alexandre-salome.fr"
+                }
+            ],
+            "description": "Graphviz generation for PHP",
+            "homepage": "http://github.com/alexandresalome/graphviz",
+            "keywords": [
+                "dot",
+                "graphviz"
+            ],
+            "time": "2014-05-21 13:52:13"
+        }
+    ],
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
         "doctrine/migrations": 20,
         "doctrine/doctrine-migrations-bundle": 20,
-        "alexandresalome/doctrine-extra-bundle": 20,
         "friendsofsymfony/user-bundle": 20,
+        "knplabs/knp-snappy-bundle": 20,
         "lexik/paybox-bundle": 20,
         "stfalcon/tinymce-bundle": 20,
-        "nickcernis/html-to-markdown": 20
+        "nickcernis/html-to-markdown": 20,
+        "alexandresalome/doctrine-extra-bundle": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

@@ -10,7 +10,7 @@
             Auteur :
             {{ text.author.firstname }} {{ text.author.lastname }}
         </p>
-        <p class="text-justify">{{ text.content | markdown }}</p>
+        <div class="text-justify">{{ text.rawContent | raw }}</div>
     </div>
 </div>
 {% endblock %}

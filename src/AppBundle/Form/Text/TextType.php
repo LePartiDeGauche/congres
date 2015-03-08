@@ -16,7 +16,7 @@ class TextType extends AbstractType
     {
         $builder
             ->add('title', null, array('label' => 'Titre'))
-            ->add('content', null, array('label' => 'Contenu'))
+            ->add('rawContent', null, array('label' => 'Contenu'))
         ;
     }
     

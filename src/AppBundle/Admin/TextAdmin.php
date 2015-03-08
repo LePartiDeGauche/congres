@@ -24,7 +24,6 @@ class TextAdmin extends Admin
             ->add('author.lastname', null, array('label' => 'Nom de l\'auteur'))
             ->add('author.firstname', null, array('label' => 'Prénom de l\'auteur'))
             ->add('title')
-            ->add('content')
             ->add('status', null, array(
                 'label' => 'Statut'),
                 'choice', array( 'choices' => array(
@@ -51,7 +50,7 @@ class TextAdmin extends Admin
                 'required' => true
             ))
             ->add('title')
-            ->add('content')
+            ->add('rawContent', 'html')
             ->add('status', 'choice', array(
                 'label' => 'Statut',
                 'choices' => array(
@@ -106,7 +105,7 @@ class TextAdmin extends Admin
                 },
             ))
             ->add('title')
-            ->add('content')
+            ->add('rawContent')
             ->add('status', 'choice', array(
                 'label' => 'Statut',
                 'choices' => array(
@@ -131,7 +130,7 @@ class TextAdmin extends Admin
             ->add('id')
             ->add('textGroup')
             ->add('title')
-            ->add('content')
+            ->add('rawContent', 'html')
             ->add('status', 'choice', array(
                 'label' => 'Statut',
                 'choices' => array(

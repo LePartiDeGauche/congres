@@ -11,6 +11,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Entity\Text\TextGroup;
 use AppBundle\Entity\Text\Text;
+use AppBundle\Entity\User;
 use AppBundle\Form\Text\TextType;
 
 /**
@@ -37,6 +38,26 @@ class TextController extends Controller
         return $this->render('text/list.html.twig', array(
             'textGroup' => $textGroup,
             'texts' => $texts,
+        ));
+    }
+
+    /**
+     * Lists Text\Text entities for author.
+     *
+     * @Route("/user", name="text_user_list")
+     * @Method("GET")
+     */
+    public function userListAction()
+    { 
+        // FIXME: for now we always display current user info
+        $user = $this->getUser();
+        $em = $this->getDoctrine()->getManager();
+
+        $texts = $em->getRepository('AppBundle:Text\Text')->findByAuthor($user->getProfile());
+
+        return $this->render('text/user_list.html.twig', array(
+            'texts' => $texts,
+            'adherent' => $user->getProfile()
         ));
     }
 
