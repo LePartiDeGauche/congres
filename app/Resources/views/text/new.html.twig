@@ -6,8 +6,23 @@
 <div class="container">
     <div class="row">
         <h1>Soumettre un texte de {{ textGroup.name }}</h1>
+        <div class="alert alert-info text-justify" role="alert">
+            <p>
+            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+            Le formulaire si dessus permet d'éditer visuellement du texte. L'éditeur est
+            volontairement basique pour rendre plus facile le travail d'amendement en ligne durant
+            les phases ulterieures du congrès et uniformiser la mise en forme. Vous pouvez
+            <strong>copier-coller</strong> votre texte depuis un logiciel de traitement de
+            texte (Word, LibreOffice, OpenOffice, etc.). La mise en forme de base sera conservé. <br/>
+            </p>
+            <p>
+
+            <strong>Pour les titres, utilisez la fonction de formatage des titres,
+                la taille des police ne sera pas conservé !</strong>
+            </p>
+        </div>
         <form method="post" action="{{ path('text_create', {'group_id' : textGroup.id}) }}">
-    <label for="title">{{ form_label(form.title)}}</label>
+            <label for="title">{{ form_label(form.title)}}</label>
             {{ form_widget(form.title) }}
             {{ form_widget(form.rawContent, { 'attr': {'class': 'tinymce', 'data-theme' : 'markdown'} }) }}
             {{ form_widget(form)}}
