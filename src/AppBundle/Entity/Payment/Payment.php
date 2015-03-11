@@ -12,6 +12,13 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Payment
 {
+    const METHOD_CREDIT_CARD = 'card';
+    const METHOD_CHEQUE = 'cheque';
+    const METHOD_CASH = 'cash';
+
+    const ACCOUNT_PG = 'pg';
+    const ACCOUNT_AFPG = 'afpg';
+
     /**
      * @var integer
      *
@@ -24,16 +31,15 @@ class Payment
     /**
      * @var integer
      *
-     * @ORM\Column(name="amount", type="integer")
+     * @ORM\Column(name="amount", type="float")
      */
     private $amount;
 
     /**
      * @var \stdClass
      *
-     * @ORM\Column(name="method", type="object")
+     * @ORM\Column(name="method", type="string", length=20)
      */
-    //FIXME
     private $method;
 
     /**
@@ -45,26 +51,28 @@ class Payment
 
     /**
      * @var \stdClass
+     * People who write the cheque / has his name on the credit card
      *
-     * @ORM\Column(name="drawer", type="object")
+     * @ORM\Column(name="drawer", type="string", length=255)
+     * 
      */
-    //FIXME
     private $drawer;
 
     /**
      * @var \stdClass
+     * adherent who benefit from the money
      *
-     * @ORM\Column(name="recipient", type="object")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Adherent")
+     *
      */
-    //FIXME
     private $recipient;
 
     /**
      * @var \stdClass
+     * intranet author of the payment
      *
-     * @ORM\Column(name="author", type="object")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Adherent")
      */
-    //FIXME
     private $author;
 
     /**
@@ -74,6 +82,14 @@ class Payment
      */
     private $date;
 
+    /**
+     * @var string 
+     * intranet author of the payment
+     *
+     * @ORM\Column(name="account", type="string", length=20)
+     *
+     */
+    private $account;
 
     /**
      * Get id
@@ -116,6 +132,14 @@ class Payment
      */
     public function setMethod($method)
     {
+        if (!in_array($status, array(
+            self::METHOD_CREDIT_CARD,
+            self::METHOD_CHEQUE,
+            self::METHOD_CASH
+        )))
+        {
+            throw new \InvalidArgumentException('Invalid method');
+        }
         $this->method = $method;
 
         return $this;
@@ -244,5 +268,35 @@ class Payment
     public function getDate()
     {
         return $this->date;
+    }
+
+    /**
+     * Set account
+     *
+     * @param string $account
+     * @return Payment
+     */
+    public function setAccount($account)
+    {
+        if (!in_array($status, array(
+            self::ACCOUNT_PG,
+            self::ACCOUNT_AFPG
+        )))
+        {
+            throw new \InvalidArgumentException('Invalid account');
+        }
+        $this->account = $account;
+
+        return $this;
+    }
+
+    /**
+     * Get account
+     *
+     * @return string 
+     */
+    public function getAccount()
+    {
+        return $this->account;
     }
 }
