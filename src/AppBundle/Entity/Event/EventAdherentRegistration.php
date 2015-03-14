@@ -27,8 +27,21 @@ class EventAdherentRegistration
     /**
      * @var \stdClass
      *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Adherent")
+     * @ORM\JoinColumn(nullable=false)
+     *
+     * Person making the registration
+     *
+     */
+    private $author;
+
+    /**
+     * @var \stdClass
+     *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Adherent", inversedBy="events")
      * @ORM\JoinColumn(nullable=false)
+     *
+     *  Adherent who participate
      *
      */
     private $adherent;
@@ -59,6 +72,14 @@ class EventAdherentRegistration
     private $event;
 
     /**
+     * @var \stdClass
+     *
+     * @ORM\ManyToMany(targetEntity="EventMeal", inversedBy="participants")
+     *
+     */
+    private $meals;
+
+    /**
      * @var boolean
      *
      * @ORM\Column(name="need_hosting", type="boolean")
@@ -79,6 +100,8 @@ class EventAdherentRegistration
      * @ORM\Column(name="registrationDate", type="datetime")
      */
     private $registrationDate;
+
+
 
 
     public function __construct(\AppBundle\Entity\Adherent $author = null)

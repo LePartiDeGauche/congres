@@ -81,6 +81,31 @@ class Event
 
 
     /**
+     * @var \stdClass
+     *
+     * @ORM\Column(name="registration_begin", type="datetime")
+     *
+     */
+    private $registrationBegin;
+
+    /**
+     * @var \stdClass
+     *
+     * @ORM\Column(name="registration_end", type="datetime")
+     *
+     */
+    private $registrationEnd;
+
+
+    /**
+     * @var \stdClass
+     *
+     * @ORM\OneToMany(targetEntity="EventMeal", mappedBy="event")
+     *
+     */
+    private $meals;
+
+    /**
      * Get id
      *
      * @return integer 
@@ -243,6 +268,7 @@ class Event
     {
         $this->roles = new ArrayCollection();
         $this->sleepingFacilities = new ArrayCollection();
+        $this->registrationBegin = new \DateTime('now');
     }
 
 
