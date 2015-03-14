@@ -7,21 +7,71 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use AppBundle\Entity\Event\Event;
 use AppBundle\Form\Event\EventType;
 
 /**
  * Event\Event controller.
  *
- * @Route("/evenement")
+ * @Route("/event")
  */
 class EventController extends Controller
 {
 
     /**
+     * Register to a event
+     *
+     * @Route("/{event_id}/registration/create", name="event_registration_create")
+     * @ParamConverter("event_id", class="AppBundle:Event\Event", options={"id" = "event_id"})
+     *
+     */
+    public function registerAction(Request $request, Event $event)
+    {
+        $eventRegistration = new EventAdherentRegistration($this->getUser()->getProfile());
+        $form = $this->createRegistrationCreateForm($eventRegistration, $event);
+
+        $form->handleRequest($request);
+
+        if ($form->isValid())
+        {
+            $eventRegistration = $form->getData();
+            $eventRegistration->setEvent($event);
+            $this->getDoctrine()->getManager()->persist($eventRegistration);
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirect($this->generateUrl('event_registration_show', array('event_id' => $event->getId(), 'event_reg_id' => $eventRegistration->getId())));
+        }
+
+        return $this->render("event_registration_create", array(
+            'event'      => $event,
+            'event_registration'      => $eventRegistration,
+            'form'  => $form->createView()))
+        ;
+    }
+
+    /**
+     * Finds and displays a Event\EventAdherentRegistration entity.
+     *
+     * @Route("{event_id}/registration/{event_reg_id}", name="event_registration_show")
+     * @Method("GET")
+     * @ParamConverter("event_id", class="AppBundle:Event\Event", options={"id" = "event_id"})
+     * @ParamConverter("event_reg_id", class="AppBundle:Event\EventAdherentRegistration", options={"id" = "event_reg_id"})
+     * @Template("event/registration_show.html.twig")
+     */
+    public function registrationShowAction(Event $event, EventAdherentRegistration $eventRegistration)
+    {
+
+        return array(
+            'event'      => $event,
+            'eventRegistration' => $eventRegistration
+        );
+    }
+
+    /**
      * Lists all Event\Event entities.
      *
-     * @Route("/", name="evenement")
+     * @Route("/", name="event")
      * @Method("GET")
      * @Template("event/index.html.twig")
      */
@@ -37,74 +87,9 @@ class EventController extends Controller
     }
 
     /**
-     * Creates a new Event\Event entity.
-     *
-     * @Route("/", name="evenement_create")
-     * @Method("POST")
-     * @Template("event/new.html.twig")
-     */
-    public function createAction(Request $request)
-    {
-        $entity = new Event();
-        $form = $this->createCreateForm($entity);
-        $form->handleRequest($request);
-
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-
-            $em->persist($entity);
-            $em->flush();
-
-            return $this->redirect($this->generateUrl('evenement_show', array('id' => $entity->getId())));
-        }
-
-        return array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
-        );
-    }
-
-    /**
-     * Creates a form to create a Event\Event entity.
-     *
-     * @param Event $entity The entity
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
-    private function createCreateForm(Event $entity)
-    {
-        $form = $this->createForm(new EventType(), $entity, array(
-            'action' => $this->generateUrl('evenement_create'),
-            'method' => 'POST',
-        ));
-
-        $form->add('submit', 'submit', array('label' => 'Create'));
-
-        return $form;
-    }
-
-    /**
-     * Displays a form to create a new Event\Event entity.
-     *
-     * @Route("/new", name="evenement_new")
-     * @Method("GET")
-     * @Template("event/new.html.twig")
-     */
-    public function newAction()
-    {
-        $entity = new Event();
-        $form   = $this->createCreateForm($entity);
-
-        return array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
-        );
-    }
-
-    /**
      * Finds and displays a Event\Event entity.
      *
-     * @Route("/{id}", name="evenement_show")
+     * @Route("/{id}", name="event_show")
      * @Method("GET")
      * @Template("event/show.html.twig")
      */
@@ -118,132 +103,29 @@ class EventController extends Controller
             throw $this->createNotFoundException('Unable to find Event\Event entity.');
         }
 
-        $deleteForm = $this->createDeleteForm($id);
-
         return array(
             'entity'      => $entity,
-            'delete_form' => $deleteForm->createView(),
         );
     }
 
     /**
-     * Displays a form to edit an existing Event\Event entity.
+     * Creates a form to create a Event\EventAdherentRegistration entity.
      *
-     * @Route("/{id}/edit", name="evenement_edit")
-     * @Method("GET")
-     * @Template("event/edit.html.twig")
-     */
-    public function editAction($id)
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $entity = $em->getRepository('AppBundle:Event\Event')->find($id);
-
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Event\Event entity.');
-        }
-
-        $editForm = $this->createEditForm($entity);
-        $deleteForm = $this->createDeleteForm($id);
-
-        return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        );
-    }
-
-    /**
-    * Creates a form to edit a Event\Event entity.
-    *
-    * @param Event $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
-    private function createEditForm(Event $entity)
-    {
-        $form = $this->createForm(new EventType(), $entity, array(
-            'action' => $this->generateUrl('evenement_update', array('id' => $entity->getId())),
-            'method' => 'PUT',
-        ));
-
-        $form->add('submit', 'submit', array('label' => 'Update'));
-
-        return $form;
-    }
-    /**
-     * Edits an existing Event\Event entity.
-     *
-     * @Route("/{id}", name="evenement_update")
-     * @Method("PUT")
-     * @Template("event/edit.html.twig")
-     */
-    public function updateAction(Request $request, $id)
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $entity = $em->getRepository('AppBundle:Event\Event')->find($id);
-
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Event\Event entity.');
-        }
-
-        $deleteForm = $this->createDeleteForm($id);
-        $editForm = $this->createEditForm($entity);
-        $editForm->handleRequest($request);
-
-        if ($editForm->isValid()) {
-            $em->flush();
-
-            return $this->redirect($this->generateUrl('evenement_edit', array('id' => $id)));
-        }
-
-        return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        );
-    }
-    /**
-     * Deletes a Event\Event entity.
-     *
-     * @Route("/{id}", name="evenement_delete")
-     * @Method("DELETE")
-     */
-    public function deleteAction(Request $request, $id)
-    {
-        $form = $this->createDeleteForm($id);
-        $form->handleRequest($request);
-
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('AppBundle:Event\Event')->find($id);
-
-            if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Event\Event entity.');
-            }
-
-            $em->remove($entity);
-            $em->flush();
-        }
-
-        return $this->redirect($this->generateUrl('evenement'));
-    }
-
-    /**
-     * Creates a form to delete a Event\Event entity by id.
-     *
-     * @param mixed $id The entity id
+     * @param EventAdherentRegistration $entity The entity
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createDeleteForm($id)
+    private function createRegistrationCreateForm(EventAdherentRegistration $entity, Event $event)
     {
-        return $this->createFormBuilder()
-            ->setAction($this->generateUrl('evenement_delete', array('id' => $id)))
-            ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
-            ->getForm()
-        ;
+        $form = $this->createForm(new EventAdherentRegistrationType(), $entity, array(
+            'action' => $this->generateUrl('event_registration_create', array('event_id' => $event->getId())),
+            'method' => 'POST',
+        ));
+
+        $form->add('submit', 'submit', array('label' => 'Create'));
+
+        return $form;
     }
+
+
 }

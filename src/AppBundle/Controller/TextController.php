@@ -2,7 +2,6 @@
 
 namespace AppBundle\Controller;
 
-
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -68,14 +67,14 @@ class TextController extends Controller
      * @Method("GET")
      * @ParamConverter("textGroup", class="AppBundle:Text\TextGroup", options={"id" = "group_id"})
      * @ParamConverter("text", class="AppBundle:Text\Text", options={"id" = "text_id"})
+     * @Template("event/show.html.twig")
      */
     public function showAction(TextGroup $textGroup, Text $text)
     {
-        $em = $this->getDoctrine()->getManager();
 
-        return $this->render('text/show.html.twig', array(
+        return array(
             'textGroup'      => $textGroup,
-            'text'      => $text)
+            'text'      => $text
         );
     }
 

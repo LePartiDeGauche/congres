@@ -1,7 +1,7 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>Évenement</h1>
+    <h1>Event\EventAdherentRegistration</h1>
 
     <table class="record_properties">
         <tbody>
@@ -10,33 +10,28 @@
                 <td>{{ entity.id }}</td>
             </tr>
             <tr>
-                <th>Name</th>
-                <td>{{ entity.name }}</td>
+                <th>Needhosting</th>
+                <td>{{ entity.needHosting }}</td>
             </tr>
             <tr>
-                <th>Description</th>
-                <td>{{ entity.description }}</td>
+                <th>Paymentmode</th>
+                <td>{{ entity.paymentMode }}</td>
             </tr>
             <tr>
-                <th>Roles</th>
-
-                <td>{% include 'event/role_list.html.twig' with {'roles': entity.roles} only %}</td>
-            </tr>
-            <tr>
-                <th>Payments</th>
-                <td>{{ entity.payments }}</td>
+                <th>Registrationdate</th>
+                <td>{{ entity.registrationDate|date('Y-m-d H:i:s') }}</td>
             </tr>
         </tbody>
     </table>
 
         <ul class="record_actions">
     <li>
-        <a href="{{ path('evenement') }}">
+        <a href="{{ path('event_registration') }}">
             Back to the list
         </a>
     </li>
     <li>
-        <a href="{{ path('evenement_edit', { 'id': entity.id }) }}">
+        <a href="{{ path('event_registration_edit', { 'id': entity.id }) }}">
             Edit
         </a>
     </li>

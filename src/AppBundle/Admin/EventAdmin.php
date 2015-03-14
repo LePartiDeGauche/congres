@@ -19,8 +19,8 @@ class EventAdmin extends Admin
     {
         $datagridMapper
            // ->add('id')
-            ->add('name')
-            ->add('description')
+            ->add('name', NULL, array('label' => 'Nom'))
+            ->add('description', NULL, array('label' => 'Description'))
             ;
     }
 
@@ -31,8 +31,8 @@ class EventAdmin extends Admin
     {
         $listMapper
             ->add('id')
-            ->add('name')
-            ->add('description')
+            ->add('name', NULL, array('label' => 'Nom'))
+            ->add('description', NULL, array('label' => 'Description'))
             ->add('_action', 'actions', array(
                 'actions' => array(
                     'show' => array(),
@@ -49,8 +49,8 @@ class EventAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('name')
-            ->add('description')
+            ->add('name', NULL, array('label' => 'Nom'))
+            ->add('description', NULL, array('label' => 'Description'))
             ->add('roles', 'sonata_type_collection', array(
                 'type_options' => array(
                     'delete' => false
@@ -72,9 +72,8 @@ class EventAdmin extends Admin
     protected function configureShowFields(ShowMapper $showMapper)
     {
         $showMapper
-        //    ->add('id')
-            ->add('name')
-            ->add('description')
+            ->add('name', NULL, array('label' => 'Nom'))
+            ->add('description', NULL, array('label' => 'Description'))
             ->add('roles', 'sonata_type_collection')
             ->add('sleepingFacilities', 'sonata_type_collection')
             ;
