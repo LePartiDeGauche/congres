@@ -26,17 +26,8 @@ class Event
     /**
      * @var \stdClass
      *
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Adherent")
-     * @ORM\JoinTable(
-     *      name="event_participant",
-     *      joinColumns={
-     *          @ORM\JoinColumn(name="event_id", referencedColumnName="id")
-     *      },
-     *      inverseJoinColumns={
-     *          @ORM\JoinColumn(name="participant_id",    
-     *              referencedColumnName="id", unique=true)
-     *      }
-     *  )
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Event\EventAdherentRegistration",
+     * mappedBy="event")
      * 
      */
     private $participants;
@@ -80,13 +71,12 @@ class Event
     private $reservationNights;
 
 
-
     /**
      * @var \stdClass
      *
-     * @ORM\Column(name="payments", type="object")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Payment\EventPayment", mappedBy="attachedEvent")
+     *
      */
-    // FIXME
     private $payments;
 
 
@@ -255,4 +245,83 @@ class Event
         $this->sleepingFacilities = new ArrayCollection();
     }
 
+
+    /**
+     * Add participants
+     *
+     * @param \AppBundle\Entity\Adherent $participants
+     * @return Event
+     */
+    public function addParticipant(\AppBundle\Entity\Adherent $participants)
+    {
+        $this->participants[] = $participants;
+
+        return $this;
+    }
+
+    /**
+     * Remove participants
+     *
+     * @param \AppBundle\Entity\Adherent $participants
+     */
+    public function removeParticipant(\AppBundle\Entity\Adherent $participants)
+    {
+        $this->participants->removeElement($participants);
+    }
+
+    /**
+     * Add sleepingFacilities
+     *
+     * @param \AppBundle\Entity\Event\SleepingFacility $sleepingFacilities
+     * @return Event
+     */
+    public function addSleepingFacility(\AppBundle\Entity\Event\SleepingFacility $sleepingFacilities)
+    {
+        $this->sleepingFacilities[] = $sleepingFacilities;
+
+        return $this;
+    }
+
+    /**
+     * Remove sleepingFacilities
+     *
+     * @param \AppBundle\Entity\Event\SleepingFacility $sleepingFacilities
+     */
+    public function removeSleepingFacility(\AppBundle\Entity\Event\SleepingFacility $sleepingFacilities)
+    {
+        $this->sleepingFacilities->removeElement($sleepingFacilities);
+    }
+
+    /**
+     * Add reservationNights
+     *
+     * @param \AppBundle\Entity\Event\ReservationNight $reservationNights
+     * @return Event
+     */
+    public function addReservationNight(\AppBundle\Entity\Event\ReservationNight $reservationNights)
+    {
+        $this->reservationNights[] = $reservationNights;
+
+        return $this;
+    }
+
+    /**
+     * Remove reservationNights
+     *
+     * @param \AppBundle\Entity\Event\ReservationNight $reservationNights
+     */
+    public function removeReservationNight(\AppBundle\Entity\Event\ReservationNight $reservationNights)
+    {
+        $this->reservationNights->removeElement($reservationNights);
+    }
+
+    /**
+     * Get reservationNights
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getReservationNights()
+    {
+        return $this->reservationNights;
+    }
 }

@@ -163,4 +163,101 @@ class SleepingSite
     {
         return $this->bedsNight;
     }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->sleepingSpots = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->reservationNights = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Set sleepingFacility
+     *
+     * @param \AppBundle\Entity\Event\SleepingFacility $sleepingFacility
+     * @return SleepingSite
+     */
+    public function setSleepingFacility(\AppBundle\Entity\Event\SleepingFacility $sleepingFacility)
+    {
+        $this->sleepingFacility = $sleepingFacility;
+
+        return $this;
+    }
+
+    /**
+     * Get sleepingFacility
+     *
+     * @return \AppBundle\Entity\Event\SleepingFacility 
+     */
+    public function getSleepingFacility()
+    {
+        return $this->sleepingFacility;
+    }
+
+    /**
+     * Add sleepingSpots
+     *
+     * @param \AppBundle\Entity\Event\SleepingSpot $sleepingSpots
+     * @return SleepingSite
+     */
+    public function addSleepingSpot(\AppBundle\Entity\Event\SleepingSpot $sleepingSpots)
+    {
+        $this->sleepingSpots[] = $sleepingSpots;
+
+        return $this;
+    }
+
+    /**
+     * Remove sleepingSpots
+     *
+     * @param \AppBundle\Entity\Event\SleepingSpot $sleepingSpots
+     */
+    public function removeSleepingSpot(\AppBundle\Entity\Event\SleepingSpot $sleepingSpots)
+    {
+        $this->sleepingSpots->removeElement($sleepingSpots);
+    }
+
+    /**
+     * Get sleepingSpots
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getSleepingSpots()
+    {
+        return $this->sleepingSpots;
+    }
+
+    /**
+     * Add reservationNights
+     *
+     * @param \AppBundle\Entity\Event\ReservationNight $reservationNights
+     * @return SleepingSite
+     */
+    public function addReservationNight(\AppBundle\Entity\Event\ReservationNight $reservationNights)
+    {
+        $this->reservationNights[] = $reservationNights;
+
+        return $this;
+    }
+
+    /**
+     * Remove reservationNights
+     *
+     * @param \AppBundle\Entity\Event\ReservationNight $reservationNights
+     */
+    public function removeReservationNight(\AppBundle\Entity\Event\ReservationNight $reservationNights)
+    {
+        $this->reservationNights->removeElement($reservationNights);
+    }
+
+    /**
+     * Get reservationNights
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getReservationNights()
+    {
+        return $this->reservationNights;
+    }
 }

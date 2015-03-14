@@ -99,4 +99,67 @@ class ReservationNight
     {
         return $this->sleepingSite;
     }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->sleepingSites = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Set event
+     *
+     * @param \AppBundle\Entity\Event\Event $event
+     * @return ReservationNight
+     */
+    public function setEvent(\AppBundle\Entity\Event\Event $event = null)
+    {
+        $this->event = $event;
+
+        return $this;
+    }
+
+    /**
+     * Get event
+     *
+     * @return \AppBundle\Entity\Event\Event 
+     */
+    public function getEvent()
+    {
+        return $this->event;
+    }
+
+    /**
+     * Add sleepingSites
+     *
+     * @param \AppBundle\Entity\Event\SleepingSite $sleepingSites
+     * @return ReservationNight
+     */
+    public function addSleepingSite(\AppBundle\Entity\Event\SleepingSite $sleepingSites)
+    {
+        $this->sleepingSites[] = $sleepingSites;
+
+        return $this;
+    }
+
+    /**
+     * Remove sleepingSites
+     *
+     * @param \AppBundle\Entity\Event\SleepingSite $sleepingSites
+     */
+    public function removeSleepingSite(\AppBundle\Entity\Event\SleepingSite $sleepingSites)
+    {
+        $this->sleepingSites->removeElement($sleepingSites);
+    }
+
+    /**
+     * Get sleepingSites
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getSleepingSites()
+    {
+        return $this->sleepingSites;
+    }
 }

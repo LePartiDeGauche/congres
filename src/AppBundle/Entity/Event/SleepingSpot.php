@@ -99,4 +99,27 @@ class SleepingSpot
     {
         return $this->description;
     }
+
+    /**
+     * Set sleepingSite
+     *
+     * @param \AppBundle\Entity\Event\SleepingSite $sleepingSite
+     * @return SleepingSpot
+     */
+    public function setSleepingSite(\AppBundle\Entity\Event\SleepingSite $sleepingSite)
+    {
+        $this->sleepingSite = $sleepingSite;
+
+        return $this;
+    }
+
+    /**
+     * Get sleepingSite
+     *
+     * @return \AppBundle\Entity\Event\SleepingSite 
+     */
+    public function getSleepingSite()
+    {
+        return $this->sleepingSite;
+    }
 }

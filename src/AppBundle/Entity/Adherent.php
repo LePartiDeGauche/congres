@@ -68,6 +68,14 @@ class Adherent
     private $responsabilities;
 
     /**
+     * @var string
+     *
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Event\EventAdherentRegistration", mappedBy="adherent")
+     *
+     */
+    private $events;
+
+    /**
      * The user associated to this adherent profile.
      * @var User
      *

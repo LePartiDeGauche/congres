@@ -53,6 +53,14 @@ class EventRole
 
 
     /**
+     * @var \stdClass
+     *
+     * @ORM\OneToMany(targetEntity="EventAdherentRegistration", mappedBy="role" )
+     */
+    private $participants;
+
+
+    /**
      * Get id
      *
      * @return integer 
@@ -162,5 +170,61 @@ class EventRole
     public function __toString()
     {
         return $this->name;
+    }
+
+    /**
+     * Add requiredResponsabilities
+     *
+     * @param \AppBundle\Entity\Responsability $requiredResponsabilities
+     * @return EventRole
+     */
+    public function addRequiredResponsability(\AppBundle\Entity\Responsability $requiredResponsabilities)
+    {
+        $this->requiredResponsabilities[] = $requiredResponsabilities;
+
+        return $this;
+    }
+
+    /**
+     * Remove requiredResponsabilities
+     *
+     * @param \AppBundle\Entity\Responsability $requiredResponsabilities
+     */
+    public function removeRequiredResponsability(\AppBundle\Entity\Responsability $requiredResponsabilities)
+    {
+        $this->requiredResponsabilities->removeElement($requiredResponsabilities);
+    }
+
+    /**
+     * Add participants
+     *
+     * @param \AppBundle\Entity\Event\EventAdherentRegistration $participants
+     * @return EventRole
+     */
+    public function addParticipant(\AppBundle\Entity\Event\EventAdherentRegistration $participants)
+    {
+        $this->participants[] = $participants;
+
+        return $this;
+    }
+
+    /**
+     * Remove participants
+     *
+     * @param \AppBundle\Entity\Event\EventAdherentRegistration $participants
+     */
+    public function removeParticipant(\AppBundle\Entity\Event\EventAdherentRegistration $participants)
+    {
+        $this->participants->removeElement($participants);
+    }
+
+    /**
+     * Get participants
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getParticipants()
+    {
+        return $this->participants;
     }
 }
