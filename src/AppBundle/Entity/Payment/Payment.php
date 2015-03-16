@@ -7,10 +7,14 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Payment:Payment
  *
- * @ORM\Table(name="payment")
  * @ORM\Entity
+ * @ORM\Table(name="payment")
+ * @ORM\InheritanceType("SINGLE_TABLE")
+ * @ORM\DiscriminatorColumn(name="payment_type", type="string")
+ * @ORM\DiscriminatorMap({"event" = "EventPayment", "membership" = "MembershipPayment"})
+ *
  */
-class Payment
+abstract class Payment
 {
     const METHOD_CREDIT_CARD = 'card';
     const METHOD_CHEQUE = 'cheque';
@@ -26,28 +30,28 @@ class Payment
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="amount", type="float")
      */
-    private $amount;
+    protected $amount;
 
     /**
      * @var \stdClass
      *
      * @ORM\Column(name="method", type="string", length=20)
      */
-    private $method;
+    protected $method;
 
     /**
      * @var boolean
      *
      * @ORM\Column(name="cashed", type="boolean")
      */
-    private $cashed;
+    protected $cashed;
 
     /**
      * @var \stdClass
@@ -56,7 +60,7 @@ class Payment
      * @ORM\Column(name="drawer", type="string", length=255)
      * 
      */
-    private $drawer;
+    protected $drawer;
 
     /**
      * @var \stdClass
@@ -65,7 +69,7 @@ class Payment
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Adherent")
      *
      */
-    private $recipient;
+    protected $recipient;
 
     /**
      * @var \stdClass
@@ -73,14 +77,14 @@ class Payment
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Adherent")
      */
-    private $author;
+    protected $author;
 
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="date", type="datetime")
      */
-    private $date;
+    protected $date;
 
     /**
      * @var string 
@@ -89,7 +93,7 @@ class Payment
      * @ORM\Column(name="account", type="string", length=20)
      *
      */
-    private $account;
+    protected $account;
 
     /**
      * Get id

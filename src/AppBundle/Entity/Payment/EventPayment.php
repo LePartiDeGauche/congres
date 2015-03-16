@@ -7,19 +7,10 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * EventPayment
  *
- * @ORM\Table()
  * @ORM\Entity
  */
 class EventPayment extends Payment
 {
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    private $id;
 
     /**
      * @var \stdClass
@@ -27,7 +18,7 @@ class EventPayment extends Payment
      * @ORM\OneToOne(targetEntity="AppBundle\Entity\Event\EventAdherentRegistration", mappedBy="payment")
      *
      */
-    private $attachedRegistration;
+    protected $attachedRegistration;
 
     /**
      * @var \stdClass
@@ -35,7 +26,7 @@ class EventPayment extends Payment
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Event\Event", inversedBy="payments")
      *
      */
-    private $attachedEvent;
+    protected $attachedEvent;
 
 
     /**

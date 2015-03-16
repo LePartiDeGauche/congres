@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * EventMeal
  *
  * @ORM\Table()
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Entity\Event\EventMealRepository")
  */
 class EventMeal
 {
@@ -47,7 +47,8 @@ class EventMeal
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="text")
+     * @ORM\Column(name="description", type="text", nullable=true)
+     *
      */
     private $description;
 
@@ -182,5 +183,64 @@ class EventMeal
     public function getTime()
     {
         return $this->time;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->participants = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Set mealTime
+     *
+     * @param \DateTime $mealTime
+     * @return EventMeal
+     */
+    public function setMealTime($mealTime)
+    {
+        $this->mealTime = $mealTime;
+
+        return $this;
+    }
+
+    /**
+     * Get mealTime
+     *
+     * @return \DateTime 
+     */
+    public function getMealTime()
+    {
+        return $this->mealTime;
+    }
+
+    public function __toString()
+    {
+        return $this->name . ' - ' . $this->mealTime->format('l d M Y H:i:s');
+    
+    }
+
+    /**
+     * Add participants
+     *
+     * @param \AppBundle\Entity\Event\EventAdherentRegistration $participants
+     * @return EventMeal
+     */
+    public function addParticipant(\AppBundle\Entity\Event\EventAdherentRegistration $participants)
+    {
+        $this->participants[] = $participants;
+
+        return $this;
+    }
+
+    /**
+     * Remove participants
+     *
+     * @param \AppBundle\Entity\Event\EventAdherentRegistration $participants
+     */
+    public function removeParticipant(\AppBundle\Entity\Event\EventAdherentRegistration $participants)
+    {
+        $this->participants->removeElement($participants);
     }
 }

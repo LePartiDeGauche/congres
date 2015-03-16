@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * EventAdherentRegistration
  *
  * @ORM\Table()
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Entity\Event\EventAdherentRegistrationRepository")
  */
 class EventAdherentRegistration
 {
@@ -64,6 +64,15 @@ class EventAdherentRegistration
 
     /**
      * @var \stdClass
+     * 
+     * @ORM\ManyToOne(targetEntity="EventCost")
+     * @ORM\JoinColumn(nullable=false)
+     * 
+     */
+    private $cost;
+
+    /**
+     * @var \stdClass
      *
      * @ORM\ManyToOne(targetEntity="Event", inversedBy="participants")
      * @ORM\JoinColumn(nullable=false)
@@ -82,7 +91,7 @@ class EventAdherentRegistration
     /**
      * @var boolean
      *
-     * @ORM\Column(name="need_hosting", type="boolean")
+      @ORM\Column(name="need_hosting", type="boolean")
      */
     private $needHosting;
 
@@ -101,13 +110,12 @@ class EventAdherentRegistration
      */
     private $registrationDate;
 
-
-
-
-    public function __construct(\AppBundle\Entity\Adherent $author = null)
+    public function __construct(\AppBundle\Entity\Adherent $author, Event $event)
     {
-        $registrationDate = new \DateTime('now');
-        $paymentMode = self::PAYMENT_MODE_ONLINE;
+        $this->author = $author;
+        $this->event = $event;
+        $this->registrationDate = new \DateTime('now');
+        $this->paymentMode = self::PAYMENT_MODE_ONLINE;
     }
     /**
      * Get id
@@ -284,5 +292,84 @@ class EventAdherentRegistration
     public function getRegistrationDate()
     {
         return $this->registrationDate;
+    }
+
+    /**
+     * Set author
+     *
+     * @param \AppBundle\Entity\Adherent $author
+     * @return EventAdherentRegistration
+     */
+    public function setAuthor(\AppBundle\Entity\Adherent $author)
+    {
+        $this->author = $author;
+
+        return $this;
+    }
+
+    /**
+     * Get author
+     *
+     * @return \AppBundle\Entity\Adherent 
+     */
+    public function getAuthor()
+    {
+        return $this->author;
+    }
+
+    /**
+     * Add meals
+     *
+     * @param \AppBundle\Entity\Event\EventMeal $meals
+     * @return EventAdherentRegistration
+     */
+    public function addMeal(\AppBundle\Entity\Event\EventMeal $meals)
+    {
+        $this->meals[] = $meals;
+
+        return $this;
+    }
+
+    /**
+     * Remove meals
+     *
+     * @param \AppBundle\Entity\Event\EventMeal $meals
+     */
+    public function removeMeal(\AppBundle\Entity\Event\EventMeal $meals)
+    {
+        $this->meals->removeElement($meals);
+    }
+
+    /**
+     * Get meals
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getMeals()
+    {
+        return $this->meals;
+    }
+
+    /**
+     * Set cost
+     *
+     * @param \AppBundle\Entity\Event\EventCost $cost
+     * @return EventAdherentRegistration
+     */
+    public function setCost(\AppBundle\Entity\Event\EventCost $cost)
+    {
+        $this->cost = $cost;
+
+        return $this;
+    }
+
+    /**
+     * Get cost
+     *
+     * @return \AppBundle\Entity\Event\EventCost 
+     */
+    public function getCost()
+    {
+        return $this->cost;
     }
 }

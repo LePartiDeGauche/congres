@@ -57,6 +57,14 @@ class Event
     /**
      * @var \stdClass
      *
+     * @ORM\OneToMany(targetEntity="EventCost", mappedBy="event",
+     * cascade={"persist", "remove", "merge"}, orphanRemoval=true)
+     */
+    private $costs;
+
+    /**
+     * @var \stdClass
+     *
      * @ORM\OneToMany(targetEntity="SleepingFacility", mappedBy="event",
      * cascade={"persist", "remove", "merge"}, orphanRemoval=true)
      */
@@ -100,10 +108,15 @@ class Event
     /**
      * @var \stdClass
      *
-     * @ORM\OneToMany(targetEntity="EventMeal", mappedBy="event")
+     * @ORM\OneToMany(targetEntity="EventMeal", mappedBy="event",
+     * cascade={"persist", "remove"}, orphanRemoval=true)
      *
      */
     private $meals;
+
+
+    /*
+    //
 
     /**
      * Get id
@@ -267,6 +280,8 @@ class Event
     public function __construct()
     {
         $this->roles = new ArrayCollection();
+        $this->meals = new ArrayCollection();
+        $this->costs = new ArrayCollection();
         $this->sleepingFacilities = new ArrayCollection();
         $this->registrationBegin = new \DateTime('now');
     }
@@ -349,5 +364,140 @@ class Event
     public function getReservationNights()
     {
         return $this->reservationNights;
+    }
+
+    /**
+     * Set registrationBegin
+     *
+     * @param \DateTime $registrationBegin
+     * @return Event
+     */
+    public function setRegistrationBegin($registrationBegin)
+    {
+        $this->registrationBegin = $registrationBegin;
+
+        return $this;
+    }
+
+    /**
+     * Get registrationBegin
+     *
+     * @return \DateTime 
+     */
+    public function getRegistrationBegin()
+    {
+        return $this->registrationBegin;
+    }
+
+    /**
+     * Set registrationEnd
+     *
+     * @param \DateTime $registrationEnd
+     * @return Event
+     */
+    public function setRegistrationEnd($registrationEnd)
+    {
+        $this->registrationEnd = $registrationEnd;
+
+        return $this;
+    }
+
+    /**
+     * Get registrationEnd
+     *
+     * @return \DateTime 
+     */
+    public function getRegistrationEnd()
+    {
+        return $this->registrationEnd;
+    }
+
+    /**
+     * Add payments
+     *
+     * @param \AppBundle\Entity\Payment\EventPayment $payments
+     * @return Event
+     */
+    public function addPayment(\AppBundle\Entity\Payment\EventPayment $payments)
+    {
+        $this->payments[] = $payments;
+
+        return $this;
+    }
+
+    /**
+     * Remove payments
+     *
+     * @param \AppBundle\Entity\Payment\EventPayment $payments
+     */
+    public function removePayment(\AppBundle\Entity\Payment\EventPayment $payments)
+    {
+        $this->payments->removeElement($payments);
+    }
+
+    /**
+     * Add meals
+     *
+     * @param \AppBundle\Entity\Event\EventMeal $meals
+     * @return Event
+     */
+    public function addMeal(\AppBundle\Entity\Event\EventMeal $meals)
+    {
+        $this->meals[] = $meals;
+
+        return $this;
+    }
+
+    /**
+     * Remove meals
+     *
+     * @param \AppBundle\Entity\Event\EventMeal $meals
+     */
+    public function removeMeal(\AppBundle\Entity\Event\EventMeal $meals)
+    {
+        $this->meals->removeElement($meals);
+    }
+
+    /**
+     * Get meals
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getMeals()
+    {
+        return $this->meals;
+    }
+
+    /**
+     * Add costs
+     *
+     * @param \AppBundle\Entity\Event\EventCost $costs
+     * @return Event
+     */
+    public function addCost(\AppBundle\Entity\Event\EventCost $costs)
+    {
+        $this->costs[] = $costs;
+
+        return $this;
+    }
+
+    /**
+     * Remove costs
+     *
+     * @param \AppBundle\Entity\Event\EventCost $costs
+     */
+    public function removeCost(\AppBundle\Entity\Event\EventCost $costs)
+    {
+        $this->costs->removeElement($costs);
+    }
+
+    /**
+     * Get costs
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getCosts()
+    {
+        return $this->costs;
     }
 }
