@@ -108,3 +108,15 @@ services:
         arguments: [~, AppBundle\Entity\Text\Text, SonataAdminBundle:CRUD]
         tags:
             - {name: sonata.admin, manager_type: orm, group: "Texte", label: "Textes"}
+
+    app.admin.event_meal:
+        class: AppBundle\Admin\EventMealAdmin
+        arguments: [~, AppBundle\Entity\Event\EventMeal, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin, label: EventMeal}
+
+    app.admin.event_cost:
+        class: AppBundle\Admin\EventCostAdmin
+        arguments: [~, AppBundle\Entity\Event\EventCost, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin, label: EventCost}

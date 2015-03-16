@@ -10,15 +10,15 @@ use Sonata\AdminBundle\Show\ShowMapper;
 
 class EventAdmin extends Admin
 {
-    protected $baseRouteName = 'events';
-    protected $baseRoutePattern = 'events';
+    protected $baseRouteName = 'event_admin';
+    protected $baseRoutePattern = 'event';
     /**
      * @param DatagridMapper $datagridMapper
      */
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-           // ->add('id')
+            // ->add('id')
             ->add('name', NULL, array('label' => 'Nom'))
             ->add('description', NULL, array('label' => 'Description'))
             ;
@@ -33,6 +33,8 @@ class EventAdmin extends Admin
             ->add('id')
             ->add('name', NULL, array('label' => 'Nom'))
             ->add('description', NULL, array('label' => 'Description'))
+            ->add('registrationBegin', NULL, array('label' => 'Début des inscriptions'))
+            ->add('registrationEnd', NULL, array('label' => 'Fin des inscriptions'))
             ->add('_action', 'actions', array(
                 'actions' => array(
                     'show' => array(),
@@ -51,19 +53,50 @@ class EventAdmin extends Admin
         $formMapper
             ->add('name', NULL, array('label' => 'Nom'))
             ->add('description', NULL, array('label' => 'Description'))
-            ->add('roles', 'sonata_type_collection', array(
-                'type_options' => array(
-                    'delete' => false
+            ->add('registrationBegin', NULL, array('label' => 'Début des inscriptions'))
+            ->add('registrationEnd', NULL, array('label' => 'Fin des inscriptions'))
+            ->add('roles', 'sonata_type_collection',
+                array(
+                    'type_options' => array(
+                        'delete' => false
+                    )
+                ), array(
+                    'edit' => 'inline',
+                    'inline' => 'table',
+                    'sortable' => 'position',
+                ), array(
+                    'required' => false,
                 )
-            ), array(
-                'edit' => 'inline',
-                'inline' => 'table',
-                'sortable' => 'position',
-            ), array(
-                'required' => false,
             )
-        )
-        ;
+            ->add('meals', 'sonata_type_collection',
+                array(
+                    'type_options' => array(
+                        'delete' => false
+                    ),
+                    'label' => 'Repas',
+                ), array(
+                    'edit' => 'inline',
+                    'inline' => 'table',
+                    'sortable' => 'position',
+                ), array(
+                    'required' => false,
+                )
+            )
+            ->add('costs', 'sonata_type_collection',
+                array(
+                    'type_options' => array(
+                        'delete' => false
+                    ),
+                    'label' => 'Tarifs',
+                ), array(
+                    'edit' => 'inline',
+                    'inline' => 'table',
+                    'sortable' => 'position',
+                ), array(
+                    'required' => false,
+                )
+            )
+            ;
     }
 
     /**
@@ -74,7 +107,11 @@ class EventAdmin extends Admin
         $showMapper
             ->add('name', NULL, array('label' => 'Nom'))
             ->add('description', NULL, array('label' => 'Description'))
+            ->add('registrationBegin', NULL, array('label' => 'Début des inscriptions'))
+            ->add('registrationEnd', NULL, array('label' => 'Fin des inscriptions'))
             ->add('roles', 'sonata_type_collection')
+            ->add('meals', 'sonata_type_collection',array('label' => 'Repas' ))
+            ->add('costs', 'sonata_type_collection',array('label' => 'Tarifs' ))
             ->add('sleepingFacilities', 'sonata_type_collection')
             ;
     }
@@ -83,6 +120,14 @@ class EventAdmin extends Admin
     {
         foreach ($object->getRoles() as $role) {
             $role->setEvent($object);
+        }
+
+        foreach ($object->getMeals() as $meal) {
+            $meal->setEvent($object);
+        }
+
+        foreach ($object->getCosts() as $cost) {
+            $cost->setEvent($object);
         }
 
         foreach ($object->getSleepingFacilities() as $sf) {
@@ -94,6 +139,14 @@ class EventAdmin extends Admin
     {
         foreach ($object->getRoles() as $role) {
             $role->setEvent($object);
+        }
+
+        foreach ($object->getMeals() as $meals) {
+            $role->setEvent($object);
+        }
+
+        foreach ($object->getCosts() as $cost) {
+            $cost->setEvent($object);
         }
 
         foreach ($object->getSleepingFacilities() as $sf) {

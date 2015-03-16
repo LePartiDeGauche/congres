@@ -1,40 +1,27 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>Event\EventAdherentRegistration</h1>
+<h1>Votre inscription à l'évenement {{event.name}}</h1>
 
     <table class="record_properties">
         <tbody>
             <tr>
                 <th>Id</th>
-                <td>{{ entity.id }}</td>
+                <td>{{ eventRegistration.id }}</td>
             </tr>
             <tr>
                 <th>Needhosting</th>
-                <td>{{ entity.needHosting }}</td>
+                <td>{{ eventRegistration.needHosting }}</td>
             </tr>
             <tr>
                 <th>Paymentmode</th>
-                <td>{{ entity.paymentMode }}</td>
+                <td>{{ eventRegistration.paymentMode }}</td>
             </tr>
             <tr>
                 <th>Registrationdate</th>
-                <td>{{ entity.registrationDate|date('Y-m-d H:i:s') }}</td>
+                <td>{{ eventRegistration.registrationDate|date('Y-m-d H:i:s') }}</td>
             </tr>
         </tbody>
     </table>
-
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('event_registration') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>
-        <a href="{{ path('event_registration_edit', { 'id': entity.id }) }}">
-            Edit
-        </a>
-    </li>
-    <li>{{ form(delete_form) }}</li>
 </ul>
 {% endblock %}

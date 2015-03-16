@@ -1,15 +1,9 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>Event\EventAdherentRegistration creation</h1>
+<h1>Inscription à l'évenement {{ event.name }}</h1>
 
     {{ form(form) }}
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('event_registration') }}">
-            Back to the list
-        </a>
-    </li>
 </ul>
 {% endblock %}
