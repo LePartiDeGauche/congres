@@ -26,3 +26,8 @@ parameters:
     # A secret key that's used to generate certain security-related tokens
     secret:            ThisTokenIsNotSoSecretChangeIt
     superadmin_password: ThispasswordIsNotSecretSoChangeIt
+    is_paybox_in_production: false
+    paybox_site: 1999888
+    paybox_rank: 32
+    paybox_login: 107904482
+    paybox_hmac_key: 1999888I

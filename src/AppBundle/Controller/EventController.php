@@ -35,6 +35,10 @@ class EventController extends Controller
      */
     public function registrationShowAction(Event $event, EventAdherentRegistration $eventRegistration)
     {
+        if ($eventRegistration->getAuthor() !=  $this->getUser()->getProfile())
+        {
+            throw new AccessDeniedException();
+        }
 
         return array(
             'event'      => $event,

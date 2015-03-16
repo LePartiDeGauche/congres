@@ -29,3 +29,7 @@ _sonata_admin:
     resource: .
     type: sonata_admin
     prefix: /admin
+
+# Lexik Paybox Bundle
+lexik_paybox:
+    resource: '@LexikPayboxBundle/Resources/config/routing.yml'

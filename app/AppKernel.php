@@ -34,6 +34,9 @@ class AppKernel extends Kernel
             new Knp\Bundle\MarkdownBundle\KnpMarkdownBundle(),
             new Knp\Bundle\SnappyBundle\KnpSnappyBundle(),
 
+            // PayBox
+            new Lexik\Bundle\PayboxBundle\LexikPayboxBundle(),
+
             // Our app
             new AppBundle\AppBundle(),
         );
