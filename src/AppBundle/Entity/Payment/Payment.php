@@ -23,6 +23,14 @@ abstract class Payment
     const ACCOUNT_PG = 'pg';
     const ACCOUNT_AFPG = 'afpg';
 
+
+    const STATUS_NEW = 'new';
+    const STATUS_PENDING = 'pending';
+    const STATUS_BANKED = 'banked';
+    const STATUS_REFUSED = 'refused';
+    const STATUS_CANCELED = 'canceled';
+
+
     /**
      * @var integer
      *
@@ -49,9 +57,9 @@ abstract class Payment
     /**
      * @var boolean
      *
-     * @ORM\Column(name="cashed", type="boolean")
+     * @ORM\Column(name="status", type="string", length=20)
      */
-    protected $cashed;
+    protected $status;
 
     /**
      * @var \stdClass
@@ -96,6 +104,34 @@ abstract class Payment
     protected $account;
 
     /**
+     * @var string
+     *
+     * Human readable element to group paybox payment in the web interface
+     *
+     * @ORM\Column(name="referenceIdentifierPrefix", type="string", length=100)
+     *
+     *
+     */
+    protected $referenceIdentifierPrefix;
+
+    /**
+     * @var array
+     *
+     * IPN Array from paybox
+     *
+     * @ORM\Column(name="paymentIPN", type="array", nullable = true)
+     *
+     */
+
+    protected $paymentIPN;
+
+    public function __construct()
+    {
+        $this->date = new \DateTime('now');
+        $this->paymentIPN = array();
+    
+    }
+    /**
      * Get id
      *
      * @return integer 
@@ -136,7 +172,7 @@ abstract class Payment
      */
     public function setMethod($method)
     {
-        if (!in_array($status, array(
+        if (!in_array($method, array(
             self::METHOD_CREDIT_CARD,
             self::METHOD_CHEQUE,
             self::METHOD_CASH
@@ -160,26 +196,36 @@ abstract class Payment
     }
 
     /**
-     * Set cashed
+     * Set status
      *
-     * @param boolean $cashed
+     * @param string $status
      * @return Payment:Payment
      */
-    public function setCashed($cashed)
+    public function setStatus($status)
     {
-        $this->cashed = $cashed;
+        if (!in_array($status, array(
+            self::STATUS_NEW,
+            self::STATUS_PENDING,
+            self::STATUS_BANKED,
+            self::STATUS_REFUSED
+        )))
+        {
+            throw new \InvalidArgumentException('Invalid Status');
+        
+        }
+        $this->status = $status;
 
         return $this;
     }
 
     /**
-     * Get cashed
+     * Get status
      *
-     * @return boolean 
+     * @return string 
      */
-    public function getCashed()
+    public function getStatus()
     {
-        return $this->cashed;
+        return $this->status;
     }
 
     /**
@@ -282,7 +328,7 @@ abstract class Payment
      */
     public function setAccount($account)
     {
-        if (!in_array($status, array(
+        if (!in_array($account, array(
             self::ACCOUNT_PG,
             self::ACCOUNT_AFPG
         )))
@@ -302,5 +348,51 @@ abstract class Payment
     public function getAccount()
     {
         return $this->account;
+    }
+
+    /**
+     * Set referenceIdentifierPrefix
+     *
+     * @param string $referenceIdentifierPrefix
+     * @return Payment
+     */
+    public function setReferenceIdentifierPrefix($referenceIdentifierPrefix)
+    {
+        $this->referenceIdentifierPrefix = $referenceIdentifierPrefix;
+
+        return $this;
+    }
+
+    /**
+     * Get referenceIdentifierPrefix
+     *
+     * @return string 
+     */
+    public function getReferenceIdentifierPrefix()
+    {
+        return $this->referenceIdentifierPrefix;
+    }
+
+    /**
+     * Set paymentIPN
+     *
+     * @param array $paymentIPN
+     * @return Payment
+     */
+    public function setPaymentIPN($paymentIPN)
+    {
+        $this->paymentIPN = $paymentIPN;
+
+        return $this;
+    }
+
+    /**
+     * Get paymentIPN
+     *
+     * @return array 
+     */
+    public function getPaymentIPN()
+    {
+        return $this->paymentIPN;
     }
 }

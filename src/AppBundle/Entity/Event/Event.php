@@ -42,6 +42,14 @@ class Event
     /**
      * @var string
      *
+     * @ORM\Column(name="normalizedName", type="string", length=100)
+     */
+    private $normalizedName;
+
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="description", type="text")
      */
     private $description;
@@ -499,5 +507,28 @@ class Event
     public function getCosts()
     {
         return $this->costs;
+    }
+
+    /**
+     * Set normalizedName
+     *
+     * @param string $normalizedName
+     * @return Event
+     */
+    public function setNormalizedName($normalizedName)
+    {
+        $this->normalizedName = $normalizedName;
+
+        return $this;
+    }
+
+    /**
+     * Get normalizedName
+     *
+     * @return string 
+     */
+    public function getNormalizedName()
+    {
+        return $this->normalizedName;
     }
 }

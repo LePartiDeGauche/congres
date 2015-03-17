@@ -12,6 +12,7 @@ use AppBundle\Entity\Event\Event;
 use AppBundle\Entity\Event\EventAdherentRegistration;
 use AppBundle\Form\Event\EventType;
 use AppBundle\Form\Event\EventAdherentRegistrationType;
+use AppBundle\Entity\Payment\EventPayment;
 
 /**
  * Event\Event controller.
@@ -70,12 +71,32 @@ class EventController extends Controller
             $eventRegistration = $form->getData();
             $eventRegistration->setEvent($event);
             $eventRegistration->setRegistrationDate(new \DateTime('now'));
-            $eventRegistration->setAdherent($this->getUser()->getProfile());
+            $eventRegistration->setAdherent($adherent);
 
             $this->getDoctrine()->getManager()->persist($eventRegistration);
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirect($this->generateUrl('event_registration_show', array('event_id' => $event->getId(), 'event_reg_id' => $eventRegistration->getId())));
+            if ($eventRegistration->getPaymentMode() == EventAdherentRegistration::PAYMENT_MODE_ONLINE)
+            {
+                $eventPayment = new EventPayment($adherent, $event, $eventRegistration);
+                $eventPayment->setAmount($eventRegistration->getCost()->getCost())
+                    ->setMethod(EventPayment::METHOD_CREDIT_CARD)
+                    ->setStatus(EventPayment::STATUS_NEW)
+                    ->setDrawer($adherent)
+                    ->setRecipient($adherent)
+                    ->setDate(new \DateTime('now'))
+                    ->setReferenceIdentifierPrefix($event->getNormalizedName())
+                    ->setAccount(EventPayment::ACCOUNT_PG); // FIXME : multiple account gestion, the account as to be choosen when creating the event. Needed to modify PayboxBundle to manage multiple id
+
+                $this->getDoctrine()->getManager()->persist($eventPayment);
+                $this->getDoctrine()->getManager()->flush();
+
+                return $this->redirect($this->generateUrl('payment_pay', array('id' => $eventPayment->getId())));
+            }
+            else
+            {
+                return $this->redirect($this->generateUrl('event_registration_show', array('event_id' => $event->getId(), 'event_reg_id' => $eventRegistration->getId())));
+            }
         }
 
         return $this->render("event/registration.html.twig", array(

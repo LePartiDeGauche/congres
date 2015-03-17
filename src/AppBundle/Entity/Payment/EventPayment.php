@@ -3,7 +3,9 @@
 namespace AppBundle\Entity\Payment;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use AppBundle\Entity\Event\Event;
+use AppBundle\Entity\Event\EventAdherentRegistration;
+use AppBundle\Entity\Adherent;
 /**
  * EventPayment
  *
@@ -15,7 +17,7 @@ class EventPayment extends Payment
     /**
      * @var \stdClass
      *
-     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Event\EventAdherentRegistration", mappedBy="payment")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Event\EventAdherentRegistration", inversedBy="payments")
      *
      */
     protected $attachedRegistration;
@@ -28,16 +30,6 @@ class EventPayment extends Payment
      */
     protected $attachedEvent;
 
-
-    /**
-     * Get id
-     *
-     * @return integer 
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
 
     /**
      * Set attachedRegistration
@@ -60,5 +52,35 @@ class EventPayment extends Payment
     public function getAttachedRegistration()
     {
         return $this->attachedRegistration;
+    }
+
+    public function __construct(Adherent $author, Event $event, EventAdherentRegistration $eventRegistration)
+    {
+        $this->author = $author;
+        $this->attachedEvent = $event;
+        $this->attachedRegistration = $eventRegistration;
+    }
+
+    /**
+     * Set attachedEvent
+     *
+     * @param \AppBundle\Entity\Event\Event $attachedEvent
+     * @return EventPayment
+     */
+    public function setAttachedEvent(\AppBundle\Entity\Event\Event $attachedEvent = null)
+    {
+        $this->attachedEvent = $attachedEvent;
+
+        return $this;
+    }
+
+    /**
+     * Get attachedEvent
+     *
+     * @return \AppBundle\Entity\Event\Event 
+     */
+    public function getAttachedEvent()
+    {
+        return $this->attachedEvent;
     }
 }

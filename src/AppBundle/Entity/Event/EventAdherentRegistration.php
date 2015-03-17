@@ -49,9 +49,9 @@ class EventAdherentRegistration
     /**
      * @var \stdClass
      *
-     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Payment\EventPayment", inversedBy="attachedRegistration")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Payment\EventPayment", mappedBy="attachedRegistration")
      */
-    private $payment;
+    private $payments;
 
     /**
      * @var \stdClass
@@ -371,5 +371,38 @@ class EventAdherentRegistration
     public function getCost()
     {
         return $this->cost;
+    }
+
+    /**
+     * Add payments
+     *
+     * @param \AppBundle\Entity\Payment\EventPayment $payments
+     * @return EventAdherentRegistration
+     */
+    public function addPayment(\AppBundle\Entity\Payment\EventPayment $payments)
+    {
+        $this->payments[] = $payments;
+
+        return $this;
+    }
+
+    /**
+     * Remove payments
+     *
+     * @param \AppBundle\Entity\Payment\EventPayment $payments
+     */
+    public function removePayment(\AppBundle\Entity\Payment\EventPayment $payments)
+    {
+        $this->payments->removeElement($payments);
+    }
+
+    /**
+     * Get payments
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getPayments()
+    {
+        return $this->payments;
     }
 }

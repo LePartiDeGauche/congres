@@ -1,0 +1,18 @@
+{% extends '::base.html.twig' %}
+{% import 'LexikPayboxBundle:Macro:paybox.html.twig' as paybox %}
+
+{% block body %}
+<h1>Paiment en ligne</h1>
+        <div class="alert alert-info text-justify" role="alert">
+            <p>
+            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+Vous avez choisi le paiment en ligne,
+En cliquant sur payer, vous allez être rediriger vers paybox pour le paiment
+            </p>
+
+        </div>
+<form action="{{ url }}" method="post">
+    {{ paybox.form(form) }}
+<input type="submit" value="Payer" />
+</form>
+{% endblock %}

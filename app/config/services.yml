@@ -38,6 +38,11 @@ services:
         arguments: [@doctrine.orm.entity_manager]
         tags:
            - { name: security.voter }
+    app.payment_response_listener:
+        class: AppBundle\EventListener\PaymentResponseListener
+        arguments: [@doctrine.orm.entity_manager]
+        tags:
+            - { name: kernel.event_listener, event: paybox.ipn_response, method: onPaymentIpnResponse }
 
 # Import admin services
 imports:

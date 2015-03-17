@@ -1,0 +1,10 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+<h1>Status : {{ status }}</h1>
+<ul>
+    {% for key, value in parameters %}
+    <li>{{ key }} : {{ value }}</li>
+    {% endfor %}
+</ul>
+{% endblock %}
