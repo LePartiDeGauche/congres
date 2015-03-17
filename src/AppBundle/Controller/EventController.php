@@ -126,21 +126,23 @@ class EventController extends Controller
     }
 
     /**
-     * Lists all Event\Event entities.
+     * Lists all Event\EventAdherentRegistration entities.
      *
-     * @Route("/list", name="event")
+     * @Route("/registration/user", name="event_adherent_registration_list")
      * @Method("GET")
-     * @Template("event/index.html.twig")
      */
     public function indexAction()
     {
+        $adherent = $this->getUser()->getProfile();
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('AppBundle:Event\Event')->findAll();
+        $eventRegs = $em->getRepository('AppBundle:Event\EventAdherentRegistration')->findByAuthor($adherent);
 
-        return array(
-            'entities' => $entities,
-        );
+        return $this->render('event/adherent_registration_list.html.twig', array(
+            'eventRegistrations' => $eventRegs,
+            'adherent' => $adherent
+        ));
+
     }
 
 

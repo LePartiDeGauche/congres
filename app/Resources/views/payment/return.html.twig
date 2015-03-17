@@ -1,10 +1,30 @@
 {% extends '::base.html.twig' %}
 
 {% block body %}
-<h1>Status : {{ status }}</h1>
-<ul>
-    {% for key, value in parameters %}
-    <li>{{ key }} : {{ value }}</li>
-    {% endfor %}
-</ul>
+<div class="container">
+    <div class="row">
+        {% if status == "success" %}
+        <h1>Le paiment s'est déroulé correctement !</h1>
+        <p>Vous devriez recevoir par courriel la confirmation de la validation du paiement dans les
+        prochaines minutes.</p>
+        {% endif%}
+
+        {% if status == "denied" %}
+        <h1>Votre paiement à été refusé</h1>
+        <p>Merci de retourner sur votre fiche d'inscription (Mon compte &gt; Mes inscription), et de
+        demander un nouveau paiement</p>
+        
+        {% endif%}
+        {% if status == "canceled" %}
+        <h1>Vous n'êtes pas allé au bout du processus de paiement</h1>
+        <p>Merci de retourner sur votre fiche d'inscription (Mon compte &gt; Mes inscription), et de
+        demander un nouveau paiement</p>
+        {% endif%}
+        <ul>
+            {% for key, value in parameters %}
+            <li>{{ key }} : {{ value }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
 {% endblock %}

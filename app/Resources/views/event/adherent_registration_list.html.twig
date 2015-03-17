@@ -1,0 +1,61 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}Liste des textes de {{adherent.firstname}} {{ adherent.lastname }}{% endblock %}
+{% block javascripts %}
+{{ parent() }}
+<script type="text/javascript" src="{{ asset('js/jquery.tablesorter.min.js') }}"></script>
+<script type="text/javascript">
+$(document).ready(function() 
+        { 
+            $(".tablesorter").tablesorter({ 
+                cssAsc: "glyphicon glyphicon-sort-by-attributes-alt",
+                cssDesc: "glyphicon glyphicon-sort-by-attributes",
+            } 
+            ); 
+        } 
+        ); 
+</script>
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>Inscriptions aux évenements de {{ adherent.firstname }} {{ adherent.lastname}}</h1>
+            <table class="table tablesorter">
+                <thead>
+                    <tr>
+                        <th>Évenement</th>
+                        <th>Rôle</th>
+                        <th>Paiement</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for eventReg in eventRegistrations %}
+                    <tr>
+                        <td>
+                            <a href="{{ path('event_registration_show', {event_id:
+                            eventReg.event.id, event_reg_id: eventReg.id}) }}">
+                                {{eventReg.event.name }}
+                            </a>
+                        </td>
+                        <td>
+                            {{eventReg.role.name}}
+                        </td>
+                        <td>
+                            <ul>
+
+                                {% for payment in eventReg.payments %}
+                                <li>Transaction n°{{payment.id}}, Montant: {{payment.amount}}, Statut {{payment.status |trans }}</li>
+                                {%endfor%}
+                            </ul>
+                        </td>
+
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div><!-- .col-md-12 -->
+    </div><!-- .row -->
+</div><!-- .container -->
+{% endblock %}
