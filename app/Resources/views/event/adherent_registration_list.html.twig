@@ -46,7 +46,25 @@ $(document).ready(function()
                             <ul>
 
                                 {% for payment in eventReg.payments %}
-                                <li>Transaction n°{{payment.id}}, Montant: {{payment.amount}}, Statut {{payment.status |trans }}</li>
+                                <li>Transaction n°{{payment.id}}, Montant: {{payment.amount}}€,
+                                    {# FIXME : Change this way of display #}
+                                    {% if  payment.status ==
+                                    constant('\\AppBundle\\Entity\\Payment\\Payment::STATUS_NEW') %}
+                                    Non effectué
+                                    {% elseif  payment.status ==
+                                    constant('\\AppBundle\\Entity\\Payment\\Payment::STATUS_PENDING') %}
+                                    En cours de validation
+                                    {% elseif  payment.status ==
+                                    constant('\\AppBundle\\Entity\\Payment\\Payment::STATUS_REFUSED') %}
+                                    Refusé
+                                    {% elseif  payment.status ==
+                                    constant('\\AppBundle\\Entity\\Payment\\Payment::STATUS_CANCELED') %}
+                                    Annulé
+                                    {% elseif  payment.status ==
+                                    constant('\\AppBundle\\Entity\\Payment\\Payment::STATUS_BANKED') %}
+                                    Validé
+                                    {% endif%}
+                                </li>
                                 {%endfor%}
                             </ul>
                         </td>
