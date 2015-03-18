@@ -17,7 +17,7 @@ class EventAdherentRegistrationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('needHosting', NULL, array('label' => 'J\'ai besoin d\'un hebergement militant', 'required' => false))
+            ->add('needHosting', NULL, array('label' => 'J\'ai besoin d\'un hébergement militant', 'required' => false))
             ->add('comment')
             ->add('paymentMode', 'choice',
                 array(

@@ -217,7 +217,7 @@ class EventMeal
 
     public function __toString()
     {
-        return $this->name . ' - ' . $this->mealTime->format('l d M Y H:i:s');
+        return $this->name;
     
     }
 
