@@ -9,9 +9,10 @@
         {{event.description}}
         </p>
         {{ form_start(form) }}
+
         <h2>Rôle</h2>
         <p class="text-muted">Quel sera votre rôle durant l'évenement ?</p>
-        
+
         {{ form_errors(form.role) }}
         {{ form_widget(form.role) }}
         <h2>Hébergement</h2>
@@ -33,6 +34,11 @@
 
         {{ form_errors(form.paymentMode) }}
         {{ form_widget(form.paymentMode) }}
+
+        <h2>Commentaire</h2>
+        <p class="text-muted">Vous avez une question, un point d'attention, des information à
+        données pour l'hébergement militant ou tout autre chose, c'est ici !</p>
+        {{ form_widget(form.comment) }}
 
         {{form_rest(form)}}
         {{ form_end(form) }}

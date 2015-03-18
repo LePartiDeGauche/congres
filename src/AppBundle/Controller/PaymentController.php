@@ -54,6 +54,8 @@ class PaymentController extends Controller
                 'PBX_RUF1'         => 'POST',
                 'PBX_REPONDRE_A' => $this->generateUrl('lexik_paybox_ipn', array('time' => time()), true),
             ));
+
+            $payment->setStatus(Payment::STATUS_PENDING);
             return $this->render("payment/pay.html.twig", array(
                 'url'  => $paybox->getUrl(),
                 'form' => $paybox->getForm()->createView(),

@@ -32,6 +32,7 @@ class EventAdmin extends Admin
         $listMapper
             ->add('id')
             ->add('name', NULL, array('label' => 'Nom'))
+            ->add('normalizedName', NULL, array('label' => 'Nom affiché dans paybox'))
             ->add('description', NULL, array('label' => 'Description'))
             ->add('registrationBegin', NULL, array('label' => 'Début des inscriptions'))
             ->add('registrationEnd', NULL, array('label' => 'Fin des inscriptions'))
@@ -52,6 +53,7 @@ class EventAdmin extends Admin
     {
         $formMapper
             ->add('name', NULL, array('label' => 'Nom'))
+            ->add('normalizedName', NULL, array('label' => 'Nom affiché dans paybox (sans espace, sans tiret, sans caractères spéciaux)'))
             ->add('description', NULL, array('label' => 'Description'))
             ->add('registrationBegin', NULL, array('label' => 'Début des inscriptions'))
             ->add('registrationEnd', NULL, array('label' => 'Fin des inscriptions'))
@@ -106,6 +108,7 @@ class EventAdmin extends Admin
     {
         $showMapper
             ->add('name', NULL, array('label' => 'Nom'))
+            ->add('normalizedName', NULL, array('label' => 'Nom affiché dans paybox'))
             ->add('description', NULL, array('label' => 'Description'))
             ->add('registrationBegin', NULL, array('label' => 'Début des inscriptions'))
             ->add('registrationEnd', NULL, array('label' => 'Fin des inscriptions'))

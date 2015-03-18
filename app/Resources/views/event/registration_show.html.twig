@@ -25,14 +25,14 @@
         {% if eventRegistration.meals.count > 0 %}
         <ul>
             {% for meal in eventRegistration.meals %}
-            <li>{{meal.name}} à {{meal.mealTime}}</li>
+            <li>{{meal.name}}</li>
             {% endfor %}
         </ul>
         {% else %}
         Pas de repas
         {% endif %}
         <h2>Paiement</h2>
-        
+
         <table class="table">
             <thead>
                 <tr>
@@ -45,14 +45,35 @@
             <tbody>
                 {% for payment in eventRegistration.payments %}
                 <tr>
-                    <td>{{payment.id}}</td>
+                    <td>n°{{payment.id}}</td>
                     <td>{{payment.amount}}€</td>
                     <td>{{payment.method |trans }}</td>
-                    <td>{{payment.status |trans }}</td>
+                    <td>
+
+                        {# FIXME : Change this way of display #}
+                        {% if  payment.status ==
+                        constant('\\AppBundle\\Entity\\Payment\\Payment::STATUS_NEW') %}
+                        Non effectué
+                        {% elseif  payment.status ==
+                        constant('\\AppBundle\\Entity\\Payment\\Payment::STATUS_PENDING') %}
+                        En cours de validation
+                        {% elseif  payment.status ==
+                        constant('\\AppBundle\\Entity\\Payment\\Payment::STATUS_REFUSED') %}
+                        Refusé
+                        {% elseif  payment.status ==
+                        constant('\\AppBundle\\Entity\\Payment\\Payment::STATUS_CANCELED') %}
+                        Annulé
+                        {% elseif  payment.status ==
+                        constant('\\AppBundle\\Entity\\Payment\\Payment::STATUS_BANKED') %}
+                        Validé
+                        {% endif%}
+                    </td>
                 </tr>
                 {%endfor%}
             </tbody>
         </table>
+        <h2>Commentaires</h2>
+        {{ eventRegistration.comment }}
     </div><!-- .row -->
 </div><!-- .container -->
 {% endblock %}

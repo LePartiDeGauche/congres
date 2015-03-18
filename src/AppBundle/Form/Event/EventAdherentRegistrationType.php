@@ -18,6 +18,7 @@ class EventAdherentRegistrationType extends AbstractType
     {
         $builder
             ->add('needHosting', NULL, array('label' => 'J\'ai besoin d\'un hebergement militant', 'required' => false))
+            ->add('comment')
             ->add('paymentMode', 'choice',
                 array(
                     'choices' => array(
