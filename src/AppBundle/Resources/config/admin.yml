@@ -120,3 +120,9 @@ services:
         arguments: [~, AppBundle\Entity\Event\EventCost, SonataAdminBundle:CRUD]
         tags:
             - {name: sonata.admin, manager_type: orm, group: admin, label: EventCost}
+
+    app.admin.event_adherent_registration:
+        class: AppBundle\Admin\EventAdherentRegistrationAdmin
+        arguments: [~, AppBundle\Entity\Event\EventAdherentRegistration, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin, label: EventAdherentRegistration}
