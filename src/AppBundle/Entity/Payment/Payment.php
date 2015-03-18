@@ -396,4 +396,10 @@ abstract class Payment
     {
         return $this->paymentIPN;
     }
+
+    public function __toString()
+    {
+        return $this->amount . '€ - ' . $this->status;
+    
+    }
 }

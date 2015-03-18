@@ -7,6 +7,7 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
+use AppBundle\Entity\Event\EventAdherentRegistration;
 
 class EventAdherentRegistrationAdmin extends Admin
 {
@@ -23,7 +24,7 @@ class EventAdherentRegistrationAdmin extends Admin
             ->add('paymentMode')
             ->add('registrationDate')
             ->add('comment')
-        ;
+            ;
     }
 
     /**
@@ -33,10 +34,23 @@ class EventAdherentRegistrationAdmin extends Admin
     {
         $listMapper
             ->add('id')
-            ->add('needHosting')
-            ->add('paymentMode')
+            ->add('adherent.firstname', NULL, array('label' => 'Prénom'))
+            ->add('adherent.lastname', NULL, array('label' => 'Nom'))
+            ->add('needHosting', NULL, array('label' => 'Hebergement'))
             ->add('registrationDate')
-            ->add('comment')
+            ->add('cost', NULL, array('label' => 'Tarif'))
+            ->add('paymentMode', 'choice', array(
+                'label' => 'Type de Paiement',
+                'multiple' => false,
+                'choices' => array(
+                    EventAdherentRegistration::PAYMENT_MODE_ONLINE => 'En ligne',
+                    EventAdherentRegistration::PAYMENT_MODE_ONSITE => 'Sur place',
+                )
+            ))
+            ->add('payments', null, array(
+                'label' => 'Paiements',
+            ))
+            ->add('meals', null, array('label' => 'Repas'))
             ->add('_action', 'actions', array(
                 'actions' => array(
                     'show' => array(),
@@ -44,7 +58,7 @@ class EventAdherentRegistrationAdmin extends Admin
                     'delete' => array(),
                 )
             ))
-        ;
+            ;
     }
 
     /**
@@ -53,12 +67,31 @@ class EventAdherentRegistrationAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('id')
+            ->add('adherent.firstname', NULL, array('label' => 'Prénom', 'read_only' => true,))
+            ->add('adherent.lastname', NULL, array('label' => 'Nom', 'read_only' => true,))
+            ->add('registrationDate',null, array('read_only' => true,'disabled'  => true,))
+            // FIXME: filter role of this event !
+            ->add('role', null, array('read_only' =>true, 'disabled' => true))
             ->add('needHosting')
-            ->add('paymentMode')
-            ->add('registrationDate')
+            ->add('cost', NULL, array('label' => 'Tarif'))
+            ->add('paymentMode', 'choice', array(
+                'label' => 'Type de Paiement',
+                'multiple' => false,
+                'choices' => array(
+                    EventAdherentRegistration::PAYMENT_MODE_ONLINE => 'En ligne',
+                    EventAdherentRegistration::PAYMENT_MODE_ONSITE => 'Sur place',
+                )
+            ))
+            ->add('payments', null, array(
+                'label' => 'Paiements',
+                'read_only' => true,
+                'disabled'  => true,
+            ))
+            // FIXME: filter meal of this event !
+            ->add('meals', null, array('label' => 'Repas', 'expanded' => true))
+
             ->add('comment')
-        ;
+            ;
     }
 
     /**
@@ -67,11 +100,27 @@ class EventAdherentRegistrationAdmin extends Admin
     protected function configureShowFields(ShowMapper $showMapper)
     {
         $showMapper
-            ->add('id')
+            ->add('adherent.firstname', NULL, array('label' => 'Prénom', 'read_only' => true,))
+            ->add('adherent.lastname', NULL, array('label' => 'Nom', 'read_only' => true,))
+            ->add('registrationDate',null, array('read_only' => true,'disabled'  => true,))
+            ->add('role', null, array('read_only' =>true, 'disabled' => true))
             ->add('needHosting')
-            ->add('paymentMode')
-            ->add('registrationDate')
+            ->add('cost', NULL, array('label' => 'Tarif'))
+            ->add('paymentMode', 'choice', array(
+                'label' => 'Type de Paiement',
+                'multiple' => false,
+                'choices' => array(
+                    EventAdherentRegistration::PAYMENT_MODE_ONLINE => 'En ligne',
+                    EventAdherentRegistration::PAYMENT_MODE_ONSITE => 'Sur place',
+                )
+            ))
+            ->add('payments', null, array(
+                'label' => 'Paiements',
+                'read_only' => true,
+                'disabled'  => true,
+            ))
+            ->add('meals', null, array('label' => 'Repas', 'expanded' => true))
             ->add('comment')
-        ;
+            ;
     }
 }

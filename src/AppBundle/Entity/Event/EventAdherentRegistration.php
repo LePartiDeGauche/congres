@@ -14,7 +14,7 @@ class EventAdherentRegistration
 {
 
     const PAYMENT_MODE_ONLINE = 'online';
-    const PAYMENT_MODE_ONSITE = 'onsite';
+    const PAYMENT_MODE_ONSITE = 'onsite';
     /**
      * @var integer
      *
