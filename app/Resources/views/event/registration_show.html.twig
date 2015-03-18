@@ -32,7 +32,23 @@
         Pas de repas
         {% endif %}
         <h2>Paiement</h2>
+        <p>
+        {% if payedAmount >= eventRegistration.cost.cost%}
+        Vous avez payé votre participation de {{ eventRegistration.cost.cost}}
+        {% else %}
+        Vous n'avez pas payé l'intégralité de votre participation, <br />
+        Reste à payer : <strong>{{eventRegistration.cost.cost - payedAmount}}<br />
+            {%if eventRegistration.paymentMode ==
+            constant("\\AppBundle\\Entity\\Event\\EventAdherentRegistration::PAYMENT_MODE_ONLINE")%}
+            <a href="{{ path('event_registration_new_payment', {event_id:
+            event.id, event_reg_id: eventRegistration.id})
+            }}">Effectuer un nouveau paiement</a>
+            {% endif %}
+            {% endif %}
+        </strong>
+        </p>
 
+        <h3>Historique</h3>
         <table class="table">
             <thead>
                 <tr>

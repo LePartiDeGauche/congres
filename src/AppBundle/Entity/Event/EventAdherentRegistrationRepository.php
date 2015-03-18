@@ -3,6 +3,7 @@
 namespace AppBundle\Entity\Event;
 
 use Doctrine\ORM\EntityRepository;
+use AppBundle\Entity\Payment\Payment;
 
 /**
  * EventAdherentRegistrationRepository
@@ -13,6 +14,19 @@ use Doctrine\ORM\EntityRepository;
 class EventAdherentRegistrationRepository extends EntityRepository
 {
     protected $classname = 'AppBundle\Entity\Event\EventAdherentRegistration';
+
+    public function getPayedAmountById (EventAdherentRegistration $ear)
+    {
+        $payedAmount = $this->createQueryBuilder('ear')
+            ->select('SUM(p.amount)')
+            ->innerJoin('ear.payments', 'p')
+            ->where('ear.id = :ear')
+            ->andWhere('p.status = :status')
+            ->setParameter('ear', $ear->getId())
+            ->setParameter('status', Payment::STATUS_BANKED)
+            ->getQuery()->getSingleScalarResult();
+        return $payedAmount;
+    }
 
 
 }

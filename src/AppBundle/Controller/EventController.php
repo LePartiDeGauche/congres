@@ -3,12 +3,14 @@
 namespace AppBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use AppBundle\Entity\Event\Event;
+use AppBundle\Entity\Adherent;
 use AppBundle\Entity\Event\EventAdherentRegistration;
 use AppBundle\Form\Event\EventType;
 use AppBundle\Form\Event\EventAdherentRegistrationType;
@@ -41,10 +43,53 @@ class EventController extends Controller
             throw new AccessDeniedException();
         }
 
+        $em = $this->getDoctrine()->getManager();
+        $repo = $em->getRepository("AppBundle:Event\EventAdherentRegistration");
+
+        $payedAmount = $repo->getPayedAmountById($eventRegistration);
+
         return array(
             'event'      => $event,
-            'eventRegistration' => $eventRegistration
+            'eventRegistration' => $eventRegistration,
+            'payedAmount' => $payedAmount,
         );
+    }
+
+    /**
+     * Make a new payment for Event\EventAdherentRegistration entity.
+     *
+     * @Route("/{event_id}/registration/{event_reg_id}/payment",
+     *  name="event_registration_new_payment", requirements={
+     *     "event_id": "\d+",
+     *     "event_reg_id": "\d+"
+     *     })
+     * @Method("GET")
+     * @ParamConverter("event", class="AppBundle:Event\Event", options={"id" = "event_id"})
+     * @ParamConverter("eventRegistration", class="AppBundle:Event\EventAdherentRegistration",
+     * options={"id" = "event_reg_id"})
+     */
+    public function registrationNewPaymentAction(Event $event, EventAdherentRegistration $eventRegistration)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $repo = $em->getRepository("AppBundle:Event\EventAdherentRegistration");
+        $payedAmount = $repo->getPayedAmountById($eventRegistration);
+        $cost = $eventRegistration->getCost()->getCost();
+        $adherent = $this->getUser()->getProfile();
+
+        if ($payedAmount < $cost)
+        {
+            $payment = $this->createPayment($adherent, $event, $eventRegistration, $cost - $payedAmount);
+
+            $em->persist($payment);
+            $em->flush();
+
+            return $this->redirect($this->generateUrl('payment_pay',
+                array('id' => $payment->getId())));
+
+        }
+
+            return $this->redirect($this->generateUrl('event_registration_show',
+                array('event_id' => $event->getId(), 'event_reg_id' => $eventRegistration->getId())));
     }
 
     /**
@@ -59,7 +104,28 @@ class EventController extends Controller
     public function registerAction(Request $request, Event $event)
     {
         $adherent = $this->getUser()->getProfile();
+        $em = $this->getDoctrine()->getManager();
+
+        // TODO voter (no time for this now...)
+        $now = new \DateTime('now');
+
+        if ($now < $event->getRegistrationBegin() || $now > $event->getRegistrationEnd())
+        {
+            throw new AccessDeniedException("Les inscriptions ne sont pas ouvertes");
+        }
+
+        $eventRegistration = $this->getDoctrine()
+            ->getRepository('AppBundle:Event\EventAdherentRegistration')
+            ->findOneBy(array('adherent' => $adherent, 'event' => $event));
+
+        if ($eventRegistration) 
+        {
+            return $this->redirect($this->generateUrl('event_registration_show',
+                array('event_id' => $event->getId(), 'event_reg_id' => $eventRegistration->getId())));
+        }
+
         $eventRegistration = new EventAdherentRegistration($this->getUser()->getProfile(), $event);
+
 
         $eventRegistration->setAdherent($adherent);
         $form = $this->createRegistrationCreateForm($eventRegistration, $event);
@@ -73,29 +139,22 @@ class EventController extends Controller
             $eventRegistration->setRegistrationDate(new \DateTime('now'));
             $eventRegistration->setAdherent($adherent);
 
-            $this->getDoctrine()->getManager()->persist($eventRegistration);
-            $this->getDoctrine()->getManager()->flush();
+            $em->persist($eventRegistration);
+            $em->flush();
 
             if ($eventRegistration->getPaymentMode() == EventAdherentRegistration::PAYMENT_MODE_ONLINE)
             {
-                $eventPayment = new EventPayment($adherent, $event, $eventRegistration);
-                $eventPayment->setAmount($eventRegistration->getCost()->getCost())
-                    ->setMethod(EventPayment::METHOD_CREDIT_CARD)
-                    ->setStatus(EventPayment::STATUS_NEW)
-                    ->setDrawer($adherent)
-                    ->setRecipient($adherent)
-                    ->setDate(new \DateTime('now'))
-                    ->setReferenceIdentifierPrefix($event->getNormalizedName())
-                    ->setAccount(EventPayment::ACCOUNT_PG); // FIXME : multiple account gestion, the account as to be choosen when creating the event. Needed to modify PayboxBundle to manage multiple id
+                $eventPayment = $this->createPayment($adherent, $event, $eventRegistration, $eventRegistration->getCost()->getCost());
+                $em->persist($eventPayment);
+                $em->flush();
 
-                $this->getDoctrine()->getManager()->persist($eventPayment);
-                $this->getDoctrine()->getManager()->flush();
-
-                return $this->redirect($this->generateUrl('payment_pay', array('id' => $eventPayment->getId())));
+                return $this->redirect($this->generateUrl('payment_pay',
+                    array('id' => $eventPayment->getId())));
             }
             else
             {
-                return $this->redirect($this->generateUrl('event_registration_show', array('event_id' => $event->getId(), 'event_reg_id' => $eventRegistration->getId())));
+                return $this->redirect($this->generateUrl('event_registration_show',
+                    array('event_id' => $event->getId(), 'event_reg_id' => $eventRegistration->getId())));
             }
         }
 
@@ -163,5 +222,20 @@ class EventController extends Controller
         $form->add('submit', 'submit', array('label' => 'Create'));
 
         return $form;
+    }
+
+    private function createPayment(Adherent $adherent, Event $event, EventAdherentRegistration $eventRegistration, $amount)
+    {
+        $eventPayment = new EventPayment($adherent, $event, $eventRegistration, $amount);
+        $eventPayment->setAmount($amount)
+            ->setMethod(EventPayment::METHOD_CREDIT_CARD)
+            ->setStatus(EventPayment::STATUS_NEW)
+            ->setDrawer($adherent)
+            ->setRecipient($adherent)
+            ->setDate(new \DateTime('now'))
+            ->setReferenceIdentifierPrefix($event->getNormalizedName())
+            ->setAccount(EventPayment::ACCOUNT_PG); // FIXME : multiple account gestion, the account as to be choosen when creating the event. Needed to modify PayboxBundle to manage multiple id
+
+        return $eventPayment;
     }
 }
