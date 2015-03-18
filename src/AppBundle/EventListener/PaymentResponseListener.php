@@ -6,6 +6,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Lexik\Bundle\PayboxBundle\Event\PayboxResponseEvent;
 use Doctrine\ORM\EntityManager;
+use AppBundle\Entity\Payment\Payment;
 
 class PaymentResponseListener
 {
