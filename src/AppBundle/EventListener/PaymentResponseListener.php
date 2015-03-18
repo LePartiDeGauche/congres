@@ -8,14 +8,18 @@ use Lexik\Bundle\PayboxBundle\Event\PayboxResponseEvent;
 
 class PaymentResponseListener
 {
+    private $em;
 
+    public function __construct(EntityManager $em)
+    {
+        $this->em = $em;
+    }
 
     public function onPaymentIpnResponse(PayboxResponseEvent $event)
     {
 
         if ($event->isVerified())
         {
-            $em = $this->get('doctrine')->getEntityManager();
             $data = $event->getData();
             $ref = explode('-', $data['Ref']);
             $payment_id = $ref[count($ref) - 1];
