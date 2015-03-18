@@ -110,6 +110,15 @@ class EventAdherentRegistration
      */
     private $registrationDate;
 
+
+    /**
+     * @var text 
+     *
+     * @ORM\Column(name="comment", type="text", nullable=true)
+     */
+    private $comment;
+
+
     public function __construct(\AppBundle\Entity\Adherent $author, Event $event)
     {
         $this->author = $author;
@@ -404,5 +413,28 @@ class EventAdherentRegistration
     public function getPayments()
     {
         return $this->payments;
+    }
+
+    /**
+     * Set comment
+     *
+     * @param string $comment
+     * @return EventAdherentRegistration
+     */
+    public function setComment($comment)
+    {
+        $this->comment = $comment;
+
+        return $this;
+    }
+
+    /**
+     * Get comment
+     *
+     * @return string 
+     */
+    public function getComment()
+    {
+        return $this->comment;
     }
 }
