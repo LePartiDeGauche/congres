@@ -22,7 +22,7 @@ services:
     sonata.admin.user:
         class: AppBundle\Admin\UserAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: "Application", label: "Utilisateurs"}
+            - { name: sonata.admin, manager_type: orm, group: "Application", label: "Utilisateurs du site"}
         arguments:
             - ~
             - AppBundle\Entity\User
@@ -71,11 +71,12 @@ services:
         tags:
             - {name: sonata.admin, manager_type: orm, group: "Evenements", label: "Évenements"}
 
-    app.admin.event_role:
-        class: AppBundle\Admin\EventRoleAdmin
-        arguments: [~, AppBundle\Entity\Event\EventRole, SonataAdminBundle:CRUD]
+    app.admin.event_adherent_registration:
+        class: AppBundle\Admin\EventAdherentRegistrationAdmin
+        arguments: [~, AppBundle\Entity\Event\EventAdherentRegistration, SonataAdminBundle:CRUD]
         tags:
-            - {name: sonata.admin, manager_type: orm, group: "Evenements", label: "Rôles d'évenements"}
+            - {name: sonata.admin, manager_type: orm, group: "Evenements", label: "Inscription des adherents"}
+
 
     app.admin.sleeping_facility:
         class: AppBundle\Admin\SleepingFacilityAdmin
@@ -87,7 +88,7 @@ services:
         class: AppBundle\Admin\AddressAdmin
         arguments: [~, AppBundle\Entity\Address, SonataAdminBundle:CRUD]
         tags:
-            - {name: sonata.admin, manager_type: orm, group: admin, label: Address}
+            - {name: sonata.admin, manager_type: orm, group: admin, label: Address, show_in_dashboard: false }
 
     app.admin.text_group:
         class: AppBundle\Admin\TextGroupAdmin
@@ -95,34 +96,35 @@ services:
         tags:
             - {name: sonata.admin, manager_type: orm, group: "Texte", label: "Groupes de textes"}
 
-    app.admin.vote_rule:
-        class: AppBundle\Admin\VoteRuleAdmin
-        arguments: [~, AppBundle\Entity\Vote\VoteRule, SonataAdminBundle:CRUD]
-        tags:
-            - {name: sonata.admin, manager_type: orm, group: "Texte", label: "Règles de votes"}
-        calls:
-            - [setSubClasses, [{threshold: AppBundle\Entity\Vote\ThresholdVoteRule}]]
-
     app.admin.text:
         class: AppBundle\Admin\TextAdmin
         arguments: [~, AppBundle\Entity\Text\Text, SonataAdminBundle:CRUD]
         tags:
             - {name: sonata.admin, manager_type: orm, group: "Texte", label: "Textes"}
 
+    app.admin.vote_rule:
+        class: AppBundle\Admin\VoteRuleAdmin
+        arguments: [~, AppBundle\Entity\Vote\VoteRule, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: "Texte", label: "Règles de votes", show_in_dashboard: false }
+        calls:
+            - [setSubClasses, [{threshold: AppBundle\Entity\Vote\ThresholdVoteRule}]]
+
+
     app.admin.event_meal:
         class: AppBundle\Admin\EventMealAdmin
         arguments: [~, AppBundle\Entity\Event\EventMeal, SonataAdminBundle:CRUD]
         tags:
-            - {name: sonata.admin, manager_type: orm, group: admin, label: EventMeal}
+            - {name: sonata.admin, manager_type: orm, group: admin, label: EventMeal, show_in_dashboard: false }
 
     app.admin.event_cost:
         class: AppBundle\Admin\EventCostAdmin
         arguments: [~, AppBundle\Entity\Event\EventCost, SonataAdminBundle:CRUD]
         tags:
-            - {name: sonata.admin, manager_type: orm, group: admin, label: EventCost}
+            - {name: sonata.admin, manager_type: orm, group: admin, label: EventCost, show_in_dashboard: false }
 
-    app.admin.event_adherent_registration:
-        class: AppBundle\Admin\EventAdherentRegistrationAdmin
-        arguments: [~, AppBundle\Entity\Event\EventAdherentRegistration, SonataAdminBundle:CRUD]
+    app.admin.event_role:
+        class: AppBundle\Admin\EventRoleAdmin
+        arguments: [~, AppBundle\Entity\Event\EventRole, SonataAdminBundle:CRUD]
         tags:
-            - {name: sonata.admin, manager_type: orm, group: admin, label: EventAdherentRegistration}
+            - {name: sonata.admin, manager_type: orm, group: "Evenements", label: "Rôles d'évenements", show_in_dashboard: false }
