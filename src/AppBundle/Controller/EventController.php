@@ -106,13 +106,6 @@ class EventController extends Controller
         $adherent = $this->getUser()->getProfile();
         $em = $this->getDoctrine()->getManager();
 
-        // TODO voter (no time for this now...)
-        $now = new \DateTime('now');
-
-        if ($now < $event->getRegistrationBegin() || $now > $event->getRegistrationEnd())
-        {
-            throw new AccessDeniedException("Les inscriptions ne sont pas ouvertes");
-        }
 
         $eventRegistration = $this->getDoctrine()
             ->getRepository('AppBundle:Event\EventAdherentRegistration')
@@ -123,6 +116,14 @@ class EventController extends Controller
             return $this->redirect($this->generateUrl('event_registration_show',
                 array('event_id' => $event->getId(), 'event_reg_id' => $eventRegistration->getId())));
         }
+
+        // TODO voter (no time for this now...)
+        $now = new \DateTime('now');
+        if ($now < $event->getRegistrationBegin() || $now > $event->getRegistrationEnd())
+        {
+            throw new AccessDeniedException("Les inscriptions ne sont pas ouvertes");
+        }
+
 
         $eventRegistration = new EventAdherentRegistration($this->getUser()->getProfile(), $event);
 
