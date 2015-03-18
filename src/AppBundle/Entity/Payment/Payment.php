@@ -207,7 +207,8 @@ abstract class Payment
             self::STATUS_NEW,
             self::STATUS_PENDING,
             self::STATUS_BANKED,
-            self::STATUS_REFUSED
+            self::STATUS_REFUSED,
+            self::STATUS_CANCELED
         )))
         {
             throw new \InvalidArgumentException('Invalid Status');

@@ -25,7 +25,7 @@ class PaymentResponseListener
             $ref = explode('-', $data['Ref']);
             $payment_id = $ref[count($ref) - 1];
 
-            $payment = $this->em->getRepository('AppBundle:Payment\Payment')->findOneById();
+            $payment = $this->em->getRepository('AppBundle:Payment\Payment')->findOneById($payment_id);
             $payment->setPaymentIPN($data);
 
             if ($data['Erreur'] == 0000)
@@ -36,6 +36,8 @@ class PaymentResponseListener
             {
                 $payment->setStatus(Payment::STATUS_REFUSED);
             }
+            $this->em->persist($payment);
+            $this->em->flush();
         }
 
     }

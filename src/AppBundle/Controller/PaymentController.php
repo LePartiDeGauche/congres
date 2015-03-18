@@ -56,6 +56,10 @@ class PaymentController extends Controller
             ));
 
             $payment->setStatus(Payment::STATUS_PENDING);
+            $this->getDoctrine()->getManager()->persist($payment);
+            $this->getDoctrine()->getManager()->flush();
+
+
             return $this->render("payment/pay.html.twig", array(
                 'url'  => $paybox->getUrl(),
                 'form' => $paybox->getForm()->createView(),
