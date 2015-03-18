@@ -15,7 +15,7 @@ class PaymentResponseListener
 
         if ($event->isVerified())
         {
-            $em = $this->getDoctrine()->getManager();
+            $em = $this->get('doctrine')->getEntityManager();
             $data = $event->getData();
             $ref = explode('-', $data['Ref']);
             $payment_id = $ref[count($ref) - 1];

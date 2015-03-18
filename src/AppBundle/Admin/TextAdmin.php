@@ -12,7 +12,7 @@ use AppBundle\Entity\Text\Text;
 class TextAdmin extends Admin
 {
     protected $baseRouteName = 'text_admin';
-    protected $baseRoutePattern = 'text_admin';
+    protected $baseRoutePattern = 'text';
     /**
      * @param DatagridMapper $datagridMapper
      */

@@ -41,6 +41,7 @@ security:
             anonymous: ~
 
     access_control:
+        - { path: ^/payment-ipn/.*, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/inscription, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/mot-de-passe, role: IS_AUTHENTICATED_ANONYMOUSLY }

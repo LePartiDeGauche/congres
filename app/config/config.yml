@@ -118,7 +118,7 @@ lexik_paybox:
         login:      %paybox_login% # Customer's login provided by Paybox
         hmac:
             key:    %paybox_hmac_key% # Key used to compute the hmac hash, provided by Paybox
-            signature_name: Sign
+            signature_name: 'Sign'
         
 
 stfalcon_tinymce:
