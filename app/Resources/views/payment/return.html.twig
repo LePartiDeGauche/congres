@@ -11,20 +11,15 @@
 
         {% if status == "denied" %}
         <h1>Votre paiement à été refusé</h1>
-        <p>Merci de retourner sur votre fiche d'inscription (Mon compte &gt; Mes inscription), et de
+<p>Merci de retourner sur votre fiche d'inscription <strong>Mon compte &gt; Mes inscription</strong>, et de
         demander un nouveau paiement</p>
         
         {% endif%}
         {% if status == "canceled" %}
         <h1>Vous n'êtes pas allé au bout du processus de paiement</h1>
-        <p>Merci de retourner sur votre fiche d'inscription (Mon compte &gt; Mes inscription), et de
+<p>Merci de retourner sur votre fiche d'inscription <strong>Mon compte &gt; Mes inscription</strong>, et de
         demander un nouveau paiement</p>
         {% endif%}
-        <ul>
-            {% for key, value in parameters %}
-            <li>{{ key }} : {{ value }}</li>
-            {% endfor %}
-        </ul>
     </div>
 </div>
 {% endblock %}
