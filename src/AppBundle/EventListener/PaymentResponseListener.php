@@ -25,7 +25,7 @@ class PaymentResponseListener
             $ref = explode('-', $data['Ref']);
             $payment_id = $ref[count($ref) - 1];
 
-            $payment = $em->getRepository('AppBundle:Payment\Payment')->findOneById();
+            $payment = $this->em->getRepository('AppBundle:Payment\Payment')->findOneById();
             $payment->setPaymentIPN($data);
 
             if ($data['Erreur'] == 0000)
