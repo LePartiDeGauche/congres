@@ -18,6 +18,7 @@ class EventAdherentRegistrationAdmin extends Admin
      */
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
+        // FIXME : add fields
         $datagridMapper
             ->add('id')
             ->add('needHosting')
@@ -73,6 +74,7 @@ class EventAdherentRegistrationAdmin extends Admin
             // FIXME: filter role of this event !
             ->add('role', null, array('read_only' =>true, 'disabled' => true))
             ->add('needHosting')
+            // FIXME: filter cost of this event !
             ->add('cost', NULL, array('label' => 'Tarif'))
             ->add('paymentMode', 'choice', array(
                 'label' => 'Type de Paiement',
@@ -82,6 +84,7 @@ class EventAdherentRegistrationAdmin extends Admin
                     EventAdherentRegistration::PAYMENT_MODE_ONSITE => 'Sur place',
                 )
             ))
+            // FIXME: add a new payment !
             ->add('payments', null, array(
                 'label' => 'Paiements',
                 'read_only' => true,
