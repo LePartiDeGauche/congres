@@ -22,6 +22,7 @@ class VoteRuleAdmin extends Admin
     {
         $datagridMapper
             ->add('id')
+            ->add('name')
             ->add('concernedResponsability')
             ;
     }
@@ -35,6 +36,7 @@ class VoteRuleAdmin extends Admin
 
         $listMapper
             ->add('id')
+            ->add('name')
             ->add('concernedResponsability', 'sonata_type_model', array('multiple' => true,
                 'required' => false,
             ))
@@ -63,6 +65,7 @@ class VoteRuleAdmin extends Admin
     {
         $subject = $this->getSubject();
         $formMapper
+            ->add('name')
             ->add('concernedResponsability', 'sonata_type_model', array('multiple' => true,
                 'required' => false,
             ))
@@ -85,6 +88,7 @@ class VoteRuleAdmin extends Admin
 
         $showMapper
             ->add('id')
+            ->add('name')
             ->add('concernedResponsability');
 
         if ($subject instanceof ThresholdVoteRule)

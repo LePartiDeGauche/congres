@@ -106,7 +106,7 @@ services:
         class: AppBundle\Admin\VoteRuleAdmin
         arguments: [~, AppBundle\Entity\Vote\VoteRule, SonataAdminBundle:CRUD]
         tags:
-            - {name: sonata.admin, manager_type: orm, group: "Texte", label: "Règles de votes", show_in_dashboard: false }
+            - {name: sonata.admin, manager_type: orm, group: "Texte", label: "Règles de votes" }
         calls:
             - [setSubClasses, [{threshold: AppBundle\Entity\Vote\ThresholdVoteRule}]]
 

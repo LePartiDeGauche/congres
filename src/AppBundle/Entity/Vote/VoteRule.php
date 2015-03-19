@@ -25,6 +25,12 @@ class VoteRule
     private $id;
 
     /**
+     * @ORM\Column(type="string", length=255)
+     *
+     */
+    private $name;
+
+    /**
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Responsability")
      *
      */

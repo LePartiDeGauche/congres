@@ -103,17 +103,19 @@ class TextGroupAdmin extends Admin
                 ),
                 'multiple' => false,
             ))
-            ->add('voteRules', 'sonata_type_collection', array(
-                'type_options' => array(
-                    'delete' => false,
-                )), array(
-                    'edit' => 'inline',
-                    'inline' => 'table',
-                    'sortable' => 'position',
-                ), array(
-                    'required' => false,
-                )
-            )
+            // FIXME : currently impossible to use subclass into subform with sonata bundle
+            
+            //->add('voteRules', 'sonata_type_collection', array(
+            //    'type_options' => array(
+            //        'delete' => false,
+            //    )), array(
+            //        'edit' => 'inline',
+            //        'inline' => 'table',
+            //        'sortable' => 'position',
+            //    ), array(
+            //        'required' => false,
+            //    )
+            //)
             ;
     }
 

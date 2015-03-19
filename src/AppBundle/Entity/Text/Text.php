@@ -88,6 +88,13 @@ class Text
      */
     private $textGroup;
 
+    /**
+     * @var \stdClass
+     *
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Vote\IndividualTextVoteAgregation", mappedBy="text")
+     *
+     */
+    private $individualVoteAgregations;
 
     /**
      * Get id

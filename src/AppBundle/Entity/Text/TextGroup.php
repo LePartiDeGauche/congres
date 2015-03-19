@@ -122,6 +122,14 @@ class TextGroup
      */
     private $voteRules;
 
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="voteFor", type="integer")
+     */
+    private $maxVotesByAdherent;
+
     /**
      * Get id
      *
