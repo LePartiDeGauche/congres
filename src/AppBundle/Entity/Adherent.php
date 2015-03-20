@@ -60,7 +60,7 @@ class Adherent
     private $status;
 
     /**
-     * @var string
+     * @var \Doctrine\Common\Collections\Collection
      *
      * @ORM\OneToMany(targetEntity="AdherentResponsability", mappedBy="adherent")
      *
@@ -89,6 +89,7 @@ class Adherent
     public function __construct()
     {
         // Initialize collection
+        $this->responsabilities = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -247,6 +248,16 @@ class Adherent
     public function getStatus()
     {
         return $this->status;
+    }
+
+    /**
+     * Get responsabilities
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getResponsabilities()
+    {
+        return $this->responsabilities;
     }
 
     public function __toString()
