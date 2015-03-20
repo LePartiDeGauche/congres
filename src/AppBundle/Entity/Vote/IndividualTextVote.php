@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * IndividualTextVote
  *
  * @ORM\Table(name="individual_text_vote")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Entity\Vote\IndividualTextVoteRepository")
  */
 class IndividualTextVote
 {

@@ -126,9 +126,19 @@ class TextGroup
     /**
      * @var integer
      *
-     * @ORM\Column(name="voteFor", type="integer")
+     * @ORM\Column( type="integer")
      */
+    // we could replace by rules based on responsability
     private $maxVotesByAdherent;
+
+
+
+    /**
+     * @var boolean
+     *
+      @ORM\Column(type="boolean")
+     */
+    private $isVisible;
 
     /**
      * Get id
@@ -401,6 +411,7 @@ class TextGroup
         $this->texts = new \Doctrine\Common\Collections\ArrayCollection();
         $this->organVoteRules = new \Doctrine\Common\Collections\ArrayCollection();
         $this->voteRules = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->isVisible = false;
     }
      
     public function __toString()

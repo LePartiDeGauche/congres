@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * AdherentResponsability
  *
  * @ORM\Table(name="adherent_responsability")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Entity\AdherentResponsabilityRepository")
  */
 class AdherentResponsability
 {

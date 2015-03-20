@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * VoteRule
  *
  * @ORM\Table(name="vote_rule")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Entity\Vote\VoteRuleRepository")
  * @ORM\InheritanceType("SINGLE_TABLE")
  * @ORM\DiscriminatorColumn(name="rule_type", type="string")
  * @ORM\DiscriminatorMap({"threshold" = "ThresholdVoteRule"})
