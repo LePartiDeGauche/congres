@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use \DateTime;
 
 /**
  * AdherentResponsability
@@ -138,7 +139,7 @@ class AdherentResponsability
      */
     public function setStart($start)
     {
-        $this->start = $start;
+        $this->start = isset($start) ? $start : new DateTime() ;
 
         return $this;
     }
@@ -161,7 +162,7 @@ class AdherentResponsability
      */
     public function setEnd($end)
     {
-        $this->end = $end;
+        $this->end = isset($end) ? $end : new DateTime() ;
 
         return $this;
     }
