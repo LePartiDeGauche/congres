@@ -29,32 +29,136 @@ $(document).ready(function()
                             Proposés 
                         </a>
                     </li>
+
+                    {% if showVotePanel %}
+                    <li role="presentation">
+                        <a href="#voting" aria-controls="voting" role="tab" data-toggle="tab">
+                            Soumis au vote
+                        </a>
+                    </li>
+                    {% endif %}
+
+                    {% if showValidatedPanel %}
+                    <li role="presentation">
+                        <a href="#validated" aria-controls="validated" role="tab" data-toggle="tab">
+                            Validé
+                        </a>
+                    </li>
+                    {% endif %}
                 </ul>
 
-                <div role="tabpanel" class="tab-pane" id="proposed">
-                    <h2>Textes proposés</h2>
-                    <table class="table tablesorter">
-                        <thead>
-                            <tr>
-                                <th>Titre</th>
-                                <th>Auteur</th>
-                                <th>Pour</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for text in texts %}
-                            {% if text.status == constant('AppBundle\\Entity\\Text\\Text::STATUS_PROPOSED') %}
-                            <tr>
-                                <td>
-                                    <a href="{{ path('text_show', {group_id: textGroup.id, text_id: text.id}) }}">{{ text.title }}</a>
-                                </td>
-                                <td>{{ text.author.firstname }} {{ text.author.lastname }}</td>
-                                <td>{% if text.organ %} {{ text.organ.name }} {% endif %}</td>
-                            </tr>
-                            {% endif %}
-                            {% endfor %}
-                        </tbody>
-                    </table>
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active" id="proposed">
+                        <h2>Textes proposés</h2>
+                        <table class="table tablesorter">
+                            <thead>
+                                <tr>
+                                    <th>Titre</th>
+                                    <th>Auteur</th>
+                                    <th>Pour</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for text in texts %}
+                                {% if text.entity.status ==
+                                constant('AppBundle\\Entity\\Text\\Text::STATUS_PROPOSED') %}
+                                <tr>
+                                    <td>
+                                        <a href="{{ path('text_show', {group_id: textGroup.id, text_id: text.entity.id}) }}">{{ text.entity.title }}</a>
+                                    </td>
+                                    <td>{{ text.entity.author.firstname }} {{ text.entity.author.lastname }}</td>
+                                    <td>{% if text.entity.organ %} {{ text.entity.organ.name }} {% endif %}</td>
+                                </tr>
+                                {% endif %}
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    {% if showVotePanel %}
+                    <div role="tabpanel" class="tab-pane" id="voting">
+                        <h2>Soumis au vote</h2>
+                        <table class="table tablesorter">
+                            <thead>
+                                <tr>
+                                    <th>Titre</th>
+                                    <th>Auteur</th>
+                                    <th>Pour</th>
+                                    {% for voteRule in textGroup.voteRules %}
+                                    <th>{{voteRule.name}}</th>
+                                    {% endfor %}
+                                    <th>Voter</th>
+
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for text in texts %}
+                                {% if text.entity.status ==
+                                constant('AppBundle\\Entity\\Text\\Text::STATUS_VOTING') %}
+                                <tr>
+                                    <td>
+                                        <a href="{{ path('text_show', {group_id: textGroup.id, text_id: text.entity.id}) }}">{{ text.entity.title }}</a>
+                                    </td>
+                                    <td>{{ text.entity.author.firstname }} {{ text.entity.author.lastname }}</td>
+                                    <td>{% if text.entity.organ %} {{ text.entity.organ.name }} {% endif %}</td>
+                                    {% for voteRule in textGroup.voteRules %}
+                                    <td>{{attribute(text, 'voteFor' ~ voteRule.id )}}</td>
+                                    {% endfor %}
+                                    <td>
+                                        {% if textGroupVoteGranted %}
+                                        {% if text.hasVoted == 0 %}
+                                        <a class="btn btn-default btn-sm" href="{{path('text_vote',
+                                            {group_id: textGroup.id, text_id: text.entity.id}) }}">
+                                        <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+                                        <span class="sr-only">Signer</span>
+                                        </a>
+                                        {% else %}
+                                        <span class="glyphicon glyphicon-check" aria-hidden="true"></span>
+                                        <span class="sr-only">Signée</span>
+                                        {% endif %}
+                                        {% else %}
+                                        <span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span>
+                                        <span class="sr-only">Signature impossible</span>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                {% endif %}
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    {% endif %}
+                    {% if showValidatedPanel %}
+                    <div role="tabpanel" class="tab-pane" id="validated">
+                        <h2>Validés</h2>
+                        <table class="table tablesorter">
+                            <thead>
+                                <tr>
+                                    <th>Titre</th>
+                                    <th>Auteur</th>
+                                    <th>Pour</th>
+                                    {% for voteRule in textGroup.voteRules %}
+                                    <th>{{voteRule.name}}</th>
+                                    {% endfor %}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for text in texts %}
+                                {% if text.entity.status ==
+                                constant('AppBundle\\Entity\\Text\\Text::STATUS_ADOPTED') %}
+                                <tr>
+                                    <td>
+                                        <a href="{{ path('text_show', {group_id: textGroup.id, text_id: text.entity.id}) }}">{{ text.entity.title }}</a>
+                                    </td>
+                                    <td>{{ text.entity.author.firstname }} {{ text.entity.author.lastname }}</td>
+                                    <td>{% if text.entity.organ %} {{ text.entity.organ.name }} {% endif %}</td>
+                                </tr>
+                                {% endif %}
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    {% endif %}
                 </div>
             </div>
         </div><!-- .col-md-12 -->

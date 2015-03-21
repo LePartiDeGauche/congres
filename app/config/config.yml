@@ -110,6 +110,7 @@ sonata_block:
 sonata_admin:
     title: Administration
     title_logo: img/logo.png
+
 lexik_paybox:
     parameters:
         production: %is_paybox_in_production%

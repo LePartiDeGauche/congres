@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
+use AppBundle\Entity\Vote\IndividualTextVote;
 use AppBundle\Entity\Text\TextGroup;
 use AppBundle\Entity\Text\Text;
 use AppBundle\Entity\User;
@@ -30,11 +31,22 @@ class TextController extends Controller
      */
     public function indexAction(TextGroup $textGroup)
     {
+        $this->denyAccessUnlessGranted('view', $textGroup);
+        $author = $this->getUser()->getProfile();
+
         $em = $this->getDoctrine()->getManager();
 
-        $texts = $em->getRepository('AppBundle:Text\Text')->findByTextGroup($textGroup);
+        $texts = $em->getRepository('AppBundle:Text\Text')
+            ->findTextAndVoteByTextGroup($author, $textGroup);
+
+        $textGroupVoteGranted = $this->isGranted('vote', $textGroup);
+
+        $date = new \DateTime('now');
 
         return $this->render('text/list.html.twig', array(
+            'textGroupVoteGranted' => $textGroupVoteGranted,
+            'showVotePanel' => ($textGroup->getVoteOpening() < $date && $textGroup->getVoteClosing() > $date),
+            'showValidatedPanel' => $textGroup->getVoteOpening() < $date,
             'textGroup' => $textGroup,
             'texts' => $texts,
         ));
@@ -67,10 +79,12 @@ class TextController extends Controller
      * @Method("GET")
      * @ParamConverter("textGroup", class="AppBundle:Text\TextGroup", options={"id" = "group_id"})
      * @ParamConverter("text", class="AppBundle:Text\Text", options={"id" = "text_id"})
-     * @Template("event/show.html.twig")
+     * @Template("text/show.html.twig")
      */
     public function showAction(TextGroup $textGroup, Text $text)
     {
+        $this->denyAccessUnlessGranted('view', $textGroup);
+        $this->denyAccessUnlessGranted('view', $text);
 
         return array(
             'textGroup'      => $textGroup,
@@ -86,6 +100,8 @@ class TextController extends Controller
      */
     public function newAction(Request $request, TextGroup $textGroup)
     {
+        $this->denyAccessUnlessGranted('create_text', $textGroup);
+
         $text = new Text($this->getUser()->getProfile());
         $form = $this->createCreateForm($text, $textGroup);
 
@@ -95,6 +111,15 @@ class TextController extends Controller
         {
             $text = $form->getData();
             $text->setTextGroup($textGroup);
+            foreach ($textGroup->getVoteRules() as $voteRule)
+            {
+                $itva = new IndividualTextVoteAgregation($text, $textGroup, $voteRule);
+                $text->addIndividualVoteAgregation($itva);
+                $this->getDoctrine()->getManager()->persist($itva);
+
+
+
+            }
             $this->getDoctrine()->getManager()->persist($text);
             $this->getDoctrine()->getManager()->flush();
 
@@ -106,6 +131,52 @@ class TextController extends Controller
             'text'      => $text,
             'form'  => $form->createView())
         );
+    }
+    /**
+     * @Route("/{group_id}/text/{text_id}/vote", name="text_vote")
+     * @ParamConverter("textGroup", class="AppBundle:Text\TextGroup", options={"id" = "group_id"})
+     * @ParamConverter("text", class="AppBundle:Text\Text", options={"id" = "text_id"})
+     *
+     */
+    public function voteAction(Request $request, TextGroup $textGroup, Text $text)
+    {
+        if ($textGroup->getId() != $text->getTextGroup()->getId())
+        {
+            throw \AccessDeniedException();
+        }
+        $this->denyAccessUnlessGranted('vote', $textGroup);
+        $this->denyAccessUnlessGranted('vote', $text);
+
+
+        $form = $this->createFormBuilder()->getForm();
+
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $adherent = $this->getUser()->getProfile();
+            $em = $this->getDoctrine()->getManager();
+
+                    $av = new IndividualTextVote($adherent, $text);
+                    $av->setVote(IndividualTextVote::VOTE_FOR);
+                    $em->persist($av);
+                    $agregs = $em->getRepository('AppBundle:Vote\IndividualTextVoteAgregation')
+                        ->getAgregationForUserAndText($text, $adherent);
+
+                    foreach($agregs as $agreg)
+                    {
+                        $agreg->setVoteFor($agreg->getVoteFor() + 1);
+                        $em->persist($agreg);
+                    }
+
+                    $em->flush();
+            return $this->redirect($this->generateUrl('text_list', array('group_id' => $textGroup->getId())));
+        }
+
+        return $this->render('text/vote.html.twig', array(
+            'textGroup' => $textGroup,
+            'text' => $text,
+            'form' => $form->createView(),
+        ));
     }
 
     /**

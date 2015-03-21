@@ -32,6 +32,20 @@ services:
         tags:
            - { name: security.voter }
 
+    app.congres.text_group_voter:
+        class:      AppBundle\Security\Text\TextGroupVoter
+        public:     false
+        arguments: [@doctrine.orm.entity_manager, @service_container]
+        tags:
+           - { name: security.voter }
+
+    app.congres.text_voter:
+        class:      AppBundle\Security\Text\TextVoter
+        public:     false
+        arguments: [@doctrine.orm.entity_manager, @service_container]
+        tags:
+           - { name: security.voter }
+
     app.calendar_voter:
         class:      AppBundle\Security\CalendarVoter
         public:     false
