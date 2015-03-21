@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Text
  *
  * @ORM\Table(name="text")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Entity\Text\TextRepository")
  */
 class Text
 {
@@ -91,7 +91,8 @@ class Text
     /**
      * @var \stdClass
      *
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Vote\IndividualTextVoteAgregation", mappedBy="text")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Vote\IndividualTextVoteAgregation", mappedBy="text", 
+     * cascade={"persist", "remove", "merge"}, orphanRemoval=true)
      *
      */
     private $individualVoteAgregations;
@@ -386,5 +387,38 @@ class Text
     public function getRawContent()
     {
         return $this->rawContent;
+    }
+
+    /**
+     * Add individualVoteAgregations
+     *
+     * @param \AppBundle\Entity\Vote\IndividualTextVoteAgregation $individualVoteAgregations
+     * @return Text
+     */
+    public function addIndividualVoteAgregation(\AppBundle\Entity\Vote\IndividualTextVoteAgregation $individualVoteAgregations)
+    {
+        $this->individualVoteAgregations[] = $individualVoteAgregations;
+
+        return $this;
+    }
+
+    /**
+     * Remove individualVoteAgregations
+     *
+     * @param \AppBundle\Entity\Vote\IndividualTextVoteAgregation $individualVoteAgregations
+     */
+    public function removeIndividualVoteAgregation(\AppBundle\Entity\Vote\IndividualTextVoteAgregation $individualVoteAgregations)
+    {
+        $this->individualVoteAgregations->removeElement($individualVoteAgregations);
+    }
+
+    /**
+     * Get individualVoteAgregations
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getIndividualVoteAgregations()
+    {
+        return $this->individualVoteAgregations;
     }
 }

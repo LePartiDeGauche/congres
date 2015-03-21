@@ -21,10 +21,10 @@ class VoteRuleRepository extends EntityRepository
     {
         $voteRightCount = $this->createQueryBuilder('vr')
             ->select('COUNT(vr)')
-            ->leftJoin('vr.responsabilities', 'vrresp')
+            ->leftJoin('vr.concernedResponsability', 'vrresp')
             ->leftJoin('vrresp.adherentResponsabilities' , 'adhresp')
             ->where('vr.textGroup = :textGroup')
-            ->andWhere('adhresp.adherent = :adherent OR SIZE(vr.responsabilities) = 0')
+            ->andWhere('adhresp.adherent = :adherent OR SIZE(vr.concernedResponsability) = 0')
             ->setParameter('adherent', $adherent->getId())
             ->setParameter('textGroup', $textGroup->getId())
             ->getQuery()->getSingleScalarResult();

@@ -555,4 +555,50 @@ class TextGroup
     {
         $this->voteRules->removeElement($voteRules);
     }
+
+    /**
+     * Set maxVotesByAdherent
+     *
+     * @param integer $maxVotesByAdherent
+     * @return TextGroup
+     */
+    public function setMaxVotesByAdherent($maxVotesByAdherent)
+    {
+        $this->maxVotesByAdherent = $maxVotesByAdherent;
+
+        return $this;
+    }
+
+    /**
+     * Get maxVotesByAdherent
+     *
+     * @return integer 
+     */
+    public function getMaxVotesByAdherent()
+    {
+        return $this->maxVotesByAdherent;
+    }
+
+    /**
+     * Set isVisible
+     *
+     * @param boolean $isVisible
+     * @return TextGroup
+     */
+    public function setIsVisible($isVisible)
+    {
+        $this->isVisible = $isVisible;
+
+        return $this;
+    }
+
+    /**
+     * Get isVisible
+     *
+     * @return boolean 
+     */
+    public function getIsVisible()
+    {
+        return $this->isVisible;
+    }
 }

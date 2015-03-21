@@ -3,6 +3,7 @@
 namespace AppBundle\Entity\Vote;
 
 use Doctrine\ORM\Mapping as ORM;
+use AppBundle\Entity\Text\Text;
 
 /**
  * IndividualTextVote
@@ -12,6 +13,10 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class IndividualTextVote
 {
+
+    const VOTE_FOR = 'in favor';
+    const VOTE_AGAINST = 'against';
+    const VOTE_ABSTENTION = 'abstention';
 
     /**
      * @var integer
@@ -52,6 +57,15 @@ class IndividualTextVote
      */
     private $text;
 
+    /**
+     * Constructor
+     */
+    public function __construct(\AppBundle\Entity\Adherent $author, Text $text)
+    {
+        $this->date = new \DateTime('now');
+        $this->author = $author;
+        $this->text = $text;
+    }
 
     /**
      * Get id
@@ -94,6 +108,14 @@ class IndividualTextVote
      */
     public function setVote($vote)
     {
+        if (!in_array($vote, array(
+            self::VOTE_FOR,
+            self::VOTE_AGAINST,
+            self::VOTE_ABSTENTION
+        ))) {
+            throw new \InvalidArgumentException('Invalid vote');
+        }
+
         $this->vote = $vote;
 
         return $this;

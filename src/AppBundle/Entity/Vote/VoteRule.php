@@ -22,19 +22,19 @@ class VoteRule
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      *
      */
-    private $name;
+    protected $name;
 
     /**
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Responsability")
      *
      */
-    private $concernedResponsability;
+    protected $concernedResponsability;
 
     /**
      * @var \stdClass
@@ -43,7 +43,7 @@ class VoteRule
      * @ORM\JoinColumn(nullable=false)
      *
      */
-    private $textGroup;
+    protected $textGroup;
 
 
     /**
@@ -77,5 +77,86 @@ class VoteRule
     public function getConcernedResponsability()
     {
         return $this->concernedResponsability;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->concernedResponsability = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     * @return VoteRule
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string 
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Add concernedResponsability
+     *
+     * @param \AppBundle\Entity\Responsability $concernedResponsability
+     * @return VoteRule
+     */
+    public function addConcernedResponsability(\AppBundle\Entity\Responsability $concernedResponsability)
+    {
+        $this->concernedResponsability[] = $concernedResponsability;
+
+        return $this;
+    }
+
+    /**
+     * Remove concernedResponsability
+     *
+     * @param \AppBundle\Entity\Responsability $concernedResponsability
+     */
+    public function removeConcernedResponsability(\AppBundle\Entity\Responsability $concernedResponsability)
+    {
+        $this->concernedResponsability->removeElement($concernedResponsability);
+    }
+
+    /**
+     * Set textGroup
+     *
+     * @param \AppBundle\Entity\Text\TextGroup $textGroup
+     * @return VoteRule
+     */
+    public function setTextGroup(\AppBundle\Entity\Text\TextGroup $textGroup)
+    {
+        $this->textGroup = $textGroup;
+
+        return $this;
+    }
+
+    /**
+     * Get textGroup
+     *
+     * @return \AppBundle\Entity\Text\TextGroup 
+     */
+    public function getTextGroup()
+    {
+        return $this->textGroup;
+    }
+
+    public function __toString()
+    {
+        return $this->name;
     }
 }
