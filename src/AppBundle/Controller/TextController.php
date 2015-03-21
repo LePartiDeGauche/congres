@@ -9,6 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Entity\Vote\IndividualTextVote;
+use AppBundle\Entity\Vote\ThresholdVoteRule;
 use AppBundle\Entity\Text\TextGroup;
 use AppBundle\Entity\Text\Text;
 use AppBundle\Entity\User;
@@ -116,14 +117,11 @@ class TextController extends Controller
                 $itva = new IndividualTextVoteAgregation($text, $textGroup, $voteRule);
                 $text->addIndividualVoteAgregation($itva);
                 $this->getDoctrine()->getManager()->persist($itva);
-
-
-
             }
             $this->getDoctrine()->getManager()->persist($text);
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirect($this->generateUrl('text_list', array('group_id' => $textGroup->getId())));
+            return $this->redirect($this->generateUrl('text_user_list'));
 
         }
         return $this->render('text/new.html.twig', array(
@@ -156,19 +154,28 @@ class TextController extends Controller
             $adherent = $this->getUser()->getProfile();
             $em = $this->getDoctrine()->getManager();
 
-                    $av = new IndividualTextVote($adherent, $text);
-                    $av->setVote(IndividualTextVote::VOTE_FOR);
-                    $em->persist($av);
-                    $agregs = $em->getRepository('AppBundle:Vote\IndividualTextVoteAgregation')
-                        ->getAgregationForUserAndText($text, $adherent);
+            $av = new IndividualTextVote($adherent, $text);
+            $av->setVote(IndividualTextVote::VOTE_FOR);
+            $em->persist($av);
+            $agregs = $em->getRepository('AppBundle:Vote\IndividualTextVoteAgregation')
+                ->getAgregationForUserAndText($text, $adherent);
 
-                    foreach($agregs as $agreg)
+            foreach($agregs as $agreg)
+            {
+                $agreg->setVoteFor($agreg->getVoteFor() + 1);
+                $voteRule =  $agreg->getVoteRule();
+                if ($voteRule instanceof ThresholdVoteRule)
+                {
+                    if ($agreg->getVoteFor() >= $voteRule->getThreshold())
                     {
-                        $agreg->setVoteFor($agreg->getVoteFor() + 1);
-                        $em->persist($agreg);
+                        $text->setStatus(Text::STATUS_ADOPTED);
+                        $em->persist($text);
                     }
+                }
+                $em->persist($agreg);
+            }
 
-                    $em->flush();
+            $em->flush();
             return $this->redirect($this->generateUrl('text_list', array('group_id' => $textGroup->getId())));
         }
 

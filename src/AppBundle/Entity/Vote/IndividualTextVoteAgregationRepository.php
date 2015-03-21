@@ -13,6 +13,8 @@ class IndividualTextVoteAgregationRepository extends EntityRepository
 
     public function getAgregationForUserAndText(Text $text, Adherent $adherent)
     {
+        // FIXME this request should return only agregator related to user right, but it returns
+        // every agregetor related to the text...
         return $this->createQueryBuilder('ar')
             ->innerJoin('ar.textGroup', 'tg')
             ->innerJoin('tg.voteRules', 'vr')

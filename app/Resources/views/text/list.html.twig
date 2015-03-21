@@ -55,7 +55,7 @@ $(document).ready(function()
                                 <tr>
                                     <th>Titre</th>
                                     <th>Auteur</th>
-                                    <th>Pour</th>
+{# <th>Pour</th> #}
                                 </tr>
                             </thead>
                             <tbody>
@@ -67,7 +67,7 @@ $(document).ready(function()
                                         <a href="{{ path('text_show', {group_id: textGroup.id, text_id: text.entity.id}) }}">{{ text.entity.title }}</a>
                                     </td>
                                     <td>{{ text.entity.author.firstname }} {{ text.entity.author.lastname }}</td>
-                                    <td>{% if text.entity.organ %} {{ text.entity.organ.name }} {% endif %}</td>
+{# <td>{% if text.entity.organ %} {{ text.entity.organ.name }} {% endif %}</td> #}
                                 </tr>
                                 {% endif %}
                                 {% endfor %}
@@ -82,7 +82,7 @@ $(document).ready(function()
                                 <tr>
                                     <th>Titre</th>
                                     <th>Auteur</th>
-                                    <th>Pour</th>
+{# <th>Pour</th> #}
                                     {% for voteRule in textGroup.voteRules %}
                                     <th>{{voteRule.name}}</th>
                                     {% endfor %}
@@ -100,7 +100,7 @@ $(document).ready(function()
                                         <a href="{{ path('text_show', {group_id: textGroup.id, text_id: text.entity.id}) }}">{{ text.entity.title }}</a>
                                     </td>
                                     <td>{{ text.entity.author.firstname }} {{ text.entity.author.lastname }}</td>
-                                    <td>{% if text.entity.organ %} {{ text.entity.organ.name }} {% endif %}</td>
+{# <td>{% if text.entity.organ %} {{ text.entity.organ.name }} {% endif %}</td> #}
                                     {% for voteRule in textGroup.voteRules %}
                                     <td>{{attribute(text, 'voteFor' ~ voteRule.id )}}</td>
                                     {% endfor %}
@@ -136,7 +136,7 @@ $(document).ready(function()
                                 <tr>
                                     <th>Titre</th>
                                     <th>Auteur</th>
-                                    <th>Pour</th>
+{#<th>Pour</th>#}
                                     {% for voteRule in textGroup.voteRules %}
                                     <th>{{voteRule.name}}</th>
                                     {% endfor %}
@@ -151,7 +151,10 @@ $(document).ready(function()
                                         <a href="{{ path('text_show', {group_id: textGroup.id, text_id: text.entity.id}) }}">{{ text.entity.title }}</a>
                                     </td>
                                     <td>{{ text.entity.author.firstname }} {{ text.entity.author.lastname }}</td>
-                                    <td>{% if text.entity.organ %} {{ text.entity.organ.name }} {% endif %}</td>
+{# <td>{% if text.entity.organ %} {{ text.entity.organ.name }} {% endif %}</td> #}
+                                    {% for voteRule in textGroup.voteRules %}
+                                    <td>{{attribute(text, 'voteFor' ~ voteRule.id )}}</td>
+                                    {% endfor %}
                                 </tr>
                                 {% endif %}
                                 {% endfor %}
