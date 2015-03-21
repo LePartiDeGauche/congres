@@ -24,14 +24,14 @@ $(document).ready(function()
             <h1>Liste des textes de {{ textGroup.name }}</h1>
             <div role="tabpanel">
                 <ul class="nav nav-tabs" role="tablist">
-                    <li role="presentation" class="active">
+<li role="presentation" {% if not showVotePanel %} class="active" {% endif %}>
                         <a href="#proposed" aria-controls="proposed" role="tab" data-toggle="tab">
                             Proposés 
                         </a>
                     </li>
 
                     {% if showVotePanel %}
-                    <li role="presentation">
+                    <li role="presentation" class="active">
                         <a href="#voting" aria-controls="voting" role="tab" data-toggle="tab">
                             Soumis au vote
                         </a>
@@ -48,7 +48,8 @@ $(document).ready(function()
                 </ul>
 
                 <div class="tab-content">
-                    <div role="tabpanel" class="tab-pane active" id="proposed">
+                    <div role="tabpanel" class="tab-pane {% if not showVotePanel %}active
+{% endif %}" id="proposed">
                         <h2>Textes proposés</h2>
                         <table class="table tablesorter">
                             <thead>
@@ -75,7 +76,7 @@ $(document).ready(function()
                         </table>
                     </div>
                     {% if showVotePanel %}
-                    <div role="tabpanel" class="tab-pane" id="voting">
+                    <div role="tabpanel" class="tab-pane active" id="voting">
                         <h2>Soumis au vote</h2>
                         <table class="table tablesorter">
                             <thead>
