@@ -63,6 +63,8 @@ class TextGroupAdmin extends Admin
                 'multiple' => false,
             ))
             ->add('voteRules', 'sonata_type_collection')
+            ->add('maxVotesByAdherent')
+            ->add('isVisible')
             ->add('_action', 'actions', array(
                 'actions' => array(
                     'show' => array(),
@@ -103,6 +105,8 @@ class TextGroupAdmin extends Admin
                 ),
                 'multiple' => false,
             ))
+            ->add('maxVotesByAdherent')
+            ->add('isVisible')
             // FIXME : currently impossible to use subclass into subform with sonata bundle
             
             //->add('voteRules', 'sonata_type_collection', array(
@@ -171,6 +175,7 @@ class TextGroupAdmin extends Admin
                 'multiple' => false,
             ))
             ->add('voteRules', 'sonata_type_collection')
+            ->add('maxVotesByAdherent')
             ;
     }
     public function getNewInstance()
