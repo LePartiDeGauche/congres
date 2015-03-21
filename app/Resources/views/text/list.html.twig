@@ -22,6 +22,9 @@ $(document).ready(function()
     <div class="row">
         <div class="col-md-12">
             <h1>Liste des textes de {{ textGroup.name }}</h1>
+<p>
+{{textGroup.description}}
+</p>
             <div role="tabpanel">
                 <ul class="nav nav-tabs" role="tablist">
 <li role="presentation" {% if not showVotePanel %} class="active" {% endif %}>
@@ -95,7 +98,9 @@ $(document).ready(function()
                             <tbody>
                                 {% for text in texts %}
                                 {% if text.entity.status ==
-                                constant('AppBundle\\Entity\\Text\\Text::STATUS_VOTING') %}
+constant('AppBundle\\Entity\\Text\\Text::STATUS_VOTING')
+or text.entity.status ==
+constant('AppBundle\\Entity\\Text\\Text::STATUS_ADOPTED') %}
                                 <tr>
                                     <td>
                                         <a href="{{ path('text_show', {group_id: textGroup.id, text_id: text.entity.id}) }}">{{ text.entity.title }}</a>
