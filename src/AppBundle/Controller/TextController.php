@@ -109,7 +109,7 @@ class TextController extends Controller
 
         $form->handleRequest($request);
 
-        if ($form->isValid())
+        if ($form->isValid() && $form->getData()->getRawContent() != null)
         {
             $text = $form->getData();
             $text->setTextGroup($textGroup);
