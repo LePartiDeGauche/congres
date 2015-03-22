@@ -128,3 +128,9 @@ services:
         arguments: [~, AppBundle\Entity\Event\EventRole, SonataAdminBundle:CRUD]
         tags:
             - {name: sonata.admin, manager_type: orm, group: "Evenements", label: "Rôles d'évenements", show_in_dashboard: false }
+
+    app.admin.adherent_responsability:
+        class: AppBundle\Admin\AdherentResponsabilityAdmin
+        arguments: [~, AppBundle\Entity\AdherentResponsability, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin, label: AdherentResponsability, show_in_dashboard: false}

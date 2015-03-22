@@ -16,9 +16,9 @@ class AdherentAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('email')
             ->add('lastname', null, array('label' => 'Nom'))
             ->add('firstname', null, array('label' => 'Prénom'))
+            ->add('email')
             ->add('birthdate', 'birthday', array('label' => 'Date de naissance'))
             ->add('status', 'choice', array(
                 'label' => 'Statut',
@@ -27,15 +27,30 @@ class AdherentAdmin extends Admin
                     Adherent::STATUS_ATTENTE_RENOUVELLEMENT => 'En attente.',
                 ),
                 'multiple' => false,
-            ));
+            ))
+            ->add('responsabilities', 'sonata_type_collection',
+                array(
+                    'type_options' => array(
+                        'delete' => false
+                    ),
+                    'label' => 'Responsabilités (ces modifications seront écrasé à chaque nouvel import du TGF !)',
+                ), array(
+                    'edit' => 'inline',
+                    'inline' => 'table',
+                    'sortable' => 'position',
+                ), array(
+                    'required' => false,
+                )
+            )
+            ;
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('email')
             ->add('lastname', null, array('label' => 'Nom'))
             ->add('firstname', null, array('label' => 'Prénom'))
+            ->add('email')
             ->add('birthdate', null, array('label' => 'Date de naissance'))
             ->add('status', null, array('label' => 'Statut'), 'choice', array(
                 'choices' => array(
@@ -44,7 +59,7 @@ class AdherentAdmin extends Admin
                 ),
                 'multiple' => false,
             ))
-            ->add('responsabilities', null, array(), null, array('property' => 'responsability'));
+            ;
     }
 
     protected function configureListFields(ListMapper $listMapper)
@@ -56,6 +71,6 @@ class AdherentAdmin extends Admin
             ->add('birthdate', null, array('label' => 'Date de naissance'))
             ->add('user', null, array('label' => 'Compte'))
             ->add('status', null, array('Statut'))
-            ->add('responsabilities', null, array('associated_property' => 'responsability'));
+            ->add('responsabilities', 'sonata_type_collection', array('associated_property' => 'responsability'));
     }
 }
