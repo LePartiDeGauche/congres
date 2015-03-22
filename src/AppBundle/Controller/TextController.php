@@ -9,6 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Entity\Vote\IndividualTextVote;
+use AppBundle\Entity\Vote\IndividualTextVoteAgregation;
 use AppBundle\Entity\Vote\ThresholdVoteRule;
 use AppBundle\Entity\Text\TextGroup;
 use AppBundle\Entity\Text\Text;
