@@ -30,9 +30,6 @@ class AdherentAdmin extends Admin
             ))
             ->add('responsabilities', 'sonata_type_collection',
                 array(
-                    'type_options' => array(
-                        'delete' => false
-                    ),
                     'label' => 'Responsabilités (ces modifications seront écrasé à chaque nouvel import du TGF !)',
                 ), array(
                     'edit' => 'inline',
