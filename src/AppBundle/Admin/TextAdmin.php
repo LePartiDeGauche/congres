@@ -21,8 +21,8 @@ class TextAdmin extends Admin
         $datagridMapper
             ->add('id')
             ->add('textGroup')
-            ->add('author.lastname', null, array('label' => 'Nom de l\'auteur'))
             ->add('author.firstname', null, array('label' => 'Prénom de l\'auteur'))
+            ->add('author.lastname', null, array('label' => 'Nom de l\'auteur'))
             ->add('title')
             ->add('status', null, array(
                 'label' => 'Statut'),
@@ -49,6 +49,8 @@ class TextAdmin extends Admin
                 array('multiple' => false,
                 'required' => true
             ))
+            ->add('author.firstname', null, array('label' => 'Prénom de l\'auteur'))
+            ->add('author.lastname', null, array('label' => 'Nom de l\'auteur'))
             ->add('title')
             //->add('rawContent', 'html')
             ->add('status', 'choice', array(

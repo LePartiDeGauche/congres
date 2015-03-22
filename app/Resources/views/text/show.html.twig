@@ -7,10 +7,39 @@
     <div class="row">
         <h1>{{textGroup.name}} - {{ text.title }}</h1>
         <p class="small text-muted">
-            Auteur :
-            {{ text.author.firstname }} {{ text.author.lastname }}
+        Auteur :
+        {{ text.author.firstname }} {{ text.author.lastname }}
         </p>
         <div class="text-justify">{{ text.rawContent | raw }}</div>
+        <hr />
+        <h1>Votes</h1>
+
+        <table class="table tablesorter">
+            <thead>
+                <tr>
+                    <th>Identité</th>
+                    <th>Responsabilités</th>
+                    {# <th>Pour</th> #}
+                </tr>
+            </thead>
+            <tbody>
+                {% for vote in text.adherentVotes %}
+                <tr>
+                    </td>
+                    <td>{{ vote.author.firstname }} {{ vote.author.lastname }}</td>
+                    <td>
+                        <ul>
+                            {% for adhresp in vote.author.responsabilities %}
+                            <li>{{ adhresp.responsability.name }}</li>
+                            {% endfor %}
+                        </ul>
+
+
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
 </div>
 {% endblock %}
