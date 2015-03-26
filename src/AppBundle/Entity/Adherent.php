@@ -14,6 +14,8 @@ class Adherent
 {
     const STATUS_OK = 'À jour de cotisation.';
     const STATUS_ATTENTE_RENOUVELLEMENT = 'En attente de renouvellement.';
+    const STATUS_OLD = 'Ancien adhérent';
+    const STATUS_EXCLUDED = 'Exclusion';
 
     /**
      * @var integer

@@ -62,6 +62,7 @@ class RegistrationListener implements EventSubscriberInterface
     public function onRegistrationSuccess(FormEvent $event)
     {
         $user = $event->getForm()->getData();
+        //TODO: 
         $profile = $this->em
             ->getRepository('AppBundle:Adherent')
             ->findOneByEmail($user->getEmail());
@@ -94,8 +95,10 @@ class RegistrationListener implements EventSubscriberInterface
             ->getRepository('AppBundle:Adherent')
             ->findOneByEmail($user->getEmail());
 
-        // If profile exists, registration authorized, FOSUserBundle proceed.
-        if ($profile) {
+
+        // TODO : Change hard coded status enum to an real ADherentStatus Entity
+        // If profile exists, and adherent is allowed to register, registration is authorized, FOSUserBundle proceed.
+        if ($profile  && (Adherent::STATUS_OK === $profile->getStatus() || Adherent::STATUS_ATTENTE_RENOUVELLEMENT === $profile->getStatus())) {
             return true;
         }
 
