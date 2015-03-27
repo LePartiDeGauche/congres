@@ -25,12 +25,15 @@ class AdherentAdmin extends Admin
                 'choices' => array(
                     Adherent::STATUS_OK => 'À jour.',
                     Adherent::STATUS_ATTENTE_RENOUVELLEMENT => 'En attente.',
+                    Adherent::STATUS_OLD => 'Ancien adhérent',
+                    Adherent::STATUS_EXCLUDED => 'Exclusion',
                 ),
                 'multiple' => false,
             ))
             ->add('responsabilities', 'sonata_type_collection',
                 array(
                     'label' => 'Responsabilités (ces modifications seront écrasé à chaque nouvel import du TGF !)',
+                    'by_reference'      => false,
                 ), array(
                     'edit' => 'inline',
                     'inline' => 'table',
@@ -53,10 +56,12 @@ class AdherentAdmin extends Admin
                 'choices' => array(
                     Adherent::STATUS_OK => 'À jour.',
                     Adherent::STATUS_ATTENTE_RENOUVELLEMENT => 'En attente.',
+                    Adherent::STATUS_OLD => 'Ancien adhérent',
+                    Adherent::STATUS_EXCLUDED => 'Exclusion',
                 ),
                 'multiple' => false,
             ))
-            ;
+            ->add('responsabilities.responsability',null , array('label' => 'Responsabilité', 'multiple' => true));
     }
 
     protected function configureListFields(ListMapper $listMapper)

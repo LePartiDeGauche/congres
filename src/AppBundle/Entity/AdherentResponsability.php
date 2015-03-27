@@ -25,7 +25,7 @@ class AdherentResponsability
     /**
      * @var \stdClass
      *
-     * @ORM\ManyToOne(targetEntity="Adherent", inversedBy="responsabilities")
+     * @ORM\ManyToOne(targetEntity="Adherent", inversedBy="responsabilities", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $adherent;

@@ -43,7 +43,7 @@ class Responsability
      * The collection of user members of the instance.
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\AdherentResponsability", mappedBy="responsability")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\AdherentResponsability", mappedBy="responsability", orphanRemoval=true)
      */
     private $adherentResponsabilities;
 

@@ -12,6 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Adherent
 {
+    const STATUS_NEW = 'Nouveau';
     const STATUS_OK = 'À jour de cotisation.';
     const STATUS_ATTENTE_RENOUVELLEMENT = 'En attente de renouvellement.';
     const STATUS_OLD = 'Ancien adhérent';
@@ -64,7 +65,7 @@ class Adherent
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\OneToMany(targetEntity="AdherentResponsability", mappedBy="adherent")
+     * @ORM\OneToMany(targetEntity="AdherentResponsability", mappedBy="adherent", orphanRemoval=true, cascade={"persist"})
      *
      */
     private $responsabilities;
@@ -92,6 +93,7 @@ class Adherent
     {
         // Initialize collection
         $this->responsabilities = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->status = self::STATUS_NEW;
     }
 
     /**
@@ -230,11 +232,18 @@ class Adherent
      */
     public function setStatus($status)
     {
+        if ($status === null)
+        {
+            $status = self::STATUS_NEW;
+        }
         if (!in_array($status, array(
+            self::STATUS_NEW,
             self::STATUS_OK,
             self::STATUS_ATTENTE_RENOUVELLEMENT,
+            self::STATUS_OLD,
+            self::STATUS_EXCLUDED
         ))) {
-            throw new \InvalidArgumentException('Invalid status');
+        throw new \InvalidArgumentException('Invalid status');
         }
 
         $this->status = $status;
@@ -265,5 +274,78 @@ class Adherent
     public function __toString()
     {
         return $this->firstname . ' ' . $this->lastname;
+    }
+
+    /**
+     * Add responsabilities
+     *
+     * @param \AppBundle\Entity\AdherentResponsability $responsabilities
+     * @return Adherent
+     */
+    public function addResponsability(\AppBundle\Entity\AdherentResponsability $responsability)
+    {
+        if($responsability->getAdherent() === null)
+        {
+            $responsability->setAdherent($this); 
+        }
+        $this->responsabilities[] = $responsability;
+
+        return $this;
+    }
+
+    /**
+     * Remove responsabilities
+     *
+     * @param \AppBundle\Entity\AdherentResponsability $responsabilities
+     */
+    public function removeResponsability(\AppBundle\Entity\AdherentResponsability $responsabilities)
+    {
+        $this->responsabilities->removeElement($responsabilities);
+    }
+
+    /**
+     * Add events
+     *
+     * @param \AppBundle\Entity\Event\EventAdherentRegistration $events
+     * @return Adherent
+     */
+    public function addEvent(\AppBundle\Entity\Event\EventAdherentRegistration $events)
+    {
+        $this->events[] = $events;
+
+        return $this;
+    }
+
+    /**
+     * Remove events
+     *
+     * @param \AppBundle\Entity\Event\EventAdherentRegistration $events
+     */
+    public function removeEvent(\AppBundle\Entity\Event\EventAdherentRegistration $events)
+    {
+        $this->events->removeElement($events);
+    }
+
+    /**
+     * Get events
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getEvents()
+    {
+        return $this->events;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \AppBundle\Entity\User $user
+     * @return Adherent
+     */
+    public function setUser(\AppBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
     }
 }

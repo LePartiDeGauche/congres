@@ -19,6 +19,7 @@ class AdherentResponsabilityAdmin extends Admin
     {
         $datagridMapper
             ->add('id')
+            ->add('responsability.name')
             ->add('start')
             ->add('end')
             ->add('isActive')
@@ -55,7 +56,7 @@ class AdherentResponsabilityAdmin extends Admin
             ->add('responsability', 'sonata_type_model')
             ->add('start')
             ->add('end')
-            ->add('isActive')
+            ->add('isActive', null, array('required' => null ))
         ;
     }
 
