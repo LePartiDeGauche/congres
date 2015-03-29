@@ -10,6 +10,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
+use AppBundle\Entity\Adherent;
 
 /**
  * Listener responsible for sending an email and prevent registration if
