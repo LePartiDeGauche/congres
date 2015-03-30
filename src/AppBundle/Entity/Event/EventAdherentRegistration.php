@@ -3,7 +3,7 @@
 namespace AppBundle\Entity\Event;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use Doctrine\Common\Collections\ArrayCollection;
 /**
  * EventAdherentRegistration
  *
@@ -15,6 +15,11 @@ class EventAdherentRegistration
 
     const PAYMENT_MODE_ONLINE = 'online';
     const PAYMENT_MODE_ONSITE = 'onsite';
+
+    const ATTENDANCE_PRESENT ='present';
+    const ATTENDANCE_ABSENT ='absent';
+    const ATTENDANCE_NOT_REGISTRED = 'not registred';
+
     /**
      * @var integer
      *
@@ -91,7 +96,7 @@ class EventAdherentRegistration
     /**
      * @var boolean
      *
-      @ORM\Column(name="need_hosting", type="boolean")
+     @ORM\Column(name="need_hosting", type="boolean")
      */
     private $needHosting;
 
@@ -118,13 +123,32 @@ class EventAdherentRegistration
      */
     private $comment;
 
+    /**
+     * @var boolean
+     *
+     @ORM\Column(name="vote_status", type="boolean")
+     */
+    private $voteStatus;
 
-    public function __construct(\AppBundle\Entity\Adherent $author, Event $event)
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="attendance", type="string", length=255, nullable=false)
+     * Online (CB) or At registration desk
+     */
+    private $attendance;
+
+
+
+    public function __construct(\AppBundle\Entity\Adherent $author = null, Event $event = null)
     {
         $this->author = $author;
         $this->event = $event;
         $this->registrationDate = new \DateTime('now');
         $this->paymentMode = self::PAYMENT_MODE_ONLINE;
+        $this->canVote = false;
+        $this->attendance = self::ATTENDANCE_NOT_REGISTRED;
+        $this->payments = new ArrayCollection();
     }
     /**
      * Get id
@@ -157,35 +181,6 @@ class EventAdherentRegistration
     public function getAdherent()
     {
         return $this->adherent;
-    }
-
-    /**
-     * Set payment
-     *
-     * @param \stdClass $payment
-     * @return EventAdherentRegistration
-     */
-    public function setPayment($payment)
-    {
-        if (!in_array($status, array(
-            self::PAYMENT_MODE_ONLINE,
-            self::PAYMENT_MODE_ONSITE)))
-        {
-            throw new \InvalidArgumentException('Invalid payment mode');
-        }
-        $this->payment = $payment;
-
-        return $this;
-    }
-
-    /**
-     * Get payment
-     *
-     * @return \stdClass 
-     */
-    public function getPayment()
-    {
-        return $this->payment;
     }
 
     /**
@@ -265,6 +260,12 @@ class EventAdherentRegistration
      */
     public function setPaymentMode($paymentMode)
     {
+        if (!in_array($paymentMode, array(
+            self::PAYMENT_MODE_ONLINE,
+            self::PAYMENT_MODE_ONSITE)))
+        {
+            throw new \InvalidArgumentException('Invalid payment mode');
+        }
         $this->paymentMode = $paymentMode;
 
         return $this;
@@ -436,5 +437,58 @@ class EventAdherentRegistration
     public function getComment()
     {
         return $this->comment;
+    }
+
+    /**
+     * Set voteStatus
+     *
+     * @param boolean $voteStatus
+     * @return EventAdherentRegistration
+     */
+    public function setVoteStatus($voteStatus)
+    {
+        $this->voteStatus = $voteStatus;
+
+        return $this;
+    }
+
+    /**
+     * Get voteStatus
+     *
+     * @return boolean 
+     */
+    public function getVoteStatus()
+    {
+        return $this->voteStatus;
+    }
+
+    /**
+     * Set attendance
+     *
+     * @param string $attendance
+     * @return EventAdherentRegistration
+     */
+    public function setAttendance($attendance)
+    {
+        if (!in_array($attendance, array(
+            self::ATTENDANCE_PRESENT,
+            self::ATTENDANCE_ABSENT,
+            self::ATTENDANCE_NOT_REGISTRED)))
+        {
+            throw new \InvalidArgumentException('Invalid attendance status');
+        }
+        $this->attendance = $attendance;
+
+        return $this;
+    }
+
+    /**
+     * Get attendance
+     *
+     * @return string 
+     */
+    public function getAttendance()
+    {
+        return $this->attendance;
     }
 }

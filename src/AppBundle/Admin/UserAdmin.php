@@ -20,7 +20,11 @@ final class UserAdmin extends Admin
 
     protected function configureFormFields(FormMapper $formMapper)
     {
-        $roles = array('ROLE_ADMIN' => 'Administrateur');
+        $roles = array(
+            'ROLE_STAFF' => 'Gestionnaire des inscriptions aux évenements',
+            //'ROLE_ORGANIZER' => 'Gestionnaire des évenements',
+            'ROLE_SUPER_ADMIN' => 'Administrateur', 
+        );
 
         $formMapper
             ->add('enabled', 'checkbox', array('label' => 'Compte Actif'))

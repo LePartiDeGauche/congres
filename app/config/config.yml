@@ -30,7 +30,9 @@ twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
     form:
-        resources: ['bootstrap_3_layout.html.twig']
+        resources: 
+            - 'bootstrap_3_layout.html.twig'
+            - 'admin/form_admin_fields.html.twig'
 
 # Assetic Configuration
 assetic:
@@ -110,6 +112,8 @@ sonata_block:
 sonata_admin:
     title: Administration
     title_logo: img/logo.png
+    security:
+        handler: sonata.admin.security.handler.role
 
 lexik_paybox:
     parameters:

@@ -9,7 +9,7 @@ services:
             - ~
         calls:
             - [ setTranslationDomain, [AppBundle] ]
-    sonata.admin.instance:
+    sonata.admin.responsability:
         class: AppBundle\Admin\ResponsabilityAdmin
         tags:
             - { name: sonata.admin, manager_type: orm, group: "Fichier", label: "Responsabilités"}
@@ -65,44 +65,44 @@ services:
         calls:
             - [ setContainer, [@service_container] ]
 
-    app.admin.event:
+    sonata.admin.event:
         class: AppBundle\Admin\EventAdmin
         arguments: [~, AppBundle\Entity\Event\Event, SonataAdminBundle:CRUD]
         tags:
             - {name: sonata.admin, manager_type: orm, group: "Evenements", label: "Évenements"}
 
-    app.admin.event_adherent_registration:
+    sonata.admin.event_adherent_registration:
         class: AppBundle\Admin\EventAdherentRegistrationAdmin
         arguments: [~, AppBundle\Entity\Event\EventAdherentRegistration, SonataAdminBundle:CRUD]
         tags:
             - {name: sonata.admin, manager_type: orm, group: "Evenements", label: "Inscription des adherents"}
 
 
-    app.admin.sleeping_facility:
+    sonata.admin.sleeping_facility:
         class: AppBundle\Admin\SleepingFacilityAdmin
         arguments: [~, AppBundle\Entity\Event\SleepingFacility, SonataAdminBundle:CRUD]
         tags:
             - {name: sonata.admin, manager_type: orm, group: "Evenements", label: "Lieu de couchage"}
 
-    app.admin.address:
+    sonata.admin.address:
         class: AppBundle\Admin\AddressAdmin
         arguments: [~, AppBundle\Entity\Address, SonataAdminBundle:CRUD]
         tags:
             - {name: sonata.admin, manager_type: orm, group: admin, label: Address, show_in_dashboard: false }
 
-    app.admin.text_group:
+    sonata.admin.text_group:
         class: AppBundle\Admin\TextGroupAdmin
         arguments: [~, AppBundle\Entity\Text\TextGroup, SonataAdminBundle:CRUD]
         tags:
             - {name: sonata.admin, manager_type: orm, group: "Texte", label: "Groupes de textes"}
 
-    app.admin.text:
+    sonata.admin.text:
         class: AppBundle\Admin\TextAdmin
         arguments: [~, AppBundle\Entity\Text\Text, SonataAdminBundle:CRUD]
         tags:
             - {name: sonata.admin, manager_type: orm, group: "Texte", label: "Textes"}
 
-    app.admin.vote_rule:
+    sonata.admin.vote_rule:
         class: AppBundle\Admin\VoteRuleAdmin
         arguments: [~, AppBundle\Entity\Vote\VoteRule, SonataAdminBundle:CRUD]
         tags:
@@ -111,26 +111,40 @@ services:
             - [setSubClasses, [{threshold: AppBundle\Entity\Vote\ThresholdVoteRule}]]
 
 
-    app.admin.event_meal:
+    sonata.admin.event_meal:
         class: AppBundle\Admin\EventMealAdmin
         arguments: [~, AppBundle\Entity\Event\EventMeal, SonataAdminBundle:CRUD]
         tags:
             - {name: sonata.admin, manager_type: orm, group: admin, label: EventMeal, show_in_dashboard: false }
 
-    app.admin.event_cost:
+    sonata.admin.event_cost:
         class: AppBundle\Admin\EventCostAdmin
         arguments: [~, AppBundle\Entity\Event\EventCost, SonataAdminBundle:CRUD]
         tags:
             - {name: sonata.admin, manager_type: orm, group: admin, label: EventCost, show_in_dashboard: false }
 
-    app.admin.event_role:
+    sonata.admin.event_role:
         class: AppBundle\Admin\EventRoleAdmin
         arguments: [~, AppBundle\Entity\Event\EventRole, SonataAdminBundle:CRUD]
         tags:
             - {name: sonata.admin, manager_type: orm, group: "Evenements", label: "Rôles d'évenements", show_in_dashboard: false }
 
-    app.admin.adherent_responsability:
+    sonata.admin.adherent_responsability:
         class: AppBundle\Admin\AdherentResponsabilityAdmin
         arguments: [~, AppBundle\Entity\AdherentResponsability, SonataAdminBundle:CRUD]
         tags:
             - {name: sonata.admin, manager_type: orm, group: admin, label: AdherentResponsability, show_in_dashboard: false}
+
+    sonata.admin.payment:
+        class: AppBundle\Admin\PaymentAdmin
+        arguments: [~, AppBundle\Entity\Payment\Payment, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin, label: Payment, show_in_dashboard: false}
+        calls:
+            - [setSubClasses, [{membership: AppBundle\Entity\Payment\MembershipPayment, event: AppBundle\Entity\Payment\EventPayment}]]
+
+    sonata.admin.payment.event_payment:
+        class: AppBundle\Admin\EventPaymentAdmin
+        arguments: [~, AppBundle\Entity\Payment\EventPayment, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin, label: EventPayment}

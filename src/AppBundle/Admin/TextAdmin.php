@@ -13,6 +13,13 @@ class TextAdmin extends Admin
 {
     protected $baseRouteName = 'text_admin';
     protected $baseRoutePattern = 'text';
+    protected $status_choice = array(
+                    Text::STATUS_NEW => 'Nouveau',
+                    Text::STATUS_PROPOSED => 'Proposés (Visible)',
+                    Text::STATUS_VOTING => 'Soumis au vote',
+                    Text::STATUS_ADOPTED => 'Adopté / Validé',
+                    Text::STATUS_REJECTED => 'Rejeté',
+                );
     /**
      * @param DatagridMapper $datagridMapper
      */
@@ -26,13 +33,8 @@ class TextAdmin extends Admin
             ->add('title')
             ->add('status', null, array(
                 'label' => 'Statut'),
-                'choice', array( 'choices' => array(
-                    Text::STATUS_NEW => 'Nouveau',
-                    Text::STATUS_PROPOSED => 'Proposés (Visible)',
-                    Text::STATUS_VOTING => 'Soumis au vote',
-                    Text::STATUS_ADOPTED => 'Adopté / Validé',
-                    Text::STATUS_REJECTED => 'Rejeté',
-                ),
+            'choice', array(
+                'choices' => $this->status_choice,
                 'multiple' => false,
             ))
         ;
@@ -55,13 +57,7 @@ class TextAdmin extends Admin
             //->add('rawContent', 'html')
             ->add('status', 'choice', array(
                 'label' => 'Statut',
-                'choices' => array(
-                    Text::STATUS_NEW => 'Nouveau',
-                    Text::STATUS_PROPOSED => 'Proposés (Visible)',
-                    Text::STATUS_VOTING => 'Soumis au vote',
-                    Text::STATUS_ADOPTED => 'Adopté / Validé',
-                    Text::STATUS_REJECTED => 'Rejeté',
-                ),
+                'choices' => $this->status_choice,
                 'multiple' => false,
             ))
             ->add('_action', 'actions', array(
@@ -110,13 +106,7 @@ class TextAdmin extends Admin
             ->add('rawContent')
             ->add('status', 'choice', array(
                 'label' => 'Statut',
-                'choices' => array(
-                    Text::STATUS_NEW => 'Nouveau',
-                    Text::STATUS_PROPOSED => 'Proposés (Visible)',
-                    Text::STATUS_VOTING => 'Soumis au vote',
-                    Text::STATUS_ADOPTED => 'Adopté / Validé',
-                    Text::STATUS_REJECTED => 'Rejeté',
-                ),
+                'choices' => $this->status_choice,
                 'multiple' => false,
             ))
             ;
@@ -135,13 +125,7 @@ class TextAdmin extends Admin
             ->add('rawContent', 'html')
             ->add('status', 'choice', array(
                 'label' => 'Statut',
-                'choices' => array(
-                    Text::STATUS_NEW => 'Nouveau',
-                    Text::STATUS_PROPOSED => 'Proposés (Visible)',
-                    Text::STATUS_VOTING => 'Soumis au vote',
-                    Text::STATUS_ADOPTED => 'Adopté / Validé',
-                    Text::STATUS_REJECTED => 'Rejeté',
-                ),
+                'choices' =>$this->status_choice, 
                 'multiple' => false,
             ))
         ;

@@ -54,7 +54,7 @@ class EventPayment extends Payment
         return $this->attachedRegistration;
     }
 
-    public function __construct(Adherent $author, Event $event, EventAdherentRegistration $eventRegistration)
+    public function __construct(Adherent $author = null, Event $event = null, EventAdherentRegistration $eventRegistration = null)
     {
         $this->author = $author;
         $this->attachedEvent = $event;
