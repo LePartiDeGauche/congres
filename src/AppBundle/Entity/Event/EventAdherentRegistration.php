@@ -146,7 +146,7 @@ class EventAdherentRegistration
         $this->event = $event;
         $this->registrationDate = new \DateTime('now');
         $this->paymentMode = self::PAYMENT_MODE_ONLINE;
-        $this->canVote = false;
+        $this->voteStatus = false;
         $this->attendance = self::ATTENDANCE_NOT_REGISTRED;
         $this->payments = new ArrayCollection();
     }
