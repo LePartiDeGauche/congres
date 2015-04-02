@@ -26,7 +26,7 @@ class EventAdherentRegistrationAdmin extends Admin
     // Quick fix for workaround for
     // https://github.com/sonata-project/SonataAdminBundle/issues/2630
     protected $yesnoChoice = array(
-    
+
         true => "Oui",
         false => "Non"
     );
@@ -46,13 +46,13 @@ class EventAdherentRegistrationAdmin extends Admin
             ->add('paymentMode', null,
                 array('label' => 'Modalité de paiement' ),
                 'choice', array(
-                'choices' => $this->paymentModeChoice,
-            ))
-            ->add('registrationDate', null, array('label' => 'Date d\'inscription'))
-            ->add('attendance', null, array('label' => 'Présence'),'choice', array(
-                'choices' => $this->attendanceChoice))
-            ->add('meals', null, array('label' => 'Repas'))
-            ;
+                    'choices' => $this->paymentModeChoice,
+                ))
+                ->add('registrationDate', null, array('label' => 'Date d\'inscription'))
+                ->add('attendance', null, array('label' => 'Présence'),'choice', array(
+                    'choices' => $this->attendanceChoice))
+                    ->add('meals', null, array('label' => 'Repas'))
+                    ;
     }
 
     /**
@@ -61,13 +61,14 @@ class EventAdherentRegistrationAdmin extends Admin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
+            ->add('id')
             ->add('_action', 'actions', array(
                 'actions' => array(
                     'show' => array(),
                     'edit' => array(),
+                    'delete' => array()
                 )
             ))
-            ->add('id')
             ->add('adherent.firstname', NULL, array('label' => 'Prénom'))
             ->add('adherent.lastname', NULL, array('label' => 'Nom'))
             //->add('adherent.email', NULL, array('label' => 'Courriel'))
@@ -75,7 +76,6 @@ class EventAdherentRegistrationAdmin extends Admin
             ->add('adherent.responsabilities', 'sonata_type_collection', array('associated_property' => 'responsability', 'label' => 'Responsabilités au sein du parti'))
             ->add('role', null, array('label' => 'Inscrit en tant que'))
             //->add('registrationDate', null, array('label' => 'Date d\'inscription'))
-            ->add('cost', NULL, array('label' => 'Tarif'))
             ->add('payments', null, array(
                 'label' => 'Paiements',
             ))
@@ -90,6 +90,7 @@ class EventAdherentRegistrationAdmin extends Admin
                 'label' => 'Présence',
                 'choices' => $this->attendanceChoice,
             ))
+            //->add('cost', NULL, array('label' => 'Tarif'))
             ->add('meals', null, array('label' => 'Repas'))
 
             ;
@@ -117,14 +118,30 @@ class EventAdherentRegistrationAdmin extends Admin
         }
         else
         {
-            $formMapper
-                ->add('adherent.firstname', NULL, array('label' => 'Prénom', 'read_only' => true,))
-                ->add('adherent.lastname', NULL, array('label' => 'Nom', 'read_only' => true,));
+        $formMapper
+            ->add('adherent.firstname', NULL, array('label' => 'Prénom', 'read_only' => true,))
+            ->add('adherent.lastname', NULL, array('label' => 'Nom', 'read_only' => true,))
+            ->add('adherent.responsabilities', 'sonata_type_collection',
+                array(
+                    'label' => 'Responsabilités au sein du parti',
+                    'type_options' => array(
+                        'delete' => false,
+                        'btn_add' => false
+                    ),
+                    'required' => false,
+                    'read_only' => true, 
+                    'disabled' => true,
+                ), array(
+                    'edit' => 'inline',
+                    'inline' => 'table',
+                    'sortable' => 'position',
+                ));
+        
         }
         $formMapper
             ->add('registrationDate',null, array('read_only' => true,'disabled'  => true,))
             // FIXME: filter role of this event !
-            ->add('role', null, array('read_only' => !$isCreate, 'disabled' => !$isCreate))
+            ->add('role') //, null, array('read_only' => !$isCreate, 'disabled' => !$isCreate))
             ->add('needHosting', 'choice', array('label' => 'necessite un hebergement', 'choices' => $this->yesnoChoice))
             // FIXME: filter cost of this event !
             ->add('cost', NULL, array('label' => 'Tarif'))
@@ -176,14 +193,14 @@ class EventAdherentRegistrationAdmin extends Admin
                 'label' => 'Type de Paiement',
                 'multiple' => false,
                 'choices' => $this->paymentModeChoice))
-            ->add('payments', null, array(
-                'label' => 'Paiements',
-                'read_only' => true,
-                'disabled'  => true,
-            ))
-            ->add('meals', null, array('label' => 'Repas', 'expanded' => true))
-            ->add('comment')
-            ;
+                ->add('payments', null, array(
+                    'label' => 'Paiements',
+                    'read_only' => true,
+                    'disabled'  => true,
+                ))
+                ->add('meals', null, array('label' => 'Repas', 'expanded' => true))
+                ->add('comment')
+                ;
     }
 
     public function getExportFields()
@@ -197,7 +214,7 @@ class EventAdherentRegistrationAdmin extends Admin
 
         return $fieldsArray;
     }
-        public function getExportFormats()
+    public function getExportFormats()
     {
         return array(
             'xls'
@@ -220,17 +237,21 @@ class EventAdherentRegistrationAdmin extends Admin
     public function prePersist($object)
     {
         foreach ($object->getPayments() as $payment) {
-            $payment->setAttachedRegistration($object);
-            $payment->setAttachedEvent($object->getEvent());
-            $payment->setAuthor($object->getAdherent());
+            $payment->setAttachedRegistration($object)
+            ->setAttachedEvent($object->getEvent())
+            ->setAuthor($object->getAdherent())
+            ->setReferenceIdentifierPrefix($object->getEvent()->getNormalizedName())
+            ;
         }
     }
     public function preUpdate($object)
     {
         foreach ($object->getPayments() as $payment) {
-            $payment->setAttachedRegistration($object);
-            $payment->setAttachedEvent($object->getEvent());
-            $payment->setAuthor($object->getAdherent());
+            $payment->setAttachedRegistration($object)
+            ->setAttachedEvent($object->getEvent())
+            ->setAuthor($object->getAdherent())
+            ->setReferenceIdentifierPrefix($object->getEvent()->getNormalizedName())
+            ;
         }
     }
 

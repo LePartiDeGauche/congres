@@ -16,6 +16,7 @@ class EventPaymentAdmin extends Admin
     protected $method_choice = array(
             EventPayment::METHOD_CASH => "Paiement en liquide",
             EventPayment::METHOD_CHEQUE=> "Paiement par chèque",
+            EventPayment::METHOD_CREDIT_CARD => "Carte de crédit",
         );
     protected $status_choice = array(
             EventPayment::STATUS_BANKED => "Accepté",

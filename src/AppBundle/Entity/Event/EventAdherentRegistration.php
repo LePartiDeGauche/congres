@@ -54,7 +54,7 @@ class EventAdherentRegistration
     /**
      * @var \stdClass
      *
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Payment\EventPayment", mappedBy="attachedRegistration")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Payment\EventPayment", mappedBy="attachedRegistration",cascade={"persist"})
      */
     private $payments;
 

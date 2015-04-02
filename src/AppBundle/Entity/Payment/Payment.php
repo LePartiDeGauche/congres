@@ -65,7 +65,7 @@ abstract class Payment
      * @var \stdClass
      * People who write the cheque / has his name on the credit card
      *
-     * @ORM\Column(name="drawer", type="string", length=255)
+     * @ORM\Column(name="drawer", type="string", length=255, nullable=true)
      * 
      */
     protected $drawer;
@@ -128,6 +128,7 @@ abstract class Payment
     public function __construct()
     {
         $this->date = new \DateTime('now');
+        $this->account = self::ACCOUNT_PG;
         $this->paymentIPN = array();
     
     }
