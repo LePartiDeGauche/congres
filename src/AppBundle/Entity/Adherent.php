@@ -63,6 +63,13 @@ class Adherent
     private $status;
 
     /**
+     * @var int$
+     *
+     * @ORM\Column(name="departement", type="integer")
+     */
+    // FIXME : Remove this field when organs will be imported
+    private $departement;
+    /**
      * @var \Doctrine\Common\Collections\Collection
      *
      * @ORM\OneToMany(targetEntity="AdherentResponsability", mappedBy="adherent", orphanRemoval=true, cascade={"persist"})
@@ -94,6 +101,7 @@ class Adherent
         // Initialize collection
         $this->responsabilities = new \Doctrine\Common\Collections\ArrayCollection();
         $this->status = self::STATUS_NEW;
+        $this->departement = 0;
     }
 
     /**
@@ -347,5 +355,28 @@ class Adherent
         $this->user = $user;
 
         return $this;
+    }
+
+    /**
+     * Set departement
+     *
+     * @param integer $departement
+     * @return Adherent
+     */
+    public function setDepartement($departement)
+    {
+        $this->departement = $departement;
+
+        return $this;
+    }
+
+    /**
+     * Get departement
+     *
+     * @return integer 
+     */
+    public function getDepartement()
+    {
+        return $this->departement;
     }
 }

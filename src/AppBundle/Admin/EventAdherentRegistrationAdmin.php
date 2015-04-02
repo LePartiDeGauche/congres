@@ -139,6 +139,7 @@ class EventAdherentRegistrationAdmin extends Admin
         
         }
         $formMapper
+            ->add('adherent.departement', null, array('label' => 'Département d\'adhesion'))
             ->add('registrationDate',null, array('read_only' => true,'disabled'  => true,))
             // FIXME: filter role of this event !
             ->add('role') //, null, array('read_only' => !$isCreate, 'disabled' => !$isCreate))
@@ -210,6 +211,7 @@ class EventAdherentRegistrationAdmin extends Admin
         $fieldsArray[] = 'adherent.firstname';
         $fieldsArray[] = 'adherent.lastname';
         $fieldsArray[] = 'adherent.email';
+        $fieldsArray[] = 'adherent.departement';
         $fieldsArray[] = 'voteStatus';
 
         return $fieldsArray;

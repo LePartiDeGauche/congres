@@ -19,6 +19,7 @@ class AdherentAdmin extends Admin
             ->add('lastname', null, array('label' => 'Nom'))
             ->add('firstname', null, array('label' => 'Prénom'))
             ->add('email')
+            ->add('departement')
             ->add('birthdate', 'birthday', array('label' => 'Date de naissance'))
             ->add('status', 'choice', array(
                 'label' => 'Statut',
