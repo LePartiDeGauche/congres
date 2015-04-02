@@ -64,11 +64,11 @@ class EventAdherentRegistrationAdmin extends Admin
             ->add('id')
             ->add('adherent.firstname', NULL, array('label' => 'Prénom'))
             ->add('adherent.lastname', NULL, array('label' => 'Nom'))
-            ->add('adherent.email', NULL, array('label' => 'Courriel'))
+            //->add('adherent.email', NULL, array('label' => 'Courriel'))
             ->add('adherent.status',null, array('label' => 'Statut'))
             ->add('adherent.responsabilities', 'sonata_type_collection', array('associated_property' => 'responsability', 'label' => 'Responsabilités au sein du parti'))
             ->add('role', null, array('label' => 'Inscrit en tant que'))
-            ->add('registrationDate', null, array('label' => 'Date d\'inscription'))
+            //->add('registrationDate', null, array('label' => 'Date d\'inscription'))
             ->add('cost', NULL, array('label' => 'Tarif'))
             ->add('payments', null, array(
                 'label' => 'Paiements',
@@ -90,7 +90,6 @@ class EventAdherentRegistrationAdmin extends Admin
                 'actions' => array(
                     'show' => array(),
                     'edit' => array(),
-                    'delete' => array(),
                 )
             ))
             ;
