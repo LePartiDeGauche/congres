@@ -61,6 +61,12 @@ class EventAdherentRegistrationAdmin extends Admin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
+            ->add('_action', 'actions', array(
+                'actions' => array(
+                    'show' => array(),
+                    'edit' => array(),
+                )
+            ))
             ->add('id')
             ->add('adherent.firstname', NULL, array('label' => 'Prénom'))
             ->add('adherent.lastname', NULL, array('label' => 'Nom'))
@@ -78,20 +84,14 @@ class EventAdherentRegistrationAdmin extends Admin
                 'multiple' => false,
                 'choices' => $this->paymentModeChoice
             ))
-            ->add('meals', null, array('label' => 'Repas'))
             ->add('needHosting', NULL, array('label' => 'Hebergement'))
             ->add('voteStatus', null, array('label' => 'Droit de vote'))
             ->add('attendance', 'choice', array(
                 'label' => 'Présence',
                 'choices' => $this->attendanceChoice,
             ))
+            ->add('meals', null, array('label' => 'Repas'))
 
-            ->add('_action', 'actions', array(
-                'actions' => array(
-                    'show' => array(),
-                    'edit' => array(),
-                )
-            ))
             ;
     }
 
