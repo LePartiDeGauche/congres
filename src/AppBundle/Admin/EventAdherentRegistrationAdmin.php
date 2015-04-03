@@ -42,6 +42,7 @@ class EventAdherentRegistrationAdmin extends Admin
             ->add('adherent.email', null, array('label' => 'Courriel'))
             ->add('adherent.departement', null, array('label' => 'Département'))
             ->add('adherent.responsabilities.responsability',null , array('label' => 'Responsabilité', 'multiple' => true))
+            ->add('role', null, array('label' => 'Inscrit en tant que', 'multiple' => true))
             ->add('needHosting', null, array('label' => 'Hebergement'))
             ->add('voteStatus', null, array('label' => 'Droit de vote'))
             //->add('meals') // TODO filter
