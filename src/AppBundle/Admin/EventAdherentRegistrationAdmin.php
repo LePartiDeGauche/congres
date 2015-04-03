@@ -40,6 +40,7 @@ class EventAdherentRegistrationAdmin extends Admin
             ->add('adherent.firstname',null,array('label' => 'Prénom'))
             ->add('adherent.lastname', null, array('label' => 'Nom de Famille'))
             ->add('adherent.email', null, array('label' => 'Courriel'))
+            ->add('adherent.departement', null, array('label' => 'Département'))
             ->add('needHosting', null, array('label' => 'Hebergement'))
             ->add('voteStatus', null, array('label' => 'Droit de vote'))
             //->add('meals') // TODO filter
@@ -72,6 +73,7 @@ class EventAdherentRegistrationAdmin extends Admin
             ->add('adherent.firstname', NULL, array('label' => 'Prénom'))
             ->add('adherent.lastname', NULL, array('label' => 'Nom'))
             //->add('adherent.email', NULL, array('label' => 'Courriel'))
+            ->add('adherent.departement', NULL, array('label' => 'Dpt'))
             ->add('adherent.status',null, array('label' => 'Statut'))
             ->add('adherent.responsabilities', 'sonata_type_collection', array('associated_property' => 'responsability', 'label' => 'Responsabilités au sein du parti'))
             ->add('role', null, array('label' => 'Inscrit en tant que'))
@@ -91,8 +93,6 @@ class EventAdherentRegistrationAdmin extends Admin
                 'choices' => $this->attendanceChoice,
             ))
             //->add('cost', NULL, array('label' => 'Tarif'))
-            ->add('meals', null, array('label' => 'Repas'))
-
             ;
     }
 
@@ -186,6 +186,7 @@ class EventAdherentRegistrationAdmin extends Admin
         $showMapper
             ->add('adherent.firstname', NULL, array('label' => 'Prénom', 'read_only' => true,))
             ->add('adherent.lastname', NULL, array('label' => 'Nom', 'read_only' => true,))
+            ->add('adherent.departement', NULL, array('label' => 'Département', 'read_only' => true,))
             ->add('registrationDate',null, array('read_only' => true,'disabled'  => true,))
             ->add('role', null, array('read_only' =>true, 'disabled' => true))
             ->add('needHosting')
