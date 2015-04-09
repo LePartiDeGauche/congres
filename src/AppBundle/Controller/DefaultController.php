@@ -17,6 +17,22 @@ class DefaultController extends Controller
     }
 
     /**
+     * @Route("/commission-votes", name="commission_votes")
+     */
+    public function commissionVoteAction()
+    {
+        return $this->render('commissions/commission-votes.html.twig');
+    }
+
+    /**
+     * @Route("/commission-debats", name="commission_debats")
+     */
+    public function commissionDebatsAction()
+    {
+        return $this->render('commissions/commission-debats.html.twig');
+    }
+
+    /**
      * @Route("/depot-contribution")
      */
     public function redirectionDepotContributionAction()

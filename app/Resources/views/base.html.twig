@@ -35,69 +35,74 @@
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Règlement intérieur <span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
+                                <li><a href="{{ path('downloads', {filename: 'RI Congrès 2015 phases 2 et 3 adopté CN.pdf'}) }}">Phases 2 &amp; 3</a></li>
                                 <li><a href="{{ path('downloads', {filename: 'Règlement Intérieur - Phase 1.pdf'}) }}">Phase 1</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                                role="button" aria-expanded="false">Plateformes <span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li>
+                                    <a href="{{ path('downloads', {filename: 'Tout est possible.pdf'}) }}">
+                                        Tout est possible
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('downloads', {filename: 'Clarté et courage politique.pdf'}) }}">
+                                        Clarté et courage politique
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                                                                role="button" aria-expanded="false">Autres textes<span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li>
+                                    <a href="{{ path('downloads', {filename: 'RI du PG modifié.pdf'}) }}">
+                                        R.I. du PG modifi&eacute;
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('downloads', {filename: 'Statuts du PG modifiés.pdf'}) }}">
+                                        Statuts du PG modifi&eacute;s
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('downloads', {filename: 'Les 100 premiers jours.pdf'}) }}">
+                                        Les 100 premiers jours
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                                                                role="button" aria-expanded="false">Commissions<span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li>
+                                    <a href="{{ path('commission_votes') }}">
+                                        Commission des votes
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('commission_debats') }}">
+                                        Commission des débats
+                                    </a>
+                                </li>
                             </ul>
                         </li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Contributions <span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
-                                {% if is_granted('CALENDAR_contribution_submit') %}
-                                <li><a href="{{ path('contribution_submit') }}">Envoyer</a></li>
-                                <li><a href="{{ path('contribution_my_submissions') }}">Mes contributions</a></li>
-                                {% endif %}
-                                {% if is_granted('CALENDAR_contribution_vote') %}
-                                <li><a href="{{ path('contribution_list') }}">Listes des contributions</a></li>
-                                {% endif %}
                                 {% if is_granted('CALENDAR_contribution_read') %}
                                 <li><a href="{{ path('contribution_list_valid') }}">Contributions validées</a></li>
                                 {% endif %}
                             </ul>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"
-                                    role="button" aria-expanded="false">Plateformes <span class="caret"></span></a>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li><a href="{{ path('text_list',{group_id: '1'}) }}">Les
-                                            Plateformes</a></li>
-                                    <li>---</li>
-                                    <li><a href="{{ path('downloads', {filename:
-                                    'Ecosocialisme, Souveraineté, République.pdf'}) }}">Ecosocialisme, Souveraineté, République</a></li>
-                                    <li><a href="{{ path('downloads', {filename:
-                                    'PG - Plateforme alternative - La democratie reelle pour realiser l ecosocialisme.pdf'}) }}">La démocratie réelle pour réaliser l'écosocialisme</a></li>
-                                    <li><a href="{{ path('downloads', {filename:
-                                    'PlateformeBN_LaVieEstANous.pdf'}) }}">Plateforme du BN: La vie est à nous</a></li>
-                                    <li><a href="{{ path('downloads', {filename:
-                                    'Plus belle la vie  - plateforme alternative.pdf'}) }}">Plus belle la vie</a></li>
-                                    <li><a href="{{ path('downloads', {filename:
-                                    'Pour le peuple ! PDF.pdf'}) }}">Pour le peuple !</a></li>
-                                    <li><a href="{{ path('downloads', {filename:
-                                    'Régénération.pdf'}) }}">Régénération</a></li>
-                                </ul>
-                            </li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"
-                                                                    role="button" aria-expanded="false">Conseil National<span class="caret"></span></a>
-                                <ul class="dropdown-menu" role="menu">
-<li><a href="{{ path('event_registration_create', {event_id: 1}) }}">Inscription</a></li>
-                                    <li><a href="{{ path('downloads', {filename:
-                                    'ProjetReglementCongres2015Phases2et3PourCN.pdf'}) }}">Projet de R&egrave;glement int&eacute;rieur Congr&egrave;s phase 2 et 3</a></li>
-                                    <li><a href="{{ path('downloads', {filename:
-                                    'BN_NoteIntentionsStatuts2015PourCN.pdf'}) }}">Note d’intention BN sur les statuts</a></li>
-                                    <li><a href="{{ path('downloads', {filename:
-                                    'Les100PremiersJoursVersionSoumiseAuDebat.pdf'}) }}">Les 100 premiers jours - version soumise au d&eacute;bat.pdf</a></li>
-                                    <li><a href="{{ path('downloads', {filename:
-                                    'ProjetDeRICongresPhases2Et3AmendePourCN.pdf'}) }}">Projet de RI Congr&egrave;s phases 2 et 3 amendé pour CN</a></li>
-                                    <li><a href="{{ path('downloads', {filename:
-                                    'RIDuPGModifiePourCN.pdf'}) }}">RI du PG modifi&eacute; pour CN.pdf</a></li>
-                                    <li><a href="{{ path('downloads', {filename:
-                                    'StatutsModifiesPourCN.pdf'}) }}">Statuts modifi&eacute;s pour CN</a></li>
-                                </ul>
-                            </li>
                         </li>
+                        {% endif %}
                     </ul>
-                    </li>
-                    {% endif %}
                     {% endblock %}
-                    </ul>
                     <ul class="nav navbar-nav navbar-right">
                         {% if is_granted('ROLE_ADMIN') %}
                         <li><a href="{{ path('sonata_admin_dashboard') }}">Administration</a></li>
@@ -125,7 +130,7 @@ inscriptions</a></li>
         </div>
         {% block body %}{% endblock %}
         {% block javascripts %}
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
         {% endblock %}
     </body>
