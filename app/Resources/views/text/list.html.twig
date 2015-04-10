@@ -48,6 +48,14 @@ $(document).ready(function()
                         </a>
                     </li>
                     {% endif %}
+
+                    {% if showValidatedPanel %}
+                    <li role="presentation">
+                        <a href="#rejected" aria-controls="rejected" role="tab" data-toggle="tab">
+                            Non-Validé
+                        </a>
+                    </li>
+                    {% endif %}
                 </ul>
 
                 <div class="tab-content">
@@ -64,8 +72,8 @@ $(document).ready(function()
                             </thead>
                             <tbody>
                                 {% for text in texts %}
-                                {% if text.entity.status ==
-                                constant('AppBundle\\Entity\\Text\\Text::STATUS_PROPOSED') %}
+                                {% if text.entity.status !=
+                                constant('AppBundle\\Entity\\Text\\Text::STATUS_NEW')%}
                                 <tr>
                                     <td>
                                         <a href="{{ path('text_show', {group_id: textGroup.id, text_id: text.entity.id}) }}">{{ text.entity.title }}</a>
@@ -152,6 +160,40 @@ constant('AppBundle\\Entity\\Text\\Text::STATUS_ADOPTED') %}
                                 {% for text in texts %}
                                 {% if text.entity.status ==
                                 constant('AppBundle\\Entity\\Text\\Text::STATUS_ADOPTED') %}
+                                <tr>
+                                    <td>
+                                        <a href="{{ path('text_show', {group_id: textGroup.id, text_id: text.entity.id}) }}">{{ text.entity.title }}</a>
+                                    </td>
+                                    <td>{{ text.entity.author.firstname }} {{ text.entity.author.lastname }}</td>
+{# <td>{% if text.entity.organ %} {{ text.entity.organ.name }} {% endif %}</td> #}
+                                    {% for voteRule in textGroup.voteRules %}
+                                    <td>{{attribute(text, 'voteFor' ~ voteRule.id )}}</td>
+                                    {% endfor %}
+                                </tr>
+                                {% endif %}
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    {% endif %}
+                    {% if showValidatedPanel %}
+                    <div role="tabpanel" class="tab-pane" id="rejected">
+                        <h2>Non-Validés</h2>
+                        <table class="table tablesorter">
+                            <thead>
+                                <tr>
+                                    <th>Titre</th>
+                                    <th>Auteur</th>
+{#<th>Pour</th>#}
+                                    {% for voteRule in textGroup.voteRules %}
+                                    <th>{{voteRule.name}}</th>
+                                    {% endfor %}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for text in texts %}
+                                {% if text.entity.status ==
+                                constant('AppBundle\\Entity\\Text\\Text::STATUS_REJECTED') %}
                                 <tr>
                                     <td>
                                         <a href="{{ path('text_show', {group_id: textGroup.id, text_id: text.entity.id}) }}">{{ text.entity.title }}</a>
