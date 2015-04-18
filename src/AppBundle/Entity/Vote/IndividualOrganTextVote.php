@@ -72,6 +72,12 @@ class IndividualOrganTextVote
      */
     private $author;
 
+    public function __construct(Organ $organ, Adherent $author, TextGroup $textGroup)
+    {
+        $this->organ = $organ;
+        $this->author = $author;
+        $this->textGroup = $textGroup;
+    }
 
     /**
      * Get id
