@@ -8,16 +8,14 @@ use AppBundle\Entity\Text\TextGroup;
 use AppBundle\Entity\Vote\TextVoteAgregation;
 
 /**
- * AppBundle\Entity\Vote\IndividualTextVoteAgregation
+ * AppBundle\Entity\Vote\IndividualOrganTextVoteAgregation
  *
- * @ORM\Entity(
- * repositoryClass="AppBundle\Entity\Vote\IndividualTextVoteAgregationRepository"
- * )
- * @ORM\Table(name="individual_text_vote_agregation")
- *
+ * @ORM\Entity()
+ * @ORM\Table(name="individual_organ_text_vote_agregation")
  */
-class IndividualTextVoteAgregation extends TextVoteAgregation
+class IndividualOrganTextVoteAgregation extends TextVoteAgregation
 {
+
     /**
      * @var integer
      *
@@ -30,25 +28,26 @@ class IndividualTextVoteAgregation extends TextVoteAgregation
     /**
      * @var \stdClass
      *
-     * @ORM\ManyToOne(targetEntity="VoteRule",
-     * cascade={"persist", "remove", "merge"})
+     * @ORM\ManyToOne(targetEntity="IndividualOrganTextVote",
+     * cascade={"persist", "remove", "merge"}, 
+     * inversedBy="textVoteAgregations")
      * @ORM\JoinColumn(nullable=false)
      *
      */
-    private $voteRule;
+    private $individualOrganTextVote;
 
 
-    public function __construct(Text $text, TextGroup $textGroup, VoteRule $voteRule)
+    public function __construct(Text $text, TextGroup $textGroup, IndividualOrganTextVote $individualOrganTextVote)
     {
         parent::__construct($text, $textGroup);
-        $this->voteRule = $voteRule;
+        $this->individualOrganTextVote = $individualOrganTextVote;
     }
 
     /**
      * Set voteRule
      *
      * @param \stdClass $voteRule
-     * @return IndividualTextVoteAgregation
+     * @return IndividualOrganTextVoteAgregation
      */
     public function setVoteRule($voteRule)
     {
