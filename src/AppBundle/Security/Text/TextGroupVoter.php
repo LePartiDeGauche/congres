@@ -103,7 +103,8 @@ final class TextGroupVoter extends AbstractVoter
         if ($textGroup->getIsVisible() && $textGroup->getVoteOpening() < $date && $textGroup->getVoteClosing() > $date)
         {
             return
-                $em->getRepository('AppBundle:Vote\OrganVoteRule')->getOrganTypeRightToVoteForTextGroup($organ->organType);
+                $em->getRepository('AppBundle:Vote\OrganVoteRule')->getOrganTypeRightToVoteForTextGroup($organ->organType) &&
+                $em->getRepository('AppBundle:Vote\IndividualOrganTextVot')->hasVoteBeenReported($organ, $textGroup);
 
         }
 

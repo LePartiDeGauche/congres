@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * People voting in an individual manner through an organ
  *
  * @ORM\Table()
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Entity\Vote\IndividualOrganTextVoteRepository")
  */
 class IndividualOrganTextVote
 {
