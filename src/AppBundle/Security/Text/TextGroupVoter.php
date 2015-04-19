@@ -92,8 +92,8 @@ final class TextGroupVoter extends AbstractVoter
      * a adherent can report a vote if :
      * - text Group is open for vote (done)
      * - the organ is abilitated to vote. (done)
-     * - the organ has not voted yet.
-     * - the adherent as as the right responsability to vote.
+     * - the organ has not voted yet. (done)
+     * - the adherent as as the right responsability to vote.(done, some limitations)
      */
     private function canReportVote (TextGroup $textGroup, User $user, Organ $organ)
     {
@@ -102,9 +102,10 @@ final class TextGroupVoter extends AbstractVoter
 
         if ($textGroup->getIsVisible() && $textGroup->getVoteOpening() < $date && $textGroup->getVoteClosing() > $date)
         {
-            return
+            return 
                 $em->getRepository('AppBundle:Vote\OrganVoteRule')->getOrganTypeRightToVoteForTextGroup($organ->organType) &&
-                $em->getRepository('AppBundle:Vote\IndividualOrganTextVot')->hasVoteBeenReported($organ, $textGroup);
+                !$em->getRepository('AppBundle:Vote\IndividualOrganTextVote')->hasVoteBeenReported($organ, $textGroup) &&
+                ($em->getRepository('AppBundle:Vote\OrganVoteRule')->getAdherentRightToVoteForOrganAndTextGroup($organ->organType));
 
         }
 

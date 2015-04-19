@@ -5,6 +5,7 @@ namespace AppBundle\Entity\Vote;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use AppBundle\Entity\Adherent;
+use AppBundle\Entity\Organ\Organ;
 use AppBundle\Entity\Text\TextGroup;
 
 /**
@@ -29,5 +30,25 @@ class OrganVoteRuleRepository extends EntityRepository
             ->getQuery()->getSingleScalarResult();
 
         return !!$voteRightCount;
+    }
+    public function getAdherentRightToVoteForOrganAndTextGroup(Adherent $adherent, Organ $organ, TextGroup $textGroup)
+    {
+        // FIXME : does not handle the cas where everybody in the organ has the right to report
+        // a vote (case where SIZE(reportResponsability) = 0)
+        // FIXME : a adherent as to be designated by its organ to be considered as able to
+        // report
+        $voteRightCount = $this-t>createQueryBuilder('ovr')
+            ->select('COUNT(ovr)')
+            ->leftJoin('ovr.reportResponsability', 'rr')
+            ->leftJoin('rr.adherentResponsabilities', 'adhresp')
+            ->where('ovr.textGroup = :textGroup')
+            ->andWhere('adhresp.adherent = :adherent AND adhresp.designatedByOrgan = :organ')
+            ->setParameter('organ', $organ->getId())
+            ->setParameter('textGroup', $textGroup->getId())
+            ->setParameter('adherent', $adherent->getId())
+            ->getQuery()->getSingleScalarResult();
+
+        return !!$voteRightCount;
+        
     }
 }
