@@ -77,6 +77,12 @@ class IndividualOrganTextVote
         $this->organ = $organ;
         $this->author = $author;
         $this->textGroup = $textGroup;
+
+        foreach ($textGroup as $text)
+        {
+            $textVoteAgregations[] = new IndividualTextVoteAgregation($text, $textGroup, $this);
+        }
+        
     }
 
     /**

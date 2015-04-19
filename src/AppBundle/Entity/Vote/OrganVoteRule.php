@@ -8,7 +8,10 @@ use Doctrine\ORM\Mapping as ORM;
  * OrganVoteRule
  *
  * @ORM\Table(name="organ_voterule")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Entity\Vote\OrganVoteRuleRepository")
+ * @ORM\InheritanceType("SINGLE_TABLE")
+ * @ORM\DiscriminatorColumn(name="rule_type", type="string")
+ * @ORM\DiscriminatorMap({})
  */
 class OrganVoteRule
 {
@@ -21,6 +24,25 @@ class OrganVoteRule
      */
     private $id;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     *
+     */
+    protected $name;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Responsability")
+     *
+     */
+    protected $reportResponsability;
+   
+
+    /**
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\OrganType")
+     *
+     */
+    protected $concernedOrganType;
+
 
     /**
      * @var \stdClass
@@ -30,6 +52,8 @@ class OrganVoteRule
      *
      */
     private $textGroup;
+
+
 
 
     /**
