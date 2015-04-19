@@ -132,12 +132,12 @@ class TextController extends Controller
         );
     }
     /**
-     * @Route("/{group_id}/text/{text_id}/vote", name="text_vote")
+     * @Route("/{group_id}/text/{text_id}/individual/vote", name="individual_text_vote")
      * @ParamConverter("textGroup", class="AppBundle:Text\TextGroup", options={"id" = "group_id"})
      * @ParamConverter("text", class="AppBundle:Text\Text", options={"id" = "text_id"})
      *
      */
-    public function voteAction(Request $request, TextGroup $textGroup, Text $text)
+    public function individualVoteAction(Request $request, TextGroup $textGroup, Text $text)
     {
         if ($textGroup->getId() != $text->getTextGroup()->getId())
         {
@@ -188,6 +188,40 @@ class TextController extends Controller
     }
 
     /**
+     * @Route("/{group_id}/report/{organ_id}/vote", name="report_vote")
+     * @ParamConverter("textGroup", class="AppBundle:Text\TextGroup", options={"id" = "group_id"})
+     * @ParamConverter("organ", class="AppBundle:Organ\Organ", options={"id" = "organ_id"})
+     *
+     */
+    public function reportVoteAction(Request $request, TextGroup $textGroup, Organ $organ)
+    {
+        //FIXME Add organ to vote rule
+        $this->denyAccessUnlessGranted('report_vote', $textGroup, $organ);
+
+        $iotv = new IndividualOrganTextVote($organ, $adherent, $textGroup);
+        $form = $this->createCreateForm($text, $textGroup);
+        $form = $this->createFormBuilder()->getForm();
+
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $adherent = $this->getUser()->getProfile();
+            $em = $this->getDoctrine()->getManager();
+
+            $em->persist($av);
+
+            $em->flush();
+            return $this->redirect($this->generateUrl('text_list', array('group_id' => $textGroup->getId())));
+        }
+
+        return $this->render('text/individual_organ_vote.html.twig', array(
+            'textGroup' => $textGroup,
+            'text' => $text,
+            'form' => $form->createView(),
+        ));
+    }
+
+    /**
      * Creates a form to create a Text\Text entity.
      *
      * @param Text $entity The entity
@@ -199,6 +233,28 @@ class TextController extends Controller
         $form = $this->createForm(new TextType(), $entity, array(
             'action' => $this->generateUrl('text_create', array('group_id' => $textGroup->getId())),
             'method' => 'POST',
+        ));
+
+        $form->add('submit', 'submit', array('label' => 'Creer'));
+
+        return $form;
+    }
+
+    /**
+     * Creates a form to create a Vote\IndividualOrganTextVote entity.
+     *
+     * @param IndividualOrganTextVote $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createIndividualOrganTextVoteCreateForm(IndividualOrganTextVote $entity)
+    {
+        $form = $this->createForm(new IndividualOrganTextVoteType(), $entity, array(
+            'action' => $this->generateUrl('individual_organ_text_vote',array(
+                'group_id' => $entity->textGoup->getId(),
+                'organ_id' => $entity->organ->getId())),
+            'method' => 'POST',
+            'vote_modality' => $entity->textGroup->getVoteModality(),
         ));
 
         $form->add('submit', 'submit', array('label' => 'Creer'));
