@@ -16,14 +16,16 @@ class IndividualOrganTextVoteAgregationType extends AbstractType
     {
         $builder
             ->add('voteFor')
-            ->add('voteAgainst')
-            ->add('voteAbstention')
-            ->add('individualOrganTextVote')
-            ->add('text')
-            ->add('textGroup')
-        ;
+            ;
+        if ($options['vote_modality'] != "validation")
+        {
+            $builder
+                ->add('voteAgainst')
+                ->add('voteAbstention')
+                ;
+        }
     }
-    
+
     /**
      * @param OptionsResolverInterface $resolver
      */
