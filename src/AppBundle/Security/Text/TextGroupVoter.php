@@ -105,8 +105,7 @@ final class TextGroupVoter extends AbstractVoter
             return 
                 $em->getRepository('AppBundle:Vote\OrganVoteRule')->getOrganTypeRightToVoteForTextGroup($organ->organType) &&
                 !$em->getRepository('AppBundle:Vote\IndividualOrganTextVote')->hasVoteBeenReported($organ, $textGroup) &&
-                ($em->getRepository('AppBundle:Vote\OrganVoteRule')->getAdherentRightToVoteForOrganAndTextGroup($organ->organType));
-
+                ($em->getRepository('AppBundle:Vote\OrganVoteRule')->getAdherentRightToReportForOrganAndTextGroup($organ->organType));
         }
 
         return false;

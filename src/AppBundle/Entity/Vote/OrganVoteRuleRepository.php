@@ -20,7 +20,7 @@ class OrganVoteRuleRepository extends EntityRepository
 
     public function getOrganTypeRightToVoteForTextGroup(OrganType $organType, TextGroup $textGroup)
     {
-        $voteRightCount = $this-t>createQueryBuilder('ovr')
+        $voteRightCount = $this->createQueryBuilder('ovr')
             ->select('COUNT(ovr)')
             ->leftJoin('ovr.concernedOrganType', 'organtypes')
             ->where('ovr.textGroup = :textGroup')
@@ -31,13 +31,13 @@ class OrganVoteRuleRepository extends EntityRepository
 
         return !!$voteRightCount;
     }
-    public function getAdherentRightToVoteForOrganAndTextGroup(Adherent $adherent, Organ $organ, TextGroup $textGroup)
+    public function getAdherentRightToReportForOrganAndTextGroup(Adherent $adherent, Organ $organ, TextGroup $textGroup)
     {
         // FIXME : does not handle the cas where everybody in the organ has the right to report
         // a vote (case where SIZE(reportResponsability) = 0)
         // FIXME : a adherent as to be designated by its organ to be considered as able to
         // report
-        $voteRightCount = $this-t>createQueryBuilder('ovr')
+        $voteRightCount = $this->createQueryBuilder('ovr')
             ->select('COUNT(ovr)')
             ->leftJoin('ovr.reportResponsability', 'rr')
             ->leftJoin('rr.adherentResponsabilities', 'adhresp')
@@ -49,6 +49,5 @@ class OrganVoteRuleRepository extends EntityRepository
             ->getQuery()->getSingleScalarResult();
 
         return !!$voteRightCount;
-        
     }
 }

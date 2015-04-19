@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * TextGroup
  *
  * @ORM\Table(name="text_group")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Entity\Text\TextGroupRepository")
  */
 class TextGroup
 {
