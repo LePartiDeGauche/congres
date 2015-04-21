@@ -14,7 +14,9 @@ use AppBundle\Entity\Vote\ThresholdVoteRule;
 use AppBundle\Entity\Text\TextGroup;
 use AppBundle\Entity\Text\Text;
 use AppBundle\Entity\User;
+use AppBundle\Entity\Organ\Organ;
 use AppBundle\Form\Text\TextType;
+use AppBundle\TextGroupOrganPair;
 
 /**
  * Text\Text controller.
@@ -41,6 +43,14 @@ class TextController extends Controller
         $texts = $em->getRepository('AppBundle:Text\Text')
             ->findTextAndVoteByTextGroup($author, $textGroup);
 
+        $reportOrgans = null;
+        if ($textGroup->getVoteType() == TextGroup::VOTETYPE_COLLECTIVE)
+        {
+            $reportOrgans = $em->getRepository('AppBundle:Text\TextGroup')
+                ->getOrganAdherentCanReportFor($author);
+        }
+        
+
         $textGroupVoteGranted = $this->isGranted('vote', $textGroup);
 
         $date = new \DateTime('now');
@@ -51,6 +61,7 @@ class TextController extends Controller
             'showValidatedPanel' => $textGroup->getVoteOpening() < $date,
             'textGroup' => $textGroup,
             'texts' => $texts,
+            'reportOrgans' => $reportOrgans,
         ));
     }
 
@@ -195,8 +206,7 @@ class TextController extends Controller
      */
     public function reportVoteAction(Request $request, TextGroup $textGroup, Organ $organ)
     {
-        //FIXME Add organ to vote rule
-        $this->denyAccessUnlessGranted('report_vote', $textGroup, $organ);
+        $this->denyAccessUnlessGranted('report_vote', new TextGroupOrganPair($textGroup, $organ), $this->getUser());
 
         $iotv = new IndividualOrganTextVote($organ, $adherent, $textGroup);
         $form = $this->createCreateForm($text, $textGroup);

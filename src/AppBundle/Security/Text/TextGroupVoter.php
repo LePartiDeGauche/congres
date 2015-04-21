@@ -2,6 +2,9 @@
 namespace AppBundle\Security\Text;
 
 use AppBundle\Entity\Text\TextGroup;
+use AppBundle\Entity\Organ\Organ;
+use AppBundle\Entity\User;
+
 use Symfony\Component\Security\Core\Authorization\Voter\AbstractVoter;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -25,10 +28,10 @@ final class TextGroupVoter extends AbstractVoter
 
     protected function getSupportedClasses()
     {
-        return array('AppBundle\Entity\Text\TextGroup');
+        return array('AppBundle\Entity\Text\TextGroup', 'AppBundle\TextGroupOrganPair');
     }
 
-    protected function isGranted($attribute, $textGroup, $user = null, $organ = null)
+    protected function isGranted($attribute, $textGroup, $user = null)
     {
         $em = $this->entityManager;
         if (!$user instanceof UserInterface) {
@@ -50,7 +53,7 @@ final class TextGroupVoter extends AbstractVoter
         }
 
         if ($attribute === self::REPORT_VOTE) {
-            return $this->canReportVote($textGroup, $user, $organ);
+            return $this->canReportVote($textGroup->getTextGroup(), $user, $textGroup->getOrgan());
         }
 
         return false;
@@ -103,7 +106,7 @@ final class TextGroupVoter extends AbstractVoter
         if ($textGroup->getIsVisible() && $textGroup->getVoteOpening() < $date && $textGroup->getVoteClosing() > $date)
         {
             return 
-                $em->getRepository('AppBundle:Vote\OrganVoteRule')->getOrganTypeRightToVoteForTextGroup($organ->organType) &&
+                $em->getRepository('AppBundle:Vote\OrganVoteRule')->getOrganTypeRightToVoteForTextGroup($organ->getOrganType()) &&
                 !$em->getRepository('AppBundle:Vote\IndividualOrganTextVote')->hasVoteBeenReported($organ, $textGroup) &&
                 ($em->getRepository('AppBundle:Vote\OrganVoteRule')->getAdherentRightToReportForOrganAndTextGroup($organ->organType));
         }

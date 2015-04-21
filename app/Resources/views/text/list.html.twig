@@ -22,12 +22,22 @@ $(document).ready(function()
     <div class="row">
         <div class="col-md-12">
             <h1>Liste des textes de {{ textGroup.name }}</h1>
-<p>
-{{textGroup.description}}
-</p>
+            <p>
+            {{textGroup.description}}
+
+            {%if reportOrgans %}
+            <h2>Rapporter un vote </h2>
+            {% for organ in reportOrgans %}
+            <a href="{{ path('report_vote', {group_id: textGroup.id, organ_id: organ.id}) }}">
+                Rapporter pour <strong>{{ organ.name }}</strong>
+            </a>
+            {% endfor %}
+            {% endif %}
+            </p>
+
             <div role="tabpanel">
                 <ul class="nav nav-tabs" role="tablist">
-<li role="presentation" {% if not showVotePanel %} class="active" {% endif %}>
+                    <li role="presentation" {% if not showVotePanel %} class="active" {% endif %}>
                         <a href="#proposed" aria-controls="proposed" role="tab" data-toggle="tab">
                             Proposés 
                         </a>
@@ -60,14 +70,14 @@ $(document).ready(function()
 
                 <div class="tab-content">
                     <div role="tabpanel" class="tab-pane {% if not showVotePanel %}active
-{% endif %}" id="proposed">
+                    {% endif %}" id="proposed">
                         <h2>Textes proposés</h2>
                         <table class="table tablesorter">
                             <thead>
                                 <tr>
                                     <th>Titre</th>
                                     <th>Auteur</th>
-{# <th>Pour</th> #}
+                                    {# <th>Pour</th> #}
                                 </tr>
                             </thead>
                             <tbody>
@@ -79,7 +89,7 @@ $(document).ready(function()
                                         <a href="{{ path('text_show', {group_id: textGroup.id, text_id: text.entity.id}) }}">{{ text.entity.title }}</a>
                                     </td>
                                     <td>{{ text.entity.author.firstname }} {{ text.entity.author.lastname }}</td>
-{# <td>{% if text.entity.organ %} {{ text.entity.organ.name }} {% endif %}</td> #}
+                                    {# <td>{% if text.entity.organ %} {{ text.entity.organ.name }} {% endif %}</td> #}
                                 </tr>
                                 {% endif %}
                                 {% endfor %}
@@ -94,7 +104,7 @@ $(document).ready(function()
                                 <tr>
                                     <th>Titre</th>
                                     <th>Auteur</th>
-{# <th>Pour</th> #}
+                                    {# <th>Pour</th> #}
                                     {% for voteRule in textGroup.voteRules %}
                                     <th>{{voteRule.name}}</th>
                                     {% endfor %}
@@ -106,25 +116,26 @@ $(document).ready(function()
                             <tbody>
                                 {% for text in texts %}
                                 {% if text.entity.status ==
-constant('AppBundle\\Entity\\Text\\Text::STATUS_VOTING')
-or text.entity.status ==
-constant('AppBundle\\Entity\\Text\\Text::STATUS_ADOPTED') %}
+                                constant('AppBundle\\Entity\\Text\\Text::STATUS_VOTING')
+                                or text.entity.status ==
+                                constant('AppBundle\\Entity\\Text\\Text::STATUS_ADOPTED') %}
                                 <tr>
                                     <td>
                                         <a href="{{ path('text_show', {group_id: textGroup.id, text_id: text.entity.id}) }}">{{ text.entity.title }}</a>
                                     </td>
                                     <td>{{ text.entity.author.firstname }} {{ text.entity.author.lastname }}</td>
-{# <td>{% if text.entity.organ %} {{ text.entity.organ.name }} {% endif %}</td> #}
+                                    {# <td>{% if text.entity.organ %} {{ text.entity.organ.name }} {% endif %}</td> #}
                                     {% for voteRule in textGroup.voteRules %}
                                     <td>{{attribute(text, 'voteFor' ~ voteRule.id )}}</td>
                                     {% endfor %}
                                     <td>
                                         {% if textGroupVoteGranted %}
                                         {% if text.hasVoted == 0 %}
-                                        <a class="btn btn-default btn-sm" href="{{path('text_vote',
-                                            {group_id: textGroup.id, text_id: text.entity.id}) }}">
-                                        <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
-                                        <span class="sr-only">Signer</span>
+                                        <a class="btn btn-default btn-sm"
+href="{{path('individual_text_vote',
+                                        {group_id: textGroup.id, text_id: text.entity.id}) }}">
+                                            <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+                                            <span class="sr-only">Signer</span>
                                         </a>
                                         {% else %}
                                         <span class="glyphicon glyphicon-check" aria-hidden="true"></span>
@@ -150,7 +161,7 @@ constant('AppBundle\\Entity\\Text\\Text::STATUS_ADOPTED') %}
                                 <tr>
                                     <th>Titre</th>
                                     <th>Auteur</th>
-{#<th>Pour</th>#}
+                                    {#<th>Pour</th>#}
                                     {% for voteRule in textGroup.voteRules %}
                                     <th>{{voteRule.name}}</th>
                                     {% endfor %}
@@ -165,7 +176,7 @@ constant('AppBundle\\Entity\\Text\\Text::STATUS_ADOPTED') %}
                                         <a href="{{ path('text_show', {group_id: textGroup.id, text_id: text.entity.id}) }}">{{ text.entity.title }}</a>
                                     </td>
                                     <td>{{ text.entity.author.firstname }} {{ text.entity.author.lastname }}</td>
-{# <td>{% if text.entity.organ %} {{ text.entity.organ.name }} {% endif %}</td> #}
+                                    {# <td>{% if text.entity.organ %} {{ text.entity.organ.name }} {% endif %}</td> #}
                                     {% for voteRule in textGroup.voteRules %}
                                     <td>{{attribute(text, 'voteFor' ~ voteRule.id )}}</td>
                                     {% endfor %}
@@ -184,7 +195,7 @@ constant('AppBundle\\Entity\\Text\\Text::STATUS_ADOPTED') %}
                                 <tr>
                                     <th>Titre</th>
                                     <th>Auteur</th>
-{#<th>Pour</th>#}
+                                    {#<th>Pour</th>#}
                                     {% for voteRule in textGroup.voteRules %}
                                     <th>{{voteRule.name}}</th>
                                     {% endfor %}
@@ -199,7 +210,7 @@ constant('AppBundle\\Entity\\Text\\Text::STATUS_ADOPTED') %}
                                         <a href="{{ path('text_show', {group_id: textGroup.id, text_id: text.entity.id}) }}">{{ text.entity.title }}</a>
                                     </td>
                                     <td>{{ text.entity.author.firstname }} {{ text.entity.author.lastname }}</td>
-{# <td>{% if text.entity.organ %} {{ text.entity.organ.name }} {% endif %}</td> #}
+                                    {# <td>{% if text.entity.organ %} {{ text.entity.organ.name }} {% endif %}</td> #}
                                     {% for voteRule in textGroup.voteRules %}
                                     <td>{{attribute(text, 'voteFor' ~ voteRule.id )}}</td>
                                     {% endfor %}
