@@ -63,6 +63,7 @@ class TextGroupAdmin extends Admin
                 'multiple' => false,
             ))
             ->add('voteRules', 'sonata_type_collection')
+            ->add('organVoteRules', 'sonata_type_collection')
             ->add('maxVotesByAdherent')
             ->add('isVisible')
             ->add('_action', 'actions', array(
@@ -105,6 +106,32 @@ class TextGroupAdmin extends Admin
                 ),
                 'multiple' => false,
             ))
+            //->add('voteRules', 'sonata_type_collection',
+            //    array(
+            //        'type_options' => array(
+            //            'delete' => false
+            //        ),
+            //        'label' => 'Règles de vote individuelles',
+            //    ), array(
+            //        'edit' => 'inline',
+            //        'inline' => 'table',
+            //        'sortable' => 'position',
+            //    ), array(
+            //        'required' => false,
+            //    ))
+            ->add('organVoteRules', 'sonata_type_collection',
+                array(
+                    'type_options' => array(
+                        'delete' => false
+                    ),
+                    'label' => 'Règles de vote par organes',
+                ), array(
+                    'edit' => 'inline',
+                    'inline' => 'table',
+                    'sortable' => 'position',
+                ), array(
+                    'required' => false,
+                ))
             ->add('maxVotesByAdherent')
             ->add('isVisible')
             // FIXME : currently impossible to use subclass into subform with sonata bundle
@@ -192,4 +219,17 @@ class TextGroupAdmin extends Admin
 
         return $instance;
     }
+    public function prePersist($object)
+    {
+        foreach ($object->getOrganVoteRules() as $ovr) {
+            $ovr->setTextGroup($object);
+        }
+    }
+    public function preUpdate($object)
+    {
+        foreach ($object->getOrganVoteRules() as $ovr) {
+            $ovr->setTextGroup($object);
+        }
+    }
 }
+

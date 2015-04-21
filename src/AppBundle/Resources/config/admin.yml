@@ -148,3 +148,9 @@ services:
         arguments: [~, AppBundle\Entity\Payment\EventPayment, SonataAdminBundle:CRUD]
         tags:
             - {name: sonata.admin, manager_type: orm, group: admin, label: EventPayment}
+
+    app.admin.organ_vote_rule:
+        class: AppBundle\Admin\OrganVoteRuleAdmin
+        arguments: [~, AppBundle\Entity\Vote\OrganVoteRule, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin, label: OrganVoteRule}
