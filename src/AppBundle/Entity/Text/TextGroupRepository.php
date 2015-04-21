@@ -19,10 +19,12 @@ class TextGroupRepository extends EntityRepository
     public function getOrganAdherentCanReportFor(Adherent $adherent)
     {
         $organs = $this->createQueryBuilder('tg')
-            ->select('adhresp.designatedByOrgan')
+            ->select('organ')
+            ->from('AppBundle:Organ\Organ', 'organ')
             ->leftJoin('tg.organVoteRules', 'ovr')
             ->leftJoin('ovr.reportResponsability', 'rr')
             ->leftJoin('rr.adherentResponsabilities', 'adhresp')
+            ->leftJoin('adhresp.designatedByOrgan', 'org')
             ->where('adhresp.adherent = :adherent')
             ->setParameter('adherent', $adherent->getId())
             ->getQuery();

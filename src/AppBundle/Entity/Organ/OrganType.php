@@ -60,6 +60,10 @@ class OrganType
     private $participationAllowedBy;
 
 
+    public function __toString()
+    {
+        return $this->name;
+    }
     /**
      * Get id
      *
