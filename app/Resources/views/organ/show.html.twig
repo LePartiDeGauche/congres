@@ -1,0 +1,46 @@
+{% extends '::base.html.twig' %}
+{% block title %} {{entity.name}} {% endblock %}
+
+{% block body -%}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>{{ entity.name }}</h1>
+            <p>{{entity.description}}</p>
+        <hr />
+        <h2>Membres</h2>
+
+        <table class="table tablesorter">
+            <thead>
+                <tr>
+                    <th>Prénom</th>
+                    <th>Nom</th>
+                    <th>Couriel</th>
+                    <th>Responsabilités</th>
+                    {# <th>Pour</th> #}
+                </tr>
+            </thead>
+            <tbody>
+                {% for adhpart in entity.participants %}
+                <tr>
+                    </td>
+                    <td>{{ adhpart.adherent.firstname }} </td>
+                    <td>{{ adhpart.adherent.lastname }}</td>
+                    <td>{{ adhpart.adherent.email }}</td>
+                    <td>
+                        <ul>
+                            {% for adhresp in adhpart.adherent.responsabilities %}
+                            <li>{{ adhresp.responsability.name }}</li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        </div><!-- .col-md-12 -->
+    </div><!-- .row -->
+</div><!-- .container -->
+
+
+{% endblock %}

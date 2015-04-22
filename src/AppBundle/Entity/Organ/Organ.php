@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Organ
  *
  * @ORM\Table(name="organ")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Entity\Organ\OrganRepository")
  */
 class Organ
 {
@@ -162,5 +162,147 @@ class Organ
     public function getOrganType()
     {
         return $this->organType;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->parentOrgans = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->subOrgans = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->participants = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->designatedParticipants = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add parentOrgans
+     *
+     * @param \AppBundle\Entity\Organ\Organ $parentOrgans
+     * @return Organ
+     */
+    public function addParentOrgan(\AppBundle\Entity\Organ\Organ $parentOrgans)
+    {
+        $this->parentOrgans[] = $parentOrgans;
+
+        return $this;
+    }
+
+    /**
+     * Remove parentOrgans
+     *
+     * @param \AppBundle\Entity\Organ\Organ $parentOrgans
+     */
+    public function removeParentOrgan(\AppBundle\Entity\Organ\Organ $parentOrgans)
+    {
+        $this->parentOrgans->removeElement($parentOrgans);
+    }
+
+    /**
+     * Get parentOrgans
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getParentOrgans()
+    {
+        return $this->parentOrgans;
+    }
+
+    /**
+     * Add subOrgans
+     *
+     * @param \AppBundle\Entity\Organ\Organ $subOrgans
+     * @return Organ
+     */
+    public function addSubOrgan(\AppBundle\Entity\Organ\Organ $subOrgans)
+    {
+        $this->subOrgans[] = $subOrgans;
+
+        return $this;
+    }
+
+    /**
+     * Remove subOrgans
+     *
+     * @param \AppBundle\Entity\Organ\Organ $subOrgans
+     */
+    public function removeSubOrgan(\AppBundle\Entity\Organ\Organ $subOrgans)
+    {
+        $this->subOrgans->removeElement($subOrgans);
+    }
+
+    /**
+     * Get subOrgans
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getSubOrgans()
+    {
+        return $this->subOrgans;
+    }
+
+    /**
+     * Add participants
+     *
+     * @param \AppBundle\Entity\Organ\OrganParticipation $participants
+     * @return Organ
+     */
+    public function addParticipant(\AppBundle\Entity\Organ\OrganParticipation $participants)
+    {
+        $this->participants[] = $participants;
+
+        return $this;
+    }
+
+    /**
+     * Remove participants
+     *
+     * @param \AppBundle\Entity\Organ\OrganParticipation $participants
+     */
+    public function removeParticipant(\AppBundle\Entity\Organ\OrganParticipation $participants)
+    {
+        $this->participants->removeElement($participants);
+    }
+
+    /**
+     * Get participants
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getParticipants()
+    {
+        return $this->participants;
+    }
+
+    /**
+     * Add designatedParticipants
+     *
+     * @param \AppBundle\Entity\AdherentResponsability $designatedParticipants
+     * @return Organ
+     */
+    public function addDesignatedParticipant(\AppBundle\Entity\AdherentResponsability $designatedParticipants)
+    {
+        $this->designatedParticipants[] = $designatedParticipants;
+
+        return $this;
+    }
+
+    /**
+     * Remove designatedParticipants
+     *
+     * @param \AppBundle\Entity\AdherentResponsability $designatedParticipants
+     */
+    public function removeDesignatedParticipant(\AppBundle\Entity\AdherentResponsability $designatedParticipants)
+    {
+        $this->designatedParticipants->removeElement($designatedParticipants);
+    }
+
+    /**
+     * Get designatedParticipants
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getDesignatedParticipants()
+    {
+        return $this->designatedParticipants;
     }
 }
