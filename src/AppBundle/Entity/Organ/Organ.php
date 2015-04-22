@@ -81,6 +81,10 @@ class Organ
      */
     private $designatedParticipants;
 
+    public function __tostring()
+    {
+        return $this->name;
+    }
     /**
      * Get id
      *

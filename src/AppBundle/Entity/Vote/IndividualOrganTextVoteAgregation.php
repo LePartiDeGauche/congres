@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use AppBundle\Entity\Text\Text;
 use AppBundle\Entity\Text\TextGroup;
 use AppBundle\Entity\Vote\TextVoteAgregation;
+use AppBundle\Entity\Vote\IndividualOrganTextVote;
 
 /**
  * AppBundle\Entity\Vote\IndividualOrganTextVoteAgregation
@@ -29,7 +30,6 @@ class IndividualOrganTextVoteAgregation extends TextVoteAgregation
      * @var \stdClass
      *
      * @ORM\ManyToOne(targetEntity="IndividualOrganTextVote",
-     * cascade={"persist", "remove", "merge"}, 
      * inversedBy="textVoteAgregations")
      * @ORM\JoinColumn(nullable=false)
      *

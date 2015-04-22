@@ -21,20 +21,20 @@ $(document).ready(function()
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <h1>Liste des textes de {{ textGroup.name }}</h1>
+            <h1>Textes de {{ textGroup.name }}</h1>
             <p>
             {{textGroup.description}}
 
             {%if reportOrgans %}
-            <h2>Rapporter un vote </h2>
+            <h2>Soumettre un procès verbal </h2>
             {% for organ in reportOrgans %}
             <a href="{{ path('report_vote', {group_id: textGroup.id, organ_id: organ.id}) }}">
-                Rapporter pour <strong>{{ organ.name }}</strong>
+                Soumettre pour <strong>{{ organ.name }}</strong>
             </a>
             {% endfor %}
             {% endif %}
             </p>
-
+            <hr/>
             <div role="tabpanel">
                 <ul class="nav nav-tabs" role="tablist">
                     <li role="presentation" {% if not showVotePanel %} class="active" {% endif %}>
@@ -132,8 +132,8 @@ $(document).ready(function()
                                         {% if textGroupVoteGranted %}
                                         {% if text.hasVoted == 0 %}
                                         <a class="btn btn-default btn-sm"
-href="{{path('individual_text_vote',
-                                        {group_id: textGroup.id, text_id: text.entity.id}) }}">
+                                           href="{{path('individual_text_vote',
+                                           {group_id: textGroup.id, text_id: text.entity.id}) }}">
                                             <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
                                             <span class="sr-only">Signer</span>
                                         </a>

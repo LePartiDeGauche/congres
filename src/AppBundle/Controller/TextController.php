@@ -9,6 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Entity\Vote\IndividualTextVote;
+use AppBundle\Entity\Vote\IndividualOrganTextVote;
 use AppBundle\Entity\Vote\IndividualTextVoteAgregation;
 use AppBundle\Entity\Vote\ThresholdVoteRule;
 use AppBundle\Entity\Text\TextGroup;
@@ -17,6 +18,7 @@ use AppBundle\Entity\User;
 use AppBundle\Entity\Organ\Organ;
 use AppBundle\Form\Text\TextType;
 use AppBundle\TextGroupOrganPair;
+use AppBundle\Form\Vote\IndividualOrganTextVoteType;;
 
 /**
  * Text\Text controller.
@@ -208,25 +210,25 @@ class TextController extends Controller
     {
         $this->denyAccessUnlessGranted('report_vote', new TextGroupOrganPair($textGroup, $organ), $this->getUser());
 
+        $adherent = $this->getUser()->getProfile();
         $iotv = new IndividualOrganTextVote($organ, $adherent, $textGroup);
-        $form = $this->createCreateForm($text, $textGroup);
-        $form = $this->createFormBuilder()->getForm();
+        $form = $this->createIndividualOrganTextVoteCreateForm($iotv);
 
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            $adherent = $this->getUser()->getProfile();
             $em = $this->getDoctrine()->getManager();
+            $iotv = $form->getData();
 
-            $em->persist($av);
+            $em->persist($iotv);
 
             $em->flush();
             return $this->redirect($this->generateUrl('text_list', array('group_id' => $textGroup->getId())));
         }
 
-        return $this->render('text/individual_organ_vote.html.twig', array(
+        return $this->render('text/report_vote.html.twig', array(
             'textGroup' => $textGroup,
-            'text' => $text,
+            'organ' => $organ,
             'form' => $form->createView(),
         ));
     }
@@ -260,14 +262,14 @@ class TextController extends Controller
     private function createIndividualOrganTextVoteCreateForm(IndividualOrganTextVote $entity)
     {
         $form = $this->createForm(new IndividualOrganTextVoteType(), $entity, array(
-            'action' => $this->generateUrl('individual_organ_text_vote',array(
-                'group_id' => $entity->textGoup->getId(),
-                'organ_id' => $entity->organ->getId())),
+            'action' => $this->generateUrl('report_vote',array(
+                'group_id' => $entity->getTextGroup()->getId(),
+                'organ_id' => $entity->getOrgan()->getId())),
             'method' => 'POST',
-            'vote_modality' => $entity->textGroup->getVoteModality(),
+            'vote_modality' => $entity->getTextGroup()->getVoteModality(),
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Creer'));
+        $form->add('submit', 'submit', array('label' => 'Soumettre', 'attr' => array('class' => 'btn btn-primary')));
 
         return $form;
     }

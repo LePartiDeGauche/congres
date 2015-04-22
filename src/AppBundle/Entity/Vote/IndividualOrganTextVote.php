@@ -3,6 +3,9 @@
 namespace AppBundle\Entity\Vote;
 
 use Doctrine\ORM\Mapping as ORM;
+use AppBundle\Entity\Organ\Organ;
+use AppBundle\Entity\Adherent;
+use AppBundle\Entity\Text\TextGroup;
 
 
 /**
@@ -36,6 +39,7 @@ class IndividualOrganTextVote
      * @var \stdClass
      *
      *  @ORM\OneToMany(targetEntity="IndividualOrganTextVoteAgregation",
+     * cascade={"persist", "remove"}, 
      *  mappedBy="individualOrganTextVote")
      *
      */
@@ -77,10 +81,12 @@ class IndividualOrganTextVote
         $this->organ = $organ;
         $this->author = $author;
         $this->textGroup = $textGroup;
+        $this->voteAbstention = 0;
+        $this->voteNotTakingPart = 0;
 
-        foreach ($textGroup as $text)
+        foreach ($textGroup->getTexts() as $text)
         {
-            $textVoteAgregations[] = new IndividualTextVoteAgregation($text, $textGroup, $this);
+            $this->textVoteAgregations[] = new IndividualOrganTextVoteAgregation($text, $textGroup, $this);
         }
         
     }
@@ -208,5 +214,51 @@ class IndividualOrganTextVote
     public function getAuthor()
     {
         return $this->author;
+    }
+
+    /**
+     * Set textGroup
+     *
+     * @param \AppBundle\Entity\Text\TextGroup $textGroup
+     * @return IndividualOrganTextVote
+     */
+    public function setTextGroup(\AppBundle\Entity\Text\TextGroup $textGroup)
+    {
+        $this->textGroup = $textGroup;
+
+        return $this;
+    }
+
+    /**
+     * Get textGroup
+     *
+     * @return \AppBundle\Entity\Text\TextGroup 
+     */
+    public function getTextGroup()
+    {
+        return $this->textGroup;
+    }
+
+    /**
+     * Add textVoteAgregations
+     *
+     * @param \AppBundle\Entity\Vote\IndividualOrganTextVoteAgregation $textVoteAgregations
+     * @return IndividualOrganTextVote
+     */
+    public function addTextVoteAgregation(\AppBundle\Entity\Vote\IndividualOrganTextVoteAgregation $textVoteAgregations)
+    {
+        $this->textVoteAgregations[] = $textVoteAgregations;
+
+        return $this;
+    }
+
+    /**
+     * Remove textVoteAgregations
+     *
+     * @param \AppBundle\Entity\Vote\IndividualOrganTextVoteAgregation $textVoteAgregations
+     */
+    public function removeTextVoteAgregation(\AppBundle\Entity\Vote\IndividualOrganTextVoteAgregation $textVoteAgregations)
+    {
+        $this->textVoteAgregations->removeElement($textVoteAgregations);
     }
 }

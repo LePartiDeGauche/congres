@@ -1,0 +1,30 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}Procès verbal du vote: <em>{{ textGroup.name }}</em> au nom de {{ organ.name }}{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <h1>Procès verbale du vote: <em>{{ textGroup.name }}</em> au nom de <em>{{ organ.name }}</em></h1>
+
+            {{ form_start(form) }}
+            {{form_row(form.voteAbstention)}}
+            {{form_row(form.voteNotTakingPart)}}
+            {% for textVote in form.textVoteAgregations %}
+            <h3>{{ textVote.vars.data.text.title }}</h3> 
+            {{ form_row(textVote.voteFor) }}
+            {% endfor %}
+
+            <p>
+            Il n'est pas possible d'annuler cette opération.
+            </p>
+
+            {{form_widget(form.submit)}} <a class="btn btn-default" href="{{ path('text_list', {group_id: textGroup.id} ) }}">Annuler</a>
+            {{form_rest(form)}}
+            {{ form_end(form) }}
+        </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -6,6 +6,7 @@ use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use AppBundle\Entity\Adherent;
 use AppBundle\Entity\Organ\Organ;
+use AppBundle\Entity\Organ\OrganType;
 use AppBundle\Entity\Text\TextGroup;
 
 /**
@@ -24,7 +25,7 @@ class OrganVoteRuleRepository extends EntityRepository
             ->select('COUNT(ovr)')
             ->leftJoin('ovr.concernedOrganType', 'organtypes')
             ->where('ovr.textGroup = :textGroup')
-            ->andWhere('organtypes.id = :organType OR SIZE(organtypes) = 0')
+            ->andWhere('organtypes.id = :organType OR SIZE(ovr.concernedOrganType) = 0')
             ->setParameter('organType', $organType->getId())
             ->setParameter('textGroup', $textGroup->getId())
             ->getQuery()->getSingleScalarResult();
