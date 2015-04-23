@@ -45,6 +45,14 @@ class IndividualOrganTextVote
      */
     private $textVoteAgregations;
 
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="voteTotal", type="integer")
+     */
+    private $voteTotal;
+
     /**
      * @var integer
      *
@@ -83,6 +91,7 @@ class IndividualOrganTextVote
         $this->textGroup = $textGroup;
         $this->voteAbstention = 0;
         $this->voteNotTakingPart = 0;
+        $this->voteTotal = 0;
 
         foreach ($textGroup->getTexts() as $text)
         {
@@ -260,5 +269,28 @@ class IndividualOrganTextVote
     public function removeTextVoteAgregation(\AppBundle\Entity\Vote\IndividualOrganTextVoteAgregation $textVoteAgregations)
     {
         $this->textVoteAgregations->removeElement($textVoteAgregations);
+    }
+
+    /**
+     * Set voteTotal
+     *
+     * @param integer $voteTotal
+     * @return IndividualOrganTextVote
+     */
+    public function setVoteTotal($voteTotal)
+    {
+        $this->voteTotal = $voteTotal;
+
+        return $this;
+    }
+
+    /**
+     * Get voteTotal
+     *
+     * @return integer 
+     */
+    public function getVoteTotal()
+    {
+        return $this->voteTotal;
     }
 }

@@ -7,8 +7,22 @@
     <div class="row">
         <div class="col-md-6">
             <h1>Procès verbale du vote: <em>{{ textGroup.name }}</em> au nom de <em>{{ organ.name }}</em></h1>
+            {%if errors %}
 
+            <div class="alert alert-danger text-justify" role="alert">
+                {% for error in errors %}
+                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true">
+                </span>
+                <strong> 
+                    {{error}}
+                </strong> 
+                <br/>
+                {% endfor %}
+            </div>
+
+            {% endif %}
             {{ form_start(form) }}
+            {{form_row(form.voteTotal)}}
             {{form_row(form.voteAbstention)}}
             {{form_row(form.voteNotTakingPart)}}
             {% for textVote in form.textVoteAgregations %}

@@ -51,7 +51,7 @@ class TextController extends Controller
             $reportOrgans = $em->getRepository('AppBundle:Text\TextGroup')
                 ->getOrganAdherentCanReportFor($author);
         }
-        
+
 
         $textGroupVoteGranted = $this->isGranted('vote', $textGroup);
 
@@ -213,6 +213,7 @@ class TextController extends Controller
         $adherent = $this->getUser()->getProfile();
         $iotv = new IndividualOrganTextVote($organ, $adherent, $textGroup);
         $form = $this->createIndividualOrganTextVoteCreateForm($iotv);
+        $errors = array();
 
         $form->handleRequest($request);
 
@@ -220,6 +221,33 @@ class TextController extends Controller
             $em = $this->getDoctrine()->getManager();
             $iotv = $form->getData();
 
+            // TODO: use validator, instead of this ugly code..
+            $sumVotes = $iotv->getVoteAbstention() + $iotv->getVoteNotTakingPart();
+            foreach ($iotv->getTextVoteAgregations() as $aggr)
+            {
+                $sumVotes += $aggr->getVoteFor() + $aggr->getVoteAgainst() + $aggr->getVoteAbstention();
+            }
+
+            if ($sumVotes != $iotv->getVoteTotal())
+            {
+                $errors[] = "Le total des votes ne correspond pas aux votes rapportés";
+            }
+
+            if ($sumVotes > count($organ->getParticipants()))
+            {
+                $errors[] = "Il y a plus de votes que de personnes inscrits dans le comité.";
+            }
+
+            if (count($errors) > 0)
+            {
+                return $this->render('text/report_vote.html.twig', array(
+                    'textGroup' => $textGroup,
+                    'organ' => $organ,
+                    'form' => $form->createView(),
+                    'errors' => $errors
+                ));
+
+            }
             $em->persist($iotv);
 
             $em->flush();
@@ -230,6 +258,7 @@ class TextController extends Controller
             'textGroup' => $textGroup,
             'organ' => $organ,
             'form' => $form->createView(),
+            'errors' => $errors
         ));
     }
 
