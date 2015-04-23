@@ -21,9 +21,9 @@ class IndividualOrganTextVoteType extends AbstractType
             ->add('textVoteAgregations', 'collection', array(
                 'type' => new IndividualOrganTextVoteAgregationType(), 
                 'options' => array('vote_modality' => $options['vote_modality']), 'label' => 'Textes'))
-            ;
+                ;
     }
-    
+
     /**
      * @param OptionsResolverInterface $resolver
      */

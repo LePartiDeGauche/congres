@@ -24,8 +24,8 @@ parameters:
     locale:            en
 
     # A secret key that's used to generate certain security-related tokens
-    secret:            ThisTokenIsNotSoSecretChangeIt
-    superadmin_password: ThispasswordIsNotSecretSoChangeIt
+    secret:            ThisTokenIsNotSoSecretChangeI
+    superadmin_password: ThispasswordIsNotSecretSoChangeI
     is_paybox_in_production: false
     paybox_site: 1999888
     paybox_rank: 32
