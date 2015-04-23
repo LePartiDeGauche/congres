@@ -20,10 +20,11 @@ $(document).ready(function()
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <h1>Liste des instances de {{ adherent.firstname }} {{ adherent.lastname}}</h1>
+            <h1>Liste des instances auxquelles participe {{ adherent.firstname }} {{ adherent.lastname}}</h1>
             <table class="table tablesorter">
                 <thead>
                     <tr>
+                        <th>Type</th>
                         <th>Nom</th>
                         <th>Description</th>
                     </tr>
@@ -31,12 +32,14 @@ $(document).ready(function()
                 <tbody>
                     {% for entity in entities %}
                     <tr>
-                        <td><a href="{{ path('organ_show', { 'id': entity.id }) }}">{{ entity.name }}</a></td>
+                        <td>{{ entity.organType.name }}</td>
+                        <td><a href="{{ path('organ_show', { 'organ_id': entity.id }) }}">{{ entity.name }}</a></td>
                         <td>{{ entity.description }}</td>
                     </tr>
                     {% endfor %}
                 </tbody>
             </table>
+         
         </div><!-- .col-md-12 -->
     </div><!-- .row -->
 </div><!-- .container -->

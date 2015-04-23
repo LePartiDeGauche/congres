@@ -234,6 +234,25 @@ class TextController extends Controller
     }
 
     /**
+     * Finds and displays a Text\Text entity.
+     *
+     * @Route("/{group_id}/report/{organ_id}/show", name="vote_report_show")
+     * @Method("GET")
+     * @ParamConverter("textGroup", class="AppBundle:Text\TextGroup", options={"id" = "group_id"})
+     * @ParamConverter("organ", class="AppBundle:Organ\Organ", options={"id" = "organ_id"})
+     * @Template("text/vote_report_show.html.twig")
+     */
+    public function showVoteReportAction(TextGroup $textGroup, Organ $organ)
+    {
+        $this->denyAccessUnlessGranted('view', $textGroup);
+
+        return array(
+            'textGroup'      => $textGroup,
+            'text'      => $text
+        );
+    }
+
+    /**
      * Creates a form to create a Text\Text entity.
      *
      * @param Text $entity The entity

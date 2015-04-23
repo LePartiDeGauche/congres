@@ -111,6 +111,7 @@
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Mon compte ({{ app.user.email }})<span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
+                                <li><a href="{{ path('organ_adherent_list') }}">Mes Instances</a></li>
                                 <li><a href="{{ path('text_user_list') }}">Mes textes</a></li>
                                 <li><a href="{{ path('event_adherent_registration_list') }}">Mes
 inscriptions</a></li>
