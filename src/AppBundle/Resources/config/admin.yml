@@ -166,3 +166,9 @@ services:
         arguments: [~, AppBundle\Entity\Organ\Organ, SonataAdminBundle:CRUD]
         tags:
             - {name: sonata.admin, manager_type: orm, group: Organ, label: Organ}
+
+    app.admin.individual_organ_text_vote_agregation:
+        class: AppBundle\Admin\IndividualOrganTextVoteAgregationAdmin
+        arguments: [~, AppBundle\Entity\Vote\IndividualOrganTextVoteAgregation, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin, label: IndividualOrganTextVoteAgregation, show_in_dashboard: false}

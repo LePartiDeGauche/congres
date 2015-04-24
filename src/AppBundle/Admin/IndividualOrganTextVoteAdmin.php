@@ -7,11 +7,19 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
+use Sonata\AdminBundle\Route\RouteCollection;
 
 class IndividualOrganTextVoteAdmin extends Admin
 {
     protected $baseRouteName = 'text_vote_report_admin';
     protected $baseRoutePattern = 'text/vote/report';
+
+    protected function configureRoutes(RouteCollection $collection)
+    {
+        $collection->remove('create');
+        $collection->remove('edit');
+    }
+
     /**
      * @param DatagridMapper $datagridMapper
      */
@@ -31,12 +39,6 @@ class IndividualOrganTextVoteAdmin extends Admin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->add('author.firstname')
-            ->add('author.lastname')
-            ->add('organ.name')
-            ->add('voteTotal')
-            ->add('voteAbstention')
-            ->add('voteNotTakingPart')
             ->add('_action', 'actions', array(
                 'actions' => array(
                     'show' => array(),
@@ -44,6 +46,15 @@ class IndividualOrganTextVoteAdmin extends Admin
                     'delete' => array(),
                 )
             ))
+            ->add('author.firstname')
+            ->add('author.lastname')
+            ->add('organ.name')
+            ->add('meetingDate', null, array( 'label' => 'Date de la réunion' ))
+            ->add('voteTotal', null, array( 'label' => 'Total des présents' ))
+            ->add('voteBlank', null, array( 'label' => 'Blancs' ))
+            ->add('voteAbstention', null, array( 'label' => 'Abstentions' ))
+            ->add('voteNotTakingPart', null, array( 'label' => 'Ne prend pas part au vote' ))
+            ->add('textVoteAgregations', 'sonata_type_model')
         ;
     }
 
@@ -54,9 +65,11 @@ class IndividualOrganTextVoteAdmin extends Admin
     {
         $formMapper
             ->add('id')
-            ->add('voteTotal')
-            ->add('voteAbstention')
-            ->add('voteNotTakingPart')
+            ->add('meetingDate', null, array( 'label' => 'Date de la réunion' ))
+            ->add('voteTotal', null, array( 'label' => 'Total des présents' ))
+            ->add('voteBlank', null, array( 'label' => 'Blancs' ))
+            ->add('voteAbstention', null, array( 'label' => 'Abstentions' ))
+            ->add('voteNotTakingPart', null, array( 'label' => 'Ne prend pas part au vote' ))
         ;
     }
 
@@ -67,9 +80,12 @@ class IndividualOrganTextVoteAdmin extends Admin
     {
         $showMapper
             ->add('id')
-            ->add('voteTotal')
-            ->add('voteAbstention')
-            ->add('voteNotTakingPart')
+            ->add('meetingDate', null, array( 'label' => 'Date de la réunion' ))
+            ->add('voteTotal', null, array( 'label' => 'Total des présents' ))
+            ->add('voteBlank', null, array( 'label' => 'Blancs' ))
+            ->add('voteAbstention', null, array( 'label' => 'Abstentions' ))
+            ->add('voteNotTakingPart', null, array( 'label' => 'Ne prend pas part au vote' ))
+            ->add('textVoteAgregations', 'sonata_type_model')
         ;
     }
 }

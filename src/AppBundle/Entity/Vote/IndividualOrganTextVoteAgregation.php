@@ -37,6 +37,12 @@ class IndividualOrganTextVoteAgregation extends TextVoteAgregation
     private $individualOrganTextVote;
 
 
+    public function __tostring()
+    {
+        return $this->getText()->getTitle() . " : " . $this->voteFor;
+    }
+
+
     public function __construct(Text $text, TextGroup $textGroup, IndividualOrganTextVote $individualOrganTextVote)
     {
         parent::__construct($text, $textGroup);
