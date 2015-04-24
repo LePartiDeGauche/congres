@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\DiscriminatorColumn(name="rule_type", type="string")
  * @ORM\DiscriminatorMap({"threshold" = "ThresholdVoteRule"})
  */
-class VoteRule
+abstract class VoteRule
 {
     /**
      * @var integer
