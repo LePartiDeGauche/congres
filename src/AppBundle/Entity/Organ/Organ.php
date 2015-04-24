@@ -72,6 +72,14 @@ class Organ
      */
     private $participants;
 
+    /**
+     * @var \stdClass
+     *
+     *  @ORM\OneToMany(targetEntity="AppBundle\Entity\Vote\IndividualOrganTextVote",
+     *  mappedBy="organ")
+     *  
+     */
+    private $textVoteReports;
 
     /**
      * @var \stdClass
@@ -172,6 +180,7 @@ class Organ
         $this->subOrgans = new \Doctrine\Common\Collections\ArrayCollection();
         $this->participants = new \Doctrine\Common\Collections\ArrayCollection();
         $this->designatedParticipants = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->textVoteReports = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -304,5 +313,39 @@ class Organ
     public function getDesignatedParticipants()
     {
         return $this->designatedParticipants;
+    }
+
+    /**
+     * Add textVoteReport
+     *
+     * @param \AppBundle\Entity\Vote\IndividualOrganTextVote $textVoteReport
+     *
+     * @return Organ
+     */
+    public function addTextVoteReport(\AppBundle\Entity\Vote\IndividualOrganTextVote $textVoteReport)
+    {
+        $this->textVoteReports[] = $textVoteReport;
+
+        return $this;
+    }
+
+    /**
+     * Remove textVoteReport
+     *
+     * @param \AppBundle\Entity\Vote\IndividualOrganTextVote $textVoteReport
+     */
+    public function removeTextVoteReport(\AppBundle\Entity\Vote\IndividualOrganTextVote $textVoteReport)
+    {
+        $this->textVoteReports->removeElement($textVoteReport);
+    }
+
+    /**
+     * Get textVoteReports
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getTextVoteReports()
+    {
+        return $this->textVoteReports;
     }
 }

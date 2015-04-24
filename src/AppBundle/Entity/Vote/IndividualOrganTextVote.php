@@ -70,7 +70,7 @@ class IndividualOrganTextVote
     /**
      * @var \stdClass
      *
-     *  @ORM\ManyToOne(targetEntity="AppBundle\Entity\Organ\Organ")
+     *  @ORM\ManyToOne(targetEntity="AppBundle\Entity\Organ\Organ", inversedBy="textVoteReports")
      *  
      */
     private $organ;

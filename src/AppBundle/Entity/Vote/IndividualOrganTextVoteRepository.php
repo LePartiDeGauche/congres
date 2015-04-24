@@ -28,4 +28,18 @@ class IndividualOrganTextVoteRepository extends EntityRepository
     
     }
 
+    public function getReport(Organ $organ, TextGroup $textGroup)
+    {
+        $report = $this->createQueryBuilder('iotv')
+            ->select('iotv')
+            ->where('iotv.textGroup = :textGroup')
+            ->andWhere('iotv.organ = :organ')
+            ->setParameter('organ', $organ->getId())
+            ->setParameter('textGroup', $textGroup->getId())
+            ->getQuery()->getSingleResult();
+
+        return $report;
+    }
+
+
 }

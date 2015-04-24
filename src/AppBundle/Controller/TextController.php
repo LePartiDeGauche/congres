@@ -251,7 +251,7 @@ class TextController extends Controller
             $em->persist($iotv);
 
             $em->flush();
-            return $this->redirect($this->generateUrl('text_list', array('group_id' => $textGroup->getId())));
+            return $this->redirect($this->generateUrl('vote_report_show', array('group_id' => $textGroup->getId(), 'organ_id' => $organ->getId())));
         }
 
         return $this->render('text/report_vote.html.twig', array(
@@ -269,15 +269,18 @@ class TextController extends Controller
      * @Method("GET")
      * @ParamConverter("textGroup", class="AppBundle:Text\TextGroup", options={"id" = "group_id"})
      * @ParamConverter("organ", class="AppBundle:Organ\Organ", options={"id" = "organ_id"})
-     * @Template("text/vote_report_show.html.twig")
+     * @Template("text/report_show.html.twig")
      */
     public function showVoteReportAction(TextGroup $textGroup, Organ $organ)
     {
         $this->denyAccessUnlessGranted('view', $textGroup);
+        $em = $this->getDoctrine()->getManager();
+        $report = $em->getRepository('AppBundle:Vote\IndividualOrganTextVote')->getReport($organ, $textGroup);
 
         return array(
-            'textGroup'      => $textGroup,
-            'text'      => $text
+            'textGroup' => $textGroup,
+            'organ' => $organ,
+            'report' => $report
         );
     }
 
