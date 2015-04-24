@@ -12,7 +12,9 @@
         </p>
 
         <ul>
+            <li>Date de réunion : {{report.meetingDate | date("m/d/Y")}}</li>
             <li>Total des présents : {{report.voteTotal}}</li>
+            <li>Blanc : {{report.voteBlank}}</li>
             <li>Ne prend pas part au vote: {{report.voteNotTakingPart}}</li>
             <li>Abstention : {{report.voteAbstention}}</li>
             {% for vote in report.textVoteAgregations %}
