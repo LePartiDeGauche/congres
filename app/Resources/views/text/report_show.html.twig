@@ -1,0 +1,24 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}Proces verbal pour {{textGroup.name}} par {{organ.name}}{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <h1>Proces verbal pour {{textGroup.name}} par {{organ.name}}</h1>
+        <p class="small text-muted">
+        Rapporteur :
+        {{ report.author.firstname }} {{ report.author.lastname }}
+        </p>
+
+        <ul>
+            <li>Total des présents : {{report.voteTotal}}</li>
+            <li>Ne prend pas part au vote: {{report.voteNotTakingPart}}</li>
+            <li>Abstention : {{report.voteAbstention}}</li>
+            {% for vote in report.textVoteAgregations %}
+            <li>{{ vote.text.title}} : {{vote.voteFor}}</li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock %}
