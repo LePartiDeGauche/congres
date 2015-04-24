@@ -222,7 +222,7 @@ class TextController extends Controller
             $iotv = $form->getData();
 
             // TODO: use validator, instead of this ugly code..
-            $sumVotes = $iotv->getVoteAbstention() + $iotv->getVoteNotTakingPart();
+            $sumVotes = $aggr->getVoteBlank() + $iotv->getVoteAbstention() + $iotv->getVoteNotTakingPart();
             foreach ($iotv->getTextVoteAgregations() as $aggr)
             {
                 $sumVotes += $aggr->getVoteFor() + $aggr->getVoteAgainst() + $aggr->getVoteAbstention();
