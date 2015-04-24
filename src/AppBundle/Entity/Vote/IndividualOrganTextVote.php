@@ -68,6 +68,23 @@ class IndividualOrganTextVote
     private $voteNotTakingPart;
 
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="voteBlank", type="integer")
+     */
+    private $voteBlank;
+
+    /**
+     * @var date
+     *
+     * @ORM\Column(name="meetingDate", type="date")
+     */
+    private $meetingDate;
+
+
+
+
+    /**
      * @var \stdClass
      *
      *  @ORM\ManyToOne(targetEntity="AppBundle\Entity\Organ\Organ", inversedBy="textVoteReports")
@@ -94,6 +111,7 @@ class IndividualOrganTextVote
         $this->voteAbstention = 0;
         $this->voteNotTakingPart = 0;
         $this->voteTotal = 0;
+        $this->voteBlank = 0;
 
         foreach ($textGroup->getTexts() as $text)
         {
@@ -294,5 +312,53 @@ class IndividualOrganTextVote
     public function getVoteTotal()
     {
         return $this->voteTotal;
+    }
+
+    /**
+     * Set voteBlank
+     *
+     * @param integer $voteBlank
+     *
+     * @return IndividualOrganTextVote
+     */
+    public function setVoteBlank($voteBlank)
+    {
+        $this->voteBlank = $voteBlank;
+
+        return $this;
+    }
+
+    /**
+     * Get voteBlank
+     *
+     * @return integer
+     */
+    public function getVoteBlank()
+    {
+        return $this->voteBlank;
+    }
+
+    /**
+     * Set meetingDate
+     *
+     * @param \DateTime $meetingDate
+     *
+     * @return IndividualOrganTextVote
+     */
+    public function setMeetingDate($meetingDate)
+    {
+        $this->meetingDate = $meetingDate;
+
+        return $this;
+    }
+
+    /**
+     * Get meetingDate
+     *
+     * @return \DateTime
+     */
+    public function getMeetingDate()
+    {
+        return $this->meetingDate;
     }
 }

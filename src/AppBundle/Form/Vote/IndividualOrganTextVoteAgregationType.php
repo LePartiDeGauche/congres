@@ -15,7 +15,7 @@ class IndividualOrganTextVoteAgregationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('voteFor', NULL,array('label' => 'Vote en faveur'))
+            ->add('voteFor', NULL,array('label' => 'Votes en faveur'))
             ;
     }
 

@@ -15,8 +15,10 @@ class IndividualOrganTextVoteType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('voteTotal', null, array( 'label' => 'Total' ))
-            ->add('voteAbstention', null, array( 'label' => 'Abstention' ))
+            ->add('meetingDate', null, array( 'label' => 'Date de la réunion' ))
+            ->add('voteTotal', null, array( 'label' => 'Total des présents' ))
+            ->add('voteBlank', null, array( 'label' => 'Blancs' ))
+            ->add('voteAbstention', null, array( 'label' => 'Abstentions' ))
             ->add('voteNotTakingPart', null, array( 'label' => 'Ne prend pas part au vote' ))
             ->add('textVoteAgregations', 'collection', array(
                 'type' => new IndividualOrganTextVoteAgregationType(), 
