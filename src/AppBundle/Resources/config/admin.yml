@@ -161,3 +161,8 @@ services:
         tags:
             - {name: sonata.admin, manager_type: orm, group: admin, label: OrganVoteRule, show_in_dashboard: false}
 
+    app.admin.organ:
+        class: AppBundle\Admin\OrganAdmin
+        arguments: [~, AppBundle\Entity\Organ\Organ, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: Organ, label: Organ}

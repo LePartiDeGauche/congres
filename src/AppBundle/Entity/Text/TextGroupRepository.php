@@ -26,6 +26,7 @@ class TextGroupRepository extends EntityRepository
             ->leftJoin('rr.adherentResponsabilities', 'adhresp')
             ->leftJoin('adhresp.designatedByOrgan', 'org')
             ->where('adhresp.adherent = :adherent')
+            ->andWhere('organ.id = org.id')
             ->setParameter('adherent', $adherent->getId())
             ->getQuery();
 
