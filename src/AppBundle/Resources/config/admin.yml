@@ -102,6 +102,12 @@ services:
         tags:
             - {name: sonata.admin, manager_type: orm, group: "Texte", label: "Textes"}
 
+    sonata.admin.individual_organ_text_vote:
+        class: AppBundle\Admin\IndividualOrganTextVoteAdmin
+        arguments: [~, AppBundle\Entity\Vote\IndividualOrganTextVote, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: "Texte", label: "Procès Verbaux"}
+
     sonata.admin.vote_rule:
         class: AppBundle\Admin\VoteRuleAdmin
         arguments: [~, AppBundle\Entity\Vote\VoteRule, SonataAdminBundle:CRUD]
@@ -147,16 +153,11 @@ services:
         class: AppBundle\Admin\EventPaymentAdmin
         arguments: [~, AppBundle\Entity\Payment\EventPayment, SonataAdminBundle:CRUD]
         tags:
-            - {name: sonata.admin, manager_type: orm, group: admin, label: EventPayment}
+            - {name: sonata.admin, manager_type: orm, group: admin, label: EventPayment, show_in_dashboard: false}
 
     app.admin.organ_vote_rule:
         class: AppBundle\Admin\OrganVoteRuleAdmin
         arguments: [~, AppBundle\Entity\Vote\OrganVoteRule, SonataAdminBundle:CRUD]
         tags:
-            - {name: sonata.admin, manager_type: orm, group: admin, label: OrganVoteRule}
+            - {name: sonata.admin, manager_type: orm, group: admin, label: OrganVoteRule, show_in_dashboard: false}
 
-    app.admin.individual_organ_text_vote:
-        class: AppBundle\Admin\IndividualOrganTextVoteAdmin
-        arguments: [~, AppBundle\Entity\Vote\IndividualOrganTextVote, SonataAdminBundle:CRUD]
-        tags:
-            - {name: sonata.admin, manager_type: orm, group: admin, label: IndividualOrganTextVote}
