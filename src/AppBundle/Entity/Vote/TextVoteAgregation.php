@@ -197,5 +197,3 @@ abstract class TextVoteAgregation
     }
 
 }
-
-?>

@@ -66,4 +66,28 @@ class IndividualOrganTextVoteAgregation extends TextVoteAgregation
         return $this->voteRule;
     }
 
+
+    /**
+     * Set individualOrganTextVote
+     *
+     * @param \AppBundle\Entity\Vote\IndividualOrganTextVote $individualOrganTextVote
+     *
+     * @return IndividualOrganTextVoteAgregation
+     */
+    public function setIndividualOrganTextVote(\AppBundle\Entity\Vote\IndividualOrganTextVote $individualOrganTextVote)
+    {
+        $this->individualOrganTextVote = $individualOrganTextVote;
+
+        return $this;
+    }
+
+    /**
+     * Get individualOrganTextVote
+     *
+     * @return \AppBundle\Entity\Vote\IndividualOrganTextVote
+     */
+    public function getIndividualOrganTextVote()
+    {
+        return $this->individualOrganTextVote;
+    }
 }

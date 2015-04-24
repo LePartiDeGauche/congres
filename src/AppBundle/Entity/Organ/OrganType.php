@@ -165,4 +165,70 @@ class OrganType
     {
         return $this->isUnique;
     }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->organs = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->participationAllowedBy = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add organ
+     *
+     * @param \AppBundle\Entity\Organ\Organ $organ
+     *
+     * @return OrganType
+     */
+    public function addOrgan(\AppBundle\Entity\Organ\Organ $organ)
+    {
+        $this->organs[] = $organ;
+
+        return $this;
+    }
+
+    /**
+     * Remove organ
+     *
+     * @param \AppBundle\Entity\Organ\Organ $organ
+     */
+    public function removeOrgan(\AppBundle\Entity\Organ\Organ $organ)
+    {
+        $this->organs->removeElement($organ);
+    }
+
+    /**
+     * Add participationAllowedBy
+     *
+     * @param \AppBundle\Entity\Responsability $participationAllowedBy
+     *
+     * @return OrganType
+     */
+    public function addParticipationAllowedBy(\AppBundle\Entity\Responsability $participationAllowedBy)
+    {
+        $this->participationAllowedBy[] = $participationAllowedBy;
+
+        return $this;
+    }
+
+    /**
+     * Remove participationAllowedBy
+     *
+     * @param \AppBundle\Entity\Responsability $participationAllowedBy
+     */
+    public function removeParticipationAllowedBy(\AppBundle\Entity\Responsability $participationAllowedBy)
+    {
+        $this->participationAllowedBy->removeElement($participationAllowedBy);
+    }
+
+    /**
+     * Get participationAllowedBy
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getParticipationAllowedBy()
+    {
+        return $this->participationAllowedBy;
+    }
 }

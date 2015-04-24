@@ -192,4 +192,45 @@ class OrganParticipation
     {
         return $this->isActive;
     }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->allowedBy = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add allowedBy
+     *
+     * @param \AppBundle\Entity\AdherentResponsability $allowedBy
+     *
+     * @return OrganParticipation
+     */
+    public function addAllowedBy(\AppBundle\Entity\AdherentResponsability $allowedBy)
+    {
+        $this->allowedBy[] = $allowedBy;
+
+        return $this;
+    }
+
+    /**
+     * Remove allowedBy
+     *
+     * @param \AppBundle\Entity\AdherentResponsability $allowedBy
+     */
+    public function removeAllowedBy(\AppBundle\Entity\AdherentResponsability $allowedBy)
+    {
+        $this->allowedBy->removeElement($allowedBy);
+    }
+
+    /**
+     * Get allowedBy
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getAllowedBy()
+    {
+        return $this->allowedBy;
+    }
 }

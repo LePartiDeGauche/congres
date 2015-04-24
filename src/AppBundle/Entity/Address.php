@@ -188,4 +188,3 @@ class Address
             $this->cityCode . ' ' . $this->cityName;
     }
 }
-

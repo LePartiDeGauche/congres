@@ -165,4 +165,72 @@ class Responsability
     {
         return $this->name;
     }
+
+    /**
+     * Add adherentResponsability
+     *
+     * @param \AppBundle\Entity\AdherentResponsability $adherentResponsability
+     *
+     * @return Responsability
+     */
+    public function addAdherentResponsability(\AppBundle\Entity\AdherentResponsability $adherentResponsability)
+    {
+        $this->adherentResponsabilities[] = $adherentResponsability;
+
+        return $this;
+    }
+
+    /**
+     * Remove adherentResponsability
+     *
+     * @param \AppBundle\Entity\AdherentResponsability $adherentResponsability
+     */
+    public function removeAdherentResponsability(\AppBundle\Entity\AdherentResponsability $adherentResponsability)
+    {
+        $this->adherentResponsabilities->removeElement($adherentResponsability);
+    }
+
+    /**
+     * Get adherentResponsabilities
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getAdherentResponsabilities()
+    {
+        return $this->adherentResponsabilities;
+    }
+
+    /**
+     * Add allowsParticipation
+     *
+     * @param \AppBundle\Entity\Organ\OrganType $allowsParticipation
+     *
+     * @return Responsability
+     */
+    public function addAllowsParticipation(\AppBundle\Entity\Organ\OrganType $allowsParticipation)
+    {
+        $this->allowsParticipations[] = $allowsParticipation;
+
+        return $this;
+    }
+
+    /**
+     * Remove allowsParticipation
+     *
+     * @param \AppBundle\Entity\Organ\OrganType $allowsParticipation
+     */
+    public function removeAllowsParticipation(\AppBundle\Entity\Organ\OrganType $allowsParticipation)
+    {
+        $this->allowsParticipations->removeElement($allowsParticipation);
+    }
+
+    /**
+     * Get allowsParticipations
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getAllowsParticipations()
+    {
+        return $this->allowsParticipations;
+    }
 }

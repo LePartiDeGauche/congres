@@ -199,4 +199,69 @@ class AdherentResponsability
     {
         return $this->isActive;
     }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->allowsParticipations = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Set designatedByOrgan
+     *
+     * @param \AppBundle\Entity\Organ\Organ $designatedByOrgan
+     *
+     * @return AdherentResponsability
+     */
+    public function setDesignatedByOrgan(\AppBundle\Entity\Organ\Organ $designatedByOrgan = null)
+    {
+        $this->designatedByOrgan = $designatedByOrgan;
+
+        return $this;
+    }
+
+    /**
+     * Get designatedByOrgan
+     *
+     * @return \AppBundle\Entity\Organ\Organ
+     */
+    public function getDesignatedByOrgan()
+    {
+        return $this->designatedByOrgan;
+    }
+
+    /**
+     * Add allowsParticipation
+     *
+     * @param \AppBundle\Entity\Organ\OrganParticipation $allowsParticipation
+     *
+     * @return AdherentResponsability
+     */
+    public function addAllowsParticipation(\AppBundle\Entity\Organ\OrganParticipation $allowsParticipation)
+    {
+        $this->allowsParticipations[] = $allowsParticipation;
+
+        return $this;
+    }
+
+    /**
+     * Remove allowsParticipation
+     *
+     * @param \AppBundle\Entity\Organ\OrganParticipation $allowsParticipation
+     */
+    public function removeAllowsParticipation(\AppBundle\Entity\Organ\OrganParticipation $allowsParticipation)
+    {
+        $this->allowsParticipations->removeElement($allowsParticipation);
+    }
+
+    /**
+     * Get allowsParticipations
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getAllowsParticipations()
+    {
+        return $this->allowsParticipations;
+    }
 }
