@@ -154,3 +154,9 @@ services:
         arguments: [~, AppBundle\Entity\Vote\OrganVoteRule, SonataAdminBundle:CRUD]
         tags:
             - {name: sonata.admin, manager_type: orm, group: admin, label: OrganVoteRule}
+
+    app.admin.individual_organ_text_vote:
+        class: AppBundle\Admin\IndividualOrganTextVoteAdmin
+        arguments: [~, AppBundle\Entity\Vote\IndividualOrganTextVote, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin, label: IndividualOrganTextVote}
