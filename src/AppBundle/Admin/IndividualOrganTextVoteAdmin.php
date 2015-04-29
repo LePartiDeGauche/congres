@@ -101,7 +101,7 @@ class IndividualOrganTextVoteAdmin extends Admin
         $fieldsArray[] = 'voteBlank';
         $fieldsArray[] = 'voteAbstention';
         $fieldsArray[] = 'voteNotTakingPart';
-        $fieldsArray[] = 'textVoteAgregations';
+        $fieldsArray[] = 'textVoteResult';
 
         return $fieldsArray;
     }

@@ -117,7 +117,7 @@ class IndividualOrganTextVote
         {
             $this->textVoteAgregations[] = new IndividualOrganTextVoteAgregation($text, $textGroup, $this);
         }
-        
+
     }
 
     /**
@@ -360,5 +360,19 @@ class IndividualOrganTextVote
     public function getMeetingDate()
     {
         return $this->meetingDate;
+    }
+
+
+    // FIXME : TO BE REMOVE AFTER PLATFORM VOTE EXPORT
+    //
+    public function getTextVoteResult()
+    {
+        $exportVote = array();
+        foreach($this->textVoteAgregations as $key => $val )
+        {
+            $exportVote[] = $val->__tostring();
+        }
+
+        return join(' , ', $exportVote); 
     }
 }
