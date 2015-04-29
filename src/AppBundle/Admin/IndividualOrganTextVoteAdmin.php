@@ -109,7 +109,8 @@ class IndividualOrganTextVoteAdmin extends Admin
     public function getExportFormats()
     {
         return array(
-            'xls'
+            'xls',
+            'csv'
         );
     }
 }
