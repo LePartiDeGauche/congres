@@ -16,6 +16,7 @@ final class UserAdmin extends Admin
         'ROLE_ADMIN' => 'Administrateur',
         'ROLE_SUPER_ADMIN' => 'Super administrateur',
         'ROLE_STAFF' => 'Gestionnaire des inscriptions',
+        'ROLE_VOTE_COMITY' => 'Commission des votes',
     );
 
     protected function configureRoutes(RouteCollection $collection)

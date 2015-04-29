@@ -88,4 +88,28 @@ class IndividualOrganTextVoteAdmin extends Admin
             ->add('textVoteAgregations', 'sonata_type_model')
         ;
     }
+
+    public function getExportFields()
+    {
+        //$fieldsArray = $this->getModelManager()->getExportFields($this->getClass());
+
+        $fieldsArray[] = 'author.firstname';
+        $fieldsArray[] = 'author.lastname';
+        $fieldsArray[] = 'organ.name';
+        $fieldsArray[] = 'meetingDate';
+        $fieldsArray[] = 'voteTotal';
+        $fieldsArray[] = 'voteBlank';
+        $fieldsArray[] = 'voteAbstention';
+        $fieldsArray[] = 'voteNotTakingPart';
+        $fieldsArray[] = 'textVoteAgregations';
+
+        return $fieldsArray;
+    }
+
+    public function getExportFormats()
+    {
+        return array(
+            'xls'
+        );
+    }
 }
