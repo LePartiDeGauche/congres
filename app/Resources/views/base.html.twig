@@ -41,29 +41,13 @@
                         </li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"
-                                role="button" aria-expanded="false">Plateformes <span class="caret"></span></a>
+                                                                role="button" aria-expanded="false">Textes soumis à amendements<span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
                                 <li>
-                                    <a href="{{ path('downloads', {filename: 'Tout est possible.pdf'}) }}">
+                                    <a href="{{ path('downloads', {filename: 'Tout est possible - numéroté.pdf'}) }}">
                                         Tout est possible
                                     </a>
                                 </li>
-                                <li>
-                                    <a href="{{ path('downloads', {filename: 'Clarté et courage politique.pdf'}) }}">
-                                        Clarté et courage politique
-                                    </a>
-                                </li>
-<li>
-                                    <a href="{{ path('text_list', {group_id: 2}) }}">
-Soumettre un procès verbal
-                                    </a>
-</li>
-                            </ul>
-                        </li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"
-                                                                role="button" aria-expanded="false">Autres textes<span class="caret"></span></a>
-                            <ul class="dropdown-menu" role="menu">
                                 <li>
                                     <a href="{{ path('downloads', {filename: 'RI du PG modifié.pdf'}) }}">
                                         R.I. du PG modifi&eacute;
@@ -101,6 +85,11 @@ Soumettre un procès verbal
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
 aria-expanded="false">Archives<span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
+                                <li>
+                                    <a href="{{ path('downloads', {filename: 'Clarté et courage politique.pdf'}) }}">
+                                        Plateforme Clarté et courage politique
+                                    </a>
+                                </li>
                                 {% if is_granted('CALENDAR_contribution_read') %}
                                 <li><a href="{{ path('contribution_list_valid') }}">Contributions</a></li>
                                 {% endif %}
