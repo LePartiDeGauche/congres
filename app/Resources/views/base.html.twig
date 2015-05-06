@@ -85,11 +85,6 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
 aria-expanded="false">Archives<span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
-                                <li>
-                                    <a href="{{ path('downloads', {filename: 'Clarté et courage politique.pdf'}) }}">
-                                        Plateforme Clarté et courage politique
-                                    </a>
-                                </li>
                                 {% if is_granted('CALENDAR_contribution_read') %}
                                 <li><a href="{{ path('contribution_list_valid') }}">Contributions</a></li>
                                 {% endif %}
