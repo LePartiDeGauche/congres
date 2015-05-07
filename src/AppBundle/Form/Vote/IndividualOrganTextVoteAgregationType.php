@@ -10,12 +10,12 @@ class IndividualOrganTextVoteAgregationType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('voteFor', NULL,array('label' => 'Votes en faveur'))
+            ->add('voteFor', null, array('label' => 'Votes en faveur'))
             ;
     }
 
@@ -26,10 +26,9 @@ class IndividualOrganTextVoteAgregationType extends AbstractType
     {
         $resolver->setDefaults(array(
             'data_class' => 'AppBundle\Entity\Vote\IndividualOrganTextVoteAgregation',
-            'vote_modality' => null
+            'vote_modality' => null,
         ));
     }
-
 
     /**
      * @return string

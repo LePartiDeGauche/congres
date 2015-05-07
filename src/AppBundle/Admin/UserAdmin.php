@@ -12,7 +12,7 @@ final class UserAdmin extends Admin
 {
     protected $baseRouteName = 'utilisateurs';
     protected $baseRoutePattern = 'utilisateurs';
-    protected $roleChoice = array (
+    protected $roleChoice = array(
         'ROLE_ADMIN' => 'Administrateur',
         'ROLE_SUPER_ADMIN' => 'Super administrateur',
         'ROLE_STAFF' => 'Gestionnaire des inscriptions',
@@ -26,7 +26,6 @@ final class UserAdmin extends Admin
 
     protected function configureFormFields(FormMapper $formMapper)
     {
-
         $formMapper
             ->add('enabled', 'checkbox', array('label' => 'Compte Activé', 'required' => false))
             ->add('locked', 'checkbox', array('label' => 'Compte Bloqué', 'required' => false))

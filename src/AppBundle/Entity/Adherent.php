@@ -5,7 +5,7 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Adherent
+ * Adherent.
  *
  * @ORM\Table(name="adherents")
  * @ORM\Entity(repositoryClass="AppBundle\Entity\AdherentRepository")
@@ -19,7 +19,7 @@ class Adherent
     const STATUS_EXCLUDED = 'Exclusion';
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -28,7 +28,7 @@ class Adherent
     private $id;
 
     /**
-     * @var string 
+     * @var string
      *
      * @ORM\Column(name="email", type="string", length=255, unique=true, nullable=true)
      */
@@ -62,18 +62,17 @@ class Adherent
      */
     private $status;
 
-    /**
-     * @var int$
-     *
-     * @ORM\Column(name="departement", type="integer")
-     */
+/**
+ * @var int$
+ *
+ * @ORM\Column(name="departement", type="integer")
+ */
     // FIXME : Remove this field when organs will be imported
     private $departement;
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
      * @ORM\OneToMany(targetEntity="AdherentResponsability", mappedBy="adherent", orphanRemoval=true, cascade={"persist"})
-     *
      */
     private $responsabilities;
 
@@ -81,12 +80,12 @@ class Adherent
      * @var string
      *
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Event\EventAdherentRegistration", mappedBy="adherent")
-     *
      */
     private $events;
 
     /**
      * The user associated to this adherent profile.
+     *
      * @var User
      *
      * @ORM\OneToOne(targetEntity="AppBundle\Entity\User", mappedBy="profile", orphanRemoval=true)
@@ -94,7 +93,7 @@ class Adherent
     private $user;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
@@ -105,9 +104,9 @@ class Adherent
     }
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -115,7 +114,7 @@ class Adherent
     }
 
     /**
-     * Get user
+     * Get user.
      *
      * @return User
      */
@@ -125,9 +124,9 @@ class Adherent
     }
 
     /**
-     * Set id
+     * Set id.
      *
-     * @return integer
+     * @return int
      */
     public function setId($id)
     {
@@ -137,9 +136,10 @@ class Adherent
     }
 
     /**
-     * Set lastname
+     * Set lastname.
      *
-     * @param  string   $lastname
+     * @param string $lastname
+     *
      * @return Adherent
      */
     public function setLastname($lastname)
@@ -150,7 +150,7 @@ class Adherent
     }
 
     /**
-     * Get lastname
+     * Get lastname.
      *
      * @return string
      */
@@ -160,9 +160,10 @@ class Adherent
     }
 
     /**
-     * Set firstname
+     * Set firstname.
      *
-     * @param  string   $firstname
+     * @param string $firstname
+     *
      * @return Adherent
      */
     public function setFirstname($firstname)
@@ -173,7 +174,7 @@ class Adherent
     }
 
     /**
-     * Get firstname
+     * Get firstname.
      *
      * @return string
      */
@@ -183,9 +184,10 @@ class Adherent
     }
 
     /**
-     * Set birthdate
+     * Set birthdate.
      *
-     * @param  \DateTime $birthdate
+     * @param \DateTime $birthdate
+     *
      * @return Adherent
      */
     public function setBirthdate($birthdate)
@@ -196,7 +198,7 @@ class Adherent
     }
 
     /**
-     * Get birthdate
+     * Get birthdate.
      *
      * @return \DateTime
      */
@@ -206,9 +208,10 @@ class Adherent
     }
 
     /**
-     * Set email
+     * Set email.
      *
-     * @param  string   $email
+     * @param string $email
+     *
      * @return Adherent
      */
     public function setEmail($email)
@@ -223,7 +226,7 @@ class Adherent
     }
 
     /**
-     * Get email
+     * Get email.
      *
      * @return string
      */
@@ -233,15 +236,15 @@ class Adherent
     }
 
     /**
-     * Set status
+     * Set status.
      *
-     * @param  string   $status
+     * @param string $status
+     *
      * @return Adherent
      */
     public function setStatus($status)
     {
-        if ($status === null)
-        {
+        if ($status === null) {
             $status = self::STATUS_NEW;
         }
         if (!in_array($status, array(
@@ -249,9 +252,9 @@ class Adherent
             self::STATUS_OK,
             self::STATUS_ATTENTE_RENOUVELLEMENT,
             self::STATUS_OLD,
-            self::STATUS_EXCLUDED
+            self::STATUS_EXCLUDED,
         ))) {
-        throw new \InvalidArgumentException('Invalid status');
+            throw new \InvalidArgumentException('Invalid status');
         }
 
         $this->status = $status;
@@ -260,7 +263,7 @@ class Adherent
     }
 
     /**
-     * Get status
+     * Get status.
      *
      * @return string
      */
@@ -270,7 +273,7 @@ class Adherent
     }
 
     /**
-     * Get responsabilities
+     * Get responsabilities.
      *
      * @return \Doctrine\Common\Collections\Collection
      */
@@ -281,20 +284,20 @@ class Adherent
 
     public function __toString()
     {
-        return $this->firstname . ' ' . $this->lastname;
+        return $this->firstname.' '.$this->lastname;
     }
 
     /**
-     * Add responsabilities
+     * Add responsabilities.
      *
      * @param \AppBundle\Entity\AdherentResponsability $responsabilities
+     *
      * @return Adherent
      */
     public function addResponsability(\AppBundle\Entity\AdherentResponsability $responsability)
     {
-        if($responsability->getAdherent() === null)
-        {
-            $responsability->setAdherent($this); 
+        if ($responsability->getAdherent() === null) {
+            $responsability->setAdherent($this);
         }
         $this->responsabilities[] = $responsability;
 
@@ -302,7 +305,7 @@ class Adherent
     }
 
     /**
-     * Remove responsabilities
+     * Remove responsabilities.
      *
      * @param \AppBundle\Entity\AdherentResponsability $responsabilities
      */
@@ -312,9 +315,10 @@ class Adherent
     }
 
     /**
-     * Add events
+     * Add events.
      *
      * @param \AppBundle\Entity\Event\EventAdherentRegistration $events
+     *
      * @return Adherent
      */
     public function addEvent(\AppBundle\Entity\Event\EventAdherentRegistration $events)
@@ -325,7 +329,7 @@ class Adherent
     }
 
     /**
-     * Remove events
+     * Remove events.
      *
      * @param \AppBundle\Entity\Event\EventAdherentRegistration $events
      */
@@ -335,9 +339,9 @@ class Adherent
     }
 
     /**
-     * Get events
+     * Get events.
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getEvents()
     {
@@ -345,9 +349,10 @@ class Adherent
     }
 
     /**
-     * Set user
+     * Set user.
      *
      * @param \AppBundle\Entity\User $user
+     *
      * @return Adherent
      */
     public function setUser(\AppBundle\Entity\User $user = null)
@@ -358,9 +363,10 @@ class Adherent
     }
 
     /**
-     * Set departement
+     * Set departement.
      *
-     * @param integer $departement
+     * @param int $departement
+     *
      * @return Adherent
      */
     public function setDepartement($departement)
@@ -371,9 +377,9 @@ class Adherent
     }
 
     /**
-     * Get departement
+     * Get departement.
      *
-     * @return integer 
+     * @return int
      */
     public function getDepartement()
     {

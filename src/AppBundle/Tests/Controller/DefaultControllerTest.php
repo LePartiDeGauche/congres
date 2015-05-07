@@ -11,7 +11,7 @@ class DefaultControllerTest extends WebTestCase
     {
         $client = static::createClient(array(), array(
             'PHP_AUTH_USER' => 'user',
-            'PHP_AUTH_PW'   => 'user',
+            'PHP_AUTH_PW' => 'user',
         ));
         $client->followRedirects();
 

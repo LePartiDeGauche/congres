@@ -42,7 +42,7 @@ class SleepingFacilityAdmin extends Admin
                     'show' => array(),
                     'edit' => array(),
                     'delete' => array(),
-                )
+                ),
             ))
             ;
     }
@@ -56,7 +56,7 @@ class SleepingFacilityAdmin extends Admin
             ->add('event', 'sonata_type_model')
             ->add('name')
             ->add('description')
-            ->add('address', 'sonata_type_admin',array(
+            ->add('address', 'sonata_type_admin', array(
                 'delete' => false,
                 'required' => true,
                 'btn_add' => false,

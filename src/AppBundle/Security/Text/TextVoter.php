@@ -1,4 +1,5 @@
 <?php
+
 namespace AppBundle\Security\Text;
 
 use AppBundle\Entity\Text\Text;
@@ -12,7 +13,6 @@ final class TextVoter extends AbstractVoter
     const VOTE = 'vote';
 
     const DELETE = 'delete';
-
 
     private $entityManager;
     private $container;
@@ -53,7 +53,7 @@ final class TextVoter extends AbstractVoter
 
         if ($attribute === self::VOTE) {
             if (Text::STATUS_VOTING === $text->getStatus()) {
-            $hasVoted = $em->getRepository('AppBundle:Vote\IndividualTextVote')->hasVoted($user->getProfile(), $text);
+                $hasVoted = $em->getRepository('AppBundle:Vote\IndividualTextVote')->hasVoted($user->getProfile(), $text);
 
                 return !$hasVoted;
             }

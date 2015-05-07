@@ -5,7 +5,7 @@ namespace AppBundle\Entity\Text;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Text
+ * Text.
  *
  * @ORM\Table(name="text")
  * @ORM\Entity(repositoryClass="AppBundle\Entity\Text\TextRepository")
@@ -18,7 +18,7 @@ class Text
     const STATUS_ADOPTED = 'adopted';
     const STATUS_REJECTED = 'rejected';
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -65,20 +65,19 @@ class Text
     /**
      * @var \stdClass
      *
-     * @ORM\OneToMany( 
+     * @ORM\OneToMany(
      * targetEntity="AppBundle\Entity\Vote\IndividualTextVote",
      * mappedBy="text")
      */
     private $adherentVotes;
 
-    /**
-     * @var \stdClass
-     *
-     * @ORM\Column(name="organ_vote", type="object")
-     */
+/**
+ * @var \stdClass
+ *
+ * @ORM\Column(name="organ_vote", type="object")
+ */
     //FIXME
     private $organVotes;
-
 
     /**
      * @var \stdClass
@@ -91,16 +90,15 @@ class Text
     /**
      * @var \stdClass
      *
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Vote\IndividualTextVoteAgregation", mappedBy="text", 
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Vote\IndividualTextVoteAgregation", mappedBy="text",
      * cascade={"persist", "remove", "merge"}, orphanRemoval=true)
-     *
      */
     private $individualVoteAgregations;
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer 
+     * @return int
      */
     public function getId()
     {
@@ -108,9 +106,10 @@ class Text
     }
 
     /**
-     * Set author
+     * Set author.
      *
      * @param \stdClass $author
+     *
      * @return Text
      */
     public function setAuthor($author)
@@ -121,9 +120,9 @@ class Text
     }
 
     /**
-     * Get author
+     * Get author.
      *
-     * @return \stdClass 
+     * @return \stdClass
      */
     public function getAuthor()
     {
@@ -131,9 +130,10 @@ class Text
     }
 
     /**
-     * Set adherentGroup
+     * Set adherentGroup.
      *
      * @param \stdClass $adherentGroup
+     *
      * @return Text
      */
     public function setAdherentGroup($adherentGroup)
@@ -144,9 +144,9 @@ class Text
     }
 
     /**
-     * Get adherentGroup
+     * Get adherentGroup.
      *
-     * @return \stdClass 
+     * @return \stdClass
      */
     public function getAdherentGroup()
     {
@@ -154,9 +154,10 @@ class Text
     }
 
     /**
-     * Set title
+     * Set title.
      *
      * @param string $title
+     *
      * @return Text
      */
     public function setTitle($title)
@@ -167,9 +168,9 @@ class Text
     }
 
     /**
-     * Get title
+     * Get title.
      *
-     * @return string 
+     * @return string
      */
     public function getTitle()
     {
@@ -177,9 +178,10 @@ class Text
     }
 
     /**
-     * Set status
+     * Set status.
      *
      * @param string $status
+     *
      * @return Text
      */
     public function setStatus($status)
@@ -200,9 +202,9 @@ class Text
     }
 
     /**
-     * Get status
+     * Get status.
      *
-     * @return string 
+     * @return string
      */
     public function getStatus()
     {
@@ -210,9 +212,10 @@ class Text
     }
 
     /**
-     * Set adherentVote
+     * Set adherentVote.
      *
      * @param \stdClass $adherentVote
+     *
      * @return Text
      */
     public function setAdherentVote($adherentVote)
@@ -223,9 +226,9 @@ class Text
     }
 
     /**
-     * Get adherentVote
+     * Get adherentVote.
      *
-     * @return \stdClass 
+     * @return \stdClass
      */
     public function getAdherentVote()
     {
@@ -233,9 +236,10 @@ class Text
     }
 
     /**
-     * Set adherentGroupVote
+     * Set adherentGroupVote.
      *
      * @param \stdClass $adherentGroupVote
+     *
      * @return Text
      */
     public function setAdherentGroupVote($adherentGroupVote)
@@ -246,9 +250,9 @@ class Text
     }
 
     /**
-     * Get adherentGroupVote
+     * Get adherentGroupVote.
      *
-     * @return \stdClass 
+     * @return \stdClass
      */
     public function getAdherentGroupVote()
     {
@@ -256,9 +260,10 @@ class Text
     }
 
     /**
-     * Set textGroup
+     * Set textGroup.
      *
      * @param \stdClass $textGroup
+     *
      * @return Text
      */
     public function setTextGroup($textGroup)
@@ -269,16 +274,16 @@ class Text
     }
 
     /**
-     * Get textGroup
+     * Get textGroup.
      *
-     * @return \stdClass 
+     * @return \stdClass
      */
     public function getTextGroup()
     {
         return $this->textGroup;
     }
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct(\AppBundle\Entity\Adherent $author = null)
     {
@@ -288,9 +293,10 @@ class Text
     }
 
     /**
-     * Set organVotes
+     * Set organVotes.
      *
      * @param \stdClass $organVotes
+     *
      * @return Text
      */
     public function setOrganVotes($organVotes)
@@ -301,9 +307,9 @@ class Text
     }
 
     /**
-     * Get organVotes
+     * Get organVotes.
      *
-     * @return \stdClass 
+     * @return \stdClass
      */
     public function getOrganVotes()
     {
@@ -311,9 +317,10 @@ class Text
     }
 
     /**
-     * Set organ
+     * Set organ.
      *
      * @param \AppBundle\Entity\Organ\Organ $organ
+     *
      * @return Text
      */
     public function setOrgan(\AppBundle\Entity\Organ\Organ $organ)
@@ -324,9 +331,9 @@ class Text
     }
 
     /**
-     * Get organ
+     * Get organ.
      *
-     * @return \AppBundle\Entity\Organ\Organ 
+     * @return \AppBundle\Entity\Organ\Organ
      */
     public function getOrgan()
     {
@@ -334,9 +341,10 @@ class Text
     }
 
     /**
-     * Add adherentVotes
+     * Add adherentVotes.
      *
      * @param \AppBundle\Entity\Vote\IndividualTextVote $adherentVotes
+     *
      * @return Text
      */
     public function addAdherentVote(\AppBundle\Entity\Vote\IndividualTextVote $adherentVotes)
@@ -347,7 +355,7 @@ class Text
     }
 
     /**
-     * Remove adherentVotes
+     * Remove adherentVotes.
      *
      * @param \AppBundle\Entity\Vote\IndividualTextVote $adherentVotes
      */
@@ -357,9 +365,9 @@ class Text
     }
 
     /**
-     * Get adherentVotes
+     * Get adherentVotes.
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getAdherentVotes()
     {
@@ -367,9 +375,10 @@ class Text
     }
 
     /**
-     * Set rawContent
+     * Set rawContent.
      *
      * @param string $rawContent
+     *
      * @return Text
      */
     public function setRawContent($rawContent)
@@ -380,9 +389,9 @@ class Text
     }
 
     /**
-     * Get rawContent
+     * Get rawContent.
      *
-     * @return string 
+     * @return string
      */
     public function getRawContent()
     {
@@ -390,9 +399,10 @@ class Text
     }
 
     /**
-     * Add individualVoteAgregations
+     * Add individualVoteAgregations.
      *
      * @param \AppBundle\Entity\Vote\IndividualTextVoteAgregation $individualVoteAgregations
+     *
      * @return Text
      */
     public function addIndividualVoteAgregation(\AppBundle\Entity\Vote\IndividualTextVoteAgregation $individualVoteAgregations)
@@ -403,7 +413,7 @@ class Text
     }
 
     /**
-     * Remove individualVoteAgregations
+     * Remove individualVoteAgregations.
      *
      * @param \AppBundle\Entity\Vote\IndividualTextVoteAgregation $individualVoteAgregations
      */
@@ -413,9 +423,9 @@ class Text
     }
 
     /**
-     * Get individualVoteAgregations
+     * Get individualVoteAgregations.
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getIndividualVoteAgregations()
     {

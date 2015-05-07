@@ -5,7 +5,8 @@ namespace AppBundle;
 use AppBundle\Entity\Text\TextGroup;
 use AppBundle\Entity\Organ\Organ;
 
-class TextGroupOrganPair {
+class TextGroupOrganPair
+{
     private $textGroup;
     private $organ;
 
@@ -23,7 +24,4 @@ class TextGroupOrganPair {
     {
         return $this->organ;
     }
-
-
 }
-?>

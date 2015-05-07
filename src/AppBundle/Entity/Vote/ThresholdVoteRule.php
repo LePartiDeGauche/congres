@@ -5,7 +5,7 @@ namespace AppBundle\Entity\Vote;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * ThresholdVoteRule
+ * ThresholdVoteRule.
  *
  * @ORM\Table(name="threshold_voterule")
  * @ORM\Entity
@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 class ThresholdVoteRule extends VoteRule
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -22,17 +22,16 @@ class ThresholdVoteRule extends VoteRule
     protected $id;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="threshold", type="integer")
      */
     protected $threshold;
 
-
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer 
+     * @return int
      */
     public function getId()
     {
@@ -40,9 +39,10 @@ class ThresholdVoteRule extends VoteRule
     }
 
     /**
-     * Set threshold
+     * Set threshold.
      *
-     * @param integer $threshold
+     * @param int $threshold
+     *
      * @return ThresholdVoteRule
      */
     public function setThreshold($threshold)
@@ -53,9 +53,9 @@ class ThresholdVoteRule extends VoteRule
     }
 
     /**
-     * Get threshold
+     * Get threshold.
      *
-     * @return integer 
+     * @return int
      */
     public function getThreshold()
     {

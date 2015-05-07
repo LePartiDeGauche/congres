@@ -5,10 +5,9 @@ namespace AppBundle\Entity\Congres;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * GeneralContribution
+ * GeneralContribution.
  *
  *  @ORM\Entity(repositoryClass="AppBundle\Entity\Congres\GeneralContributionRepository")
- *
  */
 class GeneralContribution extends Contribution
 {
@@ -16,16 +15,15 @@ class GeneralContribution extends Contribution
      * @var \Doctrine\Common\Collections\Collection
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\User")
      * @ORM\JoinTable(
-     *     name="general_votes",
-     *     joinColumns={@ORM\JoinColumn(name="contribution_id", referencedColumnName="id")},
-     *     inverseJoinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id", unique=true)}
-     * )
-     *
+     *                                              name="general_votes",
+     *                                              joinColumns={@ORM\JoinColumn(name="contribution_id", referencedColumnName="id")},
+     *                                              inverseJoinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id", unique=true)}
+     *                                              )
      */
     protected $votes;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct(\AppBundle\Entity\User $user = null)
     {
@@ -34,9 +32,10 @@ class GeneralContribution extends Contribution
     }
 
     /**
-     * Add votes
+     * Add votes.
      *
-     * @param  \AppBundle\Entity\User $votes
+     * @param \AppBundle\Entity\User $votes
+     *
      * @return ThematicContribution
      */
     public function addVote(\AppBundle\Entity\User $votes)
@@ -47,7 +46,7 @@ class GeneralContribution extends Contribution
     }
 
     /**
-     * Remove votes
+     * Remove votes.
      *
      * @param \AppBundle\Entity\User $votes
      */
@@ -57,7 +56,7 @@ class GeneralContribution extends Contribution
     }
 
     /**
-     * Get votes
+     * Get votes.
      *
      * @return \Doctrine\Common\Collections\Collection
      */

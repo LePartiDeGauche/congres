@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity
  * @ORM\Table(name="users")
  */
-class User extends BaseUser 
+class User extends BaseUser
 {
     /**
      * @ORM\Id
@@ -20,6 +20,7 @@ class User extends BaseUser
 
     /**
      * The adherent profile associated to the user.
+     *
      * @var Adherent
      *
      * @ORM\OneToOne(targetEntity="AppBundle\Entity\Adherent", inversedBy="user")
@@ -27,7 +28,7 @@ class User extends BaseUser
     protected $profile;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
@@ -39,9 +40,9 @@ class User extends BaseUser
     }
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -50,6 +51,7 @@ class User extends BaseUser
 
     /**
      * Set email, and set username at same time.
+     *
      * @param string $email Email
      */
     public function setEmail($email)
@@ -65,6 +67,7 @@ class User extends BaseUser
 
     /**
      * Set profile, and set email at the same time.
+     *
      * @param Adherent $profile Profile
      */
     public function setProfile(Adherent $profile)
@@ -74,7 +77,7 @@ class User extends BaseUser
     }
 
     /**
-     * Get profile
+     * Get profile.
      *
      * @return \AppBundle\Entity\Adherent
      */
@@ -82,5 +85,4 @@ class User extends BaseUser
     {
         return $this->profile;
     }
-
 }
