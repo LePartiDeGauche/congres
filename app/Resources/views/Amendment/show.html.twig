@@ -1,0 +1,40 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Text\Amendment</h1>
+
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Startline</th>
+                <td>{{ entity.startLine }}</td>
+            </tr>
+            <tr>
+                <th>Amendmenttype</th>
+                <td>{{ entity.amendmentType }}</td>
+            </tr>
+            <tr>
+                <th>Amendmentcontent</th>
+                <td>{{ entity.amendmentContent }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('text_amendment') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('text_amendment_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}
