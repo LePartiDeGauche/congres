@@ -421,4 +421,9 @@ class Text
     {
         return $this->individualVoteAgregations;
     }
+
+    public function __toString()
+    {
+        return $this->title;
+    }
 }
