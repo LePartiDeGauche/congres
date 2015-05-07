@@ -8,7 +8,6 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 use AppBundle\Entity\Vote\IndividualTextVoteAgregation;
-
 use AppBundle\Entity\Vote\ThresholdVoteRule;
 
 class VoteRuleAdmin extends Admin
@@ -53,7 +52,7 @@ class VoteRuleAdmin extends Admin
                 'show' => array(),
                 'edit' => array(),
                 'delete' => array(),
-            )
+            ),
         ))
         ;
     }
@@ -103,7 +102,7 @@ class VoteRuleAdmin extends Admin
         $em = $this->getModelManager()->getEntityManager($this->getClass());
 
         // FIXME add existing user votes to agregator!
-        foreach ( $textGroup->getTexts() as $text) {
+        foreach ($textGroup->getTexts() as $text) {
             $itva = new IndividualTextVoteAgregation($text, $textGroup, $voteRule);
             $text->addIndividualVoteAgregation($itva);
             $em->persist($itva);
@@ -112,5 +111,4 @@ class VoteRuleAdmin extends Admin
 
         $em->flush();
     }
-
 }

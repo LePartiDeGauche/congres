@@ -16,7 +16,7 @@ class TextType extends AbstractType
     {
         $builder
             ->add('title', null, array('label' => 'Titre'))
-            ->add('rawContent', null, array('label' => 'Contenu', 'required' => true,))
+            ->add('rawContent', null, array('label' => 'Contenu', 'required' => true))
         ;
     }
 
@@ -26,7 +26,7 @@ class TextType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Text\Text'
+            'data_class' => 'AppBundle\Entity\Text\Text',
         ));
     }
 

@@ -5,22 +5,21 @@ namespace AppBundle\Entity\Text;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * TextGroup
+ * TextGroup.
  *
  * @ORM\Table(name="text_group")
  * @ORM\Entity(repositoryClass="AppBundle\Entity\Text\TextGroupRepository")
  */
 class TextGroup
 {
+    const VOTETYPE_COLLECTIVE = 'collective';
+    const VOTETYPE_INDIVIDUAL = 'individual';
 
-    const VOTETYPE_COLLECTIVE = "collective";
-    const VOTETYPE_INDIVIDUAL = "individual";
-
-    const VOTEMODALITY_VALIDATION = "validation";
-    const VOTEMODALITY_REFERENDUM = "referendum";
+    const VOTEMODALITY_VALIDATION = 'validation';
+    const VOTEMODALITY_REFERENDUM = 'referendum';
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -88,14 +87,14 @@ class TextGroup
 
     /**
      * @var string
-     * Collective vote or individual
+     *             Collective vote or individual
      * @ORM\Column(name="vote_type", type="string", length=255)
      */
     private $voteType;
 
     /**
      * @var string
-     * validation vote | referundum
+     *             validation vote | referundum
      * @ORM\Column(name="vote_modality", type="string", length=255)
      */
     private $voteModality;
@@ -122,25 +121,23 @@ class TextGroup
      */
     private $voteRules;
 
-    /**
-     * @var integer
-     *
-     * @ORM\Column( type="integer")
-     */
+/**
+ * @var int
+ *
+ * @ORM\Column( type="integer")
+ */
     // we could replace by rules based on responsability
     private $maxVotesByAdherent;
 
     /**
-     * @var boolean
-     *
-      @ORM\Column(type="boolean")
+     * @var bool
      */
     private $isVisible;
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -148,9 +145,10 @@ class TextGroup
     }
 
     /**
-     * Set name
+     * Set name.
      *
-     * @param  string    $name
+     * @param string $name
+     *
      * @return TextGroup
      */
     public function setName($name)
@@ -161,7 +159,7 @@ class TextGroup
     }
 
     /**
-     * Get name
+     * Get name.
      *
      * @return string
      */
@@ -171,9 +169,10 @@ class TextGroup
     }
 
     /**
-     * Set description
+     * Set description.
      *
-     * @param  string    $description
+     * @param string $description
+     *
      * @return TextGroup
      */
     public function setDescription($description)
@@ -184,7 +183,7 @@ class TextGroup
     }
 
     /**
-     * Get description
+     * Get description.
      *
      * @return string
      */
@@ -194,9 +193,10 @@ class TextGroup
     }
 
     /**
-     * Set texts
+     * Set texts.
      *
-     * @param  \stdClass $texts
+     * @param \stdClass $texts
+     *
      * @return TextGroup
      */
     public function setTexts($texts)
@@ -207,7 +207,7 @@ class TextGroup
     }
 
     /**
-     * Get texts
+     * Get texts.
      *
      * @return \stdClass
      */
@@ -217,9 +217,10 @@ class TextGroup
     }
 
     /**
-     * Set submissionOpening
+     * Set submissionOpening.
      *
-     * @param  \DateTime $submissionOpening
+     * @param \DateTime $submissionOpening
+     *
      * @return TextGroup
      */
     public function setSubmissionOpening($submissionOpening)
@@ -230,7 +231,7 @@ class TextGroup
     }
 
     /**
-     * Get submissionOpening
+     * Get submissionOpening.
      *
      * @return \DateTime
      */
@@ -240,9 +241,10 @@ class TextGroup
     }
 
     /**
-     * Set submissionClosing
+     * Set submissionClosing.
      *
-     * @param  \DateTime $submissionClosing
+     * @param \DateTime $submissionClosing
+     *
      * @return TextGroup
      */
     public function setSubmissionClosing($submissionClosing)
@@ -253,7 +255,7 @@ class TextGroup
     }
 
     /**
-     * Get submissionClosing
+     * Get submissionClosing.
      *
      * @return \DateTime
      */
@@ -263,9 +265,10 @@ class TextGroup
     }
 
     /**
-     * Set voteOpening
+     * Set voteOpening.
      *
-     * @param  \DateTime $voteOpening
+     * @param \DateTime $voteOpening
+     *
      * @return TextGroup
      */
     public function setVoteOpening($voteOpening)
@@ -276,7 +279,7 @@ class TextGroup
     }
 
     /**
-     * Get voteOpening
+     * Get voteOpening.
      *
      * @return \DateTime
      */
@@ -286,9 +289,10 @@ class TextGroup
     }
 
     /**
-     * Set voteClosing
+     * Set voteClosing.
      *
-     * @param  \DateTime $voteClosing
+     * @param \DateTime $voteClosing
+     *
      * @return TextGroup
      */
     public function setVoteClosing($voteClosing)
@@ -299,7 +303,7 @@ class TextGroup
     }
 
     /**
-     * Get voteClosing
+     * Get voteClosing.
      *
      * @return \DateTime
      */
@@ -309,9 +313,10 @@ class TextGroup
     }
 
     /**
-     * Set author
+     * Set author.
      *
-     * @param  \stdClass $author
+     * @param \stdClass $author
+     *
      * @return TextGroup
      */
     public function setAuthor($author)
@@ -322,7 +327,7 @@ class TextGroup
     }
 
     /**
-     * Get author
+     * Get author.
      *
      * @return \stdClass
      */
@@ -332,9 +337,10 @@ class TextGroup
     }
 
     /**
-     * Set organTypeVoters
+     * Set organTypeVoters.
      *
-     * @param  \stdClass $organTypeVoters
+     * @param \stdClass $organTypeVoters
+     *
      * @return TextGroup
      */
     public function setOrganTypeVoters($organTypeVoters)
@@ -345,7 +351,7 @@ class TextGroup
     }
 
     /**
-     * Get organTypeVoters
+     * Get organTypeVoters.
      *
      * @return \stdClass
      */
@@ -355,9 +361,10 @@ class TextGroup
     }
 
     /**
-     * Set voteRules
+     * Set voteRules.
      *
-     * @param  \stdClass $voteRules
+     * @param \stdClass $voteRules
+     *
      * @return TextGroup
      */
     public function setVoteRules($voteRules)
@@ -368,7 +375,7 @@ class TextGroup
     }
 
     /**
-     * Get voteRules
+     * Get voteRules.
      *
      * @return \stdClass
      */
@@ -378,9 +385,10 @@ class TextGroup
     }
 
     /**
-     * Set responsabilityVoters
+     * Set responsabilityVoters.
      *
-     * @param  \stdClass $responsabilityVoters
+     * @param \stdClass $responsabilityVoters
+     *
      * @return TextGroup
      */
     public function setResponsabilityVoters($responsabilityVoters)
@@ -391,7 +399,7 @@ class TextGroup
     }
 
     /**
-     * Get responsabilityVoters
+     * Get responsabilityVoters.
      *
      * @return \stdClass
      */
@@ -400,7 +408,7 @@ class TextGroup
         return $this->responsabilityVoters;
     }
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
@@ -416,9 +424,10 @@ class TextGroup
     }
 
     /**
-     * Set voteType
+     * Set voteType.
      *
-     * @param  string    $voteType
+     * @param string $voteType
+     *
      * @return TextGroup
      */
     public function setVoteType($voteType)
@@ -435,7 +444,7 @@ class TextGroup
     }
 
     /**
-     * Get voteType
+     * Get voteType.
      *
      * @return string
      */
@@ -445,9 +454,10 @@ class TextGroup
     }
 
     /**
-     * Set voteModality
+     * Set voteModality.
      *
-     * @param  string    $voteModality
+     * @param string $voteModality
+     *
      * @return TextGroup
      */
     public function setVoteModality($voteModality)
@@ -464,7 +474,7 @@ class TextGroup
     }
 
     /**
-     * Get voteModality
+     * Get voteModality.
      *
      * @return string
      */
@@ -474,9 +484,10 @@ class TextGroup
     }
 
     /**
-     * Add texts
+     * Add texts.
      *
-     * @param  \AppBundle\Entity\Text\Text $texts
+     * @param \AppBundle\Entity\Text\Text $texts
+     *
      * @return TextGroup
      */
     public function addText(\AppBundle\Entity\Text\Text $texts)
@@ -487,7 +498,7 @@ class TextGroup
     }
 
     /**
-     * Remove texts
+     * Remove texts.
      *
      * @param \AppBundle\Entity\Text\Text $texts
      */
@@ -497,9 +508,10 @@ class TextGroup
     }
 
     /**
-     * Add organVoteRules
+     * Add organVoteRules.
      *
-     * @param  \AppBundle\Entity\Vote\OrganVoteRule $organVoteRules
+     * @param \AppBundle\Entity\Vote\OrganVoteRule $organVoteRules
+     *
      * @return TextGroup
      */
     public function addOrganVoteRule(\AppBundle\Entity\Vote\OrganVoteRule $organVoteRules)
@@ -510,7 +522,7 @@ class TextGroup
     }
 
     /**
-     * Remove organVoteRules
+     * Remove organVoteRules.
      *
      * @param \AppBundle\Entity\Vote\OrganVoteRule $organVoteRules
      */
@@ -520,7 +532,7 @@ class TextGroup
     }
 
     /**
-     * Get organVoteRules
+     * Get organVoteRules.
      *
      * @return \Doctrine\Common\Collections\Collection
      */
@@ -530,9 +542,10 @@ class TextGroup
     }
 
     /**
-     * Add voteRules
+     * Add voteRules.
      *
-     * @param  \AppBundle\Entity\Vote\VoteRule $voteRules
+     * @param \AppBundle\Entity\Vote\VoteRule $voteRules
+     *
      * @return TextGroup
      */
     public function addVoteRule(\AppBundle\Entity\Vote\VoteRule $voteRules)
@@ -543,7 +556,7 @@ class TextGroup
     }
 
     /**
-     * Remove voteRules
+     * Remove voteRules.
      *
      * @param \AppBundle\Entity\Vote\VoteRule $voteRules
      */
@@ -553,9 +566,10 @@ class TextGroup
     }
 
     /**
-     * Set maxVotesByAdherent
+     * Set maxVotesByAdherent.
      *
-     * @param  integer   $maxVotesByAdherent
+     * @param int $maxVotesByAdherent
+     *
      * @return TextGroup
      */
     public function setMaxVotesByAdherent($maxVotesByAdherent)
@@ -566,9 +580,9 @@ class TextGroup
     }
 
     /**
-     * Get maxVotesByAdherent
+     * Get maxVotesByAdherent.
      *
-     * @return integer
+     * @return int
      */
     public function getMaxVotesByAdherent()
     {
@@ -576,9 +590,10 @@ class TextGroup
     }
 
     /**
-     * Set isVisible
+     * Set isVisible.
      *
-     * @param  boolean   $isVisible
+     * @param bool $isVisible
+     *
      * @return TextGroup
      */
     public function setIsVisible($isVisible)
@@ -589,9 +604,9 @@ class TextGroup
     }
 
     /**
-     * Get isVisible
+     * Get isVisible.
      *
-     * @return boolean
+     * @return bool
      */
     public function getIsVisible()
     {

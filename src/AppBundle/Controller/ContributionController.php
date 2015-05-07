@@ -83,11 +83,11 @@ class ContributionController extends Controller
         switch (get_class($contrib)) {
         case 'AppBundle\Entity\Congres\GeneralContribution':
             $type = 'general';
-            $repo  = $this->getDoctrine()->getRepository('AppBundle:Congres\GeneralContribution');
+            $repo = $this->getDoctrine()->getRepository('AppBundle:Congres\GeneralContribution');
             break;
         case 'AppBundle\Entity\Congres\ThematicContribution':
             $type = 'thematic';
-            $repo  = $this->getDoctrine()->getRepository('AppBundle:Congres\ThematicContribution');
+            $repo = $this->getDoctrine()->getRepository('AppBundle:Congres\ThematicContribution');
             break;
         default:
             return $this->createNotFoundException();
@@ -195,7 +195,7 @@ class ContributionController extends Controller
         return $this->render('contribution/vote.html.twig', array(
             'contrib' => $contrib,
             'form' => $form->createView(),
-            'type' => $type
+            'type' => $type,
         ));
     }
 

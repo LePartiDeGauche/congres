@@ -14,5 +14,4 @@ class AdherentController extends Controller
     {
         return $this->render('adherent/profile.html.twig');
     }
-
 }

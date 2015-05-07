@@ -5,7 +5,7 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Access
+ * Access.
  *
  * @ORM\Table(name="access")
  * @ORM\Entity
@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Access
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -49,9 +49,9 @@ class Access
     }
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -59,9 +59,10 @@ class Access
     }
 
     /**
-     * Set begin
+     * Set begin.
      *
-     * @param  \DateTime $begin
+     * @param \DateTime $begin
+     *
      * @return Access
      */
     public function setBegin($begin)
@@ -72,7 +73,7 @@ class Access
     }
 
     /**
-     * Get begin
+     * Get begin.
      *
      * @return \DateTime
      */
@@ -82,9 +83,10 @@ class Access
     }
 
     /**
-     * Set end
+     * Set end.
      *
-     * @param  \DateTime $end
+     * @param \DateTime $end
+     *
      * @return Access
      */
     public function setEnd($end)
@@ -95,7 +97,7 @@ class Access
     }
 
     /**
-     * Get end
+     * Get end.
      *
      * @return \DateTime
      */
@@ -105,9 +107,10 @@ class Access
     }
 
     /**
-     * Set route
+     * Set route.
      *
-     * @param  string $route
+     * @param string $route
+     *
      * @return Access
      */
     public function setRoute($route)
@@ -118,7 +121,7 @@ class Access
     }
 
     /**
-     * Get route
+     * Get route.
      *
      * @return string
      */

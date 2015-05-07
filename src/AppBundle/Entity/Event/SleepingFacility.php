@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use AppBundle\Entity\Address;
 
 /**
- * SleepingFacility
+ * SleepingFacility.
  *
  * @ORM\Table(name="sleeping_facility")
  * @ORM\Entity
@@ -14,7 +14,7 @@ use AppBundle\Entity\Address;
 class SleepingFacility
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -68,9 +68,9 @@ class SleepingFacility
     private $positionDescription;
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -78,9 +78,10 @@ class SleepingFacility
     }
 
     /**
-     * Set sleepingSite
+     * Set sleepingSite.
      *
-     * @param  \stdClass        $sleepingSite
+     * @param \stdClass $sleepingSite
+     *
      * @return SleepingFacility
      */
     public function setSleepingSite($sleepingSite)
@@ -91,7 +92,7 @@ class SleepingFacility
     }
 
     /**
-     * Get sleepingSite
+     * Get sleepingSite.
      *
      * @return \stdClass
      */
@@ -101,9 +102,10 @@ class SleepingFacility
     }
 
     /**
-     * Set name
+     * Set name.
      *
-     * @param  string           $name
+     * @param string $name
+     *
      * @return SleepingFacility
      */
     public function setName($name)
@@ -114,7 +116,7 @@ class SleepingFacility
     }
 
     /**
-     * Get name
+     * Get name.
      *
      * @return string
      */
@@ -124,9 +126,10 @@ class SleepingFacility
     }
 
     /**
-     * Set description
+     * Set description.
      *
-     * @param  string           $description
+     * @param string $description
+     *
      * @return SleepingFacility
      */
     public function setDescription($description)
@@ -137,7 +140,7 @@ class SleepingFacility
     }
 
     /**
-     * Get description
+     * Get description.
      *
      * @return string
      */
@@ -147,9 +150,10 @@ class SleepingFacility
     }
 
     /**
-     * Set address
+     * Set address.
      *
-     * @param  string           $address
+     * @param string $address
+     *
      * @return SleepingFacility
      */
     public function setAddress($address)
@@ -160,7 +164,7 @@ class SleepingFacility
     }
 
     /**
-     * Get address
+     * Get address.
      *
      * @return string
      */
@@ -170,9 +174,10 @@ class SleepingFacility
     }
 
     /**
-     * Set positionDescription
+     * Set positionDescription.
      *
-     * @param  string           $positionDescription
+     * @param string $positionDescription
+     *
      * @return SleepingFacility
      */
     public function setPositionDescription($positionDescription)
@@ -183,7 +188,7 @@ class SleepingFacility
     }
 
     /**
-     * Get positionDescription
+     * Get positionDescription.
      *
      * @return string
      */
@@ -192,7 +197,7 @@ class SleepingFacility
         return $this->positionDescription;
     }
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
@@ -200,9 +205,10 @@ class SleepingFacility
     }
 
     /**
-     * Set event
+     * Set event.
      *
-     * @param  string           $event
+     * @param string $event
+     *
      * @return SleepingFacility
      */
     public function setEvent($event)
@@ -213,7 +219,7 @@ class SleepingFacility
     }
 
     /**
-     * Get event
+     * Get event.
      *
      * @return string
      */
@@ -223,9 +229,10 @@ class SleepingFacility
     }
 
     /**
-     * Add sleepingSites
+     * Add sleepingSites.
      *
-     * @param  \AppBundle\Entity\Event\SleepingSite $sleepingSites
+     * @param \AppBundle\Entity\Event\SleepingSite $sleepingSites
+     *
      * @return SleepingFacility
      */
     public function addSleepingSite(\AppBundle\Entity\Event\SleepingSite $sleepingSites)
@@ -236,7 +243,7 @@ class SleepingFacility
     }
 
     /**
-     * Remove sleepingSites
+     * Remove sleepingSites.
      *
      * @param \AppBundle\Entity\Event\SleepingSite $sleepingSites
      */
@@ -246,7 +253,7 @@ class SleepingFacility
     }
 
     /**
-     * Get sleepingSites
+     * Get sleepingSites.
      *
      * @return \Doctrine\Common\Collections\Collection
      */

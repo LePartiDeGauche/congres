@@ -17,13 +17,13 @@ class EventAdherentRegistrationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('needHosting', NULL, array('label' => 'J\'ai besoin d\'un hébergement militant', 'required' => false))
+            ->add('needHosting', null, array('label' => 'J\'ai besoin d\'un hébergement militant', 'required' => false))
             ->add('comment')
             ->add('paymentMode', 'choice',
                 array(
                     'choices' => array(
                         'online' => 'Carte bleue ( Vous serez redirigé vers la page de paiement à la validation de l\'inscription )',
-                        'onsite' => 'Par chèque ( libellé à l\'ordre du Parti de Gauche et envoyé au siège du PG, 20-22 rue Doudeauville, 75018 PARIS, en précisant sur l\'enveloppe "CN avril 2015" )'),
+                        'onsite' => 'Par chèque ( libellé à l\'ordre du Parti de Gauche et envoyé au siège du PG, 20-22 rue Doudeauville, 75018 PARIS, en précisant sur l\'enveloppe "CN avril 2015" )', ),
                     'expanded' => true,
                     'label' => 'Mode de paiement',
                 ))
@@ -40,11 +40,11 @@ class EventAdherentRegistrationType extends AbstractType
                 $mealsOptions = array(
                     'class' => 'AppBundle\Entity\Event\EventMeal',
                     'query_builder' => function (\AppBundle\Entity\Event\EventMealRepository $er) use ($curEvent) {
-                        return $er->findByEventQueryBuider( $curEvent );
+                        return $er->findByEventQueryBuider($curEvent);
                     },
                     'expanded' => true,
                     'multiple' => true,
-                    'label' => 'Repas'
+                    'label' => 'Repas',
                 );
 
                 $form->add('meals', 'entity', $mealsOptions);
@@ -52,20 +52,20 @@ class EventAdherentRegistrationType extends AbstractType
                 $costOptions = array(
                     'class' => 'AppBundle\Entity\Event\EventCost',
                     'query_builder' => function (\AppBundle\Entity\Event\EventCostRepository $er) use ($curEvent) {
-                        return $er->findByEventQueryBuider( $curEvent );
+                        return $er->findByEventQueryBuider($curEvent);
                     },
                     'expanded' => true,
                     'multiple' => false,
-                    'label' => 'Tranche de revenu :'
+                    'label' => 'Tranche de revenu :',
                 );
 
                 $form->add('cost', 'entity', $costOptions);
 
-                if ($curAdherent != NULL) {
+                if ($curAdherent != null) {
                     $roleOptions = array(
                         'class' => 'AppBundle\Entity\Event\EventRole',
                         'query_builder' => function (\AppBundle\Entity\Event\EventRoleRepository $er) use ($curEvent, $curAdherent) {
-                            return $er->findByEventAndAdherentQueryBuider( $curEvent, $curAdherent );
+                            return $er->findByEventAndAdherentQueryBuider($curEvent, $curAdherent);
                         },
                         'expanded' => false,
                         'multiple' => false,
@@ -73,9 +73,8 @@ class EventAdherentRegistrationType extends AbstractType
                     );
                     $form->add('role', 'entity', $roleOptions);
                 }
-
             } else {
-                throw new \InvalidArgumentException("Invalid Form data expected EventAdherentRegistration, got " . $data->getClassName());
+                throw new \InvalidArgumentException('Invalid Form data expected EventAdherentRegistration, got '.$data->getClassName());
             }
         });
     }
@@ -86,7 +85,7 @@ class EventAdherentRegistrationType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Event\EventAdherentRegistration'
+            'data_class' => 'AppBundle\Entity\Event\EventAdherentRegistration',
         ));
     }
 

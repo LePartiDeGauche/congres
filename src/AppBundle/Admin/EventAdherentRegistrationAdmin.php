@@ -27,8 +27,8 @@ class EventAdherentRegistrationAdmin extends Admin
     // https://github.com/sonata-project/SonataAdminBundle/issues/2630
     protected $yesnoChoice = array(
 
-        true => "Oui",
-        false => "Non"
+        true => 'Oui',
+        false => 'Non',
     );
     /**
      * @param DatagridMapper $datagridMapper
@@ -37,23 +37,23 @@ class EventAdherentRegistrationAdmin extends Admin
     {
         // FIXME : add fields
         $datagridMapper
-            ->add('adherent.firstname',null,array('label' => 'Prénom'))
+            ->add('adherent.firstname', null, array('label' => 'Prénom'))
             ->add('adherent.lastname', null, array('label' => 'Nom de Famille'))
             ->add('adherent.email', null, array('label' => 'Courriel'))
             ->add('adherent.departement', null, array('label' => 'Département'))
-            ->add('adherent.responsabilities.responsability',null , array('label' => 'Responsabilité', 'multiple' => true))
+            ->add('adherent.responsabilities.responsability', null, array('label' => 'Responsabilité', 'multiple' => true))
             ->add('role', null, array('label' => 'Inscrit en tant que', 'multiple' => true))
             ->add('needHosting', null, array('label' => 'Hebergement'))
             ->add('voteStatus', null, array('label' => 'Droit de vote'))
             //->add('meals') // TODO filter
             ->add('paymentMode', null,
-                array('label' => 'Modalité de paiement' ),
+                array('label' => 'Modalité de paiement'),
                 'choice', array(
                     'choices' => $this->paymentModeChoice,
                 ))
                 ->add('registrationDate', null, array('label' => 'Date d\'inscription'))
-                ->add('attendance', null, array('label' => 'Présence'),'choice', array(
-                    'choices' => $this->attendanceChoice))
+                ->add('attendance', null, array('label' => 'Présence'), 'choice', array(
+                    'choices' => $this->attendanceChoice, ))
                     ->add('meals', null, array('label' => 'Repas'))
                     ;
     }
@@ -69,14 +69,14 @@ class EventAdherentRegistrationAdmin extends Admin
                 'actions' => array(
                     'show' => array(),
                     'edit' => array(),
-                    'delete' => array()
-                )
+                    'delete' => array(),
+                ),
             ))
-            ->add('adherent.firstname', NULL, array('label' => 'Prénom'))
-            ->add('adherent.lastname', NULL, array('label' => 'Nom'))
+            ->add('adherent.firstname', null, array('label' => 'Prénom'))
+            ->add('adherent.lastname', null, array('label' => 'Nom'))
             //->add('adherent.email', NULL, array('label' => 'Courriel'))
-            ->add('adherent.departement', NULL, array('label' => 'Dpt'))
-            ->add('adherent.status',null, array('label' => 'Statut'))
+            ->add('adherent.departement', null, array('label' => 'Dpt'))
+            ->add('adherent.status', null, array('label' => 'Statut'))
             ->add('adherent.responsabilities', 'sonata_type_collection', array('associated_property' => 'responsability', 'label' => 'Responsabilités au sein du parti'))
             ->add('role', null, array('label' => 'Inscrit en tant que'))
             //->add('registrationDate', null, array('label' => 'Date d\'inscription'))
@@ -86,9 +86,9 @@ class EventAdherentRegistrationAdmin extends Admin
             ->add('paymentMode', 'choice', array(
                 'label' => 'Type de Paiement',
                 'multiple' => false,
-                'choices' => $this->paymentModeChoice
+                'choices' => $this->paymentModeChoice,
             ))
-            ->add('needHosting', NULL, array('label' => 'Hebergement'))
+            ->add('needHosting', null, array('label' => 'Hebergement'))
             ->add('voteStatus', null, array('label' => 'Droit de vote'))
             ->add('attendance', 'choice', array(
                 'label' => 'Présence',
@@ -113,19 +113,18 @@ class EventAdherentRegistrationAdmin extends Admin
                     'label' => 'Auteur',
                     'property' => array('firstname', 'lastname', 'email'),
                     'placeholder' => 'Rechercher un nom ou un email',
-                    'callback' => array($this,'adherentCallback'),
-                    'to_string_callback' => array($this,'adherentToStringCallback')));
-
+                    'callback' => array($this, 'adherentCallback'),
+                    'to_string_callback' => array($this, 'adherentToStringCallback'), ));
         } else {
-        $formMapper
-            ->add('adherent.firstname', NULL, array('label' => 'Prénom', 'read_only' => true,))
-            ->add('adherent.lastname', NULL, array('label' => 'Nom', 'read_only' => true,))
+            $formMapper
+            ->add('adherent.firstname', null, array('label' => 'Prénom', 'read_only' => true))
+            ->add('adherent.lastname', null, array('label' => 'Nom', 'read_only' => true))
             ->add('adherent.responsabilities', 'sonata_type_collection',
                 array(
                     'label' => 'Responsabilités au sein du parti',
                     'type_options' => array(
                         'delete' => false,
-                        'btn_add' => false
+                        'btn_add' => false,
                     ),
                     'required' => false,
                     'read_only' => true,
@@ -135,16 +134,15 @@ class EventAdherentRegistrationAdmin extends Admin
                     'inline' => 'table',
                     'sortable' => 'position',
                 ));
-
         }
         $formMapper
             ->add('adherent.departement', null, array('label' => 'Département d\'adhesion'))
-            ->add('registrationDate',null, array('read_only' => true,'disabled'  => true,))
+            ->add('registrationDate', null, array('read_only' => true, 'disabled' => true))
             // FIXME: filter role of this event !
             ->add('role') //, null, array('read_only' => !$isCreate, 'disabled' => !$isCreate))
             ->add('needHosting', 'choice', array('label' => 'necessite un hebergement', 'choices' => $this->yesnoChoice))
             // FIXME: filter cost of this event !
-            ->add('cost', NULL, array('label' => 'Tarif'))
+            ->add('cost', null, array('label' => 'Tarif'))
             ->add('paymentMode', 'choice', array(
                 'label' => 'Type de Paiement',
                 'multiple' => false,
@@ -156,8 +154,8 @@ class EventAdherentRegistrationAdmin extends Admin
             ->add('payments', 'sonata_type_collection', array(
                 'label' => 'Paiements',
                 'type_options' => array(
-                    'delete' => false
-                )
+                    'delete' => false,
+                ),
             ), array(
                 'edit' => 'inline',
                 'inline' => 'table',
@@ -170,7 +168,7 @@ class EventAdherentRegistrationAdmin extends Admin
             ->add('voteStatus', 'choice', array('label' => 'Droit de vote', 'choices' => $this->yesnoChoice))
             ->add('attendance', 'choice', array(
                 'label' => 'Présence',
-                'choices' => $this->attendanceChoice
+                'choices' => $this->attendanceChoice,
             ))
 
             ->add('comment')
@@ -183,21 +181,21 @@ class EventAdherentRegistrationAdmin extends Admin
     protected function configureShowFields(ShowMapper $showMapper)
     {
         $showMapper
-            ->add('adherent.firstname', NULL, array('label' => 'Prénom', 'read_only' => true,))
-            ->add('adherent.lastname', NULL, array('label' => 'Nom', 'read_only' => true,))
-            ->add('adherent.departement', NULL, array('label' => 'Département', 'read_only' => true,))
-            ->add('registrationDate',null, array('read_only' => true,'disabled'  => true,))
-            ->add('role', null, array('read_only' =>true, 'disabled' => true))
+            ->add('adherent.firstname', null, array('label' => 'Prénom', 'read_only' => true))
+            ->add('adherent.lastname', null, array('label' => 'Nom', 'read_only' => true))
+            ->add('adherent.departement', null, array('label' => 'Département', 'read_only' => true))
+            ->add('registrationDate', null, array('read_only' => true, 'disabled' => true))
+            ->add('role', null, array('read_only' => true, 'disabled' => true))
             ->add('needHosting')
-            ->add('cost', NULL, array('label' => 'Tarif'))
+            ->add('cost', null, array('label' => 'Tarif'))
             ->add('paymentMode', 'choice', array(
                 'label' => 'Type de Paiement',
                 'multiple' => false,
-                'choices' => $this->paymentModeChoice))
+                'choices' => $this->paymentModeChoice, ))
                 ->add('payments', null, array(
                     'label' => 'Paiements',
                     'read_only' => true,
-                    'disabled'  => true,
+                    'disabled' => true,
                 ))
                 ->add('meals', null, array('label' => 'Repas', 'expanded' => true))
                 ->add('comment')
@@ -219,7 +217,7 @@ class EventAdherentRegistrationAdmin extends Admin
     public function getExportFormats()
     {
         return array(
-            'xls'
+            'xls',
         );
     }
 
@@ -261,10 +259,10 @@ class EventAdherentRegistrationAdmin extends Admin
         $datagrid = $admin->getDatagrid();
         $queryBuilder = $datagrid->getQuery();
         $queryBuilder
-            ->andWhere($queryBuilder->getRootAlias() . '.firstname LIKE :value')
-            ->orWhere($queryBuilder->getRootAlias() . '.lastname LIKE :value')
-            ->orWhere($queryBuilder->getRootAlias() . '.email LIKE :value')
-            ->setParameter('value', '%' . $value . '%')
+            ->andWhere($queryBuilder->getRootAlias().'.firstname LIKE :value')
+            ->orWhere($queryBuilder->getRootAlias().'.lastname LIKE :value')
+            ->orWhere($queryBuilder->getRootAlias().'.email LIKE :value')
+            ->setParameter('value', '%'.$value.'%')
             ;
     }
 
@@ -274,7 +272,6 @@ class EventAdherentRegistrationAdmin extends Admin
         $lastname = $user->getLastname();
         $email = $user->getEmail();
 
-        return $firstname . ' ' . $lastname . ' &lt;' . $email . '&gt;';
+        return $firstname.' '.$lastname.' &lt;'.$email.'&gt;';
     }
-
 }

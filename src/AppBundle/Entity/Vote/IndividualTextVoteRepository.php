@@ -11,7 +11,7 @@ class IndividualTextVoteRepository extends EntityRepository
 {
     protected $classname;
 
-    public function getAdherentVoteCountByTextGroup(Adherent $author,TextGroup $textGroup)
+    public function getAdherentVoteCountByTextGroup(Adherent $author, TextGroup $textGroup)
     {
         $voteCount = $this->createQueryBuilder('itv')
             ->select('COUNT(itv)')
@@ -36,7 +36,5 @@ class IndividualTextVoteRepository extends EntityRepository
             ->getQuery()->getSingleScalarResult();
 
         return $voteCount;
-
     }
-
 }

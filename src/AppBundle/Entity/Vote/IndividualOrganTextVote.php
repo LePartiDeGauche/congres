@@ -9,7 +9,7 @@ use AppBundle\Entity\Text\TextGroup;
 
 /**
  * IndividualOrganTextVote
- * People voting in an individual manner through an organ
+ * People voting in an individual manner through an organ.
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="AppBundle\Entity\Vote\IndividualOrganTextVoteRepository")
@@ -17,7 +17,7 @@ use AppBundle\Entity\Text\TextGroup;
 class IndividualOrganTextVote
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -30,7 +30,6 @@ class IndividualOrganTextVote
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Text\TextGroup")
      * @ORM\JoinColumn(nullable=false)
-     *
      */
     protected $textGroup;
 
@@ -40,33 +39,32 @@ class IndividualOrganTextVote
      *  @ORM\OneToMany(targetEntity="IndividualOrganTextVoteAgregation",
      * cascade={"persist", "remove"},
      *  mappedBy="individualOrganTextVote")
-     *
      */
     private $textVoteAgregations;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="voteTotal", type="integer")
      */
     private $voteTotal;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="voteAbstention", type="integer")
      */
     private $voteAbstention;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="voteNotTakingPart", type="integer")
      */
     private $voteNotTakingPart;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="voteBlank", type="integer")
      */
@@ -83,7 +81,6 @@ class IndividualOrganTextVote
      * @var \stdClass
      *
      *  @ORM\ManyToOne(targetEntity="AppBundle\Entity\Organ\Organ", inversedBy="textVoteReports")
-     *
      */
     private $organ;
 
@@ -92,7 +89,6 @@ class IndividualOrganTextVote
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Adherent")
      * @ORM\JoinColumn(nullable=false)
-     *
      */
     private $author;
 
@@ -109,13 +105,12 @@ class IndividualOrganTextVote
         foreach ($textGroup->getTexts() as $text) {
             $this->textVoteAgregations[] = new IndividualOrganTextVoteAgregation($text, $textGroup, $this);
         }
-
     }
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -123,9 +118,10 @@ class IndividualOrganTextVote
     }
 
     /**
-     * Set textVoteAgregations
+     * Set textVoteAgregations.
      *
-     * @param  \stdClass               $textVoteAgregations
+     * @param \stdClass $textVoteAgregations
+     *
      * @return IndividualOrganTextVote
      */
     public function setTextVoteAgregations($textVoteAgregations)
@@ -136,7 +132,7 @@ class IndividualOrganTextVote
     }
 
     /**
-     * Get textVoteAgregations
+     * Get textVoteAgregations.
      *
      * @return \stdClass
      */
@@ -146,9 +142,10 @@ class IndividualOrganTextVote
     }
 
     /**
-     * Set voteAbstention
+     * Set voteAbstention.
      *
-     * @param  integer                 $voteAbstention
+     * @param int $voteAbstention
+     *
      * @return IndividualOrganTextVote
      */
     public function setVoteAbstention($voteAbstention)
@@ -159,9 +156,9 @@ class IndividualOrganTextVote
     }
 
     /**
-     * Get voteAbstention
+     * Get voteAbstention.
      *
-     * @return integer
+     * @return int
      */
     public function getVoteAbstention()
     {
@@ -169,9 +166,10 @@ class IndividualOrganTextVote
     }
 
     /**
-     * Set voteNotTakingPart
+     * Set voteNotTakingPart.
      *
-     * @param  integer                 $voteNotTakingPart
+     * @param int $voteNotTakingPart
+     *
      * @return IndividualOrganTextVote
      */
     public function setVoteNotTakingPart($voteNotTakingPart)
@@ -182,9 +180,9 @@ class IndividualOrganTextVote
     }
 
     /**
-     * Get voteNotTakingPart
+     * Get voteNotTakingPart.
      *
-     * @return integer
+     * @return int
      */
     public function getVoteNotTakingPart()
     {
@@ -192,9 +190,10 @@ class IndividualOrganTextVote
     }
 
     /**
-     * Set organ
+     * Set organ.
      *
-     * @param  \stdClass               $organ
+     * @param \stdClass $organ
+     *
      * @return IndividualOrganTextVote
      */
     public function setOrgan($organ)
@@ -205,7 +204,7 @@ class IndividualOrganTextVote
     }
 
     /**
-     * Get organ
+     * Get organ.
      *
      * @return \stdClass
      */
@@ -215,9 +214,10 @@ class IndividualOrganTextVote
     }
 
     /**
-     * Set author
+     * Set author.
      *
-     * @param  \stdClass               $author
+     * @param \stdClass $author
+     *
      * @return IndividualOrganTextVote
      */
     public function setAuthor($author)
@@ -228,7 +228,7 @@ class IndividualOrganTextVote
     }
 
     /**
-     * Get author
+     * Get author.
      *
      * @return \stdClass
      */
@@ -238,9 +238,10 @@ class IndividualOrganTextVote
     }
 
     /**
-     * Set textGroup
+     * Set textGroup.
      *
-     * @param  \AppBundle\Entity\Text\TextGroup $textGroup
+     * @param \AppBundle\Entity\Text\TextGroup $textGroup
+     *
      * @return IndividualOrganTextVote
      */
     public function setTextGroup(\AppBundle\Entity\Text\TextGroup $textGroup)
@@ -251,7 +252,7 @@ class IndividualOrganTextVote
     }
 
     /**
-     * Get textGroup
+     * Get textGroup.
      *
      * @return \AppBundle\Entity\Text\TextGroup
      */
@@ -261,9 +262,10 @@ class IndividualOrganTextVote
     }
 
     /**
-     * Add textVoteAgregations
+     * Add textVoteAgregations.
      *
-     * @param  \AppBundle\Entity\Vote\IndividualOrganTextVoteAgregation $textVoteAgregations
+     * @param \AppBundle\Entity\Vote\IndividualOrganTextVoteAgregation $textVoteAgregations
+     *
      * @return IndividualOrganTextVote
      */
     public function addTextVoteAgregation(\AppBundle\Entity\Vote\IndividualOrganTextVoteAgregation $textVoteAgregations)
@@ -274,7 +276,7 @@ class IndividualOrganTextVote
     }
 
     /**
-     * Remove textVoteAgregations
+     * Remove textVoteAgregations.
      *
      * @param \AppBundle\Entity\Vote\IndividualOrganTextVoteAgregation $textVoteAgregations
      */
@@ -284,9 +286,10 @@ class IndividualOrganTextVote
     }
 
     /**
-     * Set voteTotal
+     * Set voteTotal.
      *
-     * @param  integer                 $voteTotal
+     * @param int $voteTotal
+     *
      * @return IndividualOrganTextVote
      */
     public function setVoteTotal($voteTotal)
@@ -297,9 +300,9 @@ class IndividualOrganTextVote
     }
 
     /**
-     * Get voteTotal
+     * Get voteTotal.
      *
-     * @return integer
+     * @return int
      */
     public function getVoteTotal()
     {
@@ -307,9 +310,9 @@ class IndividualOrganTextVote
     }
 
     /**
-     * Set voteBlank
+     * Set voteBlank.
      *
-     * @param integer $voteBlank
+     * @param int $voteBlank
      *
      * @return IndividualOrganTextVote
      */
@@ -321,9 +324,9 @@ class IndividualOrganTextVote
     }
 
     /**
-     * Get voteBlank
+     * Get voteBlank.
      *
-     * @return integer
+     * @return int
      */
     public function getVoteBlank()
     {
@@ -331,7 +334,7 @@ class IndividualOrganTextVote
     }
 
     /**
-     * Set meetingDate
+     * Set meetingDate.
      *
      * @param \DateTime $meetingDate
      *
@@ -345,7 +348,7 @@ class IndividualOrganTextVote
     }
 
     /**
-     * Get meetingDate
+     * Get meetingDate.
      *
      * @return \DateTime
      */
@@ -363,6 +366,6 @@ class IndividualOrganTextVote
             $exportVote[] = $val->__tostring();
         }
 
-        return join(' , ', $exportVote);
+        return implode(' , ', $exportVote);
     }
 }

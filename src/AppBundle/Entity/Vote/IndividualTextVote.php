@@ -6,20 +6,19 @@ use Doctrine\ORM\Mapping as ORM;
 use AppBundle\Entity\Text\Text;
 
 /**
- * IndividualTextVote
+ * IndividualTextVote.
  *
  * @ORM\Table(name="individual_text_vote")
  * @ORM\Entity(repositoryClass="AppBundle\Entity\Vote\IndividualTextVoteRepository")
  */
 class IndividualTextVote
 {
-
     const VOTE_FOR = 'in favor';
     const VOTE_AGAINST = 'against';
     const VOTE_ABSTENTION = 'abstention';
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -58,7 +57,7 @@ class IndividualTextVote
     private $text;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct(\AppBundle\Entity\Adherent $author, Text $text)
     {
@@ -68,9 +67,9 @@ class IndividualTextVote
     }
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -78,9 +77,10 @@ class IndividualTextVote
     }
 
     /**
-     * Set date
+     * Set date.
      *
-     * @param  \DateTime          $date
+     * @param \DateTime $date
+     *
      * @return IndividualTextVote
      */
     public function setDate($date)
@@ -91,7 +91,7 @@ class IndividualTextVote
     }
 
     /**
-     * Get date
+     * Get date.
      *
      * @return \DateTime
      */
@@ -101,9 +101,10 @@ class IndividualTextVote
     }
 
     /**
-     * Set vote
+     * Set vote.
      *
-     * @param  string             $vote
+     * @param string $vote
+     *
      * @return IndividualTextVote
      */
     public function setVote($vote)
@@ -111,7 +112,7 @@ class IndividualTextVote
         if (!in_array($vote, array(
             self::VOTE_FOR,
             self::VOTE_AGAINST,
-            self::VOTE_ABSTENTION
+            self::VOTE_ABSTENTION,
         ))) {
             throw new \InvalidArgumentException('Invalid vote');
         }
@@ -122,7 +123,7 @@ class IndividualTextVote
     }
 
     /**
-     * Get vote
+     * Get vote.
      *
      * @return string
      */
@@ -132,9 +133,10 @@ class IndividualTextVote
     }
 
     /**
-     * Set author
+     * Set author.
      *
-     * @param  \stdClass          $author
+     * @param \stdClass $author
+     *
      * @return IndividualTextVote
      */
     public function setAuthor($author)
@@ -145,7 +147,7 @@ class IndividualTextVote
     }
 
     /**
-     * Get author
+     * Get author.
      *
      * @return \stdClass
      */
@@ -155,9 +157,10 @@ class IndividualTextVote
     }
 
     /**
-     * Set text
+     * Set text.
      *
-     * @param  \stdClass          $text
+     * @param \stdClass $text
+     *
      * @return IndividualTextVote
      */
     public function setText($text)
@@ -168,7 +171,7 @@ class IndividualTextVote
     }
 
     /**
-     * Get text
+     * Get text.
      *
      * @return \stdClass
      */

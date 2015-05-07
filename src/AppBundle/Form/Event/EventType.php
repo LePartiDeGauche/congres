@@ -33,7 +33,7 @@ class EventType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Event\Event'
+            'data_class' => 'AppBundle\Entity\Event\Event',
         ));
     }
 

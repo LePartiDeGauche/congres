@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * EventRole
+ * EventRole.
  *
  * @ORM\Table(name="event_role")
  * @ORM\Entity(repositoryClass="AppBundle\Entity\Event\EventRoleRepository")
@@ -14,7 +14,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 class EventRole
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -59,9 +59,9 @@ class EventRole
     private $participants;
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -69,9 +69,10 @@ class EventRole
     }
 
     /**
-     * Set event
+     * Set event.
      *
-     * @param  Event     $event
+     * @param Event $event
+     *
      * @return EventRole
      */
     public function setEvent(Event $event)
@@ -82,7 +83,7 @@ class EventRole
     }
 
     /**
-     * Get event
+     * Get event.
      *
      * @return \stdClass
      */
@@ -92,9 +93,10 @@ class EventRole
     }
 
     /**
-     * Set name
+     * Set name.
      *
-     * @param  string    $name
+     * @param string $name
+     *
      * @return EventRole
      */
     public function setName($name)
@@ -105,7 +107,7 @@ class EventRole
     }
 
     /**
-     * Get name
+     * Get name.
      *
      * @return string
      */
@@ -115,9 +117,10 @@ class EventRole
     }
 
     /**
-     * Set description
+     * Set description.
      *
-     * @param  string    $description
+     * @param string $description
+     *
      * @return EventRole
      */
     public function setDescription($description)
@@ -128,7 +131,7 @@ class EventRole
     }
 
     /**
-     * Get description
+     * Get description.
      *
      * @return string
      */
@@ -138,9 +141,10 @@ class EventRole
     }
 
     /**
-     * Set requieredResponsa
+     * Set requieredResponsa.
      *
-     * @param  \stdClass $requieredResponsabilities
+     * @param \stdClass $requieredResponsabilities
+     *
      * @return EventRole
      */
     public function setRequiredResponsabilities($requieredResponsa)
@@ -151,7 +155,7 @@ class EventRole
     }
 
     /**
-     * Get requiredResponsabilities
+     * Get requiredResponsabilities.
      *
      * @return \stdClass
      */
@@ -171,9 +175,10 @@ class EventRole
     }
 
     /**
-     * Add requiredResponsabilities
+     * Add requiredResponsabilities.
      *
-     * @param  \AppBundle\Entity\Responsability $requiredResponsabilities
+     * @param \AppBundle\Entity\Responsability $requiredResponsabilities
+     *
      * @return EventRole
      */
     public function addRequiredResponsability(\AppBundle\Entity\Responsability $requiredResponsabilities)
@@ -184,7 +189,7 @@ class EventRole
     }
 
     /**
-     * Remove requiredResponsabilities
+     * Remove requiredResponsabilities.
      *
      * @param \AppBundle\Entity\Responsability $requiredResponsabilities
      */
@@ -194,9 +199,10 @@ class EventRole
     }
 
     /**
-     * Add participants
+     * Add participants.
      *
-     * @param  \AppBundle\Entity\Event\EventAdherentRegistration $participants
+     * @param \AppBundle\Entity\Event\EventAdherentRegistration $participants
+     *
      * @return EventRole
      */
     public function addParticipant(\AppBundle\Entity\Event\EventAdherentRegistration $participants)
@@ -207,7 +213,7 @@ class EventRole
     }
 
     /**
-     * Remove participants
+     * Remove participants.
      *
      * @param \AppBundle\Entity\Event\EventAdherentRegistration $participants
      */
@@ -217,7 +223,7 @@ class EventRole
     }
 
     /**
-     * Get participants
+     * Get participants.
      *
      * @return \Doctrine\Common\Collections\Collection
      */

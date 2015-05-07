@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * Event
+ * Event.
  *
  * @ORM\Table(name="event")
  * @ORM\Entity
@@ -14,7 +14,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 class Event
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -27,7 +27,6 @@ class Event
      *
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Event\EventAdherentRegistration",
      * mappedBy="event")
-     *
      */
     private $participants;
 
@@ -88,7 +87,6 @@ class Event
      * @var \stdClass
      *
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Payment\EventPayment", mappedBy="attachedEvent")
-     *
      */
     private $payments;
 
@@ -96,7 +94,6 @@ class Event
      * @var \stdClass
      *
      * @ORM\Column(name="registration_begin", type="datetime")
-     *
      */
     private $registrationBegin;
 
@@ -104,7 +101,6 @@ class Event
      * @var \stdClass
      *
      * @ORM\Column(name="registration_end", type="datetime")
-     *
      */
     private $registrationEnd;
 
@@ -113,7 +109,6 @@ class Event
      *
      * @ORM\OneToMany(targetEntity="EventMeal", mappedBy="event",
      * cascade={"persist", "remove"}, orphanRemoval=true)
-     *
      */
     private $meals;
 
@@ -131,9 +126,10 @@ class Event
     }
 
     /**
-     * Set participants
+     * Set participants.
      *
-     * @param  \stdClass $participants
+     * @param \stdClass $participants
+     *
      * @return Event
      */
     public function setParticipants($participants)
@@ -144,7 +140,7 @@ class Event
     }
 
     /**
-     * Get participants
+     * Get participants.
      *
      * @return \stdClass
      */
@@ -154,9 +150,10 @@ class Event
     }
 
     /**
-     * Set name
+     * Set name.
      *
-     * @param  string $name
+     * @param string $name
+     *
      * @return Event
      */
     public function setName($name)
@@ -167,7 +164,7 @@ class Event
     }
 
     /**
-     * Get name
+     * Get name.
      *
      * @return string
      */
@@ -177,9 +174,10 @@ class Event
     }
 
     /**
-     * Set description
+     * Set description.
      *
-     * @param  string $description
+     * @param string $description
+     *
      * @return Event
      */
     public function setDescription($description)
@@ -201,7 +199,7 @@ class Event
         $this->roles->remove($role);
     }
     /**
-     * Get description
+     * Get description.
      *
      * @return string
      */
@@ -211,9 +209,10 @@ class Event
     }
 
     /**
-     * Set roles
+     * Set roles.
      *
-     * @param  \stdClass $roles
+     * @param \stdClass $roles
+     *
      * @return Event
      */
     public function setRoles($roles)
@@ -224,7 +223,7 @@ class Event
     }
 
     /**
-     * Get roles
+     * Get roles.
      *
      * @return \stdClass
      */
@@ -234,9 +233,10 @@ class Event
     }
 
     /**
-     * Set sleepingFacilities
+     * Set sleepingFacilities.
      *
-     * @param  \stdClass $sleepingFacilities
+     * @param \stdClass $sleepingFacilities
+     *
      * @return Event
      */
     public function setSleepingFacilities($sleepingFacilities)
@@ -247,7 +247,7 @@ class Event
     }
 
     /**
-     * Get sleepingFacilities
+     * Get sleepingFacilities.
      *
      * @return \stdClass
      */
@@ -257,9 +257,10 @@ class Event
     }
 
     /**
-     * Set payments
+     * Set payments.
      *
-     * @param  \stdClass $payments
+     * @param \stdClass $payments
+     *
      * @return Event
      */
     public function setPayments($payments)
@@ -270,7 +271,7 @@ class Event
     }
 
     /**
-     * Get payments
+     * Get payments.
      *
      * @return \stdClass
      */
@@ -289,9 +290,10 @@ class Event
     }
 
     /**
-     * Add participants
+     * Add participants.
      *
-     * @param  \AppBundle\Entity\Adherent $participants
+     * @param \AppBundle\Entity\Adherent $participants
+     *
      * @return Event
      */
     public function addParticipant(\AppBundle\Entity\Adherent $participants)
@@ -302,7 +304,7 @@ class Event
     }
 
     /**
-     * Remove participants
+     * Remove participants.
      *
      * @param \AppBundle\Entity\Adherent $participants
      */
@@ -312,9 +314,10 @@ class Event
     }
 
     /**
-     * Add sleepingFacilities
+     * Add sleepingFacilities.
      *
-     * @param  \AppBundle\Entity\Event\SleepingFacility $sleepingFacilities
+     * @param \AppBundle\Entity\Event\SleepingFacility $sleepingFacilities
+     *
      * @return Event
      */
     public function addSleepingFacility(\AppBundle\Entity\Event\SleepingFacility $sleepingFacilities)
@@ -325,7 +328,7 @@ class Event
     }
 
     /**
-     * Remove sleepingFacilities
+     * Remove sleepingFacilities.
      *
      * @param \AppBundle\Entity\Event\SleepingFacility $sleepingFacilities
      */
@@ -335,9 +338,10 @@ class Event
     }
 
     /**
-     * Add reservationNights
+     * Add reservationNights.
      *
-     * @param  \AppBundle\Entity\Event\ReservationNight $reservationNights
+     * @param \AppBundle\Entity\Event\ReservationNight $reservationNights
+     *
      * @return Event
      */
     public function addReservationNight(\AppBundle\Entity\Event\ReservationNight $reservationNights)
@@ -348,7 +352,7 @@ class Event
     }
 
     /**
-     * Remove reservationNights
+     * Remove reservationNights.
      *
      * @param \AppBundle\Entity\Event\ReservationNight $reservationNights
      */
@@ -358,7 +362,7 @@ class Event
     }
 
     /**
-     * Get reservationNights
+     * Get reservationNights.
      *
      * @return \Doctrine\Common\Collections\Collection
      */
@@ -368,9 +372,10 @@ class Event
     }
 
     /**
-     * Set registrationBegin
+     * Set registrationBegin.
      *
-     * @param  \DateTime $registrationBegin
+     * @param \DateTime $registrationBegin
+     *
      * @return Event
      */
     public function setRegistrationBegin($registrationBegin)
@@ -381,7 +386,7 @@ class Event
     }
 
     /**
-     * Get registrationBegin
+     * Get registrationBegin.
      *
      * @return \DateTime
      */
@@ -391,9 +396,10 @@ class Event
     }
 
     /**
-     * Set registrationEnd
+     * Set registrationEnd.
      *
-     * @param  \DateTime $registrationEnd
+     * @param \DateTime $registrationEnd
+     *
      * @return Event
      */
     public function setRegistrationEnd($registrationEnd)
@@ -404,7 +410,7 @@ class Event
     }
 
     /**
-     * Get registrationEnd
+     * Get registrationEnd.
      *
      * @return \DateTime
      */
@@ -414,9 +420,10 @@ class Event
     }
 
     /**
-     * Add payments
+     * Add payments.
      *
-     * @param  \AppBundle\Entity\Payment\EventPayment $payments
+     * @param \AppBundle\Entity\Payment\EventPayment $payments
+     *
      * @return Event
      */
     public function addPayment(\AppBundle\Entity\Payment\EventPayment $payments)
@@ -427,7 +434,7 @@ class Event
     }
 
     /**
-     * Remove payments
+     * Remove payments.
      *
      * @param \AppBundle\Entity\Payment\EventPayment $payments
      */
@@ -437,9 +444,10 @@ class Event
     }
 
     /**
-     * Add meals
+     * Add meals.
      *
-     * @param  \AppBundle\Entity\Event\EventMeal $meals
+     * @param \AppBundle\Entity\Event\EventMeal $meals
+     *
      * @return Event
      */
     public function addMeal(\AppBundle\Entity\Event\EventMeal $meals)
@@ -450,7 +458,7 @@ class Event
     }
 
     /**
-     * Remove meals
+     * Remove meals.
      *
      * @param \AppBundle\Entity\Event\EventMeal $meals
      */
@@ -460,7 +468,7 @@ class Event
     }
 
     /**
-     * Get meals
+     * Get meals.
      *
      * @return \Doctrine\Common\Collections\Collection
      */
@@ -470,9 +478,10 @@ class Event
     }
 
     /**
-     * Add costs
+     * Add costs.
      *
-     * @param  \AppBundle\Entity\Event\EventCost $costs
+     * @param \AppBundle\Entity\Event\EventCost $costs
+     *
      * @return Event
      */
     public function addCost(\AppBundle\Entity\Event\EventCost $costs)
@@ -483,7 +492,7 @@ class Event
     }
 
     /**
-     * Remove costs
+     * Remove costs.
      *
      * @param \AppBundle\Entity\Event\EventCost $costs
      */
@@ -493,7 +502,7 @@ class Event
     }
 
     /**
-     * Get costs
+     * Get costs.
      *
      * @return \Doctrine\Common\Collections\Collection
      */
@@ -503,9 +512,10 @@ class Event
     }
 
     /**
-     * Set normalizedName
+     * Set normalizedName.
      *
-     * @param  string $normalizedName
+     * @param string $normalizedName
+     *
      * @return Event
      */
     public function setNormalizedName($normalizedName)
@@ -516,7 +526,7 @@ class Event
     }
 
     /**
-     * Get normalizedName
+     * Get normalizedName.
      *
      * @return string
      */

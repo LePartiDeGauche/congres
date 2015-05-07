@@ -34,7 +34,7 @@ class AdherentAdmin extends Admin
             ->add('responsabilities', 'sonata_type_collection',
                 array(
                     'label' => 'Responsabilités (ces modifications seront écrasé à chaque nouvel import du TGF !)',
-                    'by_reference'      => false,
+                    'by_reference' => false,
                 ), array(
                     'edit' => 'inline',
                     'inline' => 'table',
@@ -62,7 +62,7 @@ class AdherentAdmin extends Admin
                 ),
                 'multiple' => false,
             ))
-            ->add('responsabilities.responsability',null , array('label' => 'Responsabilité', 'multiple' => true));
+            ->add('responsabilities.responsability', null, array('label' => 'Responsabilité', 'multiple' => true));
     }
 
     protected function configureListFields(ListMapper $listMapper)

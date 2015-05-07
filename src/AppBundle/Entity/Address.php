@@ -5,7 +5,7 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Address
+ * Address.
  *
  * @ORM\Table(name="address")
  * @ORM\Entity
@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Address
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -57,9 +57,9 @@ class Address
     private $cityName;
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -67,9 +67,10 @@ class Address
     }
 
     /**
-     * Set streetNumber
+     * Set streetNumber.
      *
-     * @param  string  $streetNumber
+     * @param string $streetNumber
+     *
      * @return Address
      */
     public function setStreetNumber($streetNumber)
@@ -80,7 +81,7 @@ class Address
     }
 
     /**
-     * Get streetNumber
+     * Get streetNumber.
      *
      * @return string
      */
@@ -90,9 +91,10 @@ class Address
     }
 
     /**
-     * Set streetType
+     * Set streetType.
      *
-     * @param  string  $streetType
+     * @param string $streetType
+     *
      * @return Address
      */
     public function setStreetType($streetType)
@@ -103,7 +105,7 @@ class Address
     }
 
     /**
-     * Get streetType
+     * Get streetType.
      *
      * @return string
      */
@@ -113,9 +115,10 @@ class Address
     }
 
     /**
-     * Set streetName
+     * Set streetName.
      *
-     * @param  string  $streetName
+     * @param string $streetName
+     *
      * @return Address
      */
     public function setStreetName($streetName)
@@ -126,7 +129,7 @@ class Address
     }
 
     /**
-     * Get streetName
+     * Get streetName.
      *
      * @return string
      */
@@ -136,9 +139,10 @@ class Address
     }
 
     /**
-     * Set cityCode
+     * Set cityCode.
      *
-     * @param  string  $cityCode
+     * @param string $cityCode
+     *
      * @return Address
      */
     public function setCityCode($cityCode)
@@ -149,7 +153,7 @@ class Address
     }
 
     /**
-     * Get cityCode
+     * Get cityCode.
      *
      * @return string
      */
@@ -159,9 +163,10 @@ class Address
     }
 
     /**
-     * Set cityName
+     * Set cityName.
      *
-     * @param  string  $cityName
+     * @param string $cityName
+     *
      * @return Address
      */
     public function setCityName($cityName)
@@ -172,7 +177,7 @@ class Address
     }
 
     /**
-     * Get cityName
+     * Get cityName.
      *
      * @return string
      */
@@ -183,7 +188,7 @@ class Address
 
     public function __toString()
     {
-        return $this->streetNumber . ', ' . $this->streetName . ' ' .
-            $this->cityCode . ' ' . $this->cityName;
+        return $this->streetNumber.', '.$this->streetName.' '.
+            $this->cityCode.' '.$this->cityName;
     }
 }

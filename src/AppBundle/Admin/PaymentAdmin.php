@@ -50,7 +50,7 @@ class PaymentAdmin extends Admin
                     'show' => array(),
                     'edit' => array(),
                     'delete' => array(),
-                )
+                ),
             ))
         ;
     }

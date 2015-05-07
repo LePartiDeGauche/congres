@@ -18,12 +18,10 @@ class IndividualTextVoteAgregationRepository extends EntityRepository
             ->innerJoin('ar.textGroup', 'tg')
             ->innerJoin('tg.voteRules', 'vr')
             ->innerJoin('vr.concernedResponsability', 'concresp')
-            ->innerJoin('concresp.adherentResponsabilities' , 'adhresp')
+            ->innerJoin('concresp.adherentResponsabilities', 'adhresp')
             ->where('ar.text = :text')
             ->andWhere('adhresp.adherent = :adherent OR SIZE(vr.concernedResponsability) = 0')
             ->setParameter('text', $text->getId())
             ->setParameter('adherent', $adherent->getId())->getQuery()->getResult();
-            ;
     }
-
 }

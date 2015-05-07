@@ -17,7 +17,6 @@ class PaymentResponseListener
 
     public function onPaymentIpnResponse(PayboxResponseEvent $event)
     {
-
         if ($event->isVerified()) {
             $data = $event->getData();
             $ref = explode('-', $data['Ref']);
@@ -34,6 +33,5 @@ class PaymentResponseListener
             $this->em->persist($payment);
             $this->em->flush();
         }
-
     }
 }

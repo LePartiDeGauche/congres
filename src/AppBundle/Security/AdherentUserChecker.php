@@ -16,7 +16,6 @@ class AdherentUserChecker extends UserChecker
                 $ex->setUser($user);
                 throw $ex;
             }
-
         }
         parent::checkPreAuth($user);
     }

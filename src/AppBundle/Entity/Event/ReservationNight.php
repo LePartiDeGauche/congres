@@ -5,7 +5,7 @@ namespace AppBundle\Entity\Event;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * ReservationNight
+ * ReservationNight.
  *
  * @ORM\Table(name="reservation_night")
  * @ORM\Entity
@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 class ReservationNight
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -45,9 +45,9 @@ class ReservationNight
     private $sleepingSites;
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -55,9 +55,10 @@ class ReservationNight
     }
 
     /**
-     * Set date
+     * Set date.
      *
-     * @param  \DateTime        $date
+     * @param \DateTime $date
+     *
      * @return ReservationNight
      */
     public function setDate($date)
@@ -68,7 +69,7 @@ class ReservationNight
     }
 
     /**
-     * Get date
+     * Get date.
      *
      * @return \DateTime
      */
@@ -78,9 +79,10 @@ class ReservationNight
     }
 
     /**
-     * Set sleepingSite
+     * Set sleepingSite.
      *
-     * @param  \stdClass        $sleepingSite
+     * @param \stdClass $sleepingSite
+     *
      * @return ReservationNight
      */
     public function setSleepingSite($sleepingSite)
@@ -91,7 +93,7 @@ class ReservationNight
     }
 
     /**
-     * Get sleepingSite
+     * Get sleepingSite.
      *
      * @return \stdClass
      */
@@ -100,7 +102,7 @@ class ReservationNight
         return $this->sleepingSite;
     }
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
@@ -108,9 +110,10 @@ class ReservationNight
     }
 
     /**
-     * Set event
+     * Set event.
      *
-     * @param  \AppBundle\Entity\Event\Event $event
+     * @param \AppBundle\Entity\Event\Event $event
+     *
      * @return ReservationNight
      */
     public function setEvent(\AppBundle\Entity\Event\Event $event = null)
@@ -121,7 +124,7 @@ class ReservationNight
     }
 
     /**
-     * Get event
+     * Get event.
      *
      * @return \AppBundle\Entity\Event\Event
      */
@@ -131,9 +134,10 @@ class ReservationNight
     }
 
     /**
-     * Add sleepingSites
+     * Add sleepingSites.
      *
-     * @param  \AppBundle\Entity\Event\SleepingSite $sleepingSites
+     * @param \AppBundle\Entity\Event\SleepingSite $sleepingSites
+     *
      * @return ReservationNight
      */
     public function addSleepingSite(\AppBundle\Entity\Event\SleepingSite $sleepingSites)
@@ -144,7 +148,7 @@ class ReservationNight
     }
 
     /**
-     * Remove sleepingSites
+     * Remove sleepingSites.
      *
      * @param \AppBundle\Entity\Event\SleepingSite $sleepingSites
      */
@@ -154,7 +158,7 @@ class ReservationNight
     }
 
     /**
-     * Get sleepingSites
+     * Get sleepingSites.
      *
      * @return \Doctrine\Common\Collections\Collection
      */

@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Deprecated, will be removed in further version
  */
@@ -26,11 +27,11 @@ class ContributionAdmin extends Admin
                     $datagrid = $admin->getDatagrid();
                     $queryBuilder = $datagrid->getQuery();
                     $queryBuilder
-                        ->leftJoin($queryBuilder->getRootAlias() . '. profile', 'profile')
+                        ->leftJoin($queryBuilder->getRootAlias().'. profile', 'profile')
                         ->andWhere('profile.firstname LIKE :value')
                         ->orWhere('profile.lastname LIKE :value')
-                        ->orWhere($queryBuilder->getRootAlias() . '.email LIKE :value')
-                        ->setParameter('value', '%' . $value . '%')
+                        ->orWhere($queryBuilder->getRootAlias().'.email LIKE :value')
+                        ->setParameter('value', '%'.$value.'%')
                     ;
                 },
                 'to_string_callback' => function ($user, $property) {
@@ -38,7 +39,7 @@ class ContributionAdmin extends Admin
                     $lastname = $user->getProfile()->getLastname();
                     $email = $user->getEmail();
 
-                    return $firstname . ' ' . $lastname . ' &lt;' . $email . '&gt;';
+                    return $firstname.' '.$lastname.' &lt;'.$email.'&gt;';
                 },
             ))
             ->add('status', 'choice', array(
@@ -95,17 +96,17 @@ class ContributionAdmin extends Admin
         ) {
             $actions['edit_status_new'] = array(
                 'label' => 'Modifier le statut : envoyée mais non validée.',
-                'ask_confirmation' => true
+                'ask_confirmation' => true,
             );
 
             $actions['edit_status_open'] = array(
                 'label' => 'Modifier le statut : ouverte aux signatures.',
-                'ask_confirmation' => true
+                'ask_confirmation' => true,
             );
 
             $actions['edit_status_closed'] = array(
                 'label' => 'Modifier le statut : signatures récoltées.',
-                'ask_confirmation' => true
+                'ask_confirmation' => true,
             );
         }
 
