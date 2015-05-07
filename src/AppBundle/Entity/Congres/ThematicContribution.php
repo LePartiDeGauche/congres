@@ -5,7 +5,7 @@ namespace AppBundle\Entity\Congres;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * ThematicContribution
+ * ThematicContribution.
  *
  * @ORM\Entity(repositoryClass="AppBundle\Entity\Congres\ThematicContributionRepository")
  */
@@ -15,12 +15,11 @@ class ThematicContribution extends Contribution
      * @var \Doctrine\Common\Collections\Collection
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\User")
      * @ORM\JoinTable(name="thematic_votes")
-     *
      */
     protected $votes;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct(\AppBundle\Entity\User $user = null)
     {
@@ -29,9 +28,10 @@ class ThematicContribution extends Contribution
     }
 
     /**
-     * Add votes
+     * Add votes.
      *
-     * @param  \AppBundle\Entity\User $votes
+     * @param \AppBundle\Entity\User $votes
+     *
      * @return ThematicContribution
      */
     public function addVote(\AppBundle\Entity\User $votes)
@@ -42,7 +42,7 @@ class ThematicContribution extends Contribution
     }
 
     /**
-     * Remove votes
+     * Remove votes.
      *
      * @param \AppBundle\Entity\User $votes
      */
@@ -52,7 +52,7 @@ class ThematicContribution extends Contribution
     }
 
     /**
-     * Get votes
+     * Get votes.
      *
      * @return \Doctrine\Common\Collections\Collection
      */

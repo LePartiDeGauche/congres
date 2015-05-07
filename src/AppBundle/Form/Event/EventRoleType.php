@@ -10,7 +10,7 @@ class EventRoleType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -21,14 +21,14 @@ class EventRoleType extends AbstractType
             //->add('requiredResponsabilities')
         ;
     }
-    
+
     /**
      * @param OptionsResolverInterface $resolver
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Event\EventRole'
+            'data_class' => 'AppBundle\Entity\Event\EventRole',
         ));
     }
 

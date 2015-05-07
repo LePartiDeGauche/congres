@@ -1,11 +1,11 @@
 <?php
+
 namespace AppBundle\Security\Text;
 
 use AppBundle\Entity\Text\TextGroup;
 use AppBundle\Entity\Organ\Organ;
 use AppBundle\Entity\User;
 use AppBundle\Entity\Adherent;
-
 use Symfony\Component\Security\Core\Authorization\Voter\AbstractVoter;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -46,7 +46,6 @@ final class TextGroupVoter extends AbstractVoter
 
         if ($attribute === self::CREATE_TEXT) {
             return $this->canCreateText($textGroup, $user);
-
         }
 
         if ($attribute === self::VOTE) {
@@ -60,31 +59,29 @@ final class TextGroupVoter extends AbstractVoter
         return false;
     }
 
-    private function canView (TextGroup $textGroup,User $user)
+    private function canView(TextGroup $textGroup, User $user)
     {
         // FIXME : in_array does not take into account role hierarchy !
         return ($textGroup->getIsVisible() ||
             in_array('ROLE_ADMIN', $user->getRoles(), true));
     }
 
-    private function canCreateText (TextGroup $textGroup, User $user)
+    private function canCreateText(TextGroup $textGroup, User $user)
     {
         $date = new \DateTime('now');
         // FIXME : in_array does not take into account role hierarchy !
         return ($textGroup->getIsVisible() && $textGroup->getSubmissionOpening() < $date && $textGroup->getSubmissionClosing() > $date) ||
             in_array('ROLE_ADMIN', $user->getRoles(), true);
-
     }
 
-    private function canVote (TextGroup $textGroup, User $user)
+    private function canVote(TextGroup $textGroup, User $user)
     {
         $date = new \DateTime('now');
         $em = $this->entityManager;
 
-        if ($textGroup->getIsVisible() && $textGroup->getVoteOpening() < $date && $textGroup->getVoteClosing() > $date)
-        {
+        if ($textGroup->getIsVisible() && $textGroup->getVoteOpening() < $date && $textGroup->getVoteClosing() > $date) {
             return $textGroup->getVoteType() == TextGroup::VOTETYPE_INDIVIDUAL && $em->getRepository('AppBundle:Vote\IndividualTextVote')
-                ->getAdherentVoteCountByTextGroup($user->getProfile(), $textGroup) < 
+                ->getAdherentVoteCountByTextGroup($user->getProfile(), $textGroup) <
                 $textGroup->getMaxVotesByAdherent() &&
                 $em->getRepository('AppBundle:Vote\VoteRule')
                 ->getAdherentRightToVoteForTextGroup($user->getProfile(), $textGroup);
@@ -100,14 +97,13 @@ final class TextGroupVoter extends AbstractVoter
      * - the organ has not voted yet. (done)
      * - the adherent as as the right responsability to vote.(done, some limitations)
      */
-    private function canReportVote (TextGroup $textGroup, Adherent $adherent, Organ $organ)
+    private function canReportVote(TextGroup $textGroup, Adherent $adherent, Organ $organ)
     {
         $date = new \DateTime('now');
         $em = $this->entityManager;
 
-        if ($textGroup->getIsVisible() && $textGroup->getVoteOpening() < $date && $textGroup->getVoteClosing() > $date)
-        {
-            return 
+        if ($textGroup->getIsVisible() && $textGroup->getVoteOpening() < $date && $textGroup->getVoteClosing() > $date) {
+            return
                 $em->getRepository('AppBundle:Vote\OrganVoteRule')->getOrganTypeRightToVoteForTextGroup($organ->getOrganType(), $textGroup) &&
                 !$em->getRepository('AppBundle:Vote\IndividualOrganTextVote')->hasVoteBeenReported($organ, $textGroup) &&
                 ($em->getRepository('AppBundle:Vote\OrganVoteRule')->getAdherentRightToReportForOrganAndTextGroup($adherent, $organ, $textGroup));
@@ -115,7 +111,6 @@ final class TextGroupVoter extends AbstractVoter
 
         return false;
     }
-
 
     public function __construct($entityManager, $container)
     {

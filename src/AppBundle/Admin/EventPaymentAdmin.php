@@ -14,21 +14,20 @@ class EventPaymentAdmin extends Admin
     protected $baseRouteName = 'event_payment_admin';
     protected $baseRoutePattern = 'event/payment';
     protected $method_choice = array(
-            EventPayment::METHOD_CASH => "Paiement en liquide",
-            EventPayment::METHOD_CHEQUE=> "Paiement par chèque",
-            EventPayment::METHOD_CREDIT_CARD => "Carte de crédit",
+            EventPayment::METHOD_CASH => 'Paiement en liquide',
+            EventPayment::METHOD_CHEQUE => 'Paiement par chèque',
+            EventPayment::METHOD_CREDIT_CARD => 'Carte de crédit',
         );
     protected $status_choice = array(
-            EventPayment::STATUS_BANKED => "Accepté",
-            EventPayment::STATUS_PENDING => "En attente de paiement",
-            EventPayment::STATUS_REFUSED => "Refusé",
+            EventPayment::STATUS_BANKED => 'Accepté',
+            EventPayment::STATUS_PENDING => 'En attente de paiement',
+            EventPayment::STATUS_REFUSED => 'Refusé',
         );
     /**
      * @param DatagridMapper $datagridMapper
      */
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
-
         $datagridMapper
             ->add('drawer', null, array('label' => 'Émetteur (Chèque)'))
             ->add('author', null, array('label' => 'Auteur de paiement'))
@@ -40,7 +39,7 @@ class EventPaymentAdmin extends Admin
             ))
             ->add('status', 'choice', array('label' => 'Status',
                 'choices' => $this->status_choice,
-                'multiple' => false
+                'multiple' => false,
             ))
             ;
     }
@@ -62,14 +61,14 @@ class EventPaymentAdmin extends Admin
             ))
             ->add('status', 'choice', array('label' => 'Status',
                 'choices' => $this->status_choice,
-                'multiple' => false
+                'multiple' => false,
             ))
             ->add('_action', 'actions', array(
                 'actions' => array(
                     'show' => array(),
                     'edit' => array(),
                     'delete' => array(),
-                )
+                ),
             ))
             ;
     }
@@ -89,7 +88,7 @@ class EventPaymentAdmin extends Admin
             ))
             ->add('status', 'choice', array('label' => 'Statut',
                 'choices' => $this->status_choice,
-                'multiple' => false
+                'multiple' => false,
             ))
             ;
     }
@@ -111,7 +110,7 @@ class EventPaymentAdmin extends Admin
             ))
             ->add('status', 'choice', array('label' => 'Status',
                 'choices' => $this->status_choice,
-                'multiple' => false
+                'multiple' => false,
             ))
             ->add('date')
             ->add('account')
@@ -124,8 +123,7 @@ class EventPaymentAdmin extends Admin
         //$repo = $this->getDoctrine()->getRepository('AppBundle:Adherent')->findId($user->adherent);
 
 
-        if ($instance->getAuthor() == NULL)
-        {
+        if ($instance->getAuthor() == null) {
             $instance->setAuthor($user->getProfile());
         }
 
