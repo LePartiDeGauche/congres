@@ -15,7 +15,7 @@ class EventAdherentRegistrationRepository extends EntityRepository
 {
     protected $classname = 'AppBundle\Entity\Event\EventAdherentRegistration';
 
-    public function getPayedAmountById (EventAdherentRegistration $ear)
+    public function getPayedAmountById(EventAdherentRegistration $ear)
     {
         $payedAmount = $this->createQueryBuilder('ear')
             ->select('SUM(p.amount)')
@@ -25,8 +25,8 @@ class EventAdherentRegistrationRepository extends EntityRepository
             ->setParameter('ear', $ear->getId())
             ->setParameter('status', Payment::STATUS_BANKED)
             ->getQuery()->getSingleScalarResult();
+
         return $payedAmount;
     }
-
 
 }

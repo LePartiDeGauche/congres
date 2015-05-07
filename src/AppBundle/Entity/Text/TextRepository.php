@@ -3,9 +3,7 @@
 namespace AppBundle\Entity\Text;
 
 use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\Mapping\ClassMetadata;
 use AppBundle\Entity\Adherent;
-use AppBundle\Entity\Text\TextGroup;
 
 /**
  * ContributionRepository
@@ -27,8 +25,7 @@ class TextRepository extends EntityRepository
         $join = ' LEFT JOIN text.textGroup tg';
         $where = ' WHERE tg.id = :tgid';
 
-        foreach ($textGroup->getVoteRules() as $voteRule)
-        {
+        foreach ($textGroup->getVoteRules() as $voteRule) {
             $vid = $voteRule->getId();
             $ivatable = 'iva' . $vid;
             $select .= ', ' . $ivatable .'.voteFor as voteFor' . $vid;
@@ -36,13 +33,12 @@ class TextRepository extends EntityRepository
             $where .= ' AND ('. $ivatable . '.voteRule = :vr' . $vid . ')';
         }
 
-        $textAndVoteDQL = $select . $from . $join . $where . ' GROUP BY entity'; 
+        $textAndVoteDQL = $select . $from . $join . $where . ' GROUP BY entity';
         $textAndVote = $this->getEntityManager()->createQuery($textAndVoteDQL);
         $textAndVote->setParameter('tgid', $textGroup->getId());
         $textAndVote->setParameter('author', $author->getId());
 
-        foreach ($textGroup->getVoteRules() as $voteRule)
-        {
+        foreach ($textGroup->getVoteRules() as $voteRule) {
             $vid = $voteRule->getId();
             $textAndVote->setParameter('vr' . $vid, $vid);
         }

@@ -30,11 +30,10 @@ class EventPayment extends Payment
      */
     protected $attachedEvent;
 
-
     /**
      * Set attachedRegistration
      *
-     * @param \stdClass $attachedRegistration
+     * @param  \stdClass    $attachedRegistration
      * @return EventPayment
      */
     public function setAttachedRegistration($attachedRegistration)
@@ -47,7 +46,7 @@ class EventPayment extends Payment
     /**
      * Get attachedRegistration
      *
-     * @return \stdClass 
+     * @return \stdClass
      */
     public function getAttachedRegistration()
     {
@@ -65,7 +64,7 @@ class EventPayment extends Payment
     /**
      * Set attachedEvent
      *
-     * @param \AppBundle\Entity\Event\Event $attachedEvent
+     * @param  \AppBundle\Entity\Event\Event $attachedEvent
      * @return EventPayment
      */
     public function setAttachedEvent(\AppBundle\Entity\Event\Event $attachedEvent = null)
@@ -78,7 +77,7 @@ class EventPayment extends Payment
     /**
      * Get attachedEvent
      *
-     * @return \AppBundle\Entity\Event\Event 
+     * @return \AppBundle\Entity\Event\Event
      */
     public function getAttachedEvent()
     {

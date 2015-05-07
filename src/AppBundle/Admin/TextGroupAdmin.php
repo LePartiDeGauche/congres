@@ -135,7 +135,7 @@ class TextGroupAdmin extends Admin
             ->add('maxVotesByAdherent')
             ->add('isVisible')
             // FIXME : currently impossible to use subclass into subform with sonata bundle
-            
+
             //->add('voteRules', 'sonata_type_collection', array(
             //    'type_options' => array(
             //        'delete' => false,
@@ -172,7 +172,7 @@ class TextGroupAdmin extends Admin
                         ->setParameter('value', '%' . $value . '%')
                     ;
                 },
-                'to_string_callback' => function($user, $property) {
+                'to_string_callback' => function ($user, $property) {
                     $firstname = $user->getProfile()->getFirstname();
                     $lastname = $user->getProfile()->getLastname();
                     $email = $user->getEmail();
@@ -211,9 +211,7 @@ class TextGroupAdmin extends Admin
         $user = $this->getConfigurationPool()->getContainer()->get('security.context')->getToken()->getUser();
         //$repo = $this->getDoctrine()->getRepository('AppBundle:Adherent')->findId($user->adherent);
 
-
-        if ($instance->getAuthor() == NULL)
-        {
+        if ($instance->getAuthor() == NULL) {
             $instance->setAuthor($user->getProfile());
         }
 
@@ -232,4 +230,3 @@ class TextGroupAdmin extends Admin
         }
     }
 }
-

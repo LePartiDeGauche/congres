@@ -59,11 +59,10 @@ class EventMeal
      */
     private $mealTime;
 
-
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -73,7 +72,7 @@ class EventMeal
     /**
      * Set event
      *
-     * @param \stdClass $event
+     * @param  \stdClass $event
      * @return EventMeal
      */
     public function setEvent($event)
@@ -86,7 +85,7 @@ class EventMeal
     /**
      * Get event
      *
-     * @return \stdClass 
+     * @return \stdClass
      */
     public function getEvent()
     {
@@ -96,7 +95,7 @@ class EventMeal
     /**
      * Set participants
      *
-     * @param \stdClass $participants
+     * @param  \stdClass $participants
      * @return EventMeal
      */
     public function setParticipants($participants)
@@ -109,7 +108,7 @@ class EventMeal
     /**
      * Get participants
      *
-     * @return \stdClass 
+     * @return \stdClass
      */
     public function getParticipants()
     {
@@ -119,7 +118,7 @@ class EventMeal
     /**
      * Set name
      *
-     * @param string $name
+     * @param  string    $name
      * @return EventMeal
      */
     public function setName($name)
@@ -132,7 +131,7 @@ class EventMeal
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -142,7 +141,7 @@ class EventMeal
     /**
      * Set description
      *
-     * @param string $description
+     * @param  string    $description
      * @return EventMeal
      */
     public function setDescription($description)
@@ -155,7 +154,7 @@ class EventMeal
     /**
      * Get description
      *
-     * @return string 
+     * @return string
      */
     public function getDescription()
     {
@@ -165,7 +164,7 @@ class EventMeal
     /**
      * Set time
      *
-     * @param \DateTime $time
+     * @param  \DateTime $time
      * @return EventMeal
      */
     public function setTime($time)
@@ -178,7 +177,7 @@ class EventMeal
     /**
      * Get time
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getTime()
     {
@@ -195,7 +194,7 @@ class EventMeal
     /**
      * Set mealTime
      *
-     * @param \DateTime $mealTime
+     * @param  \DateTime $mealTime
      * @return EventMeal
      */
     public function setMealTime($mealTime)
@@ -208,7 +207,7 @@ class EventMeal
     /**
      * Get mealTime
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getMealTime()
     {
@@ -218,13 +217,13 @@ class EventMeal
     public function __toString()
     {
         return $this->name;
-    
+
     }
 
     /**
      * Add participants
      *
-     * @param \AppBundle\Entity\Event\EventAdherentRegistration $participants
+     * @param  \AppBundle\Entity\Event\EventAdherentRegistration $participants
      * @return EventMeal
      */
     public function addParticipant(\AppBundle\Entity\Event\EventAdherentRegistration $participants)

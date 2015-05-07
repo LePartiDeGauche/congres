@@ -40,11 +40,10 @@ class OrganParticipation
     /**
      * @var \stdClass
      * @ORM\ManyToMany(
-     * targetEntity="AppBundle\Entity\AdherentResponsability", 
+     * targetEntity="AppBundle\Entity\AdherentResponsability",
      * mappedBy="allowsParticipations")
      */
     private $allowedBy;
-
 
     /**
      * @var \DateTime
@@ -67,11 +66,10 @@ class OrganParticipation
      */
     private $isActive;
 
-
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -81,7 +79,7 @@ class OrganParticipation
     /**
      * Set adherent
      *
-     * @param \stdClass $adherent
+     * @param  \stdClass          $adherent
      * @return OrganParticipation
      */
     public function setAdherent($adherent)
@@ -94,7 +92,7 @@ class OrganParticipation
     /**
      * Get adherent
      *
-     * @return \stdClass 
+     * @return \stdClass
      */
     public function getAdherent()
     {
@@ -104,7 +102,7 @@ class OrganParticipation
     /**
      * Set organ
      *
-     * @param \stdClass $organ
+     * @param  \stdClass          $organ
      * @return OrganParticipation
      */
     public function setOrgan($organ)
@@ -117,7 +115,7 @@ class OrganParticipation
     /**
      * Get organ
      *
-     * @return \stdClass 
+     * @return \stdClass
      */
     public function getOrgan()
     {
@@ -127,7 +125,7 @@ class OrganParticipation
     /**
      * Set start
      *
-     * @param \DateTime $start
+     * @param  \DateTime          $start
      * @return OrganParticipation
      */
     public function setStart($start)
@@ -140,7 +138,7 @@ class OrganParticipation
     /**
      * Get start
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getStart()
     {
@@ -150,7 +148,7 @@ class OrganParticipation
     /**
      * Set end
      *
-     * @param \DateTime $end
+     * @param  \DateTime          $end
      * @return OrganParticipation
      */
     public function setEnd($end)
@@ -163,7 +161,7 @@ class OrganParticipation
     /**
      * Get end
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getEnd()
     {
@@ -173,7 +171,7 @@ class OrganParticipation
     /**
      * Set isActive
      *
-     * @param boolean $isActive
+     * @param  boolean            $isActive
      * @return OrganParticipation
      */
     public function setIsActive($isActive)
@@ -186,7 +184,7 @@ class OrganParticipation
     /**
      * Get isActive
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getIsActive()
     {

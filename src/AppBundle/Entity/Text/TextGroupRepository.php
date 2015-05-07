@@ -3,9 +3,7 @@
 namespace AppBundle\Entity\Text;
 
 use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\Mapping\ClassMetadata;
 use AppBundle\Entity\Adherent;
-use AppBundle\Entity\Text\TextGroup;
 
 /**
  *

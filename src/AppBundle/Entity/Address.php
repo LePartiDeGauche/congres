@@ -56,11 +56,10 @@ class Address
      */
     private $cityName;
 
-
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -70,7 +69,7 @@ class Address
     /**
      * Set streetNumber
      *
-     * @param string $streetNumber
+     * @param  string  $streetNumber
      * @return Address
      */
     public function setStreetNumber($streetNumber)
@@ -83,7 +82,7 @@ class Address
     /**
      * Get streetNumber
      *
-     * @return string 
+     * @return string
      */
     public function getStreetNumber()
     {
@@ -93,7 +92,7 @@ class Address
     /**
      * Set streetType
      *
-     * @param string $streetType
+     * @param  string  $streetType
      * @return Address
      */
     public function setStreetType($streetType)
@@ -106,7 +105,7 @@ class Address
     /**
      * Get streetType
      *
-     * @return string 
+     * @return string
      */
     public function getStreetType()
     {
@@ -116,7 +115,7 @@ class Address
     /**
      * Set streetName
      *
-     * @param string $streetName
+     * @param  string  $streetName
      * @return Address
      */
     public function setStreetName($streetName)
@@ -129,7 +128,7 @@ class Address
     /**
      * Get streetName
      *
-     * @return string 
+     * @return string
      */
     public function getStreetName()
     {
@@ -139,7 +138,7 @@ class Address
     /**
      * Set cityCode
      *
-     * @param string $cityCode
+     * @param  string  $cityCode
      * @return Address
      */
     public function setCityCode($cityCode)
@@ -152,7 +151,7 @@ class Address
     /**
      * Get cityCode
      *
-     * @return string 
+     * @return string
      */
     public function getCityCode()
     {
@@ -162,7 +161,7 @@ class Address
     /**
      * Set cityName
      *
-     * @param string $cityName
+     * @param  string  $cityName
      * @return Address
      */
     public function setCityName($cityName)
@@ -175,7 +174,7 @@ class Address
     /**
      * Get cityName
      *
-     * @return string 
+     * @return string
      */
     public function getCityName()
     {

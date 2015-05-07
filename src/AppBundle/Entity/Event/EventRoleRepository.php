@@ -15,7 +15,7 @@ class EventRoleRepository  extends EntityRepository
 {
     protected $classname = 'AppBundle\Entity\Event\EventRole';
 
-    function findByEventAndAdherentQueryBuider(Event $event, Adherent $adherent)
+    public function findByEventAndAdherentQueryBuider(Event $event, Adherent $adherent)
     {
         return $this->createQueryBuilder('er')
             ->leftJoin('er.requiredResponsabilities', 'reqresp')

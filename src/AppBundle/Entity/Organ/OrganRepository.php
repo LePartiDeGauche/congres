@@ -3,7 +3,6 @@
 namespace AppBundle\Entity\Organ;
 
 use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\Mapping\ClassMetadata;
 use AppBundle\Entity\Adherent;
 
 /**
@@ -26,7 +25,7 @@ class OrganRepository extends EntityRepository
             ->getQuery();
 
         return $organs->getResult();
-    
+
     }
 
     public function isMember(Organ $organ, Adherent $adherent)
@@ -41,6 +40,6 @@ class OrganRepository extends EntityRepository
             ->getQuery()->getSingleScalarResult();
 
         return !!$member;
-    
+
     }
 }

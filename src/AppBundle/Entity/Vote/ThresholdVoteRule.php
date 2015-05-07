@@ -28,11 +28,10 @@ class ThresholdVoteRule extends VoteRule
      */
     protected $threshold;
 
-
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -42,7 +41,7 @@ class ThresholdVoteRule extends VoteRule
     /**
      * Set threshold
      *
-     * @param integer $threshold
+     * @param  integer           $threshold
      * @return ThresholdVoteRule
      */
     public function setThreshold($threshold)
@@ -55,7 +54,7 @@ class ThresholdVoteRule extends VoteRule
     /**
      * Get threshold
      *
-     * @return integer 
+     * @return integer
      */
     public function getThreshold()
     {

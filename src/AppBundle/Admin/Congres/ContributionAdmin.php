@@ -1,5 +1,5 @@
 <?php
-/* 
+/*
  * Deprecated, will be removed in further version
  */
 
@@ -33,7 +33,7 @@ class ContributionAdmin extends Admin
                         ->setParameter('value', '%' . $value . '%')
                     ;
                 },
-                'to_string_callback' => function($user, $property) {
+                'to_string_callback' => function ($user, $property) {
                     $firstname = $user->getProfile()->getFirstname();
                     $lastname = $user->getProfile()->getLastname();
                     $email = $user->getEmail();

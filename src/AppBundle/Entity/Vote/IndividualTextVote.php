@@ -70,7 +70,7 @@ class IndividualTextVote
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -80,7 +80,7 @@ class IndividualTextVote
     /**
      * Set date
      *
-     * @param \DateTime $date
+     * @param  \DateTime          $date
      * @return IndividualTextVote
      */
     public function setDate($date)
@@ -93,7 +93,7 @@ class IndividualTextVote
     /**
      * Get date
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getDate()
     {
@@ -103,7 +103,7 @@ class IndividualTextVote
     /**
      * Set vote
      *
-     * @param string $vote
+     * @param  string             $vote
      * @return IndividualTextVote
      */
     public function setVote($vote)
@@ -124,7 +124,7 @@ class IndividualTextVote
     /**
      * Get vote
      *
-     * @return string 
+     * @return string
      */
     public function getVote()
     {
@@ -134,7 +134,7 @@ class IndividualTextVote
     /**
      * Set author
      *
-     * @param \stdClass $author
+     * @param  \stdClass          $author
      * @return IndividualTextVote
      */
     public function setAuthor($author)
@@ -147,7 +147,7 @@ class IndividualTextVote
     /**
      * Get author
      *
-     * @return \stdClass 
+     * @return \stdClass
      */
     public function getAuthor()
     {
@@ -157,7 +157,7 @@ class IndividualTextVote
     /**
      * Set text
      *
-     * @param \stdClass $text
+     * @param  \stdClass          $text
      * @return IndividualTextVote
      */
     public function setText($text)
@@ -170,7 +170,7 @@ class IndividualTextVote
     /**
      * Get text
      *
-     * @return \stdClass 
+     * @return \stdClass
      */
     public function getText()
     {

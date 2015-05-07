@@ -43,13 +43,10 @@ class EventCost
      */
     private $event;
 
-
-
-
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -59,7 +56,7 @@ class EventCost
     /**
      * Set name
      *
-     * @param string $name
+     * @param  string    $name
      * @return EventCost
      */
     public function setName($name)
@@ -72,7 +69,7 @@ class EventCost
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -82,7 +79,7 @@ class EventCost
     /**
      * Set cost
      *
-     * @param integer $cost
+     * @param  integer   $cost
      * @return EventCost
      */
     public function setCost($cost)
@@ -95,7 +92,7 @@ class EventCost
     /**
      * Get cost
      *
-     * @return integer 
+     * @return integer
      */
     public function getCost()
     {
@@ -105,7 +102,7 @@ class EventCost
     /**
      * Set event
      *
-     * @param \AppBundle\Entity\Event\Event $event
+     * @param  \AppBundle\Entity\Event\Event $event
      * @return EventCost
      */
     public function setEvent(\AppBundle\Entity\Event\Event $event = null)
@@ -118,7 +115,7 @@ class EventCost
     /**
      * Get event
      *
-     * @return \AppBundle\Entity\Event\Event 
+     * @return \AppBundle\Entity\Event\Event
      */
     public function getEvent()
     {
@@ -127,6 +124,6 @@ class EventCost
     public function __toString()
     {
         return $this->name . ' (' . $this->cost . '€)';
-    
+
     }
 }

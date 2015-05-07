@@ -34,7 +34,7 @@ class SleepingSpot
      * @ORM\Column(name="description", type="text")
      */
     private $description;
-    
+
     /**
      * @var \stdClass
      *
@@ -43,11 +43,10 @@ class SleepingSpot
      */
     private $sleepingSite;
 
-
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -57,7 +56,7 @@ class SleepingSpot
     /**
      * Set name
      *
-     * @param string $name
+     * @param  string       $name
      * @return SleepingSpot
      */
     public function setName($name)
@@ -70,7 +69,7 @@ class SleepingSpot
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -80,7 +79,7 @@ class SleepingSpot
     /**
      * Set description
      *
-     * @param string $description
+     * @param  string       $description
      * @return SleepingSpot
      */
     public function setDescription($description)
@@ -93,7 +92,7 @@ class SleepingSpot
     /**
      * Get description
      *
-     * @return string 
+     * @return string
      */
     public function getDescription()
     {
@@ -103,7 +102,7 @@ class SleepingSpot
     /**
      * Set sleepingSite
      *
-     * @param \AppBundle\Entity\Event\SleepingSite $sleepingSite
+     * @param  \AppBundle\Entity\Event\SleepingSite $sleepingSite
      * @return SleepingSpot
      */
     public function setSleepingSite(\AppBundle\Entity\Event\SleepingSite $sleepingSite)
@@ -116,7 +115,7 @@ class SleepingSpot
     /**
      * Get sleepingSite
      *
-     * @return \AppBundle\Entity\Event\SleepingSite 
+     * @return \AppBundle\Entity\Event\SleepingSite
      */
     public function getSleepingSite()
     {

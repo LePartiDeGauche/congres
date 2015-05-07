@@ -10,7 +10,7 @@ class TextType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -19,7 +19,7 @@ class TextType extends AbstractType
             ->add('rawContent', null, array('label' => 'Contenu', 'required' => true,))
         ;
     }
-    
+
     /**
      * @param OptionsResolverInterface $resolver
      */

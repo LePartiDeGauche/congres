@@ -3,7 +3,6 @@
 namespace AppBundle\Entity\Congres;
 
 use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\Mapping\ClassMetadata;
 use AppBundle\Entity\Responsability;
 
 /**

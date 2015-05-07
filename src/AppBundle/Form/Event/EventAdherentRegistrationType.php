@@ -12,7 +12,7 @@ class EventAdherentRegistrationType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -28,21 +28,18 @@ class EventAdherentRegistrationType extends AbstractType
                     'label' => 'Mode de paiement',
                 ))
                 ;
-        $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) use ($builder)
-        {
+        $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) use ($builder) {
             $form = $event->getForm();
             $data = $event->getData();
 
             /* Check we're looking at the right data/form */
-            if ($data instanceof \AppBundle\Entity\Event\EventAdherentRegistration)
-            {
+            if ($data instanceof \AppBundle\Entity\Event\EventAdherentRegistration) {
                 $curEvent = $data->getEvent();
                 $curAdherent = $data->getAdherent();
 
                 $mealsOptions = array(
                     'class' => 'AppBundle\Entity\Event\EventMeal',
-                    'query_builder' => function(\AppBundle\Entity\Event\EventMealRepository $er) use ($curEvent)
-                    {  
+                    'query_builder' => function (\AppBundle\Entity\Event\EventMealRepository $er) use ($curEvent) {
                         return $er->findByEventQueryBuider( $curEvent );
                     },
                     'expanded' => true,
@@ -54,8 +51,7 @@ class EventAdherentRegistrationType extends AbstractType
 
                 $costOptions = array(
                     'class' => 'AppBundle\Entity\Event\EventCost',
-                    'query_builder' => function(\AppBundle\Entity\Event\EventCostRepository $er) use ($curEvent)
-                    {  
+                    'query_builder' => function (\AppBundle\Entity\Event\EventCostRepository $er) use ($curEvent) {
                         return $er->findByEventQueryBuider( $curEvent );
                     },
                     'expanded' => true,
@@ -65,12 +61,10 @@ class EventAdherentRegistrationType extends AbstractType
 
                 $form->add('cost', 'entity', $costOptions);
 
-                if ($curAdherent != NULL)
-                {
+                if ($curAdherent != NULL) {
                     $roleOptions = array(
                         'class' => 'AppBundle\Entity\Event\EventRole',
-                        'query_builder' => function(\AppBundle\Entity\Event\EventRoleRepository $er) use ($curEvent, $curAdherent)
-                        {  
+                        'query_builder' => function (\AppBundle\Entity\Event\EventRoleRepository $er) use ($curEvent, $curAdherent) {
                             return $er->findByEventAndAdherentQueryBuider( $curEvent, $curAdherent );
                         },
                         'expanded' => false,
@@ -80,10 +74,8 @@ class EventAdherentRegistrationType extends AbstractType
                     $form->add('role', 'entity', $roleOptions);
                 }
 
-            }
-            else
-            {
-                throw new \InvalidArgumentException("Invalid Form data expected EventAdherentRegistration, got " . $data->getClassName()); 
+            } else {
+                throw new \InvalidArgumentException("Invalid Form data expected EventAdherentRegistration, got " . $data->getClassName());
             }
         });
     }

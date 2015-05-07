@@ -60,19 +60,19 @@ class EventAdherentRegistration
 
     /**
      * @var \stdClass
-     * 
+     *
      * @ORM\ManyToOne(targetEntity="EventRole", inversedBy="participants")
      * @ORM\JoinColumn(nullable=false)
-     * 
+     *
      */
     private $role;
 
     /**
      * @var \stdClass
-     * 
+     *
      * @ORM\ManyToOne(targetEntity="EventCost")
      * @ORM\JoinColumn(nullable=false)
-     * 
+     *
      */
     private $cost;
 
@@ -115,9 +115,8 @@ class EventAdherentRegistration
      */
     private $registrationDate;
 
-
     /**
-     * @var text 
+     * @var text
      *
      * @ORM\Column(name="comment", type="text", nullable=true)
      */
@@ -138,8 +137,6 @@ class EventAdherentRegistration
      */
     private $attendance;
 
-
-
     public function __construct(\AppBundle\Entity\Adherent $author = null, Event $event = null)
     {
         $this->author = $author;
@@ -153,7 +150,7 @@ class EventAdherentRegistration
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -163,7 +160,7 @@ class EventAdherentRegistration
     /**
      * Set adherent
      *
-     * @param \stdClass $adherent
+     * @param  \stdClass                 $adherent
      * @return EventAdherentRegistration
      */
     public function setAdherent($adherent)
@@ -176,7 +173,7 @@ class EventAdherentRegistration
     /**
      * Get adherent
      *
-     * @return \stdClass 
+     * @return \stdClass
      */
     public function getAdherent()
     {
@@ -186,7 +183,7 @@ class EventAdherentRegistration
     /**
      * Set role
      *
-     * @param \stdClass $role
+     * @param  \stdClass                 $role
      * @return EventAdherentRegistration
      */
     public function setRole($role)
@@ -199,7 +196,7 @@ class EventAdherentRegistration
     /**
      * Get role
      *
-     * @return \stdClass 
+     * @return \stdClass
      */
     public function getRole()
     {
@@ -209,7 +206,7 @@ class EventAdherentRegistration
     /**
      * Set event
      *
-     * @param \stdClass $event
+     * @param  \stdClass                 $event
      * @return EventAdherentRegistration
      */
     public function setEvent($event)
@@ -222,7 +219,7 @@ class EventAdherentRegistration
     /**
      * Get event
      *
-     * @return \stdClass 
+     * @return \stdClass
      */
     public function getEvent()
     {
@@ -232,7 +229,7 @@ class EventAdherentRegistration
     /**
      * Set needHosting
      *
-     * @param boolean $needHosting
+     * @param  boolean                   $needHosting
      * @return EventAdherentRegistration
      */
     public function setNeedHosting($needHosting)
@@ -245,7 +242,7 @@ class EventAdherentRegistration
     /**
      * Get needHosting
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getNeedHosting()
     {
@@ -255,7 +252,7 @@ class EventAdherentRegistration
     /**
      * Set paymentMode
      *
-     * @param string $paymentMode
+     * @param  string                    $paymentMode
      * @return EventAdherentRegistration
      */
     public function setPaymentMode($paymentMode)
@@ -274,7 +271,7 @@ class EventAdherentRegistration
     /**
      * Get paymentMode
      *
-     * @return string 
+     * @return string
      */
     public function getPaymentMode()
     {
@@ -284,7 +281,7 @@ class EventAdherentRegistration
     /**
      * Set registrationDate
      *
-     * @param \DateTime $registrationDate
+     * @param  \DateTime                 $registrationDate
      * @return EventAdherentRegistration
      */
     public function setRegistrationDate($registrationDate)
@@ -297,7 +294,7 @@ class EventAdherentRegistration
     /**
      * Get registrationDate
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getRegistrationDate()
     {
@@ -307,7 +304,7 @@ class EventAdherentRegistration
     /**
      * Set author
      *
-     * @param \AppBundle\Entity\Adherent $author
+     * @param  \AppBundle\Entity\Adherent $author
      * @return EventAdherentRegistration
      */
     public function setAuthor(\AppBundle\Entity\Adherent $author)
@@ -320,7 +317,7 @@ class EventAdherentRegistration
     /**
      * Get author
      *
-     * @return \AppBundle\Entity\Adherent 
+     * @return \AppBundle\Entity\Adherent
      */
     public function getAuthor()
     {
@@ -330,7 +327,7 @@ class EventAdherentRegistration
     /**
      * Add meals
      *
-     * @param \AppBundle\Entity\Event\EventMeal $meals
+     * @param  \AppBundle\Entity\Event\EventMeal $meals
      * @return EventAdherentRegistration
      */
     public function addMeal(\AppBundle\Entity\Event\EventMeal $meals)
@@ -353,7 +350,7 @@ class EventAdherentRegistration
     /**
      * Get meals
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getMeals()
     {
@@ -363,7 +360,7 @@ class EventAdherentRegistration
     /**
      * Set cost
      *
-     * @param \AppBundle\Entity\Event\EventCost $cost
+     * @param  \AppBundle\Entity\Event\EventCost $cost
      * @return EventAdherentRegistration
      */
     public function setCost(\AppBundle\Entity\Event\EventCost $cost)
@@ -376,7 +373,7 @@ class EventAdherentRegistration
     /**
      * Get cost
      *
-     * @return \AppBundle\Entity\Event\EventCost 
+     * @return \AppBundle\Entity\Event\EventCost
      */
     public function getCost()
     {
@@ -386,7 +383,7 @@ class EventAdherentRegistration
     /**
      * Add payments
      *
-     * @param \AppBundle\Entity\Payment\EventPayment $payments
+     * @param  \AppBundle\Entity\Payment\EventPayment $payments
      * @return EventAdherentRegistration
      */
     public function addPayment(\AppBundle\Entity\Payment\EventPayment $payments)
@@ -409,7 +406,7 @@ class EventAdherentRegistration
     /**
      * Get payments
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getPayments()
     {
@@ -419,7 +416,7 @@ class EventAdherentRegistration
     /**
      * Set comment
      *
-     * @param string $comment
+     * @param  string                    $comment
      * @return EventAdherentRegistration
      */
     public function setComment($comment)
@@ -432,7 +429,7 @@ class EventAdherentRegistration
     /**
      * Get comment
      *
-     * @return string 
+     * @return string
      */
     public function getComment()
     {
@@ -442,7 +439,7 @@ class EventAdherentRegistration
     /**
      * Set voteStatus
      *
-     * @param boolean $voteStatus
+     * @param  boolean                   $voteStatus
      * @return EventAdherentRegistration
      */
     public function setVoteStatus($voteStatus)
@@ -455,7 +452,7 @@ class EventAdherentRegistration
     /**
      * Get voteStatus
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getVoteStatus()
     {
@@ -465,7 +462,7 @@ class EventAdherentRegistration
     /**
      * Set attendance
      *
-     * @param string $attendance
+     * @param  string                    $attendance
      * @return EventAdherentRegistration
      */
     public function setAttendance($attendance)
@@ -485,7 +482,7 @@ class EventAdherentRegistration
     /**
      * Get attendance
      *
-     * @return string 
+     * @return string
      */
     public function getAttendance()
     {

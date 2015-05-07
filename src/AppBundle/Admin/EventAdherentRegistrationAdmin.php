@@ -105,8 +105,7 @@ class EventAdherentRegistrationAdmin extends Admin
     {
         $isCreate = !$this->id($this->getSubject());
 
-        if ($isCreate)
-        {
+        if ($isCreate) {
             $formMapper
                 // FIXME Filter event !
                 ->add('event', null, array('label' => 'Évenement', 'property' => 'name'))
@@ -117,9 +116,7 @@ class EventAdherentRegistrationAdmin extends Admin
                     'callback' => array($this,'adherentCallback'),
                     'to_string_callback' => array($this,'adherentToStringCallback')));
 
-        }
-        else
-        {
+        } else {
         $formMapper
             ->add('adherent.firstname', NULL, array('label' => 'Prénom', 'read_only' => true,))
             ->add('adherent.lastname', NULL, array('label' => 'Nom', 'read_only' => true,))
@@ -131,14 +128,14 @@ class EventAdherentRegistrationAdmin extends Admin
                         'btn_add' => false
                     ),
                     'required' => false,
-                    'read_only' => true, 
+                    'read_only' => true,
                     'disabled' => true,
                 ), array(
                     'edit' => 'inline',
                     'inline' => 'table',
                     'sortable' => 'position',
                 ));
-        
+
         }
         $formMapper
             ->add('adherent.departement', null, array('label' => 'Département d\'adhesion'))
@@ -232,7 +229,6 @@ class EventAdherentRegistrationAdmin extends Admin
         $user = $this->getConfigurationPool()->getContainer()->get('security.context')->getToken()->getUser();
         //$repo = $this->getDoctrine()->getRepository('AppBundle:Adherent')->findId($user->adherent);
 
-
         $instance->setAdherent($user->getProfile());
         $instance->setAuthor($user->getProfile());
         $instance->setPaymentMode(EventAdherentRegistration::PAYMENT_MODE_ONSITE);
@@ -260,7 +256,7 @@ class EventAdherentRegistrationAdmin extends Admin
         }
     }
 
-    public function adherentCallback ($admin, $property, $value)
+    public function adherentCallback($admin, $property, $value)
     {
         $datagrid = $admin->getDatagrid();
         $queryBuilder = $datagrid->getQuery();
@@ -272,11 +268,12 @@ class EventAdherentRegistrationAdmin extends Admin
             ;
     }
 
-    public function adherentToStringCallback ($user, $property)
+    public function adherentToStringCallback($user, $property)
     {
         $firstname = $user->getFirstname();
         $lastname = $user->getLastname();
         $email = $user->getEmail();
+
         return $firstname . ' ' . $lastname . ' &lt;' . $email . '&gt;';
     }
 

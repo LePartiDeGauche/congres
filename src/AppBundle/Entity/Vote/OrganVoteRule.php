@@ -54,7 +54,7 @@ class OrganVoteRule
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -77,7 +77,7 @@ class OrganVoteRule
     /**
      * Set name
      *
-     * @param string $name
+     * @param  string        $name
      * @return OrganVoteRule
      */
     public function setName($name)
@@ -90,7 +90,7 @@ class OrganVoteRule
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -100,7 +100,7 @@ class OrganVoteRule
     /**
      * Add reportResponsability
      *
-     * @param \AppBundle\Entity\Responsability $reportResponsability
+     * @param  \AppBundle\Entity\Responsability $reportResponsability
      * @return OrganVoteRule
      */
     public function addReportResponsability(\AppBundle\Entity\Responsability $reportResponsability)
@@ -123,7 +123,7 @@ class OrganVoteRule
     /**
      * Get reportResponsability
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getReportResponsability()
     {
@@ -133,7 +133,7 @@ class OrganVoteRule
     /**
      * Add concernedOrganType
      *
-     * @param \AppBundle\Entity\Organ\OrganType $concernedOrganType
+     * @param  \AppBundle\Entity\Organ\OrganType $concernedOrganType
      * @return OrganVoteRule
      */
     public function addConcernedOrganType(\AppBundle\Entity\Organ\OrganType $concernedOrganType)
@@ -156,7 +156,7 @@ class OrganVoteRule
     /**
      * Get concernedOrganType
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getConcernedOrganType()
     {
@@ -166,7 +166,7 @@ class OrganVoteRule
     /**
      * Set textGroup
      *
-     * @param \AppBundle\Entity\Text\TextGroup $textGroup
+     * @param  \AppBundle\Entity\Text\TextGroup $textGroup
      * @return OrganVoteRule
      */
     public function setTextGroup(\AppBundle\Entity\Text\TextGroup $textGroup)
@@ -179,7 +179,7 @@ class OrganVoteRule
     /**
      * Get textGroup
      *
-     * @return \AppBundle\Entity\Text\TextGroup 
+     * @return \AppBundle\Entity\Text\TextGroup
      */
     public function getTextGroup()
     {

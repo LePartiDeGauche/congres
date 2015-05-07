@@ -39,7 +39,7 @@ class ReservationNight
     /**
      * @var \stdClass
      *
-     * @ORM\ManyToMany(targetEntity="SleepingSite", 
+     * @ORM\ManyToMany(targetEntity="SleepingSite",
      * inversedBy="reservationNights")
      */
     private $sleepingSites;
@@ -47,7 +47,7 @@ class ReservationNight
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -57,7 +57,7 @@ class ReservationNight
     /**
      * Set date
      *
-     * @param \DateTime $date
+     * @param  \DateTime        $date
      * @return ReservationNight
      */
     public function setDate($date)
@@ -70,7 +70,7 @@ class ReservationNight
     /**
      * Get date
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getDate()
     {
@@ -80,7 +80,7 @@ class ReservationNight
     /**
      * Set sleepingSite
      *
-     * @param \stdClass $sleepingSite
+     * @param  \stdClass        $sleepingSite
      * @return ReservationNight
      */
     public function setSleepingSite($sleepingSite)
@@ -93,7 +93,7 @@ class ReservationNight
     /**
      * Get sleepingSite
      *
-     * @return \stdClass 
+     * @return \stdClass
      */
     public function getSleepingSite()
     {
@@ -110,7 +110,7 @@ class ReservationNight
     /**
      * Set event
      *
-     * @param \AppBundle\Entity\Event\Event $event
+     * @param  \AppBundle\Entity\Event\Event $event
      * @return ReservationNight
      */
     public function setEvent(\AppBundle\Entity\Event\Event $event = null)
@@ -123,7 +123,7 @@ class ReservationNight
     /**
      * Get event
      *
-     * @return \AppBundle\Entity\Event\Event 
+     * @return \AppBundle\Entity\Event\Event
      */
     public function getEvent()
     {
@@ -133,7 +133,7 @@ class ReservationNight
     /**
      * Add sleepingSites
      *
-     * @param \AppBundle\Entity\Event\SleepingSite $sleepingSites
+     * @param  \AppBundle\Entity\Event\SleepingSite $sleepingSites
      * @return ReservationNight
      */
     public function addSleepingSite(\AppBundle\Entity\Event\SleepingSite $sleepingSites)
@@ -156,7 +156,7 @@ class ReservationNight
     /**
      * Get sleepingSites
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getSleepingSites()
     {
