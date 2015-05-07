@@ -49,23 +49,22 @@ class SleepingSite
      * @ORM\OneToMany(targetEntity="SleepingSpot", mappedBy="sleepingSite",
       * cascade={"persist", "remove", "merge"}, orphanRemoval=true)
      */
-    
+
     private $sleepingSpots;
 
     /**
      * @var \stdClass
      *
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Event\ReservationNight", mappedBy="sleepingSites")
-     * 
+     *
      *
      */
     private $reservationNights;
 
-
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -75,7 +74,7 @@ class SleepingSite
     /**
      * Set name
      *
-     * @param string $name
+     * @param  string       $name
      * @return SleepingSite
      */
     public function setName($name)
@@ -88,7 +87,7 @@ class SleepingSite
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -98,7 +97,7 @@ class SleepingSite
     /**
      * Set description
      *
-     * @param string $description
+     * @param  string       $description
      * @return SleepingSite
      */
     public function setDescription($description)
@@ -111,7 +110,7 @@ class SleepingSite
     /**
      * Get description
      *
-     * @return string 
+     * @return string
      */
     public function getDescription()
     {
@@ -121,7 +120,7 @@ class SleepingSite
     /**
      * Set beds
      *
-     * @param \stdClass $beds
+     * @param  \stdClass    $beds
      * @return SleepingSite
      */
     public function setBeds($beds)
@@ -134,7 +133,7 @@ class SleepingSite
     /**
      * Get beds
      *
-     * @return \stdClass 
+     * @return \stdClass
      */
     public function getBeds()
     {
@@ -144,7 +143,7 @@ class SleepingSite
     /**
      * Set bedsNight
      *
-     * @param \stdClass $bedsNight
+     * @param  \stdClass    $bedsNight
      * @return SleepingSite
      */
     public function setBedsNight($bedsNight)
@@ -157,7 +156,7 @@ class SleepingSite
     /**
      * Get bedsNight
      *
-     * @return \stdClass 
+     * @return \stdClass
      */
     public function getBedsNight()
     {
@@ -175,7 +174,7 @@ class SleepingSite
     /**
      * Set sleepingFacility
      *
-     * @param \AppBundle\Entity\Event\SleepingFacility $sleepingFacility
+     * @param  \AppBundle\Entity\Event\SleepingFacility $sleepingFacility
      * @return SleepingSite
      */
     public function setSleepingFacility(\AppBundle\Entity\Event\SleepingFacility $sleepingFacility)
@@ -188,7 +187,7 @@ class SleepingSite
     /**
      * Get sleepingFacility
      *
-     * @return \AppBundle\Entity\Event\SleepingFacility 
+     * @return \AppBundle\Entity\Event\SleepingFacility
      */
     public function getSleepingFacility()
     {
@@ -198,7 +197,7 @@ class SleepingSite
     /**
      * Add sleepingSpots
      *
-     * @param \AppBundle\Entity\Event\SleepingSpot $sleepingSpots
+     * @param  \AppBundle\Entity\Event\SleepingSpot $sleepingSpots
      * @return SleepingSite
      */
     public function addSleepingSpot(\AppBundle\Entity\Event\SleepingSpot $sleepingSpots)
@@ -221,7 +220,7 @@ class SleepingSite
     /**
      * Get sleepingSpots
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getSleepingSpots()
     {
@@ -231,7 +230,7 @@ class SleepingSite
     /**
      * Add reservationNights
      *
-     * @param \AppBundle\Entity\Event\ReservationNight $reservationNights
+     * @param  \AppBundle\Entity\Event\ReservationNight $reservationNights
      * @return SleepingSite
      */
     public function addReservationNight(\AppBundle\Entity\Event\ReservationNight $reservationNights)
@@ -254,7 +253,7 @@ class SleepingSite
     /**
      * Get reservationNights
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getReservationNights()
     {

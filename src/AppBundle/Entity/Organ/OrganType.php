@@ -59,7 +59,6 @@ class OrganType
      */
     private $participationAllowedBy;
 
-
     public function __toString()
     {
         return $this->name;
@@ -67,7 +66,7 @@ class OrganType
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -77,7 +76,7 @@ class OrganType
     /**
      * Set name
      *
-     * @param string $name
+     * @param  string    $name
      * @return OrganType
      */
     public function setName($name)
@@ -90,7 +89,7 @@ class OrganType
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -100,7 +99,7 @@ class OrganType
     /**
      * Set organs
      *
-     * @param \stdClass $organs
+     * @param  \stdClass $organs
      * @return OrganType
      */
     public function setOrgans($organs)
@@ -113,7 +112,7 @@ class OrganType
     /**
      * Get organs
      *
-     * @return \stdClass 
+     * @return \stdClass
      */
     public function getOrgans()
     {
@@ -123,7 +122,7 @@ class OrganType
     /**
      * Set type
      *
-     * @param string $type
+     * @param  string    $type
      * @return OrganType
      */
     public function setType($type)
@@ -136,7 +135,7 @@ class OrganType
     /**
      * Get type
      *
-     * @return string 
+     * @return string
      */
     public function getType()
     {
@@ -146,7 +145,7 @@ class OrganType
     /**
      * Set isUnique
      *
-     * @param boolean $isUnique
+     * @param  boolean   $isUnique
      * @return OrganType
      */
     public function setIsUnique($isUnique)
@@ -159,7 +158,7 @@ class OrganType
     /**
      * Get isUnique
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getIsUnique()
     {

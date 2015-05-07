@@ -2,11 +2,9 @@
 
 namespace AppBundle\Controller;
 
-
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use AppBundle\Entity\Payment\Payment;
 
@@ -19,7 +17,7 @@ class PaymentController extends Controller
 {
 
     /**
-     * Online transaction with paybox 
+     * Online transaction with paybox
      *
      * @Route("/{id}", name="payment_pay")
      * @Method("GET")
@@ -37,7 +35,7 @@ class PaymentController extends Controller
             $cmdid = $payment->getReferenceIdentifierPrefix(). '-' . $payment->getId();
             $paybox = $this->get('lexik_paybox.request_handler');
             $paybox->setParameters(array(
-                'PBX_CMD'          => $cmdid, 
+                'PBX_CMD'          => $cmdid,
                 'PBX_DEVISE'       => '978',
                 'PBX_PORTEUR'      => $adherent->getEmail(),
                 'PBX_RETOUR'       => 'Mt:M;Ref:R;Auto:A;Erreur:E',
@@ -59,7 +57,6 @@ class PaymentController extends Controller
             $this->getDoctrine()->getManager()->persist($payment);
             $this->getDoctrine()->getManager()->flush();
 
-
             return $this->render("payment/pay.html.twig", array(
                 'url'  => $paybox->getUrl(),
                 'form' => $paybox->getForm()->createView(),
@@ -69,7 +66,7 @@ class PaymentController extends Controller
     }
 
     /**
-     * Online transaction with paybox 
+     * Online transaction with paybox
      *
      * @Route("/return/{status}", name="payment_paybox_return")
      *

@@ -10,7 +10,7 @@ class EventType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -26,7 +26,7 @@ class EventType extends AbstractType
             //->add('participants')
         ;
     }
-    
+
     /**
      * @param OptionsResolverInterface $resolver
      */

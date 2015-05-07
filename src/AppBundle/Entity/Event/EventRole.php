@@ -51,7 +51,6 @@ class EventRole
      */
     private $requiredResponsabilities;
 
-
     /**
      * @var \stdClass
      *
@@ -59,11 +58,10 @@ class EventRole
      */
     private $participants;
 
-
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -73,7 +71,7 @@ class EventRole
     /**
      * Set event
      *
-     * @param Event $event
+     * @param  Event     $event
      * @return EventRole
      */
     public function setEvent(Event $event)
@@ -86,7 +84,7 @@ class EventRole
     /**
      * Get event
      *
-     * @return \stdClass 
+     * @return \stdClass
      */
     public function getEvent()
     {
@@ -96,7 +94,7 @@ class EventRole
     /**
      * Set name
      *
-     * @param string $name
+     * @param  string    $name
      * @return EventRole
      */
     public function setName($name)
@@ -109,7 +107,7 @@ class EventRole
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -119,7 +117,7 @@ class EventRole
     /**
      * Set description
      *
-     * @param string $description
+     * @param  string    $description
      * @return EventRole
      */
     public function setDescription($description)
@@ -132,7 +130,7 @@ class EventRole
     /**
      * Get description
      *
-     * @return string 
+     * @return string
      */
     public function getDescription()
     {
@@ -142,7 +140,7 @@ class EventRole
     /**
      * Set requieredResponsa
      *
-     * @param \stdClass $requieredResponsabilities
+     * @param  \stdClass $requieredResponsabilities
      * @return EventRole
      */
     public function setRequiredResponsabilities($requieredResponsa)
@@ -155,7 +153,7 @@ class EventRole
     /**
      * Get requiredResponsabilities
      *
-     * @return \stdClass 
+     * @return \stdClass
      */
     public function getRequiredResponsabilities()
     {
@@ -175,7 +173,7 @@ class EventRole
     /**
      * Add requiredResponsabilities
      *
-     * @param \AppBundle\Entity\Responsability $requiredResponsabilities
+     * @param  \AppBundle\Entity\Responsability $requiredResponsabilities
      * @return EventRole
      */
     public function addRequiredResponsability(\AppBundle\Entity\Responsability $requiredResponsabilities)
@@ -198,7 +196,7 @@ class EventRole
     /**
      * Add participants
      *
-     * @param \AppBundle\Entity\Event\EventAdherentRegistration $participants
+     * @param  \AppBundle\Entity\Event\EventAdherentRegistration $participants
      * @return EventRole
      */
     public function addParticipant(\AppBundle\Entity\Event\EventAdherentRegistration $participants)
@@ -221,7 +219,7 @@ class EventRole
     /**
      * Get participants
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getParticipants()
     {

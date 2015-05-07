@@ -2,8 +2,6 @@
 
 namespace AppBundle\EventListener;
 
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Lexik\Bundle\PayboxBundle\Event\PayboxResponseEvent;
 use Doctrine\ORM\EntityManager;
 use AppBundle\Entity\Payment\Payment;
@@ -20,8 +18,7 @@ class PaymentResponseListener
     public function onPaymentIpnResponse(PayboxResponseEvent $event)
     {
 
-        if ($event->isVerified())
-        {
+        if ($event->isVerified()) {
             $data = $event->getData();
             $ref = explode('-', $data['Ref']);
             $payment_id = $ref[count($ref) - 1];
@@ -29,12 +26,9 @@ class PaymentResponseListener
             $payment = $this->em->getRepository('AppBundle:Payment\Payment')->findOneById($payment_id);
             $payment->setPaymentIPN($data);
 
-            if ($data['Erreur'] == 0000)
-            {
+            if ($data['Erreur'] == 0000) {
                 $payment->setStatus(Payment::STATUS_BANKED);
-            }
-            else
-            {
+            } else {
                 $payment->setStatus(Payment::STATUS_REFUSED);
             }
             $this->em->persist($payment);
@@ -43,5 +37,3 @@ class PaymentResponseListener
 
     }
 }
-
-?>

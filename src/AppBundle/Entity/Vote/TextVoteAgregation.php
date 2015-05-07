@@ -74,7 +74,7 @@ abstract class TextVoteAgregation
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -84,7 +84,7 @@ abstract class TextVoteAgregation
     /**
      * Set text
      *
-     * @param \stdClass $text
+     * @param  \stdClass                    $text
      * @return IndividualTextVoteAgregation
      */
     public function setText($text)
@@ -97,7 +97,7 @@ abstract class TextVoteAgregation
     /**
      * Get text
      *
-     * @return \stdClass 
+     * @return \stdClass
      */
     public function getText()
     {
@@ -107,7 +107,7 @@ abstract class TextVoteAgregation
     /**
      * Set textGroup
      *
-     * @param \stdClass $textGroup
+     * @param  \stdClass                    $textGroup
      * @return IndividualTextVoteAgregation
      */
     public function setTextGroup($textGroup)
@@ -120,7 +120,7 @@ abstract class TextVoteAgregation
     /**
      * Get textGroup
      *
-     * @return \stdClass 
+     * @return \stdClass
      */
     public function getTextGroup()
     {
@@ -130,7 +130,7 @@ abstract class TextVoteAgregation
     /**
      * Set voteFor
      *
-     * @param integer $voteFor
+     * @param  integer                      $voteFor
      * @return IndividualTextVoteAgregation
      */
     public function setVoteFor($voteFor)
@@ -143,7 +143,7 @@ abstract class TextVoteAgregation
     /**
      * Get voteFor
      *
-     * @return integer 
+     * @return integer
      */
     public function getVoteFor()
     {
@@ -153,7 +153,7 @@ abstract class TextVoteAgregation
     /**
      * Set voteAgainst
      *
-     * @param integer $voteAgainst
+     * @param  integer                      $voteAgainst
      * @return IndividualTextVoteAgregation
      */
     public function setVoteAgainst($voteAgainst)
@@ -166,7 +166,7 @@ abstract class TextVoteAgregation
     /**
      * Get voteAgainst
      *
-     * @return integer 
+     * @return integer
      */
     public function getVoteAgainst()
     {
@@ -176,7 +176,7 @@ abstract class TextVoteAgregation
     /**
      * Set voteAbstention
      *
-     * @param integer $voteAbstention
+     * @param  integer                      $voteAbstention
      * @return IndividualTextVoteAgregation
      */
     public function setVoteAbstention($voteAbstention)
@@ -189,7 +189,7 @@ abstract class TextVoteAgregation
     /**
      * Get voteAbstention
      *
-     * @return integer 
+     * @return integer
      */
     public function getVoteAbstention()
     {

@@ -5,7 +5,6 @@ namespace AppBundle\Entity\Vote;
 use Doctrine\ORM\Mapping as ORM;
 use AppBundle\Entity\Text\Text;
 use AppBundle\Entity\Text\TextGroup;
-use AppBundle\Entity\Vote\TextVoteAgregation;
 
 /**
  * AppBundle\Entity\Vote\IndividualTextVoteAgregation
@@ -37,7 +36,6 @@ class IndividualTextVoteAgregation extends TextVoteAgregation
      */
     private $voteRule;
 
-
     public function __construct(Text $text, TextGroup $textGroup, VoteRule $voteRule)
     {
         parent::__construct($text, $textGroup);
@@ -47,7 +45,7 @@ class IndividualTextVoteAgregation extends TextVoteAgregation
     /**
      * Set voteRule
      *
-     * @param \stdClass $voteRule
+     * @param  \stdClass                    $voteRule
      * @return IndividualTextVoteAgregation
      */
     public function setVoteRule($voteRule)
@@ -60,7 +58,7 @@ class IndividualTextVoteAgregation extends TextVoteAgregation
     /**
      * Get voteRule
      *
-     * @return \stdClass 
+     * @return \stdClass
      */
     public function getVoteRule()
     {

@@ -10,7 +10,7 @@ class IndividualOrganTextVoteType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -21,7 +21,7 @@ class IndividualOrganTextVoteType extends AbstractType
             ->add('voteAbstention', null, array( 'label' => 'Abstentions' ))
             ->add('voteNotTakingPart', null, array( 'label' => 'Ne prend pas part au vote' ))
             ->add('textVoteAgregations', 'collection', array(
-                'type' => new IndividualOrganTextVoteAgregationType(), 
+                'type' => new IndividualOrganTextVoteAgregationType(),
                 'options' => array('vote_modality' => $options['vote_modality']), 'label' => 'Textes'))
                 ;
     }

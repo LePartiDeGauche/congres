@@ -123,9 +123,7 @@ class EventPaymentAdmin extends Admin
         $user = $this->getConfigurationPool()->getContainer()->get('security.context')->getToken()->getUser();
         //$repo = $this->getDoctrine()->getRepository('AppBundle:Adherent')->findId($user->adherent);
 
-
-        if ($instance->getAuthor() == NULL)
-        {
+        if ($instance->getAuthor() == NULL) {
             $instance->setAuthor($user->getProfile());
         }
 

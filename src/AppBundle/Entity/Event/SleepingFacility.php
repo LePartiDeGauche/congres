@@ -52,7 +52,6 @@ class SleepingFacility
      */
     private $description;
 
-
     /**
      * @var string
      *
@@ -68,11 +67,10 @@ class SleepingFacility
      */
     private $positionDescription;
 
-
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -82,7 +80,7 @@ class SleepingFacility
     /**
      * Set sleepingSite
      *
-     * @param \stdClass $sleepingSite
+     * @param  \stdClass        $sleepingSite
      * @return SleepingFacility
      */
     public function setSleepingSite($sleepingSite)
@@ -95,7 +93,7 @@ class SleepingFacility
     /**
      * Get sleepingSite
      *
-     * @return \stdClass 
+     * @return \stdClass
      */
     public function getSleepingSite()
     {
@@ -105,7 +103,7 @@ class SleepingFacility
     /**
      * Set name
      *
-     * @param string $name
+     * @param  string           $name
      * @return SleepingFacility
      */
     public function setName($name)
@@ -118,7 +116,7 @@ class SleepingFacility
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -128,7 +126,7 @@ class SleepingFacility
     /**
      * Set description
      *
-     * @param string $description
+     * @param  string           $description
      * @return SleepingFacility
      */
     public function setDescription($description)
@@ -141,7 +139,7 @@ class SleepingFacility
     /**
      * Get description
      *
-     * @return string 
+     * @return string
      */
     public function getDescription()
     {
@@ -151,7 +149,7 @@ class SleepingFacility
     /**
      * Set address
      *
-     * @param string $address
+     * @param  string           $address
      * @return SleepingFacility
      */
     public function setAddress($address)
@@ -164,7 +162,7 @@ class SleepingFacility
     /**
      * Get address
      *
-     * @return string 
+     * @return string
      */
     public function getAddress()
     {
@@ -174,7 +172,7 @@ class SleepingFacility
     /**
      * Set positionDescription
      *
-     * @param string $positionDescription
+     * @param  string           $positionDescription
      * @return SleepingFacility
      */
     public function setPositionDescription($positionDescription)
@@ -187,7 +185,7 @@ class SleepingFacility
     /**
      * Get positionDescription
      *
-     * @return string 
+     * @return string
      */
     public function getPositionDescription()
     {
@@ -204,7 +202,7 @@ class SleepingFacility
     /**
      * Set event
      *
-     * @param string $event
+     * @param  string           $event
      * @return SleepingFacility
      */
     public function setEvent($event)
@@ -217,7 +215,7 @@ class SleepingFacility
     /**
      * Get event
      *
-     * @return string 
+     * @return string
      */
     public function getEvent()
     {
@@ -227,7 +225,7 @@ class SleepingFacility
     /**
      * Add sleepingSites
      *
-     * @param \AppBundle\Entity\Event\SleepingSite $sleepingSites
+     * @param  \AppBundle\Entity\Event\SleepingSite $sleepingSites
      * @return SleepingFacility
      */
     public function addSleepingSite(\AppBundle\Entity\Event\SleepingSite $sleepingSites)
@@ -250,7 +248,7 @@ class SleepingFacility
     /**
      * Get sleepingSites
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getSleepingSites()
     {

@@ -45,11 +45,10 @@ abstract class VoteRule
      */
     protected $textGroup;
 
-
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -59,7 +58,7 @@ abstract class VoteRule
     /**
      * Set concernedResponsability
      *
-     * @param \stdClass $concernedResponsability
+     * @param  \stdClass $concernedResponsability
      * @return VoteRule
      */
     public function setConcernedResponsability($concernedResponsability)
@@ -72,7 +71,7 @@ abstract class VoteRule
     /**
      * Get concernedResponsability
      *
-     * @return \stdClass 
+     * @return \stdClass
      */
     public function getConcernedResponsability()
     {
@@ -89,7 +88,7 @@ abstract class VoteRule
     /**
      * Set name
      *
-     * @param string $name
+     * @param  string   $name
      * @return VoteRule
      */
     public function setName($name)
@@ -102,7 +101,7 @@ abstract class VoteRule
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -112,7 +111,7 @@ abstract class VoteRule
     /**
      * Add concernedResponsability
      *
-     * @param \AppBundle\Entity\Responsability $concernedResponsability
+     * @param  \AppBundle\Entity\Responsability $concernedResponsability
      * @return VoteRule
      */
     public function addConcernedResponsability(\AppBundle\Entity\Responsability $concernedResponsability)
@@ -135,7 +134,7 @@ abstract class VoteRule
     /**
      * Set textGroup
      *
-     * @param \AppBundle\Entity\Text\TextGroup $textGroup
+     * @param  \AppBundle\Entity\Text\TextGroup $textGroup
      * @return VoteRule
      */
     public function setTextGroup(\AppBundle\Entity\Text\TextGroup $textGroup)
@@ -148,7 +147,7 @@ abstract class VoteRule
     /**
      * Get textGroup
      *
-     * @return \AppBundle\Entity\Text\TextGroup 
+     * @return \AppBundle\Entity\Text\TextGroup
      */
     public function getTextGroup()
     {

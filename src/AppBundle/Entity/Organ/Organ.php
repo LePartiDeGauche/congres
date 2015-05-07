@@ -43,23 +43,21 @@ class Organ
      */
     private $organType;
 
-
     /**
      * @var \stdClass
      * parents organ on the hierarchie.
      * example : a "comité" parent is commission départementale
-     * @ORM\ManyToMany(targetEntity="Organ", 
+     * @ORM\ManyToMany(targetEntity="Organ",
      * inversedBy="subOrgans")
      */
-    private $parentOrgans;   
-
+    private $parentOrgans;
 
     /**
      * @var \stdClass
      * attached sub organs on the hierarchy.
      * example : several "comité" are attache to a commission départementale
      * example : Commité is attached To Comité Départementale
-     * @ORM\ManyToMany(targetEntity="Organ", 
+     * @ORM\ManyToMany(targetEntity="Organ",
      * mappedBy="parentOrgans")
      */
     private $subOrgans;
@@ -77,7 +75,7 @@ class Organ
      *
      *  @ORM\OneToMany(targetEntity="AppBundle\Entity\Vote\IndividualOrganTextVote",
      *  mappedBy="organ")
-     *  
+     *
      */
     private $textVoteReports;
 
@@ -96,7 +94,7 @@ class Organ
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -106,7 +104,7 @@ class Organ
     /**
      * Set name
      *
-     * @param string $name
+     * @param  string $name
      * @return Organ
      */
     public function setName($name)
@@ -119,7 +117,7 @@ class Organ
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -129,7 +127,7 @@ class Organ
     /**
      * Set description
      *
-     * @param string $description
+     * @param  string $description
      * @return Organ
      */
     public function setDescription($description)
@@ -142,7 +140,7 @@ class Organ
     /**
      * Get description
      *
-     * @return string 
+     * @return string
      */
     public function getDescription()
     {
@@ -152,7 +150,7 @@ class Organ
     /**
      * Set organType
      *
-     * @param \stdClass $organType
+     * @param  \stdClass $organType
      * @return Organ
      */
     public function setOrganType($organType)
@@ -165,7 +163,7 @@ class Organ
     /**
      * Get organType
      *
-     * @return \stdClass 
+     * @return \stdClass
      */
     public function getOrganType()
     {
@@ -186,7 +184,7 @@ class Organ
     /**
      * Add parentOrgans
      *
-     * @param \AppBundle\Entity\Organ\Organ $parentOrgans
+     * @param  \AppBundle\Entity\Organ\Organ $parentOrgans
      * @return Organ
      */
     public function addParentOrgan(\AppBundle\Entity\Organ\Organ $parentOrgans)
@@ -209,7 +207,7 @@ class Organ
     /**
      * Get parentOrgans
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getParentOrgans()
     {
@@ -219,7 +217,7 @@ class Organ
     /**
      * Add subOrgans
      *
-     * @param \AppBundle\Entity\Organ\Organ $subOrgans
+     * @param  \AppBundle\Entity\Organ\Organ $subOrgans
      * @return Organ
      */
     public function addSubOrgan(\AppBundle\Entity\Organ\Organ $subOrgans)
@@ -242,7 +240,7 @@ class Organ
     /**
      * Get subOrgans
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getSubOrgans()
     {
@@ -252,7 +250,7 @@ class Organ
     /**
      * Add participants
      *
-     * @param \AppBundle\Entity\Organ\OrganParticipation $participants
+     * @param  \AppBundle\Entity\Organ\OrganParticipation $participants
      * @return Organ
      */
     public function addParticipant(\AppBundle\Entity\Organ\OrganParticipation $participants)
@@ -275,7 +273,7 @@ class Organ
     /**
      * Get participants
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getParticipants()
     {
@@ -285,7 +283,7 @@ class Organ
     /**
      * Add designatedParticipants
      *
-     * @param \AppBundle\Entity\AdherentResponsability $designatedParticipants
+     * @param  \AppBundle\Entity\AdherentResponsability $designatedParticipants
      * @return Organ
      */
     public function addDesignatedParticipant(\AppBundle\Entity\AdherentResponsability $designatedParticipants)
@@ -308,7 +306,7 @@ class Organ
     /**
      * Get designatedParticipants
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getDesignatedParticipants()
     {

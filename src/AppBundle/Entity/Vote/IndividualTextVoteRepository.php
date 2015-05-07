@@ -3,7 +3,6 @@
 namespace AppBundle\Entity\Vote;
 
 use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\Mapping\ClassMetadata;
 use AppBundle\Entity\Adherent;
 use AppBundle\Entity\Text\TextGroup;
 use AppBundle\Entity\Text\Text;
@@ -38,7 +37,6 @@ class IndividualTextVoteRepository extends EntityRepository
 
         return $voteCount;
 
-    
     }
 
 }

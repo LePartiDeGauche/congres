@@ -12,7 +12,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use AppBundle\Entity\Event\Event;
 use AppBundle\Entity\Adherent;
 use AppBundle\Entity\Event\EventAdherentRegistration;
-use AppBundle\Form\Event\EventType;
 use AppBundle\Form\Event\EventAdherentRegistrationType;
 use AppBundle\Entity\Payment\EventPayment;
 
@@ -38,8 +37,7 @@ class EventController extends Controller
      */
     public function registrationShowAction(Event $event, EventAdherentRegistration $eventRegistration)
     {
-        if ($eventRegistration->getAuthor() !=  $this->getUser()->getProfile())
-        {
+        if ($eventRegistration->getAuthor() !=  $this->getUser()->getProfile()) {
             throw new AccessDeniedException();
         }
 
@@ -76,8 +74,7 @@ class EventController extends Controller
         $cost = $eventRegistration->getCost()->getCost();
         $adherent = $this->getUser()->getProfile();
 
-        if ($payedAmount < $cost)
-        {
+        if ($payedAmount < $cost) {
             $payment = $this->createPayment($adherent, $event, $eventRegistration, $cost - $payedAmount);
 
             $em->persist($payment);
@@ -106,35 +103,29 @@ class EventController extends Controller
         $adherent = $this->getUser()->getProfile();
         $em = $this->getDoctrine()->getManager();
 
-
         $eventRegistration = $this->getDoctrine()
             ->getRepository('AppBundle:Event\EventAdherentRegistration')
             ->findOneBy(array('adherent' => $adherent, 'event' => $event));
 
-        if ($eventRegistration) 
-        {
+        if ($eventRegistration) {
             return $this->redirect($this->generateUrl('event_registration_show',
                 array('event_id' => $event->getId(), 'event_reg_id' => $eventRegistration->getId())));
         }
 
         // TODO voter (no time for this now...)
         $now = new \DateTime('now');
-        if ($now < $event->getRegistrationBegin() || $now > $event->getRegistrationEnd())
-        {
+        if ($now < $event->getRegistrationBegin() || $now > $event->getRegistrationEnd()) {
             throw new AccessDeniedException("Les inscriptions ne sont pas ouvertes");
         }
 
-
         $eventRegistration = new EventAdherentRegistration($this->getUser()->getProfile(), $event);
-
 
         $eventRegistration->setAdherent($adherent);
         $form = $this->createRegistrationCreateForm($eventRegistration, $event);
 
         $form->handleRequest($request);
 
-        if ($form->isValid())
-        {
+        if ($form->isValid()) {
             $eventRegistration = $form->getData();
             $eventRegistration->setEvent($event);
             $eventRegistration->setRegistrationDate(new \DateTime('now'));
@@ -143,17 +134,14 @@ class EventController extends Controller
             $em->persist($eventRegistration);
             $em->flush();
 
-            if ($eventRegistration->getPaymentMode() == EventAdherentRegistration::PAYMENT_MODE_ONLINE)
-            {
+            if ($eventRegistration->getPaymentMode() == EventAdherentRegistration::PAYMENT_MODE_ONLINE) {
                 $eventPayment = $this->createPayment($adherent, $event, $eventRegistration, $eventRegistration->getCost()->getCost());
                 $em->persist($eventPayment);
                 $em->flush();
 
                 return $this->redirect($this->generateUrl('payment_pay',
                     array('id' => $eventPayment->getId())));
-            }
-            else
-            {
+            } else {
                 return $this->redirect($this->generateUrl('event_registration_show',
                     array('event_id' => $event->getId(), 'event_reg_id' => $eventRegistration->getId())));
             }
@@ -165,7 +153,6 @@ class EventController extends Controller
             'form'  => $form->createView()))
             ;
     }
-
 
     /**
      * Finds and displays a Event\Event entity.
@@ -204,7 +191,6 @@ class EventController extends Controller
         ));
 
     }
-
 
     /**
      * Creates a form to create a Event\EventAdherentRegistration entity.

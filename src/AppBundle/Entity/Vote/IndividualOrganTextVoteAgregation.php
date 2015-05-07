@@ -5,8 +5,6 @@ namespace AppBundle\Entity\Vote;
 use Doctrine\ORM\Mapping as ORM;
 use AppBundle\Entity\Text\Text;
 use AppBundle\Entity\Text\TextGroup;
-use AppBundle\Entity\Vote\TextVoteAgregation;
-use AppBundle\Entity\Vote\IndividualOrganTextVote;
 
 /**
  * AppBundle\Entity\Vote\IndividualOrganTextVoteAgregation
@@ -36,12 +34,10 @@ class IndividualOrganTextVoteAgregation extends TextVoteAgregation
      */
     private $individualOrganTextVote;
 
-
     public function __tostring()
     {
         return $this->getText()->getTitle() . " : " . $this->voteFor;
     }
-
 
     public function __construct(Text $text, TextGroup $textGroup, IndividualOrganTextVote $individualOrganTextVote)
     {
@@ -52,7 +48,7 @@ class IndividualOrganTextVoteAgregation extends TextVoteAgregation
     /**
      * Set voteRule
      *
-     * @param \stdClass $voteRule
+     * @param  \stdClass                         $voteRule
      * @return IndividualOrganTextVoteAgregation
      */
     public function setVoteRule($voteRule)
@@ -65,13 +61,12 @@ class IndividualOrganTextVoteAgregation extends TextVoteAgregation
     /**
      * Get voteRule
      *
-     * @return \stdClass 
+     * @return \stdClass
      */
     public function getVoteRule()
     {
         return $this->voteRule;
     }
-
 
     /**
      * Set individualOrganTextVote

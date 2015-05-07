@@ -48,7 +48,7 @@ class AdherentResponsability
 
     /**
      * @var \stdClass
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Organ\OrganParticipation", 
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Organ\OrganParticipation",
      * inversedBy="allowedBy")
      */
     private $allowsParticipations;
@@ -74,11 +74,10 @@ class AdherentResponsability
      */
     private $isActive;
 
-
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -88,7 +87,7 @@ class AdherentResponsability
     /**
      * Set adherent
      *
-     * @param \stdClass $adherent
+     * @param  \stdClass              $adherent
      * @return AdherentResponsability
      */
     public function setAdherent($adherent)
@@ -101,7 +100,7 @@ class AdherentResponsability
     /**
      * Get adherent
      *
-     * @return \stdClass 
+     * @return \stdClass
      */
     public function getAdherent()
     {
@@ -111,7 +110,7 @@ class AdherentResponsability
     /**
      * Set responsability
      *
-     * @param \stdClass $responsability
+     * @param  \stdClass              $responsability
      * @return AdherentResponsability
      */
     public function setResponsability($responsability)
@@ -124,7 +123,7 @@ class AdherentResponsability
     /**
      * Get responsability
      *
-     * @return \stdClass 
+     * @return \stdClass
      */
     public function getResponsability()
     {
@@ -134,7 +133,7 @@ class AdherentResponsability
     /**
      * Set start
      *
-     * @param \DateTime $start
+     * @param  \DateTime              $start
      * @return AdherentResponsability
      */
     public function setStart($start)
@@ -147,7 +146,7 @@ class AdherentResponsability
     /**
      * Get start
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getStart()
     {
@@ -157,7 +156,7 @@ class AdherentResponsability
     /**
      * Set end
      *
-     * @param \DateTime $end
+     * @param  \DateTime              $end
      * @return AdherentResponsability
      */
     public function setEnd($end)
@@ -170,7 +169,7 @@ class AdherentResponsability
     /**
      * Get end
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getEnd()
     {
@@ -180,7 +179,7 @@ class AdherentResponsability
     /**
      * Set isActive
      *
-     * @param boolean $isActive
+     * @param  boolean                $isActive
      * @return AdherentResponsability
      */
     public function setIsActive($isActive)
@@ -193,7 +192,7 @@ class AdherentResponsability
     /**
      * Get isActive
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getIsActive()
     {

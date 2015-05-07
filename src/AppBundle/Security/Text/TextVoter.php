@@ -13,7 +13,6 @@ final class TextVoter extends AbstractVoter
 
     const DELETE = 'delete';
 
-
     private $entityManager;
     private $container;
 

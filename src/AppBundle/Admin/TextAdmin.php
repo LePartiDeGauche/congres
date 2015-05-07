@@ -95,10 +95,11 @@ class TextAdmin extends Admin
                         ->setParameter('value', '%' . $value . '%')
                     ;
                 },
-                'to_string_callback' => function($user, $property) {
+                'to_string_callback' => function ($user, $property) {
                     $firstname = $user->getFirstname();
                     $lastname = $user->getLastname();
                     $email = $user->getEmail();
+
                     return $firstname . ' ' . $lastname . ' &lt;' . $email . '&gt;';
                 },
             ))
@@ -125,7 +126,7 @@ class TextAdmin extends Admin
             ->add('rawContent', 'html')
             ->add('status', 'choice', array(
                 'label' => 'Statut',
-                'choices' =>$this->status_choice, 
+                'choices' =>$this->status_choice,
                 'multiple' => false,
             ))
         ;
@@ -136,9 +137,7 @@ class TextAdmin extends Admin
         $user = $this->getConfigurationPool()->getContainer()->get('security.context')->getToken()->getUser();
         //$repo = $this->getDoctrine()->getRepository('AppBundle:Adherent')->findId($user->adherent);
 
-
-        if ($instance->getAuthor() == NULL)
-        {
+        if ($instance->getAuthor() == NULL) {
             $instance->setAuthor($user->getProfile());
         }
 

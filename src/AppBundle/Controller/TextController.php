@@ -46,12 +46,10 @@ class TextController extends Controller
             ->findTextAndVoteByTextGroup($author, $textGroup);
 
         $reportOrgans = null;
-        if ($textGroup->getVoteType() == TextGroup::VOTETYPE_COLLECTIVE)
-        {
+        if ($textGroup->getVoteType() == TextGroup::VOTETYPE_COLLECTIVE) {
             $reportOrgans = $em->getRepository('AppBundle:Text\TextGroup')
                 ->getOrganAdherentCanReportFor($author);
         }
-
 
         $textGroupVoteGranted = $this->isGranted('vote', $textGroup);
 
@@ -74,7 +72,7 @@ class TextController extends Controller
      * @Method("GET")
      */
     public function userListAction()
-    { 
+    {
         // FIXME: for now we always display current user info
         $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
@@ -122,12 +120,10 @@ class TextController extends Controller
 
         $form->handleRequest($request);
 
-        if ($form->isValid() && $form->getData()->getRawContent() != null)
-        {
+        if ($form->isValid() && $form->getData()->getRawContent() != null) {
             $text = $form->getData();
             $text->setTextGroup($textGroup);
-            foreach ($textGroup->getVoteRules() as $voteRule)
-            {
+            foreach ($textGroup->getVoteRules() as $voteRule) {
                 $itva = new IndividualTextVoteAgregation($text, $textGroup, $voteRule);
                 $text->addIndividualVoteAgregation($itva);
                 $this->getDoctrine()->getManager()->persist($itva);
@@ -138,6 +134,7 @@ class TextController extends Controller
             return $this->redirect($this->generateUrl('text_user_list'));
 
         }
+
         return $this->render('text/new.html.twig', array(
             'textGroup'      => $textGroup,
             'text'      => $text,
@@ -152,13 +149,11 @@ class TextController extends Controller
      */
     public function individualVoteAction(Request $request, TextGroup $textGroup, Text $text)
     {
-        if ($textGroup->getId() != $text->getTextGroup()->getId())
-        {
+        if ($textGroup->getId() != $text->getTextGroup()->getId()) {
             throw \AccessDeniedException();
         }
         $this->denyAccessUnlessGranted('vote', $textGroup);
         $this->denyAccessUnlessGranted('vote', $text);
-
 
         $form = $this->createFormBuilder()->getForm();
 
@@ -174,14 +169,11 @@ class TextController extends Controller
             $agregs = $em->getRepository('AppBundle:Vote\IndividualTextVoteAgregation')
                 ->getAgregationForUserAndText($text, $adherent);
 
-            foreach($agregs as $agreg)
-            {
+            foreach ($agregs as $agreg) {
                 $agreg->setVoteFor($agreg->getVoteFor() + 1);
                 $voteRule =  $agreg->getVoteRule();
-                if ($voteRule instanceof ThresholdVoteRule)
-                {
-                    if ($agreg->getVoteFor() >= $voteRule->getThreshold())
-                    {
+                if ($voteRule instanceof ThresholdVoteRule) {
+                    if ($agreg->getVoteFor() >= $voteRule->getThreshold()) {
                         $text->setStatus(Text::STATUS_ADOPTED);
                         $em->persist($text);
                     }
@@ -190,6 +182,7 @@ class TextController extends Controller
             }
 
             $em->flush();
+
             return $this->redirect($this->generateUrl('text_list', array('group_id' => $textGroup->getId())));
         }
 
@@ -223,23 +216,19 @@ class TextController extends Controller
 
             // TODO: use validator, instead of this ugly code..
             $sumVotes = $iotv->getVoteBlank() + $iotv->getVoteAbstention() + $iotv->getVoteNotTakingPart();
-            foreach ($iotv->getTextVoteAgregations() as $aggr)
-            {
+            foreach ($iotv->getTextVoteAgregations() as $aggr) {
                 $sumVotes += $aggr->getVoteFor() + $aggr->getVoteAgainst() + $aggr->getVoteAbstention();
             }
 
-            if ($sumVotes != $iotv->getVoteTotal())
-            {
+            if ($sumVotes != $iotv->getVoteTotal()) {
                 $errors[] = "Le total des votes ne correspond pas aux votes rapportés";
             }
 
-            if ($sumVotes > count($organ->getParticipants()))
-            {
+            if ($sumVotes > count($organ->getParticipants())) {
                 $errors[] = "Il y a plus de votes que de personnes inscrits dans le comité.";
             }
 
-            if (count($errors) > 0)
-            {
+            if (count($errors) > 0) {
                 return $this->render('text/report_vote.html.twig', array(
                     'textGroup' => $textGroup,
                     'organ' => $organ,
@@ -251,6 +240,7 @@ class TextController extends Controller
             $em->persist($iotv);
 
             $em->flush();
+
             return $this->redirect($this->generateUrl('vote_report_show', array('group_id' => $textGroup->getId(), 'organ_id' => $organ->getId())));
         }
 

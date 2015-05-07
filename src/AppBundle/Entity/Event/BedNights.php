@@ -52,11 +52,10 @@ class BedNights
      */
     private $notes;
 
-
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -66,7 +65,7 @@ class BedNights
     /**
      * Set sleepingSpot
      *
-     * @param \stdClass $sleepingSpot
+     * @param  \stdClass $sleepingSpot
      * @return BedNights
      */
     public function setSleepingSpot($sleepingSpot)
@@ -79,7 +78,7 @@ class BedNights
     /**
      * Get sleepingSpot
      *
-     * @return \stdClass 
+     * @return \stdClass
      */
     public function getSleepingSpot()
     {
@@ -89,7 +88,7 @@ class BedNights
     /**
      * Set night
      *
-     * @param \stdClass $night
+     * @param  \stdClass $night
      * @return BedNights
      */
     public function setNight($night)
@@ -102,7 +101,7 @@ class BedNights
     /**
      * Get night
      *
-     * @return \stdClass 
+     * @return \stdClass
      */
     public function getNight()
     {
@@ -112,7 +111,7 @@ class BedNights
     /**
      * Set payment
      *
-     * @param \stdClass $payment
+     * @param  \stdClass $payment
      * @return BedNights
      */
     public function setPayment($payment)
@@ -125,7 +124,7 @@ class BedNights
     /**
      * Get payment
      *
-     * @return \stdClass 
+     * @return \stdClass
      */
     public function getPayment()
     {
@@ -135,7 +134,7 @@ class BedNights
     /**
      * Set notes
      *
-     * @param string $notes
+     * @param  string    $notes
      * @return BedNights
      */
     public function setNotes($notes)
@@ -148,7 +147,7 @@ class BedNights
     /**
      * Get notes
      *
-     * @return string 
+     * @return string
      */
     public function getNotes()
     {

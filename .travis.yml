@@ -1,11 +1,33 @@
 language: php
+
+sudo: false
+
+cache:
+  directories:
+    - $HOME/.composer/cache
+
 php:
-    - 5.5
     - 5.4
-    - 5.3
+    - 5.5
+    - 5.6
+    - nightly
+    - hhvm
+    - hhvm-nightly
+
+matrix:
+    allow_failures:
+        - php: nightly
+        - php: hhvm-nightly
+    fast_finish: true
 
 before_script:
-    - composer install -n --prefer-dist
+    - curl http://cs.sensiolabs.org/get/php-cs-fixer.phar -o php-cs-fixer.phar
+    - composer self-update
+
+install:
+    - composer install
 
 script:
+      - bin/security-checker security:check
       - phpunit -c app
+      - php php-cs-fixer.phar fix src

@@ -2,8 +2,6 @@
 
 namespace AppBundle\Admin\Congres;
 
-use Sonata\AdminBundle\Route\RouteCollection;
-
 class GeneralContributionAdmin extends ContributionAdmin
 {
     protected $baseRouteName = 'congres/contributions/generales';

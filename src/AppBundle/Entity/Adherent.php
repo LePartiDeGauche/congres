@@ -28,7 +28,7 @@ class Adherent
     private $id;
 
     /**
-     * @var string 
+     * @var string
      *
      * @ORM\Column(name="email", type="string", length=255, unique=true, nullable=true)
      */
@@ -240,8 +240,7 @@ class Adherent
      */
     public function setStatus($status)
     {
-        if ($status === null)
-        {
+        if ($status === null) {
             $status = self::STATUS_NEW;
         }
         if (!in_array($status, array(
@@ -287,14 +286,13 @@ class Adherent
     /**
      * Add responsabilities
      *
-     * @param \AppBundle\Entity\AdherentResponsability $responsabilities
+     * @param  \AppBundle\Entity\AdherentResponsability $responsabilities
      * @return Adherent
      */
     public function addResponsability(\AppBundle\Entity\AdherentResponsability $responsability)
     {
-        if($responsability->getAdherent() === null)
-        {
-            $responsability->setAdherent($this); 
+        if ($responsability->getAdherent() === null) {
+            $responsability->setAdherent($this);
         }
         $this->responsabilities[] = $responsability;
 
@@ -314,7 +312,7 @@ class Adherent
     /**
      * Add events
      *
-     * @param \AppBundle\Entity\Event\EventAdherentRegistration $events
+     * @param  \AppBundle\Entity\Event\EventAdherentRegistration $events
      * @return Adherent
      */
     public function addEvent(\AppBundle\Entity\Event\EventAdherentRegistration $events)
@@ -337,7 +335,7 @@ class Adherent
     /**
      * Get events
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getEvents()
     {
@@ -347,7 +345,7 @@ class Adherent
     /**
      * Set user
      *
-     * @param \AppBundle\Entity\User $user
+     * @param  \AppBundle\Entity\User $user
      * @return Adherent
      */
     public function setUser(\AppBundle\Entity\User $user = null)
@@ -360,7 +358,7 @@ class Adherent
     /**
      * Set departement
      *
-     * @param integer $departement
+     * @param  integer  $departement
      * @return Adherent
      */
     public function setDepartement($departement)
@@ -373,7 +371,7 @@ class Adherent
     /**
      * Get departement
      *
-     * @return integer 
+     * @return integer
      */
     public function getDepartement()
     {
