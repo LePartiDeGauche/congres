@@ -2,7 +2,6 @@
 
 namespace AppBundle\Admin\Congres;
 
-use Sonata\AdminBundle\Route\RouteCollection;
 
 class ThematicContributionAdmin extends ContributionAdmin
 {

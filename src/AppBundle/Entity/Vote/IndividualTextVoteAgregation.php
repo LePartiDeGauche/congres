@@ -5,16 +5,14 @@ namespace AppBundle\Entity\Vote;
 use Doctrine\ORM\Mapping as ORM;
 use AppBundle\Entity\Text\Text;
 use AppBundle\Entity\Text\TextGroup;
-use AppBundle\Entity\Vote\TextVoteAgregation;
 
 /**
- * AppBundle\Entity\Vote\IndividualTextVoteAgregation
+ * AppBundle\Entity\Vote\IndividualTextVoteAgregation.
  *
  * @ORM\Entity(
  * repositoryClass="AppBundle\Entity\Vote\IndividualTextVoteAgregationRepository"
  * )
  * @ORM\Table(name="individual_text_vote_agregation")
- *
  */
 class IndividualTextVoteAgregation extends TextVoteAgregation
 {
@@ -33,10 +31,8 @@ class IndividualTextVoteAgregation extends TextVoteAgregation
      * @ORM\ManyToOne(targetEntity="VoteRule",
      * cascade={"persist", "remove", "merge"})
      * @ORM\JoinColumn(nullable=false)
-     *
      */
     private $voteRule;
-
 
     public function __construct(Text $text, TextGroup $textGroup, VoteRule $voteRule)
     {
@@ -45,9 +41,10 @@ class IndividualTextVoteAgregation extends TextVoteAgregation
     }
 
     /**
-     * Set voteRule
+     * Set voteRule.
      *
      * @param \stdClass $voteRule
+     *
      * @return IndividualTextVoteAgregation
      */
     public function setVoteRule($voteRule)
@@ -58,13 +55,12 @@ class IndividualTextVoteAgregation extends TextVoteAgregation
     }
 
     /**
-     * Get voteRule
+     * Get voteRule.
      *
-     * @return \stdClass 
+     * @return \stdClass
      */
     public function getVoteRule()
     {
         return $this->voteRule;
     }
-
 }

@@ -5,7 +5,7 @@ namespace AppBundle\Entity\Vote;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * OrganVoteRule
+ * OrganVoteRule.
  *
  * @ORM\Table(name="organ_voterule")
  * @ORM\Entity(repositoryClass="AppBundle\Entity\Vote\OrganVoteRuleRepository")
@@ -26,19 +26,16 @@ class OrganVoteRule
 
     /**
      * @ORM\Column(type="string", length=255)
-     *
      */
     protected $name;
 
     /**
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Responsability")
-     *
      */
     protected $reportResponsability;
 
     /**
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Organ\OrganType")
-     *
      */
     protected $concernedOrganType;
 
@@ -47,21 +44,20 @@ class OrganVoteRule
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Text\TextGroup", inversedBy="organVoteRules")
      * @ORM\JoinColumn(nullable=false)
-     *
      */
     private $textGroup;
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
         return $this->id;
     }
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
@@ -75,9 +71,10 @@ class OrganVoteRule
     }
 
     /**
-     * Set name
+     * Set name.
      *
      * @param string $name
+     *
      * @return OrganVoteRule
      */
     public function setName($name)
@@ -88,9 +85,9 @@ class OrganVoteRule
     }
 
     /**
-     * Get name
+     * Get name.
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -98,9 +95,10 @@ class OrganVoteRule
     }
 
     /**
-     * Add reportResponsability
+     * Add reportResponsability.
      *
      * @param \AppBundle\Entity\Responsability $reportResponsability
+     *
      * @return OrganVoteRule
      */
     public function addReportResponsability(\AppBundle\Entity\Responsability $reportResponsability)
@@ -111,7 +109,7 @@ class OrganVoteRule
     }
 
     /**
-     * Remove reportResponsability
+     * Remove reportResponsability.
      *
      * @param \AppBundle\Entity\Responsability $reportResponsability
      */
@@ -121,9 +119,9 @@ class OrganVoteRule
     }
 
     /**
-     * Get reportResponsability
+     * Get reportResponsability.
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getReportResponsability()
     {
@@ -131,9 +129,10 @@ class OrganVoteRule
     }
 
     /**
-     * Add concernedOrganType
+     * Add concernedOrganType.
      *
      * @param \AppBundle\Entity\Organ\OrganType $concernedOrganType
+     *
      * @return OrganVoteRule
      */
     public function addConcernedOrganType(\AppBundle\Entity\Organ\OrganType $concernedOrganType)
@@ -144,7 +143,7 @@ class OrganVoteRule
     }
 
     /**
-     * Remove concernedOrganType
+     * Remove concernedOrganType.
      *
      * @param \AppBundle\Entity\Organ\OrganType $concernedOrganType
      */
@@ -154,9 +153,9 @@ class OrganVoteRule
     }
 
     /**
-     * Get concernedOrganType
+     * Get concernedOrganType.
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getConcernedOrganType()
     {
@@ -164,9 +163,10 @@ class OrganVoteRule
     }
 
     /**
-     * Set textGroup
+     * Set textGroup.
      *
      * @param \AppBundle\Entity\Text\TextGroup $textGroup
+     *
      * @return OrganVoteRule
      */
     public function setTextGroup(\AppBundle\Entity\Text\TextGroup $textGroup)
@@ -177,9 +177,9 @@ class OrganVoteRule
     }
 
     /**
-     * Get textGroup
+     * Get textGroup.
      *
-     * @return \AppBundle\Entity\Text\TextGroup 
+     * @return \AppBundle\Entity\Text\TextGroup
      */
     public function getTextGroup()
     {

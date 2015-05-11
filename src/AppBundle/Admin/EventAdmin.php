@@ -19,8 +19,8 @@ class EventAdmin extends Admin
     {
         $datagridMapper
             // ->add('id')
-            ->add('name', NULL, array('label' => 'Nom'))
-            ->add('description', NULL, array('label' => 'Description'))
+            ->add('name', null, array('label' => 'Nom'))
+            ->add('description', null, array('label' => 'Description'))
             ;
     }
 
@@ -31,17 +31,17 @@ class EventAdmin extends Admin
     {
         $listMapper
             ->add('id')
-            ->add('name', NULL, array('label' => 'Nom'))
-            ->add('normalizedName', NULL, array('label' => 'Nom affiché dans paybox'))
-            ->add('description', NULL, array('label' => 'Description'))
-            ->add('registrationBegin', NULL, array('label' => 'Début des inscriptions'))
-            ->add('registrationEnd', NULL, array('label' => 'Fin des inscriptions'))
+            ->add('name', null, array('label' => 'Nom'))
+            ->add('normalizedName', null, array('label' => 'Nom affiché dans paybox'))
+            ->add('description', null, array('label' => 'Description'))
+            ->add('registrationBegin', null, array('label' => 'Début des inscriptions'))
+            ->add('registrationEnd', null, array('label' => 'Fin des inscriptions'))
             ->add('_action', 'actions', array(
                 'actions' => array(
                     'show' => array(),
                     'edit' => array(),
                     'delete' => array(),
-                )
+                ),
             ))
             ;
     }
@@ -52,16 +52,16 @@ class EventAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('name', NULL, array('label' => 'Nom'))
-            ->add('normalizedName', NULL, array('label' => 'Nom affiché dans paybox (sans espace, sans tiret, sans caractères spéciaux)'))
-            ->add('description', NULL, array('label' => 'Description'))
-            ->add('registrationBegin', NULL, array('label' => 'Début des inscriptions'))
-            ->add('registrationEnd', NULL, array('label' => 'Fin des inscriptions'))
+            ->add('name', null, array('label' => 'Nom'))
+            ->add('normalizedName', null, array('label' => 'Nom affiché dans paybox (sans espace, sans tiret, sans caractères spéciaux)'))
+            ->add('description', null, array('label' => 'Description'))
+            ->add('registrationBegin', null, array('label' => 'Début des inscriptions'))
+            ->add('registrationEnd', null, array('label' => 'Fin des inscriptions'))
             ->add('roles', 'sonata_type_collection',
                 array(
                     'type_options' => array(
-                        'delete' => false
-                    )
+                        'delete' => false,
+                    ),
                 ), array(
                     'edit' => 'inline',
                     'inline' => 'table',
@@ -73,7 +73,7 @@ class EventAdmin extends Admin
             ->add('meals', 'sonata_type_collection',
                 array(
                     'type_options' => array(
-                        'delete' => false
+                        'delete' => false,
                     ),
                     'label' => 'Repas',
                 ), array(
@@ -87,7 +87,7 @@ class EventAdmin extends Admin
             ->add('costs', 'sonata_type_collection',
                 array(
                     'type_options' => array(
-                        'delete' => false
+                        'delete' => false,
                     ),
                     'label' => 'Tarifs',
                 ), array(
@@ -107,14 +107,14 @@ class EventAdmin extends Admin
     protected function configureShowFields(ShowMapper $showMapper)
     {
         $showMapper
-            ->add('name', NULL, array('label' => 'Nom'))
-            ->add('normalizedName', NULL, array('label' => 'Nom affiché dans paybox'))
-            ->add('description', NULL, array('label' => 'Description'))
-            ->add('registrationBegin', NULL, array('label' => 'Début des inscriptions'))
-            ->add('registrationEnd', NULL, array('label' => 'Fin des inscriptions'))
+            ->add('name', null, array('label' => 'Nom'))
+            ->add('normalizedName', null, array('label' => 'Nom affiché dans paybox'))
+            ->add('description', null, array('label' => 'Description'))
+            ->add('registrationBegin', null, array('label' => 'Début des inscriptions'))
+            ->add('registrationEnd', null, array('label' => 'Fin des inscriptions'))
             ->add('roles', 'sonata_type_collection')
-            ->add('meals', 'sonata_type_collection',array('label' => 'Repas' ))
-            ->add('costs', 'sonata_type_collection',array('label' => 'Tarifs' ))
+            ->add('meals', 'sonata_type_collection', array('label' => 'Repas' ))
+            ->add('costs', 'sonata_type_collection', array('label' => 'Tarifs' ))
             ->add('sleepingFacilities', 'sonata_type_collection')
             ;
     }

@@ -5,7 +5,7 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Instance
+ * Instance.
  *
  * @ORM\Table(name="instances",
  * indexes ={@ORM\Index(name="name", columns={"name"})})
@@ -41,6 +41,7 @@ class Responsability
 
     /**
      * The collection of user members of the instance.
+     *
      * @var \Doctrine\Common\Collections\Collection
      *
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\AdherentResponsability", mappedBy="responsability", orphanRemoval=true)
@@ -49,6 +50,7 @@ class Responsability
 
     /**
      * The collection of user members of the instance.
+     *
      * @var \Doctrine\Common\Collections\Collection
      *
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Organ\OrganType",
@@ -57,7 +59,7 @@ class Responsability
     private $allowsParticipations;
 
     /**
-     * Get id
+     * Get id.
      *
      * @return integer
      */
@@ -67,9 +69,10 @@ class Responsability
     }
 
     /**
-     * Set name
+     * Set name.
      *
-     * @param  string   $name
+     * @param string $name
+     *
      * @return Instance
      */
     public function setName($name)
@@ -79,7 +82,7 @@ class Responsability
             self::INSTANCE_BN,
             self::INSTANCE_CN,
         ))) {
-        throw new \InvalidArgumentException("Invalid status");
+            throw new \InvalidArgumentException("Invalid status");
         }
 
         $this->name = $name;
@@ -88,7 +91,7 @@ class Responsability
     }
 
     /**
-     * Get name
+     * Get name.
      *
      * @return string
      */
@@ -98,7 +101,7 @@ class Responsability
     }
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
@@ -106,9 +109,10 @@ class Responsability
     }
 
     /**
-     * Add adherents
+     * Add adherents.
      *
-     * @param  \AppBundle\Entity\Adherent $adherent
+     * @param \AppBundle\Entity\Adherent $adherent
+     *
      * @return Instance
      */
     public function addAdherent(\AppBundle\Entity\Adherent $adherent)
@@ -119,7 +123,7 @@ class Responsability
     }
 
     /**
-     * Remove adherents
+     * Remove adherents.
      *
      * @param \AppBundle\Entity\Adherent $adherents
      */
@@ -129,7 +133,7 @@ class Responsability
     }
 
     /**
-     * Get adherents
+     * Get adherents.
      *
      * @return \Doctrine\Common\Collections\Collection
      */
@@ -139,9 +143,10 @@ class Responsability
     }
 
     /**
-     * Set election date
+     * Set election date.
      *
-     * @param  \DateTime $date
+     * @param \DateTime $date
+     *
      * @return Instance
      */
     public function setElectionDate(\DateTime $date)
@@ -152,7 +157,7 @@ class Responsability
     }
 
     /**
-     * Get election date
+     * Get election date.
      *
      * @return \DateTime
      */
@@ -167,7 +172,7 @@ class Responsability
     }
 
     /**
-     * Add adherentResponsability
+     * Add adherentResponsability.
      *
      * @param \AppBundle\Entity\AdherentResponsability $adherentResponsability
      *
@@ -181,7 +186,7 @@ class Responsability
     }
 
     /**
-     * Remove adherentResponsability
+     * Remove adherentResponsability.
      *
      * @param \AppBundle\Entity\AdherentResponsability $adherentResponsability
      */
@@ -191,7 +196,7 @@ class Responsability
     }
 
     /**
-     * Get adherentResponsabilities
+     * Get adherentResponsabilities.
      *
      * @return \Doctrine\Common\Collections\Collection
      */
@@ -201,7 +206,7 @@ class Responsability
     }
 
     /**
-     * Add allowsParticipation
+     * Add allowsParticipation.
      *
      * @param \AppBundle\Entity\Organ\OrganType $allowsParticipation
      *
@@ -215,7 +220,7 @@ class Responsability
     }
 
     /**
-     * Remove allowsParticipation
+     * Remove allowsParticipation.
      *
      * @param \AppBundle\Entity\Organ\OrganType $allowsParticipation
      */
@@ -225,7 +230,7 @@ class Responsability
     }
 
     /**
-     * Get allowsParticipations
+     * Get allowsParticipations.
      *
      * @return \Doctrine\Common\Collections\Collection
      */

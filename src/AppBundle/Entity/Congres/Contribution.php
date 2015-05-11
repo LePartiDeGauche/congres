@@ -23,12 +23,12 @@ abstract class Contribution
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
-     *
      */
     protected $id;
 
     /**
      * The author of the contribution.
+     *
      * @var \AppBundle\Entity\User
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User")
      */
@@ -56,7 +56,8 @@ abstract class Contribution
     protected $status;
 
     /**
-     * Constructor
+     * Constructor.
+     *
      * @param \AppBundle\Entity\User $author The author of the contribution.
      */
     public function __construct(\AppBundle\Entity\User $author = null)
@@ -66,7 +67,7 @@ abstract class Contribution
     }
 
     /**
-     * Get id
+     * Get id.
      *
      * @return integer
      */
@@ -76,9 +77,10 @@ abstract class Contribution
     }
 
     /**
-     * Set author
+     * Set author.
      *
-     * @param  \AppBundle\Entity\User $author
+     * @param \AppBundle\Entity\User $author
+     *
      * @return Contribution
      */
     public function setAuthor(\AppBundle\Entity\User $author = null)
@@ -89,7 +91,7 @@ abstract class Contribution
     }
 
     /**
-     * Get author
+     * Get author.
      *
      * @return \AppBundle\Entity\User
      */
@@ -99,9 +101,10 @@ abstract class Contribution
     }
 
     /**
-     * Set title
+     * Set title.
      *
-     * @param  string       $title
+     * @param string $title
+     *
      * @return Contribution
      */
     public function setTitle($title)
@@ -112,7 +115,7 @@ abstract class Contribution
     }
 
     /**
-     * Get title
+     * Get title.
      *
      * @return string
      */
@@ -122,9 +125,10 @@ abstract class Contribution
     }
 
     /**
-     * Set content
+     * Set content.
      *
-     * @param  string       $content
+     * @param string $content
+     *
      * @return Contribution
      */
     public function setContent($content)
@@ -135,7 +139,7 @@ abstract class Contribution
     }
 
     /**
-     * Get content
+     * Get content.
      *
      * @return string
      */
@@ -145,9 +149,10 @@ abstract class Contribution
     }
 
     /**
-     * Set status
+     * Set status.
      *
-     * @param  string       $status
+     * @param string $status
+     *
      * @return Contribution
      */
     public function setStatus($status)
@@ -166,7 +171,7 @@ abstract class Contribution
     }
 
     /**
-     * Get status
+     * Get status.
      *
      * @return string
      */

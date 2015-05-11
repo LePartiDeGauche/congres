@@ -12,7 +12,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use AppBundle\Entity\Event\Event;
 use AppBundle\Entity\Adherent;
 use AppBundle\Entity\Event\EventAdherentRegistration;
-use AppBundle\Form\Event\EventType;
 use AppBundle\Form\Event\EventAdherentRegistrationType;
 use AppBundle\Entity\Payment\EventPayment;
 
@@ -23,7 +22,6 @@ use AppBundle\Entity\Payment\EventPayment;
  */
 class EventController extends Controller
 {
-
     /**
      * Finds and displays a Event\EventAdherentRegistration entity.
      *
@@ -31,6 +29,7 @@ class EventController extends Controller
      *     "event_id": "\d+",
      *     "event_reg_id": "\d+"
      *     })
+     *
      * @Method("GET")
      * @ParamConverter("event", class="AppBundle:Event\Event", options={"id" = "event_id"})
      * @ParamConverter("eventRegistration", class="AppBundle:Event\EventAdherentRegistration", options={"id" = "event_reg_id"})
@@ -38,8 +37,7 @@ class EventController extends Controller
      */
     public function registrationShowAction(Event $event, EventAdherentRegistration $eventRegistration)
     {
-        if ($eventRegistration->getAuthor() !=  $this->getUser()->getProfile())
-        {
+        if ($eventRegistration->getAuthor() !=  $this->getUser()->getProfile()) {
             throw new AccessDeniedException();
         }
 
@@ -63,6 +61,7 @@ class EventController extends Controller
      *     "event_id": "\d+",
      *     "event_reg_id": "\d+"
      *     })
+     *
      * @Method("GET")
      * @ParamConverter("event", class="AppBundle:Event\Event", options={"id" = "event_id"})
      * @ParamConverter("eventRegistration", class="AppBundle:Event\EventAdherentRegistration",
@@ -76,8 +75,7 @@ class EventController extends Controller
         $cost = $eventRegistration->getCost()->getCost();
         $adherent = $this->getUser()->getProfile();
 
-        if ($payedAmount < $cost)
-        {
+        if ($payedAmount < $cost) {
             $payment = $this->createPayment($adherent, $event, $eventRegistration, $cost - $payedAmount);
 
             $em->persist($payment);
@@ -85,56 +83,48 @@ class EventController extends Controller
 
             return $this->redirect($this->generateUrl('payment_pay',
                 array('id' => $payment->getId())));
-
         }
 
-            return $this->redirect($this->generateUrl('event_registration_show',
+        return $this->redirect($this->generateUrl('event_registration_show',
                 array('event_id' => $event->getId(), 'event_reg_id' => $eventRegistration->getId())));
     }
 
     /**
-     * Register to a event
+     * Register to a event.
      *
      * @Route("/{event_id}/registration/create", name="event_registration_create", requirements={
      *     "event_id": "\d+"
      *     })
      * @ParamConverter("event", class="AppBundle:Event\Event", options={"id" = "event_id"})
-     *
      */
     public function registerAction(Request $request, Event $event)
     {
         $adherent = $this->getUser()->getProfile();
         $em = $this->getDoctrine()->getManager();
 
-
         $eventRegistration = $this->getDoctrine()
             ->getRepository('AppBundle:Event\EventAdherentRegistration')
             ->findOneBy(array('adherent' => $adherent, 'event' => $event));
 
-        if ($eventRegistration) 
-        {
+        if ($eventRegistration) {
             return $this->redirect($this->generateUrl('event_registration_show',
                 array('event_id' => $event->getId(), 'event_reg_id' => $eventRegistration->getId())));
         }
 
         // TODO voter (no time for this now...)
         $now = new \DateTime('now');
-        if ($now < $event->getRegistrationBegin() || $now > $event->getRegistrationEnd())
-        {
+        if ($now < $event->getRegistrationBegin() || $now > $event->getRegistrationEnd()) {
             throw new AccessDeniedException("Les inscriptions ne sont pas ouvertes");
         }
 
-
         $eventRegistration = new EventAdherentRegistration($this->getUser()->getProfile(), $event);
-
 
         $eventRegistration->setAdherent($adherent);
         $form = $this->createRegistrationCreateForm($eventRegistration, $event);
 
         $form->handleRequest($request);
 
-        if ($form->isValid())
-        {
+        if ($form->isValid()) {
             $eventRegistration = $form->getData();
             $eventRegistration->setEvent($event);
             $eventRegistration->setRegistrationDate(new \DateTime('now'));
@@ -143,17 +133,14 @@ class EventController extends Controller
             $em->persist($eventRegistration);
             $em->flush();
 
-            if ($eventRegistration->getPaymentMode() == EventAdherentRegistration::PAYMENT_MODE_ONLINE)
-            {
+            if ($eventRegistration->getPaymentMode() == EventAdherentRegistration::PAYMENT_MODE_ONLINE) {
                 $eventPayment = $this->createPayment($adherent, $event, $eventRegistration, $eventRegistration->getCost()->getCost());
                 $em->persist($eventPayment);
                 $em->flush();
 
                 return $this->redirect($this->generateUrl('payment_pay',
                     array('id' => $eventPayment->getId())));
-            }
-            else
-            {
+            } else {
                 return $this->redirect($this->generateUrl('event_registration_show',
                     array('event_id' => $event->getId(), 'event_reg_id' => $eventRegistration->getId())));
             }
@@ -162,10 +149,9 @@ class EventController extends Controller
         return $this->render("event/registration.html.twig", array(
             'event'      => $event,
             'event_registration'      => $eventRegistration,
-            'form'  => $form->createView()))
+            'form'  => $form->createView(), ))
             ;
     }
-
 
     /**
      * Finds and displays a Event\Event entity.
@@ -173,10 +159,10 @@ class EventController extends Controller
      * @Route("/{event_id}", name="event_show", requirements={
      *     "event_id": "\d+"
      * })
- )
- * @Method("GET")
- * @ParamConverter("event", class="AppBundle:Event\Event", options={"id" = "event_id"})
- * @Template("event/show.html.twig")
+     )
+     * @Method("GET")
+     * @ParamConverter("event", class="AppBundle:Event\Event", options={"id" = "event_id"})
+     * @Template("event/show.html.twig")
      */
     public function showAction(Event $event)
     {
@@ -189,6 +175,7 @@ class EventController extends Controller
      * Lists all Event\EventAdherentRegistration entities.
      *
      * @Route("/registration/user", name="event_adherent_registration_list")
+     *
      * @Method("GET")
      */
     public function indexAction()
@@ -200,11 +187,9 @@ class EventController extends Controller
 
         return $this->render('event/adherent_registration_list.html.twig', array(
             'eventRegistrations' => $eventRegs,
-            'adherent' => $adherent
+            'adherent' => $adherent,
         ));
-
     }
-
 
     /**
      * Creates a form to create a Event\EventAdherentRegistration entity.

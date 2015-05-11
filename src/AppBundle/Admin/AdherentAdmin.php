@@ -62,7 +62,7 @@ class AdherentAdmin extends Admin
                 ),
                 'multiple' => false,
             ))
-            ->add('responsabilities.responsability',null , array('label' => 'Responsabilité', 'multiple' => true));
+            ->add('responsabilities.responsability', null, array('label' => 'Responsabilité', 'multiple' => true));
     }
 
     protected function configureListFields(ListMapper $listMapper)

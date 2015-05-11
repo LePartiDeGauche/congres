@@ -9,15 +9,13 @@ class AdherentUserChecker extends UserChecker
 {
     public function checkPreAuth(UserInterface $user)
     {
-        if ($user instanceof AppBundle\Entity\User)
-        {
+        if ($user instanceof AppBundle\Entity\User) {
             $profile = $user->getProfile();
             if (!$profile  || !(Adherent::STATUS_OK === $profile->getStatus() || Adherent::STATUS_ATTENTE_RENOUVELLEMENT === $profile->getStatus())) {
                 $ex = new LockedException('Status does not allow connection');
                 $ex->setUser($user);
                 throw $ex;
             }
-
         }
         parent::checkPreAuth($user);
     }
@@ -29,6 +27,3 @@ class AdherentUserChecker extends UserChecker
         parent::checkPostAuth($user);
     }
 }
-
-
-?>

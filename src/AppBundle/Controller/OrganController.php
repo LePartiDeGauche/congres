@@ -2,7 +2,6 @@
 
 namespace AppBundle\Controller;
 
-
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -17,11 +16,11 @@ use AppBundle\Entity\Organ\Organ;
  */
 class OrganController extends Controller
 {
-
     /**
      * Lists all Organ\Organ public entities.
      *
      * @Route("/", name="organ_list")
+     *
      * @Method("GET")
      * @Template("organ/index.html.twig")
      */
@@ -42,6 +41,7 @@ class OrganController extends Controller
      * Lists all Organ\Organ of an adherent.
      *
      * @Route("/user", name="organ_adherent_list")
+     *
      * @Method("GET")
      * @Template("organ/organ_adherent_list.html.twig")
      */
@@ -62,6 +62,7 @@ class OrganController extends Controller
      * Finds and displays a Organ\Organ entity.
      *
      * @Route("/{organ_id}", name="organ_show")
+     *
      * @Method("GET")
      * @Template("organ/show.html.twig")
      * @ParamConverter("organ", class="AppBundle:Organ\Organ", options={"id" = "organ_id"})
@@ -71,7 +72,7 @@ class OrganController extends Controller
         $em = $this->getDoctrine()->getManager();
         $adherent = $this->getUser()->getProfile();
 
-        if (!$em->getRepository('AppBundle:Organ\Organ')->isMember($organ, $adherent) ) {
+        if (!$em->getRepository('AppBundle:Organ\Organ')->isMember($organ, $adherent)) {
             throw \AccessDeniedException();
         }
 

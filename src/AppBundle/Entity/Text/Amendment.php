@@ -6,7 +6,6 @@ use AppBundle\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
-
 /**
  * The amendment proposed to the congress.
  *
@@ -15,8 +14,14 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Amendment
 {
+    private static $types = array(
+        'a' => 'Ajout',
+        'd' => 'Suppression',
+        'm' => 'Modification',
+    );
+
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -31,7 +36,6 @@ class Amendment
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User")
      * @Assert\NotNull
-     *
      */
     private $author;
 
@@ -48,7 +52,7 @@ class Amendment
     /**
      * The line concerned by the amendment.
      *
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="start_line", type="integer")
      * @Assert\NotBlank
@@ -61,22 +65,50 @@ class Amendment
      *
      * @var string
      *
-     * @ORM\Column(name="amendment_type")
+     * @ORM\Column(name="type")
      * @Assert\NotBlank
-     * @Assert\Choice(choices = {"add", "delete", "modify"})
+     * @Assert\Choice(callback = "getTypesValues")
      */
-    private $amendmentType;
+    private $type;
 
     /**
      * The contribution.
      *
      * @var string
      *
-     * @ORM\Column(name="amendment_content", type="text")
+     * @ORM\Column(name="content", type="text")
      * @Assert\NotBlank
      * @Assert\Type(type="string")
      */
-    private $amendmentContent;
+    private $content;
+
+    /**
+     * Available types.
+     *
+     * @return array
+     */
+    public static function getTypes()
+    {
+        return self::$types;
+    }
+
+    /**
+     * Available values for types.
+     *
+     * @return array
+     */
+    public static function getTypesValues()
+    {
+        return array_keys(self::$types);
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return '#'.$this->id ?: '';
+    }
 
     /**
      * @return int
@@ -137,32 +169,40 @@ class Amendment
     /**
      * @return string
      */
-    public function getAmendmentType()
+    public function getHumanReadableType()
     {
-        return $this->amendmentType;
+        return self::$types[$this->type];
     }
 
     /**
-     * @param string $amendmentType
+     * @return string
      */
-    public function setAmendmentType($amendmentType)
+    public function getType()
     {
-        $this->amendmentType = $amendmentType;
+        return $this->type;
     }
 
     /**
-     * @return mixed
+     * @param string $type
      */
-    public function getAmendmentContent()
+    public function setType($type)
     {
-        return $this->amendmentContent;
+        $this->type = $type;
     }
 
     /**
-     * @param mixed $amendmentContent
+     * @return string
      */
-    public function setAmendmentContent($amendmentContent)
+    public function getContent()
     {
-        $this->amendmentContent = $amendmentContent;
+        return $this->content;
+    }
+
+    /**
+     * @param string $content
+     */
+    public function setContent($content)
+    {
+        $this->content = $content;
     }
 }

@@ -5,7 +5,7 @@ namespace AppBundle\Entity\Event;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * EventMeal
+ * EventMeal.
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="AppBundle\Entity\Event\EventMealRepository")
@@ -26,7 +26,6 @@ class EventMeal
      *
      * @ORM\ManyToOne(targetEntity="Event", inversedBy="meals")
      * @ORM\JoinColumn(nullable=false)
-     *
      */
     private $event;
 
@@ -48,7 +47,6 @@ class EventMeal
      * @var string
      *
      * @ORM\Column(name="description", type="text", nullable=true)
-     *
      */
     private $description;
 
@@ -59,11 +57,10 @@ class EventMeal
      */
     private $mealTime;
 
-
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -71,9 +68,10 @@ class EventMeal
     }
 
     /**
-     * Set event
+     * Set event.
      *
      * @param \stdClass $event
+     *
      * @return EventMeal
      */
     public function setEvent($event)
@@ -84,9 +82,9 @@ class EventMeal
     }
 
     /**
-     * Get event
+     * Get event.
      *
-     * @return \stdClass 
+     * @return \stdClass
      */
     public function getEvent()
     {
@@ -94,9 +92,10 @@ class EventMeal
     }
 
     /**
-     * Set participants
+     * Set participants.
      *
      * @param \stdClass $participants
+     *
      * @return EventMeal
      */
     public function setParticipants($participants)
@@ -107,9 +106,9 @@ class EventMeal
     }
 
     /**
-     * Get participants
+     * Get participants.
      *
-     * @return \stdClass 
+     * @return \stdClass
      */
     public function getParticipants()
     {
@@ -117,9 +116,10 @@ class EventMeal
     }
 
     /**
-     * Set name
+     * Set name.
      *
      * @param string $name
+     *
      * @return EventMeal
      */
     public function setName($name)
@@ -130,9 +130,9 @@ class EventMeal
     }
 
     /**
-     * Get name
+     * Get name.
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -140,9 +140,10 @@ class EventMeal
     }
 
     /**
-     * Set description
+     * Set description.
      *
      * @param string $description
+     *
      * @return EventMeal
      */
     public function setDescription($description)
@@ -153,9 +154,9 @@ class EventMeal
     }
 
     /**
-     * Get description
+     * Get description.
      *
-     * @return string 
+     * @return string
      */
     public function getDescription()
     {
@@ -163,9 +164,10 @@ class EventMeal
     }
 
     /**
-     * Set time
+     * Set time.
      *
      * @param \DateTime $time
+     *
      * @return EventMeal
      */
     public function setTime($time)
@@ -176,16 +178,16 @@ class EventMeal
     }
 
     /**
-     * Get time
+     * Get time.
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getTime()
     {
         return $this->time;
     }
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
@@ -193,9 +195,10 @@ class EventMeal
     }
 
     /**
-     * Set mealTime
+     * Set mealTime.
      *
      * @param \DateTime $mealTime
+     *
      * @return EventMeal
      */
     public function setMealTime($mealTime)
@@ -206,9 +209,9 @@ class EventMeal
     }
 
     /**
-     * Get mealTime
+     * Get mealTime.
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getMealTime()
     {
@@ -218,13 +221,13 @@ class EventMeal
     public function __toString()
     {
         return $this->name;
-    
     }
 
     /**
-     * Add participants
+     * Add participants.
      *
      * @param \AppBundle\Entity\Event\EventAdherentRegistration $participants
+     *
      * @return EventMeal
      */
     public function addParticipant(\AppBundle\Entity\Event\EventAdherentRegistration $participants)
@@ -235,7 +238,7 @@ class EventMeal
     }
 
     /**
-     * Remove participants
+     * Remove participants.
      *
      * @param \AppBundle\Entity\Event\EventAdherentRegistration $participants
      */

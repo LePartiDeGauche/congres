@@ -28,7 +28,7 @@ final class CalendarVoter implements VoterInterface
     }
 
     /**
-     * Iteratively check all given attributes by calling isGranted
+     * Iteratively check all given attributes by calling isGranted.
      *
      * This method terminates as soon as it is able to return ACCESS_GRANTED
      * If at least one attribute is supported, but access not granted, then ACCESS_DENIED is returned

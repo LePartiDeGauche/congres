@@ -18,9 +18,9 @@ class EventMealAdmin extends Admin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('name', NULL, array('label' => 'Nom'))
+            ->add('name', null, array('label' => 'Nom'))
             ->add('description')
-            ->add('mealTime',NULL, array('label' => 'Jour/Heure du Repas'))
+            ->add('mealTime', null, array('label' => 'Jour/Heure du Repas'))
         ;
     }
 
@@ -31,15 +31,15 @@ class EventMealAdmin extends Admin
     {
         $listMapper
             ->add('id')
-            ->add('name', NULL, array('label' => 'Nom'))
+            ->add('name', null, array('label' => 'Nom'))
             ->add('description')
-            ->add('mealTime', NULL, array('label' => 'Jour/Heure du Repas'))
+            ->add('mealTime', null, array('label' => 'Jour/Heure du Repas'))
             ->add('_action', 'actions', array(
                 'actions' => array(
                     'show' => array(),
                     'edit' => array(),
                     'delete' => array(),
-                )
+                ),
             ))
         ;
     }
@@ -50,9 +50,9 @@ class EventMealAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('name', NULL, array('label' => 'Nom'))
+            ->add('name', null, array('label' => 'Nom'))
             ->add('description')
-            ->add('mealTime', NULL, array('label' => 'Jour/Heure du Repas'))
+            ->add('mealTime', null, array('label' => 'Jour/Heure du Repas'))
         ;
     }
 
@@ -63,9 +63,9 @@ class EventMealAdmin extends Admin
     {
         $showMapper
             ->add('id')
-            ->add('name', NULL, array('label' => 'Nom'))
+            ->add('name', null, array('label' => 'Nom'))
             ->add('description')
-            ->add('mealTime', NULL, array('label' => 'Jour/Heure du Repas'))
+            ->add('mealTime', null, array('label' => 'Jour/Heure du Repas'))
         ;
     }
 }

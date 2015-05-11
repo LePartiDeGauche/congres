@@ -1,12 +1,12 @@
 {% extends '::base.html.twig' %}
 
-{% block title %}Soumettre une contribution{% endblock %}
+{% block title %}Soumettre un amendement {% endblock %}
 
 {% block body %}
 <div class="container">
     <div class="row">
-        <h1>Soumettre une contribution</h1>
-        <form method="post" action="{{ path('contribution_submit') }}">
+        <h1>Soumettre un amendement</h1>
+        <form method="post" action="{{ path('amendment_submit') }}">
             {{ form_widget(form) }}
             <input type="submit" class="btn btn-primary" value="Envoyer" />
         </form>

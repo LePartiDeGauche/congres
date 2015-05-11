@@ -7,7 +7,6 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
-
 use AppBundle\Entity\Text\TextGroup;
 
 class TextGroupAdmin extends Admin
@@ -39,7 +38,7 @@ class TextGroupAdmin extends Admin
     {
         $listMapper
             ->add('id')
-            ->add('author', 'sonata_type_model_autocomplete', array('property'=>'lastname'))
+            ->add('author', 'sonata_type_model_autocomplete', array('property' => 'lastname'))
             ->add('name')
             ->add('description')
             ->add('submissionOpening')
@@ -71,7 +70,7 @@ class TextGroupAdmin extends Admin
                     'show' => array(),
                     'edit' => array(),
                     'delete' => array(),
-                )
+                ),
             ))
             ;
     }
@@ -83,7 +82,7 @@ class TextGroupAdmin extends Admin
     {
         $formMapper
             //->add('id')
-            ->add('author', 'sonata_type_model_autocomplete', array('property'=>array('firstname', 'lastname')))
+            ->add('author', 'sonata_type_model_autocomplete', array('property' => array('firstname', 'lastname')))
             ->add('name')
             ->add('description')
             ->add('submissionOpening')
@@ -122,7 +121,7 @@ class TextGroupAdmin extends Admin
             ->add('organVoteRules', 'sonata_type_collection',
                 array(
                     'type_options' => array(
-                        'delete' => false
+                        'delete' => false,
                     ),
                     'label' => 'Règles de vote par organes',
                 ), array(
@@ -135,7 +134,7 @@ class TextGroupAdmin extends Admin
             ->add('maxVotesByAdherent')
             ->add('isVisible')
             // FIXME : currently impossible to use subclass into subform with sonata bundle
-            
+
             //->add('voteRules', 'sonata_type_collection', array(
             //    'type_options' => array(
             //        'delete' => false,
@@ -166,18 +165,18 @@ class TextGroupAdmin extends Admin
                     $datagrid = $admin->getDatagrid();
                     $queryBuilder = $datagrid->getQuery();
                     $queryBuilder
-                        ->andWhere($queryBuilder->getRootAlias() . '.firstname LIKE :value')
-                        ->orWhere($queryBuilder->getRootAlias() . '.lastname LIKE :value')
-                        ->orWhere($queryBuilder->getRootAlias() . '.email LIKE :value')
-                        ->setParameter('value', '%' . $value . '%')
+                        ->andWhere($queryBuilder->getRootAlias().'.firstname LIKE :value')
+                        ->orWhere($queryBuilder->getRootAlias().'.lastname LIKE :value')
+                        ->orWhere($queryBuilder->getRootAlias().'.email LIKE :value')
+                        ->setParameter('value', '%'.$value.'%')
                     ;
                 },
-                'to_string_callback' => function($user, $property) {
+                'to_string_callback' => function ($user, $property) {
                     $firstname = $user->getProfile()->getFirstname();
                     $lastname = $user->getProfile()->getLastname();
                     $email = $user->getEmail();
 
-                    return $firstname . ' ' . $lastname . ' &lt;' . $email . '&gt;';
+                    return $firstname.' '.$lastname.' &lt;'.$email.'&gt;';
                 },
             ))
             ->add('description')
@@ -212,8 +211,7 @@ class TextGroupAdmin extends Admin
         //$repo = $this->getDoctrine()->getRepository('AppBundle:Adherent')->findId($user->adherent);
 
 
-        if ($instance->getAuthor() == NULL)
-        {
+        if ($instance->getAuthor() == null) {
             $instance->setAuthor($user->getProfile());
         }
 
@@ -232,4 +230,3 @@ class TextGroupAdmin extends Admin
         }
     }
 }
-

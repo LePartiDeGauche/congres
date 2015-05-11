@@ -44,7 +44,7 @@ class IndividualOrganTextVoteAdmin extends Admin
                     'show' => array(),
                     'edit' => array(),
                     'delete' => array(),
-                )
+                ),
             ))
             ->add('author.firstname')
             ->add('author.lastname')
@@ -110,7 +110,7 @@ class IndividualOrganTextVoteAdmin extends Admin
     {
         return array(
             'xls',
-            'csv'
+            'csv',
         );
     }
 }

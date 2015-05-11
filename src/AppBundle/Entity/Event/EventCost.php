@@ -5,7 +5,7 @@ namespace AppBundle\Entity\Event;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * EventCost
+ * EventCost.
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="AppBundle\Entity\Event\EventCostRepository")
@@ -39,17 +39,13 @@ class EventCost
      * @var \stdClass
      *
      * @ORM\ManyToOne(targetEntity="Event", inversedBy="costs")
-     *
      */
     private $event;
 
-
-
-
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -57,9 +53,10 @@ class EventCost
     }
 
     /**
-     * Set name
+     * Set name.
      *
      * @param string $name
+     *
      * @return EventCost
      */
     public function setName($name)
@@ -70,9 +67,9 @@ class EventCost
     }
 
     /**
-     * Get name
+     * Get name.
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -80,9 +77,10 @@ class EventCost
     }
 
     /**
-     * Set cost
+     * Set cost.
      *
      * @param integer $cost
+     *
      * @return EventCost
      */
     public function setCost($cost)
@@ -93,9 +91,9 @@ class EventCost
     }
 
     /**
-     * Get cost
+     * Get cost.
      *
-     * @return integer 
+     * @return integer
      */
     public function getCost()
     {
@@ -103,9 +101,10 @@ class EventCost
     }
 
     /**
-     * Set event
+     * Set event.
      *
      * @param \AppBundle\Entity\Event\Event $event
+     *
      * @return EventCost
      */
     public function setEvent(\AppBundle\Entity\Event\Event $event = null)
@@ -116,9 +115,9 @@ class EventCost
     }
 
     /**
-     * Get event
+     * Get event.
      *
-     * @return \AppBundle\Entity\Event\Event 
+     * @return \AppBundle\Entity\Event\Event
      */
     public function getEvent()
     {
@@ -126,7 +125,6 @@ class EventCost
     }
     public function __toString()
     {
-        return $this->name . ' (' . $this->cost . '€)';
-    
+        return $this->name.' ('.$this->cost.'€)';
     }
 }

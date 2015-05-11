@@ -10,26 +10,26 @@ class AmendmentType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('startLine')
-            ->add('amendmentType')
-            ->add('amendmentContent')
-            ->add('author')
+            ->add('type', 'choice', array(
+        'choices' => array('a' => 'Ajout', 'd' => 'Suppression', 'm' => 'Modification'), ))
+            ->add('content')
             ->add('text')
         ;
     }
-    
+
     /**
      * @param OptionsResolverInterface $resolver
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Text\Amendment'
+            'data_class' => 'AppBundle\Entity\Text\Amendment',
         ));
     }
 

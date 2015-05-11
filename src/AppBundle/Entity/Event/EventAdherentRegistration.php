@@ -4,20 +4,20 @@ namespace AppBundle\Entity\Event;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+
 /**
- * EventAdherentRegistration
+ * EventAdherentRegistration.
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="AppBundle\Entity\Event\EventAdherentRegistrationRepository")
  */
 class EventAdherentRegistration
 {
-
     const PAYMENT_MODE_ONLINE = 'online';
     const PAYMENT_MODE_ONSITE = 'onsite';
 
-    const ATTENDANCE_PRESENT ='present';
-    const ATTENDANCE_ABSENT ='absent';
+    const ATTENDANCE_PRESENT = 'present';
+    const ATTENDANCE_ABSENT = 'absent';
     const ATTENDANCE_NOT_REGISTRED = 'not registred';
 
     /**
@@ -36,7 +36,6 @@ class EventAdherentRegistration
      * @ORM\JoinColumn(nullable=false)
      *
      * Person making the registration
-     *
      */
     private $author;
 
@@ -47,7 +46,6 @@ class EventAdherentRegistration
      * @ORM\JoinColumn(nullable=false)
      *
      *  Adherent who participate
-     *
      */
     private $adherent;
 
@@ -60,19 +58,17 @@ class EventAdherentRegistration
 
     /**
      * @var \stdClass
-     * 
+     *
      * @ORM\ManyToOne(targetEntity="EventRole", inversedBy="participants")
      * @ORM\JoinColumn(nullable=false)
-     * 
      */
     private $role;
 
     /**
      * @var \stdClass
-     * 
+     *
      * @ORM\ManyToOne(targetEntity="EventCost")
      * @ORM\JoinColumn(nullable=false)
-     * 
      */
     private $cost;
 
@@ -81,7 +77,6 @@ class EventAdherentRegistration
      *
      * @ORM\ManyToOne(targetEntity="Event", inversedBy="participants")
      * @ORM\JoinColumn(nullable=false)
-     *
      */
     private $event;
 
@@ -89,14 +84,11 @@ class EventAdherentRegistration
      * @var \stdClass
      *
      * @ORM\ManyToMany(targetEntity="EventMeal", inversedBy="participants")
-     *
      */
     private $meals;
 
     /**
      * @var boolean
-     *
-     @ORM\Column(name="need_hosting", type="boolean")
      */
     private $needHosting;
 
@@ -115,9 +107,8 @@ class EventAdherentRegistration
      */
     private $registrationDate;
 
-
     /**
-     * @var text 
+     * @var text
      *
      * @ORM\Column(name="comment", type="text", nullable=true)
      */
@@ -125,8 +116,6 @@ class EventAdherentRegistration
 
     /**
      * @var boolean
-     *
-     @ORM\Column(name="vote_status", type="boolean")
      */
     private $voteStatus;
 
@@ -137,8 +126,6 @@ class EventAdherentRegistration
      * Online (CB) or At registration desk
      */
     private $attendance;
-
-
 
     public function __construct(\AppBundle\Entity\Adherent $author = null, Event $event = null)
     {
@@ -151,9 +138,9 @@ class EventAdherentRegistration
         $this->payments = new ArrayCollection();
     }
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -161,9 +148,10 @@ class EventAdherentRegistration
     }
 
     /**
-     * Set adherent
+     * Set adherent.
      *
      * @param \stdClass $adherent
+     *
      * @return EventAdherentRegistration
      */
     public function setAdherent($adherent)
@@ -174,9 +162,9 @@ class EventAdherentRegistration
     }
 
     /**
-     * Get adherent
+     * Get adherent.
      *
-     * @return \stdClass 
+     * @return \stdClass
      */
     public function getAdherent()
     {
@@ -184,9 +172,10 @@ class EventAdherentRegistration
     }
 
     /**
-     * Set role
+     * Set role.
      *
      * @param \stdClass $role
+     *
      * @return EventAdherentRegistration
      */
     public function setRole($role)
@@ -197,9 +186,9 @@ class EventAdherentRegistration
     }
 
     /**
-     * Get role
+     * Get role.
      *
-     * @return \stdClass 
+     * @return \stdClass
      */
     public function getRole()
     {
@@ -207,9 +196,10 @@ class EventAdherentRegistration
     }
 
     /**
-     * Set event
+     * Set event.
      *
      * @param \stdClass $event
+     *
      * @return EventAdherentRegistration
      */
     public function setEvent($event)
@@ -220,9 +210,9 @@ class EventAdherentRegistration
     }
 
     /**
-     * Get event
+     * Get event.
      *
-     * @return \stdClass 
+     * @return \stdClass
      */
     public function getEvent()
     {
@@ -230,9 +220,10 @@ class EventAdherentRegistration
     }
 
     /**
-     * Set needHosting
+     * Set needHosting.
      *
      * @param boolean $needHosting
+     *
      * @return EventAdherentRegistration
      */
     public function setNeedHosting($needHosting)
@@ -243,9 +234,9 @@ class EventAdherentRegistration
     }
 
     /**
-     * Get needHosting
+     * Get needHosting.
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getNeedHosting()
     {
@@ -253,17 +244,17 @@ class EventAdherentRegistration
     }
 
     /**
-     * Set paymentMode
+     * Set paymentMode.
      *
      * @param string $paymentMode
+     *
      * @return EventAdherentRegistration
      */
     public function setPaymentMode($paymentMode)
     {
         if (!in_array($paymentMode, array(
             self::PAYMENT_MODE_ONLINE,
-            self::PAYMENT_MODE_ONSITE)))
-        {
+            self::PAYMENT_MODE_ONSITE, ))) {
             throw new \InvalidArgumentException('Invalid payment mode');
         }
         $this->paymentMode = $paymentMode;
@@ -272,9 +263,9 @@ class EventAdherentRegistration
     }
 
     /**
-     * Get paymentMode
+     * Get paymentMode.
      *
-     * @return string 
+     * @return string
      */
     public function getPaymentMode()
     {
@@ -282,9 +273,10 @@ class EventAdherentRegistration
     }
 
     /**
-     * Set registrationDate
+     * Set registrationDate.
      *
      * @param \DateTime $registrationDate
+     *
      * @return EventAdherentRegistration
      */
     public function setRegistrationDate($registrationDate)
@@ -295,9 +287,9 @@ class EventAdherentRegistration
     }
 
     /**
-     * Get registrationDate
+     * Get registrationDate.
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getRegistrationDate()
     {
@@ -305,9 +297,10 @@ class EventAdherentRegistration
     }
 
     /**
-     * Set author
+     * Set author.
      *
      * @param \AppBundle\Entity\Adherent $author
+     *
      * @return EventAdherentRegistration
      */
     public function setAuthor(\AppBundle\Entity\Adherent $author)
@@ -318,9 +311,9 @@ class EventAdherentRegistration
     }
 
     /**
-     * Get author
+     * Get author.
      *
-     * @return \AppBundle\Entity\Adherent 
+     * @return \AppBundle\Entity\Adherent
      */
     public function getAuthor()
     {
@@ -328,9 +321,10 @@ class EventAdherentRegistration
     }
 
     /**
-     * Add meals
+     * Add meals.
      *
      * @param \AppBundle\Entity\Event\EventMeal $meals
+     *
      * @return EventAdherentRegistration
      */
     public function addMeal(\AppBundle\Entity\Event\EventMeal $meals)
@@ -341,7 +335,7 @@ class EventAdherentRegistration
     }
 
     /**
-     * Remove meals
+     * Remove meals.
      *
      * @param \AppBundle\Entity\Event\EventMeal $meals
      */
@@ -351,9 +345,9 @@ class EventAdherentRegistration
     }
 
     /**
-     * Get meals
+     * Get meals.
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getMeals()
     {
@@ -361,9 +355,10 @@ class EventAdherentRegistration
     }
 
     /**
-     * Set cost
+     * Set cost.
      *
      * @param \AppBundle\Entity\Event\EventCost $cost
+     *
      * @return EventAdherentRegistration
      */
     public function setCost(\AppBundle\Entity\Event\EventCost $cost)
@@ -374,9 +369,9 @@ class EventAdherentRegistration
     }
 
     /**
-     * Get cost
+     * Get cost.
      *
-     * @return \AppBundle\Entity\Event\EventCost 
+     * @return \AppBundle\Entity\Event\EventCost
      */
     public function getCost()
     {
@@ -384,9 +379,10 @@ class EventAdherentRegistration
     }
 
     /**
-     * Add payments
+     * Add payments.
      *
      * @param \AppBundle\Entity\Payment\EventPayment $payments
+     *
      * @return EventAdherentRegistration
      */
     public function addPayment(\AppBundle\Entity\Payment\EventPayment $payments)
@@ -397,7 +393,7 @@ class EventAdherentRegistration
     }
 
     /**
-     * Remove payments
+     * Remove payments.
      *
      * @param \AppBundle\Entity\Payment\EventPayment $payments
      */
@@ -407,9 +403,9 @@ class EventAdherentRegistration
     }
 
     /**
-     * Get payments
+     * Get payments.
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getPayments()
     {
@@ -417,9 +413,10 @@ class EventAdherentRegistration
     }
 
     /**
-     * Set comment
+     * Set comment.
      *
      * @param string $comment
+     *
      * @return EventAdherentRegistration
      */
     public function setComment($comment)
@@ -430,9 +427,9 @@ class EventAdherentRegistration
     }
 
     /**
-     * Get comment
+     * Get comment.
      *
-     * @return string 
+     * @return string
      */
     public function getComment()
     {
@@ -440,9 +437,10 @@ class EventAdherentRegistration
     }
 
     /**
-     * Set voteStatus
+     * Set voteStatus.
      *
      * @param boolean $voteStatus
+     *
      * @return EventAdherentRegistration
      */
     public function setVoteStatus($voteStatus)
@@ -453,9 +451,9 @@ class EventAdherentRegistration
     }
 
     /**
-     * Get voteStatus
+     * Get voteStatus.
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getVoteStatus()
     {
@@ -463,9 +461,10 @@ class EventAdherentRegistration
     }
 
     /**
-     * Set attendance
+     * Set attendance.
      *
      * @param string $attendance
+     *
      * @return EventAdherentRegistration
      */
     public function setAttendance($attendance)
@@ -473,8 +472,7 @@ class EventAdherentRegistration
         if (!in_array($attendance, array(
             self::ATTENDANCE_PRESENT,
             self::ATTENDANCE_ABSENT,
-            self::ATTENDANCE_NOT_REGISTRED)))
-        {
+            self::ATTENDANCE_NOT_REGISTRED, ))) {
             throw new \InvalidArgumentException('Invalid attendance status');
         }
         $this->attendance = $attendance;
@@ -483,9 +481,9 @@ class EventAdherentRegistration
     }
 
     /**
-     * Get attendance
+     * Get attendance.
      *
-     * @return string 
+     * @return string
      */
     public function getAttendance()
     {

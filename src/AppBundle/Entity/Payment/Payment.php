@@ -5,14 +5,13 @@ namespace AppBundle\Entity\Payment;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Payment:Payment
+ * Payment:Payment.
  *
  * @ORM\Entity
  * @ORM\Table(name="payment")
  * @ORM\InheritanceType("SINGLE_TABLE")
  * @ORM\DiscriminatorColumn(name="payment_type", type="string")
  * @ORM\DiscriminatorMap({"event" = "EventPayment", "membership" = "MembershipPayment"})
- *
  */
 abstract class Payment
 {
@@ -23,13 +22,11 @@ abstract class Payment
     const ACCOUNT_PG = 'pg';
     const ACCOUNT_AFPG = 'afpg';
 
-
     const STATUS_NEW = 'new';
     const STATUS_PENDING = 'pending';
     const STATUS_BANKED = 'banked';
     const STATUS_REFUSED = 'refused';
     const STATUS_CANCELED = 'canceled';
-
 
     /**
      * @var integer
@@ -63,25 +60,23 @@ abstract class Payment
 
     /**
      * @var \stdClass
-     * People who write the cheque / has his name on the credit card
+     *                People who write the cheque / has his name on the credit card
      *
      * @ORM\Column(name="drawer", type="string", length=255, nullable=true)
-     * 
      */
     protected $drawer;
 
     /**
      * @var \stdClass
-     * adherent who benefit from the money
+     *                adherent who benefit from the money
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Adherent")
-     *
      */
     protected $recipient;
 
     /**
      * @var \stdClass
-     * intranet author of the payment
+     *                intranet author of the payment
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Adherent")
      */
@@ -95,11 +90,10 @@ abstract class Payment
     protected $date;
 
     /**
-     * @var string 
-     * intranet author of the payment
+     * @var string
+     *             intranet author of the payment
      *
      * @ORM\Column(name="account", type="string", length=20)
-     *
      */
     protected $account;
 
@@ -109,8 +103,6 @@ abstract class Payment
      * Human readable element to group paybox payment in the web interface
      *
      * @ORM\Column(name="referenceIdentifierPrefix", type="string", length=100)
-     *
-     *
      */
     protected $referenceIdentifierPrefix;
 
@@ -120,9 +112,7 @@ abstract class Payment
      * IPN Array from paybox
      *
      * @ORM\Column(name="paymentIPN", type="array", nullable = true)
-     *
      */
-
     protected $paymentIPN;
 
     public function __construct()
@@ -130,12 +120,11 @@ abstract class Payment
         $this->date = new \DateTime('now');
         $this->account = self::ACCOUNT_PG;
         $this->paymentIPN = array();
-    
     }
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -143,9 +132,10 @@ abstract class Payment
     }
 
     /**
-     * Set amount
+     * Set amount.
      *
      * @param integer $amount
+     *
      * @return Payment:Payment
      */
     public function setAmount($amount)
@@ -156,9 +146,9 @@ abstract class Payment
     }
 
     /**
-     * Get amount
+     * Get amount.
      *
-     * @return integer 
+     * @return integer
      */
     public function getAmount()
     {
@@ -166,9 +156,10 @@ abstract class Payment
     }
 
     /**
-     * Set method
+     * Set method.
      *
      * @param \stdClass $method
+     *
      * @return Payment:Payment
      */
     public function setMethod($method)
@@ -176,9 +167,8 @@ abstract class Payment
         if (!in_array($method, array(
             self::METHOD_CREDIT_CARD,
             self::METHOD_CHEQUE,
-            self::METHOD_CASH
-        )))
-        {
+            self::METHOD_CASH,
+        ))) {
             throw new \InvalidArgumentException('Invalid method');
         }
         $this->method = $method;
@@ -187,9 +177,9 @@ abstract class Payment
     }
 
     /**
-     * Get method
+     * Get method.
      *
-     * @return \stdClass 
+     * @return \stdClass
      */
     public function getMethod()
     {
@@ -197,9 +187,10 @@ abstract class Payment
     }
 
     /**
-     * Set status
+     * Set status.
      *
      * @param string $status
+     *
      * @return Payment:Payment
      */
     public function setStatus($status)
@@ -209,11 +200,9 @@ abstract class Payment
             self::STATUS_PENDING,
             self::STATUS_BANKED,
             self::STATUS_REFUSED,
-            self::STATUS_CANCELED
-        )))
-        {
+            self::STATUS_CANCELED,
+        ))) {
             throw new \InvalidArgumentException('Invalid Status');
-        
         }
         $this->status = $status;
 
@@ -221,9 +210,9 @@ abstract class Payment
     }
 
     /**
-     * Get status
+     * Get status.
      *
-     * @return string 
+     * @return string
      */
     public function getStatus()
     {
@@ -231,9 +220,10 @@ abstract class Payment
     }
 
     /**
-     * Set drawer
+     * Set drawer.
      *
      * @param \stdClass $drawer
+     *
      * @return Payment:Payment
      */
     public function setDrawer($drawer)
@@ -244,9 +234,9 @@ abstract class Payment
     }
 
     /**
-     * Get drawer
+     * Get drawer.
      *
-     * @return \stdClass 
+     * @return \stdClass
      */
     public function getDrawer()
     {
@@ -254,9 +244,10 @@ abstract class Payment
     }
 
     /**
-     * Set recipient
+     * Set recipient.
      *
      * @param \stdClass $recipient
+     *
      * @return Payment:Payment
      */
     public function setRecipient($recipient)
@@ -267,9 +258,9 @@ abstract class Payment
     }
 
     /**
-     * Get recipient
+     * Get recipient.
      *
-     * @return \stdClass 
+     * @return \stdClass
      */
     public function getRecipient()
     {
@@ -277,9 +268,10 @@ abstract class Payment
     }
 
     /**
-     * Set author
+     * Set author.
      *
      * @param \stdClass $author
+     *
      * @return Payment:Payment
      */
     public function setAuthor($author)
@@ -290,9 +282,9 @@ abstract class Payment
     }
 
     /**
-     * Get author
+     * Get author.
      *
-     * @return \stdClass 
+     * @return \stdClass
      */
     public function getAuthor()
     {
@@ -300,9 +292,10 @@ abstract class Payment
     }
 
     /**
-     * Set date
+     * Set date.
      *
      * @param \DateTime $date
+     *
      * @return Payment:Payment
      */
     public function setDate($date)
@@ -313,9 +306,9 @@ abstract class Payment
     }
 
     /**
-     * Get date
+     * Get date.
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getDate()
     {
@@ -323,18 +316,18 @@ abstract class Payment
     }
 
     /**
-     * Set account
+     * Set account.
      *
      * @param string $account
+     *
      * @return Payment
      */
     public function setAccount($account)
     {
         if (!in_array($account, array(
             self::ACCOUNT_PG,
-            self::ACCOUNT_AFPG
-        )))
-        {
+            self::ACCOUNT_AFPG,
+        ))) {
             throw new \InvalidArgumentException('Invalid account');
         }
         $this->account = $account;
@@ -343,9 +336,9 @@ abstract class Payment
     }
 
     /**
-     * Get account
+     * Get account.
      *
-     * @return string 
+     * @return string
      */
     public function getAccount()
     {
@@ -353,9 +346,10 @@ abstract class Payment
     }
 
     /**
-     * Set referenceIdentifierPrefix
+     * Set referenceIdentifierPrefix.
      *
      * @param string $referenceIdentifierPrefix
+     *
      * @return Payment
      */
     public function setReferenceIdentifierPrefix($referenceIdentifierPrefix)
@@ -366,9 +360,9 @@ abstract class Payment
     }
 
     /**
-     * Get referenceIdentifierPrefix
+     * Get referenceIdentifierPrefix.
      *
-     * @return string 
+     * @return string
      */
     public function getReferenceIdentifierPrefix()
     {
@@ -376,9 +370,10 @@ abstract class Payment
     }
 
     /**
-     * Set paymentIPN
+     * Set paymentIPN.
      *
      * @param array $paymentIPN
+     *
      * @return Payment
      */
     public function setPaymentIPN($paymentIPN)
@@ -389,9 +384,9 @@ abstract class Payment
     }
 
     /**
-     * Get paymentIPN
+     * Get paymentIPN.
      *
-     * @return array 
+     * @return array
      */
     public function getPaymentIPN()
     {
@@ -400,7 +395,6 @@ abstract class Payment
 
     public function __toString()
     {
-        return $this->amount . '€ - ' . $this->status;
-    
+        return $this->amount.'€ - '.$this->status;
     }
 }

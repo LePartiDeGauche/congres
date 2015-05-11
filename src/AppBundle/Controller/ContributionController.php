@@ -195,7 +195,7 @@ class ContributionController extends Controller
         return $this->render('contribution/vote.html.twig', array(
             'contrib' => $contrib,
             'form' => $form->createView(),
-            'type' => $type
+            'type' => $type,
         ));
     }
 
