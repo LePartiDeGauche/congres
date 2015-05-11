@@ -30,4 +30,4 @@ install:
 script:
       - bin/security-checker security:check
       - phpunit -c app
-      - php php-cs-fixer.phar fix src
+      - php php-cs-fixer.phar fix --no-interaction --dry-run --diff -vvv src/
