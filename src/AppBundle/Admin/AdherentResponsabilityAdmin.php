@@ -44,7 +44,7 @@ class AdherentResponsabilityAdmin extends Admin
                     'show' => array(),
                     'edit' => array(),
                     'delete' => array(),
-                )
+                ),
             ))
         ;
     }
@@ -58,7 +58,7 @@ class AdherentResponsabilityAdmin extends Admin
             ->add('responsability', 'sonata_type_model')
             ->add('start')
             ->add('end')
-            ->add('isActive', null, array('required' => null ))
+            ->add('isActive', null, array('required' => null))
             ->add('designatedByOrgan', 'sonata_type_model_autocomplete', array('property' => array('name'), 'required' => false))
         ;
     }

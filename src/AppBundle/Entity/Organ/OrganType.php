@@ -5,7 +5,7 @@ namespace AppBundle\Entity\Organ;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * OrganType
+ * OrganType.
  *
  * @ORM\Table(name="organ_type")
  * @ORM\Entity
@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 class OrganType
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -44,7 +44,7 @@ class OrganType
     private $type;
 
     /**
-     * @var boolean
+     * @var bool
      *
      * @ORM\Column(name="isUnique", type="boolean")
      */
@@ -52,6 +52,7 @@ class OrganType
 
     /**
      * The collection of user members of the instance.
+     *
      * @var \Doctrine\Common\Collections\Collection
      *
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Responsability",
@@ -64,9 +65,9 @@ class OrganType
         return $this->name;
     }
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -74,9 +75,10 @@ class OrganType
     }
 
     /**
-     * Set name
+     * Set name.
      *
-     * @param  string    $name
+     * @param string $name
+     *
      * @return OrganType
      */
     public function setName($name)
@@ -87,7 +89,7 @@ class OrganType
     }
 
     /**
-     * Get name
+     * Get name.
      *
      * @return string
      */
@@ -97,9 +99,10 @@ class OrganType
     }
 
     /**
-     * Set organs
+     * Set organs.
      *
-     * @param  \stdClass $organs
+     * @param \stdClass $organs
+     *
      * @return OrganType
      */
     public function setOrgans($organs)
@@ -110,7 +113,7 @@ class OrganType
     }
 
     /**
-     * Get organs
+     * Get organs.
      *
      * @return \stdClass
      */
@@ -120,9 +123,10 @@ class OrganType
     }
 
     /**
-     * Set type
+     * Set type.
      *
-     * @param  string    $type
+     * @param string $type
+     *
      * @return OrganType
      */
     public function setType($type)
@@ -133,7 +137,7 @@ class OrganType
     }
 
     /**
-     * Get type
+     * Get type.
      *
      * @return string
      */
@@ -143,9 +147,10 @@ class OrganType
     }
 
     /**
-     * Set isUnique
+     * Set isUnique.
      *
-     * @param  boolean   $isUnique
+     * @param bool $isUnique
+     *
      * @return OrganType
      */
     public function setIsUnique($isUnique)
@@ -156,16 +161,16 @@ class OrganType
     }
 
     /**
-     * Get isUnique
+     * Get isUnique.
      *
-     * @return boolean
+     * @return bool
      */
     public function getIsUnique()
     {
         return $this->isUnique;
     }
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
@@ -174,7 +179,7 @@ class OrganType
     }
 
     /**
-     * Add organ
+     * Add organ.
      *
      * @param \AppBundle\Entity\Organ\Organ $organ
      *
@@ -188,7 +193,7 @@ class OrganType
     }
 
     /**
-     * Remove organ
+     * Remove organ.
      *
      * @param \AppBundle\Entity\Organ\Organ $organ
      */
@@ -198,7 +203,7 @@ class OrganType
     }
 
     /**
-     * Add participationAllowedBy
+     * Add participationAllowedBy.
      *
      * @param \AppBundle\Entity\Responsability $participationAllowedBy
      *
@@ -212,7 +217,7 @@ class OrganType
     }
 
     /**
-     * Remove participationAllowedBy
+     * Remove participationAllowedBy.
      *
      * @param \AppBundle\Entity\Responsability $participationAllowedBy
      */
@@ -222,7 +227,7 @@ class OrganType
     }
 
     /**
-     * Get participationAllowedBy
+     * Get participationAllowedBy.
      *
      * @return \Doctrine\Common\Collections\Collection
      */

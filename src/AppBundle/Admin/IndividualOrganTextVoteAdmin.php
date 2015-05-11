@@ -44,16 +44,16 @@ class IndividualOrganTextVoteAdmin extends Admin
                     'show' => array(),
                     'edit' => array(),
                     'delete' => array(),
-                )
+                ),
             ))
             ->add('author.firstname')
             ->add('author.lastname')
             ->add('organ.name')
-            ->add('meetingDate', null, array( 'label' => 'Date de la réunion' ))
-            ->add('voteTotal', null, array( 'label' => 'Total des présents' ))
-            ->add('voteBlank', null, array( 'label' => 'Blancs' ))
-            ->add('voteAbstention', null, array( 'label' => 'Abstentions' ))
-            ->add('voteNotTakingPart', null, array( 'label' => 'Ne prend pas part au vote' ))
+            ->add('meetingDate', null, array('label' => 'Date de la réunion'))
+            ->add('voteTotal', null, array('label' => 'Total des présents'))
+            ->add('voteBlank', null, array('label' => 'Blancs'))
+            ->add('voteAbstention', null, array('label' => 'Abstentions'))
+            ->add('voteNotTakingPart', null, array('label' => 'Ne prend pas part au vote'))
             ->add('textVoteAgregations', 'sonata_type_model')
         ;
     }
@@ -65,11 +65,11 @@ class IndividualOrganTextVoteAdmin extends Admin
     {
         $formMapper
             ->add('id')
-            ->add('meetingDate', null, array( 'label' => 'Date de la réunion' ))
-            ->add('voteTotal', null, array( 'label' => 'Total des présents' ))
-            ->add('voteBlank', null, array( 'label' => 'Blancs' ))
-            ->add('voteAbstention', null, array( 'label' => 'Abstentions' ))
-            ->add('voteNotTakingPart', null, array( 'label' => 'Ne prend pas part au vote' ))
+            ->add('meetingDate', null, array('label' => 'Date de la réunion'))
+            ->add('voteTotal', null, array('label' => 'Total des présents'))
+            ->add('voteBlank', null, array('label' => 'Blancs'))
+            ->add('voteAbstention', null, array('label' => 'Abstentions'))
+            ->add('voteNotTakingPart', null, array('label' => 'Ne prend pas part au vote'))
         ;
     }
 
@@ -80,11 +80,11 @@ class IndividualOrganTextVoteAdmin extends Admin
     {
         $showMapper
             ->add('id')
-            ->add('meetingDate', null, array( 'label' => 'Date de la réunion' ))
-            ->add('voteTotal', null, array( 'label' => 'Total des présents' ))
-            ->add('voteBlank', null, array( 'label' => 'Blancs' ))
-            ->add('voteAbstention', null, array( 'label' => 'Abstentions' ))
-            ->add('voteNotTakingPart', null, array( 'label' => 'Ne prend pas part au vote' ))
+            ->add('meetingDate', null, array('label' => 'Date de la réunion'))
+            ->add('voteTotal', null, array('label' => 'Total des présents'))
+            ->add('voteBlank', null, array('label' => 'Blancs'))
+            ->add('voteAbstention', null, array('label' => 'Abstentions'))
+            ->add('voteNotTakingPart', null, array('label' => 'Ne prend pas part au vote'))
             ->add('textVoteAgregations', 'sonata_type_model')
         ;
     }
@@ -110,7 +110,7 @@ class IndividualOrganTextVoteAdmin extends Admin
     {
         return array(
             'xls',
-            'csv'
+            'csv',
         );
     }
 }

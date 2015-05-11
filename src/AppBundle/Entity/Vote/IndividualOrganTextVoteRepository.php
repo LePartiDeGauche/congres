@@ -21,7 +21,6 @@ class IndividualOrganTextVoteRepository extends EntityRepository
             ->getQuery()->getSingleScalarResult();
 
         return !!$voteCount;
-
     }
 
     public function getReport(Organ $organ, TextGroup $textGroup)
@@ -36,5 +35,4 @@ class IndividualOrganTextVoteRepository extends EntityRepository
 
         return $report;
     }
-
 }

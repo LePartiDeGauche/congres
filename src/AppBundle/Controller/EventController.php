@@ -22,7 +22,6 @@ use AppBundle\Entity\Payment\EventPayment;
  */
 class EventController extends Controller
 {
-
     /**
      * Finds and displays a Event\EventAdherentRegistration entity.
      *
@@ -30,6 +29,7 @@ class EventController extends Controller
      *     "event_id": "\d+",
      *     "event_reg_id": "\d+"
      *     })
+     *
      * @Method("GET")
      * @ParamConverter("event", class="AppBundle:Event\Event", options={"id" = "event_id"})
      * @ParamConverter("eventRegistration", class="AppBundle:Event\EventAdherentRegistration", options={"id" = "event_reg_id"})
@@ -47,7 +47,7 @@ class EventController extends Controller
         $payedAmount = $repo->getPayedAmountById($eventRegistration);
 
         return array(
-            'event'      => $event,
+            'event' => $event,
             'eventRegistration' => $eventRegistration,
             'payedAmount' => $payedAmount,
         );
@@ -61,6 +61,7 @@ class EventController extends Controller
      *     "event_id": "\d+",
      *     "event_reg_id": "\d+"
      *     })
+     *
      * @Method("GET")
      * @ParamConverter("event", class="AppBundle:Event\Event", options={"id" = "event_id"})
      * @ParamConverter("eventRegistration", class="AppBundle:Event\EventAdherentRegistration",
@@ -82,21 +83,19 @@ class EventController extends Controller
 
             return $this->redirect($this->generateUrl('payment_pay',
                 array('id' => $payment->getId())));
-
         }
 
-            return $this->redirect($this->generateUrl('event_registration_show',
+        return $this->redirect($this->generateUrl('event_registration_show',
                 array('event_id' => $event->getId(), 'event_reg_id' => $eventRegistration->getId())));
     }
 
     /**
-     * Register to a event
+     * Register to a event.
      *
      * @Route("/{event_id}/registration/create", name="event_registration_create", requirements={
      *     "event_id": "\d+"
      *     })
      * @ParamConverter("event", class="AppBundle:Event\Event", options={"id" = "event_id"})
-     *
      */
     public function registerAction(Request $request, Event $event)
     {
@@ -115,7 +114,7 @@ class EventController extends Controller
         // TODO voter (no time for this now...)
         $now = new \DateTime('now');
         if ($now < $event->getRegistrationBegin() || $now > $event->getRegistrationEnd()) {
-            throw new AccessDeniedException("Les inscriptions ne sont pas ouvertes");
+            throw new AccessDeniedException('Les inscriptions ne sont pas ouvertes');
         }
 
         $eventRegistration = new EventAdherentRegistration($this->getUser()->getProfile(), $event);
@@ -147,10 +146,10 @@ class EventController extends Controller
             }
         }
 
-        return $this->render("event/registration.html.twig", array(
-            'event'      => $event,
-            'event_registration'      => $eventRegistration,
-            'form'  => $form->createView()))
+        return $this->render('event/registration.html.twig', array(
+            'event' => $event,
+            'event_registration' => $eventRegistration,
+            'form' => $form->createView(), ))
             ;
     }
 
@@ -160,15 +159,15 @@ class EventController extends Controller
      * @Route("/{event_id}", name="event_show", requirements={
      *     "event_id": "\d+"
      * })
- )
- * @Method("GET")
- * @ParamConverter("event", class="AppBundle:Event\Event", options={"id" = "event_id"})
- * @Template("event/show.html.twig")
+     )
+     * @Method("GET")
+     * @ParamConverter("event", class="AppBundle:Event\Event", options={"id" = "event_id"})
+     * @Template("event/show.html.twig")
      */
     public function showAction(Event $event)
     {
         return array(
-            'event'      => $event,
+            'event' => $event,
         );
     }
 
@@ -176,6 +175,7 @@ class EventController extends Controller
      * Lists all Event\EventAdherentRegistration entities.
      *
      * @Route("/registration/user", name="event_adherent_registration_list")
+     *
      * @Method("GET")
      */
     public function indexAction()
@@ -187,9 +187,8 @@ class EventController extends Controller
 
         return $this->render('event/adherent_registration_list.html.twig', array(
             'eventRegistrations' => $eventRegs,
-            'adherent' => $adherent
+            'adherent' => $adherent,
         ));
-
     }
 
     /**

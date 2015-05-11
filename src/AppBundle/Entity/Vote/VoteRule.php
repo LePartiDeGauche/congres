@@ -5,7 +5,7 @@ namespace AppBundle\Entity\Vote;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * VoteRule
+ * VoteRule.
  *
  * @ORM\Table(name="vote_rule")
  * @ORM\Entity(repositoryClass="AppBundle\Entity\Vote\VoteRuleRepository")
@@ -16,7 +16,7 @@ use Doctrine\ORM\Mapping as ORM;
 abstract class VoteRule
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -26,13 +26,11 @@ abstract class VoteRule
 
     /**
      * @ORM\Column(type="string", length=255)
-     *
      */
     protected $name;
 
     /**
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Responsability")
-     *
      */
     protected $concernedResponsability;
 
@@ -41,14 +39,13 @@ abstract class VoteRule
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Text\TextGroup", inversedBy="voteRules")
      * @ORM\JoinColumn(nullable=false)
-     *
      */
     protected $textGroup;
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -56,9 +53,10 @@ abstract class VoteRule
     }
 
     /**
-     * Set concernedResponsability
+     * Set concernedResponsability.
      *
-     * @param  \stdClass $concernedResponsability
+     * @param \stdClass $concernedResponsability
+     *
      * @return VoteRule
      */
     public function setConcernedResponsability($concernedResponsability)
@@ -69,7 +67,7 @@ abstract class VoteRule
     }
 
     /**
-     * Get concernedResponsability
+     * Get concernedResponsability.
      *
      * @return \stdClass
      */
@@ -78,7 +76,7 @@ abstract class VoteRule
         return $this->concernedResponsability;
     }
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
@@ -86,9 +84,10 @@ abstract class VoteRule
     }
 
     /**
-     * Set name
+     * Set name.
      *
-     * @param  string   $name
+     * @param string $name
+     *
      * @return VoteRule
      */
     public function setName($name)
@@ -99,7 +98,7 @@ abstract class VoteRule
     }
 
     /**
-     * Get name
+     * Get name.
      *
      * @return string
      */
@@ -109,9 +108,10 @@ abstract class VoteRule
     }
 
     /**
-     * Add concernedResponsability
+     * Add concernedResponsability.
      *
-     * @param  \AppBundle\Entity\Responsability $concernedResponsability
+     * @param \AppBundle\Entity\Responsability $concernedResponsability
+     *
      * @return VoteRule
      */
     public function addConcernedResponsability(\AppBundle\Entity\Responsability $concernedResponsability)
@@ -122,7 +122,7 @@ abstract class VoteRule
     }
 
     /**
-     * Remove concernedResponsability
+     * Remove concernedResponsability.
      *
      * @param \AppBundle\Entity\Responsability $concernedResponsability
      */
@@ -132,9 +132,10 @@ abstract class VoteRule
     }
 
     /**
-     * Set textGroup
+     * Set textGroup.
      *
-     * @param  \AppBundle\Entity\Text\TextGroup $textGroup
+     * @param \AppBundle\Entity\Text\TextGroup $textGroup
+     *
      * @return VoteRule
      */
     public function setTextGroup(\AppBundle\Entity\Text\TextGroup $textGroup)
@@ -145,7 +146,7 @@ abstract class VoteRule
     }
 
     /**
-     * Get textGroup
+     * Get textGroup.
      *
      * @return \AppBundle\Entity\Text\TextGroup
      */

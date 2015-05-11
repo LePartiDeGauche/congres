@@ -5,7 +5,7 @@ namespace AppBundle\Entity\Event;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * SleepingSpot
+ * SleepingSpot.
  *
  * @ORM\Table(name="sleeping_spot")
  * @ORM\Entity
@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 class SleepingSpot
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -44,9 +44,9 @@ class SleepingSpot
     private $sleepingSite;
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -54,9 +54,10 @@ class SleepingSpot
     }
 
     /**
-     * Set name
+     * Set name.
      *
-     * @param  string       $name
+     * @param string $name
+     *
      * @return SleepingSpot
      */
     public function setName($name)
@@ -67,7 +68,7 @@ class SleepingSpot
     }
 
     /**
-     * Get name
+     * Get name.
      *
      * @return string
      */
@@ -77,9 +78,10 @@ class SleepingSpot
     }
 
     /**
-     * Set description
+     * Set description.
      *
-     * @param  string       $description
+     * @param string $description
+     *
      * @return SleepingSpot
      */
     public function setDescription($description)
@@ -90,7 +92,7 @@ class SleepingSpot
     }
 
     /**
-     * Get description
+     * Get description.
      *
      * @return string
      */
@@ -100,9 +102,10 @@ class SleepingSpot
     }
 
     /**
-     * Set sleepingSite
+     * Set sleepingSite.
      *
-     * @param  \AppBundle\Entity\Event\SleepingSite $sleepingSite
+     * @param \AppBundle\Entity\Event\SleepingSite $sleepingSite
+     *
      * @return SleepingSpot
      */
     public function setSleepingSite(\AppBundle\Entity\Event\SleepingSite $sleepingSite)
@@ -113,7 +116,7 @@ class SleepingSpot
     }
 
     /**
-     * Get sleepingSite
+     * Get sleepingSite.
      *
      * @return \AppBundle\Entity\Event\SleepingSite
      */

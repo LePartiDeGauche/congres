@@ -7,16 +7,14 @@ use AppBundle\Entity\Text\Text;
 use AppBundle\Entity\Text\TextGroup;
 
 /**
- *
- * AppBundle\Entity\Vote\TextVoteAgregation
+ * AppBundle\Entity\Vote\TextVoteAgregation.
  *
  * @ORM\MappedSuperclass
- *
  */
 abstract class TextVoteAgregation
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -29,7 +27,6 @@ abstract class TextVoteAgregation
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Text\Text", inversedBy="individualVoteAgregations")
      * @ORM\JoinColumn(nullable=false)
-     *
      */
     protected $text;
 
@@ -38,26 +35,25 @@ abstract class TextVoteAgregation
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Text\TextGroup")
      * @ORM\JoinColumn(nullable=false)
-     *
      */
     protected $textGroup;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="voteFor", type="integer")
      */
     protected $voteFor;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="voteAgainst", type="integer")
      */
     protected $voteAgainst;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="voteAbstention", type="integer")
      */
@@ -72,9 +68,9 @@ abstract class TextVoteAgregation
         $this->voteAbstention = 0;
     }
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -82,9 +78,10 @@ abstract class TextVoteAgregation
     }
 
     /**
-     * Set text
+     * Set text.
      *
-     * @param  \stdClass                    $text
+     * @param \stdClass $text
+     *
      * @return IndividualTextVoteAgregation
      */
     public function setText($text)
@@ -95,7 +92,7 @@ abstract class TextVoteAgregation
     }
 
     /**
-     * Get text
+     * Get text.
      *
      * @return \stdClass
      */
@@ -105,9 +102,10 @@ abstract class TextVoteAgregation
     }
 
     /**
-     * Set textGroup
+     * Set textGroup.
      *
-     * @param  \stdClass                    $textGroup
+     * @param \stdClass $textGroup
+     *
      * @return IndividualTextVoteAgregation
      */
     public function setTextGroup($textGroup)
@@ -118,7 +116,7 @@ abstract class TextVoteAgregation
     }
 
     /**
-     * Get textGroup
+     * Get textGroup.
      *
      * @return \stdClass
      */
@@ -128,9 +126,10 @@ abstract class TextVoteAgregation
     }
 
     /**
-     * Set voteFor
+     * Set voteFor.
      *
-     * @param  integer                      $voteFor
+     * @param int $voteFor
+     *
      * @return IndividualTextVoteAgregation
      */
     public function setVoteFor($voteFor)
@@ -141,9 +140,9 @@ abstract class TextVoteAgregation
     }
 
     /**
-     * Get voteFor
+     * Get voteFor.
      *
-     * @return integer
+     * @return int
      */
     public function getVoteFor()
     {
@@ -151,9 +150,10 @@ abstract class TextVoteAgregation
     }
 
     /**
-     * Set voteAgainst
+     * Set voteAgainst.
      *
-     * @param  integer                      $voteAgainst
+     * @param int $voteAgainst
+     *
      * @return IndividualTextVoteAgregation
      */
     public function setVoteAgainst($voteAgainst)
@@ -164,9 +164,9 @@ abstract class TextVoteAgregation
     }
 
     /**
-     * Get voteAgainst
+     * Get voteAgainst.
      *
-     * @return integer
+     * @return int
      */
     public function getVoteAgainst()
     {
@@ -174,9 +174,10 @@ abstract class TextVoteAgregation
     }
 
     /**
-     * Set voteAbstention
+     * Set voteAbstention.
      *
-     * @param  integer                      $voteAbstention
+     * @param int $voteAbstention
+     *
      * @return IndividualTextVoteAgregation
      */
     public function setVoteAbstention($voteAbstention)
@@ -187,13 +188,12 @@ abstract class TextVoteAgregation
     }
 
     /**
-     * Get voteAbstention
+     * Get voteAbstention.
      *
-     * @return integer
+     * @return int
      */
     public function getVoteAbstention()
     {
         return $this->voteAbstention;
     }
-
 }

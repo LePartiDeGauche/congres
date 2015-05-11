@@ -24,5 +24,4 @@ class TextGroupOrganPair
     {
         return $this->organ;
     }
-
 }

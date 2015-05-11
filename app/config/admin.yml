@@ -102,6 +102,12 @@ services:
         tags:
             - {name: sonata.admin, manager_type: orm, group: "Texte", label: "Textes"}
 
+    app.admin.amendment:
+        class: AppBundle\Admin\AmendmentAdmin
+        arguments: [~, AppBundle\Entity\Text\Amendment, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: "Texte", label: "Amendements"}
+
     sonata.admin.individual_organ_text_vote:
         class: AppBundle\Admin\IndividualOrganTextVoteAdmin
         arguments: [~, AppBundle\Entity\Vote\IndividualOrganTextVote, SonataAdminBundle:CRUD]

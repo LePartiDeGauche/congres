@@ -7,16 +7,15 @@ use AppBundle\Entity\Text\Text;
 use AppBundle\Entity\Text\TextGroup;
 
 /**
- * AppBundle\Entity\Vote\IndividualOrganTextVoteAgregation
+ * AppBundle\Entity\Vote\IndividualOrganTextVoteAgregation.
  *
  * @ORM\Entity()
  * @ORM\Table(name="individual_organ_text_vote_agregation")
  */
 class IndividualOrganTextVoteAgregation extends TextVoteAgregation
 {
-
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -30,13 +29,12 @@ class IndividualOrganTextVoteAgregation extends TextVoteAgregation
      * @ORM\ManyToOne(targetEntity="IndividualOrganTextVote",
      * inversedBy="textVoteAgregations")
      * @ORM\JoinColumn(nullable=false)
-     *
      */
     private $individualOrganTextVote;
 
     public function __tostring()
     {
-        return $this->getText()->getTitle() . " : " . $this->voteFor;
+        return $this->getText()->getTitle().' : '.$this->voteFor;
     }
 
     public function __construct(Text $text, TextGroup $textGroup, IndividualOrganTextVote $individualOrganTextVote)
@@ -46,9 +44,10 @@ class IndividualOrganTextVoteAgregation extends TextVoteAgregation
     }
 
     /**
-     * Set voteRule
+     * Set voteRule.
      *
-     * @param  \stdClass                         $voteRule
+     * @param \stdClass $voteRule
+     *
      * @return IndividualOrganTextVoteAgregation
      */
     public function setVoteRule($voteRule)
@@ -59,7 +58,7 @@ class IndividualOrganTextVoteAgregation extends TextVoteAgregation
     }
 
     /**
-     * Get voteRule
+     * Get voteRule.
      *
      * @return \stdClass
      */
@@ -69,7 +68,7 @@ class IndividualOrganTextVoteAgregation extends TextVoteAgregation
     }
 
     /**
-     * Set individualOrganTextVote
+     * Set individualOrganTextVote.
      *
      * @param \AppBundle\Entity\Vote\IndividualOrganTextVote $individualOrganTextVote
      *
@@ -83,7 +82,7 @@ class IndividualOrganTextVoteAgregation extends TextVoteAgregation
     }
 
     /**
-     * Get individualOrganTextVote
+     * Get individualOrganTextVote.
      *
      * @return \AppBundle\Entity\Vote\IndividualOrganTextVote
      */

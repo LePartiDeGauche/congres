@@ -5,7 +5,7 @@ namespace AppBundle\Entity\Organ;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * OrganParticipation
+ * OrganParticipation.
  *
  * @ORM\Table(name="organ_participation")
  * @ORM\Entity
@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 class OrganParticipation
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -40,8 +40,8 @@ class OrganParticipation
     /**
      * @var \stdClass
      * @ORM\ManyToMany(
-     * targetEntity="AppBundle\Entity\AdherentResponsability",
-     * mappedBy="allowsParticipations")
+     *                targetEntity="AppBundle\Entity\AdherentResponsability",
+     *                mappedBy="allowsParticipations")
      */
     private $allowedBy;
 
@@ -60,16 +60,16 @@ class OrganParticipation
     private $end;
 
     /**
-     * @var boolean
+     * @var bool
      *
      * @ORM\Column(name="isActive", type="boolean")
      */
     private $isActive;
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -77,9 +77,10 @@ class OrganParticipation
     }
 
     /**
-     * Set adherent
+     * Set adherent.
      *
-     * @param  \stdClass          $adherent
+     * @param \stdClass $adherent
+     *
      * @return OrganParticipation
      */
     public function setAdherent($adherent)
@@ -90,7 +91,7 @@ class OrganParticipation
     }
 
     /**
-     * Get adherent
+     * Get adherent.
      *
      * @return \stdClass
      */
@@ -100,9 +101,10 @@ class OrganParticipation
     }
 
     /**
-     * Set organ
+     * Set organ.
      *
-     * @param  \stdClass          $organ
+     * @param \stdClass $organ
+     *
      * @return OrganParticipation
      */
     public function setOrgan($organ)
@@ -113,7 +115,7 @@ class OrganParticipation
     }
 
     /**
-     * Get organ
+     * Get organ.
      *
      * @return \stdClass
      */
@@ -123,9 +125,10 @@ class OrganParticipation
     }
 
     /**
-     * Set start
+     * Set start.
      *
-     * @param  \DateTime          $start
+     * @param \DateTime $start
+     *
      * @return OrganParticipation
      */
     public function setStart($start)
@@ -136,7 +139,7 @@ class OrganParticipation
     }
 
     /**
-     * Get start
+     * Get start.
      *
      * @return \DateTime
      */
@@ -146,9 +149,10 @@ class OrganParticipation
     }
 
     /**
-     * Set end
+     * Set end.
      *
-     * @param  \DateTime          $end
+     * @param \DateTime $end
+     *
      * @return OrganParticipation
      */
     public function setEnd($end)
@@ -159,7 +163,7 @@ class OrganParticipation
     }
 
     /**
-     * Get end
+     * Get end.
      *
      * @return \DateTime
      */
@@ -169,9 +173,10 @@ class OrganParticipation
     }
 
     /**
-     * Set isActive
+     * Set isActive.
      *
-     * @param  boolean            $isActive
+     * @param bool $isActive
+     *
      * @return OrganParticipation
      */
     public function setIsActive($isActive)
@@ -182,16 +187,16 @@ class OrganParticipation
     }
 
     /**
-     * Get isActive
+     * Get isActive.
      *
-     * @return boolean
+     * @return bool
      */
     public function getIsActive()
     {
         return $this->isActive;
     }
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
@@ -199,7 +204,7 @@ class OrganParticipation
     }
 
     /**
-     * Add allowedBy
+     * Add allowedBy.
      *
      * @param \AppBundle\Entity\AdherentResponsability $allowedBy
      *
@@ -213,7 +218,7 @@ class OrganParticipation
     }
 
     /**
-     * Remove allowedBy
+     * Remove allowedBy.
      *
      * @param \AppBundle\Entity\AdherentResponsability $allowedBy
      */
@@ -223,7 +228,7 @@ class OrganParticipation
     }
 
     /**
-     * Get allowedBy
+     * Get allowedBy.
      *
      * @return \Doctrine\Common\Collections\Collection
      */

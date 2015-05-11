@@ -32,7 +32,7 @@ class TextAdmin extends Admin
             ->add('author.lastname', null, array('label' => 'Nom de l\'auteur'))
             ->add('title')
             ->add('status', null, array(
-                'label' => 'Statut'),
+                'label' => 'Statut', ),
             'choice', array(
                 'choices' => $this->status_choice,
                 'multiple' => false,
@@ -49,7 +49,7 @@ class TextAdmin extends Admin
             ->add('id')
             ->add('textGroup', 'sonata_type_model',
                 array('multiple' => false,
-                'required' => true
+                'required' => true,
             ))
             ->add('author.firstname', null, array('label' => 'Prénom de l\'auteur'))
             ->add('author.lastname', null, array('label' => 'Nom de l\'auteur'))
@@ -65,7 +65,7 @@ class TextAdmin extends Admin
                     'show' => array(),
                     'edit' => array(),
                     'delete' => array(),
-                )
+                ),
             ))
         ;
     }
@@ -89,10 +89,10 @@ class TextAdmin extends Admin
                     $datagrid = $admin->getDatagrid();
                     $queryBuilder = $datagrid->getQuery();
                     $queryBuilder
-                        ->andWhere($queryBuilder->getRootAlias() . '.firstname LIKE :value')
-                        ->orWhere($queryBuilder->getRootAlias() . '.lastname LIKE :value')
-                        ->orWhere($queryBuilder->getRootAlias() . '.email LIKE :value')
-                        ->setParameter('value', '%' . $value . '%')
+                        ->andWhere($queryBuilder->getRootAlias().'.firstname LIKE :value')
+                        ->orWhere($queryBuilder->getRootAlias().'.lastname LIKE :value')
+                        ->orWhere($queryBuilder->getRootAlias().'.email LIKE :value')
+                        ->setParameter('value', '%'.$value.'%')
                     ;
                 },
                 'to_string_callback' => function ($user, $property) {
@@ -100,7 +100,7 @@ class TextAdmin extends Admin
                     $lastname = $user->getLastname();
                     $email = $user->getEmail();
 
-                    return $firstname . ' ' . $lastname . ' &lt;' . $email . '&gt;';
+                    return $firstname.' '.$lastname.' &lt;'.$email.'&gt;';
                 },
             ))
             ->add('title')
@@ -111,7 +111,6 @@ class TextAdmin extends Admin
                 'multiple' => false,
             ))
             ;
-        ;
     }
 
     /**
@@ -126,7 +125,7 @@ class TextAdmin extends Admin
             ->add('rawContent', 'html')
             ->add('status', 'choice', array(
                 'label' => 'Statut',
-                'choices' =>$this->status_choice,
+                'choices' => $this->status_choice,
                 'multiple' => false,
             ))
         ;
@@ -137,7 +136,7 @@ class TextAdmin extends Admin
         $user = $this->getConfigurationPool()->getContainer()->get('security.context')->getToken()->getUser();
         //$repo = $this->getDoctrine()->getRepository('AppBundle:Adherent')->findId($user->adherent);
 
-        if ($instance->getAuthor() == NULL) {
+        if ($instance->getAuthor() == null) {
             $instance->setAuthor($user->getProfile());
         }
 

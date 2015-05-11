@@ -3,10 +3,10 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use \DateTime;
+use DateTime;
 
 /**
- * AdherentResponsability
+ * AdherentResponsability.
  *
  * @ORM\Table(name="adherent_responsability")
  * @ORM\Entity(repositoryClass="AppBundle\Entity\AdherentResponsabilityRepository")
@@ -14,7 +14,7 @@ use \DateTime;
 class AdherentResponsability
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -49,7 +49,7 @@ class AdherentResponsability
     /**
      * @var \stdClass
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Organ\OrganParticipation",
-     * inversedBy="allowedBy")
+     *                inversedBy="allowedBy")
      */
     private $allowsParticipations;
 
@@ -68,16 +68,16 @@ class AdherentResponsability
     private $end;
 
     /**
-     * @var boolean
+     * @var bool
      *
      * @ORM\Column(name="isActive", type="boolean")
      */
     private $isActive;
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -85,9 +85,10 @@ class AdherentResponsability
     }
 
     /**
-     * Set adherent
+     * Set adherent.
      *
-     * @param  \stdClass              $adherent
+     * @param \stdClass $adherent
+     *
      * @return AdherentResponsability
      */
     public function setAdherent($adherent)
@@ -98,7 +99,7 @@ class AdherentResponsability
     }
 
     /**
-     * Get adherent
+     * Get adherent.
      *
      * @return \stdClass
      */
@@ -108,9 +109,10 @@ class AdherentResponsability
     }
 
     /**
-     * Set responsability
+     * Set responsability.
      *
-     * @param  \stdClass              $responsability
+     * @param \stdClass $responsability
+     *
      * @return AdherentResponsability
      */
     public function setResponsability($responsability)
@@ -121,7 +123,7 @@ class AdherentResponsability
     }
 
     /**
-     * Get responsability
+     * Get responsability.
      *
      * @return \stdClass
      */
@@ -131,20 +133,21 @@ class AdherentResponsability
     }
 
     /**
-     * Set start
+     * Set start.
      *
-     * @param  \DateTime              $start
+     * @param \DateTime $start
+     *
      * @return AdherentResponsability
      */
     public function setStart($start)
     {
-        $this->start = isset($start) ? $start : new DateTime() ;
+        $this->start = isset($start) ? $start : new DateTime();
 
         return $this;
     }
 
     /**
-     * Get start
+     * Get start.
      *
      * @return \DateTime
      */
@@ -154,20 +157,21 @@ class AdherentResponsability
     }
 
     /**
-     * Set end
+     * Set end.
      *
-     * @param  \DateTime              $end
+     * @param \DateTime $end
+     *
      * @return AdherentResponsability
      */
     public function setEnd($end)
     {
-        $this->end = isset($end) ? $end : new DateTime() ;
+        $this->end = isset($end) ? $end : new DateTime();
 
         return $this;
     }
 
     /**
-     * Get end
+     * Get end.
      *
      * @return \DateTime
      */
@@ -177,9 +181,10 @@ class AdherentResponsability
     }
 
     /**
-     * Set isActive
+     * Set isActive.
      *
-     * @param  boolean                $isActive
+     * @param bool $isActive
+     *
      * @return AdherentResponsability
      */
     public function setIsActive($isActive)
@@ -190,16 +195,16 @@ class AdherentResponsability
     }
 
     /**
-     * Get isActive
+     * Get isActive.
      *
-     * @return boolean
+     * @return bool
      */
     public function getIsActive()
     {
         return $this->isActive;
     }
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
@@ -207,7 +212,7 @@ class AdherentResponsability
     }
 
     /**
-     * Set designatedByOrgan
+     * Set designatedByOrgan.
      *
      * @param \AppBundle\Entity\Organ\Organ $designatedByOrgan
      *
@@ -221,7 +226,7 @@ class AdherentResponsability
     }
 
     /**
-     * Get designatedByOrgan
+     * Get designatedByOrgan.
      *
      * @return \AppBundle\Entity\Organ\Organ
      */
@@ -231,7 +236,7 @@ class AdherentResponsability
     }
 
     /**
-     * Add allowsParticipation
+     * Add allowsParticipation.
      *
      * @param \AppBundle\Entity\Organ\OrganParticipation $allowsParticipation
      *
@@ -245,7 +250,7 @@ class AdherentResponsability
     }
 
     /**
-     * Remove allowsParticipation
+     * Remove allowsParticipation.
      *
      * @param \AppBundle\Entity\Organ\OrganParticipation $allowsParticipation
      */
@@ -255,7 +260,7 @@ class AdherentResponsability
     }
 
     /**
-     * Get allowsParticipations
+     * Get allowsParticipations.
      *
      * @return \Doctrine\Common\Collections\Collection
      */

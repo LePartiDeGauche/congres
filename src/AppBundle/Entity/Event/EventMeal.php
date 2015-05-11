@@ -5,7 +5,7 @@ namespace AppBundle\Entity\Event;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * EventMeal
+ * EventMeal.
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="AppBundle\Entity\Event\EventMealRepository")
@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 class EventMeal
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -26,7 +26,6 @@ class EventMeal
      *
      * @ORM\ManyToOne(targetEntity="Event", inversedBy="meals")
      * @ORM\JoinColumn(nullable=false)
-     *
      */
     private $event;
 
@@ -48,7 +47,6 @@ class EventMeal
      * @var string
      *
      * @ORM\Column(name="description", type="text", nullable=true)
-     *
      */
     private $description;
 
@@ -60,9 +58,9 @@ class EventMeal
     private $mealTime;
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -70,9 +68,10 @@ class EventMeal
     }
 
     /**
-     * Set event
+     * Set event.
      *
-     * @param  \stdClass $event
+     * @param \stdClass $event
+     *
      * @return EventMeal
      */
     public function setEvent($event)
@@ -83,7 +82,7 @@ class EventMeal
     }
 
     /**
-     * Get event
+     * Get event.
      *
      * @return \stdClass
      */
@@ -93,9 +92,10 @@ class EventMeal
     }
 
     /**
-     * Set participants
+     * Set participants.
      *
-     * @param  \stdClass $participants
+     * @param \stdClass $participants
+     *
      * @return EventMeal
      */
     public function setParticipants($participants)
@@ -106,7 +106,7 @@ class EventMeal
     }
 
     /**
-     * Get participants
+     * Get participants.
      *
      * @return \stdClass
      */
@@ -116,9 +116,10 @@ class EventMeal
     }
 
     /**
-     * Set name
+     * Set name.
      *
-     * @param  string    $name
+     * @param string $name
+     *
      * @return EventMeal
      */
     public function setName($name)
@@ -129,7 +130,7 @@ class EventMeal
     }
 
     /**
-     * Get name
+     * Get name.
      *
      * @return string
      */
@@ -139,9 +140,10 @@ class EventMeal
     }
 
     /**
-     * Set description
+     * Set description.
      *
-     * @param  string    $description
+     * @param string $description
+     *
      * @return EventMeal
      */
     public function setDescription($description)
@@ -152,7 +154,7 @@ class EventMeal
     }
 
     /**
-     * Get description
+     * Get description.
      *
      * @return string
      */
@@ -162,9 +164,10 @@ class EventMeal
     }
 
     /**
-     * Set time
+     * Set time.
      *
-     * @param  \DateTime $time
+     * @param \DateTime $time
+     *
      * @return EventMeal
      */
     public function setTime($time)
@@ -175,7 +178,7 @@ class EventMeal
     }
 
     /**
-     * Get time
+     * Get time.
      *
      * @return \DateTime
      */
@@ -184,7 +187,7 @@ class EventMeal
         return $this->time;
     }
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
@@ -192,9 +195,10 @@ class EventMeal
     }
 
     /**
-     * Set mealTime
+     * Set mealTime.
      *
-     * @param  \DateTime $mealTime
+     * @param \DateTime $mealTime
+     *
      * @return EventMeal
      */
     public function setMealTime($mealTime)
@@ -205,7 +209,7 @@ class EventMeal
     }
 
     /**
-     * Get mealTime
+     * Get mealTime.
      *
      * @return \DateTime
      */
@@ -217,13 +221,13 @@ class EventMeal
     public function __toString()
     {
         return $this->name;
-
     }
 
     /**
-     * Add participants
+     * Add participants.
      *
-     * @param  \AppBundle\Entity\Event\EventAdherentRegistration $participants
+     * @param \AppBundle\Entity\Event\EventAdherentRegistration $participants
+     *
      * @return EventMeal
      */
     public function addParticipant(\AppBundle\Entity\Event\EventAdherentRegistration $participants)
@@ -234,7 +238,7 @@ class EventMeal
     }
 
     /**
-     * Remove participants
+     * Remove participants.
      *
      * @param \AppBundle\Entity\Event\EventAdherentRegistration $participants
      */

@@ -5,7 +5,7 @@ namespace AppBundle\Entity\Event;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * BedNights
+ * BedNights.
  *
  * @ORM\Table(name="bednights")
  * @ORM\Entity
@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 class BedNights
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -21,27 +21,27 @@ class BedNights
      */
     private $id;
 
-    /**
-     * @var \stdClass
-     *
-     * @ORM\Column(name="sleepingSpot", type="object")
-     */
+/**
+ * @var \stdClass
+ *
+ * @ORM\Column(name="sleepingSpot", type="object")
+ */
     //FIXME
     private $sleepingSpot;
 
-    /**
-     * @var \stdClass
-     *
-     * @ORM\Column(name="night", type="object")
-     */
+/**
+ * @var \stdClass
+ *
+ * @ORM\Column(name="night", type="object")
+ */
     //FIXME
     private $night;
 
-    /**
-     * @var \stdClass
-     *
-     * @ORM\Column(name="payment", type="object")
-     */
+/**
+ * @var \stdClass
+ *
+ * @ORM\Column(name="payment", type="object")
+ */
     //FIXME
     private $payment;
 
@@ -53,9 +53,9 @@ class BedNights
     private $notes;
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -63,9 +63,10 @@ class BedNights
     }
 
     /**
-     * Set sleepingSpot
+     * Set sleepingSpot.
      *
-     * @param  \stdClass $sleepingSpot
+     * @param \stdClass $sleepingSpot
+     *
      * @return BedNights
      */
     public function setSleepingSpot($sleepingSpot)
@@ -76,7 +77,7 @@ class BedNights
     }
 
     /**
-     * Get sleepingSpot
+     * Get sleepingSpot.
      *
      * @return \stdClass
      */
@@ -86,9 +87,10 @@ class BedNights
     }
 
     /**
-     * Set night
+     * Set night.
      *
-     * @param  \stdClass $night
+     * @param \stdClass $night
+     *
      * @return BedNights
      */
     public function setNight($night)
@@ -99,7 +101,7 @@ class BedNights
     }
 
     /**
-     * Get night
+     * Get night.
      *
      * @return \stdClass
      */
@@ -109,9 +111,10 @@ class BedNights
     }
 
     /**
-     * Set payment
+     * Set payment.
      *
-     * @param  \stdClass $payment
+     * @param \stdClass $payment
+     *
      * @return BedNights
      */
     public function setPayment($payment)
@@ -122,7 +125,7 @@ class BedNights
     }
 
     /**
-     * Get payment
+     * Get payment.
      *
      * @return \stdClass
      */
@@ -132,9 +135,10 @@ class BedNights
     }
 
     /**
-     * Set notes
+     * Set notes.
      *
-     * @param  string    $notes
+     * @param string $notes
+     *
      * @return BedNights
      */
     public function setNotes($notes)
@@ -145,7 +149,7 @@ class BedNights
     }
 
     /**
-     * Get notes
+     * Get notes.
      *
      * @return string
      */

@@ -18,7 +18,7 @@ use AppBundle\Entity\User;
 use AppBundle\Entity\Organ\Organ;
 use AppBundle\Form\Text\TextType;
 use AppBundle\TextGroupOrganPair;
-use AppBundle\Form\Vote\IndividualOrganTextVoteType;;
+use AppBundle\Form\Vote\IndividualOrganTextVoteType;
 
 /**
  * Text\Text controller.
@@ -27,11 +27,11 @@ use AppBundle\Form\Vote\IndividualOrganTextVoteType;;
  */
 class TextController extends Controller
 {
-
     /**
      * Lists all Text\Text entities.
      *
      * @Route("/{group_id}/list", name="text_list")
+     *
      * @Method("GET")
      * @ParamConverter("textGroup", class="AppBundle:Text\TextGroup", options={"id" = "group_id"})
      */
@@ -69,6 +69,7 @@ class TextController extends Controller
      * Lists Text\Text entities for author.
      *
      * @Route("/user", name="text_user_list")
+     *
      * @Method("GET")
      */
     public function userListAction()
@@ -81,7 +82,7 @@ class TextController extends Controller
 
         return $this->render('text/user_list.html.twig', array(
             'texts' => $texts,
-            'adherent' => $user->getProfile()
+            'adherent' => $user->getProfile(),
         ));
     }
 
@@ -89,6 +90,7 @@ class TextController extends Controller
      * Finds and displays a Text\Text entity.
      *
      * @Route("/{group_id}/text/{text_id}", name="text_show")
+     *
      * @Method("GET")
      * @ParamConverter("textGroup", class="AppBundle:Text\TextGroup", options={"id" = "group_id"})
      * @ParamConverter("text", class="AppBundle:Text\Text", options={"id" = "text_id"})
@@ -100,8 +102,8 @@ class TextController extends Controller
         $this->denyAccessUnlessGranted('view', $text);
 
         return array(
-            'textGroup'      => $textGroup,
-            'text'      => $text
+            'textGroup' => $textGroup,
+            'text' => $text,
         );
     }
 
@@ -132,20 +134,18 @@ class TextController extends Controller
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirect($this->generateUrl('text_user_list'));
-
         }
 
         return $this->render('text/new.html.twig', array(
-            'textGroup'      => $textGroup,
-            'text'      => $text,
-            'form'  => $form->createView())
+            'textGroup' => $textGroup,
+            'text' => $text,
+            'form' => $form->createView(), )
         );
     }
     /**
      * @Route("/{group_id}/text/{text_id}/individual/vote", name="individual_text_vote")
      * @ParamConverter("textGroup", class="AppBundle:Text\TextGroup", options={"id" = "group_id"})
      * @ParamConverter("text", class="AppBundle:Text\Text", options={"id" = "text_id"})
-     *
      */
     public function individualVoteAction(Request $request, TextGroup $textGroup, Text $text)
     {
@@ -171,7 +171,7 @@ class TextController extends Controller
 
             foreach ($agregs as $agreg) {
                 $agreg->setVoteFor($agreg->getVoteFor() + 1);
-                $voteRule =  $agreg->getVoteRule();
+                $voteRule = $agreg->getVoteRule();
                 if ($voteRule instanceof ThresholdVoteRule) {
                     if ($agreg->getVoteFor() >= $voteRule->getThreshold()) {
                         $text->setStatus(Text::STATUS_ADOPTED);
@@ -197,7 +197,6 @@ class TextController extends Controller
      * @Route("/{group_id}/report/{organ_id}/vote", name="report_vote")
      * @ParamConverter("textGroup", class="AppBundle:Text\TextGroup", options={"id" = "group_id"})
      * @ParamConverter("organ", class="AppBundle:Organ\Organ", options={"id" = "organ_id"})
-     *
      */
     public function reportVoteAction(Request $request, TextGroup $textGroup, Organ $organ)
     {
@@ -221,11 +220,11 @@ class TextController extends Controller
             }
 
             if ($sumVotes != $iotv->getVoteTotal()) {
-                $errors[] = "Le total des votes ne correspond pas aux votes rapportés";
+                $errors[] = 'Le total des votes ne correspond pas aux votes rapportés';
             }
 
             if ($sumVotes > count($organ->getParticipants())) {
-                $errors[] = "Il y a plus de votes que de personnes inscrits dans le comité.";
+                $errors[] = 'Il y a plus de votes que de personnes inscrits dans le comité.';
             }
 
             if (count($errors) > 0) {
@@ -233,9 +232,8 @@ class TextController extends Controller
                     'textGroup' => $textGroup,
                     'organ' => $organ,
                     'form' => $form->createView(),
-                    'errors' => $errors
+                    'errors' => $errors,
                 ));
-
             }
             $em->persist($iotv);
 
@@ -248,7 +246,7 @@ class TextController extends Controller
             'textGroup' => $textGroup,
             'organ' => $organ,
             'form' => $form->createView(),
-            'errors' => $errors
+            'errors' => $errors,
         ));
     }
 
@@ -256,6 +254,7 @@ class TextController extends Controller
      * Finds and displays a Text\Text entity.
      *
      * @Route("/{group_id}/report/{organ_id}/show", name="vote_report_show")
+     *
      * @Method("GET")
      * @ParamConverter("textGroup", class="AppBundle:Text\TextGroup", options={"id" = "group_id"})
      * @ParamConverter("organ", class="AppBundle:Organ\Organ", options={"id" = "organ_id"})
@@ -270,7 +269,7 @@ class TextController extends Controller
         return array(
             'textGroup' => $textGroup,
             'organ' => $organ,
-            'report' => $report
+            'report' => $report,
         );
     }
 
@@ -303,9 +302,9 @@ class TextController extends Controller
     private function createIndividualOrganTextVoteCreateForm(IndividualOrganTextVote $entity)
     {
         $form = $this->createForm(new IndividualOrganTextVoteType(), $entity, array(
-            'action' => $this->generateUrl('report_vote',array(
+            'action' => $this->generateUrl('report_vote', array(
                 'group_id' => $entity->getTextGroup()->getId(),
-                'organ_id' => $entity->getOrgan()->getId())),
+                'organ_id' => $entity->getOrgan()->getId(), )),
             'method' => 'POST',
             'vote_modality' => $entity->getTextGroup()->getVoteModality(),
         ));

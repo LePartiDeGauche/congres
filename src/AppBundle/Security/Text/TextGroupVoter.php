@@ -1,11 +1,11 @@
 <?php
+
 namespace AppBundle\Security\Text;
 
 use AppBundle\Entity\Text\TextGroup;
 use AppBundle\Entity\Organ\Organ;
 use AppBundle\Entity\User;
 use AppBundle\Entity\Adherent;
-
 use Symfony\Component\Security\Core\Authorization\Voter\AbstractVoter;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -46,7 +46,6 @@ final class TextGroupVoter extends AbstractVoter
 
         if ($attribute === self::CREATE_TEXT) {
             return $this->canCreateText($textGroup, $user);
-
         }
 
         if ($attribute === self::VOTE) {
@@ -60,7 +59,7 @@ final class TextGroupVoter extends AbstractVoter
         return false;
     }
 
-    private function canView(TextGroup $textGroup,User $user)
+    private function canView(TextGroup $textGroup, User $user)
     {
         // FIXME : in_array does not take into account role hierarchy !
         return ($textGroup->getIsVisible() ||
@@ -73,7 +72,6 @@ final class TextGroupVoter extends AbstractVoter
         // FIXME : in_array does not take into account role hierarchy !
         return ($textGroup->getIsVisible() && $textGroup->getSubmissionOpening() < $date && $textGroup->getSubmissionClosing() > $date) ||
             in_array('ROLE_ADMIN', $user->getRoles(), true);
-
     }
 
     private function canVote(TextGroup $textGroup, User $user)

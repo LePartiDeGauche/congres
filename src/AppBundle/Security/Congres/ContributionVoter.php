@@ -1,4 +1,5 @@
 <?php
+
 namespace AppBundle\Security\Congres;
 
 use AppBundle\Entity\Congres\Contribution;
