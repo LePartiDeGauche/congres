@@ -71,12 +71,11 @@ class Text
      */
     private $adherentVotes;
 
-/**
- * @var \stdClass
- *
- * @ORM\Column(name="organ_vote", type="object")
- */
-    //FIXME
+    /**
+     * @var \stdClass
+     *
+     * @ORM\Column(name="organ_vote", type="object")
+     */
     private $organVotes;
 
     /**
@@ -94,14 +93,6 @@ class Text
      * cascade={"persist", "remove", "merge"}, orphanRemoval=true)
      */
     private $individualVoteAgregations;
-
-    /**
-     * @return string
-     */
-    public function __toString()
-    {
-        return $this->title;
-    }
 
     /**
      * Get id.

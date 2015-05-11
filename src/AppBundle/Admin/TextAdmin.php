@@ -136,10 +136,6 @@ class TextAdmin extends Admin
         $user = $this->getConfigurationPool()->getContainer()->get('security.context')->getToken()->getUser();
         //$repo = $this->getDoctrine()->getRepository('AppBundle:Adherent')->findId($user->adherent);
 
-<<<<<<< HEAD
-=======
-
->>>>>>> amendements
         if ($instance->getAuthor() == null) {
             $instance->setAuthor($user->getProfile());
         }
