@@ -206,3 +206,4 @@ class Amendment
         $this->content = $content;
     }
 }
+
