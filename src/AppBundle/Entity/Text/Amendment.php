@@ -83,6 +83,19 @@ class Amendment
     private $content;
 
     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="meetingDate", type="date", nullable=true)
+     * @Assert\Date
+     */
+    private $meetingDate;
+
+    public function __construct()
+    {
+        $this->meetingDate = new \DateTime();
+    }
+
+    /**
      * Available types.
      *
      * @return array
@@ -204,6 +217,22 @@ class Amendment
     public function setContent($content)
     {
         $this->content = $content;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getMeetingDate()
+    {
+        return $this->meetingDate;
+    }
+
+    /**
+     * @param \DateTime $meetingDate
+     */
+    public function setMeetingDate(\DateTime $meetingDate = null)
+    {
+        $this->meetingDate = $meetingDate;
     }
 }
 
