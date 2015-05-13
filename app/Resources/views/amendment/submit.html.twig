@@ -6,8 +6,34 @@
 <div class="container">
     <div class="row">
         <h1>Soumettre un amendement</h1>
+        {% for flashMessage in app.session.flashbag.get('success') %}
+            <div class="alert alert-success">
+                {{ flashMessage }}
+            </div>
+        {% endfor %}
         <form method="post" action="{{ path('amendment_submit') }}">
-            {{ form_widget(form) }}
+            {{ form_errors(form) }}
+            <div class="form-group">
+                {{ form_label(form.text, 'Texte concerné : ') }}
+                {{ form_errors(form.text) }}
+                {{ form_widget(form.text) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(form.startLine, 'Index ligne de début : ') }}
+                {{ form_errors(form.startLine) }}
+                {{ form_widget(form.startLine) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(form.type, 'Type de modification : ') }}
+                {{ form_errors(form.type) }}
+                {{ form_widget(form.type) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(form.content, 'Nouveau texte : ') }}
+                {{ form_errors(form.content) }}
+                {{ form_widget(form.content) }}
+            </div>
+            {{ form_rest(form) }}
             <input type="submit" class="btn btn-primary" value="Envoyer" />
         </form>
     </div>

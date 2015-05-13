@@ -36,6 +36,15 @@ class AmendmentController extends Controller
                 $manager->persist($formAmendment->getData());
                 $manager->flush();
 
+                $this
+                    ->get('session')
+                    ->getFlashBag()
+                    ->add(
+                        'success',
+                        'Amendement bien enregistré. Remplissez à nouveau ce formulaire pour en proposer un autre.'
+                    )
+                ;
+
                 return $this->redirect($this->generateUrl('amendment_submit'));
             }
         }
