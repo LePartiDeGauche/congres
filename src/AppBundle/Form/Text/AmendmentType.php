@@ -20,6 +20,7 @@ class AmendmentType extends AbstractType
         'choices' => array('a' => 'Ajout', 'd' => 'Suppression', 'm' => 'Modification'), ))
             ->add('content')
             ->add('text')
+            ->add('meetingDate')
         ;
     }
 

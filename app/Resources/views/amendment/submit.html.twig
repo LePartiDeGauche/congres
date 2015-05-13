@@ -33,6 +33,11 @@
                 {{ form_errors(form.content) }}
                 {{ form_widget(form.content) }}
             </div>
+            <div class="form-group">
+                {{ form_label(form.meetingDate, 'Date de réunion : ') }}
+                {{ form_errors(form.meetingDate) }}
+                {{ form_widget(form.meetingDate) }}
+            </div>
             {{ form_rest(form) }}
             <input type="submit" class="btn btn-primary" value="Envoyer" />
         </form>

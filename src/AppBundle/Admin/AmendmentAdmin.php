@@ -27,6 +27,7 @@ class AmendmentAdmin extends Admin
             ->add('startLine', null, array('label' => 'Ligne'))
             ->add('type', 'choice', array('label' => 'Type de modification', 'choices' => Amendment::getTypes()))
             ->add('content', null, array('label' => 'Contenu'))
+            ->add('meetingDate', null, array('label' => 'Date de réunion'))
         ;
     }
 
@@ -42,6 +43,7 @@ class AmendmentAdmin extends Admin
             ->add('startLine', null, array('label' => 'Ligne'))
             ->add('type', null, array('label' => 'Type de modification'))
             ->add('content', null, array('label' => 'Contenu'))
+            ->add('meetingDate', null, array('label' => 'Date de réunion'))
         ;
     }
 
@@ -56,6 +58,7 @@ class AmendmentAdmin extends Admin
             ->add('author', null, array('label' => 'Auteur'))
             ->add('startLine', null, array('label' => 'Ligne'))
             ->add('humanReadableType', null, array('label' => 'Type de modification'))
+            ->add('meetingDate', null, array('label' => 'Date de réunion'))
             ->add('_action', 'actions', array(
                 'actions' => array(
                     'show' => array(),
@@ -77,6 +80,7 @@ class AmendmentAdmin extends Admin
             ->add('startLine', null, array('label' => 'Ligne'))
             ->add('type', null, array('label' => 'Type de modification'), 'choice', array('choices' => Amendment::getTypes()))
             ->add('content', null, array('label' => 'Contenu'))
+            ->add('meetingDate', null, array('label' => 'Date de réunion'))
         ;
     }
 
@@ -91,6 +95,7 @@ class AmendmentAdmin extends Admin
             'startLine',
             'humanReadableType',
             'content',
+            'meetingDate',
         );
     }
 
