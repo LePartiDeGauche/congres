@@ -20,11 +20,15 @@ class AmendmentController extends Controller
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      *
-     * @Route("/envoyer", name="amendment_submit")
+     * @Route("/envoyer/{text_group_id}", requirements={"text_group_id" = "\d+"}, name="amendment_submit")
      */
     public function submitAction(Request $request)
     {
-        $formAmendment = $this->createForm(new AmendmentType(), new Amendment($this->getUser()));
+        $formAmendment = $this->createForm(
+            new AmendmentType(),
+            new Amendment($this->getUser()),
+            array('text_group_id' => $request->get('text_group_id'))
+        );
 
         $formAmendment->handleRequest($request);
         if ($formAmendment->isSubmitted()) {
@@ -45,7 +49,8 @@ class AmendmentController extends Controller
                     )
                 ;
 
-                return $this->redirect($this->generateUrl('amendment_submit'));
+                return $this->redirect($this->generateUrl('amendment_submit', 
+                    array('text_group_id' => $request->get('text_group_id'))));
             }
         }
 
