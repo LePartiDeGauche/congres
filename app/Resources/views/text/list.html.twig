@@ -26,12 +26,19 @@ $(document).ready(function()
             {{textGroup.description}}
 
             {%if reportOrgans %}
-            <h2>Soumettre un procès verbal </h2>
-            {% for organ in reportOrgans %}
-            <a href="{{ path('report_vote', {group_id: textGroup.id, organ_id: organ.id}) }}">
-                Soumettre pour <strong>{{ organ.name }}</strong>
-            </a>
-            {% endfor %}
+                <h2>Soumettre des amendements</h2>
+                {% for organ in reportOrgans %}
+                    <a href="{{ path('amendment_submit', {text_group_id: textGroup.id, organ_id: organ.id}) }}">
+                        Soumettre pour <strong>{{ organ.name }}</strong>
+                    </a>
+                {% endfor %}
+
+                <h2>Soumettre un procès verbal </h2>
+                {% for organ in reportOrgans %}
+                    <a href="{{ path('report_vote', {group_id: textGroup.id, organ_id: organ.id}) }}">
+                        Soumettre pour <strong>{{ organ.name }}</strong>
+                    </a>
+                {% endfor %}
             {% endif %}
             </p>
             <hr/>

@@ -132,6 +132,7 @@ class TextGroup
 
     /**
      * @var bool
+     * @ORM\Column(type="boolean")
      */
     private $isVisible;
 

@@ -4,7 +4,12 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Text\Amendment;
 use AppBundle\Form\Text\AmendmentType;
+use AppBundle\Entity\Organ\Organ;
+use AppBundle\Entity\Text\TextGroup;
+use AppBundle\Entity\User;
+use AppBundle\TextGroupOrganPair;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -17,17 +22,22 @@ class AmendmentController extends Controller
 {
     /**
      * @param Request $request
+     * @param TextGroup $textGroup
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      *
-     * @Route("/envoyer/{text_group_id}", requirements={"text_group_id" = "\d+"}, name="amendment_submit")
+     * @Route("/envoyer/{text_group_id}/organ/{organ_id}", requirements={"text_group_id" = "\d+", "organ_id" = "\d+"}, name="amendment_submit")
+     * @ParamConverter("textGroup", class="AppBundle:Text\TextGroup", options={"id" = "text_group_id"})
+     * @ParamConverter("organ", class="AppBundle:Organ\Organ", options={"id" = "organ_id"})
      */
-    public function submitAction(Request $request)
+    public function submitAction(Request $request, TextGroup $textGroup, Organ $organ)
     {
+        $this->denyAccessUnlessGranted('report_amend', new TextGroupOrganPair($textGroup, $organ), $this->getUser());
+    
         $formAmendment = $this->createForm(
             new AmendmentType(),
             new Amendment($this->getUser()),
-            array('text_group_id' => $request->get('text_group_id'))
+            array('text_group_id' => $textGroup->getId())
         );
 
         $formAmendment->handleRequest($request);
@@ -50,7 +60,8 @@ class AmendmentController extends Controller
                 ;
 
                 return $this->redirect($this->generateUrl('amendment_submit', 
-                    array('text_group_id' => $request->get('text_group_id'))));
+                    array('text_group_id' => $textGroup->getId(), 'organ_id' => $organ->getId())
+                ));
             }
         }
 
@@ -59,3 +70,4 @@ class AmendmentController extends Controller
         ));
     }
 }
+

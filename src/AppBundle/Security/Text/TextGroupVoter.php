@@ -19,12 +19,14 @@ final class TextGroupVoter extends AbstractVoter
 
     const REPORT_VOTE = 'report_vote';
 
+    const REPORT_AMEND = 'report_amend';
+
     private $entityManager;
     private $container;
 
     protected function getSupportedAttributes()
     {
-        return array(self::VIEW, self::CREATE_TEXT, self::VOTE, self::REPORT_VOTE);
+        return array(self::VIEW, self::CREATE_TEXT, self::VOTE, self::REPORT_VOTE, self::REPORT_AMEND);
     }
 
     protected function getSupportedClasses()
@@ -54,6 +56,10 @@ final class TextGroupVoter extends AbstractVoter
 
         if ($attribute === self::REPORT_VOTE) {
             return $this->canReportVote($textGroup->getTextGroup(), $user->getProfile(), $textGroup->getOrgan());
+        }
+
+        if ($attribute === self::REPORT_AMEND) {
+            return $this->canReportAmend($textGroup->getTextGroup(), $user->getProfile(), $textGroup->getOrgan());
         }
 
         return false;
@@ -111,6 +117,27 @@ final class TextGroupVoter extends AbstractVoter
 
         return false;
     }
+
+
+    /*
+     * a adherent can amend a text if :
+     * - text Group is open for vote (done)
+     * - the adherent as as the right responsability to report vote.(done, some limitations)
+     */
+    private function canReportAmend(TextGroup $textGroup, Adherent $adherent, Organ $organ)
+    {
+        $date = new \DateTime('now');
+        $em = $this->entityManager;
+
+        if ($textGroup->getIsVisible() && $textGroup->getVoteOpening() < $date && $textGroup->getVoteClosing() > $date) {
+            return
+                $em->getRepository('AppBundle:Vote\OrganVoteRule')->getOrganTypeRightToVoteForTextGroup($organ->getOrganType(), $textGroup) &&
+                ($em->getRepository('AppBundle:Vote\OrganVoteRule')->getAdherentRightToReportForOrganAndTextGroup($adherent, $organ, $textGroup));
+        }
+
+        return false;
+    }
+
 
     public function __construct($entityManager, $container)
     {
