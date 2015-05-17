@@ -89,6 +89,7 @@ class EventAdherentRegistration
 
     /**
      * @var bool
+     * @ORM\Column(type="boolean")
      */
     private $needHosting;
 
