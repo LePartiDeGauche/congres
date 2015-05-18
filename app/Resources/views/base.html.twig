@@ -96,8 +96,13 @@
 
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-aria-expanded="false">Archives<span class="caret"></span></a>
+                               aria-expanded="false">Archives<span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
+                                <li>
+                                    <a href="{{ path('resultats_plateformes') }}">
+                                        Vote des plateformes
+                                    </a>
+                                </li>
                                 {% if is_granted('CALENDAR_contribution_read') %}
                                 <li><a href="{{ path('contribution_list_valid') }}">Contributions</a></li>
                                 {% endif %}
