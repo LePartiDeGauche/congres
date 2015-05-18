@@ -33,15 +33,8 @@
                         {% block navLinks %}
                         {% if is_granted('ROLE_USER') %}
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Règlement intérieur <span class="caret"></span></a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="{{ path('downloads', {filename: 'RI Congrès 2015 phases 2 et 3 adopté CN.pdf'}) }}">Phases 2 &amp; 3</a></li>
-                                <li><a href="{{ path('downloads', {filename: 'Règlement Intérieur - Phase 1.pdf'}) }}">Phase 1</a></li>
-                            </ul>
-                        </li>
-                        <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"
-                                                                role="button" aria-expanded="false">Textes soumis à amendements<span class="caret"></span></a>
+                                                                role="button" aria-expanded="false">Textes<span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
                                 <li>
                                     <a href="{{ path('downloads', {filename: 'Tout est possible - numéroté.pdf'}) }}">
@@ -65,10 +58,21 @@
                                 </li>
                             </ul>
                         </li>
+
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"
-                                                                role="button" aria-expanded="false">Commissions<span class="caret"></span></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                               aria-expanded="false">Amendements<span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
+                                <li><a href="{{ path('text_list', { 'group_id' : 3 }) }}">Proposer</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                   aria-expanded="false">Organisation<span class="caret"></span></a>
+                           <ul class="dropdown-menu" role="menu">
+                                <li><a href="{{ path('downloads', {filename: 'RI Congrès 2015 phases 2 et 3 adopté CN.pdf'}) }}">Phases 2 &amp; 3</a></li>
+                                <li><a href="{{ path('downloads', {filename: 'Règlement Intérieur - Phase 1.pdf'}) }}">Phase 1</a></li>
                                 <li>
                                     <a href="{{ path('commission_votes') }}">
                                         Commission des votes
@@ -81,6 +85,15 @@
                                 </li>
                             </ul>
                         </li>
+
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                               aria-expanded="false">Conseil National<span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="{{ path('event_registration_create', { 'event_id' : 2 }) }}">Inscription</a></li>
+                            </ul>
+                        </li>
+
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
 aria-expanded="false">Archives<span class="caret"></span></a>
@@ -88,13 +101,6 @@ aria-expanded="false">Archives<span class="caret"></span></a>
                                 {% if is_granted('CALENDAR_contribution_read') %}
                                 <li><a href="{{ path('contribution_list_valid') }}">Contributions</a></li>
                                 {% endif %}
-                            </ul>
-                        </li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                               aria-expanded="false">Amendements<span class="caret"></span></a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="{{ path('text_list', { 'group_id' : 3 }) }}">Proposer</a></li>
                             </ul>
                         </li>
                         {% endif %}
