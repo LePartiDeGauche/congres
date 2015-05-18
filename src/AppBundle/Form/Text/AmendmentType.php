@@ -40,6 +40,7 @@ class AmendmentType extends AbstractType
                 )))
             ->add('content', null, array('label' => 'Nouveau texte'))
             ->add('meetingDate', null, array('label' => 'Date de réunion'))
+            ->add('numberOfPresent', null, array('label' => 'Nombre de présents'))
             ->add('save', 'submit', array('label' => 'Enregistrer'))
         ;
     }
