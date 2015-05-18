@@ -16,6 +16,8 @@ class Responsability
     const INSTANCE_CN = 'Conseil National';
     const INSTANCE_BN = 'Bureau National';
     const INSTANCE_SN = 'Secrétariat National';
+    const INSTANCE_COSEC = 'Co-secrétaire de comité';
+    const INSTANCE_DEL = 'Délégué au congrés';
 
     /**
      * @var int
