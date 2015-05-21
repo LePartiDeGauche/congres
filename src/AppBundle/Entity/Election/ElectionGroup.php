@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Entity\Congres;
+namespace AppBundle\Entity\Election;
 
 use AppBundle\Entity\Adherent;
 use AppBundle\Entity\Responsability;
