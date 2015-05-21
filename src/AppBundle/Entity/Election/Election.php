@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Entity\Congres;
+namespace AppBundle\Entity\Election;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -26,9 +26,9 @@ class Election
     /**
      * The type of the Election.
      *
-     * @var \AppBundle\Entity\Congres\ElectionGroup
+     * @var \AppBundle\Entity\Election\ElectionGroup
      *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Congres\ElectionGroup")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Election\ElectionGroup")
      * @Assert\NotNull
      */
     private $electionGroup;
