@@ -42,4 +42,58 @@ class Election
      * @Assert\NotBlank
      */
     private $status;
+
+    /**
+     * Get id.
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set id.
+     *
+     * @return int
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+
+    /**
+     * @return ElectionGroup
+     */
+    public function getElectionGroup()
+    {
+        return $this->$electionGroup;
+    }
+
+    /**
+     * @param ElectionGroup $electionGroup
+     */
+    public function setElectionGroup(ElectionGroup $electionGroup)
+    {
+        $this->electionGroup = $electionGroup;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * @param int $status
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+    }
 }
