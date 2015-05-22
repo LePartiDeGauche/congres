@@ -4,7 +4,7 @@ namespace AppBundle\Entity\Election;
 
 use AppBundle\Entity\Adherent;
 use AppBundle\Entity\Responsability;
-use AppBundle\Entity\Organ\Organ;
+use AppBundle\Entity\Organ\OrganType;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -37,22 +37,14 @@ class ElectionGroup
     private $name;
 
     /**
-     * The organ.
+     * The type of the organ.
      *
-     * @var \AppBundle\Entity\Organ\Organ
+     * @var \AppBundle\Entity\Organ\OrganType
      *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Organ\Organ")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Organ\OrganType")
      */
-    private $organ;
+    private $organType;
 
-    /**
-     * The responsable of the election.
-     *
-     * @var \AppBundle\Entity\Adherent
-     *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Adherent")
-     */
-    private $electionResponsable;
 
     /**
      * The responsabilities given by the election.
@@ -102,35 +94,19 @@ class ElectionGroup
     }
 
     /**
-     * @return Organ
+     * @return OrganType
      */
-    public function getOrgan(Organ $organ)
+    public function getOrganType()
     {
-        return $this->$organ;
+        return $this->organType;
     }
 
     /**
-     * @param Organ $organ
+     * @param OrganType $organType
      */
-    public function setOrgan(Organ $organ)
+    public function setOrganType(OrganType $organType)
     {
-        $this->organ = $organ;
-    }
-
-    /**
-     * @return Adherent
-     */
-    public function getElectionResponsable()
-    {
-        return $this->electionResponsable;
-    }
-
-    /**
-     * @param Adherent $electionResponsable
-     */
-    public function setElectionResponsable(Adherent $electionResponsable)
-    {
-        $this->electionResponsable = $electionResponsable;
+        $this->organType = $organType;
     }
 
     /**
@@ -147,5 +123,13 @@ class ElectionGroup
     public function setElectionResponsabilities(Responsability $electionResponsabilities)
     {
         $this->electionResponsabilities = $electionResponsabilities;
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->name ;
     }
 }

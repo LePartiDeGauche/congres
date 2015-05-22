@@ -10,14 +10,14 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 
 /**
- * Election Group administration.
+ * ElectionGroup  administration.
  *
  * @author Clément Talleu <clement@les-tilleuls.coop>
  */
 class ElectionGroupAdmin extends Admin
 {
-    protected $baseRouteName = 'electiongroup_admin';
-    protected $baseRoutePattern = 'electiongroup_admin';
+    protected $baseRouteName = 'election_group_admin';
+    protected $baseRoutePattern = 'election_group_admin';
 
     /**
      * {@inheritdoc}
@@ -26,9 +26,7 @@ class ElectionGroupAdmin extends Admin
     {
         $datagridMapper
             ->add('name', null, array('label' => 'Nom'))
-            ->add('organ', null, array('label' => 'Organe Concerné'))
-            ->add('electionResponsable', null, array('label' => "Responsable de l'élection"))
-            ->add('electionResponsabilities', null, array('label' => "Rôle de l'élu"))
+            ->add('organType', null, array('label' => 'Organe Concerné'))
         ;
     }
 
@@ -40,16 +38,7 @@ class ElectionGroupAdmin extends Admin
         $list
             ->addIdentifier('id')
             ->add('name', null, array('label' => 'Nom'))
-            ->add('organ', null, array('label' => 'Organe'))
-            ->add('electionResponsable', null, array('label' => "Responsable de l'élection"))
-            ->add('electionResponsabilities', null, array('label' => "Rôle de l'élu"))
-            ->add('_action', 'actions', array(
-                'actions' => array(
-                    'show' => array(),
-                    'edit' => array(),
-                    'delete' => array(),
-                ),
-            ))
+            ->add('organType', null, array('label' => 'Organe Concerné'))
         ;
     }
 
@@ -60,9 +49,7 @@ class ElectionGroupAdmin extends Admin
     {
         $form
             ->add('name', null, array('label' => 'Nom'))
-            ->add('organ', null, array('label' => 'Organe'))
-            ->add('electionResponsable', null, array('label' => "Responsable de l'élection"))
-            ->add('electionResponsabilities', 'choice', array('label' => "Rôle de l'élu" ))
+            ->add('organType', null, array('label' => 'Organe Concerné'))
         ;
     }
 
@@ -72,11 +59,8 @@ class ElectionGroupAdmin extends Admin
     protected function configureShowFields(ShowMapper $showMapper)
     {
         $showMapper
-            ->add('id')
             ->add('name', null, array('label' => 'Nom'))
-            ->add('organ', null, array('label' => 'Organe'))
-            ->add('electionResponsable', null, array('label' => "Responsable de l'élection"))
-            ->add('electionResponsabilities', null, array('label' => "Rôle de l'élu"))
+            ->add('organType', null, array('label' => 'Organe Concerné'))
         ;
     }
 
@@ -87,9 +71,8 @@ class ElectionGroupAdmin extends Admin
     {
         return array(
             'name',
-            'organ',
-            'electionResponsable',
-            'electionResponsabilities',
+            'organType',
+            'electionResponsabilities'
         );
     }
 
@@ -102,4 +85,5 @@ class ElectionGroupAdmin extends Admin
             'xls',
         );
     }
+
 }

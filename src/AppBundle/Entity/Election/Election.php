@@ -2,6 +2,8 @@
 
 namespace AppBundle\Entity\Election;
 
+use AppBundle\Entity\Adherent;
+use AppBundle\Entity\Organ\Organ;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -14,6 +16,9 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Election
 {
+    const STATUS_OPEN = 'Election Ouverte';
+    const STATUS_CLOSED = 'Election Fermée';
+
     /**
      * @var int
      *
@@ -34,14 +39,39 @@ class Election
     private $electionGroup;
 
     /**
+     * The localisation of the Election.
+     *
+     * @var \AppBundle\Entity\Organ\Organ
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Organ\Organ")
+     */
+    private $organ;
+
+    /**
      * The status of the election, open or closed.
      *
-     * @var bool
+     * @var string
      *
-     * @ORM\Column(name="status")
+     * @ORM\Column(name="status", type="string", length=255)
      * @Assert\NotBlank
      */
     private $status;
+
+    /**
+     * The responsable of the election.
+     *
+     * @var \AppBundle\Entity\Adherent
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Adherent")
+     */
+    private $electionResponsable;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="raw_content", type="text")
+     */
+    private $result;
 
     /**
      * Get id.
@@ -70,7 +100,7 @@ class Election
      */
     public function getElectionGroup()
     {
-        return $this->$electionGroup;
+        return $this->electionGroup;
     }
 
     /**
@@ -82,7 +112,23 @@ class Election
     }
 
     /**
-     * @return bool
+     * @return Organ
+     */
+    public function getOrgan()
+    {
+        return $this->organ;
+    }
+
+    /**
+     * @param Organ $organ
+     */
+    public function setOrgan(Organ $organ)
+    {
+        $this->organ = $organ;
+    }
+
+    /**
+     * @return string
      */
     public function getStatus()
     {
@@ -90,10 +136,62 @@ class Election
     }
 
     /**
-     * @param int $status
+     * @param string $status
+     *
+     * @return Status
      */
     public function setStatus($status)
     {
+        if (!in_array($status, array(
+            self::STATUS_OPEN,
+            self::STATUS_CLOSED,
+
+        ))) {
+            throw new \InvalidArgumentException('Invalid status');
+        }
+
         $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * @return Adherent
+     */
+    public function getElectionResponsable()
+    {
+        return $this->electionResponsable;
+    }
+
+    /**
+     * @param Adherent $electionResponsable
+     */
+    public function setElectionResponsable(Adherent $electionResponsable)
+    {
+        $this->electionResponsable = $electionResponsable;
+    }
+
+    /**
+     * @return Result
+     */
+    public function getResult()
+    {
+        return $this->result;
+    }
+
+    /**
+     * @param Adherent $adherent
+     */
+    public function setResult(Adherent $adherent)
+    {
+        $this->result = $adherent;
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return '#'.$this->id ?: '';
     }
 }

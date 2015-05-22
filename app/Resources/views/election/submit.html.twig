@@ -1,0 +1,17 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}Rapporter un résultat d'élection {% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <h1>Rapporter un résultat</h1>
+            {% for flashMessage in app.session.flashbag.get('success') %}
+                <div class="alert alert-success">
+                    {{ flashMessage }}
+                </div>
+            {% endfor %}
+            {{ form(form) }}
+        </div>
+    </div>
+{% endblock %}
