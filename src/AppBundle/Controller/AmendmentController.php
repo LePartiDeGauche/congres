@@ -6,7 +6,6 @@ use AppBundle\Entity\Text\Amendment;
 use AppBundle\Form\Text\AmendmentType;
 use AppBundle\Entity\Organ\Organ;
 use AppBundle\Entity\Text\TextGroup;
-use AppBundle\Entity\User;
 use AppBundle\TextGroupOrganPair;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;

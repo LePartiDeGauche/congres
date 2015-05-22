@@ -1,0 +1,49 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}Liste des Elections{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Liste des Elections</h1>
+                <div role="tabpanel">
+
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active" id="validated">
+                            <h2>Elections</h2>
+                            {% if electionList is empty %}
+                                <p>Pas d'elections.</p>
+                            {% else %}
+                                <table class="table tablesorter">
+                                    <thead>
+                                    <tr>
+                                        <th>Election</th>
+                                        <th>Organe</th>
+                                        <th>Lieu</th>
+                                        <th>Responsable de l'élection</th>
+                                        <th>Elus</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for election in electionList %}
+                                        <tr>
+                                            <td>{{ election.id }}</td>
+                                            <td><a href="{{ path('election_list', {id: election.id}) }}">{{ election.electiongroup }}</td>
+                                            <td>
+                                                <a href="{{ path('election_list', {id: election.id}) }}">{{ election.organ }}</a>
+                                            </td>
+                                            <td> {{ election.electionresponsable }}</td>
+                                            <td>{{ election.result }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div><!-- .col-md-12 -->
+        </div><!-- .row -->
+    </div><!-- .container -->
+{% endblock %}
