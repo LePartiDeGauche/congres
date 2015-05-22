@@ -25,8 +25,16 @@ class ElectionAdmin extends Admin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('electionGroup', null, array('label' => "Type d''élection"))
-            ->add('status', null, array('label' => 'Status'))
+            ->add('electionGroup', null, array('label' => "Type d'élection"))
+            ->add('organ', null, array('label' => "Lieu concerné"))
+            ->add('status', null, array(
+                'label' => 'Statut',
+                'choices' => array(
+                    Election::STATUS_OPEN => 'Election Ouverte.',
+                    Election::STATUS_CLOSED => 'Election fermée.',
+                ),
+                'multiple' => false,
+            ))
         ;
     }
 
@@ -37,14 +45,16 @@ class ElectionAdmin extends Admin
     {
         $list
             ->addIdentifier('id')
-            ->add('electionGroup', null, array('label' => "Type d''élection"))
+            ->add('electionGroup', null, array('label' => "Type d'élection"))
+            ->add('organ', null, array('label' => "Lieu concerné"))
             ->add('status', null, array('label' => 'Status'))
+            ->add('result', null, array('label' => 'Elus'))
             ->add('_action', 'actions', array(
                 'actions' => array(
                     'show' => array(),
                     'edit' => array(),
                     'delete' => array(),
-                ),
+                )
             ))
         ;
     }
@@ -55,8 +65,16 @@ class ElectionAdmin extends Admin
     protected function configureFormFields(FormMapper $form)
     {
         $form
-            ->add('electionGroup', null, array('label' => "Type d''élection"))
-            ->add('status', null, array('label' => 'Status'))
+            ->add('electionGroup', null, array('label' => "Type d'élection"))
+            ->add('organ', null, array('label' => "Lieu concerné"))
+            ->add('status', 'choice', array(
+                'label' => 'Statut',
+                'choices' => array(
+                    Election::STATUS_OPEN => 'Election Ouverte.',
+                    Election::STATUS_CLOSED => 'Election fermée.',
+                ),
+                'multiple' => false,
+            ))
         ;
     }
 
@@ -66,8 +84,9 @@ class ElectionAdmin extends Admin
     protected function configureShowFields(ShowMapper $showMapper)
     {
         $showMapper
-            ->add('electionGroup', null, array('label' => "Type d''élection"))
-            ->add('status', null, array('label' => 'Status'))
+            ->add('electionGroup', null, array('label' => "Type d'élection"))
+            ->add('organ', null, array('label' => "Lieu concerné"))
+            ->add('status', null, array('label' => "Statut de l'élection"))
         ;
     }
 
@@ -79,6 +98,7 @@ class ElectionAdmin extends Admin
         return array(
             'name',
             'organ',
+            'status',
             'electionResponsable',
             'electionResponsabilities',
         );

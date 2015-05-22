@@ -132,7 +132,13 @@ services:
         class: AppBundle\Admin\ElectionGroupAdmin
         arguments : [~, AppBundle\Entity\Election\ElectionGroup, SonataAdminBundle:CRUD]
         tags:
-            - {name sonata.admin, manager_type: orm, group: "Election", label: "Type d'élection"}
+            - {name: sonata.admin, manager_type: orm, group: "Election", label: "Type d'élection"}
+
+    sonata.admin.result:
+        class: AppBundle\Admin\ResultAdmin
+        arguments : [~, AppBundle\Entity\Election\Result, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: "Election", label: "Résultats"}
 
     sonata.admin.event_meal:
         class: AppBundle\Admin\EventMealAdmin
