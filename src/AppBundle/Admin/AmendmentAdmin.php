@@ -57,7 +57,8 @@ class AmendmentAdmin extends Admin
         $list
             ->addIdentifier('id')
             ->add('text', null, array('label' => 'Texte'))
-            ->add('author', null, array('label' => 'Auteur'))
+            ->add('author.profile.lastname', null, array('label' => 'Nom'))
+            ->add('author.profile.firstname', null, array('label' => 'Prénom'))
             ->add('startLine', null, array('label' => 'Ligne'))
             ->add('humanReadableType', null, array('label' => 'Type de modification'))
             ->add('meetingDate', null, array('label' => 'Date de réunion'))
@@ -79,7 +80,7 @@ class AmendmentAdmin extends Admin
     {
         $filter
             ->add('text', null, array('label' => 'Texte'))
-            ->add('author', null, array('label' => 'Auteur'))
+            ->add('author.profile.lastname', null, array('label' => 'Nom autheur'))
             ->add('startLine', null, array('label' => 'Ligne'))
             ->add('type', null, array('label' => 'Type de modification'), 'choice', array('choices' => Amendment::getTypes()))
             ->add('content', null, array('label' => 'Contenu'))
@@ -94,7 +95,8 @@ class AmendmentAdmin extends Admin
     {
         return array(
             'text',
-            'author',
+            'author.lastname',
+            'author.firstname',
             'startLine',
             'humanReadableType',
             'content',
