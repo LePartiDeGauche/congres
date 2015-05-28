@@ -3,15 +3,15 @@
 {% block title %}Soumettre un amendement {% endblock %}
 
 {% block body %}
-<div class="container">
-    <div class="row">
-        <h1>Soumettre un amendement</h1>
-        {% for flashMessage in app.session.flashbag.get('success') %}
-            <div class="alert alert-success">
-                {{ flashMessage }}
-            </div>
-        {% endfor %}
-        {{ form(form) }}
+    <div class="container">
+        <div class="row">
+            <h1>Soumettre un amendement</h1>
+            {% for flashMessage in app.session.flashbag.get('success') %}
+                <div class="alert alert-success">
+                    {{ flashMessage }}
+                </div>
+            {% endfor %}
+            {{ form(form) }}
+        </div>
     </div>
-</div>
 {% endblock %}

@@ -4,6 +4,8 @@ namespace AppBundle\Entity\Election;
 
 use AppBundle\Entity\Adherent;
 use AppBundle\Entity\Organ\Organ;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -69,9 +71,10 @@ class Election
     /**
      * @var string
      *
-     * @ORM\Column(name="raw_content", type="text")
+     * @ORM\Column(name="elected", nullable=true)
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Adherent")
      */
-    private $result;
+    private $elected;
 
     /**
      * Get id.
@@ -172,19 +175,23 @@ class Election
     }
 
     /**
-     * @return Result
+     * @return Adherent[]
      */
-    public function getResult()
+    public function getElected()
     {
-        return $this->result;
+        return $this->elected;
     }
 
     /**
-     * @param Adherent $adherent
+     * @param Adherent[] $elected
+     *
+     * @return $this
      */
-    public function setResult(Adherent $adherent)
+    public function setElected(Collection $elected)
     {
-        $this->result = $adherent;
+        $this->elected = $elected;
+
+        return $this;
     }
 
     /**
@@ -194,4 +201,10 @@ class Election
     {
         return '#'.$this->id ?: '';
     }
+
+    public function __construct()
+    {
+        $this->elected = new ArrayCollection();
+    }
+
 }
