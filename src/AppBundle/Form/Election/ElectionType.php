@@ -2,6 +2,7 @@
 
 namespace AppBundle\Form\Election;
 
+use AppBundle\Entity\AdherentRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -15,9 +16,22 @@ class ElectionType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('election', 'entity')
-            ->add('result', null, array('label' => 'Resultat'))
+        $adherentOptions = array(
+            'label' => "Adhérent élu",
+            'expanded' => false,
+            'multiple' => true,
+            'class' => 'AppBundle\Entity\Adherent',
+            'query_builder' => function(AdherentRepository $er) {
+                $qb = $er->createQueryBuilder('a');
+                $qb->orderBy('a.lastname', 'ASC');
+                $qb->setMaxResults( '100' );
+                return $qb;
+            }
 
+        );
+
+        $builder->add('elected', 'entity', $adherentOptions)
+                ->add('save', 'submit', array('label' => 'Enregistrer'))
         ;
 
     }
