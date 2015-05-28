@@ -23,18 +23,27 @@
                                         <th>Lieu</th>
                                         <th>Responsable de l'élection</th>
                                         <th>Elus</th>
+                                        <th>Election ouverte</th>
+                                        <th>Rapporter le résultat</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     {% for election in electionList %}
                                         <tr>
                                             <td>{{ election.id }}</td>
-                                            <td><a href="{{ path('election_list', {id: election.id}) }}">{{ election.electiongroup }}</td>
                                             <td>
-                                                <a href="{{ path('election_list', {id: election.id}) }}">{{ election.organ }}</a>
+                                                {{ election.electiongroup }}
+                                            </td>
+                                            <td>
+                                                {{ election.organ }}
                                             </td>
                                             <td> {{ election.electionresponsable }}</td>
-                                            <td>{{ election.result }}</td>
+                                            <td>{{ election.elected }}</td>
+                                            <td>{{ election.status }}</td>
+                                            <td>
+                                                <a href="{{ path('election_report', {id: election.id}) }}">Rapporter</a>
+
+                                            </td>
                                         </tr>
                                     {% endfor %}
                                     </tbody>

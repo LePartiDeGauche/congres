@@ -71,7 +71,7 @@ class ElectionAdmin extends Admin
                 'label' => 'Statut',
                 'choices' => array(
                     Election::STATUS_OPEN => 'Election Ouverte.',
-                    Election::STATUS_CLOSED => 'Election fermée.',
+                    Election::STATUS_CLOSED => 'Election fermee.',
                 ),
                 'multiple' => false,
             ))

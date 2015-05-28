@@ -3,8 +3,9 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Election\Election;
+use AppBundle\Entity\Organ\Organ;
+use AppBundle\Form\Election\ElectionType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -22,25 +23,20 @@ class ElectionController extends Controller
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      *
-     * @Route("/envoyer/{election_id}/{organ_id}, name="election_report")
-     * @ParamConverter("election", class="AppBundle:Election\Election", options={"id" = "election_id"})
-     * @ParamConverter("organ", class="AppBundle:Organ\Organ", options={"id" = "organ_id"})
-     * @ParamConverter("result", class="AppBundle:Election\Election", options={"id" = "organ_id"})
-     *
-     *
-    public function submitAction(Request $request, Election $election, Organ $organ)
+     * @Route("/rapporter-resultat/{id}", name="election_report")
+     */
+    public function submitAction(Request $request, Election $election)
     {
-        $this->denyAccessUnlessGranted('report_election', $this->getUser());
+        // security   --->   $this->denyAccessUnlessGranted('report_election', $this->getUser());
+
 
         $formElection = $this->createForm(
-            new ElectionType(),
-            new Election($this->getUser()),
-            array('election_id' => $election->getId())
+            new ElectionType()
         );
 
         $formElection->handleRequest($request);
         if ($formElection->isSubmitted()) {
-            $formElection->getData()->setElectionResponsable($this->getUser());
+            $formElection->getData()->setStatus(Election::STATUS_CLOSED);
 
             if ($formElection->isValid()) {
                 $manager = $this->getDoctrine()->getManager();
@@ -57,9 +53,7 @@ class ElectionController extends Controller
                     )
                 ;
 
-                return $this->redirect($this->generateUrl('election_report',
-                    array('election_id' => $electionGroup->getId(), 'organ_id' => $organ->getId())
-                ));
+                return $this->redirect($this->generateUrl('election_list'));
             }
         }
 
@@ -67,7 +61,7 @@ class ElectionController extends Controller
             'form' => isset($displayedForm) ? $displayedForm->createView() : $formElection->createView(),
         ));
     }
-*/
+
 
     /**
      * @Route("/liste", name="election_list")
