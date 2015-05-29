@@ -3,6 +3,7 @@
 namespace AppBundle\Form\Election;
 
 use AppBundle\Entity\AdherentRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -11,6 +12,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 class ElectionType extends AbstractType
 {
     /**
+     * @Method("PUT")
      * @param FormBuilderInterface $builder
      * @param array                $options
      */
@@ -29,11 +31,8 @@ class ElectionType extends AbstractType
             }
 
         );
-
         $builder->add('elected', 'entity', $adherentOptions)
-                ->add('save', 'submit', array('label' => 'Enregistrer'))
         ;
-
     }
 
     /**

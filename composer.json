@@ -29,7 +29,8 @@
         "knplabs/knp-snappy-bundle": "dev-master",
         "lexik/paybox-bundle": "dev-master",
         "stfalcon/tinymce-bundle": "dev-master", 
-        "nickcernis/html-to-markdown": "dev-master"
+        "nickcernis/html-to-markdown": "dev-master",
+        "friendsofsymfony/jsrouting-bundle": "~1.5"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3",

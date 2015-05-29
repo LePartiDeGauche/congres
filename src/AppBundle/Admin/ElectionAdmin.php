@@ -48,7 +48,7 @@ class ElectionAdmin extends Admin
             ->add('electionGroup', null, array('label' => "Type d'élection"))
             ->add('organ', null, array('label' => "Lieu concerné"))
             ->add('status', null, array('label' => 'Status'))
-            ->add('result', null, array('label' => 'Elus'))
+            ->add('elected', null, array('label' => 'Elus'))
             ->add('_action', 'actions', array(
                 'actions' => array(
                     'show' => array(),
