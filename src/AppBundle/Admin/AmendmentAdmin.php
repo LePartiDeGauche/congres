@@ -59,6 +59,7 @@ class AmendmentAdmin extends Admin
             ->add('text', null, array('label' => 'Texte'))
             ->add('author.profile.lastname', null, array('label' => 'Nom'))
             ->add('author.profile.firstname', null, array('label' => 'Prénom'))
+            ->add('author.profile.organs', 'sonata_type_collection', array('associated_property' => 'organ', 'label' => 'Instance'))
             ->add('startLine', null, array('label' => 'Ligne'))
             ->add('humanReadableType', null, array('label' => 'Type de modification'))
             ->add('meetingDate', null, array('label' => 'Date de réunion'))
@@ -95,8 +96,9 @@ class AmendmentAdmin extends Admin
     {
         return array(
             'text',
-            'author.lastname',
-            'author.firstname',
+            'author.profile.lastname',
+            'author.profile.firstname',
+            'author.profile.organsnames',
             'startLine',
             'humanReadableType',
             'content',

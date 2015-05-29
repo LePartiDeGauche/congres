@@ -77,6 +77,13 @@ class Adherent
     private $responsabilities;
 
     /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Organ\OrganParticipation", mappedBy="adherent", orphanRemoval=true, cascade={"persist"})
+     */
+    private $organs;
+
+    /**
      * @var string
      *
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Event\EventAdherentRegistration", mappedBy="adherent")
@@ -99,6 +106,7 @@ class Adherent
     {
         // Initialize collection
         $this->responsabilities = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->organs = new \Doctrine\Common\Collections\ArrayCollection();
         $this->status = self::STATUS_NEW;
         $this->departement = 0;
     }
@@ -282,6 +290,32 @@ class Adherent
         return $this->responsabilities;
     }
 
+    /**
+     * Get organs.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getOrgans()
+    {
+        return $this->organs;
+    }
+
+
+    /**
+     * Returns names of organs of the adherent
+     * 
+     * @FIXME cf. getExportFields in AdmendmentAdmin
+     * @return string
+     */
+    public function getOrgansNames()
+    {
+        $name = "";
+        foreach ($this->organs as $organParticipation) {
+            $name .= $organParticipation->getOrgan() . ", ";
+        }
+        return $name;
+    }
+
     public function __toString()
     {
         return $this->firstname.' '.$this->lastname;
@@ -312,6 +346,33 @@ class Adherent
     public function removeResponsability(\AppBundle\Entity\AdherentResponsability $responsabilities)
     {
         $this->responsabilities->removeElement($responsabilities);
+    }
+
+    /**
+     * Add organs.
+     *
+     * @param \AppBundle\Entity\OrganParticipation $organ
+     *
+     * @return Adherent
+     */
+    public function addOrgan(\AppBundle\Entity\Organ\OrganParticipation $organ)
+    {
+        if ($organ->getAdherent() === null) {
+            $organ->setAdherent($this);
+        }
+        $this->organs[] = $organs;
+
+        return $this;
+    }
+
+    /**
+     * Remove organs.
+     *
+     * @param \AppBundle\Entity\OrganParticipation $organ
+     */
+    public function removeOrgan(\AppBundle\Entity\Organ\OrganParticipation $organ)
+    {
+        $this->organs->removeElement($organ);
     }
 
     /**

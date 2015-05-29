@@ -24,7 +24,7 @@ class OrganParticipation
     /**
      * @var \stdClass
      *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Adherent")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Adherent", inversedBy="organs")
      * @ORM\JoinColumn(nullable=false)
      */
     private $adherent;
