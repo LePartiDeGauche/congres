@@ -11,7 +11,37 @@
                     {{ flashMessage }}
                 </div>
             {% endfor %}
-            {{ form(form) }}
+
+
+            {{ form_start(form) }}
+            {{ form_errors(form) }}
+
+            <div>
+                {{ form_label(form.elected) }}
+                {{ form_errors(form.elected) }}
+                {{ form_widget(form.elected) }}
+            </div>
+
+
+            <input type="submit" />
+
+            {{ form_end(form) }}
         </div>
     </div>
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+<script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>
+
+<script>$("#appbundle_election_election_elected").select2();</script>
+
+
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    <link href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css" rel="stylesheet" />
+
 {% endblock %}

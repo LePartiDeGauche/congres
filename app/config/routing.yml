@@ -33,3 +33,4 @@ _sonata_admin:
 # Lexik Paybox Bundle
 lexik_paybox:
     resource: '@LexikPayboxBundle/Resources/config/routing.yml'
+

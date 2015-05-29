@@ -5,9 +5,12 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Election\Election;
 use AppBundle\Entity\Organ\Organ;
 use AppBundle\Form\Election\ElectionType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\JsonResponse;
+
 
 /**
  * Election\Election controller.
@@ -31,7 +34,7 @@ class ElectionController extends Controller
 
 
         $formElection = $this->createForm(
-            new ElectionType()
+            new ElectionType(), $election
         );
 
         $formElection->handleRequest($request);
