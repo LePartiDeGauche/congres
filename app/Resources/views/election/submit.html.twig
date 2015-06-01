@@ -22,11 +22,11 @@
                 {{ form_widget(form.elected) }}
             </div>
 
-
             <input type="submit" />
 
             {{ form_end(form) }}
         </div>
+        <a href="{{ path('election_list') }}">Retourner à la liste des élections</a>
     </div>
 {% endblock %}
 

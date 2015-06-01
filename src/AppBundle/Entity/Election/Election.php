@@ -37,7 +37,7 @@ class Election
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Election\ElectionGroup")
      * @Assert\NotNull
      */
-    private $electionGroup;
+    private $group;
 
     /**
      * The localisation of the Election.
@@ -113,17 +113,17 @@ class Election
     /**
      * @return ElectionGroup
      */
-    public function getElectionGroup()
+    public function getGroup()
     {
-        return $this->electionGroup;
+        return $this->group;
     }
 
     /**
-     * @param ElectionGroup $electionGroup
+     * @param ElectionGroup $group
      */
-    public function setElectionGroup(ElectionGroup $electionGroup)
+    public function setGroup(ElectionGroup $group)
     {
-        $this->electionGroup = $electionGroup;
+        $this->group = $group;
     }
 
     /**
