@@ -35,7 +35,7 @@
                                     {% for election in electionList %}
                                         <tr>
                                             <td>
-                                                {{ election.electiongroup }}
+                                                {{ election.group }}
                                             </td>
                                             <td>
                                                 {{ election.organ }}
@@ -69,7 +69,9 @@
     {{ parent() }}
     <script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
     <script>$(document).ready(function(){
-            $('#table_election').DataTable();
+            $('#table_election').DataTable({
+                "lengthMenu": [ 25, 50, 75, 100 ]
+            });
         });
     </script>
 {% endblock %}

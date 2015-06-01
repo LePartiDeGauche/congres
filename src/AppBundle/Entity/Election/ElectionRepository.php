@@ -16,7 +16,7 @@ class ElectionRepository extends EntityRepository
     {
         return $this
             ->createQueryBuilder('e')
-            ->join('e.electionGroup', 'g')
+            ->join('e.group', 'g')
             ->join('e.organ', 'o')
             ->join('o.designatedParticipants', 'r')
             ->join('r.adherent', 'a')
