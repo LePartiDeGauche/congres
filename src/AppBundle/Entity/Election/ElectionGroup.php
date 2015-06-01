@@ -45,7 +45,6 @@ class ElectionGroup
      */
     private $organType;
 
-
     /**
      * The responsabilities given by the election.
      *
@@ -54,6 +53,13 @@ class ElectionGroup
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Responsability")
      */
     private $electionResponsabilities;
+
+    /**
+     * @var Responsability The responsability in charge of managing the election
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Responsability")
+     */
+    private $responsableResponsability;
 
     /**
      * Get id.
@@ -123,6 +129,22 @@ class ElectionGroup
     public function setElectionResponsabilities(Responsability $electionResponsabilities)
     {
         $this->electionResponsabilities = $electionResponsabilities;
+    }
+
+    /**
+     * @return Responsability
+     */
+    public function getResponsableResponsability()
+    {
+        return $this->responsableResponsability;
+    }
+
+    /**
+     * @param Responsability $responsableResponsability
+     */
+    public function setResponsableResponsability(Responsability $responsableResponsability)
+    {
+        $this->responsableResponsability = $responsableResponsability;
     }
 
     /**
