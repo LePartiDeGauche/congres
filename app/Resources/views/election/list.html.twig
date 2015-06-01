@@ -3,7 +3,13 @@
 {% block title %}Liste des Elections{% endblock %}
 
 {% block body %}
+
     <div class="container">
+        {% for flashMessage in app.session.flashbag.get('success') %}
+            <div class="alert alert-success">
+                {{ flashMessage }}
+            </div>
+        {% endfor %}
         <div class="row">
             <div class="col-md-12">
                 <h1>Liste des Elections</h1>
@@ -18,7 +24,6 @@
                                 <table class="table tablesorter">
                                     <thead>
                                     <tr>
-                                        <th>Election</th>
                                         <th>Organe</th>
                                         <th>Lieu</th>
                                         <th>Responsable de l'élection</th>
@@ -30,19 +35,23 @@
                                     <tbody>
                                     {% for election in electionList %}
                                         <tr>
-                                            <td>{{ election.id }}</td>
                                             <td>
                                                 {{ election.electiongroup }}
                                             </td>
                                             <td>
                                                 {{ election.organ }}
                                             </td>
-                                            <td> {{ election.electionresponsable }}</td>
-                                            <td>{{ election.elected }}</td>
+                                            <td>
+                                                {% for responsability in election.organ.designatedParticipants %}
+                                                    {{ responsability.adherent }}
+                                                {% endfor %}
+                                            </td>
+                                            <td>{{ election.elected|join(', ') }}</td>
                                             <td>{{ election.status }}</td>
                                             <td>
-                                                <a href="{{ path('election_report', {id: election.id}) }}">Rapporter</a>
-
+                                                {% if is_granted('ELECTION_REPORT', election) %}
+                                                    <a href="{{ path('election_report', {id: election.id}) }}">Rapporter</a>
+                                                {% endif %}
                                             </td>
                                         </tr>
                                     {% endfor %}

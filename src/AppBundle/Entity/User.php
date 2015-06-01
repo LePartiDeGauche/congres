@@ -65,6 +65,11 @@ class User extends BaseUser
         return parent::setEmail($email);
     }
 
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
     /**
      * Set profile, and set email at the same time.
      *

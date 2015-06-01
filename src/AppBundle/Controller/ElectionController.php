@@ -3,13 +3,13 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Election\Election;
-use AppBundle\Entity\Organ\Organ;
+use AppBundle\Entity\Adherent;
+use AppBundle\Entity\AdherentRepository;
 use AppBundle\Form\Election\ElectionType;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\JsonResponse;
 
 
 /**
@@ -27,15 +27,11 @@ class ElectionController extends Controller
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      *
      * @Route("/rapporter-resultat/{id}", name="election_report")
+     * @Security("is_granted('ELECTION_REPORT', election)")
      */
     public function submitAction(Request $request, Election $election)
     {
-        // security   --->   $this->denyAccessUnlessGranted('report_election', $this->getUser());
-
-
-        $formElection = $this->createForm(
-            new ElectionType(), $election
-        );
+        $formElection = $this->createForm(new ElectionType(), $election);
 
         $formElection->handleRequest($request);
         if ($formElection->isSubmitted()) {
@@ -61,7 +57,7 @@ class ElectionController extends Controller
         }
 
         return $this->render('election/submit.html.twig', array(
-            'form' => isset($displayedForm) ? $displayedForm->createView() : $formElection->createView(),
+            'form' => $formElection->createView(),
         ));
     }
 
@@ -69,15 +65,11 @@ class ElectionController extends Controller
     /**
      * @Route("/liste", name="election_list")
      */
-    public function listAction(Request $request)
+    public function listAction()
     {
-
-        $electionRepository = $this->getDoctrine()->getRepository('AppBundle:Election\Election');
-
-        $electionList = $electionRepository->findAll();
-
         return $this->render('election/list.html.twig', array(
-            'electionList' => $electionList,
+            'electionList' => $this->getDoctrine()->getRepository('AppBundle:Election\Election')->findAllWithResponsable(),
         ));
     }
+
 }
