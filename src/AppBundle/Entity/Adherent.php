@@ -49,7 +49,7 @@ class Adherent
     private $firstname;
 
     /**
-     * @var OrganParticipation[]
+    * @var \Doctrine\Common\Collections\Collection
      *
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Organ\OrganParticipation", mappedBy="adherent")
      */
@@ -61,22 +61,6 @@ class Adherent
      * @ORM\Column(name="birthdate", type="date")
      */
     private $birthdate;
-
-    /**
-     * @return OrganParticipation[]
-     */
-    public function getOrganParticipations()
-    {
-        return $this->organParticipations;
-    }
-
-    /**
-     * @param OrganParticipation[] $organParticipations
-     */
-    public function setOrganParticipations($organParticipations)
-    {
-        $this->organParticipations = $organParticipations;
-    }
 
     /**
      * @var string
@@ -99,13 +83,6 @@ class Adherent
      * @ORM\OneToMany(targetEntity="AdherentResponsability", mappedBy="adherent", orphanRemoval=true, cascade={"persist"})
      */
     private $responsabilities;
-
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     *
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Organ\OrganParticipation", mappedBy="adherent", orphanRemoval=true, cascade={"persist"})
-     */
-    private $organs;
 
     /**
      * @var string
@@ -317,24 +294,13 @@ class Adherent
     /**
      * Get organs.
      *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getOrgans()
-    {
-        return $this->organs;
-    }
-
-
-    /**
-     * Returns names of organs of the adherent
-     * 
-     * @FIXME cf. getExportFields in AdmendmentAdmin
      * @return string
      */
+    // FIXME cf. getExportFields in AdmendmentAdmin
     public function getOrgansNames()
     {
         $name = "";
-        foreach ($this->organs as $organParticipation) {
+        foreach ($this->organParticipations as $organParticipation) {
             $name .= $organParticipation->getOrgan() . ", ";
         }
         return $name;
@@ -373,30 +339,48 @@ class Adherent
     }
 
     /**
-     * Add organs.
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getOrganParticipations()
+    {
+        return $this->organParticipations;
+    }
+
+    /**
+     * @param \Doctrine\Common\Collections\Collection $organParticipations
+     */
+    public function setOrganParticipations(\Doctrine\Common\Collections\Collection $organParticipations)
+    {
+        $this->organParticipations = $organParticipations;
+    }
+
+    /**
+     * Add organ participation.
      *
      * @param \AppBundle\Entity\OrganParticipation $organ
      *
      * @return Adherent
      */
-    public function addOrgan(\AppBundle\Entity\Organ\OrganParticipation $organ)
+    public function addOrganParticipation(\AppBundle\Entity\Organ\OrganParticipation $organParticipation)
     {
-        if ($organ->getAdherent() === null) {
-            $organ->setAdherent($this);
+        if ($organParticipation->getAdherent() === null) {
+            $organParticipation->setAdherent($this);
         }
-        $this->organs[] = $organs;
+        $this->organParticipations[] = $organParticipation;
 
         return $this;
     }
 
     /**
-     * Remove organs.
+     * Remove organ participation.
      *
      * @param \AppBundle\Entity\OrganParticipation $organ
      */
-    public function removeOrgan(\AppBundle\Entity\Organ\OrganParticipation $organ)
+     public function removeOrganParticipation(\AppBundle\Entity\Organ\OrganParticipation $organParticipation)
     {
-        $this->organs->removeElement($organ);
+        $this->organParticipation->removeElement($organParticipation);
+
+        return $this;
     }
 
     /**
