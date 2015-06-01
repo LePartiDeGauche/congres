@@ -24,6 +24,7 @@ services:
         arguments: [%fos_user.model.user.class%]
         tags:
             - { name: form.type, alias: app_user_profile }
+
     app.congres.contribution_voter:
         class:      AppBundle\Security\Congres\ContributionVoter
         public:     false
@@ -51,6 +52,13 @@ services:
         arguments: [@doctrine.orm.entity_manager]
         tags:
            - { name: security.voter }
+
+    app.election_report_voter:
+        class:      AppBundle\Security\ElectionReportVoter
+        public:     false
+        tags:
+           - { name: security.voter }
+
     app.payment_response_listener:
         class: AppBundle\EventListener\PaymentResponseListener
         arguments: [@doctrine.orm.entity_manager]

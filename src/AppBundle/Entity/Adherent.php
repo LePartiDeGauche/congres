@@ -49,11 +49,34 @@ class Adherent
     private $firstname;
 
     /**
+     * @var OrganParticipation[]
+     *
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Organ\OrganParticipation", mappedBy="adherent")
+     */
+    private $organParticipations;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="birthdate", type="date")
      */
     private $birthdate;
+
+    /**
+     * @return OrganParticipation[]
+     */
+    public function getOrganParticipations()
+    {
+        return $this->organParticipations;
+    }
+
+    /**
+     * @param OrganParticipation[] $organParticipations
+     */
+    public function setOrganParticipations($organParticipations)
+    {
+        $this->organParticipations = $organParticipations;
+    }
 
     /**
      * @var string
@@ -218,8 +241,8 @@ class Adherent
     {
         $this->email = $email;
 
-        if ($this->user && $this->user->GetEmail() !== $email) {
-            $this->user->setEmail();
+        if ($this->user && $this->user->getEmail() !== $email) {
+            $this->user->setEmail($email);
         }
 
         return $this;
