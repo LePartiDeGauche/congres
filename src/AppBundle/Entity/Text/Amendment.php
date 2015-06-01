@@ -235,4 +235,3 @@ class Amendment
         $this->meetingDate = $meetingDate;
     }
 }
-

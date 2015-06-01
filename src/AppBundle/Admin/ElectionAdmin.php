@@ -26,7 +26,7 @@ class ElectionAdmin extends Admin
     {
         $datagridMapper
             ->add('group', null, array('label' => "Type d'élection"))
-            ->add('organ', null, array('label' => "Lieu concerné"))
+            ->add('organ', null, array('label' => 'Lieu concerné'))
             ->add('status', null, array(
                 'label' => 'Statut',
                 'choices' => array(
@@ -46,7 +46,7 @@ class ElectionAdmin extends Admin
         $list
             ->addIdentifier('id')
             ->add('group', null, array('label' => "Type d'élection"))
-            ->add('organ', null, array('label' => "Lieu concerné"))
+            ->add('organ', null, array('label' => 'Lieu concerné'))
             ->add('status', null, array('label' => 'Status'))
             ->add('elected', null, array('label' => 'Elus'))
             ->add('_action', 'actions', array(
@@ -54,7 +54,7 @@ class ElectionAdmin extends Admin
                     'show' => array(),
                     'edit' => array(),
                     'delete' => array(),
-                )
+                ),
             ))
         ;
     }
@@ -66,7 +66,7 @@ class ElectionAdmin extends Admin
     {
         $form
             ->add('group', null, array('label' => "Type d'élection"))
-            ->add('organ', null, array('label' => "Lieu concerné"))
+            ->add('organ', null, array('label' => 'Lieu concerné'))
             ->add('status', 'choice', array(
                 'label' => 'Statut',
                 'choices' => array(
@@ -85,7 +85,7 @@ class ElectionAdmin extends Admin
     {
         $showMapper
             ->add('group', null, array('label' => "Type d'élection"))
-            ->add('organ', null, array('label' => "Lieu concerné"))
+            ->add('organ', null, array('label' => 'Lieu concerné'))
             ->add('status', null, array('label' => "Statut de l'élection"))
         ;
     }

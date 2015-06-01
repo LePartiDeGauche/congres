@@ -19,7 +19,7 @@ class AdherentRepository extends EntityRepository
             ->select('a.id, a.firstname, a.lastname')
         ;
 
-        foreach($typedTexts as $key => $value) {
+        foreach ($typedTexts as $key => $value) {
             $placeholder = sprintf('name_%s', $key);
 
             $queryBuilder
@@ -39,7 +39,7 @@ class AdherentRepository extends EntityRepository
             ->where('a.email = :email')
             ->setParameter('email', $adherent->getEmail())
             ->getQuery();
-        ;
+
         return $adherent->getResult();
     }
 

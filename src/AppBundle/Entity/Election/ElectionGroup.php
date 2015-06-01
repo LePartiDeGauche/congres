@@ -2,12 +2,10 @@
 
 namespace AppBundle\Entity\Election;
 
-use AppBundle\Entity\Adherent;
 use AppBundle\Entity\Responsability;
 use AppBundle\Entity\Organ\OrganType;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-
 
 /**
  * Type of Election.
@@ -152,6 +150,6 @@ class ElectionGroup
      */
     public function __toString()
     {
-        return $this->name ;
+        return $this->name;
     }
 }

@@ -26,9 +26,9 @@ class ElectionType extends AbstractType
                 'expanded' => false,
                 'multiple' => true,
                 'class' => 'AppBundle\Entity\Adherent',
-                'query_builder' => function(AdherentRepository $repository) use ($organ) {
+                'query_builder' => function (AdherentRepository $repository) use ($organ) {
                     return $repository->getSearchAdherentByOrganQueryBuilder($organ);
-                }
+                },
             ));
         });
     }

@@ -2,7 +2,6 @@
 
 namespace AppBundle\Admin;
 
-use AppBundle\Entity\Election\ElectionGroup;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -74,7 +73,7 @@ class ElectionGroupAdmin extends Admin
         return array(
             'name',
             'organType',
-            'electionResponsabilities'
+            'electionResponsabilities',
         );
     }
 
@@ -87,5 +86,4 @@ class ElectionGroupAdmin extends Admin
             'xls',
         );
     }
-
 }
