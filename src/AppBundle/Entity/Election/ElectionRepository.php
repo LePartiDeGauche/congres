@@ -3,8 +3,6 @@
 namespace AppBundle\Entity\Election;
 
 use AppBundle\Entity\Adherent;
-use AppBundle\Entity\AdherentResponsability;
-use AppBundle\Entity\Organ\OrganParticipation;
 use Doctrine\ORM\EntityRepository;
 
 /**

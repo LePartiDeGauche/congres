@@ -25,8 +25,8 @@ class ResultAdmin extends Admin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('election', null, array('label' => "Election"))
-            ->add('result', null, array('label' => "Résultat"))
+            ->add('election', null, array('label' => 'Election'))
+            ->add('result', null, array('label' => 'Résultat'))
         ;
     }
 
@@ -37,8 +37,8 @@ class ResultAdmin extends Admin
     {
         $list
             ->addIdentifier('id')
-            ->add('election', null, array('label' => "Election"))
-            ->add('result', null, array('label' => "Résultat"))
+            ->add('election', null, array('label' => 'Election'))
+            ->add('result', null, array('label' => 'Résultat'))
         ;
     }
 
@@ -48,8 +48,8 @@ class ResultAdmin extends Admin
     protected function configureFormFields(FormMapper $form)
     {
         $form
-            ->add('election', null, array('label' => "Election"))
-            ->add('result', null, array('label' => "Résultat"))
+            ->add('election', null, array('label' => 'Election'))
+            ->add('result', null, array('label' => 'Résultat'))
         ;
     }
 
@@ -59,8 +59,8 @@ class ResultAdmin extends Admin
     protected function configureShowFields(ShowMapper $showMapper)
     {
         $showMapper
-            ->add('election', null, array('label' => "Election"))
-            ->add('result', null, array('label' => "Résultat"))
+            ->add('election', null, array('label' => 'Election'))
+            ->add('result', null, array('label' => 'Résultat'))
         ;
     }
 
@@ -84,5 +84,4 @@ class ResultAdmin extends Admin
             'xls',
         );
     }
-
 }

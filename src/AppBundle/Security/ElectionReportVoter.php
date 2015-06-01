@@ -2,7 +2,6 @@
 
 namespace AppBundle\Security;
 
-use AppBundle\Entity\Election\ElectionRepository;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
 

@@ -262,4 +262,3 @@ class Amendment
         $this->numberOfPresent = $numberOfPresent;
     }
 }
-

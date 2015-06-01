@@ -3,14 +3,11 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Election\Election;
-use AppBundle\Entity\Adherent;
-use AppBundle\Entity\AdherentRepository;
 use AppBundle\Form\Election\ElectionType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-
 
 /**
  * Election\Election controller.
@@ -19,9 +16,8 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class ElectionController extends Controller
 {
-
     /**
-     * @param Request $request
+     * @param Request  $request
      * @param Election $election
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
@@ -61,7 +57,6 @@ class ElectionController extends Controller
         ));
     }
 
-
     /**
      * @Route("/liste", name="election_list")
      */
@@ -71,5 +66,4 @@ class ElectionController extends Controller
             'electionList' => $this->getDoctrine()->getRepository('AppBundle:Election\Election')->findAllWithResponsable(),
         ));
     }
-
 }

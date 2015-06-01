@@ -118,7 +118,6 @@ final class TextGroupVoter extends AbstractVoter
         return false;
     }
 
-
     /*
      * a adherent can amend a text if :
      * - text Group is open for vote (done)
@@ -137,7 +136,6 @@ final class TextGroupVoter extends AbstractVoter
 
         return false;
     }
-
 
     public function __construct($entityManager, $container)
     {
