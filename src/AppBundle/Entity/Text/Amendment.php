@@ -90,6 +90,17 @@ class Amendment
      */
     private $meetingDate;
 
+    /**
+     * The number of present
+     *
+     * @var int
+     *
+     * @ORM\Column(name="number_present", type="integer", nullable=true)
+     * @Assert\Type(type="integer")
+     */
+    private $numberOfPresent;
+
+
     public function __construct()
     {
         $this->meetingDate = new \DateTime();
@@ -233,5 +244,21 @@ class Amendment
     public function setMeetingDate(\DateTime $meetingDate = null)
     {
         $this->meetingDate = $meetingDate;
+    }
+
+    /**
+     * @return int
+     */
+    public function getNumberOfPresent()
+    {
+        return $this->numberOfPresent;
+    }
+
+    /**
+     * @param int $numberOfPresent
+     */
+    public function setNumberOfPresent($numberOfPresent)
+    {
+        $this->numberOfPresent = $numberOfPresent;
     }
 }
