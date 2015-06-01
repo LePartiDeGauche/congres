@@ -18,7 +18,6 @@ class TextGroup
     const VOTEMODALITY_VALIDATION = 'validation';
     const VOTEMODALITY_REFERENDUM = 'referendum';
 
-
     /**
      * @var int
      *

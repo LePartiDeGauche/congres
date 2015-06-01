@@ -20,7 +20,7 @@ use Symfony\Component\HttpFoundation\Request;
 class AmendmentController extends Controller
 {
     /**
-     * @param Request $request
+     * @param Request   $request
      * @param TextGroup $textGroup
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
@@ -32,7 +32,7 @@ class AmendmentController extends Controller
     public function submitAction(Request $request, TextGroup $textGroup, Organ $organ)
     {
         $this->denyAccessUnlessGranted('report_amend', new TextGroupOrganPair($textGroup, $organ), $this->getUser());
-    
+
         $formAmendment = $this->createForm(
             new AmendmentType(),
             new Amendment($this->getUser()),
@@ -58,7 +58,7 @@ class AmendmentController extends Controller
                     )
                 ;
 
-                return $this->redirect($this->generateUrl('amendment_submit', 
+                return $this->redirect($this->generateUrl('amendment_submit',
                     array('text_group_id' => $textGroup->getId(), 'organ_id' => $organ->getId())
                 ));
             }
@@ -69,4 +69,3 @@ class AmendmentController extends Controller
         ));
     }
 }
-

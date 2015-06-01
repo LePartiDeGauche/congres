@@ -21,23 +21,24 @@ class AmendmentType extends AbstractType
             'expanded' => false,
             'multiple' => false,
             'class' => 'AppBundle\Entity\Text\Text',
-            'query_builder' => function(TextRepository $er) use ($textGroupId){
+            'query_builder' => function (TextRepository $er) use ($textGroupId) {
                 $qb = $er->createQueryBuilder('t');
                 if (isset($textGroupId)) {
                     $qb->where('t.textGroup = :textGroupId')
                         ->setParameter(':textGroupId', $textGroupId);
                 }
                 $qb->orderBy('t.title', 'ASC');
+
                 return $qb;
-            }
+            },
         );
         $builder->add('text', 'entity', $textOptions)
             ->add('startLine', null, array('label' => 'Index ligne de début'))
             ->add('type', 'choice', array(
                 'label' => 'Type de modification',
                 'choices' => array(
-                    'a' => 'Ajout', 'd' => 'Suppression', 'm' => 'Modification'
-                )))
+                    'a' => 'Ajout', 'd' => 'Suppression', 'm' => 'Modification',
+                ), ))
             ->add('content', null, array('label' => 'Nouveau texte'))
             ->add('meetingDate', null, array('label' => 'Date de réunion'))
             ->add('numberOfPresent', null, array('label' => 'Nombre de présents'))
@@ -52,7 +53,7 @@ class AmendmentType extends AbstractType
     {
         $resolver->setDefaults(array(
             'data_class' => 'AppBundle\Entity\Text\Amendment',
-            'text_group_id' => null
+            'text_group_id' => null,
         ));
     }
 
