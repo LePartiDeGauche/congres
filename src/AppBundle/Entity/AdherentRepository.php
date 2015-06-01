@@ -4,10 +4,6 @@ namespace AppBundle\Entity;
 
 use AppBundle\Entity\Organ\Organ;
 use Doctrine\ORM\EntityRepository;
-use AppBundle\Entity\Adherent;
-use AppBundle\Entity\User;
-
-
 
 /**
  * AdherentRepository.
@@ -56,7 +52,7 @@ class AdherentRepository extends EntityRepository
                 ->where('o.organ = :organ')
                 ->setParameter('organ', $organ)
                 ->orderBy('a.lastname', 'ASC')
-                ->setMaxResults(100)
+                ->setMaxResults(300)
         ;
 
         return $qb;

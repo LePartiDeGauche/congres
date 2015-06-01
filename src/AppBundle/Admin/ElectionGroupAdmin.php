@@ -50,7 +50,7 @@ class ElectionGroupAdmin extends Admin
         $form
             ->add('name', null, array('label' => 'Nom'))
             ->add('organType', null, array('label' => 'Organe Concerné'))
-            ->add('responsableResponsability')
+            ->add('responsableResponsability', null, array('label' => "Responsable de l'élection"))
         ;
     }
 
@@ -62,7 +62,7 @@ class ElectionGroupAdmin extends Admin
         $showMapper
             ->add('name', null, array('label' => 'Nom'))
             ->add('organType', null, array('label' => 'Organe Concerné'))
-            ->add('responsableResponsability')
+            ->add('responsableResponsability', null, array('label' => "Responsable de l'élection"))
         ;
     }
 
