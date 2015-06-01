@@ -293,9 +293,9 @@ class Adherent
     /**
      * Returns names of organs of the adherent
      *
-     * @FIXME cf. getExportFields in AdmendmentAdmin
      * @return string
      */
+    // FIXME cf. getExportFields in AdmendmentAdmin
     public function getOrgansNames()
     {
         $name = "";
