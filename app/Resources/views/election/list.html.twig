@@ -14,14 +14,13 @@
             <div class="col-md-12">
                 <h1>Liste des Elections</h1>
                 <div role="tabpanel">
-
                     <div class="tab-content">
                         <div role="tabpanel" class="tab-pane active" id="validated">
                             <h2>Elections</h2>
                             {% if electionList is empty %}
                                 <p>Pas d'elections.</p>
                             {% else %}
-                                <table class="table tablesorter">
+                                <table class="table tablesorter" id="table_election">
                                     <thead>
                                     <tr>
                                         <th>Organe</th>
@@ -64,4 +63,18 @@
             </div><!-- .col-md-12 -->
         </div><!-- .row -->
     </div><!-- .container -->
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
+    <script>$(document).ready(function(){
+            $('#table_election').DataTable();
+        });
+    </script>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css" rel="stylesheet" />
 {% endblock %}
