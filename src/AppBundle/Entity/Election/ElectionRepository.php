@@ -20,8 +20,6 @@ class ElectionRepository extends EntityRepository
             ->join('r.adherent', 'a')
             ->join('a.user', 'u')
             ->join('r.responsability', 're')
-            //->where('e = :election')
-            //->setParameter('election', $election)
             ->andWhere('r.responsability = g.responsableResponsability')
             ->andWhere('r.isActive = 1')
             ->getQuery()
