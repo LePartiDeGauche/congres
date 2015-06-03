@@ -38,7 +38,7 @@ class Organ
     /**
      * @var \stdClass
      *
-     * @ORM\ManyToOne(targetEntity="OrganType", inversedBy="organs")
+     * @ORM\ManyToOne(targetEntity="OrganType", inversedBy="organs", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $organType;
