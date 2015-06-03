@@ -62,13 +62,14 @@ class Adherent
      */
     private $status;
 
-/**
- * @var int$
- *
- * @ORM\Column(name="departement", type="integer")
- */
+    /**
+     * @var int$
+     *
+     * @ORM\Column(name="departement", type="integer")
+     */
     // FIXME : Remove this field when organs will be imported
     private $departement;
+
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
@@ -95,7 +96,7 @@ class Adherent
      *
      * @var User
      *
-     * @ORM\OneToOne(targetEntity="AppBundle\Entity\User", mappedBy="profile", orphanRemoval=true)
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\User", mappedBy="profile", cascade={"persist", "remove", "refresh"}, orphanRemoval=true)
      */
     private $user;
 
@@ -226,8 +227,8 @@ class Adherent
     {
         $this->email = $email;
 
-        if ($this->user && $this->user->GetEmail() !== $email) {
-            $this->user->setEmail();
+        if ($this->user && $this->user->getEmail() !== $email) {
+            $this->user->setEmail($email);
         }
 
         return $this;
