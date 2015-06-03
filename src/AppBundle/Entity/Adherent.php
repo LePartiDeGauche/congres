@@ -107,7 +107,7 @@ class Adherent
     {
         // Initialize collection
         $this->responsabilities = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->organs = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->organParticipations = new \Doctrine\Common\Collections\ArrayCollection();
         $this->status = self::STATUS_NEW;
         $this->departement = 0;
     }
@@ -292,7 +292,7 @@ class Adherent
     }
 
     /**
-     * Get organs.
+     * Get organs names.
      *
      * @return string
      */
@@ -357,7 +357,7 @@ class Adherent
     /**
      * Add organ participation.
      *
-     * @param \AppBundle\Entity\OrganParticipation $organ
+     * @param \AppBundle\Entity\OrganParticipation $organParticipation
      *
      * @return Adherent
      */
@@ -374,7 +374,7 @@ class Adherent
     /**
      * Remove organ participation.
      *
-     * @param \AppBundle\Entity\OrganParticipation $organ
+     * @param \AppBundle\Entity\OrganParticipation $organParticipation
      */
      public function removeOrganParticipation(\AppBundle\Entity\Organ\OrganParticipation $organParticipation)
     {
