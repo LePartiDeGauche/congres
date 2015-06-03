@@ -378,7 +378,7 @@ class Adherent
      */
      public function removeOrganParticipation(\AppBundle\Entity\Organ\OrganParticipation $organParticipation)
     {
-        $this->organParticipation->removeElement($organParticipation);
+        $this->organParticipations->removeElement($organParticipation);
 
         return $this;
     }
