@@ -49,11 +49,7 @@ class Adherent
     private $firstname;
 
     /**
-<<<<<<< HEAD
-     * @var OrganParticipation[]
-=======
-    * @var \Doctrine\Common\Collections\Collection
->>>>>>> a47198c4f1f56d71dc767f59fae168a46be1042c
+     * @var \Doctrine\Common\Collections\Collection
      *
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Organ\OrganParticipation", mappedBy="adherent")
      */
@@ -67,22 +63,6 @@ class Adherent
     private $birthdate;
 
     /**
-     * @return OrganParticipation[]
-     */
-    public function getOrganParticipations()
-    {
-        return $this->organParticipations;
-    }
-
-    /**
-     * @param OrganParticipation[] $organParticipations
-     */
-    public function setOrganParticipations($organParticipations)
-    {
-        $this->organParticipations = $organParticipations;
-    }
-
-    /**
      * @var string
      *
      * @ORM\Column(name="status", type="string", length=255)
@@ -94,7 +74,7 @@ class Adherent
      *
      * @ORM\Column(name="departement", type="integer")
      */
-    // FIXME : Remove this field when organs will be imported
+    // FIXME : Remove this field when organs will be imported
     private $departement;
 
     /**
@@ -396,9 +376,9 @@ class Adherent
      *
      * @param \AppBundle\Entity\OrganParticipation $organParticipation
      */
-     public function removeOrganParticipation(\AppBundle\Entity\Organ\OrganParticipation $organParticipation)
+    public function removeOrganParticipation(\AppBundle\Entity\Organ\OrganParticipation $organParticipation)
     {
-        $this->organParticipation->removeElement($organParticipation);
+        $this->organParticipations->removeElement($organParticipation);
 
         return $this;
     }
