@@ -28,7 +28,7 @@ class ResponsabilityAdmin extends Admin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('name', null, array('label' => 'Nom'));
+            ->add('name', null, array('label' => 'Nom'))
             ->add('electionDate', null, array('label' => 'Date de renouvellement.'));
     }
 
