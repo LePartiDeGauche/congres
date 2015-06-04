@@ -12,6 +12,11 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class SleepingSite
 {
+    const ROOM_SINGLE = 'Chambre simple';
+    const ROOM_TWIN = 'Twin : 2 lits séparés';
+    const ROOM_DOUBLE = 'Chambre double';
+    const ROOM_OTHER = 'Autre';
+
     /**
      * @var int
      *
@@ -38,9 +43,9 @@ class SleepingSite
     /**
      * @var string
      *
-     * @ORM\Column(name="adress", type="text")
+     * @ORM\Column(name="address", type="string", length=255)
      */
-    private $adress;
+    private $address;
 
     /**
      * @var int
@@ -125,17 +130,17 @@ class SleepingSite
     /**
      * @return string
      */
-    public function getAdress()
+    public function getAddress()
     {
-        return $this->adress;
+        return $this->address;
     }
 
     /**
-     * @param string $adress
+     * @param string $address
      */
-    public function setAdress($adress)
+    public function setAddress($address)
     {
-        $this->adress = $adress;
+        $this->address = $address;
     }
 
     /**

@@ -3,7 +3,6 @@
 namespace AppBundle\Entity\Event;
 
 use Doctrine\ORM\Mapping as ORM;
-use AppBundle\Entity\Address;
 
 /**
  * SleepingFacility.
@@ -23,20 +22,22 @@ class SleepingFacility
     private $id;
 
     /**
-     * @var \stdClass
+     * The Event concerned.
      *
-     * @ORM\ManyToOne(targetEntity="Event", inversedBy="sleepingFacilities")
-     * @ORM\JoinColumn(nullable=false)
+     * @var \AppBundle\Entity\Event\Event
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Event\Event", inversedBy="Event")
      */
     private $event;
 
     /**
-     * @var \stdClass
+     * The Sleeping Site.
      *
-     * @ORM\OneToMany(targetEntity="SleepingSite", mappedBy="sleepingFacility",
-     * cascade={"persist", "remove", "merge"}, orphanRemoval=true)
+     * @var \AppBundle\Entity\Event\SleepingSite
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Event\SleepingSite", inversedBy="SleepingSite")
      */
-    private $sleepingSites;
+    private $sleepingSite;
 
     /**
      * @var integer
@@ -65,7 +66,7 @@ class SleepingFacility
     /**
      * Get event.
      *
-     * @return string
+     * @return Event
      */
     public function getEvent()
     {
@@ -73,33 +74,27 @@ class SleepingFacility
     }
 
     /**
-     * Set event.
-     *
-     * @param string $event
-     *
-     * @return SleepingFacility
+     * @param Event $event
      */
-    public function setEvent($event)
+    public function setEvent(Event $event)
     {
         $this->event = $event;
-
-        return $this;
     }
 
     /**
-     * @return \stdClass
+     * @return SleepingSite
      */
-    public function getSleepingSites()
+    public function getSleepingSite()
     {
-        return $this->sleepingSites;
+        return $this->sleepingSite;
     }
 
     /**
-     * @param \stdClass $sleepingSites
+     * @param SleepingSite $sleepingSite
      */
-    public function setSleepingSites($sleepingSites)
+    public function setSleepingSite(SleepingSite $sleepingSite)
     {
-        $this->sleepingSites = $sleepingSites;
+        $this->sleepingSite = $sleepingSite;
     }
 
     /**
