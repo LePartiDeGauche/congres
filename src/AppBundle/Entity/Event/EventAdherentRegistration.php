@@ -117,7 +117,7 @@ class EventAdherentRegistration
 
     /**
      * @var bool
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(name="vote_status", type="boolean")
      */
     private $voteStatus;
 

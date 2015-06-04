@@ -39,33 +39,18 @@ class SleepingFacility
     private $sleepingSites;
 
     /**
-     * @var string
+     * @var integer
      *
-     * @ORM\Column(name="name", type="string", length=255)
+     * @ORM\Column(name="reservation_nights", type="integer")
      */
-    private $name;
+    private $reservationNights;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="text")
+     * @ORM\Column(name="comments", type="text")
      */
-    private $description;
-
-    /**
-     * @var string
-     *
-     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Address",cascade={"persist", "remove", "merge"}, orphanRemoval=true)
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $address;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="positionDescription", type="text")
-     */
-    private $positionDescription;
+    private $comments;
 
     /**
      * Get id.
@@ -78,130 +63,13 @@ class SleepingFacility
     }
 
     /**
-     * Set sleepingSite.
-     *
-     * @param \stdClass $sleepingSite
-     *
-     * @return SleepingFacility
-     */
-    public function setSleepingSite($sleepingSite)
-    {
-        $this->sleepingSite = $sleepingSite;
-
-        return $this;
-    }
-
-    /**
-     * Get sleepingSite.
-     *
-     * @return \stdClass
-     */
-    public function getSleepingSite()
-    {
-        return $this->sleepingSite;
-    }
-
-    /**
-     * Set name.
-     *
-     * @param string $name
-     *
-     * @return SleepingFacility
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    /**
-     * Get name.
+     * Get event.
      *
      * @return string
      */
-    public function getName()
+    public function getEvent()
     {
-        return $this->name;
-    }
-
-    /**
-     * Set description.
-     *
-     * @param string $description
-     *
-     * @return SleepingFacility
-     */
-    public function setDescription($description)
-    {
-        $this->description = $description;
-
-        return $this;
-    }
-
-    /**
-     * Get description.
-     *
-     * @return string
-     */
-    public function getDescription()
-    {
-        return $this->description;
-    }
-
-    /**
-     * Set address.
-     *
-     * @param string $address
-     *
-     * @return SleepingFacility
-     */
-    public function setAddress($address)
-    {
-        $this->address = $address;
-
-        return $this;
-    }
-
-    /**
-     * Get address.
-     *
-     * @return string
-     */
-    public function getAddress()
-    {
-        return $this->address;
-    }
-
-    /**
-     * Set positionDescription.
-     *
-     * @param string $positionDescription
-     *
-     * @return SleepingFacility
-     */
-    public function setPositionDescription($positionDescription)
-    {
-        $this->positionDescription = $positionDescription;
-
-        return $this;
-    }
-
-    /**
-     * Get positionDescription.
-     *
-     * @return string
-     */
-    public function getPositionDescription()
-    {
-        return $this->positionDescription;
-    }
-    /**
-     * Constructor.
-     */
-    public function __construct()
-    {
-        $this->sleepingSites = new \Doctrine\Common\Collections\ArrayCollection();
+        return $this->event;
     }
 
     /**
@@ -219,46 +87,50 @@ class SleepingFacility
     }
 
     /**
-     * Get event.
-     *
-     * @return string
-     */
-    public function getEvent()
-    {
-        return $this->event;
-    }
-
-    /**
-     * Add sleepingSites.
-     *
-     * @param \AppBundle\Entity\Event\SleepingSite $sleepingSites
-     *
-     * @return SleepingFacility
-     */
-    public function addSleepingSite(\AppBundle\Entity\Event\SleepingSite $sleepingSites)
-    {
-        $this->sleepingSites[] = $sleepingSites;
-
-        return $this;
-    }
-
-    /**
-     * Remove sleepingSites.
-     *
-     * @param \AppBundle\Entity\Event\SleepingSite $sleepingSites
-     */
-    public function removeSleepingSite(\AppBundle\Entity\Event\SleepingSite $sleepingSites)
-    {
-        $this->sleepingSites->removeElement($sleepingSites);
-    }
-
-    /**
-     * Get sleepingSites.
-     *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return \stdClass
      */
     public function getSleepingSites()
     {
         return $this->sleepingSites;
+    }
+
+    /**
+     * @param \stdClass $sleepingSites
+     */
+    public function setSleepingSites($sleepingSites)
+    {
+        $this->sleepingSites = $sleepingSites;
+    }
+
+    /**
+     * @return int
+     */
+    public function getReservationNights()
+    {
+        return $this->reservationNights;
+    }
+
+    /**
+     * @param int $reservationNights
+     */
+    public function setReservationNights($reservationNights)
+    {
+        $this->reservationNights = $reservationNights;
+    }
+
+    /**
+     * @return string
+     */
+    public function getComments()
+    {
+        return $this->comments;
+    }
+
+    /**
+     * @param string $comments
+     */
+    public function setComments($comments)
+    {
+        $this->comments = $comments;
     }
 }

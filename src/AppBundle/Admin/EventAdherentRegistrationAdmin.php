@@ -35,7 +35,7 @@ class EventAdherentRegistrationAdmin extends Admin
      */
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
-        // FIXME : add fields
+        // FIXME : add fields
         $datagridMapper
             ->add('adherent.firstname', null, array('label' => 'Prénom'))
             ->add('adherent.lastname', null, array('label' => 'Nom de Famille'))
@@ -51,11 +51,11 @@ class EventAdherentRegistrationAdmin extends Admin
                 'choice', array(
                     'choices' => $this->paymentModeChoice,
                 ))
-                ->add('registrationDate', null, array('label' => 'Date d\'inscription'))
-                ->add('attendance', null, array('label' => 'Présence'), 'choice', array(
-                    'choices' => $this->attendanceChoice, ))
-                    ->add('meals', null, array('label' => 'Repas'))
-                    ;
+            ->add('registrationDate', null, array('label' => 'Date d\'inscription'))
+            ->add('attendance', null, array('label' => 'Présence'), 'choice', array(
+                'choices' => $this->attendanceChoice, ))
+            ->add('meals', null, array('label' => 'Repas'))
+        ;
     }
 
     /**
@@ -70,8 +70,8 @@ class EventAdherentRegistrationAdmin extends Admin
                     'show' => array(),
                     'edit' => array(),
                     'delete' => array(),
-                    ),
-                ))
+                ),
+            ))
             ->add('adherent.firstname', null, array('label' => 'Prénom'))
             ->add('adherent.lastname', null, array('label' => 'Nom'))
             //->add('adherent.email', NULL, array('label' => 'Courriel'))
@@ -95,7 +95,7 @@ class EventAdherentRegistrationAdmin extends Admin
             ))
             //->add('cost', NULL, array('label' => 'Tarif'))
             ->add('meals', null, array('label' => 'Repas', 'multiple' => true))
-            ;
+        ;
     }
 
     /**
@@ -107,7 +107,7 @@ class EventAdherentRegistrationAdmin extends Admin
 
         if ($isCreate) {
             $formMapper
-                // FIXME Filter event !
+                // FIXME Filter event !
                 ->add('event', null, array('label' => 'Événement', 'property' => 'name'))
                 ->add('adherent', 'sonata_type_model_autocomplete', array(
                     'label' => 'Auteur',
@@ -117,23 +117,23 @@ class EventAdherentRegistrationAdmin extends Admin
                     'to_string_callback' => array($this, 'adherentToStringCallback'), ));
         } else {
             $formMapper
-            ->add('adherent.firstname', null, array('label' => 'Prénom', 'read_only' => true))
-            ->add('adherent.lastname', null, array('label' => 'Nom', 'read_only' => true))
-            ->add('adherent.responsabilities', 'sonata_type_collection',
-                array(
-                    'label' => 'Responsabilités au sein du parti',
-                    'type_options' => array(
-                        'delete' => false,
-                        'btn_add' => false,
-                    ),
-                    'required' => false,
-                    'read_only' => true,
-                    'disabled' => true,
-                ), array(
-                    'edit' => 'inline',
-                    'inline' => 'table',
-                    'sortable' => 'position',
-                ));
+                ->add('adherent.firstname', null, array('label' => 'Prénom', 'read_only' => true))
+                ->add('adherent.lastname', null, array('label' => 'Nom', 'read_only' => true))
+                ->add('adherent.responsabilities', 'sonata_type_collection',
+                    array(
+                        'label' => 'Responsabilités au sein du parti',
+                        'type_options' => array(
+                            'delete' => false,
+                            'btn_add' => false,
+                        ),
+                        'required' => false,
+                        'read_only' => true,
+                        'disabled' => true,
+                    ), array(
+                        'edit' => 'inline',
+                        'inline' => 'table',
+                        'sortable' => 'position',
+                    ));
         }
         $formMapper
             ->add('adherent.departement', null, array('label' => 'Département d\'adhesion'))
@@ -172,7 +172,7 @@ class EventAdherentRegistrationAdmin extends Admin
             ))
 
             ->add('comment')
-            ;
+        ;
     }
 
     /**
@@ -194,13 +194,13 @@ class EventAdherentRegistrationAdmin extends Admin
                 'multiple' => false,
                 'choices' => $this->paymentModeChoice, ))
             ->add('payments', null, array(
-                    'label' => 'Paiements',
-                    'read_only' => true,
-                    'disabled' => true,
-                ))
+                'label' => 'Paiements',
+                'read_only' => true,
+                'disabled' => true,
+            ))
             ->add('meals', null, array('label' => 'Repas', 'expanded' => true))
             ->add('comment')
-            ;
+        ;
     }
 
     /**
@@ -236,12 +236,8 @@ class EventAdherentRegistrationAdmin extends Admin
         $user = $this->getConfigurationPool()->getContainer()->get('security.context')->getToken()->getUser();
         //$repo = $this->getDoctrine()->getRepository('AppBundle:Adherent')->findId($user->adherent);
 
-        $adherent = $user->getProfile();
-        if(isset($adherent))
-        {
-            $instance->setAdherent($adherent);
-            $instance->setAuthor($adherent);
-        }
+        $instance->setAdherent($user->getProfile);
+        $instance->setAuthor($user->getProfile);
 
         $instance->setPaymentMode(EventAdherentRegistration::PAYMENT_MODE_ONSITE);
 
@@ -251,9 +247,9 @@ class EventAdherentRegistrationAdmin extends Admin
     {
         foreach ($object->getPayments() as $payment) {
             $payment->setAttachedRegistration($object)
-            ->setAttachedEvent($object->getEvent())
-            ->setAuthor($object->getAdherent())
-            ->setReferenceIdentifierPrefix($object->getEvent()->getNormalizedName())
+                ->setAttachedEvent($object->getEvent())
+                ->setAuthor($object->getAdherent())
+                ->setReferenceIdentifierPrefix($object->getEvent()->getNormalizedName())
             ;
         }
     }
@@ -261,9 +257,9 @@ class EventAdherentRegistrationAdmin extends Admin
     {
         foreach ($object->getPayments() as $payment) {
             $payment->setAttachedRegistration($object)
-            ->setAttachedEvent($object->getEvent())
-            ->setAuthor($object->getAdherent())
-            ->setReferenceIdentifierPrefix($object->getEvent()->getNormalizedName())
+                ->setAttachedEvent($object->getEvent())
+                ->setAuthor($object->getAdherent())
+                ->setReferenceIdentifierPrefix($object->getEvent()->getNormalizedName())
             ;
         }
     }
@@ -277,7 +273,7 @@ class EventAdherentRegistrationAdmin extends Admin
             ->orWhere($queryBuilder->getRootAlias().'.lastname LIKE :value')
             ->orWhere($queryBuilder->getRootAlias().'.email LIKE :value')
             ->setParameter('value', '%'.$value.'%')
-            ;
+        ;
     }
 
     public function adherentToStringCallback($user, $property)

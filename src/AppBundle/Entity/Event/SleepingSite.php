@@ -36,27 +36,33 @@ class SleepingSite
     private $description;
 
     /**
-     * @var \stdClass
+     * @var string
      *
-     * @ORM\ManyToOne(targetEntity="SleepingFacility", inversedBy="sleepingSites")
-     * @ORM\JoinColumn(name="sleeping_facility", nullable=false)
+     * @ORM\Column(name="adress", type="text")
      */
-    private $sleepingFacility;
+    private $adress;
 
     /**
-     * @var \stdClass
+     * @var int
      *
-     * @ORM\OneToMany(targetEntity="SleepingSpot", mappedBy="sleepingSite",
-     * cascade={"persist", "remove", "merge"}, orphanRemoval=true)
+     * @ORM\Column(name="number_places", type="integer")
      */
-    private $sleepingSpots;
+    private $numberOfPlaces;
 
     /**
-     * @var \stdClass
+     * @var string
      *
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Event\ReservationNight", mappedBy="sleepingSites")
+     * @ORM\Column(name="position_description", type="text")
      */
-    private $reservationNights;
+    private $positionDescription;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="price", type="integer")
+     */
+    private $price;
+
 
     /**
      * Get id.
@@ -66,6 +72,16 @@ class SleepingSite
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Get name.
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
     }
 
     /**
@@ -83,13 +99,13 @@ class SleepingSite
     }
 
     /**
-     * Get name.
+     * Get description.
      *
      * @return string
      */
-    public function getName()
+    public function getDescription()
     {
-        return $this->name;
+        return $this->description;
     }
 
     /**
@@ -107,160 +123,66 @@ class SleepingSite
     }
 
     /**
-     * Get description.
-     *
      * @return string
      */
-    public function getDescription()
+    public function getAdress()
     {
-        return $this->description;
+        return $this->adress;
     }
 
     /**
-     * Set beds.
-     *
-     * @param \stdClass $beds
-     *
-     * @return SleepingSite
+     * @param string $adress
      */
-    public function setBeds($beds)
+    public function setAdress($adress)
     {
-        $this->beds = $beds;
-
-        return $this;
+        $this->adress = $adress;
     }
 
     /**
-     * Get beds.
-     *
-     * @return \stdClass
+     * @return int
      */
-    public function getBeds()
+    public function getNumberOfPlaces()
     {
-        return $this->beds;
+        return $this->numberOfPlaces;
     }
 
     /**
-     * Set bedsNight.
-     *
-     * @param \stdClass $bedsNight
-     *
-     * @return SleepingSite
+     * @param int $numberOfPlaces
      */
-    public function setBedsNight($bedsNight)
+    public function setNumberOfPlaces($numberOfPlaces)
     {
-        $this->bedsNight = $bedsNight;
-
-        return $this;
+        $this->numberOfPlaces = $numberOfPlaces;
     }
 
     /**
-     * Get bedsNight.
-     *
-     * @return \stdClass
+     * @return string
      */
-    public function getBedsNight()
+    public function getPositionDescription()
     {
-        return $this->bedsNight;
-    }
-    /**
-     * Constructor.
-     */
-    public function __construct()
-    {
-        $this->sleepingSpots = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->reservationNights = new \Doctrine\Common\Collections\ArrayCollection();
+        return $this->positionDescription;
     }
 
     /**
-     * Set sleepingFacility.
-     *
-     * @param \AppBundle\Entity\Event\SleepingFacility $sleepingFacility
-     *
-     * @return SleepingSite
+     * @param string $positionDescription
      */
-    public function setSleepingFacility(\AppBundle\Entity\Event\SleepingFacility $sleepingFacility)
+    public function setPositionDescription($positionDescription)
     {
-        $this->sleepingFacility = $sleepingFacility;
-
-        return $this;
+        $this->positionDescription = $positionDescription;
     }
 
     /**
-     * Get sleepingFacility.
-     *
-     * @return \AppBundle\Entity\Event\SleepingFacility
+     * @return int
      */
-    public function getSleepingFacility()
+    public function getPrice()
     {
-        return $this->sleepingFacility;
+        return $this->price;
     }
 
     /**
-     * Add sleepingSpots.
-     *
-     * @param \AppBundle\Entity\Event\SleepingSpot $sleepingSpots
-     *
-     * @return SleepingSite
+     * @param int $price
      */
-    public function addSleepingSpot(\AppBundle\Entity\Event\SleepingSpot $sleepingSpots)
+    public function setPrice($price)
     {
-        $this->sleepingSpots[] = $sleepingSpots;
-
-        return $this;
-    }
-
-    /**
-     * Remove sleepingSpots.
-     *
-     * @param \AppBundle\Entity\Event\SleepingSpot $sleepingSpots
-     */
-    public function removeSleepingSpot(\AppBundle\Entity\Event\SleepingSpot $sleepingSpots)
-    {
-        $this->sleepingSpots->removeElement($sleepingSpots);
-    }
-
-    /**
-     * Get sleepingSpots.
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getSleepingSpots()
-    {
-        return $this->sleepingSpots;
-    }
-
-    /**
-     * Add reservationNights.
-     *
-     * @param \AppBundle\Entity\Event\ReservationNight $reservationNights
-     *
-     * @return SleepingSite
-     */
-    public function addReservationNight(\AppBundle\Entity\Event\ReservationNight $reservationNights)
-    {
-        $this->reservationNights[] = $reservationNights;
-
-        return $this;
-    }
-
-    /**
-     * Remove reservationNights.
-     *
-     * @param \AppBundle\Entity\Event\ReservationNight $reservationNights
-     */
-    public function removeReservationNight(\AppBundle\Entity\Event\ReservationNight $reservationNights)
-    {
-        $this->reservationNights->removeElement($reservationNights);
-    }
-
-    /**
-     * Get reservationNights.
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getReservationNights()
-    {
-        return $this->reservationNights;
+        $this->price = $price;
     }
 }
