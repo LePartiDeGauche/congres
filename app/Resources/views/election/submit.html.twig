@@ -12,14 +12,13 @@
                 </div>
             {% endfor %}
 
-
             {{ form_start(form) }}
             {{ form_errors(form) }}
 
             <div>
                 {{ form_label(form.elected) }}
                 {{ form_errors(form.elected) }}
-                {{ form_widget(form.elected) }}
+                {{ form_widget(form.elected) }} ({{ election.numberOfElected }} élus)
             </div>
 
             <input type="submit" />
@@ -31,9 +30,9 @@
 {% endblock %}
 
 {% block javascripts %}
-{{ parent() }}
+    {{ parent() }}
     <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>
-<script>$("#appbundle_election_election_elected").select2();</script>
+    <script>$("#appbundle_election_election_elected").select2({maximumSelectionLength: {{ election.numberOfElected }}});</script>
 {% endblock %}
 
 {% block stylesheets %}

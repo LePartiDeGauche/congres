@@ -79,16 +79,7 @@ class Responsability
      */
     public function setName($name)
     {
-        if (!in_array($name, array(
-            self::INSTANCE_SN,
-            self::INSTANCE_BN,
-            self::INSTANCE_CN,
-        ))) {
-            throw new \InvalidArgumentException('Invalid status');
-        }
-
         $this->name = $name;
-
         return $this;
     }
 

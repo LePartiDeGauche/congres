@@ -58,19 +58,31 @@ class Election
     private $status;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(type="smallint")
+     * @Assert\Range(min=1)
+     */
+    private $numberOfElected;
+
+    /**
      * The responsable of the election.
      *
      * @var \AppBundle\Entity\Adherent
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Adherent")
      */
-    private $electionResponsable;
+    private $responsable;
 
     /**
-     * @var string
+     * @var Adherent[]
      *
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Adherent")
-     * @Assert\Count(min="1", groups={"report_election"})
+     * @Assert\Expression(
+     *     "this.getElected().count() <= this.getNumberOfElected()",
+     *     message="Trop d'élus selectionnés",
+     *     groups={"report_election"}
+     * )
      */
     private $elected;
 
@@ -172,17 +184,37 @@ class Election
     /**
      * @return Adherent
      */
-    public function getElectionResponsable()
+    public function getResponsable()
     {
-        return $this->electionResponsable;
+        return $this->responsable;
     }
 
     /**
-     * @param Adherent $electionResponsable
+     * @param Adherent $responsable
      */
-    public function setElectionResponsable(Adherent $electionResponsable)
+    public function setResponsable(Adherent $responsable)
     {
-        $this->electionResponsable = $electionResponsable;
+        $this->responsable = $responsable;
+    }
+
+    /**
+     * @return int
+     */
+    public function getNumberOfElected()
+    {
+        return $this->numberOfElected;
+    }
+
+    /**
+     * @param int $numberOfElected
+     *
+     * @return Election
+     */
+    public function setNumberOfElected($numberOfElected)
+    {
+        $this->numberOfElected = $numberOfElected;
+
+        return $this;
     }
 
     /**
@@ -191,6 +223,14 @@ class Election
     public function getElected()
     {
         return $this->elected;
+    }
+
+    /**
+     * @return string
+     */
+    public function getElectedToString()
+    {
+        return join(', ', $this->elected->toArray());
     }
 
     /**

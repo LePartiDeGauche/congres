@@ -54,6 +54,7 @@ class ElectionController extends Controller
 
         return $this->render('election/submit.html.twig', array(
             'form' => $formElection->createView(),
+            'election' => $election,
         ));
     }
 

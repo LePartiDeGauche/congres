@@ -74,6 +74,7 @@ class AdherentAdmin extends Admin
             ->add('birthdate', null, array('label' => 'Date de naissance'))
             ->add('user', null, array('label' => 'Compte'))
             ->add('status', null, array('Statut'))
-            ->add('responsabilities', 'sonata_type_collection', array('associated_property' => 'responsability'));
+            ->add('responsabilities', 'sonata_type_collection', array('associated_property' => 'responsability', 'label' => 'Responsabilités'))
+            ->add('organParticipations', 'sonata_type_collection', array('associated_property' => 'organ', 'label' => 'Instances'));
     }
 }

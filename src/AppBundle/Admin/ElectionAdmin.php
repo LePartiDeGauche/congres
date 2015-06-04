@@ -25,7 +25,7 @@ class ElectionAdmin extends Admin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('group', null, array('label' => "Type d'élection"))
+            ->add('group', null, array('label' => 'Type d\'élection'))
             ->add('organ', null, array('label' => 'Lieu concerné'))
             ->add('status', null, array(
                 'label' => 'Statut',
@@ -45,7 +45,7 @@ class ElectionAdmin extends Admin
     {
         $list
             ->addIdentifier('id')
-            ->add('group', null, array('label' => "Type d'élection"))
+            ->add('group', null, array('label' => 'Type d\'élection'))
             ->add('organ', null, array('label' => 'Lieu concerné'))
             ->add('status', null, array('label' => 'Status'))
             ->add('elected', null, array('label' => 'Elus'))
@@ -65,8 +65,9 @@ class ElectionAdmin extends Admin
     protected function configureFormFields(FormMapper $form)
     {
         $form
-            ->add('group', null, array('label' => "Type d'élection"))
+            ->add('group', null, array('label' => 'Type d\'élection'))
             ->add('organ', null, array('label' => 'Lieu concerné'))
+            ->add('numberOfElected', null, array('label' => 'Nombre d\'élus'))
             ->add('status', 'choice', array(
                 'label' => 'Statut',
                 'choices' => array(
@@ -86,7 +87,8 @@ class ElectionAdmin extends Admin
         $showMapper
             ->add('group', null, array('label' => "Type d'élection"))
             ->add('organ', null, array('label' => 'Lieu concerné'))
-            ->add('status', null, array('label' => "Statut de l'élection"))
+            ->add('numberOfElected', null, array('label' => 'Nombre d\'élus'))
+            ->add('status', null, array('label' => 'Statut de l\'élection'))
         ;
     }
 
@@ -99,8 +101,9 @@ class ElectionAdmin extends Admin
             'name',
             'organ',
             'status',
-            'electionResponsable',
-            'electionResponsabilities',
+            'numberOfElected',
+            'responsable',
+            'electedToString',
         );
     }
 

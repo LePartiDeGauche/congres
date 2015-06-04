@@ -49,7 +49,11 @@ class Adherent
     private $firstname;
 
     /**
+<<<<<<< HEAD
      * @var OrganParticipation[]
+=======
+    * @var \Doctrine\Common\Collections\Collection
+>>>>>>> a47198c4f1f56d71dc767f59fae168a46be1042c
      *
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Organ\OrganParticipation", mappedBy="adherent")
      */
@@ -85,13 +89,14 @@ class Adherent
      */
     private $status;
 
-/**
- * @var int$
- *
- * @ORM\Column(name="departement", type="integer")
- */
+    /**
+     * @var int$
+     *
+     * @ORM\Column(name="departement", type="integer")
+     */
     // FIXME : Remove this field when organs will be imported
     private $departement;
+
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
@@ -111,7 +116,7 @@ class Adherent
      *
      * @var User
      *
-     * @ORM\OneToOne(targetEntity="AppBundle\Entity\User", mappedBy="profile", orphanRemoval=true)
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\User", mappedBy="profile", cascade={"persist", "remove", "refresh"}, orphanRemoval=true)
      */
     private $user;
 
@@ -122,6 +127,7 @@ class Adherent
     {
         // Initialize collection
         $this->responsabilities = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->organParticipations = new \Doctrine\Common\Collections\ArrayCollection();
         $this->status = self::STATUS_NEW;
         $this->departement = 0;
     }
@@ -305,6 +311,21 @@ class Adherent
         return $this->responsabilities;
     }
 
+    /**
+     * Get organs names.
+     *
+     * @return string
+     */
+    // FIXME cf. getExportFields in AdmendmentAdmin
+    public function getOrgansNames()
+    {
+        $name = "";
+        foreach ($this->organParticipations as $organParticipation) {
+            $name .= $organParticipation->getOrgan() . ", ";
+        }
+        return $name;
+    }
+
     public function __toString()
     {
         return $this->firstname.' '.$this->lastname;
@@ -335,6 +356,51 @@ class Adherent
     public function removeResponsability(\AppBundle\Entity\AdherentResponsability $responsabilities)
     {
         $this->responsabilities->removeElement($responsabilities);
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getOrganParticipations()
+    {
+        return $this->organParticipations;
+    }
+
+    /**
+     * @param \Doctrine\Common\Collections\Collection $organParticipations
+     */
+    public function setOrganParticipations(\Doctrine\Common\Collections\Collection $organParticipations)
+    {
+        $this->organParticipations = $organParticipations;
+    }
+
+    /**
+     * Add organ participation.
+     *
+     * @param \AppBundle\Entity\OrganParticipation $organParticipation
+     *
+     * @return Adherent
+     */
+    public function addOrganParticipation(\AppBundle\Entity\Organ\OrganParticipation $organParticipation)
+    {
+        if ($organParticipation->getAdherent() === null) {
+            $organParticipation->setAdherent($this);
+        }
+        $this->organParticipations[] = $organParticipation;
+
+        return $this;
+    }
+
+    /**
+     * Remove organ participation.
+     *
+     * @param \AppBundle\Entity\OrganParticipation $organParticipation
+     */
+     public function removeOrganParticipation(\AppBundle\Entity\Organ\OrganParticipation $organParticipation)
+    {
+        $this->organParticipation->removeElement($organParticipation);
+
+        return $this;
     }
 
     /**

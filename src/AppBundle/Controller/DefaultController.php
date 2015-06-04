@@ -17,6 +17,15 @@ class DefaultController extends Controller
     }
 
     /**
+     * @Route("/resultats-plateformes", name="resultats_plateformes")
+     */
+    public function resultatsPlateformesAction()
+    {
+        return $this->render('default/resultats-plateformes.html.twig');
+    }
+
+
+    /**
      * @Route("/commission-votes", name="commission_votes")
      */
     public function commissionVoteAction()
