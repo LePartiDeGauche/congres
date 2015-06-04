@@ -98,12 +98,12 @@ class ElectionAdmin extends Admin
     public function getExportFields()
     {
         return array(
-            'name',
+            'group',
             'organ',
             'status',
             'numberOfElected',
             'responsable',
-            'electedToString',
+            'elected',
         );
     }
 

@@ -73,7 +73,8 @@ class ElectionGroupAdmin extends Admin
         return array(
             'name',
             'organType',
-            'electionResponsabilities',
+            'responsabilities',
+            'responsableResponsability',
         );
     }
 
