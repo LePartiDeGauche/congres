@@ -3,6 +3,7 @@
 namespace AppBundle\Entity\Event;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * SleepingSite.
@@ -30,6 +31,7 @@ class SleepingSite
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
+     * @Assert\NotBlank
      */
     private $name;
 
@@ -51,6 +53,7 @@ class SleepingSite
      * @var int
      *
      * @ORM\Column(name="number_places", type="integer")
+     * @Assert\NotNull
      */
     private $numberOfPlaces;
 
@@ -68,6 +71,15 @@ class SleepingSite
      */
     private $price;
 
+    /**
+     * The Event concerned.
+     *
+     * @var \AppBundle\Entity\Event\Event
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Event\Event", inversedBy="Event")
+     * @Assert\NotNull
+     */
+    private $event;
 
     /**
      * Get id.
@@ -190,4 +202,21 @@ class SleepingSite
     {
         $this->price = $price;
     }
+
+    /**
+     * @return Event
+     */
+    public function getEvent()
+    {
+        return $this->event;
+    }
+
+    /**
+     * @param Event $event
+     */
+    public function setEvent($event)
+    {
+        $this->event = $event;
+    }
+
 }

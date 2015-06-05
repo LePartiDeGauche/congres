@@ -40,6 +40,7 @@ class SleepingSiteAdmin extends Admin
     {
         $listMapper
             ->addIdentifier('id')
+            ->add('event', null, array('label' => 'Evénement concerné'))
             ->add('name', null, array('label' => 'Nom'))
             ->add('description', null, array('label' => 'Description'))
             ->add('address', null, array('label' => 'Adresse'))
@@ -62,6 +63,7 @@ class SleepingSiteAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
+            ->add('event', null, array('label' => 'Evénement concerné'))
             ->add('name', null, array('label' => 'Nom'))
             ->add('description', 'choice', array(
                 'label' => 'Description',
