@@ -247,14 +247,6 @@ class Amendment
     }
 
     /**
-     * @return int
-     */
-    public function getNumberOfPresent()
-    {
-        return $this->numberOfPresent;
-    }
-
-    /**
      * @param int $numberOfPresent
      */
     public function setNumberOfPresent($numberOfPresent)

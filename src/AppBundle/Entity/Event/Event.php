@@ -534,4 +534,12 @@ class Event
     {
         return $this->normalizedName;
     }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->name;
+    }
 }

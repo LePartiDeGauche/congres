@@ -77,10 +77,9 @@ services:
         tags:
             - {name: sonata.admin, manager_type: orm, group: "Evenements", label: "Inscription des adherents"}
 
-
-    sonata.admin.sleeping_facility:
-        class: AppBundle\Admin\SleepingFacilityAdmin
-        arguments: [~, AppBundle\Entity\Event\SleepingFacility, SonataAdminBundle:CRUD]
+    sonata.admin.sleeping:
+        class: AppBundle\Admin\SleepingSiteAdmin
+        arguments: [~, AppBundle\Entity\Event\SleepingSite, SonataAdminBundle:CRUD]
         tags:
             - {name: sonata.admin, manager_type: orm, group: "Evenements", label: "Lieu de couchage"}
 

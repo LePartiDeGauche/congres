@@ -16,19 +16,36 @@ class ResponsabilityAdmin extends Admin
 
     protected function configureRoutes(RouteCollection $collection)
     {
+        $collection->remove('create');
     }
 
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('name', null, array('label' => 'Nom'))
+            ->add('name', 'doctrine_orm_choice', array(
+                'label' => 'Nom',
+                'doctrine_orm_choices' => array(
+                    Responsability::INSTANCE_BN,
+                    Responsability::INSTANCE_SN,
+                    Responsability::INSTANCE_CN,
+                ),
+                'multiple' => false,
+            ))
             ->add('electionDate', null, array('label' => 'Date de renouvellement.'));
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('name', null, array('label' => 'Nom'))
+            ->add('name', 'doctrine_orm_choice', array(
+                'label' => 'Nom',
+                'doctrine_orm_choices' => array(
+                    Responsability::INSTANCE_BN,
+                    Responsability::INSTANCE_SN,
+                    Responsability::INSTANCE_CN,
+                ),
+                'multiple' => false,
+            ))
             ->add('electionDate', null, array('label' => 'Date de renouvellement.'));
     }
 

@@ -49,7 +49,7 @@ class Adherent
     private $firstname;
 
     /**
-    * @var \Doctrine\Common\Collections\Collection
+     * @var \Doctrine\Common\Collections\Collection
      *
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Organ\OrganParticipation", mappedBy="adherent")
      */
@@ -74,7 +74,7 @@ class Adherent
      *
      * @ORM\Column(name="departement", type="integer")
      */
-    // FIXME : Remove this field when organs will be imported
+    // FIXME : Remove this field when organs will be imported
     private $departement;
 
     /**
@@ -228,8 +228,7 @@ class Adherent
         $this->email = $email;
 
         if ($this->user && $this->user->getEmail() !== $email) {
-            // FIXME
-            //$this->user->setEmail($email);
+            $this->user->setEmail($email);
         }
 
         return $this;
@@ -377,7 +376,7 @@ class Adherent
      *
      * @param \AppBundle\Entity\OrganParticipation $organParticipation
      */
-     public function removeOrganParticipation(\AppBundle\Entity\Organ\OrganParticipation $organParticipation)
+    public function removeOrganParticipation(\AppBundle\Entity\Organ\OrganParticipation $organParticipation)
     {
         $this->organParticipations->removeElement($organParticipation);
 
