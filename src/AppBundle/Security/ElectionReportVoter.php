@@ -41,6 +41,10 @@ class ElectionReportVoter implements VoterInterface
             }
         }
 
+        if (in_array('ROLE_ADMIN', $token->getUser()->getRoles(), true)) {
+            return VoterInterface::ACCESS_GRANTED;
+        }
+
         return VoterInterface::ACCESS_DENIED;
     }
 }

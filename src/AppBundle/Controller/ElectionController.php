@@ -64,7 +64,7 @@ class ElectionController extends Controller
     public function listAction()
     {
         return $this->render('election/list.html.twig', array(
-            'electionList' => $this->getDoctrine()->getRepository('AppBundle:Election\Election')->findAllWithResponsable(),
+            'electionList' => $this->getDoctrine()->getRepository('AppBundle:Election\Election')->findAll(),
         ));
     }
 }
