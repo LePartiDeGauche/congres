@@ -77,12 +77,6 @@ services:
         tags:
             - {name: sonata.admin, manager_type: orm, group: "Evenements", label: "Inscription des adherents"}
 
-    sonata.admin.sleeping:
-        class: AppBundle\Admin\SleepingSiteAdmin
-        arguments: [~, AppBundle\Entity\Event\SleepingSite, SonataAdminBundle:CRUD]
-        tags:
-            - {name: sonata.admin, manager_type: orm, group: "Evenements", label: "Lieu de couchage"}
-
     sonata.admin.address:
         class: AppBundle\Admin\AddressAdmin
         arguments: [~, AppBundle\Entity\Address, SonataAdminBundle:CRUD]
@@ -194,3 +188,21 @@ services:
         arguments: [~, AppBundle\Entity\Vote\IndividualOrganTextVoteAgregation, SonataAdminBundle:CRUD]
         tags:
             - {name: sonata.admin, manager_type: orm, group: admin, label: IndividualOrganTextVoteAgregation, show_in_dashboard: false}
+
+    sonata.admin.sleeping:
+        class: AppBundle\Admin\SleepingSiteAdmin
+        arguments: [~, AppBundle\Entity\Event\SleepingSite, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: "Evenements", label: "Lieu de couchage"}
+
+    sonata.admin.roomtype:
+        class: AppBundle\Admin\RoomTypeAdmin
+        arguments: [~, AppBundle\Entity\Event\RoomType, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: "Evenements", label: "Type de chambre"}
+
+    sonata.admin.bedroom:
+            class: AppBundle\Admin\BedroomAdmin
+            arguments: [~, AppBundle\Entity\Event\Bedroom, SonataAdminBundle:CRUD]
+            tags:
+                - {name: sonata.admin, manager_type: orm, group: "Evenements", label: "Chambres"}

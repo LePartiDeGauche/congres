@@ -25,11 +25,12 @@ class SleepingSiteAdmin extends Admin
     {
         $datagridMapper
             ->add('name', null, array('label' => 'Nom'))
+            ->add('event', null, array('label' => 'Evénement'))
             ->add('description', null, array('label' => 'Description'))
             ->add('address', null, array('label' => 'Adresse'))
-            ->add('numberOfPlaces', null, array('label' => 'Nombre de places'))
-            ->add('positionDescription', null, array('label' => 'Position'))
-            ->add('price', null, array('label' => 'Prix'))
+            ->add('latitude', null, array('label' => 'Latitude'))
+            ->add('longitude', null, array('label' => 'Longitude'))
+            //->add('roomTypes.roomType', null, array('label' => 'Type de chambre', 'multiple' => true));
         ;
     }
 
@@ -40,13 +41,12 @@ class SleepingSiteAdmin extends Admin
     {
         $listMapper
             ->addIdentifier('id')
-            ->add('event', null, array('label' => 'Evénement concerné'))
             ->add('name', null, array('label' => 'Nom'))
+            ->add('event', null, array('label' => 'Evénement'))
             ->add('description', null, array('label' => 'Description'))
             ->add('address', null, array('label' => 'Adresse'))
-            ->add('numberOfPlaces', null, array('label' => 'Nombre de places'))
-            ->add('positionDescription', null, array('label' => 'Position'))
-            ->add('price', null, array('label' => 'Prix'))
+            ->add('latitude', null, array('label' => 'Latitude'))
+            ->add('longitude', null, array('label' => 'Longitude'))
             ->add('_action', 'actions', array(
                 'actions' => array(
                     'show' => array(),
@@ -63,22 +63,23 @@ class SleepingSiteAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('event', null, array('label' => 'Evénement concerné'))
             ->add('name', null, array('label' => 'Nom'))
-            ->add('description', 'choice', array(
-                'label' => 'Description',
-                'choices' => array(
-                    SleepingSite::ROOM_SINGLE => 'Chambre simple',
-                    SleepingSite::ROOM_TWIN => 'Twin : 2 lits séparés',
-                    SleepingSite::ROOM_DOUBLE => 'Chambre double',
-                    SleepingSite::ROOM_OTHER => 'Autre',
-                ),
-                'multiple' => false,
-            ))
+            ->add('event', null, array('label' => 'Evénement'))
+            ->add('description', null, array('label' => 'Description'))
             ->add('address', null, array('label' => 'Adresse'))
-            ->add('numberOfPlaces', null, array('label' => 'Nombre de places'))
-            ->add('positionDescription', null, array('label' => 'Position'))
-            ->add('price', null, array('label' => 'Prix'))
+            ->add('latitude', null, array('label' => 'Latitude'))
+            ->add('longitude', null, array('label' => 'Longitude'))
+            ->add('roomTypes', 'sonata_type_collection',
+                array(
+                    'by_reference' => false,
+                ), array(
+                    'edit' => 'inline',
+                    'inline' => 'table',
+                    'sortable' => 'position',
+                ), array(
+                    'required' => false,
+                )
+            )
         ;
     }
 
@@ -89,11 +90,12 @@ class SleepingSiteAdmin extends Admin
     {
         $showMapper
             ->add('name', null, array('label' => 'Nom'))
+            ->add('event', null, array('label' => 'Evénement'))
             ->add('description', null, array('label' => 'Description'))
             ->add('address', null, array('label' => 'Adresse'))
-            ->add('numberOfPlaces', null, array('label' => 'Nombre de places'))
-            ->add('positionDescription', null, array('label' => 'Position'))
-            ->add('price', null, array('label' => 'Prix'))
+            ->add('latitude', null, array('label' => 'Latitude'))
+            ->add('longitude', null, array('label' => 'Longitude'))
+            ->add('roomTypes', null, array('label' => 'Type de chambre', 'multiple' => true))
         ;
     }
 
@@ -104,11 +106,12 @@ class SleepingSiteAdmin extends Admin
     {
         return array(
             'name',
+            'event',
             'description',
             'address',
-            'numberOfPlaces',
-            'positionDescription',
-            'price',
+            'latitude',
+            'longitude',
+            'roomTypes.roomType',
         );
     }
 

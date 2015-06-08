@@ -1,0 +1,68 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}Liste des lieux de couchage{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Liste des lieux de couchage</h1>
+                <div role="tabpanel">
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active" id="validated">
+                            {% if bedroomList is empty %}
+                                <p>Pas de lieux</p>
+                            {% else %}
+                                <table class="table tablesorter" id="table_bedroom">
+                                    <thead>
+                                    <tr>
+                                        <th>Numéro de chambre</th>
+                                        <th>clé</th>
+                                        <th>type</th>
+                                        <th></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for bedroom in bedroomList %}
+                                        <tr>
+                                            <td>
+                                                {{ bedroom.number }}
+                                            </td>
+                                            <td>
+                                                {{ bedroom.codeOrKey }}
+                                            </td>
+                                            <td>
+                                                {{ bedroom.roomType }}
+                                            </td>
+                                            <td>
+                                                <a href="#">S'inscrire</a>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div><!-- .col-md-12 -->
+        </div><!-- .row -->
+    </div><!-- .container -->
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
+    <script>$(document).ready(function(){
+            $('#table_bedroom').DataTable({
+                "lengthMenu": [ 25, 50, 75, 100 ]
+            });
+        });
+    </script>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css" rel="stylesheet" />
+{% endblock %}

@@ -13,11 +13,6 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class SleepingSite
 {
-    const ROOM_SINGLE = 'Chambre simple';
-    const ROOM_TWIN = 'Twin : 2 lits séparés';
-    const ROOM_DOUBLE = 'Chambre double';
-    const ROOM_OTHER = 'Autre';
-
     /**
      * @var int
      *
@@ -28,48 +23,14 @@ class SleepingSite
     private $id;
 
     /**
+     * Name of the place. Hostel or the house of a party's member.
+     *
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
-     * @Assert\NotBlank
-     */
-    private $name;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="description", type="text")
-     */
-    private $description;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="address", type="string", length=255)
-     */
-    private $address;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="number_places", type="integer")
      * @Assert\NotNull
      */
-    private $numberOfPlaces;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="position_description", type="text")
-     */
-    private $positionDescription;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="price", type="integer")
-     */
-    private $price;
+    private $name;
 
     /**
      * The Event concerned.
@@ -82,8 +43,49 @@ class SleepingSite
     private $event;
 
     /**
-     * Get id.
+     * Short Description.
      *
+     * @var string
+     *
+     * @ORM\Column(name="description", type="text")
+     */
+    private $description;
+
+    /**
+     * Address.
+     *
+     * @var string
+     *
+     * @ORM\Column(name="address", type="string", length=255)
+     */
+    private $address;
+
+    /**
+     * Latitude of the place.
+     *
+     * @var float
+     *
+     * @ORM\Column(name="latitude", type="float", nullable=true)
+     */
+    private $latitude;
+
+    /**
+     * Longitude of the place.
+     *
+     * @var float
+     *
+     * @ORM\Column(name="longitude", type="float", nullable=true)
+     */
+    private $longitude;
+
+    /**
+     * @var RoomType[]
+     *
+     * @ORM\OneToMany(targetEntity="RoomType", mappedBy="sleepingSite")
+     */
+    private $roomTypes;
+
+    /**
      * @return int
      */
     public function getId()
@@ -92,8 +94,14 @@ class SleepingSite
     }
 
     /**
-     * Get name.
-     *
+     * @param int $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    /**
      * @return string
      */
     public function getName()
@@ -102,22 +110,30 @@ class SleepingSite
     }
 
     /**
-     * Set name.
-     *
      * @param string $name
-     *
-     * @return SleepingSite
      */
     public function setName($name)
     {
         $this->name = $name;
-
-        return $this;
     }
 
     /**
-     * Get description.
-     *
+     * @return Event
+     */
+    public function getEvent()
+    {
+        return $this->event;
+    }
+
+    /**
+     * @param Event $event
+     */
+    public function setEvent($event)
+    {
+        $this->event = $event;
+    }
+
+    /**
      * @return string
      */
     public function getDescription()
@@ -126,17 +142,11 @@ class SleepingSite
     }
 
     /**
-     * Set description.
-     *
      * @param string $description
-     *
-     * @return SleepingSite
      */
     public function setDescription($description)
     {
         $this->description = $description;
-
-        return $this;
     }
 
     /**
@@ -156,67 +166,84 @@ class SleepingSite
     }
 
     /**
-     * @return int
+     * @return float
      */
-    public function getNumberOfPlaces()
+    public function getLatitude()
     {
-        return $this->numberOfPlaces;
+        return $this->latitude;
     }
 
     /**
-     * @param int $numberOfPlaces
+     * @param float $latitude
      */
-    public function setNumberOfPlaces($numberOfPlaces)
+    public function setLatitude($latitude)
     {
-        $this->numberOfPlaces = $numberOfPlaces;
+        $this->latitude = $latitude;
     }
 
     /**
-     * @return string
+     * @return float
      */
-    public function getPositionDescription()
+    public function getLongitude()
     {
-        return $this->positionDescription;
+        return $this->longitude;
     }
 
     /**
-     * @param string $positionDescription
+     * @param float $longitude
      */
-    public function setPositionDescription($positionDescription)
+    public function setLongitude($longitude)
     {
-        $this->positionDescription = $positionDescription;
+        $this->longitude = $longitude;
+    }
+
+    public function __toString()
+    {
+        return $this->name;
     }
 
     /**
-     * @return int
+     * @return RoomType[]
      */
-    public function getPrice()
+    public function getRoomTypes()
     {
-        return $this->price;
+        return $this->roomTypes;
     }
 
     /**
-     * @param int $price
+     * @param RoomType[] $roomTypes
      */
-    public function setPrice($price)
+    public function setRoomTypes($roomTypes)
     {
-        $this->price = $price;
+        $this->roomTypes = $roomTypes;
+    }
+
+
+    /**
+     * Add roomTypes.
+     *
+     * @param \AppBundle\Entity\Event\RoomType $roomTypes
+     *
+     * @return RoomType
+     */
+    public function addRoomType(\AppBundle\Entity\Event\RoomType $roomType)
+    {
+        if ($roomType->getSleepingSite() === null) {
+            $roomType->setSleepingSite($this);
+        }
+        $this->roomTypes[] = $roomType;
+
+        return $this;
     }
 
     /**
-     * @return Event
+     * Remove roomTypes.
+     *
+     * @param \AppBundle\Entity\Event\RoomType $roomTypes
      */
-    public function getEvent()
+    public function removeRoomType(\AppBundle\Entity\Event\RoomType $roomTypes)
     {
-        return $this->event;
-    }
-
-    /**
-     * @param Event $event
-     */
-    public function setEvent($event)
-    {
-        $this->event = $event;
+        $this->roomTypes->removeElement($roomTypes);
     }
 
 }
