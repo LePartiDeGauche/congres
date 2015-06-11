@@ -17,26 +17,34 @@
                                 <table class="table tablesorter" id="table_bedroom">
                                     <thead>
                                     <tr>
+                                        <th>Nom</th>
                                         <th>Numéro de chambre</th>
-                                        <th>clé</th>
-                                        <th>type</th>
-                                        <th></th>
+                                        <th>Dispo à partir de </th>
+                                        <th>Jusque</th>
+                                        <th>Places libres</th>
+                                        <th>S'inscrire</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     {% for bedroom in bedroomList %}
                                         <tr>
                                             <td>
-                                                {{ bedroom.number }}
-                                            </td>
-                                            <td>
-                                                {{ bedroom.codeOrKey }}
-                                            </td>
-                                            <td>
                                                 {{ bedroom.roomType }}
                                             </td>
                                             <td>
-                                                <a href="#">S'inscrire</a>
+                                                {{ bedroom.number }}
+                                            </td>
+                                            <td>
+                                                {{ bedroom.dateStartAvailability|date('d/m/Y')}}
+                                            </td>
+                                            <td>
+                                                {{ bedroom.dateStopAvailability|date('d/m/Y') }}
+                                            </td>
+                                            <td>
+                                                {{ bedroom.roomType.places }}
+                                            </td>
+                                            <td>
+                                                <a href="{{ path('sleeping_inscription', {id: bedroom.id}) }}">S'inscrire</a>
                                             </td>
                                         </tr>
                                     {% endfor %}

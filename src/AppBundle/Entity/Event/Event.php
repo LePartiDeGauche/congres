@@ -104,8 +104,12 @@ class Event
      */
     private $meals;
 
-    /*
-    //
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="nights_duration", type="integer")
+     */
+    private $nightsDuration;
 
     /**
      * Get id
@@ -388,6 +392,22 @@ class Event
     }
 
     /**
+     * @return int
+     */
+    public function getNightsDuration()
+    {
+        return $this->nightsDuration;
+    }
+
+    /**
+     * @param int $nightsDuration
+     */
+    public function setNightsDuration($nightsDuration)
+    {
+        $this->nightsDuration = $nightsDuration;
+    }
+
+    /**
      * Add payments.
      *
      * @param \AppBundle\Entity\Payment\EventPayment $payments
@@ -510,4 +530,5 @@ class Event
     {
         return $this->name;
     }
+
 }

@@ -18,7 +18,6 @@ class RoomTypeAdmin extends Admin
     protected $baseRouteName = 'room_type';
     protected $baseRoutePattern = 'room_type';
 
-
     /**
      * {@inheritdoc}
      */
@@ -27,20 +26,9 @@ class RoomTypeAdmin extends Admin
         $datagridMapper
             ->add('sleepingSite', null, array('label' => 'Lieu concerné'))
             ->add('name', null, array('label' => 'Nom'))
-            ->add('type', 'choice', array(
-                'label' => 'Type de chambre',
-                'choices' => array(
-                    RoomType::ROOM_SINGLE => 'Chambre simple',
-                    RoomType::ROOM_TWIN => 'Twin : 2 lits séparés',
-                    RoomType::ROOM_DOUBLE => 'Chambre double',
-                    RoomType::ROOM_OTHER => 'Autre',
-                ),
-                'multiple' => false,
-            ))
+            ->add('type', null, array('label' => 'Type de chambre'))
             ->add('description', null, array('label' => 'Description'))
             ->add('places', null, array('label' => 'Places Disponibles'))
-            ->add('available', null, array('label' => 'available'))
-            ->add('price', null, array('label' => 'prix'))
             ->add('canBookMore', null, array('label' => 'Possibilité de réserver plus de chambre que disponibles'))
         ;
     }
@@ -54,20 +42,9 @@ class RoomTypeAdmin extends Admin
             ->addIdentifier('id')
             ->add('sleepingSite', null, array('label' => 'Lieu concerné'))
             ->add('name', null, array('label' => 'Nom'))
-            ->add('type', 'choice', array(
-                'label' => 'Type de chambre',
-                'choices' => array(
-                    RoomType::ROOM_SINGLE => 'Chambre simple',
-                    RoomType::ROOM_TWIN => 'Twin : 2 lits séparés',
-                    RoomType::ROOM_DOUBLE => 'Chambre double',
-                    RoomType::ROOM_OTHER => 'Autre',
-                ),
-                'multiple' => false,
-            ))
+            ->add('type', null, array('label' => 'Type de chambre'))
             ->add('description', null, array('label' => 'Description'))
             ->add('places', null, array('label' => 'Places Disponibles'))
-            ->add('available', null, array('label' => 'available'))
-            ->add('price', null, array('label' => 'prix'))
             ->add('_action', 'actions', array(
                 'actions' => array(
                     'show' => array(),
@@ -98,9 +75,18 @@ class RoomTypeAdmin extends Admin
             ))
             ->add('description', null, array('label' => 'Description'))
             ->add('places', null, array('label' => 'Places Disponibles'))
-            ->add('available', null, array('label' => 'available'))
-            ->add('price', null, array('label' => 'prix'))
             ->add('canBookMore', null, array('label' => 'Possibilité de réserver plus de chambre que disponibles'))
+            /*->add('bedrooms', 'sonata_type_collection',
+                array(
+                    'by_reference' => false,
+                ), array(
+                    'edit' => 'inline',
+                    'inline' => 'table',
+                    'sortable' => 'position',
+                ), array(
+                    'required' => false,
+                )
+            )*/
         ;
     }
 
@@ -112,20 +98,9 @@ class RoomTypeAdmin extends Admin
         $showMapper
             ->add('sleepingSite', null, array('label' => 'Lieu concerné'))
             ->add('name', null, array('label' => 'Nom'))
-            ->add('type', 'choice', array(
-                'label' => 'Type de chambre',
-                'choices' => array(
-                    RoomType::ROOM_SINGLE => 'Chambre simple',
-                    RoomType::ROOM_TWIN => 'Twin : 2 lits séparés',
-                    RoomType::ROOM_DOUBLE => 'Chambre double',
-                    RoomType::ROOM_OTHER => 'Autre',
-                ),
-                'multiple' => false,
-            ))
+            ->add('type', null, array('label' => 'Type de chambre'))
             ->add('description', null, array('label' => 'Description'))
             ->add('places', null, array('label' => 'Places Disponibles'))
-            ->add('available', null, array('label' => 'available'))
-            ->add('price', null, array('label' => 'prix'))
             ->add('canBookMore', null, array('label' => 'Possibilité de réserver plus de chambre que disponibles'))
         ;
     }
@@ -141,8 +116,6 @@ class RoomTypeAdmin extends Admin
             'type',
             'description',
             'places',
-            'available',
-            'price',
             'canBookmore',
         );
     }

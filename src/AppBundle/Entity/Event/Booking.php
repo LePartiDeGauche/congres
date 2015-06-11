@@ -39,6 +39,13 @@ class Booking
     private $adherent;
 
     /**
+     * @var datetime
+     *
+     * @ORM\Column(name="night", type="datetime")
+     */
+    private $night;
+
+    /**
      * @return int
      */
     public function getId()
@@ -84,6 +91,22 @@ class Booking
     public function setAdherent($adherent)
     {
         $this->adherent = $adherent;
+    }
+
+    /**
+     * @return datetime
+     */
+    public function getNight()
+    {
+        return $this->night;
+    }
+
+    /**
+     * @param datetime $night
+     */
+    public function setNight($night)
+    {
+        $this->night = $night;
     }
 
 

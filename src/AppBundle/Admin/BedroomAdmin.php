@@ -26,7 +26,8 @@ class BedroomAdmin extends Admin
         $datagridMapper
             ->add('roomType', null, array('label' => 'Type de chambre'))
             ->add('number', null, array('label' => 'Numéro de la chambre'))
-            ->add('codeOrKey', null, array('label' => 'Code ou clé'))
+            ->add('dateStartAvailability', null, array('label' => 'Ouverte à partir de'))
+            ->add('dateStopAvailability', null, array('label' => ' Jusque'))
         ;
     }
 
@@ -39,7 +40,8 @@ class BedroomAdmin extends Admin
             ->addIdentifier('id')
             ->add('roomType', null, array('label' => 'Type de chambre'))
             ->add('number', null, array('label' => 'Numéro de la chambre'))
-            ->add('codeOrKey', null, array('label' => 'Code ou clé'))
+            ->add('dateStartAvailability', null, array('label' => 'Ouverte à partir de'))
+            ->add('dateStopAvailability', null, array('label' => ' Jusque'))
             ->add('_action', 'actions', array(
                 'actions' => array(
                     'show' => array(),
@@ -58,7 +60,8 @@ class BedroomAdmin extends Admin
         $formMapper
             ->add('roomType', null, array('label' => 'Type de chambre'))
             ->add('number', null, array('label' => 'Numéro de la chambre'))
-            ->add('codeOrKey', null, array('label' => 'Code ou clé'))
+            ->add('dateStartAvailability', null, array('label' => 'Ouverte à partir de'))
+            ->add('dateStopAvailability', null, array('label' => ' Jusque'))
         ;
     }
 
@@ -70,7 +73,9 @@ class BedroomAdmin extends Admin
         $showMapper
             ->add('roomType', null, array('label' => 'Type de chambre'))
             ->add('number', null, array('label' => 'Numéro de la chambre'))
-            ->add('codeOrKey', null, array('label' => 'Code ou clé'))        ;
+            ->add('dateStartAvailability', null, array('label' => 'Ouverte à partir de'))
+            ->add('dateStopAvailability', null, array('label' => 'Jusque'))
+        ;
     }
 
     /**
@@ -81,7 +86,8 @@ class BedroomAdmin extends Admin
         return array(
             'roomType',
             'number',
-            'codeOrKey',
+            'dateStartAvailability',
+            'dateStopAvailability',
         );
     }
 

@@ -25,7 +25,9 @@ class Bedroom
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Event\RoomType", inversedBy="RoomType")
+     * @var RoomType
+     *
+     * @ORM\ManyToOne(targetEntity="RoomType", inversedBy="bedrooms", cascade="persist")
      */
     private $roomType;
 
@@ -34,18 +36,9 @@ class Bedroom
      *
      * @var string
      *
-     * @ORM\Column(name="name", type="text")
+     * @ORM\Column(name="number", type="text")
      */
     private $number;
-
-    /**
-     * The code or the key of the bedroom.
-     *
-     * @var string
-     *
-     * @ORM\Column(name="code_or_key", type="text")
-     */
-    private $codeOrKey;
 
     /**
      * Date of beginning
@@ -112,22 +105,6 @@ class Bedroom
     public function setNumber($number)
     {
         $this->number = $number;
-    }
-
-    /**
-     * @return string
-     */
-    public function getCodeOrKey()
-    {
-        return $this->codeOrKey;
-    }
-
-    /**
-     * @param string $codeOrKey
-     */
-    public function setCodeOrKey($codeOrKey)
-    {
-        $this->codeOrKey = $codeOrKey;
     }
 
     /**

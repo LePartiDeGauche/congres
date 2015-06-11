@@ -18,6 +18,12 @@ class RoomType
     const ROOM_DOUBLE = 'Chambre double';
     const ROOM_OTHER = 'Autre';
 
+    const PRICE_MIN = 10;
+    const PRICE_MED = 15;
+    const PRICE_HIGH = 20;
+    const PRICE_MAX = 25;
+
+
     /**
      * @var int
      *
@@ -74,26 +80,6 @@ class RoomType
     private $places;
 
     /**
-     * Is available.
-     *
-     * @var int
-     *
-     * @ORM\Column(name="available", type="integer")
-     * @Assert\NotNull
-     */
-    private $available;
-
-    /**
-     * Price.
-     *
-     * @var int
-     *
-     * @ORM\Column(name="price", type="integer")
-     * @Assert\NotNull
-     */
-    private $price;
-
-    /**
      * Can this place book more than the number of places.
      *
      * @var bool
@@ -101,6 +87,13 @@ class RoomType
      * @ORM\Column(name="can_book_more", type="boolean", nullable=true)
      */
     private $canBookMore;
+
+    /**
+     * @var Bedroom[]
+     *
+     * @ORM\OneToMany(targetEntity="Bedroom", mappedBy="roomType")
+     */
+    private $bedrooms;
 
     /**
      * @return int
@@ -111,36 +104,11 @@ class RoomType
     }
 
     /**
-     * Constructor.
-     */
-    public function __construct()
-    {
-        // Initialize collection
-        $this->sleepingSite = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    /**
      * @param int $id
      */
     public function setId($id)
     {
         $this->id = $id;
-    }
-
-    /**
-     * @return SleepingSite
-     */
-    public function getSleepingSite()
-    {
-        return $this->sleepingSite;
-    }
-
-    /**
-     * @param SleepingSite $sleepingSite
-     */
-    public function setSleepingSite($sleepingSite)
-    {
-        $this->sleepingSite = $sleepingSite;
     }
 
     /**
@@ -157,6 +125,38 @@ class RoomType
     public function setName($name)
     {
         $this->name = $name;
+    }
+
+    /**
+     * @return Bedroom[]
+     */
+    public function getBedrooms()
+    {
+        return $this->bedrooms;
+    }
+
+    /**
+     * @param Bedroom[] $bedrooms
+     */
+    public function setBedrooms($bedrooms)
+    {
+        $this->bedrooms = $bedrooms;
+    }
+
+    /**
+     * @return SleepingSite
+     */
+    public function getSleepingSite()
+    {
+        return $this->sleepingSite;
+    }
+
+    /**
+     * @param SleepingSite $sleepingSite
+     */
+    public function setSleepingSite($sleepingSite)
+    {
+        $this->sleepingSite = $sleepingSite;
     }
 
     /**
@@ -208,38 +208,6 @@ class RoomType
     }
 
     /**
-     * @return int
-     */
-    public function getAvailable()
-    {
-        return $this->available;
-    }
-
-    /**
-     * @param int $available
-     */
-    public function setAvailable($available)
-    {
-        $this->available = $available;
-    }
-
-    /**
-     * @return float
-     */
-    public function getPrice()
-    {
-        return $this->price;
-    }
-
-    /**
-     * @param float $price
-     */
-    public function setPrice($price)
-    {
-        $this->price = $price;
-    }
-
-    /**
      * @return boolean
      */
     public function isCanBookMore()
@@ -259,4 +227,41 @@ class RoomType
     {
         return $this->name;
     }
+    /**
+     * Constructor.
+     */
+    public function __construct()
+    {
+        // Initialize collection
+        $this->bedRooms = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add bedrooms.
+     *
+     * @param Bedroom $bedroom
+     * @return Bedroom
+     * @internal param Bedroom $bedrooms
+     */
+    public function addBedroom(Bedroom $bedroom)
+    {
+        if ($bedroom->getSleepingSite() === null) {
+            $bedroom->setSleepingSite($this);
+        }
+        $this->bedrooms[] = $bedroom;
+
+        return $this;
+    }
+
+    /**
+     * Remove roomTypes.
+     *
+     * @param Bedroom $bedrooms
+     * @internal param Bedroom $bedrooms
+     */
+    public function removeBedroom(Bedroom $bedrooms)
+    {
+        $this->bedrooms->removeElement($bedrooms);
+    }
+
 }

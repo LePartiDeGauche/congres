@@ -30,7 +30,7 @@ class SleepingSiteAdmin extends Admin
             ->add('address', null, array('label' => 'Adresse'))
             ->add('latitude', null, array('label' => 'Latitude'))
             ->add('longitude', null, array('label' => 'Longitude'))
-            //->add('roomTypes.roomType', null, array('label' => 'Type de chambre', 'multiple' => true));
+            ->add('roomTypes', null, array('label' => 'Type de chambre', 'multiple' => true));
         ;
     }
 
@@ -81,6 +81,7 @@ class SleepingSiteAdmin extends Admin
                 )
             )
         ;
+
     }
 
     /**
@@ -111,7 +112,8 @@ class SleepingSiteAdmin extends Admin
             'address',
             'latitude',
             'longitude',
-            'roomTypes.roomType',
+            'roomTypes',
+            'bedrooms',
         );
     }
 

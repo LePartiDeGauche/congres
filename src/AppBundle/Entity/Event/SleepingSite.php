@@ -218,15 +218,25 @@ class SleepingSite
         $this->roomTypes = $roomTypes;
     }
 
+    /**
+     * Constructor.
+     */
+    public function __construct()
+    {
+        // Initialize collection
+        $this->roomTypes = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->bedRooms = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Add roomTypes.
      *
-     * @param \AppBundle\Entity\Event\RoomType $roomTypes
-     *
+     * @param RoomType $roomType
      * @return RoomType
+     * @internal param RoomType $roomTypes
+     *
      */
-    public function addRoomType(\AppBundle\Entity\Event\RoomType $roomType)
+    public function addRoomType(RoomType $roomType)
     {
         if ($roomType->getSleepingSite() === null) {
             $roomType->setSleepingSite($this);
@@ -241,9 +251,8 @@ class SleepingSite
      *
      * @param \AppBundle\Entity\Event\RoomType $roomTypes
      */
-    public function removeRoomType(\AppBundle\Entity\Event\RoomType $roomTypes)
+    public function removeRoomType(RoomType $roomTypes)
     {
         $this->roomTypes->removeElement($roomTypes);
     }
-
 }
