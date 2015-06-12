@@ -18,6 +18,8 @@ class Election
 {
     const STATUS_OPEN = 'Election Ouverte';
     const STATUS_CLOSED = 'Election Fermée';
+    const ISVALID_TRUE = 'Election validée';
+    const ISVALID_FALSE = 'Election rejetée';
 
     /**
      * @var int
@@ -87,6 +89,8 @@ class Election
     private $elected;
 
     /**
+     * Is the election validate by an admin.
+     *
      * @var bool
      *
      * @ORM\Column(name="is_valid", type="boolean")
