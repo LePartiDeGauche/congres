@@ -123,7 +123,7 @@ services:
 
     sonata.admin.election:
         class: AppBundle\Admin\ElectionAdmin
-        arguments: [~, AppBundle\Entity\Election\Election, SonataAdminBundle:CRUD]
+        arguments: [~, AppBundle\Entity\Election\Election, AppBundle:IsValid]
         tags:
             - {name: sonata.admin, manager_type: orm, group: "Election", label: "Elections" }
 
@@ -132,6 +132,7 @@ services:
         arguments : [~, AppBundle\Entity\Election\ElectionGroup, SonataAdminBundle:CRUD]
         tags:
             - {name: sonata.admin, manager_type: orm, group: "Election", label: "Type d'élection"}
+
 
     sonata.admin.result:
         class: AppBundle\Admin\ResultAdmin
