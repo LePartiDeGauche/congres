@@ -182,7 +182,8 @@ class Election
         if (!in_array($status, array(
             self::STATUS_OPEN,
             self::STATUS_CLOSED,
-
+            self::ISVALID_TRUE,
+            self::ISVALID_FALSE
         ))) {
             throw new \InvalidArgumentException('Invalid status');
         }

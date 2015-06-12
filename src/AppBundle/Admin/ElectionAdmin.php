@@ -85,6 +85,16 @@ class ElectionAdmin extends Admin
                 ),
                 'multiple' => false,
             ))
+            ->add('elected', 'sonata_type_collection', array(
+                'type_options' => array(
+                    'delete' => true
+                )
+            ), array(
+                'edit' => 'inline',
+                'inline' => 'table',
+                'sortable' => 'position',
+                'required' => false
+            ))
         ;
     }
 

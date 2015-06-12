@@ -3,6 +3,8 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\AdherentResponsability;
+use AppBundle\Entity\Responsability;
+use AppBundle\Entity\Election\Election;
 use Sonata\AdminBundle\Controller\CRUDController as Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
@@ -20,6 +22,7 @@ class IsValidController extends Controller
         }
 
         $object->setIsValid(1);
+        $object->setStatus(Election::ISVALID_TRUE);
         $this->admin->update($object);
 
         $elected = $object->getElected();
@@ -30,14 +33,14 @@ class IsValidController extends Controller
                 ->getManager()
                 ->getRepository('AppBundle:Responsability')
             ;
-            $responsability = $repository->find(5);
+            $responsability = $repository->findOneByName(Responsability::INSTANCE_DEL);
 
             $adherentResponsability = new AdherentResponsability();
 
             $adherentResponsability->setAdherent($elected);
             $adherentResponsability->setResponsability($responsability);
             $adherentResponsability->setIsActive(true);
-            $adherentResponsability->setStart(new \DateTime());
+            $adherentResponsability->setStart(new \DateTime('today'));
 
 
             $em = $this->getDoctrine()->getManager();
@@ -61,6 +64,7 @@ class IsValidController extends Controller
         }
 
         $object->setIsValid(0);
+        $object->setStatus(Election::ISVALID_FALSE);
 
         $this->admin->update($object);
 
