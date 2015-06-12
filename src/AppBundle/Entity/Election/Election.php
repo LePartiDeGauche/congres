@@ -87,6 +87,13 @@ class Election
     private $elected;
 
     /**
+     * @var bool
+     *
+     * @ORM\Column(name="is_valid", type="boolean")
+     */
+    private $isValid;
+
+    /**
      * @return string
      */
     public function __toString()
@@ -228,7 +235,7 @@ class Election
     /**
      * @return string
      */
-    public function getElectedToString()
+    public function getElectedNames()
     {
         return join(', ', $this->elected->toArray());
     }
@@ -244,4 +251,28 @@ class Election
 
         return $this;
     }
+
+    /**
+     * @return boolean
+     */
+    public function isIsValid()
+    {
+        return $this->isValid;
+    }
+
+    /**
+     * @param boolean $isValid
+     */
+    public function setIsValid($isValid)
+    {
+        $this->isValid = $isValid;
+    }
+
+    public function getElectedEmail()
+    {
+        return join(', ', $this->elected->map(function (Adherent $elected) {
+            return $elected->getEmail();
+        })->toArray());
+    }
+
 }
