@@ -126,9 +126,10 @@ class ElectionAdmin extends Admin
     public function getExportFields()
     {
         return array(
-            'electedNames',
-            'electedEmail',
+            'id',
             'organ',
+            'electedNames',
+            'electedEmail'
         );
     }
 
