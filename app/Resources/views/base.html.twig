@@ -36,11 +36,6 @@
                                                                 role="button" aria-expanded="false">Textes<span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
                                 <li>
-                                    <a href="{{ path('downloads', {filename: 'Complément RI candidatures adopté.pdf'}) }}">
-                                        Complément RI - candidatures
-                                    </a>
-                                </li>
-                                <li>
                                     <a href="{{ path('downloads', {filename: 'CDV Amendements validés - Classement par comités  site.pdf'}) }}">
                                         Amendements
                                     </a>
@@ -72,8 +67,26 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                                    aria-expanded="false">Organisation<span class="caret"></span></a>
                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="{{ path('downloads', {filename: 'RI Congrès 2015 phases 2 et 3 adopté CN.pdf'}) }}">Phases 2 &amp; 3</a></li>
-                                <li><a href="{{ path('downloads', {filename: 'Règlement Intérieur - Phase 1.pdf'}) }}">Phase 1</a></li>
+                               <li>
+                                   <a href="{{ path('downloads', {filename: 'Rapport CDD sur texte des 100 jours.pdf'}) }}">
+                                       Rapport CDD sur texte des 100 jours
+                                   </a>
+                               </li>
+                               <li>
+                                   <a href="{{ path('downloads', {filename: 'Complément RI candidatures adopté.pdf'}) }}">
+                                       Complément RI - candidatures
+                                   </a>
+                               </li>
+                                <li>
+                                    <a href="{{ path('downloads', {filename: 'RI Congrès 2015 phases 2 et 3 adopté CN.pdf'}) }}">
+                                        Phases 2 &amp; 3
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('downloads', {filename: 'Règlement Intérieur - Phase 1.pdf'}) }}">
+                                        Phase 1
+                                    </a>
+                                </li>
                                 <li>
                                     <a href="{{ path('commission_votes') }}">
                                         Commission des votes
