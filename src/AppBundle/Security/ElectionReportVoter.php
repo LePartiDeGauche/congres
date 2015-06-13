@@ -35,6 +35,9 @@ class ElectionReportVoter implements VoterInterface
             return VoterInterface::ACCESS_ABSTAIN;
         }
 
+        // FIXME: Delegués election report is over; dont let it go on
+        return VoterInterface::ACCESS_DENIED;
+
         foreach ($object->getOrgan()->getDesignatedParticipants() as $responsability) {
             if ($responsability->getAdherent()->getUser() === $token->getUser()) {
                 return VoterInterface::ACCESS_GRANTED;
