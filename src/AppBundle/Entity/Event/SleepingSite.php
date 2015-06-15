@@ -37,7 +37,7 @@ class SleepingSite
      *
      * @var \AppBundle\Entity\Event\Event
      *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Event\Event", inversedBy="Event")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Event\Event")
      * @Assert\NotNull
      */
     private $event;
@@ -81,7 +81,7 @@ class SleepingSite
     /**
      * @var RoomType[]
      *
-     * @ORM\OneToMany(targetEntity="RoomType", mappedBy="sleepingSite")
+     * @ORM\OneToMany(targetEntity="RoomType", mappedBy="sleepingSite", cascade={"persist"})
      */
     private $roomTypes;
 

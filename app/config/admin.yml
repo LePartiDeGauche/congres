@@ -199,7 +199,7 @@ services:
         class: AppBundle\Admin\RoomTypeAdmin
         arguments: [~, AppBundle\Entity\Event\RoomType, SonataAdminBundle:CRUD]
         tags:
-            - {name: sonata.admin, manager_type: orm, group: "Evenements", label: "Type de chambre"}
+            - {name: sonata.admin, manager_type: orm, group: "Evenements", label: "Type de chambre", }
 
     sonata.admin.bedroom:
             class: AppBundle\Admin\BedroomAdmin

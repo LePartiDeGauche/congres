@@ -69,18 +69,24 @@ class SleepingSiteAdmin extends Admin
             ->add('address', null, array('label' => 'Adresse'))
             ->add('latitude', null, array('label' => 'Latitude'))
             ->add('longitude', null, array('label' => 'Longitude'))
-            ->add('roomTypes', 'sonata_type_collection',
-                array(
-                    'by_reference' => false,
-                ), array(
-                    'edit' => 'inline',
-                    'inline' => 'table',
-                    'sortable' => 'position',
-                ), array(
-                    'required' => false,
-                )
-            )
-        ;
+            ;
+
+        if ($this->id($this->getSubject())) {
+            $formMapper
+                ->add(
+                    'roomTypes',
+                    'sonata_type_collection',
+                    array(
+                        'by_reference' => false,
+                    ), array(
+                        'edit' => 'inline',
+                        'inline' => 'table',
+                        'sortable' => 'position',
+                    ), array(
+                        'required' => false,
+                    )
+                );
+        }
 
     }
 
