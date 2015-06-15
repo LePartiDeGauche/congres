@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="instances",
  * indexes ={@ORM\Index(name="name", columns={"name"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Entity\ResponsabilityRepository")
  */
 class Responsability
 {
@@ -18,6 +18,12 @@ class Responsability
     const INSTANCE_SN = 'Secrétariat National';
     const INSTANCE_COSEC = 'Co-secrétaire de comité';
     const INSTANCE_DEL = 'Délégué au congrés';
+    const INSTANCE_BC = 'Bureau du Congrès';
+    const INSTANCE_CDC = 'Commission de candidatures';
+    const INSTANCE_SEN = 'Bureau National ou Secrétariat exécutif national';
+    const INSTANCE_CRC = 'Commission de résolution des conflits';
+    const INSTANCE_CCF = 'Commission de contrôle financier';
+    const INSTANCE_CN_NAT = 'Conseil national - part nationale';
 
     /**
      * @var int

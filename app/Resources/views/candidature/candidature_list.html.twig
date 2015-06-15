@@ -25,12 +25,14 @@
             <thead>
                 <td>Instance</td>
                 <td>Profession de foi</td>
+                <td>Complément</td>
                 <td>&nbsp;</td>
             </thead>
             {% for result in result %}
             <tr>
                 <td>{{ result.responsability }}</td>
                 <td>{{ result.professionfoi }}</td>
+                <td>{{ result.professionfoicplt }}</td>
                 <td>
                     <a href="{{ path('candidature_delete', { 'id' : result.id }) }}"
                        class="btn btn-sm btn-default delete_link"

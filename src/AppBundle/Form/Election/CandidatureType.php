@@ -6,6 +6,9 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
+use AppBundle\Entity\Responsability;
+use AppBundle\Entity\ResponsabilityRepository;
+
 class CandidatureType extends AbstractType
 {
     /**
@@ -14,28 +17,31 @@ class CandidatureType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        // $textGroupId = $options['text_group_id'];
-        // $textOptions = array(
-        //     'label' => 'Texte concerné',
-        //     'expanded' => false,
-        //     'multiple' => false,
-        //     'class' => 'AppBundle\Entity\Text\Text',
-        //     'query_builder' => function (TextRepository $er) use ($textGroupId) {
-        //         $qb = $er->createQueryBuilder('t');
-        //         if (isset($textGroupId)) {
-        //             $qb->where('t.textGroup = :textGroupId')
-        //                 ->setParameter(':textGroupId', $textGroupId);
-        //         }
-        //         $qb->orderBy('t.title', 'ASC');
-        //
-        //         return $qb;
-        //     },
-        // );
-
         $builder->add('responsability', 'entity', array(
+                'label' => 'Instance',
                 'class' => 'AppBundle:Responsability',
+                'query_builder' => function (ResponsabilityRepository $er) {
+                    $qb = $er->createQueryBuilder('t');
+                    $qb->where('t.name IN (:names)')
+                        ->setParameter(':names', array(
+                            Responsability::INSTANCE_BC,
+                            Responsability::INSTANCE_CDC,
+                            Responsability::INSTANCE_SEN,
+                            Responsability::INSTANCE_CRC,
+                            Responsability::INSTANCE_CCF,
+                            Responsability::INSTANCE_CN_NAT,
+                        ));
+                    $qb->orderBy('t.name', 'ASC');
+
+                    return $qb;
+                },
             ))
-            ->add('professionfoi', null)
+            ->add('professionfoi', null, array('label' => 'Profession de foi'))
+            ->add('isSortant', 'checkbox', array(
+                'label'     => 'Je suis candidat-e sortant-e d\'une instance nationale.',
+                'required'  => false,
+            ))
+            ->add('professionfoicplt', null, array('label' => 'Complément'))
             ->add('save', 'submit', array('label' => 'Enregistrer'));
     }
 

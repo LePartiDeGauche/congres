@@ -65,6 +65,28 @@ class Candidature
     private $professionfoi;
 
     /**
+     * The complement of profession de foi for those who already has
+     * responsabilities.
+     *
+     * @var string
+     *
+     * @ORM\Column(name="professionfoicplt", type="text")
+     *
+     * @Assert\NotBlank
+     * @Assert\Length(max=1000)
+     */
+    private $professionfoicplt;
+
+
+    /**
+     * @var Boolean
+     *
+     * @ORM\Column(name="is_sortant", type="boolean")
+     */
+    private $isSortant;
+
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="submit_date", type="datetime")
@@ -88,6 +110,7 @@ class Candidature
         $this->setAuthor($author);
         $this->setSubmitDate(new \DateTime('today'));
         $this->setStatus(self::STATUS_NEW);
+        $this->setIsSortant(false);
     }
 
     /**
@@ -170,6 +193,54 @@ class Candidature
     public function getProfessionfoi()
     {
         return $this->professionfoi;
+    }
+
+    /**
+     * Is sortant
+     *
+     * @param boolean $isSortant
+     *
+     * @return Candidature
+     */
+    public function setIsSortant($isSortant)
+    {
+        $this->isSortant = $isSortant;
+
+        return $this;
+    }
+
+    /**
+     * Get is sortant
+     *
+     * @return string
+     */
+    public function getIsSortant()
+    {
+        return $this->isSortant;
+    }
+
+    /**
+     * Set professionfoi complement
+     *
+     * @param string $professionfoi
+     *
+     * @return Candidature
+     */
+    public function setProfessionfoiCplt($professionfoicplt)
+    {
+        $this->professionfoicplt = $professionfoicplt;
+
+        return $this;
+    }
+
+    /**
+     * Get professionfoi.
+     *
+     * @return string
+     */
+    public function getProfessionfoiCplt()
+    {
+        return $this->professionfoicplt;
     }
 
     /**

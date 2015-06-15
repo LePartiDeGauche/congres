@@ -49,7 +49,6 @@ class CandidatureController extends Controller
                 ;
 
                 return $this->redirect($this->generateUrl('candidature_list'));
-                //return $this->render('candidature/candidature_success.html.twig', array('variable' => $data['idinstance']));
             }
         }
 
