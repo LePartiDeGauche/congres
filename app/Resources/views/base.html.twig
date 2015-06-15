@@ -101,9 +101,9 @@
                         </li>
 
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">CN Juin 2015<span class="caret"></span></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Congrès<span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="{{ path('event_registration_create', { 'event_id' : 2 }) }}">Inscription</a></li>
+                                <li><a href="{{ path('candidature_list') }}">Candidatures aux instances</a></li>
                             </ul>
                         </li>
 
@@ -121,17 +121,6 @@
                                 {% endif %}
                             </ul>
                         </li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"
-                                   role="button" aria-expanded="false">Elections<span class="caret"></span></a>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li>
-                                        <a href="{{ path('election_list') }}">
-                                            Liste des élections
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
                         {% endif %}
                     </ul>
                     {% endblock %}
