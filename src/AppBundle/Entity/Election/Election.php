@@ -257,6 +257,19 @@ class Election
         return $this;
     }
 
+
+    /**
+     * Returns true if election has been checked wether it has been validated
+     * or rejected
+     *
+     * @return boolean
+     */
+    public function hasBeenChecked()
+    {
+        return ($this->getStatus() == self::ISVALID_TRUE
+             || $this->getStatus() == self::ISVALID_FALSE);
+    }
+
     /**
      * @return boolean
      */
