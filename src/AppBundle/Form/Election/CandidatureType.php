@@ -42,7 +42,7 @@ class CandidatureType extends AbstractType
                 'label'     => 'Je suis candidat-e sortant-e d\'une instance nationale.',
                 'required'  => false,
             ))
-            ->add('professionfoicplt', null, array('label' => 'Complément'))
+            ->add('professionfoicplt', null, array('label' => 'Complément', 'required'  => false,))
             ->add('save', 'submit', array('label' => 'Enregistrer'));
     }
 
