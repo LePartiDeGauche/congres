@@ -1,0 +1,50 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+
+<div class="container">
+    <div class="row">
+
+        {% for flashMessage in app.session.flashbag.get('success') %}
+            <div class="alert alert-success">
+                {{ flashMessage }}
+            </div>
+        {% endfor %}
+
+        <h1>Liste de vos candidatures aux instances</h1>
+
+        <p>
+            <a href="{{ path('candidature_create') }}"
+               class="btn btn-sm btn-default">
+                <i class="glyphicon glyphicon-plus"></i>
+                Déposer une candidature
+            </a>
+        </p>
+
+        <table class="table table-striped table-bordered">
+            <thead>
+                <td>Instance</td>
+                <td>Profession de foi</td>
+                <td>Complément</td>
+                <td>&nbsp;</td>
+            </thead>
+            {% for result in result %}
+            <tr>
+                <td>{{ result.responsability }}</td>
+                <td>{{ result.professionfoi }}</td>
+                <td>{{ result.professionfoicplt }}</td>
+                <td>
+                    <a href="{{ path('candidature_delete', { 'id' : result.id }) }}"
+                       class="btn btn-sm btn-default delete_link"
+                       onclick="return(confirm('Etes vous sur ?'));">
+                        <i class="glyphicon glyphicon-remove"></i>
+                        Supprimer
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+
+{% endblock %}
