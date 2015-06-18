@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Dashboard for /Users/clement/Documents/works/congres_pg/src/AppBundle/Entity/Text</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="../../css/bootstrap.min.css" rel="stylesheet">
+  <link href="../../css/nv.d3.min.css" rel="stylesheet">
+  <link href="../../css/style.css" rel="stylesheet">
+  <!--[if lt IE 9]>
+  <script src="../../js/html5shiv.min.js"></script>
+  <script src="../../js/respond.min.js"></script>
+  <![endif]-->
+ </head>
+ <body>
+  <header>
+   <div class="container">
+    <div class="row">
+     <div class="col-md-12">
+      <ol class="breadcrumb">
+        <li><a href="../../index.html">/Users/clement/Documents/works/congres_pg/src/AppBundle</a></li>
+        <li><a href="../index.html">Entity</a></li>
+        <li><a href="index.html">Text</a></li>
+        <li class="active">(Dashboard)</li>
+
+      </ol>
+     </div>
+    </div>
+   </div>
+  </header>
+  <div class="container">
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Classes</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="classCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="classComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="TextRepository.php.html#14">TextRepository</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TextGroupRepository.php.html#12">TextGroupRepository</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TextGroup.php.html#13">TextGroup</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Text.php.html#13">Text</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Amendment.php.html#15">Amendment</a></td><td class="text-right">0%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="TextGroup.php.html#13">TextGroup</a></td><td class="text-right">1806</td></tr>
+       <tr><td><a href="Text.php.html#13">Text</a></td><td class="text-right">930</td></tr>
+       <tr><td><a href="Amendment.php.html#15">Amendment</a></td><td class="text-right">420</td></tr>
+       <tr><td><a href="TextRepository.php.html#14">TextRepository</a></td><td class="text-right">12</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Methods</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="methodCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="methodComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="TextGroup.php.html#287"><abbr title="TextGroup::getVoteOpening">getVoteOpening</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TextGroup.php.html#275"><abbr title="TextGroup::setVoteOpening">setVoteOpening</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TextGroup.php.html#263"><abbr title="TextGroup::getSubmissionClosing">getSubmissionClosing</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TextGroup.php.html#251"><abbr title="TextGroup::setSubmissionClosing">setSubmissionClosing</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TextGroup.php.html#299"><abbr title="TextGroup::setVoteClosing">setVoteClosing</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TextGroup.php.html#311"><abbr title="TextGroup::getVoteClosing">getVoteClosing</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TextGroup.php.html#359"><abbr title="TextGroup::getOrganTypeVoters">getOrganTypeVoters</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TextGroup.php.html#347"><abbr title="TextGroup::setOrganTypeVoters">setOrganTypeVoters</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TextGroup.php.html#335"><abbr title="TextGroup::getAuthor">getAuthor</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TextGroup.php.html#323"><abbr title="TextGroup::setAuthor">setAuthor</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TextGroup.php.html#239"><abbr title="TextGroup::getSubmissionOpening">getSubmissionOpening</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TextGroup.php.html#227"><abbr title="TextGroup::setSubmissionOpening">setSubmissionOpening</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TextGroup.php.html#155"><abbr title="TextGroup::setName">setName</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TextGroup.php.html#143"><abbr title="TextGroup::getId">getId</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Text.php.html#434"><abbr title="Text::__toString">__toString</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Text.php.html#429"><abbr title="Text::getIndividualVoteAgregations">getIndividualVoteAgregations</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TextGroup.php.html#167"><abbr title="TextGroup::getName">getName</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TextGroup.php.html#179"><abbr title="TextGroup::setDescription">setDescription</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TextGroup.php.html#215"><abbr title="TextGroup::getTexts">getTexts</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TextGroup.php.html#203"><abbr title="TextGroup::setTexts">setTexts</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TextGroup.php.html#191"><abbr title="TextGroup::getDescription">getDescription</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TextGroup.php.html#371"><abbr title="TextGroup::setVoteRules">setVoteRules</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TextGroup.php.html#383"><abbr title="TextGroup::getVoteRules">getVoteRules</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TextGroup.php.html#564"><abbr title="TextGroup::removeVoteRule">removeVoteRule</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TextGroup.php.html#552"><abbr title="TextGroup::addVoteRule">addVoteRule</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TextGroup.php.html#540"><abbr title="TextGroup::getOrganVoteRules">getOrganVoteRules</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TextGroup.php.html#530"><abbr title="TextGroup::removeOrganVoteRule">removeOrganVoteRule</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TextGroup.php.html#576"><abbr title="TextGroup::setMaxVotesByAdherent">setMaxVotesByAdherent</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TextGroup.php.html#588"><abbr title="TextGroup::getMaxVotesByAdherent">getMaxVotesByAdherent</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TextRepository.php.html#18"><abbr title="TextRepository::findTextAndVoteByTextGroup">findTextAndVoteByTextGroup</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TextGroupRepository.php.html#16"><abbr title="TextGroupRepository::getOrganAdherentCanReportFor">getOrganAdherentCanReportFor</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TextGroup.php.html#612"><abbr title="TextGroup::getIsVisible">getIsVisible</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TextGroup.php.html#600"><abbr title="TextGroup::setIsVisible">setIsVisible</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TextGroup.php.html#518"><abbr title="TextGroup::addOrganVoteRule">addOrganVoteRule</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TextGroup.php.html#506"><abbr title="TextGroup::removeText">removeText</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TextGroup.php.html#422"><abbr title="TextGroup::__toString">__toString</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TextGroup.php.html#414"><abbr title="TextGroup::__construct">__construct</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TextGroup.php.html#407"><abbr title="TextGroup::getResponsabilityVoters">getResponsabilityVoters</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TextGroup.php.html#395"><abbr title="TextGroup::setResponsabilityVoters">setResponsabilityVoters</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TextGroup.php.html#434"><abbr title="TextGroup::setVoteType">setVoteType</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TextGroup.php.html#452"><abbr title="TextGroup::getVoteType">getVoteType</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TextGroup.php.html#494"><abbr title="TextGroup::addText">addText</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TextGroup.php.html#482"><abbr title="TextGroup::getVoteModality">getVoteModality</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TextGroup.php.html#464"><abbr title="TextGroup::setVoteModality">setVoteModality</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Text.php.html#419"><abbr title="Text::removeIndividualVoteAgregation">removeIndividualVoteAgregation</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Text.php.html#407"><abbr title="Text::addIndividualVoteAgregation">addIndividualVoteAgregation</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Amendment.php.html#228"><abbr title="Amendment::setContent">setContent</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Amendment.php.html#220"><abbr title="Amendment::getContent">getContent</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Amendment.php.html#212"><abbr title="Amendment::setType">setType</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Amendment.php.html#204"><abbr title="Amendment::getType">getType</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Amendment.php.html#236"><abbr title="Amendment::getMeetingDate">getMeetingDate</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Amendment.php.html#244"><abbr title="Amendment::setMeetingDate">setMeetingDate</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Text.php.html#126"><abbr title="Text::getAuthor">getAuthor</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Text.php.html#114"><abbr title="Text::setAuthor">setAuthor</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Text.php.html#102"><abbr title="Text::getId">getId</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Amendment.php.html#252"><abbr title="Amendment::setNumberOfPresent">setNumberOfPresent</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Amendment.php.html#196"><abbr title="Amendment::getHumanReadableType">getHumanReadableType</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Amendment.php.html#188"><abbr title="Amendment::setStartLine">setStartLine</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Amendment.php.html#140"><abbr title="Amendment::getId">getId</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Amendment.php.html#132"><abbr title="Amendment::__toString">__toString</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Amendment.php.html#124"><abbr title="Amendment::getTypesValues">getTypesValues</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Amendment.php.html#114"><abbr title="Amendment::getTypes">getTypes</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Amendment.php.html#148"><abbr title="Amendment::getAuthor">getAuthor</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Amendment.php.html#156"><abbr title="Amendment::setAuthor">setAuthor</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Amendment.php.html#180"><abbr title="Amendment::getStartLine">getStartLine</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Amendment.php.html#172"><abbr title="Amendment::setText">setText</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Amendment.php.html#164"><abbr title="Amendment::getText">getText</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Text.php.html#138"><abbr title="Text::setAdherentGroup">setAdherentGroup</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Text.php.html#150"><abbr title="Text::getAdherentGroup">getAdherentGroup</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Text.php.html#337"><abbr title="Text::getOrgan">getOrgan</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Text.php.html#325"><abbr title="Text::setOrgan">setOrgan</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Text.php.html#313"><abbr title="Text::getOrganVotes">getOrganVotes</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Text.php.html#301"><abbr title="Text::setOrganVotes">setOrganVotes</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Text.php.html#349"><abbr title="Text::addAdherentVote">addAdherentVote</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Text.php.html#361"><abbr title="Text::removeAdherentVote">removeAdherentVote</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Text.php.html#395"><abbr title="Text::getRawContent">getRawContent</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Text.php.html#383"><abbr title="Text::setRawContent">setRawContent</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Text.php.html#371"><abbr title="Text::getAdherentVotes">getAdherentVotes</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Text.php.html#287"><abbr title="Text::__construct">__construct</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Text.php.html#280"><abbr title="Text::getTextGroup">getTextGroup</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Text.php.html#208"><abbr title="Text::getStatus">getStatus</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Text.php.html#186"><abbr title="Text::setStatus">setStatus</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Text.php.html#174"><abbr title="Text::getTitle">getTitle</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Text.php.html#162"><abbr title="Text::setTitle">setTitle</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Text.php.html#220"><abbr title="Text::setAdherentVote">setAdherentVote</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Text.php.html#232"><abbr title="Text::getAdherentVote">getAdherentVote</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Text.php.html#268"><abbr title="Text::setTextGroup">setTextGroup</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Text.php.html#256"><abbr title="Text::getAdherentGroupVote">getAdherentGroupVote</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Text.php.html#244"><abbr title="Text::setAdherentGroupVote">setAdherentGroupVote</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Amendment.php.html#104"><abbr title="Amendment::__construct">__construct</a></a></td><td class="text-right">0%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="TextRepository.php.html#18"><abbr title="TextRepository::findTextAndVoteByTextGroup">findTextAndVoteByTextGroup</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="TextGroup.php.html#464"><abbr title="TextGroup::setVoteModality">setVoteModality</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="TextGroup.php.html#434"><abbr title="TextGroup::setVoteType">setVoteType</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Text.php.html#186"><abbr title="Text::setStatus">setStatus</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Amendment.php.html#132"><abbr title="Amendment::__toString">__toString</abbr></a></td><td class="text-right">6</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <footer>
+    <hr/>
+    <p>
+     <small>Generated by <a href="http://github.com/sebastianbergmann/php-code-coverage" target="_top">PHP_CodeCoverage 2.1.5</a> using <a href="http://php.net/" target="_top">PHP 5.6.5</a> and <a href="http://phpunit.de/">PHPUnit 4.7.4</a> at Thu Jun 18 16:33:01 CEST 2015.</small>
+    </p>
+   </footer>
+  </div>
+  <script src="../../js/jquery.min.js" type="text/javascript"></script>
+  <script src="../../js/bootstrap.min.js" type="text/javascript"></script>
+  <script src="../../js/holder.min.js" type="text/javascript"></script>
+  <script src="../../js/d3.min.js" type="text/javascript"></script>
+  <script src="../../js/nv.d3.min.js" type="text/javascript"></script>
+  <script type="text/javascript">
+$(document).ready(function() {
+  nv.addGraph(function() {
+    var chart = nv.models.multiBarChart();
+    chart.tooltips(false)
+      .showControls(false)
+      .showLegend(false)
+      .reduceXTicks(false)
+      .staggerLabels(true)
+      .yAxis.tickFormat(d3.format('d'));
+
+    d3.select('#classCoverageDistribution svg')
+      .datum(getCoverageDistributionData([5,0,0,0,0,0,0,0,0,0,0,0], "Class Coverage"))
+      .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  nv.addGraph(function() {
+    var chart = nv.models.multiBarChart();
+    chart.tooltips(false)
+      .showControls(false)
+      .showLegend(false)
+      .reduceXTicks(false)
+      .staggerLabels(true)
+      .yAxis.tickFormat(d3.format('d'));
+
+    d3.select('#methodCoverageDistribution svg')
+      .datum(getCoverageDistributionData([90,0,0,0,0,0,0,0,0,0,0,0], "Method Coverage"))
+      .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  function getCoverageDistributionData(data, label) {
+    var labels = [
+      '0%',
+      '0-10%',
+      '10-20%',
+      '20-30%',
+      '30-40%',
+      '40-50%',
+      '50-60%',
+      '60-70%',
+      '70-80%',
+      '80-90%',
+      '90-100%',
+      '100%'
+    ];
+    var values = [];
+    $.each(labels, function(key) {
+      values.push({x: labels[key], y: data[key]});
+    });
+
+    return [
+      {
+        key: label,
+        values: values,
+        color: "#4572A7"
+      }
+    ];
+  }
+  nv.addGraph(function() {
+    var chart = nv.models.scatterChart()
+      .showDistX(true)
+      .showDistY(true)
+      .showLegend(false)
+      .forceX([0, 100]);
+    chart.scatter.onlyCircles(false);
+    chart.tooltipContent(function(key, y, e, graph) {
+      return '<p>' + graph.point.class + '</p>';
+    });
+
+    chart.xAxis.axisLabel('Code Coverage (in percent)');
+    chart.yAxis.axisLabel('Cyclomatic Complexity');
+
+    d3.select('#classComplexity svg')
+      .datum(getComplexityData([[0,20,"<a href=\"Amendment.php.html#15\">Amendment<\/a>"],[0,30,"<a href=\"Text.php.html#13\">Text<\/a>"],[0,42,"<a href=\"TextGroup.php.html#13\">TextGroup<\/a>"],[0,1,"<a href=\"TextGroupRepository.php.html#12\">TextGroupRepository<\/a>"],[0,3,"<a href=\"TextRepository.php.html#14\">TextRepository<\/a>"]], 'Class Complexity'))
+      .transition()
+      .duration(500)
+      .call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  nv.addGraph(function() {
+    var chart = nv.models.scatterChart()
+      .showDistX(true)
+      .showDistY(true)
+      .showLegend(false)
+      .forceX([0, 100]);
+    chart.scatter.onlyCircles(false);
+    chart.tooltipContent(function(key, y, e, graph) {
+      return '<p>' + graph.point.class + '</p>';
+    });
+
+    chart.xAxis.axisLabel('Code Coverage (in percent)');
+    chart.yAxis.axisLabel('Method Complexity');
+
+    d3.select('#methodComplexity svg')
+      .datum(getComplexityData([[0,1,"<a href=\"Amendment.php.html#104\">Amendment::__construct<\/a>"],[0,1,"<a href=\"Amendment.php.html#114\">Amendment::getTypes<\/a>"],[0,1,"<a href=\"Amendment.php.html#124\">Amendment::getTypesValues<\/a>"],[0,2,"<a href=\"Amendment.php.html#132\">Amendment::__toString<\/a>"],[0,1,"<a href=\"Amendment.php.html#140\">Amendment::getId<\/a>"],[0,1,"<a href=\"Amendment.php.html#148\">Amendment::getAuthor<\/a>"],[0,1,"<a href=\"Amendment.php.html#156\">Amendment::setAuthor<\/a>"],[0,1,"<a href=\"Amendment.php.html#164\">Amendment::getText<\/a>"],[0,1,"<a href=\"Amendment.php.html#172\">Amendment::setText<\/a>"],[0,1,"<a href=\"Amendment.php.html#180\">Amendment::getStartLine<\/a>"],[0,1,"<a href=\"Amendment.php.html#188\">Amendment::setStartLine<\/a>"],[0,1,"<a href=\"Amendment.php.html#196\">Amendment::getHumanReadableType<\/a>"],[0,1,"<a href=\"Amendment.php.html#204\">Amendment::getType<\/a>"],[0,1,"<a href=\"Amendment.php.html#212\">Amendment::setType<\/a>"],[0,1,"<a href=\"Amendment.php.html#220\">Amendment::getContent<\/a>"],[0,1,"<a href=\"Amendment.php.html#228\">Amendment::setContent<\/a>"],[0,1,"<a href=\"Amendment.php.html#236\">Amendment::getMeetingDate<\/a>"],[0,1,"<a href=\"Amendment.php.html#244\">Amendment::setMeetingDate<\/a>"],[0,1,"<a href=\"Amendment.php.html#252\">Amendment::setNumberOfPresent<\/a>"],[0,1,"<a href=\"Text.php.html#102\">Text::getId<\/a>"],[0,1,"<a href=\"Text.php.html#114\">Text::setAuthor<\/a>"],[0,1,"<a href=\"Text.php.html#126\">Text::getAuthor<\/a>"],[0,1,"<a href=\"Text.php.html#138\">Text::setAdherentGroup<\/a>"],[0,1,"<a href=\"Text.php.html#150\">Text::getAdherentGroup<\/a>"],[0,1,"<a href=\"Text.php.html#162\">Text::setTitle<\/a>"],[0,1,"<a href=\"Text.php.html#174\">Text::getTitle<\/a>"],[0,2,"<a href=\"Text.php.html#186\">Text::setStatus<\/a>"],[0,1,"<a href=\"Text.php.html#208\">Text::getStatus<\/a>"],[0,1,"<a href=\"Text.php.html#220\">Text::setAdherentVote<\/a>"],[0,1,"<a href=\"Text.php.html#232\">Text::getAdherentVote<\/a>"],[0,1,"<a href=\"Text.php.html#244\">Text::setAdherentGroupVote<\/a>"],[0,1,"<a href=\"Text.php.html#256\">Text::getAdherentGroupVote<\/a>"],[0,1,"<a href=\"Text.php.html#268\">Text::setTextGroup<\/a>"],[0,1,"<a href=\"Text.php.html#280\">Text::getTextGroup<\/a>"],[0,1,"<a href=\"Text.php.html#287\">Text::__construct<\/a>"],[0,1,"<a href=\"Text.php.html#301\">Text::setOrganVotes<\/a>"],[0,1,"<a href=\"Text.php.html#313\">Text::getOrganVotes<\/a>"],[0,1,"<a href=\"Text.php.html#325\">Text::setOrgan<\/a>"],[0,1,"<a href=\"Text.php.html#337\">Text::getOrgan<\/a>"],[0,1,"<a href=\"Text.php.html#349\">Text::addAdherentVote<\/a>"],[0,1,"<a href=\"Text.php.html#361\">Text::removeAdherentVote<\/a>"],[0,1,"<a href=\"Text.php.html#371\">Text::getAdherentVotes<\/a>"],[0,1,"<a href=\"Text.php.html#383\">Text::setRawContent<\/a>"],[0,1,"<a href=\"Text.php.html#395\">Text::getRawContent<\/a>"],[0,1,"<a href=\"Text.php.html#407\">Text::addIndividualVoteAgregation<\/a>"],[0,1,"<a href=\"Text.php.html#419\">Text::removeIndividualVoteAgregation<\/a>"],[0,1,"<a href=\"Text.php.html#429\">Text::getIndividualVoteAgregations<\/a>"],[0,1,"<a href=\"Text.php.html#434\">Text::__toString<\/a>"],[0,1,"<a href=\"TextGroup.php.html#143\">TextGroup::getId<\/a>"],[0,1,"<a href=\"TextGroup.php.html#155\">TextGroup::setName<\/a>"],[0,1,"<a href=\"TextGroup.php.html#167\">TextGroup::getName<\/a>"],[0,1,"<a href=\"TextGroup.php.html#179\">TextGroup::setDescription<\/a>"],[0,1,"<a href=\"TextGroup.php.html#191\">TextGroup::getDescription<\/a>"],[0,1,"<a href=\"TextGroup.php.html#203\">TextGroup::setTexts<\/a>"],[0,1,"<a href=\"TextGroup.php.html#215\">TextGroup::getTexts<\/a>"],[0,1,"<a href=\"TextGroup.php.html#227\">TextGroup::setSubmissionOpening<\/a>"],[0,1,"<a href=\"TextGroup.php.html#239\">TextGroup::getSubmissionOpening<\/a>"],[0,1,"<a href=\"TextGroup.php.html#251\">TextGroup::setSubmissionClosing<\/a>"],[0,1,"<a href=\"TextGroup.php.html#263\">TextGroup::getSubmissionClosing<\/a>"],[0,1,"<a href=\"TextGroup.php.html#275\">TextGroup::setVoteOpening<\/a>"],[0,1,"<a href=\"TextGroup.php.html#287\">TextGroup::getVoteOpening<\/a>"],[0,1,"<a href=\"TextGroup.php.html#299\">TextGroup::setVoteClosing<\/a>"],[0,1,"<a href=\"TextGroup.php.html#311\">TextGroup::getVoteClosing<\/a>"],[0,1,"<a href=\"TextGroup.php.html#323\">TextGroup::setAuthor<\/a>"],[0,1,"<a href=\"TextGroup.php.html#335\">TextGroup::getAuthor<\/a>"],[0,1,"<a href=\"TextGroup.php.html#347\">TextGroup::setOrganTypeVoters<\/a>"],[0,1,"<a href=\"TextGroup.php.html#359\">TextGroup::getOrganTypeVoters<\/a>"],[0,1,"<a href=\"TextGroup.php.html#371\">TextGroup::setVoteRules<\/a>"],[0,1,"<a href=\"TextGroup.php.html#383\">TextGroup::getVoteRules<\/a>"],[0,1,"<a href=\"TextGroup.php.html#395\">TextGroup::setResponsabilityVoters<\/a>"],[0,1,"<a href=\"TextGroup.php.html#407\">TextGroup::getResponsabilityVoters<\/a>"],[0,1,"<a href=\"TextGroup.php.html#414\">TextGroup::__construct<\/a>"],[0,1,"<a href=\"TextGroup.php.html#422\">TextGroup::__toString<\/a>"],[0,2,"<a href=\"TextGroup.php.html#434\">TextGroup::setVoteType<\/a>"],[0,1,"<a href=\"TextGroup.php.html#452\">TextGroup::getVoteType<\/a>"],[0,2,"<a href=\"TextGroup.php.html#464\">TextGroup::setVoteModality<\/a>"],[0,1,"<a href=\"TextGroup.php.html#482\">TextGroup::getVoteModality<\/a>"],[0,1,"<a href=\"TextGroup.php.html#494\">TextGroup::addText<\/a>"],[0,1,"<a href=\"TextGroup.php.html#506\">TextGroup::removeText<\/a>"],[0,1,"<a href=\"TextGroup.php.html#518\">TextGroup::addOrganVoteRule<\/a>"],[0,1,"<a href=\"TextGroup.php.html#530\">TextGroup::removeOrganVoteRule<\/a>"],[0,1,"<a href=\"TextGroup.php.html#540\">TextGroup::getOrganVoteRules<\/a>"],[0,1,"<a href=\"TextGroup.php.html#552\">TextGroup::addVoteRule<\/a>"],[0,1,"<a href=\"TextGroup.php.html#564\">TextGroup::removeVoteRule<\/a>"],[0,1,"<a href=\"TextGroup.php.html#576\">TextGroup::setMaxVotesByAdherent<\/a>"],[0,1,"<a href=\"TextGroup.php.html#588\">TextGroup::getMaxVotesByAdherent<\/a>"],[0,1,"<a href=\"TextGroup.php.html#600\">TextGroup::setIsVisible<\/a>"],[0,1,"<a href=\"TextGroup.php.html#612\">TextGroup::getIsVisible<\/a>"],[0,1,"<a href=\"TextGroupRepository.php.html#16\">TextGroupRepository::getOrganAdherentCanReportFor<\/a>"],[0,3,"<a href=\"TextRepository.php.html#18\">TextRepository::findTextAndVoteByTextGroup<\/a>"]], 'Method Complexity'))
+      .transition()
+      .duration(500)
+      .call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  function getComplexityData(data, label) {
+    var values = [];
+    $.each(data, function(key) {
+      var value = Math.round(data[key][0]*100) / 100;
+      values.push({
+        x: value,
+        y: data[key][1],
+        class: data[key][2],
+        size: 0.05,
+        shape: 'diamond'
+      });
+    });
+
+    return [
+      {
+        key: label,
+        values: values,
+        color: "#4572A7"
+      }
+    ];
+  }
+});
+  </script>
+ </body>
+</html>

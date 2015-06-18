@@ -64,3 +64,10 @@ services:
         arguments: [@doctrine.orm.entity_manager]
         tags:
             - { name: kernel.event_listener, event: paybox.ipn_response, method: onPaymentIpnResponse }
+
+    app.event_booking_voter:
+        class:      AppBundle\Security\Congres\BookingVoter
+        arguments: [@doctrine.orm.entity_manager]
+        public:     false
+        tags:
+           - { name: security.voter }

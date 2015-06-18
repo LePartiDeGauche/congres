@@ -37,14 +37,26 @@
                                             {% for date in bookings|keys %}
                                                 <td>
                                                     {% if bookings[date][bedroom.id] is defined %}
-                                                        Places disponibles :
-                                                        {{ bedroom.roomType.places - bookings[date][bedroom.id]|length }}
 
-                                                        Adhérents :
-                                                        {% for booking in bookings[date][bedroom.id] %}
-                                                            {{ booking.adherent.firstName }} {{ booking.adherent.lastName }}
-                                                        {% endfor %}
-                                                        <a href="{{ path('sleeping_inscription', {id: bedroom.id, date: date}) }}">S'inscrire</a>
+                                                        {% if  bookings[date][bedroom.id]|length >= bedroom.roomType.places %}
+                                                            Chambre pleine
+                                                            <br />
+                                                        {% else %}
+                                                            Il reste : {{ bedroom.roomType.places - bookings[date][bedroom.id]|length }} place(s)
+                                                            <br />
+                                                        {% endif %}
+
+                                                        {% if bookings[date][bedroom.id]|length %}
+                                                            {% if  (bookings[date][bedroom.id]|length) < bedroom.roomType.places %}
+                                                             Inscrits :
+                                                                {% for booking in bookings[date][bedroom.id] %}
+                                                                    {{ booking.adherent.firstName }} {{ booking.adherent.lastName }}<br />
+                                                                {% endfor %}
+                                                            {% endif %}
+                                                        {% endif %}
+                                                        {% if bookings[date][bedroom.id]|length < bedroom.roomType.places %}
+                                                        <a href="{{ path('sleeping_inscription', {id: bedroom.id, date: date}) }}">Réserver</a>
+                                                        {% endif %}
                                                     {% else %}
                                                     Non disponible.
                                                     {% endif %}

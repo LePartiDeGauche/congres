@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -86,7 +87,7 @@ class EventController extends Controller
         }
 
         return $this->redirect($this->generateUrl('event_registration_show',
-                array('event_id' => $event->getId(), 'event_reg_id' => $eventRegistration->getId())));
+            array('event_id' => $event->getId(), 'event_reg_id' => $eventRegistration->getId())));
     }
 
     /**
@@ -126,12 +127,23 @@ class EventController extends Controller
 
         if ($form->isValid()) {
             $eventRegistration = $form->getData();
+            $needHosting = $eventRegistration->getNeedHosting();
             $eventRegistration->setEvent($event);
             $eventRegistration->setRegistrationDate(new \DateTime('now'));
             $eventRegistration->setAdherent($adherent);
 
             $em->persist($eventRegistration);
             $em->flush();
+
+            if ($needHosting == true){
+                /** @var Session $session */
+                $session = $this->get('session');
+
+                $session->set('paiement', $eventRegistration->getPaymentMode());
+                return $this->redirect($this->generateUrl('sleeping_list'));
+            }
+
+
 
             if ($eventRegistration->getPaymentMode() == EventAdherentRegistration::PAYMENT_MODE_ONLINE) {
                 $eventPayment = $this->createPayment($adherent, $event, $eventRegistration, $eventRegistration->getCost()->getCost());
@@ -159,7 +171,7 @@ class EventController extends Controller
      * @Route("/{event_id}", name="event_show", requirements={
      *     "event_id": "\d+"
      * })
-     )
+    )
      * @Method("GET")
      * @ParamConverter("event", class="AppBundle:Event\Event", options={"id" = "event_id"})
      * @Template("event/show.html.twig")

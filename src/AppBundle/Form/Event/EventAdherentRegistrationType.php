@@ -72,7 +72,7 @@ class EventAdherentRegistrationType extends AbstractType
                         'multiple' => false,
 
                     );
-                    $form->add('role', 'entity', $roleOptions);
+                   // $form->add('role', 'entity', $roleOptions);
                 }
             } else {
                 throw new \InvalidArgumentException('Invalid Form data expected EventAdherentRegistration, got '.$data->getClassName());

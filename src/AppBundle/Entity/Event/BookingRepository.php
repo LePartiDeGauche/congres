@@ -11,8 +11,10 @@ class BookingRepository extends EntityRepository
         $dateEnd = clone $date;
         $dateEnd->add(new \DateInterval('P1D'));
 
-        $this
+        return $this
             ->createQueryBuilder('b')
+            ->innerJoin('b.adherent', 'a')
+            ->addSelect('a')
             ->where('b.bedroom = :bedroom')
             ->andWhere('b.date >= :dateStart')
             ->andWhere('b.date < :dateEnd')
@@ -25,6 +27,4 @@ class BookingRepository extends EntityRepository
             ->getResult()
         ;
     }
-
-
 }
