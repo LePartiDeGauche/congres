@@ -2,6 +2,7 @@
 
 namespace AppBundle\Form\Event;
 
+use AppBundle\Entity\Event\SleepingSiteRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvents;
@@ -71,7 +72,7 @@ class EventAdherentRegistrationType extends AbstractType
                         'multiple' => false,
 
                     );
-                    $form->add('role', 'entity', $roleOptions);
+                   // $form->add('role', 'entity', $roleOptions);
                 }
             } else {
                 throw new \InvalidArgumentException('Invalid Form data expected EventAdherentRegistration, got '.$data->getClassName());

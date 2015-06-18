@@ -148,7 +148,7 @@ class Responsability
      *
      * @return Instance
      */
-    public function setElectionDate($date)
+    public function setElectionDate(\DateTime $date)
     {
         $this->electionDate = $date;
 

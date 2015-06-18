@@ -47,6 +47,7 @@ class AdherentRepository extends EntityRepository
     {
         $qb =
             $this->createQueryBuilder('a')
+                ->join('a.user', 'u')
                 ->join('a.organParticipations', 'o')
                 ->where('o.organ = :organ')
                 ->setParameter('organ', $organ)

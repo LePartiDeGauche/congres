@@ -228,8 +228,7 @@ class Adherent
         $this->email = $email;
 
         if ($this->user && $this->user->getEmail() !== $email) {
-            // FIXME
-            //$this->user->setEmail($email);
+            $this->user->setEmail($email);
         }
 
         return $this;

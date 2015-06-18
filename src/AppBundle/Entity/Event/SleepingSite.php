@@ -3,6 +3,7 @@
 namespace AppBundle\Entity\Event;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * SleepingSite.
@@ -22,13 +23,28 @@ class SleepingSite
     private $id;
 
     /**
+     * Name of the place. Hostel or the house of a party's member.
+     *
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
+     * @Assert\NotNull
      */
     private $name;
 
     /**
+     * The Event concerned.
+     *
+     * @var \AppBundle\Entity\Event\Event
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Event\Event")
+     * @Assert\NotNull
+     */
+    private $event;
+
+    /**
+     * Short Description.
+     *
      * @var string
      *
      * @ORM\Column(name="description", type="text")
@@ -36,31 +52,40 @@ class SleepingSite
     private $description;
 
     /**
-     * @var \stdClass
+     * Address.
      *
-     * @ORM\ManyToOne(targetEntity="SleepingFacility", inversedBy="sleepingSites")
-     * @ORM\JoinColumn(name="sleeping_facility", nullable=false)
+     * @var string
+     *
+     * @ORM\Column(name="address", type="string", length=255)
      */
-    private $sleepingFacility;
+    private $address;
 
     /**
-     * @var \stdClass
+     * Latitude of the place.
      *
-     * @ORM\OneToMany(targetEntity="SleepingSpot", mappedBy="sleepingSite",
-     * cascade={"persist", "remove", "merge"}, orphanRemoval=true)
+     * @var float
+     *
+     * @ORM\Column(name="latitude", type="float", nullable=true)
      */
-    private $sleepingSpots;
+    private $latitude;
 
     /**
-     * @var \stdClass
+     * Longitude of the place.
      *
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Event\ReservationNight", mappedBy="sleepingSites")
+     * @var float
+     *
+     * @ORM\Column(name="longitude", type="float", nullable=true)
      */
-    private $reservationNights;
+    private $longitude;
 
     /**
-     * Get id.
+     * @var RoomType[]
      *
+     * @ORM\OneToMany(targetEntity="RoomType", mappedBy="sleepingSite", cascade={"persist"})
+     */
+    private $roomTypes;
+
+    /**
      * @return int
      */
     public function getId()
@@ -69,22 +94,14 @@ class SleepingSite
     }
 
     /**
-     * Set name.
-     *
-     * @param string $name
-     *
-     * @return SleepingSite
+     * @param int $id
      */
-    public function setName($name)
+    public function setId($id)
     {
-        $this->name = $name;
-
-        return $this;
+        $this->id = $id;
     }
 
     /**
-     * Get name.
-     *
      * @return string
      */
     public function getName()
@@ -93,22 +110,30 @@ class SleepingSite
     }
 
     /**
-     * Set description.
-     *
-     * @param string $description
-     *
-     * @return SleepingSite
+     * @param string $name
      */
-    public function setDescription($description)
+    public function setName($name)
     {
-        $this->description = $description;
-
-        return $this;
+        $this->name = $name;
     }
 
     /**
-     * Get description.
-     *
+     * @return Event
+     */
+    public function getEvent()
+    {
+        return $this->event;
+    }
+
+    /**
+     * @param Event $event
+     */
+    public function setEvent($event)
+    {
+        $this->event = $event;
+    }
+
+    /**
      * @return string
      */
     public function getDescription()
@@ -117,150 +142,117 @@ class SleepingSite
     }
 
     /**
-     * Set beds.
-     *
-     * @param \stdClass $beds
-     *
-     * @return SleepingSite
+     * @param string $description
      */
-    public function setBeds($beds)
+    public function setDescription($description)
     {
-        $this->beds = $beds;
-
-        return $this;
+        $this->description = $description;
     }
 
     /**
-     * Get beds.
-     *
-     * @return \stdClass
+     * @return string
      */
-    public function getBeds()
+    public function getAddress()
     {
-        return $this->beds;
+        return $this->address;
     }
 
     /**
-     * Set bedsNight.
-     *
-     * @param \stdClass $bedsNight
-     *
-     * @return SleepingSite
+     * @param string $address
      */
-    public function setBedsNight($bedsNight)
+    public function setAddress($address)
     {
-        $this->bedsNight = $bedsNight;
-
-        return $this;
+        $this->address = $address;
     }
 
     /**
-     * Get bedsNight.
-     *
-     * @return \stdClass
+     * @return float
      */
-    public function getBedsNight()
+    public function getLatitude()
     {
-        return $this->bedsNight;
+        return $this->latitude;
     }
+
+    /**
+     * @param float $latitude
+     */
+    public function setLatitude($latitude)
+    {
+        $this->latitude = $latitude;
+    }
+
+    /**
+     * @return float
+     */
+    public function getLongitude()
+    {
+        return $this->longitude;
+    }
+
+    /**
+     * @param float $longitude
+     */
+    public function setLongitude($longitude)
+    {
+        $this->longitude = $longitude;
+    }
+
+    public function __toString()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @return RoomType[]
+     */
+    public function getRoomTypes()
+    {
+        return $this->roomTypes;
+    }
+
+    /**
+     * @param RoomType[] $roomTypes
+     */
+    public function setRoomTypes($roomTypes)
+    {
+        $this->roomTypes = $roomTypes;
+    }
+
     /**
      * Constructor.
      */
     public function __construct()
     {
-        $this->sleepingSpots = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->reservationNights = new \Doctrine\Common\Collections\ArrayCollection();
+        // Initialize collection
+        $this->roomTypes = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->bedRooms = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
-     * Set sleepingFacility.
+     * Add roomTypes.
      *
-     * @param \AppBundle\Entity\Event\SleepingFacility $sleepingFacility
+     * @param RoomType $roomType
+     * @return RoomType
+     * @internal param RoomType $roomTypes
      *
-     * @return SleepingSite
      */
-    public function setSleepingFacility(\AppBundle\Entity\Event\SleepingFacility $sleepingFacility)
+    public function addRoomType(RoomType $roomType)
     {
-        $this->sleepingFacility = $sleepingFacility;
+        if ($roomType->getSleepingSite() === null) {
+            $roomType->setSleepingSite($this);
+        }
+        $this->roomTypes[] = $roomType;
 
         return $this;
     }
 
     /**
-     * Get sleepingFacility.
+     * Remove roomTypes.
      *
-     * @return \AppBundle\Entity\Event\SleepingFacility
+     * @param \AppBundle\Entity\Event\RoomType $roomTypes
      */
-    public function getSleepingFacility()
+    public function removeRoomType(RoomType $roomTypes)
     {
-        return $this->sleepingFacility;
-    }
-
-    /**
-     * Add sleepingSpots.
-     *
-     * @param \AppBundle\Entity\Event\SleepingSpot $sleepingSpots
-     *
-     * @return SleepingSite
-     */
-    public function addSleepingSpot(\AppBundle\Entity\Event\SleepingSpot $sleepingSpots)
-    {
-        $this->sleepingSpots[] = $sleepingSpots;
-
-        return $this;
-    }
-
-    /**
-     * Remove sleepingSpots.
-     *
-     * @param \AppBundle\Entity\Event\SleepingSpot $sleepingSpots
-     */
-    public function removeSleepingSpot(\AppBundle\Entity\Event\SleepingSpot $sleepingSpots)
-    {
-        $this->sleepingSpots->removeElement($sleepingSpots);
-    }
-
-    /**
-     * Get sleepingSpots.
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getSleepingSpots()
-    {
-        return $this->sleepingSpots;
-    }
-
-    /**
-     * Add reservationNights.
-     *
-     * @param \AppBundle\Entity\Event\ReservationNight $reservationNights
-     *
-     * @return SleepingSite
-     */
-    public function addReservationNight(\AppBundle\Entity\Event\ReservationNight $reservationNights)
-    {
-        $this->reservationNights[] = $reservationNights;
-
-        return $this;
-    }
-
-    /**
-     * Remove reservationNights.
-     *
-     * @param \AppBundle\Entity\Event\ReservationNight $reservationNights
-     */
-    public function removeReservationNight(\AppBundle\Entity\Event\ReservationNight $reservationNights)
-    {
-        $this->reservationNights->removeElement($reservationNights);
-    }
-
-    /**
-     * Get reservationNights.
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getReservationNights()
-    {
-        return $this->reservationNights;
+        $this->roomTypes->removeElement($roomTypes);
     }
 }

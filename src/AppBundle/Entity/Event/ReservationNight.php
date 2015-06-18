@@ -39,8 +39,7 @@ class ReservationNight
     /**
      * @var \stdClass
      *
-     * @ORM\ManyToMany(targetEntity="SleepingSite",
-     * inversedBy="reservationNights")
+     * @ORM\ManyToMany(targetEntity="SleepingSite")
      */
     private $sleepingSites;
 

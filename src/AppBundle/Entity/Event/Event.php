@@ -70,14 +70,6 @@ class Event
     /**
      * @var \stdClass
      *
-     * @ORM\OneToMany(targetEntity="SleepingFacility", mappedBy="event",
-     * cascade={"persist", "remove", "merge"}, orphanRemoval=true)
-     */
-    private $sleepingFacilities;
-
-    /**
-     * @var \stdClass
-     *
      * @ORM\OneToMany(targetEntity="ReservationNight", mappedBy="event",
      * cascade={"persist", "remove", "merge"}, orphanRemoval=true)
      */
@@ -112,8 +104,12 @@ class Event
      */
     private $meals;
 
-    /*
-    //
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="nights_duration", type="integer")
+     */
+    private $nightsDuration;
 
     /**
      * Get id
@@ -314,30 +310,6 @@ class Event
     }
 
     /**
-     * Add sleepingFacilities.
-     *
-     * @param \AppBundle\Entity\Event\SleepingFacility $sleepingFacilities
-     *
-     * @return Event
-     */
-    public function addSleepingFacility(\AppBundle\Entity\Event\SleepingFacility $sleepingFacilities)
-    {
-        $this->sleepingFacilities[] = $sleepingFacilities;
-
-        return $this;
-    }
-
-    /**
-     * Remove sleepingFacilities.
-     *
-     * @param \AppBundle\Entity\Event\SleepingFacility $sleepingFacilities
-     */
-    public function removeSleepingFacility(\AppBundle\Entity\Event\SleepingFacility $sleepingFacilities)
-    {
-        $this->sleepingFacilities->removeElement($sleepingFacilities);
-    }
-
-    /**
      * Add reservationNights.
      *
      * @param \AppBundle\Entity\Event\ReservationNight $reservationNights
@@ -417,6 +389,22 @@ class Event
     public function getRegistrationEnd()
     {
         return $this->registrationEnd;
+    }
+
+    /**
+     * @return int
+     */
+    public function getNightsDuration()
+    {
+        return $this->nightsDuration;
+    }
+
+    /**
+     * @param int $nightsDuration
+     */
+    public function setNightsDuration($nightsDuration)
+    {
+        $this->nightsDuration = $nightsDuration;
     }
 
     /**
