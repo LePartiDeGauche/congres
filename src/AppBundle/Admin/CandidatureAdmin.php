@@ -121,20 +121,23 @@ class CandidatureAdmin extends Admin
             ))
         ;
     }
-    
+
     public function getExportFields()
     {
         return array(
             'Prenom'=>'author.firstname',
             'Nom'=>'author.lastname',
-            'Comité'=>'author.organParticipations',
-            'Status adhérent'=>'author.status',
+            'Genre'=>'author.gender',
+            'Mail'=>'author.email',
+            'Mobile'=>'author.mobilephone',
+            'Comité'=>'author.organsnames',
+            'Statut adhérent'=>'author.status',
             'Responsabilité'=>'responsability',
             'Profession de foi'=>'professionfoi',
             'Profession de foi cplt'=>'professionfoicplt',
             'Est Sortant'=>'isSortant',
             'Date de candidature'=>'submitDate',
-            'Status de candidature'=>'status',
+            'Statut de candidature'=>'status',
             );
     }
 }
