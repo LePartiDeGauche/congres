@@ -30,6 +30,7 @@ class EventAdherentRegistrationAdmin extends Admin
         true => 'Oui',
         false => 'Non',
     );
+
     /**
      * @param DatagridMapper $datagridMapper
      */
@@ -95,6 +96,8 @@ class EventAdherentRegistrationAdmin extends Admin
             ))
             //->add('cost', NULL, array('label' => 'Tarif'))
             ->add('meals', null, array('label' => 'Repas', 'multiple' => true))
+            ->add('bedroom', null, array('template' => 'app:admin:bedroom_custom_list.html.twig'))
+
         ;
     }
 
