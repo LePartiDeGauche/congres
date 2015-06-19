@@ -18,7 +18,9 @@ class AdherentAdmin extends Admin
         $formMapper
             ->add('lastname', null, array('label' => 'Nom'))
             ->add('firstname', null, array('label' => 'Prénom'))
+            ->add('gender', null, array('label' => 'Genre'))
             ->add('email')
+            ->add('mobilephone', null, array('label' => 'Téléphone'))
             ->add('departement')
             ->add('birthdate', 'birthday', array('label' => 'Date de naissance'))
             ->add('status', 'choice', array(
@@ -71,6 +73,7 @@ class AdherentAdmin extends Admin
             ->addIdentifier('email')
             ->addIdentifier('lastname', null, array('label' => 'Nom'))
             ->addIdentifier('firstname', null, array('label' => 'Prénom'))
+            ->add('gender', null, array('label' => 'Genre'))
             ->add('birthdate', null, array('label' => 'Date de naissance'))
             ->add('user', null, array('label' => 'Compte'))
             ->add('status', null, array('Statut'))
