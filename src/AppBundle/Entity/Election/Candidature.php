@@ -70,7 +70,7 @@ class Candidature
      *
      * @var string
      *
-     * @ORM\Column(name="professionfoicplt", type="text", nullable=false)
+     * @ORM\Column(name="professionfoicplt", type="text", nullable=true)
      *
      * @Assert\Length(max=1000)
      */
