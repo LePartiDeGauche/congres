@@ -89,7 +89,9 @@ class SleepingController extends Controller
             $data = $formSleeping->getData();
             $duration = $data['duration'];
             $date = clone $data['date'];
-            $price = 60 * $duration;
+
+            // ///// A modifier selon le prix de la chambre par nuit
+            $price = 60;
 
             for($i=0; $i < $duration; $i++){
                 $booking = new Booking();
@@ -114,7 +116,9 @@ class SleepingController extends Controller
 
             if ($paiement == EventAdherentRegistration::PAYMENT_MODE_ONLINE) {
 
-                $totalPrice = $eventRegistration->getCost()->getCost()+$price;
+                $priceComplete = $price * $duration;
+
+                $totalPrice = $eventRegistration->getCost()->getCost()+$priceComplete;
                 $eventPayment = $this->createPayment($adherent, $event, $eventRegistration, $totalPrice);
 
                 $manager->persist($eventPayment);
