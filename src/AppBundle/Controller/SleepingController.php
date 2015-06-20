@@ -89,7 +89,9 @@ class SleepingController extends Controller
             $data = $formSleeping->getData();
             $duration = $data['duration'];
             $date = clone $data['date'];
-            $price = 60 * $duration;
+
+            // ///// A modifier selon le prix de la chambre par nuit
+            $price = 60;
 
             for($i=0; $i < $duration; $i++){
                 $booking = new Booking();
@@ -101,6 +103,7 @@ class SleepingController extends Controller
                 $manager->persist($booking);
 
                 $date->add(new \DateInterval("P1D"));
+
             }
 
             $manager->flush();
@@ -114,7 +117,9 @@ class SleepingController extends Controller
 
             if ($paiement == EventAdherentRegistration::PAYMENT_MODE_ONLINE) {
 
-                $totalPrice = $eventRegistration->getCost()->getCost()+$price;
+                $priceComplete = $price * $duration;
+
+                $totalPrice = $eventRegistration->getCost()->getCost()+$priceComplete;
                 $eventPayment = $this->createPayment($adherent, $event, $eventRegistration, $totalPrice);
 
                 $manager->persist($eventPayment);
@@ -128,10 +133,6 @@ class SleepingController extends Controller
             }
 
         }
-
-
-
-
         return $this->render('event/bedroom_submit.html.twig', array(
             'form' => $formSleeping->createView(),
         ));
@@ -140,7 +141,13 @@ class SleepingController extends Controller
 
     }
 
-
+    /**
+     * @param Adherent $adherent
+     * @param Event $event
+     * @param EventAdherentRegistration $eventRegistration
+     * @param $amount
+     * @return EventPayment
+     */
     private function createPayment(Adherent $adherent, Event $event, EventAdherentRegistration $eventRegistration, $amount)
     {
         $eventPayment = new EventPayment($adherent, $event, $eventRegistration, $amount);
@@ -154,5 +161,29 @@ class SleepingController extends Controller
             ->setAccount(EventPayment::ACCOUNT_PG); // FIXME : multiple account gestion, the account as to be choosen when creating the event. Needed to modify PayboxBundle to manage multiple id
 
         return $eventPayment;
+    }
+
+    /**
+     * @param $adherent
+     * @return object
+     */
+    public function findBedroomByAdherentAction($adherent)
+    {
+        $doctrine = $this->getDoctrine();
+        $bookingRepository = $doctrine->getRepository('AppBundle:Event\Booking');
+        $booking = $bookingRepository->findOneBy($adherent);
+
+        if ($booking)
+        {
+            $bedroom = $booking->getBedroom();
+            $name = $bedroom->getRoomType()->getName();
+            $bedroomNumber = $bedroom->getNumber();
+
+            return $this->render('admin/bedroom_custom_list.html.twig', [
+                'name' => $name,
+                'bedroomNumber' => $bedroomNumber,
+            ]);
+
+        }
     }
 }
