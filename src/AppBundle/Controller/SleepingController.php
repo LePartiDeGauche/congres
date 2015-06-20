@@ -91,7 +91,7 @@ class SleepingController extends Controller
             $date = clone $data['date'];
 
             // ///// A modifier selon le prix de la chambre par nuit
-            $price = 60;
+            $price = 0;
 
             for($i=0; $i < $duration; $i++){
                 $booking = new Booking();
