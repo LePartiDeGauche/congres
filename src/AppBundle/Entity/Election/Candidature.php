@@ -129,7 +129,7 @@ class Candidature
      *
      * @return Candidature
      */
-    public function setAuthor(Adherent $author)
+    public function setAuthor(Adherent $author = null)
     {
         $this->author = $author;
 

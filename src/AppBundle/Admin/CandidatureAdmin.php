@@ -47,7 +47,6 @@ class CandidatureAdmin extends Admin
             ->add('author.firstname', null, array('label' => 'Prénom de l\'auteur'))
             ->add('author.lastname', null, array('label' => 'Nom de l\'auteur'))
             ->add('responsability', null, array('label' => 'Instance'))
-            ->add('professionfoi', null, array('label' => 'Profession de foi'))
             ->add('submitDate', null, array('label' => 'Date d\'envoi'))
             ->add('status', 'choice', array(
                 'label' => 'Statut',
@@ -72,28 +71,18 @@ class CandidatureAdmin extends Admin
         $formMapper
             ->add('author', 'sonata_type_model_autocomplete', array(
                 'label' => 'Auteur',
-                'property' => array('firstname', 'lastname', 'email'),
                 'placeholder' => 'Rechercher un nom ou un email',
-                'callback' => function ($admin, $property, $value) {
-                    $datagrid = $admin->getDatagrid();
-                    $queryBuilder = $datagrid->getQuery();
-                    $queryBuilder
-                        ->andWhere($queryBuilder->getRootAlias().'.firstname LIKE :value')
-                        ->orWhere($queryBuilder->getRootAlias().'.lastname LIKE :value')
-                        ->orWhere($queryBuilder->getRootAlias().'.email LIKE :value')
-                        ->setParameter('value', '%'.$value.'%')
-                    ;
-                },
-                'to_string_callback' => function ($user, $property) {
-                    $firstname = $user->getFirstname();
-                    $lastname = $user->getLastname();
-                    $email = $user->getEmail();
-
-                    return $firstname.' '.$lastname.' &lt;'.$email.'&gt;';
+                'property' => array('firstname', 'lastname', 'email'),
+                'to_string_callback' => function ($adherent, $property) {
+                    return $adherent->getFirstname() . ' '
+                        . $adherent->getLastname() . ' &lt;'
+                        . $adherent->getEmail() . '&gt;';
                 },
             ))
             ->add('responsability')
             ->add('professionfoi')
+            ->add('isSortant')
+            ->add('professionfoicplt')
             ->add('status', 'choice', array(
                 'label' => 'Statut',
                 'choices' => $this->status_choice,
