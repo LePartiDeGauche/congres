@@ -36,8 +36,23 @@
                                                                 role="button" aria-expanded="false">Textes<span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
                                 <li>
+                                    <a href="{{ path('downloads', {filename: 'Rapport du groupe Statuts de la Commission des  débats.pdf'}) }}">
+                                        Rapport du groupe Statuts de la Commission des  débats
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('downloads', {filename: 'Statuts du PG Cahier des amemdements de la Commission des  débats.pdf'}) }}">
+                                        Statuts du PG - Cahier des amemdements
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('downloads', {filename: 'Réglement intérieur du PG - Cahier des amendements de la  Commission des débats.pdf'}) }}">
+                                        Réglement intérieur du PG - Cahier des amendements
+                                    </a>
+                                </li>
+                                <li>
                                     <a href="{{ path('downloads', {filename: 'CDV Amendements validés - Classement par comités  site.pdf'}) }}">
-                                        Amendements
+                                        Amendements validés
                                     </a>
                                 </li>
                                 <li>
@@ -102,9 +117,6 @@
 
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Congrès<span class="caret"></span></a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="{{ path('candidature_list') }}">Candidatures aux instances</a></li>
-                            </ul>
                         </li>
 
                         <li class="dropdown">
