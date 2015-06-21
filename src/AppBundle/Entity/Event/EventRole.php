@@ -54,7 +54,7 @@ class EventRole
     /**
      * @var \stdClass
      *
-     * @ORM\OneToMany(targetEntity="EventAdherentRegistration", mappedBy="role" )
+     * @ORM\OneToMany(targetEntity="EventAdherentRegistration", mappedBy="role")
      */
     private $participants;
 

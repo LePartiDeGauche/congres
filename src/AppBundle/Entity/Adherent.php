@@ -347,6 +347,23 @@ class Adherent
     }
 
     /**
+     * Checks if adherent has provided responsability.
+     *
+     * @param \AppBundle\Entity\AdherentResponsability $responsabilities
+     *
+     * @return bool
+     */
+    public function hasResponsability(\AppBundle\Entity\Responsability $responsability)
+    {
+        foreach ($this->responsabilities as $adh_responsability) {
+            if ($adh_responsability->getResponsability() == $responsability) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * Remove responsabilities.
      *
      * @param \AppBundle\Entity\AdherentResponsability $responsabilities

@@ -60,7 +60,7 @@ class EventAdmin extends Admin
             ->add('roles', 'sonata_type_collection',
                 array(
                     'type_options' => array(
-                        'delete' => false,
+                        'delete' => true,
                     ),
                 ), array(
                     'edit' => 'inline',
