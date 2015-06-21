@@ -4,21 +4,35 @@
 <div class="container">
     <div class="row">
         <h1>Bonjour, {{ app.user.profile.firstname}}</h1>
+        <div class="col-md-6">
+            <h2>Inscription au congrès</h2>
+            <p>
+            <a href="{{ path('event_registration_create', { event_id: 3 }) }}">
+                Cliquer ici pour s'inscrire au congrès de Villejuif.
+            </a>
+            </p>
+            <ul>
+                <li>
+            Les délégués et membres du bureau national sont membres de droit et
+            s'inscrivent directement.
+                </li>
+                <li>
+            Les membres des différentes commissions, les candidats aux instances,
+            les équipes d'organisation et les invités transmettent au préalable leur
+            demande d'inscription à : congres2015@lepartidegauche.fr
+                </li>
+            </ul>
+            <p>
+            Contact : Marie-Pierre Oprandi 06 88 95 51 84
+            </p>
 
-        <h2>Amendements&nbsp;: Statuts et réglement intérieur du PG</h2>
-        <p>
-            Les cahiers d'amendements de la Commission des débats concernant
-            les statuts et le règlement intérieur du PG, ainsi qu'un premier
-            rapport sur leur traitement, sont disponibles dans la rubrique "Textes".
-        </p>
-
-        <h2>Amendements sur les textes soumis au congrès</h2>
-        <p>
-            La liste des amendements votés par les comités, transmise après
-            examen par la Commission des votes réunie le 30 mai 2015 est
-            disponible dans la rubrique <a href="{{ path('downloads', {filename: 'CDV Amendements validés - Classement par comités  site.pdf'}) }}">Textes&nbsp;>&nbsp;Amendements</a>.<br/>
-            Pour toute remarque : frederique.dumont@lepartidegauche.fr
-        </p>
+            <h2>Amendements&nbsp;: Statuts et réglement intérieur du PG</h2>
+            <p>
+                Les cahiers d'amendements de la Commission des débats concernant
+                les statuts et le règlement intérieur du PG, ainsi qu'un premier
+                rapport sur leur traitement, sont disponibles dans la rubrique "Textes".
+            </p>
+        </div>
     </div>
     <div class="row">
         <div class="alert alert-warning text-justify" role="alert">
