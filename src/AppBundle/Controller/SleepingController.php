@@ -2,9 +2,11 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Adherent;
 use AppBundle\Entity\Event\Bedroom;
 use AppBundle\Entity\Event\BedroomBooking;
 use AppBundle\Entity\Event\Booking;
+use AppBundle\Entity\Event\Event;
 use AppBundle\Entity\Event\EventAdherentRegistration;
 use AppBundle\Form\Event\BookingType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -167,23 +169,10 @@ class SleepingController extends Controller
      * @param $adherent
      * @return object
      */
-    public function findBedroomByAdherentAction($adherent)
+    public function bedroomByAdherentAction(Adherent $adherent)
     {
-        $doctrine = $this->getDoctrine();
-        $bookingRepository = $doctrine->getRepository('AppBundle:Event\Booking');
-        $booking = $bookingRepository->findOneBy($adherent);
+        $booking = $this->getDoctrine()->getRepository('AppBundle:Event\Booking')->findOneBy(['adherent' => $adherent]);
 
-        if ($booking)
-        {
-            $bedroom = $booking->getBedroom();
-            $name = $bedroom->getRoomType()->getName();
-            $bedroomNumber = $bedroom->getNumber();
-
-            return $this->render('admin/bedroom_custom_list.html.twig', [
-                'name' => $name,
-                'bedroomNumber' => $bedroomNumber,
-            ]);
-
-        }
+        return $this->render('admin/bedroom_by_adherent.html.twig', ['booking' => $booking]);
     }
 }

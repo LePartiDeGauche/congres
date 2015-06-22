@@ -2,7 +2,6 @@
 
 {% block field %}
     <div>
-        <!-- render('SleepingController::findBedroomByAdherentAction') %}
-         bedroom.name }} -->
+        {% render(controller('AppBundle:Sleeping:bedroomByAdherent', {'id': object.adherent.id })) %}
     </div>
 {% endblock %}
