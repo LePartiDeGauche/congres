@@ -68,7 +68,7 @@ class EventAdherentRegistrationAdmin extends Admin
      */
     protected $datagridValues = array (
 
-        '_sort_order' => 'DESC', // Descendant ordering (default = 'ASC')
+        '_sort_order' => 'DESC',
     );
 
     /**
