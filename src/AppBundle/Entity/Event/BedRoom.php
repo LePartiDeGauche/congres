@@ -138,4 +138,12 @@ class Bedroom
     {
         $this->dateStopAvailability = $dateStopAvailability;
     }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->number;
+    }
 }
