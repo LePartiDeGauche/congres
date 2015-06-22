@@ -144,6 +144,8 @@ class Bedroom
      */
     public function __toString()
     {
-        return $this->number;
+        $sleepingSite = $this->getRoomType()->getSleepingSite();
+        $number = $this->getNumber();
+        return $sleepingSite.', chambre : '.$number;
     }
 }
