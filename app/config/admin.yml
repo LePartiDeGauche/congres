@@ -212,3 +212,9 @@ services:
             arguments: [~, AppBundle\Entity\Event\Bedroom, SonataAdminBundle:CRUD]
             tags:
                 - {name: sonata.admin, manager_type: orm, group: "Evenements", label: "Chambres"}
+
+    sonata.admin.booking:
+        class: AppBundle\Admin\BookingAdmin
+        arguments: [~, AppBundle\Entity\Event\Booking, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: "Evenements", label: "Réservations"}

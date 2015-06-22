@@ -2,6 +2,7 @@
 
 namespace AppBundle\Admin;
 
+use AppBundle\Entity\Event\Event;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -44,7 +45,7 @@ class EventAdherentRegistrationAdmin extends Admin
             ->add('adherent.email', null, array('label' => 'Courriel'))
             ->add('adherent.departement', null, array('label' => 'Département'))
             ->add('adherent.responsabilities.responsability', null, array('label' => 'Responsabilité', 'multiple' => true))
-            ->add('role', null, array('label' => 'Inscrit en tant que', 'multiple' => true))
+            ->add('role', null, array('label' => 'Inscrit en tant que'))
             ->add('needHosting', null, array('label' => 'Hebergement'))
             ->add('voteStatus', null, array('label' => 'Droit de vote'))
             ->add('paymentMode', null,
@@ -58,6 +59,17 @@ class EventAdherentRegistrationAdmin extends Admin
             ->add('meals', null, array('label' => 'Repas'))
         ;
     }
+
+
+    /**
+     * Default Datagrid values
+     *
+     * @var array
+     */
+    protected $datagridValues = array (
+
+        '_sort_order' => 'DESC', // Descendant ordering (default = 'ASC')
+    );
 
     /**
      * @param ListMapper $listMapper
@@ -96,7 +108,7 @@ class EventAdherentRegistrationAdmin extends Admin
             ))
             //->add('cost', NULL, array('label' => 'Tarif'))
             ->add('meals', null, array('label' => 'Repas', 'multiple' => true))
-            ->add('bedroom', null, array('template' => 'admin/bedroom_custom_list.html.twig'))
+            ->add('bedroom', null, array('label' => 'Chambre', 'template' => 'admin/bedroom_custom_list.html.twig'))
 
         ;
     }
