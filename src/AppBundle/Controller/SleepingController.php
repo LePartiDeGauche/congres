@@ -10,7 +10,6 @@ use AppBundle\Entity\Event\Event;
 use AppBundle\Entity\Event\EventAdherentRegistration;
 use AppBundle\Form\Event\BookingType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
@@ -115,7 +114,6 @@ class SleepingController extends Controller
             $eventRegistration = $this->getDoctrine()
                 ->getRepository('AppBundle:Event\EventAdherentRegistration')
                 ->findOneBy(array('adherent' => $adherent, 'event' => $event));
-
 
             if ($paiement == EventAdherentRegistration::PAYMENT_MODE_ONLINE) {
 
