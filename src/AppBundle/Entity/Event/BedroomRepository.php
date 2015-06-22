@@ -10,11 +10,15 @@ use Doctrine\ORM\EntityRepository;
  */
 class BedroomRepository  extends EntityRepository
 {
-    public function findPlacesByBedroom(Bedroom $bedroom)
+    public function findBedroomsActivesByDate(\DateTime $date)
     {
         return $this
             ->createQueryBuilder('b')
-            ->join('b.roomType', 'r')
+            ->where('b.dateStartAvailability <= :date')
+            ->andWhere('b.dateStopAvailability >= :date')
+            ->setParameters([
+                'date' => $date,
+            ])
             ->getQuery()
             ->getResult()
         ;

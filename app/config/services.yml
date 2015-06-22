@@ -77,3 +77,9 @@ services:
         public:     false
         tags:
            - { name: security.voter }
+
+    app.booking_listener:
+        class: AppBundle\EventListener\BookingListener
+        tags:
+            - { name: doctrine.event_listener, event: postUpdate }
+            - { name: doctrine.event_listener, event: postPersist }
