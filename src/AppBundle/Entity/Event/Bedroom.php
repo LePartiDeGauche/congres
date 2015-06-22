@@ -9,7 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Sleeping.
  *
  * @ORM\Table(name="bedroom")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="BedroomRepository")
  */
 class Bedroom
 {

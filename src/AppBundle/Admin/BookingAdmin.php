@@ -30,6 +30,16 @@ class BookingAdmin extends Admin
     }
 
     /**
+     * Default Datagrid values
+     *
+     * @var array
+     */
+    protected $datagridValues = array (
+
+        '_sort_order' => 'DESC',
+    );
+
+    /**
      * {@inheritdoc}
      */
     protected function configureListFields(ListMapper $listMapper)
