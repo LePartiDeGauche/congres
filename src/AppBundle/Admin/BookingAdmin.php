@@ -26,6 +26,7 @@ class BookingAdmin extends Admin
             ->add('date', null, array('label' => 'Date'))
             ->add('bedroom', null, array('label' => 'Chambre'))
             ->add('price', null, array('label' => 'Prix'))
+            ->add('bedroom.roomType.sleepingSite.event', null, array('label' => 'Événement'))
         ;
     }
 
@@ -50,6 +51,7 @@ class BookingAdmin extends Admin
             ->add('date', null, array('label' => 'Date'))
             ->add('bedroom', null, array('label' => 'Chambre'))
             ->add('price', null, array('label' => 'Prix'))
+            ->add('bedroom.roomType.sleepingSite.event', null, array('label' => 'Événement'))
             ->add('_action', 'actions', array(
                 'actions' => array(
                     'show' => array(),
