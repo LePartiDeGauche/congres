@@ -30,6 +30,7 @@ class RoomTypeAdmin extends Admin
             ->add('description', null, array('label' => 'Description'))
             ->add('places', null, array('label' => 'Places Disponibles'))
             ->add('canBookMore', null, array('label' => 'Possibilité de réserver plus de chambre que disponibles'))
+            ->add('sleepingSite.event', null, array('label' => 'Événement concerné'))
         ;
     }
 
@@ -45,6 +46,7 @@ class RoomTypeAdmin extends Admin
             ->add('type', null, array('label' => 'Type de chambre'))
             ->add('description', null, array('label' => 'Description'))
             ->add('places', null, array('label' => 'Places Disponibles'))
+            ->add('sleepingSite.event', null, array('label' => 'Événement concerné'))
             ->add('_action', 'actions', array(
                 'actions' => array(
                     'show' => array(),
