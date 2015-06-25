@@ -18,6 +18,10 @@ class Adherent
     const STATUS_OLD = 'Ancien adhérent';
     const STATUS_EXCLUDED = 'Exclusion';
 
+    const GENDER_MALE    = 'M';
+    const GENDER_FEMALE  = 'F';
+    const GENDER_UNKNOWN = '?';
+
     /**
      * @var int
      *
@@ -47,6 +51,20 @@ class Adherent
      * @ORM\Column(name="firstname", type="string", length=255)
      */
     private $firstname;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="gender", type="string", length=1)
+     */
+    private $gender;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="mobilephone", type="string", length=100, nullable=true)
+     */
+    private $mobilephone;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
@@ -228,7 +246,7 @@ class Adherent
         $this->email = $email;
 
         if ($this->user && $this->user->getEmail() !== $email) {
-            $this->user->setEmail($email);
+            // FIXME: $this->user->setEmail($email);
         }
 
         return $this;
@@ -326,6 +344,23 @@ class Adherent
         $this->responsabilities[] = $responsability;
 
         return $this;
+    }
+
+    /**
+     * Checks if adherent has provided responsability.
+     *
+     * @param \AppBundle\Entity\AdherentResponsability $responsabilities
+     *
+     * @return bool
+     */
+    public function hasResponsability(\AppBundle\Entity\Responsability $responsability)
+    {
+        foreach ($this->responsabilities as $adh_responsability) {
+            if ($adh_responsability->getResponsability() == $responsability) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -453,5 +488,66 @@ class Adherent
     public function getDepartement()
     {
         return $this->departement;
+    }
+
+    /**
+     * Set gender
+     *
+     * @param string $gender
+     *
+     * @return Adherent
+     */
+    public function setGender($gender)
+    {
+        switch ($gender) {
+            case 'M':
+            case 'H':
+            case 'G':
+                $gender = self::GENDER_MALE;
+                break;
+            case 'F':
+                $gender = self::GENDER_FEMALE;
+                break;
+            default:
+                $gender = self::GENDER_UNKNOWN;
+                break;
+        }
+        $this->gender = $gender;
+
+        return $this;
+    }
+
+    /**
+     * Get gender
+     *
+     * @return string
+     */
+    public function getGender()
+    {
+        return $this->gender;
+    }
+
+    /**
+     * Set mobilephone
+     *
+     * @param string $mobilephone
+     *
+     * @return Adherent
+     */
+    public function setMobilephone($mobilephone)
+    {
+        $this->mobilephone = $mobilephone;
+
+        return $this;
+    }
+
+    /**
+     * Get mobilephone
+     *
+     * @return string
+     */
+    public function getMobilephone()
+    {
+        return $this->mobilephone;
     }
 }

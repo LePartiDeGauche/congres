@@ -4,18 +4,40 @@
 <div class="container">
     <div class="row">
         <h1>Bonjour, {{ app.user.profile.firstname}}</h1>
-        <p>
-<<<<<<< HEAD
-            Le formulaire de transmission du nom des délégués au congrès sera prochainement mis en ligne ici.
-=======
-            <h2>Désignation des délégués au congrès</h2>
-            Seuls les co-secrétaire de comités peuvent transmettre le nom des délégués au congrès. Les délégations doivent être paritaires.<br/>
-            Pour toute question ou difficulté de transmission, appelez au 06 88 95 51 84 ou congres2015@lepartidegauche.fr.
-        </p>
-        <p>
-        Transmettre le nom des délégués au congrès <a href="{{ path('election_list') }}">ici</a>
->>>>>>> master
-        </p>
+        <div class="col-md-6">
+            <h2>Travaux de la commission des débats</h2>
+            <p>
+            Les cahiers d'amendements de la Commission des débats concernant les
+            statuts, le règlement intérieur du PG et le texte de la Plateforme,
+            ainsi que les rapports sur leur traitement, sont disponibles dans la
+            rubrique "Textes".
+            </p>
+            <p>
+            Pour joindre la commission des débats: commission-debats@lepartidegauche.fr
+            </p>
+
+            <h2>Inscription au congrès</h2>
+            <p>
+            <a href="{{ path('event_registration_create', { event_id: 3 }) }}">
+                Cliquer ici pour s'inscrire au congrès de Villejuif.
+            </a>
+            </p>
+
+            <ul>
+                <li>
+            Les délégués et membres du bureau national sont membres de droit et
+            s'inscrivent directement.
+                </li>
+                <li>
+            Les membres des différentes commissions, les candidats aux instances,
+            les équipes d'organisation et les invités transmettent au préalable leur
+            demande d'inscription à : congres2015@lepartidegauche.fr
+                </li>
+            </ul>
+            <p>
+            Contact : Marie-Pierre Oprandi 06 88 95 51 84
+            </p>
+        </div>
     </div>
     <div class="row">
         <div class="alert alert-warning text-justify" role="alert">

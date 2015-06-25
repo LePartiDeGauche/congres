@@ -72,6 +72,12 @@ services:
         tags:
            - { name: security.voter }
 
+    app.congres.event_register_voter:
+        class:      AppBundle\Security\EventRegisterVoter
+        public:     false
+        tags:
+           - { name: security.voter }
+
     app.booking_listener:
         class: AppBundle\EventListener\BookingListener
         arguments: [@mailer]

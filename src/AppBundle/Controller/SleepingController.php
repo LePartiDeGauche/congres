@@ -8,6 +8,7 @@ use AppBundle\Entity\Event\BedroomBooking;
 use AppBundle\Entity\Event\Booking;
 use AppBundle\Entity\Event\Event;
 use AppBundle\Entity\Event\EventAdherentRegistration;
+use AppBundle\Entity\Payment\EventPayment;
 use AppBundle\Form\Event\BookingType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -106,6 +107,8 @@ class SleepingController extends Controller
                 $date->add(new \DateInterval("P1D"));
             }
 
+            $manager->flush();
+            $manager->refresh($adherent);
 
            $paiement = $this->get('session')->get('paiement');
             $event = $bedroom->getRoomType()->getSleepingSite()->getEvent();
@@ -143,7 +146,7 @@ class SleepingController extends Controller
      * @param $amount
      * @return EventPayment
      */
-    private function createPayment(Adherent $adherent, Event $event, EventAdherentRegistration $eventRegistration, $amount)
+    private function createPayment($adherent, $event, EventAdherentRegistration $eventRegistration, $amount)
     {
         $eventPayment = new EventPayment($adherent, $event, $eventRegistration, $amount);
         $eventPayment->setAmount($amount)
