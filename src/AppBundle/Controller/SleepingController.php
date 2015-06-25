@@ -37,7 +37,7 @@ class SleepingController extends Controller
         $bedroomRepository = $doctrine->getRepository('AppBundle:Event\Bedroom');
         $bookingRepository = $doctrine->getRepository('AppBundle:Event\Booking');
 
-        $bedrooms = $bedroomRepository->findAll();
+        $bedrooms = $bedroomRepository->findBedroomsNextCurrentDate();
 
         $bookings = [];
         foreach ($bedrooms as $bedroom) {
@@ -91,9 +91,20 @@ class SleepingController extends Controller
             $data = $formSleeping->getData();
             $duration = $data['duration'];
             $date = clone $data['date'];
-
             // ///// A modifier selon le prix de la chambre par nuit
             $price = 0;
+
+            if ($duration <=0) {
+                $this
+                    ->get('session')
+                    ->getFlashBag()
+                    ->add(
+                        'warning',
+                        'Indiquez une durée valable, supérieure à 0 jours'
+                    )
+                ;
+                return $this->redirect($this->generateUrl('sleeping_list'));
+            }
 
             for($i=0; $i < $duration; $i++){
                 $booking = new Booking();
@@ -102,13 +113,40 @@ class SleepingController extends Controller
                 $booking->setBedroom($bedroom);
                 $booking->setPrice($price);
 
+                // test du nombre de réservations par chambre
+                $bookings = $manager->getRepository('AppBundle:Event\Booking')
+                    ->findFor($bedroom, $date);
+                $numberOfBookingsByDayAndBedroom = count($bookings);
+                $places = $bedroom->getRoomType()->getPlaces();
+
                 $manager->persist($booking);
+
+                if ($numberOfBookingsByDayAndBedroom > $places) {
+                    $this
+                        ->get('session')
+                        ->getFlashBag()
+                        ->add(
+                            'error',
+                            'Une de vos réservations n\'a pu être enregistrée car elle concerne une chambre déjà pleine'
+                        )
+                    ;
+                    $manager->detach($booking);
+                }
+
                 $manager->flush();
                 $date->add(new \DateInterval("P1D"));
             }
-
             $manager->flush();
             $manager->refresh($adherent);
+
+            $this
+                ->get('session')
+                ->getFlashBag()
+                ->add(
+                    'success',
+                    'Réservation bien enregistrée'
+                )
+            ;
 
            $paiement = $this->get('session')->get('paiement');
             $event = $bedroom->getRoomType()->getSleepingSite()->getEvent();
@@ -129,8 +167,7 @@ class SleepingController extends Controller
                 return $this->redirect($this->generateUrl('payment_pay',
                     array('id' => $eventPayment->getId())));
             } else {
-                return $this->redirect($this->generateUrl('event_registration_show',
-                    array('event_id' => $event->getId(), 'event_reg_id' => $eventRegistration->getId())));
+                return $this->redirect($this->generateUrl('sleeping_list'));
             }
 
         }
@@ -187,5 +224,27 @@ class SleepingController extends Controller
     {
         $bookings = $this->getDoctrine()->getRepository('AppBundle:Event\Booking')->findBy(['bedroom' => $bedroom]);
         return $this->render('admin/bookings_by_bedroom.html.twig', ['bookings' => $bookings, 'nbr' => count($bookings)]);
+    }
+
+
+    /**
+     * Lists all Booking registration.
+     *
+     * @Route("/booking/user", name="booking_registration_list")
+     *
+     * @Method("GET")
+     */
+    public function indexAction()
+    {
+        $adherent = $this->getUser()->getProfile();
+
+        $em = $this->getDoctrine()->getManager();
+
+        $bookings = $em->getRepository('AppBundle:Event\Booking')->findBy(['adherent' => $adherent]);
+
+        return $this->render('event/booking_registration_list.html.twig', array(
+            'bookings' => $bookings,
+            'adherent' => $adherent,
+        ));
     }
 }

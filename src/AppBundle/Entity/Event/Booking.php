@@ -91,7 +91,7 @@ class Booking
     }
 
     /**
-     * @return datetime
+     * @return \DateTime
      */
     public function getDate()
     {
