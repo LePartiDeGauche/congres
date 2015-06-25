@@ -90,9 +90,20 @@ class SleepingController extends Controller
             $data = $formSleeping->getData();
             $duration = $data['duration'];
             $date = clone $data['date'];
-
             // ///// A modifier selon le prix de la chambre par nuit
             $price = 0;
+
+            if ($duration <=0) {
+                $this
+                    ->get('session')
+                    ->getFlashBag()
+                    ->add(
+                        'warning',
+                        'Indiquez une durée valable, supérieure à 0 jours'
+                    )
+                ;
+                return $this->redirect($this->generateUrl('sleeping_list'));
+            }
 
             for($i=0; $i < $duration; $i++){
                 $booking = new Booking();
