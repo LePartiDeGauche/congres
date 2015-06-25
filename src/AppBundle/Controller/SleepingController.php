@@ -92,7 +92,7 @@ class SleepingController extends Controller
             $date = clone $data['date'];
 
             // ///// A modifier selon le prix de la chambre par nuit
-            $price = 60;
+            $price = 0;
 
             for($i=0; $i < $duration; $i++){
                 $booking = new Booking();
@@ -162,11 +162,18 @@ class SleepingController extends Controller
      * @param $adherent
      * @return object
      */
-    public function bedroomByAdherentAction(Adherent $adherent)
+    public function bedroomByAdherentAction(Adherent $adherent, Event $event)
     {
-        $booking = $this->getDoctrine()->getRepository('AppBundle:Event\Booking')->findOneBy(['adherent' => $adherent]);
+        $bookings = $this->getDoctrine()->getRepository('AppBundle:Event\Booking')->findBy(['adherent' => $adherent]);
 
-        return $this->render('admin/bedroom_by_adherent.html.twig', ['booking' => $booking]);
+        $filtered_bookings = array();
+        foreach ($bookings as $booking) {
+            if ($booking->getBedroom()->getRoomType()->getSleepingSite()->getEvent() == $event) {
+                $filtered_bookings[] = $booking;
+            }
+        }
+
+        return $this->render('admin/bedroom_by_adherent.html.twig', ['bookings' => $filtered_bookings]);
     }
 
     /**
