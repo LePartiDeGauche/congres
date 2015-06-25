@@ -67,8 +67,10 @@ class BookingAdmin extends Admin
      */
     protected function configureFormFields(FormMapper $formMapper)
     {
+
         $formMapper
-            ->add('adherent', null, array('label' => 'Adhérent'))
+            ->add('adherent.firstname', 'text', array('label' => 'Prénom', 'read_only' => true))
+            ->add('adherent.lastname', 'text', array('label' => 'Nom', 'read_only' => true))
             ->add('date', null, array('label' => 'Date'))
             ->add('bedroom', null, array('label' => 'Chambre'))
             ->add('price', null, array('label' => 'Prix'))

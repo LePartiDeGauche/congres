@@ -173,4 +173,14 @@ class SleepingController extends Controller
 
         return $this->render('admin/bedroom_by_adherent.html.twig', ['booking' => $booking]);
     }
+
+    /**
+     * @param Bedroom $bedroom
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function bookingsByBedroomAction(Bedroom $bedroom)
+    {
+        $bookings = $this->getDoctrine()->getRepository('AppBundle:Event\Booking')->findBy(['bedroom' => $bedroom]);
+        return $this->render('admin/bookings_by_bedroom.html.twig', ['bookings' => $bookings, 'nbr' => count($bookings)]);
+    }
 }
