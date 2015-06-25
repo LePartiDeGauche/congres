@@ -221,4 +221,26 @@ class SleepingController extends Controller
         $bookings = $this->getDoctrine()->getRepository('AppBundle:Event\Booking')->findBy(['bedroom' => $bedroom]);
         return $this->render('admin/bookings_by_bedroom.html.twig', ['bookings' => $bookings, 'nbr' => count($bookings)]);
     }
+
+
+    /**
+     * Lists all Booking registration.
+     *
+     * @Route("/booking/user", name="booking_registration_list")
+     *
+     * @Method("GET")
+     */
+    public function indexAction()
+    {
+        $adherent = $this->getUser()->getProfile();
+
+        $em = $this->getDoctrine()->getManager();
+
+        $bookings = $em->getRepository('AppBundle:Event\Booking')->findBy(['adherent' => $adherent]);
+
+        return $this->render('event/booking_registration_list.html.twig', array(
+            'bookings' => $bookings,
+            'adherent' => $adherent,
+        ));
+    }
 }
