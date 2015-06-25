@@ -101,11 +101,37 @@ class SleepingController extends Controller
                 $booking->setBedroom($bedroom);
                 $booking->setPrice($price);
 
+                // test du nombre de réservations par chambre
+                $bookings = $manager->getRepository('AppBundle:Event\Booking')
+                    ->findFor($bedroom, $date);
+                $numberOfBookingsByDayAndBedroom = count($bookings);
+                $places = $bedroom->getRoomType()->getPlaces();
+
                 $manager->persist($booking);
+
+                if ($numberOfBookingsByDayAndBedroom > $places) {
+                    $this
+                        ->get('session')
+                        ->getFlashBag()
+                        ->add(
+                            'error',
+                            'Une de vos réservations n\'a pu être enregistrée car elle concerne une chambre déjà pleine'
+                        )
+                    ;
+                    $manager->detach($booking);
+                }
+
                 $manager->flush();
                 $date->add(new \DateInterval("P1D"));
             }
-
+            $this
+                ->get('session')
+                ->getFlashBag()
+                ->add(
+                    'success',
+                    'Réservation bien enregistrée'
+                )
+            ;
 
            $paiement = $this->get('session')->get('paiement');
             $event = $bedroom->getRoomType()->getSleepingSite()->getEvent();
@@ -126,8 +152,7 @@ class SleepingController extends Controller
                 return $this->redirect($this->generateUrl('payment_pay',
                     array('id' => $eventPayment->getId())));
             } else {
-                return $this->redirect($this->generateUrl('event_registration_show',
-                    array('event_id' => $event->getId(), 'event_reg_id' => $eventRegistration->getId())));
+                return $this->redirect($this->generateUrl('sleeping_list'));
             }
 
         }

@@ -70,6 +70,7 @@ class BookingListener
         if ($entity instanceof Booking) {
             $bedroom = $entity->getBedroom();
             $date = $entity->getDate();
+            $sleepingSite = $entity->getBedroom()->getRoomType()->getSleepingSite();
 
             $bookings = $entityManager->getRepository('AppBundle:Event\Booking')
                 ->findFor($bedroom, $date);
@@ -78,7 +79,15 @@ class BookingListener
             $places = $bedroom->getRoomType()->getPlaces();
 
             if ($numberOfBookingsByDay > $places) {
-                echo 'trop de résas';
+                $date = dump($date);
+                $message = \Swift_Message::newInstance()
+                    ->setSubject('Hébergement : places manquantes !')
+                    ->setFrom('postmaster@example.com')
+                    ->setTo('mpoprandi@yahoo.fr')
+                    ->setBody('Il y a  une chambre avec plus d\'inscriptions qu\'autorisé. Il s\'agit de la chambre : '.$bedroom.' - '.$sleepingSite.'.
+                    A la date suivante : '.$date.'.')
+                ;
+                $this->mailer->send($message);
             }
         }
     }
