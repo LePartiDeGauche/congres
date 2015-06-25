@@ -103,11 +103,9 @@ class SleepingController extends Controller
 
                 $manager->persist($booking);
 
+                $manager->flush();
                 $date->add(new \DateInterval("P1D"));
-
             }
-
-            $manager->flush();
 
             $paiement = $this->get('session')->get('paiement');
             $event = $bedroom->getRoomType()->getSleepingSite()->getEvent();
@@ -136,9 +134,6 @@ class SleepingController extends Controller
         return $this->render('event/bedroom_submit.html.twig', array(
             'form' => $formSleeping->createView(),
         ));
-
-
-
     }
 
     /**
