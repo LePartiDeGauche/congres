@@ -10,6 +10,13 @@ use Doctrine\ORM\Event\LifecycleEventArgs;
  */
 class BookingListener
 {
+    private $mailer;
+
+    public function __construct($mailer)
+    {
+        $this->mailer = $mailer;
+    }
+
     public function postUpdate(LifecycleEventArgs $args)
     {
         $this->checkLastAvailablePlace($args);
@@ -49,7 +56,7 @@ class BookingListener
                     ->setBody('Le nombre de places réservées pour le prochain événement est rempli, il faudrait penser à
                     en réserver de nouvelles !')
                 ;
-                $this->get('mailer')->send($message);
+                $this->mailer->send($message);
             }
         }
     }

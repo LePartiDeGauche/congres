@@ -102,12 +102,12 @@ class SleepingController extends Controller
                 $booking->setPrice($price);
 
                 $manager->persist($booking);
-
                 $manager->flush();
                 $date->add(new \DateInterval("P1D"));
             }
 
-            $paiement = $this->get('session')->get('paiement');
+
+           $paiement = $this->get('session')->get('paiement');
             $event = $bedroom->getRoomType()->getSleepingSite()->getEvent();
             $eventRegistration = $this->getDoctrine()
                 ->getRepository('AppBundle:Event\EventAdherentRegistration')
