@@ -10,8 +10,8 @@ use Doctrine\ORM\EntityRepository;
  */
 class BedroomRepository  extends EntityRepository
 {
-    public function findBedroomsActivesByDate(\DateTime $date)
-    {
+    public function findBedroomsActivesByDate(\DateTime $date) {
+
         return $this
             ->createQueryBuilder('b')
             ->where('b.dateStartAvailability <= :date')
@@ -22,5 +22,18 @@ class BedroomRepository  extends EntityRepository
             ->getQuery()
             ->getResult()
         ;
+    }
+
+    public function findBedroomsNextCurrentDate()
+    {
+        return $this
+            ->createQueryBuilder('b')
+            ->where('b.dateStartAvailability >= :date')
+            ->setParameters([
+                'date' => new \DateTime('-20 days'),
+            ])
+            ->getQuery()
+            ->getResult()
+            ;
     }
 }

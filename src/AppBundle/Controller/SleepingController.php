@@ -36,7 +36,7 @@ class SleepingController extends Controller
         $bedroomRepository = $doctrine->getRepository('AppBundle:Event\Bedroom');
         $bookingRepository = $doctrine->getRepository('AppBundle:Event\Booking');
 
-        $bedrooms = $bedroomRepository->findAll();
+        $bedrooms = $bedroomRepository->findBedroomsNextCurrentDate();
 
         $bookings = [];
         foreach ($bedrooms as $bedroom) {

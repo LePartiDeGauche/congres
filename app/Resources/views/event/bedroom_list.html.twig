@@ -18,11 +18,6 @@
                         {{ flashMessage }}
                     </div>
                 {% endfor %}
-                {% for flashMessage in app.session.flashbag.get('warning') %}
-                    <div class="alert alert-warning">
-                        {{ flashMessage }}
-                    </div>
-                {% endfor %}
                 <div role="tabpanel">
                     <div class="tab-content">
                         <div role="tabpanel" class="tab-pane active" id="validated">
