@@ -35,10 +35,18 @@ class ElectionReportVoter implements VoterInterface
             return VoterInterface::ACCESS_ABSTAIN;
         }
 
+        if ($object->hasBeenChecked()) {
+            return VoterInterface::ACCESS_DENIED;
+        }
+
         foreach ($object->getOrgan()->getDesignatedParticipants() as $responsability) {
             if ($responsability->getAdherent()->getUser() === $token->getUser()) {
                 return VoterInterface::ACCESS_GRANTED;
             }
+        }
+
+        if (in_array('ROLE_ADMIN', $token->getUser()->getRoles(), true)) {
+            return VoterInterface::ACCESS_GRANTED;
         }
 
         return VoterInterface::ACCESS_DENIED;
