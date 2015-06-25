@@ -255,4 +255,17 @@ class SleepingSite
     {
         $this->roomTypes->removeElement($roomTypes);
     }
+
+    /**
+     * @return int
+     */
+    public function getTotalCapacity(){
+        $total = 0;
+        foreach ($this->getRoomTypes() as $roomType)
+        {
+            $total += count($roomType->getBedrooms()) * $roomType->getPlaces();
+        }
+        return $total;
+    }
+
 }

@@ -80,6 +80,7 @@ services:
 
     app.booking_listener:
         class: AppBundle\EventListener\BookingListener
+        arguments: [@mailer]
         tags:
             - { name: doctrine.event_listener, event: postUpdate }
             - { name: doctrine.event_listener, event: postPersist }

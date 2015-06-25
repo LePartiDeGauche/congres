@@ -139,6 +139,15 @@ class Event
     }
 
     /**
+     * Get number of participants/registrations.
+     *
+     * @return int
+     */
+    public function getNbRegistrations(){
+        return count($this->participants);
+    }
+
+    /**
      * Set name.
      *
      * @param string $name

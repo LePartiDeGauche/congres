@@ -103,15 +103,14 @@ class SleepingController extends Controller
                 $booking->setPrice($price);
 
                 $manager->persist($booking);
-
+                $manager->flush();
                 $date->add(new \DateInterval("P1D"));
-
             }
 
             $manager->flush();
             $manager->refresh($adherent);
 
-            $paiement = $this->get('session')->get('paiement');
+           $paiement = $this->get('session')->get('paiement');
             $event = $bedroom->getRoomType()->getSleepingSite()->getEvent();
             $eventRegistration = $this->getDoctrine()
                 ->getRepository('AppBundle:Event\EventAdherentRegistration')
@@ -138,9 +137,6 @@ class SleepingController extends Controller
         return $this->render('event/bedroom_submit.html.twig', array(
             'form' => $formSleeping->createView(),
         ));
-
-
-
     }
 
     /**
@@ -169,10 +165,27 @@ class SleepingController extends Controller
      * @param $adherent
      * @return object
      */
-    public function bedroomByAdherentAction(Adherent $adherent)
+    public function bedroomByAdherentAction(Adherent $adherent, Event $event)
     {
-        $booking = $this->getDoctrine()->getRepository('AppBundle:Event\Booking')->findOneBy(['adherent' => $adherent]);
+        $bookings = $this->getDoctrine()->getRepository('AppBundle:Event\Booking')->findBy(['adherent' => $adherent]);
 
-        return $this->render('admin/bedroom_by_adherent.html.twig', ['booking' => $booking]);
+        $filtered_bookings = array();
+        foreach ($bookings as $booking) {
+            if ($booking->getBedroom()->getRoomType()->getSleepingSite()->getEvent() == $event) {
+                $filtered_bookings[] = $booking;
+            }
+        }
+
+        return $this->render('admin/bedroom_by_adherent.html.twig', ['bookings' => $filtered_bookings]);
+    }
+
+    /**
+     * @param Bedroom $bedroom
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function bookingsByBedroomAction(Bedroom $bedroom)
+    {
+        $bookings = $this->getDoctrine()->getRepository('AppBundle:Event\Booking')->findBy(['bedroom' => $bedroom]);
+        return $this->render('admin/bookings_by_bedroom.html.twig', ['bookings' => $bookings, 'nbr' => count($bookings)]);
     }
 }

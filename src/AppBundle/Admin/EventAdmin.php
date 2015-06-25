@@ -36,6 +36,7 @@ class EventAdmin extends Admin
             ->add('description', null, array('label' => 'Description'))
             ->add('registrationBegin', null, array('label' => 'Début des inscriptions'))
             ->add('registrationEnd', null, array('label' => 'Fin des inscriptions'))
+            ->add('nbRegistrations', null, array('label' => 'Nombre d\'inscriptions'))
             ->add('_action', 'actions', array(
                 'actions' => array(
                     'show' => array(),
