@@ -167,11 +167,15 @@ class SleepingController extends Controller
      * @param $adherent
      * @return object
      */
-    public function bedroomByAdherentAction(Adherent $adherent)
+    public function bedroomByAdherentAction(Adherent $adherent, Event $event)
     {
-        $booking = $this->getDoctrine()->getRepository('AppBundle:Event\Booking')->findOneBy(['adherent' => $adherent]);
+        $bookings = $this->getDoctrine()->getRepository('AppBundle:Event\Booking')->findBy(['adherent' => $adherent]);
 
-        return $this->render('admin/bedroom_by_adherent.html.twig', ['booking' => $booking]);
+        $bookings = array_filter($bookings, function ($b) use ($event) {
+            return $b->getBedroom()->getRoomType()->getSleepingSite()->getEvent() == $event;
+        });
+
+        return $this->render('admin/bedroom_by_adherent.html.twig', ['bookings' => $bookings]);
     }
 
     /**
@@ -182,6 +186,6 @@ class SleepingController extends Controller
     {
         $bookings = $this->getDoctrine()->getRepository('AppBundle:Event\Booking')->findBy(['bedroom' => $bedroom]);
 
-        return $this->render('admin/bookings_by_bedroom.html.twig', ['bookings' => $bookings, 'nbr' => count($bookings)]);
+        return $this->render('admin/bookings_by_bedroom.html.twig', ['bookings' => $bookings]);
     }
 }
