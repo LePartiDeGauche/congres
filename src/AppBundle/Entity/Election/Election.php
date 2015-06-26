@@ -18,6 +18,8 @@ class Election
 {
     const STATUS_OPEN = 'Election Ouverte';
     const STATUS_CLOSED = 'Election Fermée';
+    const ISVALID_TRUE = 'Election validée';
+    const ISVALID_FALSE = 'Election rejetée';
 
     /**
      * @var int
@@ -87,6 +89,8 @@ class Election
     private $elected;
 
     /**
+     * Is the election validate by an admin.
+     *
      * @var bool
      *
      * @ORM\Column(name="is_valid", type="boolean")
@@ -178,7 +182,8 @@ class Election
         if (!in_array($status, array(
             self::STATUS_OPEN,
             self::STATUS_CLOSED,
-
+            self::ISVALID_TRUE,
+            self::ISVALID_FALSE
         ))) {
             throw new \InvalidArgumentException('Invalid status');
         }
@@ -250,6 +255,19 @@ class Election
         $this->elected = $elected;
 
         return $this;
+    }
+
+
+    /**
+     * Returns true if election has been checked wether it has been validated
+     * or rejected
+     *
+     * @return boolean
+     */
+    public function hasBeenChecked()
+    {
+        return ($this->getStatus() == self::ISVALID_TRUE
+             || $this->getStatus() == self::ISVALID_FALSE);
     }
 
     /**

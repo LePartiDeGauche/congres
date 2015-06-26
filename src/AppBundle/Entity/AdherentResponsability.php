@@ -56,14 +56,14 @@ class AdherentResponsability
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="start", type="date")
+     * @ORM\Column(name="start", type="date", nullable=true)
      */
     private $start;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="end", type="date")
+     * @ORM\Column(name="end", type="date", nullable=true)
      */
     private $end;
 
@@ -72,7 +72,7 @@ class AdherentResponsability
      *
      * @ORM\Column(name="isActive", type="boolean")
      */
-    private $isActive;
+    private $isActive=false;
 
     /**
      * Get id.

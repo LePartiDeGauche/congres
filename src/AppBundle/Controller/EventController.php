@@ -100,6 +100,8 @@ class EventController extends Controller
      */
     public function registerAction(Request $request, Event $event)
     {
+        $this->denyAccessUnlessGranted('event-register', $event, 'Vous ne disposez pas des droits nécessaires pour vous inscrire.');
+
         $adherent = $this->getUser()->getProfile();
         $em = $this->getDoctrine()->getManager();
 

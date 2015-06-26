@@ -36,6 +36,43 @@
                                                                 role="button" aria-expanded="false">Textes<span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
                                 <li>
+                                    <a href="{{ path('downloads', {filename: 'RAPPORT-Plateforme.pdf'}) }}">
+                                        Rapport de la Commission des débats sur le texte Plateforme
+                                    </a>
+                                </li>
+                                <li>
+                                <li>
+                                    <a href="{{ path('downloads', {filename: 'Cahier Amendements texte Plateforme.pdf'}) }}">
+                                        Cahier des amendements de la Commission des débats sur le texte Plateforme
+                                    </a>
+                                </li>
+                                <li>
+                                <li>
+                                    <a href="{{ path('downloads', {filename: '15.06.22.Rapport complementaire de la Commission des debats du 21 juin 2015.pdf'}) }}">
+                                        Rapport complémentaire de la Commission des débats sur les Statuts/RI du PG
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('downloads', {filename: 'Rapport du groupe Statuts de la Commission des  débats.pdf'}) }}">
+                                        Rapport du groupe Statuts de la Commission des  débats
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('downloads', {filename: 'Statuts du PG Cahier des amemdements de la Commission des  débats.pdf'}) }}">
+                                        Statuts du PG - Cahier des amemdements
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('downloads', {filename: 'Réglement intérieur du PG - Cahier des amendements de la  Commission des débats.pdf'}) }}">
+                                        Réglement intérieur du PG - Cahier des amendements
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('downloads', {filename: 'CDV Amendements validés - Classement par comités  site.pdf'}) }}">
+                                        Amendements validés
+                                    </a>
+                                </li>
+                                <li>
                                     <a href="{{ path('downloads', {filename: 'Tout est possible - numéroté.pdf'}) }}">
                                         Tout est possible
                                     </a>
@@ -62,8 +99,26 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                                    aria-expanded="false">Organisation<span class="caret"></span></a>
                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="{{ path('downloads', {filename: 'RI Congrès 2015 phases 2 et 3 adopté CN.pdf'}) }}">Phases 2 &amp; 3</a></li>
-                                <li><a href="{{ path('downloads', {filename: 'Règlement Intérieur - Phase 1.pdf'}) }}">Phase 1</a></li>
+                               <li>
+                                   <a href="{{ path('downloads', {filename: 'Rapport CDD sur texte des 100 jours.pdf'}) }}">
+                                       Rapport CDD sur texte des 100 jours
+                                   </a>
+                               </li>
+                               <li>
+                                   <a href="{{ path('downloads', {filename: 'Complément RI candidatures adopté.pdf'}) }}">
+                                       Complément RI - candidatures
+                                   </a>
+                               </li>
+                                <li>
+                                    <a href="{{ path('downloads', {filename: 'RI Congrès 2015 phases 2 et 3 adopté CN.pdf'}) }}">
+                                        Phases 2 &amp; 3
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('downloads', {filename: 'Règlement Intérieur - Phase 1.pdf'}) }}">
+                                        Phase 1
+                                    </a>
+                                </li>
                                 <li>
                                     <a href="{{ path('commission_votes') }}">
                                         Commission des votes
@@ -78,9 +133,16 @@
                         </li>
 
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">CN Juin 2015<span class="caret"></span></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Congrès<span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="{{ path('event_registration_create', { 'event_id' : 2 }) }}">Inscription</a></li>
+                                <li>
+                                    <a href="{{ path('event_registration_create', { event_id: 3 }) }}">
+                                        Inscription au congrès
+                                    </a>
+                                    <a href="{{ path('election_delegue') }}">
+                                        Délégués désignés
+                                    </a>
+                                </li>
                             </ul>
                         </li>
 
@@ -98,17 +160,6 @@
                                 {% endif %}
                             </ul>
                         </li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"
-                                   role="button" aria-expanded="false">Elections<span class="caret"></span></a>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li>
-                                        <a href="{{ path('election_list') }}">
-                                            Liste des élections
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
                         {% endif %}
                     </ul>
                     {% endblock %}

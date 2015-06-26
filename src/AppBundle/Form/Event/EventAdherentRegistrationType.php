@@ -18,13 +18,13 @@ class EventAdherentRegistrationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('needHosting', null, array('label' => 'J\'ai besoin d\'un hébergement militant', 'required' => false))
+            ->add('needHosting', null, array('label' => 'Hébergement en hôtel situé à proximité du lieu du congrès', 'required' => false))
             ->add('comment')
             ->add('paymentMode', 'choice',
                 array(
                     'choices' => array(
                         'online' => 'Carte bleue ( Vous serez redirigé vers la page de paiement à la validation de l\'inscription )',
-                        'onsite' => 'Par chèque ( libellé à l\'ordre du Parti de Gauche et envoyé au siège du PG, 20-22 rue Doudeauville, 75018 PARIS, en précisant sur l\'enveloppe "CN avril 2015" )', ),
+                        'onsite' => 'Par chèque ( libellé à l\'ordre du Parti de Gauche et envoyé au siège du PG, 20-22 rue Doudeauville, 75018 PARIS, en précisant sur l\'enveloppe "Congrés juillet 2015" )', ),
                     'expanded' => true,
                     'label' => 'Mode de paiement',
                 ))
@@ -72,7 +72,7 @@ class EventAdherentRegistrationType extends AbstractType
                         'multiple' => false,
 
                     );
-                   // $form->add('role', 'entity', $roleOptions);
+                   $form->add('role', 'entity', $roleOptions);
                 }
             } else {
                 throw new \InvalidArgumentException('Invalid Form data expected EventAdherentRegistration, got '.$data->getClassName());

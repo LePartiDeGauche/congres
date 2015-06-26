@@ -83,8 +83,8 @@ class EventAdherentRegistrationAdmin extends Admin
                     'show' => array(),
                     'edit' => array(),
                     'delete' => array(),
-                ),
-            ))
+                    ),
+                ))
             ->add('adherent.firstname', null, array('label' => 'Prénom'))
             ->add('adherent.lastname', null, array('label' => 'Nom'))
             //->add('adherent.email', NULL, array('label' => 'Courriel'))
@@ -250,8 +250,12 @@ class EventAdherentRegistrationAdmin extends Admin
         $user = $this->getConfigurationPool()->getContainer()->get('security.context')->getToken()->getUser();
         //$repo = $this->getDoctrine()->getRepository('AppBundle:Adherent')->findId($user->adherent);
 
-        $instance->setAdherent($user->getProfile);
-        $instance->setAuthor($user->getProfile);
+        $adherent = $user->getProfile();
+        if(isset($adherent))
+        {
+            $instance->setAdherent($adherent);
+            $instance->setAuthor($adherent);
+        }
 
         $instance->setPaymentMode(EventAdherentRegistration::PAYMENT_MODE_ONSITE);
 
