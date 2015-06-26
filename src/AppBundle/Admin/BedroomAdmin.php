@@ -89,8 +89,10 @@ class BedroomAdmin extends Admin
     public function getExportFields()
     {
         return array(
+            'roomType.sleepingSite',
             'roomType',
             'number',
+            'roomType.places',
             'dateStartAvailability',
             'dateStopAvailability',
         );

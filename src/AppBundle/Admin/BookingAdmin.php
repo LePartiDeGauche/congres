@@ -99,6 +99,7 @@ class BookingAdmin extends Admin
             'adherent',
             'date',
             'bedroom',
+            'bedroom.roomType.sleepingSite.event',
             'price',
         );
     }
