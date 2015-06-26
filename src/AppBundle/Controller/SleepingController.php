@@ -119,9 +119,17 @@ class SleepingController extends Controller
                 $numberOfBookingsByDayAndBedroom = count($bookings);
                 $places = $bedroom->getRoomType()->getPlaces();
 
+                // test si une réservation à ce nom et cette date existe
+                $bookingExist = $manager->getRepository('AppBundle:Event\Booking')->findOneBy(['adherent' => $adherent, 'date' => $date]);
+
+                //test si la chambre est disponible à cette date
+                $bedroomAvailable = $manager->getRepository('AppBundle:Event\Bedroom')->findIsBedroomActivateByDate($bedroom, $date);
+                $isBedroomAvailable = count($bedroomAvailable);
+
                 $manager->persist($booking);
 
-                if ($numberOfBookingsByDayAndBedroom > $places) {
+                if ($numberOfBookingsByDayAndBedroom > $places || $bookingExist || $isBedroomAvailable < 1) {
+
                     $this
                         ->get('session')
                         ->getFlashBag()
@@ -132,7 +140,6 @@ class SleepingController extends Controller
                     ;
                     $manager->detach($booking);
                 }
-
                 $manager->flush();
                 $date->add(new \DateInterval("P1D"));
             }

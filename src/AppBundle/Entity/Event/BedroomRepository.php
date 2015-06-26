@@ -30,7 +30,23 @@ class BedroomRepository  extends EntityRepository
             ->createQueryBuilder('b')
             ->where('b.dateStartAvailability >= :date')
             ->setParameters([
-                'date' => new \DateTime('-20 days'),
+                'date' => new \DateTime('-10 days'),
+            ])
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+    public function findIsBedroomActivateByDate(Bedroom $bedroom ,\DateTime $date) {
+
+        return $this
+            ->createQueryBuilder('b')
+            ->where('b = :bedroom')
+            ->andWhere('b.dateStartAvailability < :date')
+            ->andWhere('b.dateStopAvailability > :date')
+            ->setParameters([
+                'date' => $date,
+                'bedroom' => $bedroom,
             ])
             ->getQuery()
             ->getResult()

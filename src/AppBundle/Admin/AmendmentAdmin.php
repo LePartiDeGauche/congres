@@ -81,7 +81,7 @@ class AmendmentAdmin extends Admin
     {
         $filter
             ->add('text', null, array('label' => 'Texte'))
-            ->add('author.profile.lastname', null, array('label' => 'Nom autheur'))
+            ->add('author.profile.lastname', null, array('label' => 'Nom auteur'))
             ->add('startLine', null, array('label' => 'Ligne'))
             ->add('type', null, array('label' => 'Type de modification'), 'choice', array('choices' => Amendment::getTypes()))
             ->add('content', null, array('label' => 'Contenu'))
