@@ -127,7 +127,7 @@ class SleepingController extends Controller
 
                 $manager->persist($booking);
 
-                if ($numberOfBookingsByDayAndBedroom > $places || $bookingExist || $isBedroomAvailable > 1) {
+                if ($numberOfBookingsByDayAndBedroom > $places || $bookingExist || $isBedroomAvailable < 1) {
 
                     $this
                         ->get('session')
