@@ -232,6 +232,7 @@ class EventAdherentRegistrationAdmin extends Admin
             'votestatus',
             'role',
             'needhosting',
+            'cost',
             'meals',
             'attendance',
         );
