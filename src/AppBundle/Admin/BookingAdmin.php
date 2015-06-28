@@ -67,10 +67,14 @@ class BookingAdmin extends Admin
      */
     protected function configureFormFields(FormMapper $formMapper)
     {
-
+        // FIXME adherent lookup function should be shared with every admin object
         $formMapper
-            ->add('adherent.firstname', 'text', array('label' => 'Prénom', 'read_only' => true))
-            ->add('adherent.lastname', 'text', array('label' => 'Nom', 'read_only' => true))
+            ->add('adherent', 'sonata_type_model_autocomplete', array(
+                'label' => 'Auteur',
+                'property' => array('firstname', 'lastname', 'email'),
+                'placeholder' => 'Rechercher un nom ou un email',
+                'callback' => array($this, 'adherentCallback'),
+                'to_string_callback' => array($this, 'adherentToStringCallback'), ))
             ->add('date', null, array('label' => 'Date'))
             ->add('bedroom', null, array('label' => 'Chambre'))
             ->add('price', null, array('label' => 'Prix'))
@@ -112,5 +116,26 @@ class BookingAdmin extends Admin
         return array(
             'xls',
         );
+    }
+
+    public function adherentCallback($admin, $property, $value)
+    {
+        $datagrid = $admin->getDatagrid();
+        $queryBuilder = $datagrid->getQuery();
+        $queryBuilder
+            ->andWhere($queryBuilder->getRootAlias().'.firstname LIKE :value')
+            ->orWhere($queryBuilder->getRootAlias().'.lastname LIKE :value')
+            ->orWhere($queryBuilder->getRootAlias().'.email LIKE :value')
+            ->setParameter('value', '%'.$value.'%')
+        ;
+    }
+
+    public function adherentToStringCallback($user, $property)
+    {
+        $firstname = $user->getFirstname();
+        $lastname = $user->getLastname();
+        $email = $user->getEmail();
+
+        return $firstname.' '.$lastname.' &lt;'.$email.'&gt;';
     }
 }
