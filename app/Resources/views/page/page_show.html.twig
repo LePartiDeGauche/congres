@@ -1,0 +1,27 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+        <div class="row">
+            <div class="col-md-12">
+                <div role="tabpanel">
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active" id="validated">
+                    {% if pageShow is empty %}
+                    <p>Pas de contenu</p>
+                     {% else %}
+                        {% for page in pageShow %}
+                            <h2>{{ page.title }}</h2> <br />
+                            {{ page.content }}
+                        {% endfor %}
+                     {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div><!-- .col-md-12 -->
+        </div><!-- .row -->
+    </div><!-- .container -->
+{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css" rel="stylesheet" />
+{% endblock %}
