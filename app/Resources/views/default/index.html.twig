@@ -5,12 +5,27 @@
     <div class="row">
         <h1>Bonjour, {{ app.user.profile.firstname}}</h1>
         <div class="col-md-6">
-            <h2>Travaux de la commission des débats</h2>
+            <h2>Textes soumis au vote du Congrès</h2>
             <p>
-            Les cahiers d'amendements de la Commission des débats concernant les
-            statuts, le règlement intérieur du PG et le texte de la Plateforme,
-            ainsi que les rapports sur leur traitement, sont disponibles dans la
-            rubrique "Textes".
+            Les nouvelles versions des textes soumis au vote du Congrès, suite
+            au travail de la commission des débats sont en ligne:
+                <ul>
+                    <li>
+                        <a href="{{ path('downloads', {filename: 'TEP.VERSION 6 CDD.pdf'}) }}">
+                            Tout est possible - Plateforme amendée
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ path('downloads', {filename: 'Statuts amendés final CDD.pdf'}) }}">
+                            Status amendés du PG
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ path('downloads', {filename: 'RI amendé final CDD.pdf'}) }}">
+                            Réglement intérieur amendé
+                        </a>
+                    </li>
+                </ul>
             </p>
             <p>
             Pour joindre la commission des débats: commission-debats@lepartidegauche.fr

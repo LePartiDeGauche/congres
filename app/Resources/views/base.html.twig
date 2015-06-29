@@ -33,7 +33,28 @@
                         {% if is_granted('ROLE_USER') %}
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"
-                                                                role="button" aria-expanded="false">Textes<span class="caret"></span></a>
+                                                                role="button" aria-expanded="false">Textes soumis au vote du Congrès<span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li>
+                                    <a href="{{ path('downloads', {filename: 'TEP.VERSION 6 CDD.pdf'}) }}">
+                                        Tout est possible - Plateforme amendée
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('downloads', {filename: 'Statuts amendés final CDD.pdf'}) }}">
+                                        Status amendés du PG
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('downloads', {filename: 'RI amendé final CDD.pdf'}) }}">
+                                        Réglement intérieur amendé
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                                                                role="button" aria-expanded="false">Documents<span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
                                 <li>
                                     <a href="{{ path('downloads', {filename: 'RAPPORT-Plateforme.pdf'}) }}">
@@ -41,12 +62,10 @@
                                     </a>
                                 </li>
                                 <li>
-                                <li>
                                     <a href="{{ path('downloads', {filename: 'Cahier Amendements texte Plateforme.pdf'}) }}">
                                         Cahier des amendements de la Commission des débats sur le texte Plateforme
                                     </a>
                                 </li>
-                                <li>
                                 <li>
                                     <a href="{{ path('downloads', {filename: '15.06.22.Rapport complementaire de la Commission des debats du 21 juin 2015.pdf'}) }}">
                                         Rapport complémentaire de la Commission des débats sur les Statuts/RI du PG
