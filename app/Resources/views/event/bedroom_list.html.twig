@@ -27,7 +27,8 @@
                                 <table class="table tablesorter" id="table_bedroom">
                                     <thead>
                                     <tr>
-                                        <th>Nom</th>
+                                        <th>Lieu</th>
+                                        <th>Type</th>
                                         <th>Numéro de chambre</th>
                                         {% for date in bookings|keys %}
                                             <th>{{ date|date }}</th>
@@ -37,6 +38,9 @@
                                     <tbody>
                                     {% for bedroom in bedrooms %}
                                         <tr>
+                                            <td>
+                                                {{ bedroom.roomType.sleepingSite }}
+                                            </td>
                                             <td>
                                                 {{ bedroom.roomType }}
                                             </td>
