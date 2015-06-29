@@ -30,7 +30,8 @@
         "lexik/paybox-bundle": "dev-master",
         "stfalcon/tinymce-bundle": "dev-master", 
         "nickcernis/html-to-markdown": "dev-master",
-        "friendsofsymfony/jsrouting-bundle": "~1.5"
+        "friendsofsymfony/jsrouting-bundle": "~1.5",
+        "knplabs/knp-menu-bundle": "~2"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3",
