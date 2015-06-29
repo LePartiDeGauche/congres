@@ -105,13 +105,6 @@ class Event
     private $meals;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="nights_duration", type="integer")
-     */
-    private $nightsDuration;
-
-    /**
      * Get id
      *
      * @return integer
@@ -539,5 +532,4 @@ class Event
     {
         return $this->name;
     }
-
 }

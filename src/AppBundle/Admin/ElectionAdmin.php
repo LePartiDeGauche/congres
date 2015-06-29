@@ -7,6 +7,7 @@ use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
 
 /**
@@ -32,6 +33,8 @@ class ElectionAdmin extends Admin
                 'choices' => array(
                     Election::STATUS_OPEN => 'Election Ouverte.',
                     Election::STATUS_CLOSED => 'Election fermée.',
+                    Election::ISVALID_TRUE => 'Election Validée',
+                    Election::ISVALID_FALSE => 'Election Rejetée',
                 ),
                 'multiple' => false,
             ))
@@ -54,7 +57,11 @@ class ElectionAdmin extends Admin
                     'show' => array(),
                     'edit' => array(),
                     'delete' => array(),
-                ),
+                    'valid' => array(
+                        'template' => 'AppBundle:admin:list_action_valid.html.twig'),
+                    'reject' => array(
+                        'template' => 'AppBundle:admin:list_action_reject.html.twig'),
+                )
             ))
         ;
     }
@@ -73,8 +80,20 @@ class ElectionAdmin extends Admin
                 'choices' => array(
                     Election::STATUS_OPEN => 'Election Ouverte.',
                     Election::STATUS_CLOSED => 'Election fermee.',
+                    Election::ISVALID_TRUE => 'Election Validée',
+                    Election::ISVALID_FALSE => 'Election Rejetée',
                 ),
                 'multiple' => false,
+            ))
+            ->add('elected', 'sonata_type_collection', array(
+                'type_options' => array(
+                    'delete' => true
+                )
+            ), array(
+                'edit' => 'inline',
+                'inline' => 'table',
+                'sortable' => 'position',
+                'required' => false
             ))
         ;
     }
@@ -93,14 +112,24 @@ class ElectionAdmin extends Admin
     }
 
     /**
+     * {@inheritdoc}
+     */
+    protected function configureRoutes(RouteCollection $collection)
+    {
+        $collection->add('valid');
+        $collection->add('reject');
+    }
+
+    /**
      * @return array
      */
     public function getExportFields()
     {
         return array(
-            'electedNames',
-            'electedEmail',
+            'id',
             'organ',
+            'electedNames',
+            'electedEmail'
         );
     }
 

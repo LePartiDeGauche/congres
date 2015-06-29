@@ -42,6 +42,14 @@ class DefaultController extends Controller
     }
 
     /**
+     * @Route("/deleguedesigne", name="election_delegue")
+     */
+    public function delegueDesigneAction()
+    {
+        return $this->render('election/delegue.html.twig');
+    }
+
+    /**
      * @Route("/depot-contribution")
      */
     public function redirectionDepotContributionAction()

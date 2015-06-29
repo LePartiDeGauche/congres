@@ -1,51 +1,84 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class="container">
-        <div class="row">
-            <h1>Bonjour, {{ app.user.profile.firstname}}</h1>
-            <div class="col-md-6">
-                <h2>Travaux de la commission des débats</h2>
-                <p>
-                    Les cahiers d'amendements de la Commission des débats concernant les
-                    statuts, le règlement intérieur du PG et le texte de la Plateforme,
-                    ainsi que les rapports sur leur traitement, sont disponibles dans la
-                    rubrique "Textes".
-                </p>
-                <p>
-                    Pour joindre la commission des débats: commission-debats@lepartidegauche.fr
-                </p>
-
-                <h2>Inscription au congrès</h2>
-                <p>
-                    <a href="{{ path('event_registration_create', { event_id: 3 }) }}">
-                        Cliquer ici pour s'inscrire au congrès de Villejuif.
-                    </a>
-                </p>
-
+<div class="container">
+    <div class="row">
+        <h1>Bonjour, {{ app.user.profile.firstname}}</h1>
+        <div class="col-md-6">
+            <h2>Textes soumis au vote du Congrès</h2>
+            <p>
+            Les nouvelles versions des textes soumis au vote du Congrès, suite
+            au travail de la commission des débats sont en ligne:
                 <ul>
                     <li>
-                        Les délégués et membres du bureau national sont membres de droit et
-                        s'inscrivent directement.
+                        <a href="{{ path('downloads', {filename: 'TEP.VERSION 6 CDD.pdf'}) }}">
+                            Tout est possible - Plateforme amendée
+                        </a>
                     </li>
                     <li>
-                        Les membres des différentes commissions, les candidats aux instances,
-                        les équipes d'organisation et les invités transmettent au préalable leur
-                        demande d'inscription à : congres2015@lepartidegauche.fr
+                        <a href="{{ path('downloads', {filename: 'Statuts amendés final CDD.pdf'}) }}">
+                            Status amendés du PG
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ path('downloads', {filename: 'RI amendé final CDD.pdf'}) }}">
+                            Réglement intérieur amendé
+                        </a>
                     </li>
                 </ul>
-                <p>
-                    Contact : Marie-Pierre Oprandi 06 88 95 51 84
-                </p>
-            </div>
+            </p>
+            <p>
+            Pour joindre la commission des débats: commission-debats@lepartidegauche.fr
+            </p>
+
+            <h2>Inscription au congrès</h2>
+            <p>
+            <a href="{{ path('event_registration_create', { event_id: 3 }) }}">
+                Cliquer ici pour s'inscrire au congrès de Villejuif.
+            </a>
+            </p>
+
+            <ul>
+                <li>
+            Les délégués et membres du bureau national sont membres de droit et
+            s'inscrivent directement.
+                </li>
+                <li>
+            Les membres des différentes commissions, les candidats aux instances,
+            les équipes d'organisation et les invités transmettent au préalable leur
+            demande d'inscription à : congres2015@lepartidegauche.fr
+                </li>
+            </ul>
+            <p>
+            Contact : Marie-Pierre Oprandi 06 88 95 51 84
+            </p>
+
+            <h2>Candidatures aux instances</h2>
+            <p>Les candidatures aux instances validées par la Commission des votes:</p>
+            <ul>
+                <li>Bureau national : 30</li>
+                <li>Secrétariat exécutif national : 57</li>
+                <li>Conseil national – part nationale : 48</li>
+                <li>Bureau du congrès : 13</li>
+                <li>Commission des candidatures : 16 dont une rejetée, soit 15 validées</li>
+                <li>Commission de résolution des conflits : 12</li>
+                <li>Commission de contrôle financier : 6</li>
+            </ul>
+            <p>
+            Nombre total de candidatures : 182<br/>
+            Nombre total de candidats : 130<br />
+            <a href="{{ path('downloads', {filename: 'Candidatures aux instances.pdf'}) }}">
+                Consulter les candidatures
+            </a>
+            </p>
         </div>
-        <div class="row">
-            <div class="alert alert-warning text-justify" role="alert">
-                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                L'équipe de développeurs bénévoles a besoin de se renforcer ! N'hésitez pas à envoyer un e-mail à
-                congres2015@lepartidegauche.fr si vous pouvez aider. L'application est codée en PHP sous Symfony
-                2.6. Le code source est entièrement disponible <a href="https://github.com/LePartiDeGauche/congres">ici</a>.
-            </div>
+    </div>
+    <div class="row">
+        <div class="alert alert-warning text-justify" role="alert">
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            L'équipe de développeurs bénévoles a besoin de se renforcer ! N'hésitez pas à envoyer un e-mail à
+            congres2015@lepartidegauche.fr si vous pouvez aider. L'application est codée en PHP sous Symfony
+            2.6. Le code source est entièrement disponible <a href="https://github.com/LePartiDeGauche/congres">ici</a>.
         </div>
     </div>
 {% endblock %}
