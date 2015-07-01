@@ -9,6 +9,7 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 use AppBundle\Entity\Event\EventAdherentRegistration;
+use Doctrine\ORM\EntityRepository;
 
 class EventAdherentRegistrationAdmin extends Admin
 {
@@ -122,7 +123,15 @@ class EventAdherentRegistrationAdmin extends Admin
         if ($isCreate) {
             $formMapper
                 // FIXME Filter event !
-                ->add('event', null, array('label' => 'Événement', 'property' => 'name'))
+                ->add('event', null, array(
+                    'label' => 'Événement',
+                    'property' => 'name',
+                    'query_builder' => function (EntityRepository $er) {
+                        return $er->createQueryBuilder('u')
+                            ->orderBy('u.id', 'DESC')
+                            ->setMaxResults(1);
+                    },
+                ))
                 ->add('adherent', 'sonata_type_model_autocomplete', array(
                     'label' => 'Auteur',
                     'property' => array('firstname', 'lastname', 'email'),
@@ -156,7 +165,14 @@ class EventAdherentRegistrationAdmin extends Admin
             ->add('role') //, null, array('read_only' => !$isCreate, 'disabled' => !$isCreate))
             ->add('needHosting', 'choice', array('label' => 'necessite un hebergement', 'choices' => $this->yesnoChoice))
             // FIXME: filter cost of this event !
-            ->add('cost', null, array('label' => 'Tarif'))
+            ->add('cost', null, array(
+                'label' => 'Tarif',
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('u')
+                        ->orderBy('u.id', 'DESC')
+                        ->setMaxResults(21);
+                },
+            ))
             ->add('paymentMode', 'choice', array(
                 'label' => 'Type de Paiement',
                 'multiple' => false,
@@ -178,7 +194,15 @@ class EventAdherentRegistrationAdmin extends Admin
                 'required' => false,
             ))
             // FIXME: filter meal of this event !
-            ->add('meals', null, array('label' => 'Repas', 'expanded' => true))
+            ->add('meals', null, array(
+                'label' => 'Repas',
+                'expanded' => true,
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('u')
+                        ->orderBy('u.id', 'DESC')
+                        ->setMaxResults(3);
+                },
+            ))
             //->add('voteStatus', 'choice', array('label' => 'Droit de vote', 'choices' => $this->yesnoChoice))
             ->add('attendance', 'choice', array(
                 'label' => 'Présence',
