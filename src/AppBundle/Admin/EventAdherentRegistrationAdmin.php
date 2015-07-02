@@ -259,6 +259,7 @@ class EventAdherentRegistrationAdmin extends Admin
             'cost',
             'meals',
             'attendance',
+            'comment',
         );
     }
 
