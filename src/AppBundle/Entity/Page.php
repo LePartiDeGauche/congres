@@ -27,7 +27,7 @@ class Page {
      *
      * @var Category
      *
-     * @ORM\ManyToOne(targetEntity="Category", inversedBy="category", cascade="persist")
+     * @ORM\ManyToOne(targetEntity="Category", inversedBy="pages", cascade="persist")
      */
     private $category;
 
