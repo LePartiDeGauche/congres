@@ -114,6 +114,8 @@ sonata_admin:
     title_logo: img/logo.png
     security:
         handler: sonata.admin.security.handler.role
+    templates:
+        layout: "::admin.html.twig"
 
 lexik_paybox:
     parameters:
@@ -159,3 +161,7 @@ stfalcon_tinymce:
                 - {title : 'Titre 4', block : 'h4'}
                 - {title : 'Titre 5', block : 'h5'}
                 - {title : 'Titre 6', block : 'h6'}
+
+knp_menu:
+    twig:
+        template: menu.html.twig
