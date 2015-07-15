@@ -11,7 +11,7 @@
                      {% else %}
                         {% for page in pageShow %}
                             <h2>{{ page.title }}</h2> <br />
-                            {{ page.content }}
+                            {{ page.content|raw }}
                         {% endfor %}
                      {% endif %}
                         </div>

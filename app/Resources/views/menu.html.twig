@@ -1,0 +1,5 @@
+{% for topLevel in item %}
+    {% for category in topLevel %}
+        <li><a href="{{ category.uri }}">{{ category.label }}</a></li>
+    {% endfor %}
+{% endfor %}

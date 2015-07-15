@@ -33,7 +33,7 @@
                         {% if is_granted('ROLE_USER') %}
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"
-                                                                role="button" aria-expanded="false">Textes soumis au vote du Congrès<span class="caret"></span></a>
+                                                                role="button" aria-expanded="false">Textes<span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
                                 <li>
                                     <a href="{{ path('downloads', {filename: 'EnMouvementCitoyens.pdf'}) }}">
@@ -196,10 +196,7 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"
                                role="button" aria-expanded="false">Autre<span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
-                                <li>
-                                    {{ knp_menu_render('main') }}
-                                    </a>
-                                </li>
+                                {{ knp_menu_render('main') }}
                             </ul>
                         </li>
                         {% endif %}

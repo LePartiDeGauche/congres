@@ -60,7 +60,7 @@ class PageAdmin extends Admin
         $formMapper
             ->add('category', null, array('label' => 'Catégorie'))
             ->add('title', null, array('label' => 'Titre de la page'))
-            ->add('content', null, array('label' => 'Contenu'))
+            ->add('content', null, array('label' => 'Contenu', 'attr' => ['class' => 'tinymce', 'data-theme' => 'markdown']))
             ->add('isActive', null, array('label' => 'Page active'))
         ;
     }
