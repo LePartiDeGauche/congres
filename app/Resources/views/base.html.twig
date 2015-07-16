@@ -33,21 +33,21 @@
                         {% if is_granted('ROLE_USER') %}
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"
-                                                                role="button" aria-expanded="false">Textes soumis au vote du Congrès<span class="caret"></span></a>
+                                                                role="button" aria-expanded="false">Textes adoptés<span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
                                 <li>
-                                    <a href="{{ path('downloads', {filename: 'EnMouvementCitoyens.pdf'}) }}">
-                                        En mouvement citoyens - Plateforme amendée
+                                    <a href="{{ path('downloads', {filename: 'EnMouvementCitoyen_ne_s_version def.pdf'}) }}">
+                                        En mouvement, citoyen-ne-s&nbsp;!
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="{{ path('downloads', {filename: 'Statuts amendés final CDD.pdf'}) }}">
-                                        Status amendés du PG
+                                    <a href="{{ path('downloads', {filename: 'Statuts version def.doc.pdf'}) }}">
+                                        Statuts
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="{{ path('downloads', {filename: 'RI amendé final CDD.pdf'}) }}">
-                                        Réglement intérieur amendé
+                                    <a href="{{ path('downloads', {filename: 'RI version def.pdf'}) }}">
+                                        Réglement intérieur
                                     </a>
                                 </li>
                             </ul>
@@ -169,6 +169,21 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                                aria-expanded="false">Archives<span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
+                                <li>
+                                    <a href="{{ path('downloads', {filename: 'EnMouvementCitoyens.pdf'}) }}">
+                                        En mouvement citoyens - Plateforme amendée
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('downloads', {filename: 'Statuts amendés final CDD.pdf'}) }}">
+                                        Status amendés du PG
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('downloads', {filename: 'RI amendé final CDD.pdf'}) }}">
+                                        Réglement intérieur amendé
+                                    </a>
+                                </li>
                                 <li>
                                     <a href="{{ path('resultats_plateformes') }}">
                                         Vote des plateformes
