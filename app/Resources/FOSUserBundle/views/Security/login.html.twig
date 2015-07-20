@@ -43,15 +43,8 @@
 <div class="row">
     <div class="alert alert-info text-justify" role="alert">
         <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
-        Si vous ne vous êtes jamais connecté sur le site Congrès, il faut vous inscrire en utilisant
-        le lien inscription en haut à droite. Les contributions sont publiques et soumises à signatures
-        du lundi 19 au 30 janvier. Pour tout problème, contacter congres2015@lepartidegauche.fr.
-    </div>
-    <div class="alert alert-warning text-justify" role="alert">
-        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-        L'équipe de développeurs bénévoles a besoin de se renforcer ! N'hésitez pas à envoyer un e-mail à
-        congres2015@lepartidegauche.fr si vous pouvez aider. L'application est codée en PHP sous Symfony
-        2.6. Le code source est entièrement disponible <a href="https://github.com/LePartiDeGauche/congres">ici</a>.
+        Si vous ne vous êtes jamais connecté, il faut vous inscrire en utilisant
+        le lien <a href="{{ path('fos_user_registration_register') }}">Inscription</a> en haut à droite.
     </div>
 </div>
 {% endblock fos_user_content %}
