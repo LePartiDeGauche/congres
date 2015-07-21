@@ -148,12 +148,13 @@ class EventController extends Controller
             }
 
             $message = \Swift_Message::newInstance()
+                ->setFrom(array('remue-meninges@lepartidegauche.fr' => 'Remues Méninges 2015'))
                 ->setSubject('Inscription Remues Méninges 2015')
                 ->setTo($this->getUser()->getEmail())
                 ->setBody(
                     $this->renderView(
                         'mail/event_register.txt.twig',
-                        array('email' => $user->getEmail())
+                        array('email' => $this->getUser()->getEmail())
                     )
                 );
             $this->get('mailer')->send($message);
