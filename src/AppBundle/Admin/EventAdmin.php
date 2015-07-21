@@ -141,7 +141,7 @@ class EventAdmin extends Admin
         }
 
         foreach ($object->getMeals() as $meals) {
-            $role->setEvent($object);
+            $meals->setEvent($object);
         }
 
         foreach ($object->getCosts() as $cost) {
