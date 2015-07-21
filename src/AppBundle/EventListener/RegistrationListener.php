@@ -133,7 +133,7 @@ class RegistrationListener implements EventSubscriberInterface
         if ($profile !== null) {
             $event->getUser()->setProfile($profile);
         } else {
-            $event->getUser()->setEnabled(false);
+            //$event->getUser()->setEnabled(false);
             $url = $this->router->generate('non_adherent_register');
             $event->setResponse(new RedirectResponse($url));
             return false;

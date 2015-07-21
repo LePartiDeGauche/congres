@@ -61,7 +61,7 @@ security:
             - ROLE_SONATA_ADMIN_EVENT_REGISTRATION_VIEWER
             - ROLE_SONATA_ADMIN_EVENT_REGISTRATION_EDITOR
 
-        ROLE_ORGANIZER: 
+        ROLE_ORGANIZER:
             - ROLE_STAFF
             - ROLE_SONATA_ADMIN_EVENT_REGISTRATION_ADMIN
             - ROLE_SONATA_ADMIN_EVENT_VIEWER
@@ -69,7 +69,7 @@ security:
         ROLE_ADMIN:
             - ROLE_ORGANIZER
             - ROLE_SONATA_ADMIN
-        ROLE_SUPER_ADMIN: 
+        ROLE_SUPER_ADMIN:
             - ROLE_ADMIN
             - ROLE_ALLOWED_TO_SWITCH
 
@@ -88,7 +88,7 @@ security:
                 users:
                     user:  { password: user, roles: 'ROLE_USER' }
                     admin: { password: admin, roles: 'ROLE_ADMIN' }
-        
+
     access_decision_manager:
         strategy: unanimous
 
@@ -114,4 +114,6 @@ security:
         - { path: ^/inscription, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/mot-de-passe, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin/, role: ROLE_ADMIN_PANEL }
-        - { path: ^/, role: ROLE_USER }
+        - { path: ^/event, role: ROLE_USER }
+        - { path: ^/adherents/register, role: ROLE_USER }
+        - { path: ^/$, role: IS_AUTHENTICATED_ANONYMOUSLY }

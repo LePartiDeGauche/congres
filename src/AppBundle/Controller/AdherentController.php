@@ -19,13 +19,18 @@ class AdherentController extends Controller
 {
     /**
      * Register a non adherent
+     *
      * @Route("/register", name="non_adherent_register")
      */
     public function registerAction(Request $request)
     {
-        //$this->denyAccessUnlessGranted('report_amend', new TextGroupOrganPair($textGroup, $organ), $this->getUser());
+        $profile = $this->getDoctrine()->getManager()
+            ->getRepository('AppBundle:Adherent')
+            ->findOneByEmail($this->getUser()->getEmail());
 
-        $profile = new Adherent();
+        if ($profile === null) {
+            $profile = new Adherent();
+        }
 
         $form = $this->createForm(
             new AdherentType(),
@@ -46,7 +51,7 @@ class AdherentController extends Controller
                 $manager->persist($profile);
                 $manager->flush();
 
-                $this->getUser()->setEnabled(true);
+                //$this->getUser()->setEnabled(true);
                 $this->getUser()->setProfile($profile);
                 $this->userManager = $this->container->get('fos_user.user_manager');
                 $this->userManager->updateUser($this->getUser());

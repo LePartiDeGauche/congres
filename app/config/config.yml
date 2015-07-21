@@ -30,7 +30,7 @@ twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
     form:
-        resources: 
+        resources:
             - 'bootstrap_3_layout.html.twig'
             - 'admin/form_admin_fields.html.twig'
 
@@ -92,7 +92,7 @@ fos_user:
     user_class: AppBundle\Entity\User
     from_email:
         address: %mailer_sender_address%
-        sender_name: "Congrès Parti de Gauche"
+        sender_name: "Remues Méninges 2015"
     registration:
         confirmation:
             enabled: true
@@ -124,7 +124,7 @@ lexik_paybox:
         hmac:
             key:    %paybox_hmac_key% # Key used to compute the hmac hash, provided by Paybox
             signature_name: 'Sign'
-        
+
 
 stfalcon_tinymce:
     include_jquery: false
@@ -149,7 +149,7 @@ stfalcon_tinymce:
             fix_list_elements : true
             valid_styles:
                 "*": ""
-            valid_classes: 
+            valid_classes:
                 "*": ""
 
             style_formats :
