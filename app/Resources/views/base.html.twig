@@ -30,10 +30,20 @@
                     {% block navbar %}
                     <ul class="nav navbar-nav">
                         {% block navLinks %}
-                        <li>
-                            <a href="{{ path('downloads', {filename: 'PROGRAMMERM2015H.pdf'}) }}">
-                                Programme
-                            </a>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Programme<span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li>
+                                    <a href="{{ path('downloads', {filename: 'PROGRAMMERM2015H.pdf'}) }}">
+                                        Programme complet
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('downloads', {filename: 'Prog prévisionnel RM PAPEP 2015.pdf'}) }}">
+                                        Parcours assemblées citoyennes
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
                         <li>
                             <a href="{{ path('downloads', {filename: 'CommentVenirauRM.pdf'}) }}">
