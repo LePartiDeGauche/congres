@@ -137,7 +137,9 @@ class EventController extends Controller
             $em->persist($eventRegistration);
             $em->flush();
 
-            if ($needHosting == true){
+            // FIXME: activer la sélection de chambre devrait être une préférence
+            // définie pour l'événement
+            if ($needHosting == true && FALSE){
                 /** @var Session $session */
                 $session = $this->get('session');
 
@@ -145,7 +147,16 @@ class EventController extends Controller
                 return $this->redirect($this->generateUrl('sleeping_list'));
             }
 
-
+            $message = \Swift_Message::newInstance()
+                ->setSubject('Inscription Remues Méninges 2015')
+                ->setTo($this->getUser()->getEmail())
+                ->setBody(
+                    $this->renderView(
+                        'mail/event_register.txt.twig',
+                        array('email' => $user->getEmail())
+                    )
+                );
+            $this->get('mailer')->send($message);
 
             if ($eventRegistration->getPaymentMode() == EventAdherentRegistration::PAYMENT_MODE_ONLINE) {
                 $eventPayment = $this->createPayment($adherent, $event, $eventRegistration, $eventRegistration->getCost()->getCost());
