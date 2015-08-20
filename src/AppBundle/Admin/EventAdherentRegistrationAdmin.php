@@ -165,14 +165,7 @@ class EventAdherentRegistrationAdmin extends Admin
             ->add('role') //, null, array('read_only' => !$isCreate, 'disabled' => !$isCreate))
             ->add('needHosting', 'choice', array('label' => 'necessite un hebergement', 'choices' => $this->yesnoChoice))
             // FIXME: filter cost of this event !
-            ->add('cost', null, array(
-                'label' => 'Tarif',
-                'query_builder' => function (EntityRepository $er) {
-                    return $er->createQueryBuilder('u')
-                        ->orderBy('u.id', 'DESC')
-                        ->setMaxResults(21);
-                },
-            ))
+            ->add('cost', null, array('label' => 'Tarif'))
             ->add('paymentMode', 'choice', array(
                 'label' => 'Type de Paiement',
                 'multiple' => false,
