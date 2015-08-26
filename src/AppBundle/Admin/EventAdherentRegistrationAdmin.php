@@ -250,6 +250,7 @@ class EventAdherentRegistrationAdmin extends Admin
             'role',
             'needhosting',
             'cost',
+            'payments_string',
             'meals',
             'attendance',
             'comment',

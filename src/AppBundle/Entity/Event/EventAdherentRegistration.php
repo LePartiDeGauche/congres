@@ -415,6 +415,20 @@ class EventAdherentRegistration
     }
 
     /**
+     * Get payments string
+     *
+     * @return string
+     */
+    public function getPaymentsString()
+    {
+        $str = '';
+        foreach ($this->payments as $payment) {
+            $str .= $payment . ', ';
+        }
+        return $str;
+    }
+
+    /**
      * Set comment.
      *
      * @param string $comment
