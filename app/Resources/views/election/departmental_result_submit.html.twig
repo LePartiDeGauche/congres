@@ -1,0 +1,126 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}Rapporter un résultat d'élection départementale{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            {% for flashMessage in app.session.flashbag.get('success') %}
+                <div class="alert alert-success">
+                    {{ flashMessage }}
+                </div>
+            {% endfor %}
+
+            {{ form_start(form) }}
+
+            <h3>Nom du rapporteur</h3>
+
+            <label for="form_name">Nom et prénom</label>
+            <input type="text" id="form_name" name="form[name]" placeholder="{{ adherent.firstname }} {{ adherent.lastname }}" required disabled/>
+
+            <h3>Département concerné</h3>
+
+            <label for="form_department">Département</label>
+            <input type="text" id="form_department" name="form[department]" placeholder="{{ adherent.departement }}" disabled required />
+
+            <h3>Date de l'assemblée générale </h3>
+
+            <label for="form_date">Date*</label>
+            <input type="date" id="form_date" name="form[date]" required />
+
+            <h3>Nombre de votants </h3>
+
+            <label for="form_numberOfVoters">Nombre de votants</label>
+            <input type="number" id="form_numberOfVoters" name="form[numberOfVoters]"  />
+
+            <h3>Votes exprimés</h3>
+
+            <label for="form_validVotes">Votes exprimés*</label>
+            <input type="number" id="form_validVotes" name="form[validVotes]"  required/>
+
+            <h3>Votes blancs</h3>
+
+            <label for="form_blankVotes">Votes blancs</label>
+            <input type="number" id="form_blankVotes" name="form[blankVotes]" />
+
+            <h3>Co-secrétaire Femme</h3>
+
+            <label for="form_coSecWomen">Sélectionner la nouvelle co-secrétaire*</label>
+            <input type="text" id="form_coSecWomen" name="form[coSecWomen]" required/>
+
+            <h3>Ancienne Co-secrétaire Femme</h3>
+
+            {{ form_errors(form.oldCoSecWomen) }}
+            {{ form_widget(form.oldCoSecWomen) }}
+
+            <h3>Co-secrétaire homme</h3>
+
+            {{ form_errors(form.coSecMen) }}
+            {{ form_widget(form.coSecMen) }}
+
+            <h3>Ancien co-secrétaire homme</h3>
+
+            {{ form_errors(form.oldCoSecMen) }}
+            {{ form_widget(form.oldCoSecMen) }}
+
+            <h3>Co-trésorière femme</h3>
+
+            {{ form_errors(form.coTreasureWomen) }}
+            {{ form_widget(form.coTreasureWomen) }}
+
+            <h3>Ancienne co-trésorière femme</h3>
+
+            {{ form_errors(form.oldCoTreasureWomen) }}
+            {{ form_widget(form.oldCoTreasureWomen) }}
+
+            <h3>Co-trésorier homme</h3>
+
+            {{ form_errors(form.coTreasureMen) }}
+            {{ form_widget(form.coTreasureMen) }}
+
+            <h3>Ancien co-trésorier homme</h3>
+
+            {{ form_errors(form.oldCoTreasureMen) }}
+            {{ form_widget(form.oldCoTreasureMen) }}
+
+            <h3>Poste Fonctionnel</h3>
+
+            {{ form_errors(form.responsability1) }}
+            {{ form_widget(form.responsability1) }}
+
+            <h3>Poste Fonctionnel</h3>
+
+            {{ form_errors(form.responsability2) }}
+            {{ form_widget(form.responsability2) }}
+
+            <h3>Poste Fonctionnel</h3>
+
+            {{ form_errors(form.responsability3) }}
+            {{ form_widget(form.responsability3) }}
+
+            <h3>Poste Fonctionnel</h3>
+
+            {{ form_errors(form.responsability4) }}
+            {{ form_widget(form.responsability4) }}
+
+            <h3>Poste Fonctionnel</h3>
+
+            {{ form_errors(form.responsability5) }}
+            {{ form_widget(form.responsability5) }}
+
+            <h3>Poste Fonctionnel</h3>
+
+            {{ form_errors(form.responsability6) }}
+            {{ form_widget(form.responsability6) }}
+
+            <input type="submit" class="btn btn-primary" value="Envoyer" />
+
+            {{ form_end(form) }}
+
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent () }}
+    {{ tinymce_init() }}
+{% endblock %}

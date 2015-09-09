@@ -98,6 +98,36 @@ class Election
     private $isValid;
 
     /**
+     * Number of voters
+     *
+     * @var int
+     *
+     * @ORM\Column(type="smallint")
+     * @Assert\Range(min=1)
+     */
+    private $numberOfVoters;
+
+    /**
+     * Number of valid votes
+     *
+     * @var int
+     *
+     * @ORM\Column(type="smallint")
+     * @Assert\Range(min=1)
+     */
+    private $validVotes;
+
+    /**
+     * Number of blank votes
+     *
+     * @var int
+     *
+     * @ORM\Column(type="smallint")
+     * @Assert\Range(min=1)
+     */
+    private $blankVotes;
+
+    /**
      * @return string
      */
     public function __toString()
@@ -293,4 +323,51 @@ class Election
         })->toArray());
     }
 
+    /**
+     * @return int
+     */
+    public function getNumberOfVoters()
+    {
+        return $this->numberOfVoters;
+    }
+
+    /**
+     * @param int $numberOfVoters
+     */
+    public function setNumberOfVoters($numberOfVoters)
+    {
+        $this->numberOfVoters = $numberOfVoters;
+    }
+
+    /**
+     * @return int
+     */
+    public function getValidVotes()
+    {
+        return $this->validVotes;
+    }
+
+    /**
+     * @param int $validVotes
+     */
+    public function setValidVotes($validVotes)
+    {
+        $this->validVotes = $validVotes;
+    }
+
+    /**
+     * @return int
+     */
+    public function getBlankVotes()
+    {
+        return $this->blankVotes;
+    }
+
+    /**
+     * @param int $blankVotes
+     */
+    public function setBlankVotes($blankVotes)
+    {
+        $this->blankVotes = $blankVotes;
+    }
 }
