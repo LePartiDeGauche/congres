@@ -12,6 +12,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
  * Class Departmental Controller
@@ -46,7 +47,7 @@ class DepartmentalController extends Controller
 
                 $departmentalElection = $formElection->getData();
 
-//données obligatoires
+//données du formulaire
                 $date = $departmentalElection['date'];
                 $numberOfVoters = $departmentalElection['numberOfVoters'];
                 $validVotes = $departmentalElection['validVotes'];
@@ -60,10 +61,33 @@ class DepartmentalController extends Controller
                 $coTreasureMen = $departmentalElection['coTreasureMen'];
                 $oldCoTreasureMen = $departmentalElection['oldCoTreasureMen'];
 
+//récupérer la responsabilité co sec ou co trésorier
+                $responsabilityCoSec = $this->getDoctrine()->getRepository('AppBundle:Responsability')->findOneByName('Co-secrétaire départemental');
+                $responsabilityCoTreasure= $this->getDoctrine()->getRepository('AppBundle:Responsability')->findOneByName('Co-trésorier départemental');
 
                 $numberOfElected = 4;
                 if ($oldCoSecMen) {
                     $numberOfElected++;
+                    $currentDate = new \DateTime();
+                    $oldAdherentResponsability = $this
+                        ->getDoctrine()
+                        ->getRepository('AppBundle:AdherentResponsability')
+                        ->findOldResponsabilityByAdherentAndResponsability($oldCoSecMen, $currentDate, $responsabilityCoSec);
+
+                    if ($oldAdherentResponsability)
+                    {
+                        dump($oldAdherentResponsability);
+                        $oldAdherentResponsability->setIsActive('O');
+                    }
+                    if (!$oldAdherentResponsability)
+                    {
+                        dump('nono');
+
+                    }
+                        die;
+
+
+                    $manager->persist($oldAdherentResponsability);
                 }
                 if ($oldCoSecWomen) {
                     $numberOfElected++;
@@ -75,9 +99,7 @@ class DepartmentalController extends Controller
                     $numberOfElected++;
                 }
 
-//récupérer la responsabilité co sec ou co trésorier
-                $responsabilityCoSec = $this->getDoctrine()->getRepository('AppBundle:Responsability')->findOneByName('Co-secrétaire départemental');
-                $responsabilityCoTreasure= $this->getDoctrine()->getRepository('AppBundle:Responsability')->findOneByName('Co-trésorier départemental');
+
 
 
                 $election = new Election();
@@ -120,6 +142,7 @@ class DepartmentalController extends Controller
 
                 $manager->persist($election);
                 $manager->persist($newCoSecWomen);
+                $manager->persist($oldCoSecMen);
                 $manager->persist($newCoSecMen);
                 $manager->persist($newCoTreasureWomen);
                 $manager->persist($newCoTreasureMen);
