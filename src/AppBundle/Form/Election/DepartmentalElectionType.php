@@ -42,10 +42,25 @@ class DepartmentalElectionType extends AbstractType
                     'disabled' => true,
                     'data' => $this->adherent->getDepartement(),
             ))
-                ->add('date', null, array('label' => "Date de l'élection *"))
-                ->add('numberOfVoters', null, array('label' => 'Nombre de votants', 'required' => false))
-                ->add('validVotes', null, array('label' => 'Votes exprimés', 'required' => false))
-                ->add('blankVotes', null, array('label' => 'Votes blancs', 'required' => false))
+                ->add('date', 'date', array('label' => "Date de l'élection *"))
+                ->add('numberOfVoters', 'integer', array(
+                    'label' => 'Nombre de votants',
+                    'required' => false,
+                    'attr' => array(
+                        'min' => '1'
+                    )))
+                ->add('validVotes', 'integer', array(
+                    'label' => 'Votes exprimés',
+                    'attr' => array(
+                        'min' => '1'
+                    )))
+                ->add('blankVotes',
+                    'integer', array(
+                    'label' => 'Votes blancs',
+                    'required' => false,
+                        'attr' => array(
+                           'min' => '1'
+                    )))
                 ->add('coSecWomen', 'entity', array(
                     'label' => 'Co-secrétaire femme *',
                     'expanded' => false,
@@ -169,8 +184,9 @@ class DepartmentalElectionType extends AbstractType
                 ->add('responsability1', null, array(
                     'label' => 'Poste fonctionnel 1',
                     'required' => false,
-                    'data' => 'Fonction...'
-                ))
+                    'attr' => array(
+                        'placeholder' => 'Fonction ...',
+                )))
                 ->add('responsable1', 'entity', array(
                     'label' => 'Elu',
                     'expanded' => false,
@@ -185,24 +201,99 @@ class DepartmentalElectionType extends AbstractType
                     }
                 ))
                 ->add('responsability2', null, array(
-                    'label' => 'Poste fonctionnel',
-                    'required' => false
+                    'label' => 'Poste fonctionnel 2',
+                    'required' => false,
+                    'attr' => array(
+                        'placeholder' => 'Fonction ...',
+                    )))
+                ->add('responsable2', 'entity', array(
+                    'label' => 'Elu',
+                    'expanded' => false,
+                    'multiple' => false,
+                    'required' => false,
+                    'class' => 'AppBundle:Adherent',
+                    'query_builder' => function (AdherentRepository $repository) {
+                        return $repository
+                            ->createQueryBuilder('a')
+                            ->where('a.departement = :department')
+                            ->setParameter('department', $this->adherent->getDepartement());
+                    }
                 ))
                 ->add('responsability3', null, array(
-                    'label' => 'Poste fonctionnel',
-                    'required' => false
+                    'label' => 'Poste fonctionnel 3',
+                    'required' => false,
+                    'attr' => array(
+                        'placeholder' => 'Fonction ...',
+                    )))
+                ->add('responsable3', 'entity', array(
+                    'label' => 'Elu',
+                    'expanded' => false,
+                    'multiple' => false,
+                    'required' => false,
+                    'class' => 'AppBundle:Adherent',
+                    'query_builder' => function (AdherentRepository $repository) {
+                        return $repository
+                            ->createQueryBuilder('a')
+                            ->where('a.departement = :department')
+                            ->setParameter('department', $this->adherent->getDepartement());
+                    }
                 ))
                 ->add('responsability4', null, array(
-                    'label' => 'Poste fonctionnel',
-                    'required' => false
+                    'label' => 'Poste fonctionnel 4',
+                    'required' => false,
+                    'attr' => array(
+                        'placeholder' => 'Fonction ...',
+                    )))
+                ->add('responsable4', 'entity', array(
+                    'label' => 'Elu',
+                    'expanded' => false,
+                    'multiple' => false,
+                    'required' => false,
+                    'class' => 'AppBundle:Adherent',
+                    'query_builder' => function (AdherentRepository $repository) {
+                        return $repository
+                            ->createQueryBuilder('a')
+                            ->where('a.departement = :department')
+                            ->setParameter('department', $this->adherent->getDepartement());
+                    }
                 ))
                 ->add('responsability5', null, array(
-                    'label' => 'Poste fonctionnel',
-                    'required' => false
+                    'label' => 'Poste fonctionnel 5',
+                    'required' => false,
+                    'attr' => array(
+                        'placeholder' => 'Fonction ...',
+                    )))
+                ->add('responsable5', 'entity', array(
+                    'label' => 'Elu',
+                    'expanded' => false,
+                    'multiple' => false,
+                    'required' => false,
+                    'class' => 'AppBundle:Adherent',
+                    'query_builder' => function (AdherentRepository $repository) {
+                        return $repository
+                            ->createQueryBuilder('a')
+                            ->where('a.departement = :department')
+                            ->setParameter('department', $this->adherent->getDepartement());
+                    }
                 ))
-                ->add('responsability6', null, array('
-                label' => 'Poste fonctionnel',
-                    'required' => false
+                ->add('responsability6', null, array(
+                    'label' => 'Poste fonctionnel 6',
+                    'required' => false,
+                    'attr' => array(
+                        'placeholder' => 'Fonction ...',
+                    )))
+                ->add('responsable6', 'entity', array(
+                    'label' => 'Elu',
+                    'expanded' => false,
+                    'multiple' => false,
+                    'required' => false,
+                    'class' => 'AppBundle:Adherent',
+                    'query_builder' => function (AdherentRepository $repository) {
+                        return $repository
+                            ->createQueryBuilder('a')
+                            ->where('a.departement = :department')
+                            ->setParameter('department', $this->adherent->getDepartement());
+                    }
                 ));
         });
     }

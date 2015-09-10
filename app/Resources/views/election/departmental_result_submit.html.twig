@@ -9,7 +9,9 @@
             <h1>Rapporter un résultar d'élection départemental</h1>
             <h3>Les champs marqués d'une étoile sont obligatoires</h3>
             {{ form_start(form) }}
+            {{ form_errors(form) }}
             {{ form_widget(form) }}
+            <input type="submit" />
             {{ form_end(form) }}
         </div>
     </div>
