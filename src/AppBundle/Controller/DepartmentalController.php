@@ -43,8 +43,10 @@ class DepartmentalController extends Controller
             if ($formElection->isValid()) {
                 $manager = $this->getDoctrine()->getManager();
 
+
                 $departmentalElection = $formElection->getData();
-                $name = $departmentalElection['name'];
+
+//données obligatoires
                 $date = $departmentalElection['date'];
                 $numberOfVoters = $departmentalElection['numberOfVoters'];
                 $validVotes = $departmentalElection['validVotes'];
@@ -59,36 +61,70 @@ class DepartmentalController extends Controller
                 $oldCoTreasureMen = $departmentalElection['oldCoTreasureMen'];
 
 
+                $numberOfElected = 4;
+                if ($oldCoSecMen) {
+                    $numberOfElected++;
+                }
+                if ($oldCoSecWomen) {
+                    $numberOfElected++;
+                }
+                if ($oldCoTreasureWomen) {
+                    $numberOfElected++;
+                }
+                if ($oldCoTreasureMen) {
+                    $numberOfElected++;
+                }
 
-                dump($departmentalElection);die;
+//récupérer la responsabilité co sec ou co trésorier
+                $responsabilityCoSec = $this->getDoctrine()->getRepository('AppBundle:Responsability')->findOneByName('Co-secrétaire départemental');
+                $responsabilityCoTreasure= $this->getDoctrine()->getRepository('AppBundle:Responsability')->findOneByName('Co-trésorier départemental');
+
 
                 $election = new Election();
-                $election->setStatus('STATUS_CLOSED');
+                $election->setStatus('Election Fermée');
                 $election->setResponsable($adherent);
                 $election->setNumberOfVoters($numberOfVoters);
                 $election->setValidVotes($validVotes);
                 $election->setBlankVotes($blankVotes);
+                $election->setIsValid(true);
+                $election->setNumberOfElected($numberOfElected);
 
                 $newCoSecWomen = new AdherentResponsability();
                 $newCoSecWomen->setAdherent($coSecWomen);
-                $newCoSecWomen->setResponsability('INSTANCE_COSEC_DEPARTMENT');
+                $newCoSecWomen->setResponsability($responsabilityCoSec);
                 $newCoSecWomen->setStart($date);
                 $newCoSecWomen->setIsActive(true);
 
                 $newCoSecMen = new AdherentResponsability();
                 $newCoSecMen->setAdherent($coSecMen);
-                $newCoSecMen->setResponsability('INSTANCE_COSEC_DEPARTMENT');
+                $newCoSecMen->setResponsability($responsabilityCoSec);
                 $newCoSecMen->setStart($date);
                 $newCoSecMen->setIsActive(true);
+
+                $newCoTreasureWomen = new AdherentResponsability();
+                $newCoTreasureWomen->setAdherent($coTreasureWomen);
+                $newCoTreasureWomen->setResponsability($responsabilityCoTreasure);
+                $newCoTreasureWomen->setStart($date);
+                $newCoTreasureWomen->setIsActive(true);
+
+                $newCoTreasureMen = new AdherentResponsability();
+                $newCoTreasureMen->setAdherent($coTreasureMen);
+                $newCoTreasureMen->setResponsability($responsabilityCoTreasure);
+                $newCoTreasureMen->setStart($date);
+                $newCoTreasureMen->setIsActive(true);
 
                 if ($oldCoSecMen) {
 
                 }
 
 
-                $responsability = new Responsability();
+                $manager->persist($election);
+                $manager->persist($newCoSecWomen);
+                $manager->persist($newCoSecMen);
+                $manager->persist($newCoTreasureWomen);
+                $manager->persist($newCoTreasureMen);
 
-                $manager->persist($formElection->getData());
+
                 $manager->flush();
 
                 $this
@@ -100,7 +136,7 @@ class DepartmentalController extends Controller
                     )
                 ;
 
-                return $this->redirect($this->generateUrl('election_list'));
+                return $this->redirect($this->generateUrl('homepage'));
             }
 
         }

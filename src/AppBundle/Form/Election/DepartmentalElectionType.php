@@ -30,7 +30,7 @@ class DepartmentalElectionType extends AbstractType
             $departmentalElection = $event->getData();
             $form = $event->getForm();
 
-            $form->add('name', null, array(
+            $form->add('responsableElection', null, array(
                 'label' => 'Nom du rapporteur *',
                 'required' => true,
                 'disabled' => true,
