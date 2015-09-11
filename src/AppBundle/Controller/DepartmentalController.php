@@ -61,14 +61,19 @@ class DepartmentalController extends Controller
                 $coTreasureMen = $departmentalElection['coTreasureMen'];
                 $oldCoTreasureMen = $departmentalElection['oldCoTreasureMen'];
 
+
 //récupérer la responsabilité co sec ou co trésorier
                 $responsabilityCoSec = $this->getDoctrine()->getRepository('AppBundle:Responsability')->findOneByName('Co-secrétaire départemental');
                 $responsabilityCoTreasure= $this->getDoctrine()->getRepository('AppBundle:Responsability')->findOneByName('Co-trésorier départemental');
 
                 $numberOfElected = 4;
+                $currentDate = new \DateTime(null, new \DateTimeZone('Europe/Paris'));
+
+
+//Si d'anciens responsables sont cités, leurs responsabilités sont désactivées
                 if ($oldCoSecMen) {
                     $numberOfElected++;
-                    $currentDate = new \DateTime();
+
                     $oldAdherentResponsability = $this
                         ->getDoctrine()
                         ->getRepository('AppBundle:AdherentResponsability')
@@ -76,32 +81,70 @@ class DepartmentalController extends Controller
 
                     if ($oldAdherentResponsability)
                     {
-                        dump($oldAdherentResponsability);
-                        $oldAdherentResponsability->setIsActive('O');
+                        foreach($oldAdherentResponsability as $key)
+                        {
+                            $key->setIsActive(false);
+                            $manager->persist($key);
+                        }
                     }
-                    if (!$oldAdherentResponsability)
-                    {
-                        dump('nono');
-
                     }
-                        die;
+                    if ($oldCoSecWomen) {
+                        $numberOfElected++;
+
+                        $oldAdherentResponsability = $this
+                            ->getDoctrine()
+                            ->getRepository('AppBundle:AdherentResponsability')
+                            ->findOldResponsabilityByAdherentAndResponsability($oldCoSecWomen, $currentDate, $responsabilityCoSec);
+
+                        if ($oldAdherentResponsability)
+                        {
+                            foreach($oldAdherentResponsability as $key)
+                            {
+                                $key->setIsActive(false);
+                                $manager->persist($key);
+                            }
+                        }
+                    }
+                    if ($oldCoTreasureWomen) {
+                        $numberOfElected++;
+
+                        $oldAdherentResponsability = $this
+                            ->getDoctrine()
+                            ->getRepository('AppBundle:AdherentResponsability')
+                            ->findOldResponsabilityByAdherentAndResponsability($oldCoTreasureWomen, $currentDate, $responsabilityCoTreasure);
+
+                        if ($oldAdherentResponsability)
+                        {
+                            foreach($oldAdherentResponsability as $key)
+                            {
+                                $key->setIsActive(false);
+                                $manager->persist($key);
+                            }
+                        }
+                    }
+                    if ($oldCoTreasureMen) {
+                        $numberOfElected++;
+
+                        $oldAdherentResponsability = $this
+                            ->getDoctrine()
+                            ->getRepository('AppBundle:AdherentResponsability')
+                            ->findOldResponsabilityByAdherentAndResponsability($oldCoTreasureMen, $currentDate, $responsabilityCoTreasure);
+
+                        if ($oldAdherentResponsability)
+                        {
+                            foreach($oldAdherentResponsability as $key)
+                            {
+                                $key->setIsActive(false);
+                                $manager->persist($key);
+                            }
+                        }
+                    }
+
+//Création des postes fonctionnels si c'est derniers existent
 
 
-                    $manager->persist($oldAdherentResponsability);
-                }
-                if ($oldCoSecWomen) {
-                    $numberOfElected++;
-                }
-                if ($oldCoTreasureWomen) {
-                    $numberOfElected++;
-                }
-                if ($oldCoTreasureMen) {
-                    $numberOfElected++;
-                }
 
-
-
-
+// création de l'élection et des nouveaux élus
                 $election = new Election();
                 $election->setStatus('Election Fermée');
                 $election->setResponsable($adherent);
@@ -135,14 +178,8 @@ class DepartmentalController extends Controller
                 $newCoTreasureMen->setStart($date);
                 $newCoTreasureMen->setIsActive(true);
 
-                if ($oldCoSecMen) {
-
-                }
-
-
                 $manager->persist($election);
                 $manager->persist($newCoSecWomen);
-                $manager->persist($oldCoSecMen);
                 $manager->persist($newCoSecMen);
                 $manager->persist($newCoTreasureWomen);
                 $manager->persist($newCoTreasureMen);

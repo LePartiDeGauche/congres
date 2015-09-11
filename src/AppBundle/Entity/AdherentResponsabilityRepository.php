@@ -15,23 +15,34 @@ class AdherentResponsabilityRepository extends EntityRepository
 {
     protected $classname;
 
-    /**
-     * @param Adherent $adherent
-     * @param \DateTime $dateTime
-     * @param Responsability $responsability
-     */
     public function findOldResponsabilityByAdherentAndResponsability(Adherent $adherent, \DateTime $currentDate, Responsability $responsability)
     {
-        $adherentResponsability = $this->createQueryBuilder('a')
-            ->select('a')
-            ->where('a.adherent = :adherent')
-            ->andWhere('a.start > :currentDate')
-            ->andWhere('a.responsability = :responsability')
+//        $adherentResponsability = $this->createQueryBuilder('a')
+//            ->select('a')
+//            ->where('a.adherent = :adherent')
+//            //->andWhere('a.start > :currentDate')
+//            ->andWhere('a.responsability = :responsability')
+//            ->setParameter('adherent', $adherent)
+//           ->setParameter('currentDate', $currentDate)
+//            ->setParameter('responsability', $responsability)
+//            ->getQuery();
+//
+//        return $adherentResponsability->getFirstResult();
+
+        return $adherentResponsability = $this
+            ->createQueryBuilder('ar')
+            ->select('ar')
+            ->where('ar.adherent = :adherent')
+            ->andWhere('ar.start < :currentDate')
+            ->andWhere('ar.responsability = :responsability')
             ->setParameter('adherent', $adherent)
             ->setParameter('currentDate', $currentDate)
             ->setParameter('responsability', $responsability)
-            ->getQuery();
+            ->getQuery()
+            ->getResult()
+        ;
 
-        return $adherentResponsability->getFirstResult();
+        //return $adherentResponsability = $query->getResult();
+
     }
 }
