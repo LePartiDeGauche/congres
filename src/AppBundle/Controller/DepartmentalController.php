@@ -47,37 +47,33 @@ class DepartmentalController extends Controller
 
                 $departmentalElection = $formElection->getData();
 
-//données du formulaire
+//données du formulaire obligatoires : date, élus
                 $date = $departmentalElection['date'];
                 $numberOfVoters = $departmentalElection['numberOfVoters'];
                 $validVotes = $departmentalElection['validVotes'];
                 $blankVotes = $departmentalElection['blankVotes'];
                 $coSecWomen = $departmentalElection['coSecWomen'];
-                $oldCoSecWomen = $departmentalElection['oldCoSecWomen'];
                 $coSecMen = $departmentalElection['coSecMen'];
-                $oldCoSecMen = $departmentalElection['oldCoSecMen'];
                 $coTreasureWomen = $departmentalElection['coTreasureWomen'];
-                $oldCoTreasureWomen = $departmentalElection['oldCoTreasureWomen'];
                 $coTreasureMen = $departmentalElection['coTreasureMen'];
-                $oldCoTreasureMen = $departmentalElection['oldCoTreasureMen'];
 
 
 //récupérer la responsabilité co sec ou co trésorier
                 $responsabilityCoSec = $this->getDoctrine()->getRepository('AppBundle:Responsability')->findOneByName('Co-secrétaire départemental');
                 $responsabilityCoTreasure= $this->getDoctrine()->getRepository('AppBundle:Responsability')->findOneByName('Co-trésorier départemental');
 
+//Nombre d'élus de base
                 $numberOfElected = 4;
-                $currentDate = new \DateTime(null, new \DateTimeZone('Europe/Paris'));
-
 
 //Si d'anciens responsables sont cités, leurs responsabilités sont désactivées
-                if ($oldCoSecMen) {
+                if ($departmentalElection['oldCoSecMen']) {
+                    $oldCoSecMen = $departmentalElection['oldCoSecMen'];
                     $numberOfElected++;
 
                     $oldAdherentResponsability = $this
                         ->getDoctrine()
                         ->getRepository('AppBundle:AdherentResponsability')
-                        ->findOldResponsabilityByAdherentAndResponsability($oldCoSecMen, $currentDate, $responsabilityCoSec);
+                        ->findOldResponsabilityByAdherentAndResponsability($oldCoSecMen, $date, $responsabilityCoSec);
 
                     if ($oldAdherentResponsability)
                     {
@@ -88,13 +84,14 @@ class DepartmentalController extends Controller
                         }
                     }
                     }
-                    if ($oldCoSecWomen) {
+                    if ($departmentalElection['oldCoSecWomen']) {
+                        $oldCoSecWomen = $departmentalElection['oldCoSecWomen'];
                         $numberOfElected++;
 
                         $oldAdherentResponsability = $this
                             ->getDoctrine()
                             ->getRepository('AppBundle:AdherentResponsability')
-                            ->findOldResponsabilityByAdherentAndResponsability($oldCoSecWomen, $currentDate, $responsabilityCoSec);
+                            ->findOldResponsabilityByAdherentAndResponsability($oldCoSecWomen, $date, $responsabilityCoSec);
 
                         if ($oldAdherentResponsability)
                         {
@@ -105,13 +102,14 @@ class DepartmentalController extends Controller
                             }
                         }
                     }
-                    if ($oldCoTreasureWomen) {
+                    if ($departmentalElection['oldCoTreasureWomen']) {
+                        $oldCoTreasureWomen = $departmentalElection['oldCoTreasureWomen'];
                         $numberOfElected++;
 
                         $oldAdherentResponsability = $this
                             ->getDoctrine()
                             ->getRepository('AppBundle:AdherentResponsability')
-                            ->findOldResponsabilityByAdherentAndResponsability($oldCoTreasureWomen, $currentDate, $responsabilityCoTreasure);
+                            ->findOldResponsabilityByAdherentAndResponsability($oldCoTreasureWomen, $date, $responsabilityCoTreasure);
 
                         if ($oldAdherentResponsability)
                         {
@@ -122,13 +120,14 @@ class DepartmentalController extends Controller
                             }
                         }
                     }
-                    if ($oldCoTreasureMen) {
+                    if ($departmentalElection['oldCoTreasureMen']) {
+                        $oldCoTreasureMen = $departmentalElection['oldCoTreasureMen'];
                         $numberOfElected++;
 
                         $oldAdherentResponsability = $this
                             ->getDoctrine()
                             ->getRepository('AppBundle:AdherentResponsability')
-                            ->findOldResponsabilityByAdherentAndResponsability($oldCoTreasureMen, $currentDate, $responsabilityCoTreasure);
+                            ->findOldResponsabilityByAdherentAndResponsability($oldCoTreasureMen, $date, $responsabilityCoTreasure);
 
                         if ($oldAdherentResponsability)
                         {
@@ -144,6 +143,8 @@ class DepartmentalController extends Controller
 
 
 
+
+
 // création de l'élection et des nouveaux élus
                 $election = new Election();
                 $election->setStatus('Election Fermée');
@@ -154,28 +155,32 @@ class DepartmentalController extends Controller
                 $election->setIsValid(true);
                 $election->setNumberOfElected($numberOfElected);
 
+                // début du mandat 1 jour après l'élection
+                $dateElection = clone $date;
+                $dateElection = $date->modify("+ 1 days");
+
                 $newCoSecWomen = new AdherentResponsability();
                 $newCoSecWomen->setAdherent($coSecWomen);
                 $newCoSecWomen->setResponsability($responsabilityCoSec);
-                $newCoSecWomen->setStart($date);
+                $newCoSecWomen->setStart($dateElection);
                 $newCoSecWomen->setIsActive(true);
 
                 $newCoSecMen = new AdherentResponsability();
                 $newCoSecMen->setAdherent($coSecMen);
                 $newCoSecMen->setResponsability($responsabilityCoSec);
-                $newCoSecMen->setStart($date);
+                $newCoSecMen->setStart($dateElection);
                 $newCoSecMen->setIsActive(true);
 
                 $newCoTreasureWomen = new AdherentResponsability();
                 $newCoTreasureWomen->setAdherent($coTreasureWomen);
                 $newCoTreasureWomen->setResponsability($responsabilityCoTreasure);
-                $newCoTreasureWomen->setStart($date);
+                $newCoTreasureWomen->setStart($dateElection);
                 $newCoTreasureWomen->setIsActive(true);
 
                 $newCoTreasureMen = new AdherentResponsability();
                 $newCoTreasureMen->setAdherent($coTreasureMen);
                 $newCoTreasureMen->setResponsability($responsabilityCoTreasure);
-                $newCoTreasureMen->setStart($date);
+                $newCoTreasureMen->setStart($dateElection);
                 $newCoTreasureMen->setIsActive(true);
 
                 $manager->persist($election);
@@ -184,6 +189,120 @@ class DepartmentalController extends Controller
                 $manager->persist($newCoTreasureWomen);
                 $manager->persist($newCoTreasureMen);
 
+// Ajout des postes fonctionnels s'ils existent
+                if ($departmentalElection['responsability1']) {
+                    $responsability1 = $departmentalElection['responsability1'];
+                    if ($departmentalElection['responsable1']) {
+                        $responsable1 = $departmentalElection['responsable1'];
+
+                        $responsability = new Responsability();
+                        $responsability->setName($responsability1);
+
+                        $adherentResponsability = new AdherentResponsability();
+                        $adherentResponsability->setAdherent($responsable1);
+                        $adherentResponsability->setResponsability($responsability);
+                        $adherentResponsability->setIsActive(true);
+                        $adherentResponsability->setStart($dateElection);
+
+                        $manager->persist($adherentResponsability);
+                        $manager->persist($responsability);
+                    }
+                }
+
+                if ($departmentalElection['responsability2']) {
+                    $responsability2 = $departmentalElection['responsability2'];
+                    if ($departmentalElection['responsable2']) {
+                        $responsable2 = $departmentalElection['responsable2'];
+
+                        $responsability = new Responsability();
+                        $responsability->setName($responsability2);
+
+                        $adherentResponsability = new AdherentResponsability();
+                        $adherentResponsability->setAdherent($responsable2);
+                        $adherentResponsability->setResponsability($responsability);
+                        $adherentResponsability->setIsActive(true);
+                        $adherentResponsability->setStart($dateElection);
+
+                        $manager->persist($adherentResponsability);
+                        $manager->persist($responsability);
+                    }
+                }
+
+                if ($departmentalElection['responsability3']) {
+                    $responsability3 = $departmentalElection['responsability3'];
+                    if ($departmentalElection['responsable3']) {
+                        $responsable3 = $departmentalElection['responsable3'];
+
+                        $responsability = new Responsability();
+                        $responsability->setName($responsability3);
+
+                        $adherentResponsability = new AdherentResponsability();
+                        $adherentResponsability->setAdherent($responsable3);
+                        $adherentResponsability->setResponsability($responsability);
+                        $adherentResponsability->setIsActive(true);
+                        $adherentResponsability->setStart($dateElection);
+
+                        $manager->persist($adherentResponsability);
+                        $manager->persist($responsability);
+                    }
+                }
+
+                if ($departmentalElection['responsability4']) {
+                    $responsability4 = $departmentalElection['responsability4'];
+                    if ($departmentalElection['responsable4']) {
+                        $responsable4 = $departmentalElection['responsable4'];
+
+                        $responsability = new Responsability();
+                        $responsability->setName($responsability4);
+
+                        $adherentResponsability = new AdherentResponsability();
+                        $adherentResponsability->setAdherent($responsable4);
+                        $adherentResponsability->setResponsability($responsability);
+                        $adherentResponsability->setIsActive(true);
+                        $adherentResponsability->setStart($dateElection);
+
+                        $manager->persist($adherentResponsability);
+                        $manager->persist($responsability);
+                    }
+                }
+
+                if ($departmentalElection['responsability5']) {
+                    $responsability5 = $departmentalElection['responsability5'];
+                    if ($departmentalElection['responsable5']) {
+                        $responsable5 = $departmentalElection['responsable5'];
+
+                        $responsability = new Responsability();
+                        $responsability->setName($responsability5);
+
+                        $adherentResponsability = new AdherentResponsability();
+                        $adherentResponsability->setAdherent($responsable5);
+                        $adherentResponsability->setResponsability($responsability);
+                        $adherentResponsability->setIsActive(true);
+                        $adherentResponsability->setStart($dateElection);
+
+                        $manager->persist($adherentResponsability);
+                        $manager->persist($responsability);
+                    }
+                }
+
+                if ($departmentalElection['responsability5']) {
+                    $responsability5 = $departmentalElection['responsability5'];
+                    if ($departmentalElection['responsable5']) {
+                        $responsable5 = $departmentalElection['responsable5'];
+
+                        $responsability = new Responsability();
+                        $responsability->setName($responsability5);
+
+                        $adherentResponsability = new AdherentResponsability();
+                        $adherentResponsability->setAdherent($responsable5);
+                        $adherentResponsability->setResponsability($responsability);
+                        $adherentResponsability->setIsActive(true);
+                        $adherentResponsability->setStart($dateElection);
+
+                        $manager->persist($adherentResponsability);
+                        $manager->persist($responsability);
+                    }
+                }
 
                 $manager->flush();
 

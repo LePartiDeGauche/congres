@@ -188,7 +188,7 @@ class DepartmentalElectionType extends AbstractType
                         'placeholder' => 'Fonction ...',
                 )))
                 ->add('responsable1', 'entity', array(
-                    'label' => 'Elu',
+                    'label' => 'Elu à ce poste',
                     'expanded' => false,
                     'multiple' => false,
                     'required' => false,
@@ -207,7 +207,7 @@ class DepartmentalElectionType extends AbstractType
                         'placeholder' => 'Fonction ...',
                     )))
                 ->add('responsable2', 'entity', array(
-                    'label' => 'Elu',
+                    'label' => 'Elu à ce poste',
                     'expanded' => false,
                     'multiple' => false,
                     'required' => false,
@@ -226,7 +226,7 @@ class DepartmentalElectionType extends AbstractType
                         'placeholder' => 'Fonction ...',
                     )))
                 ->add('responsable3', 'entity', array(
-                    'label' => 'Elu',
+                    'label' => 'Elu à ce poste',
                     'expanded' => false,
                     'multiple' => false,
                     'required' => false,
@@ -245,7 +245,7 @@ class DepartmentalElectionType extends AbstractType
                         'placeholder' => 'Fonction ...',
                     )))
                 ->add('responsable4', 'entity', array(
-                    'label' => 'Elu',
+                    'label' => 'Elu à ce poste',
                     'expanded' => false,
                     'multiple' => false,
                     'required' => false,
@@ -264,7 +264,7 @@ class DepartmentalElectionType extends AbstractType
                         'placeholder' => 'Fonction ...',
                     )))
                 ->add('responsable5', 'entity', array(
-                    'label' => 'Elu',
+                    'label' => 'Elu à ce poste',
                     'expanded' => false,
                     'multiple' => false,
                     'required' => false,
@@ -283,7 +283,7 @@ class DepartmentalElectionType extends AbstractType
                         'placeholder' => 'Fonction ...',
                     )))
                 ->add('responsable6', 'entity', array(
-                    'label' => 'Elu',
+                    'label' => 'Elu à ce poste',
                     'expanded' => false,
                     'multiple' => false,
                     'required' => false,
