@@ -11,4 +11,5 @@ use Doctrine\ORM\EntityRepository;
 class ResponsabilityRepository extends EntityRepository
 {
     protected $classname = 'AppBundle\Entity\Responsability';
+
 }

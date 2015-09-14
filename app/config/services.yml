@@ -78,6 +78,12 @@ services:
         tags:
            - { name: security.voter }
 
+    app.election.departmental_voter:
+        class:      AppBundle\Security\DepartmentalElectionVoter
+        public:     false
+        tags:
+          - { name : security.voter }
+
     app.booking_listener:
         class: AppBundle\EventListener\BookingListener
         arguments: [@mailer]

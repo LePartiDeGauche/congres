@@ -3,7 +3,6 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
-use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
  * ContributionRepository.
@@ -17,18 +16,6 @@ class AdherentResponsabilityRepository extends EntityRepository
 
     public function findOldResponsabilityByAdherentAndResponsability(Adherent $adherent, \DateTime $currentDate, Responsability $responsability)
     {
-//        $adherentResponsability = $this->createQueryBuilder('a')
-//            ->select('a')
-//            ->where('a.adherent = :adherent')
-//            //->andWhere('a.start > :currentDate')
-//            ->andWhere('a.responsability = :responsability')
-//            ->setParameter('adherent', $adherent)
-//           ->setParameter('currentDate', $currentDate)
-//            ->setParameter('responsability', $responsability)
-//            ->getQuery();
-//
-//        return $adherentResponsability->getFirstResult();
-
         return $adherentResponsability = $this
             ->createQueryBuilder('ar')
             ->select('ar')
@@ -41,8 +28,21 @@ class AdherentResponsabilityRepository extends EntityRepository
             ->getQuery()
             ->getResult()
         ;
-
-        //return $adherentResponsability = $query->getResult();
-
     }
+
+    public function findActiveResponsabilityByAdherent(Adherent $adherent, $responsability)
+    {
+        return $adherentResponsability = $this
+            ->createQueryBuilder('ar')
+            ->select('ar')
+            ->where('ar.adherent = :adherent')
+            ->andWhere('ar.responsability = :responsability')
+            ->andWhere('ar.isActive = 1')
+            ->setParameter('adherent', $adherent)
+            ->setParameter('responsability', $responsability)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
 }
