@@ -80,6 +80,7 @@ services:
 
     app.election.departmental_voter:
         class:      AppBundle\Security\DepartmentalElectionVoter
+        arguments: [@doctrine.orm.entity_manager]
         public:     false
         tags:
           - { name : security.voter }

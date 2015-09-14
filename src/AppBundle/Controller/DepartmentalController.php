@@ -33,6 +33,8 @@ class DepartmentalController extends Controller
     {
         $adherent = $this->getUser()->getProfile();
 
+        $this->denyAccessUnlessGranted('DEPARTMENT_ELECTION_REPORT', $adherent);
+
         $formElection = $this->createForm(
             new DepartmentalElectionType($adherent)
         );
@@ -138,11 +140,6 @@ class DepartmentalController extends Controller
                             }
                         }
                     }
-
-//Création des postes fonctionnels si c'est derniers existent
-
-
-
 
 
 // création de l'élection et des nouveaux élus
@@ -304,6 +301,48 @@ class DepartmentalController extends Controller
                     }
                 }
 
+
+
+
+//
+//
+//                //Responsability co-secrétaire
+//                $responsability = $this
+//                    ->getDoctrine()
+//                    ->getRepository('AppBundle:Responsability')
+//                    ->findByName('Co-secrétaire départemental');
+//
+//                //Réupération d'une responsabilité par adhérent si active
+//                $adherentResponsability = $this
+//                    ->getDoctrine()
+//                    ->getRepository('AppBundle:AdherentResponsability')
+//                    ->findActiveResponsabilityByAdherent($adherent, $responsability);
+//
+//                //Si l'user courant est un co-secrétaire actif
+//                if($adherentResponsability) {
+//                    foreach ($adherentResponsability as $key) {
+//                        $responsabilityAdherent = $key->getResponsability();
+//                    }
+//                    foreach($responsability as $key)
+//                    {
+//                        $responsability = $key;
+//                    }
+//
+//                    if ($responsabilityAdherent == $responsability)
+//                    {
+//                        echo 'good';
+//                    }
+//                    else
+//                    {
+//                        echo 'resp existe mais match pas';
+//                    }
+//                }
+//                else
+//                {
+//                    echo 'aucune resp active';
+//                }
+//
+//                die;
 
                 $manager->flush();
 
