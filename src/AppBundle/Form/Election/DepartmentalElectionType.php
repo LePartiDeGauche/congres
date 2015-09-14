@@ -5,6 +5,8 @@ namespace AppBundle\Form\Election;
 use AppBundle\Entity\Adherent;
 use AppBundle\Entity\AdherentRepository;
 use AppBundle\Entity\Election\Election;
+use AppBundle\Entity\Responsability;
+use AppBundle\Entity\ResponsabilityRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
@@ -181,12 +183,17 @@ class DepartmentalElectionType extends AbstractType
                             ->setParameter('gender', 'M');
                     }
                 ))
-                ->add('responsability1', null, array(
+                ->add('responsability1', 'entity', array(
                     'label' => 'Poste fonctionnel 1',
                     'required' => false,
-                    'attr' => array(
-                        'placeholder' => 'Fonction ...',
-                )))
+                    'expanded' => false,
+                    'multiple' => false,
+                    'class' => 'AppBundle:Responsability',
+                    'query_builder' => function (ResponsabilityRepository $repository) {
+                        return $repository
+                            ->createQueryBuilder('r');
+                    }
+                ))
                 ->add('responsable1', 'entity', array(
                     'label' => 'Elu à ce poste',
                     'expanded' => false,
@@ -200,12 +207,17 @@ class DepartmentalElectionType extends AbstractType
                             ->setParameter('department', $this->adherent->getDepartement());
                     }
                 ))
-                ->add('responsability2', null, array(
+                ->add('responsability2', 'entity', array(
                     'label' => 'Poste fonctionnel 2',
                     'required' => false,
-                    'attr' => array(
-                        'placeholder' => 'Fonction ...',
-                    )))
+                    'expanded' => false,
+                    'multiple' => false,
+                    'class' => 'AppBundle:Responsability',
+                    'query_builder' => function (ResponsabilityRepository $repository) {
+                        return $repository
+                            ->createQueryBuilder('r');
+                    }
+                ))
                 ->add('responsable2', 'entity', array(
                     'label' => 'Elu à ce poste',
                     'expanded' => false,
@@ -219,12 +231,17 @@ class DepartmentalElectionType extends AbstractType
                             ->setParameter('department', $this->adherent->getDepartement());
                     }
                 ))
-                ->add('responsability3', null, array(
+                ->add('responsability3', 'entity', array(
                     'label' => 'Poste fonctionnel 3',
                     'required' => false,
-                    'attr' => array(
-                        'placeholder' => 'Fonction ...',
-                    )))
+                    'expanded' => false,
+                    'multiple' => false,
+                    'class' => 'AppBundle:Responsability',
+                    'query_builder' => function (ResponsabilityRepository $repository) {
+                        return $repository
+                            ->createQueryBuilder('r');
+                    }
+                ))
                 ->add('responsable3', 'entity', array(
                     'label' => 'Elu à ce poste',
                     'expanded' => false,
@@ -238,12 +255,17 @@ class DepartmentalElectionType extends AbstractType
                             ->setParameter('department', $this->adherent->getDepartement());
                     }
                 ))
-                ->add('responsability4', null, array(
+                ->add('responsability4', 'entity', array(
                     'label' => 'Poste fonctionnel 4',
                     'required' => false,
-                    'attr' => array(
-                        'placeholder' => 'Fonction ...',
-                    )))
+                    'expanded' => false,
+                    'multiple' => false,
+                    'class' => 'AppBundle:Responsability',
+                    'query_builder' => function (ResponsabilityRepository $repository) {
+                        return $repository
+                            ->createQueryBuilder('r');
+                    }
+                ))
                 ->add('responsable4', 'entity', array(
                     'label' => 'Elu à ce poste',
                     'expanded' => false,
@@ -257,12 +279,17 @@ class DepartmentalElectionType extends AbstractType
                             ->setParameter('department', $this->adherent->getDepartement());
                     }
                 ))
-                ->add('responsability5', null, array(
+                ->add('responsability5', 'entity', array(
                     'label' => 'Poste fonctionnel 5',
                     'required' => false,
-                    'attr' => array(
-                        'placeholder' => 'Fonction ...',
-                    )))
+                    'expanded' => false,
+                    'multiple' => false,
+                    'class' => 'AppBundle:Responsability',
+                    'query_builder' => function (ResponsabilityRepository $repository) {
+                        return $repository
+                            ->createQueryBuilder('r');
+                    }
+                ))
                 ->add('responsable5', 'entity', array(
                     'label' => 'Elu à ce poste',
                     'expanded' => false,
@@ -276,12 +303,17 @@ class DepartmentalElectionType extends AbstractType
                             ->setParameter('department', $this->adherent->getDepartement());
                     }
                 ))
-                ->add('responsability6', null, array(
+                ->add('responsability6', 'entity', array(
                     'label' => 'Poste fonctionnel 6',
                     'required' => false,
-                    'attr' => array(
-                        'placeholder' => 'Fonction ...',
-                    )))
+                    'expanded' => false,
+                    'multiple' => false,
+                    'class' => 'AppBundle:Responsability',
+                    'query_builder' => function (ResponsabilityRepository $repository) {
+                        return $repository
+                            ->createQueryBuilder('r');
+                    }
+                ))
                 ->add('responsable6', 'entity', array(
                     'label' => 'Elu à ce poste',
                     'expanded' => false,

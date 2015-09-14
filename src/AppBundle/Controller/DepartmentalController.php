@@ -33,7 +33,7 @@ class DepartmentalController extends Controller
     {
         $adherent = $this->getUser()->getProfile();
 
-        $this->denyAccessUnlessGranted('DEPARTMENT_ELECTION_REPORT', $adherent);
+      //  $this->denyAccessUnlessGranted('DEPARTMENT_ELECTION_REPORT');
 
         $formElection = $this->createForm(
             new DepartmentalElectionType($adherent)
@@ -141,10 +141,16 @@ class DepartmentalController extends Controller
                         }
                     }
 
+// récupération du type d'élection
+                $electionGroup = $this
+                    ->getDoctrine()
+                    ->getRepository('AppBundle:Election\ElectionGroup')
+                    ->findOneBy(array('name' => 'Election Départementale'));
 
 // création de l'élection et des nouveaux élus
                 $election = new Election();
                 $election->setStatus('Election Fermée');
+                $election->setGroup($electionGroup);
                 $election->setResponsable($adherent);
                 $election->setNumberOfVoters($numberOfVoters);
                 $election->setValidVotes($validVotes);
@@ -192,17 +198,13 @@ class DepartmentalController extends Controller
                     if ($departmentalElection['responsable1']) {
                         $responsable1 = $departmentalElection['responsable1'];
 
-                        $responsability = new Responsability();
-                        $responsability->setName($responsability1);
-
                         $adherentResponsability = new AdherentResponsability();
                         $adherentResponsability->setAdherent($responsable1);
-                        $adherentResponsability->setResponsability($responsability);
+                        $adherentResponsability->setResponsability($responsability1);
                         $adherentResponsability->setIsActive(true);
                         $adherentResponsability->setStart($dateElection);
 
                         $manager->persist($adherentResponsability);
-                        $manager->persist($responsability);
                     }
                 }
 
@@ -211,17 +213,13 @@ class DepartmentalController extends Controller
                     if ($departmentalElection['responsable2']) {
                         $responsable2 = $departmentalElection['responsable2'];
 
-                        $responsability = new Responsability();
-                        $responsability->setName($responsability2);
-
                         $adherentResponsability = new AdherentResponsability();
                         $adherentResponsability->setAdherent($responsable2);
-                        $adherentResponsability->setResponsability($responsability);
+                        $adherentResponsability->setResponsability($responsability2);
                         $adherentResponsability->setIsActive(true);
                         $adherentResponsability->setStart($dateElection);
 
                         $manager->persist($adherentResponsability);
-                        $manager->persist($responsability);
                     }
                 }
 
@@ -230,17 +228,14 @@ class DepartmentalController extends Controller
                     if ($departmentalElection['responsable3']) {
                         $responsable3 = $departmentalElection['responsable3'];
 
-                        $responsability = new Responsability();
-                        $responsability->setName($responsability3);
 
                         $adherentResponsability = new AdherentResponsability();
                         $adherentResponsability->setAdherent($responsable3);
-                        $adherentResponsability->setResponsability($responsability);
+                        $adherentResponsability->setResponsability($responsability3);
                         $adherentResponsability->setIsActive(true);
                         $adherentResponsability->setStart($dateElection);
 
                         $manager->persist($adherentResponsability);
-                        $manager->persist($responsability);
                     }
                 }
 
@@ -249,17 +244,13 @@ class DepartmentalController extends Controller
                     if ($departmentalElection['responsable4']) {
                         $responsable4 = $departmentalElection['responsable4'];
 
-                        $responsability = new Responsability();
-                        $responsability->setName($responsability4);
-
                         $adherentResponsability = new AdherentResponsability();
                         $adherentResponsability->setAdherent($responsable4);
-                        $adherentResponsability->setResponsability($responsability);
+                        $adherentResponsability->setResponsability($responsability4);
                         $adherentResponsability->setIsActive(true);
                         $adherentResponsability->setStart($dateElection);
 
                         $manager->persist($adherentResponsability);
-                        $manager->persist($responsability);
                     }
                 }
 
@@ -268,81 +259,30 @@ class DepartmentalController extends Controller
                     if ($departmentalElection['responsable5']) {
                         $responsable5 = $departmentalElection['responsable5'];
 
-                        $responsability = new Responsability();
-                        $responsability->setName($responsability5);
-
                         $adherentResponsability = new AdherentResponsability();
                         $adherentResponsability->setAdherent($responsable5);
-                        $adherentResponsability->setResponsability($responsability);
+                        $adherentResponsability->setResponsability($responsability5);
                         $adherentResponsability->setIsActive(true);
                         $adherentResponsability->setStart($dateElection);
 
                         $manager->persist($adherentResponsability);
-                        $manager->persist($responsability);
                     }
                 }
 
-                if ($departmentalElection['responsability5']) {
-                    $responsability5 = $departmentalElection['responsability5'];
-                    if ($departmentalElection['responsable5']) {
-                        $responsable5 = $departmentalElection['responsable5'];
-
-                        $responsability = new Responsability();
-                        $responsability->setName($responsability5);
+                if ($departmentalElection['responsability6']) {
+                    $responsability6 = $departmentalElection['responsability6'];
+                    if ($departmentalElection['responsable6']) {
+                        $responsable5 = $departmentalElection['responsable6'];
 
                         $adherentResponsability = new AdherentResponsability();
                         $adherentResponsability->setAdherent($responsable5);
-                        $adherentResponsability->setResponsability($responsability);
+                        $adherentResponsability->setResponsability($responsability6);
                         $adherentResponsability->setIsActive(true);
                         $adherentResponsability->setStart($dateElection);
 
                         $manager->persist($adherentResponsability);
-                        $manager->persist($responsability);
                     }
                 }
-
-
-
-
-//
-//
-//                //Responsability co-secrétaire
-//                $responsability = $this
-//                    ->getDoctrine()
-//                    ->getRepository('AppBundle:Responsability')
-//                    ->findByName('Co-secrétaire départemental');
-//
-//                //Réupération d'une responsabilité par adhérent si active
-//                $adherentResponsability = $this
-//                    ->getDoctrine()
-//                    ->getRepository('AppBundle:AdherentResponsability')
-//                    ->findActiveResponsabilityByAdherent($adherent, $responsability);
-//
-//                //Si l'user courant est un co-secrétaire actif
-//                if($adherentResponsability) {
-//                    foreach ($adherentResponsability as $key) {
-//                        $responsabilityAdherent = $key->getResponsability();
-//                    }
-//                    foreach($responsability as $key)
-//                    {
-//                        $responsability = $key;
-//                    }
-//
-//                    if ($responsabilityAdherent == $responsability)
-//                    {
-//                        echo 'good';
-//                    }
-//                    else
-//                    {
-//                        echo 'resp existe mais match pas';
-//                    }
-//                }
-//                else
-//                {
-//                    echo 'aucune resp active';
-//                }
-//
-//                die;
 
                 $manager->flush();
 
