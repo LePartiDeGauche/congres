@@ -41,7 +41,7 @@ class AdherentResponsabilityRepository extends EntityRepository
             ->setParameter('adherent', $adherent)
             ->setParameter('responsability', $responsability)
             ->getQuery()
-            ->getSingleResult()
+            ->getResult()
             ;
     }
 

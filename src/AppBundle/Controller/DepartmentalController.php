@@ -2,17 +2,14 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Entity\Adherent;
 use AppBundle\Entity\AdherentResponsability;
 use AppBundle\Entity\Organ;
 use AppBundle\Entity\Election\Election;
 use AppBundle\Entity\Responsability;
 use AppBundle\Form\Election\DepartmentalElectionType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
  * Class Departmental Controller
@@ -33,7 +30,11 @@ class DepartmentalController extends Controller
     {
         $adherent = $this->getUser()->getProfile();
 
-      //  $this->denyAccessUnlessGranted('DEPARTMENT_ELECTION_REPORT');
+//        if(($this->getUser()) == null) {
+//            return $this->redirect($this->generateUrl('homepage'));
+//        }
+
+        $this->denyAccessUnlessGranted('DEPARTMENT_ELECTION_REPORT', $adherent);
 
         $formElection = $this->createForm(
             new DepartmentalElectionType($adherent)
