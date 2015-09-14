@@ -42,41 +42,38 @@ class DepartmentalElectionVoter implements  VoterInterface
      */
     public function vote(TokenInterface $token, $object, array $attributes)
     {
-//        $user = $token->getUser();
-//
-//        if($user == null)
-//        {
-//            return VoterInterface::ACCESS_DENIED;
-//        }
-//        else {
-//            $adherent = $user->getProfile();
-//
-//            //Responsability co-secrétaire
-//            $responsability = $this->entityManager
-//                ->getRepository('AppBundle:Responsability')
-//                ->findByName('Co-secrétaire départemental');
-//
-//            //Réupération d'une responsabilité par adhérent si active
-//            $adherentResponsability = $this->entityManager
-//                ->getRepository('AppBundle:AdherentResponsability')
-//                ->findActiveResponsabilityByAdherent($adherent, $responsability);
-//
-//            //Si l'user courant est un co-secrétaire actif
-//            if ($adherentResponsability) {
-//                foreach ($adherentResponsability as $key) {
-//                    $responsabilityAdherent = $key->getResponsability();
-//                }
-//                foreach ($responsability as $key) {
-//                    $responsability = $key;
-//                }
-//                if ($responsabilityAdherent == $responsability) {
-//                    return VoterInterface::ACCESS_GRANTED;
-//                } else {
-//                    return VoterInterface::ACCESS_DENIED;
-//                }
-//            } else {
-//                return VoterInterface::ACCESS_DENIED;
-//            }
-//        }
+        $user = $token->getUser();
+
+        if($user == null)
+        {
+            return VoterInterface::ACCESS_DENIED;
+        }
+        else {
+            $adherent = $user->getProfile();
+
+            //Responsability co-secrétaire
+            $responsability = $this->entityManager
+                ->getRepository('AppBundle:Responsability')
+                ->findOneByName('Co-secrétaire départemental');
+
+
+            //Réupération d'une responsabilité par adhérent si active
+            $adherentResponsability = $this->entityManager
+                ->getRepository('AppBundle:AdherentResponsability')
+                ->findActiveResponsabilityByAdherent($adherent, $responsability);
+
+            //Si l'user courant est un co-secrétaire actif
+            if ($adherentResponsability) {
+                    $responsabilityAdherent = $adherentResponsability->getResponsability();
+
+                if ($responsabilityAdherent == $responsability) {
+                    return VoterInterface::ACCESS_GRANTED;
+                } else {
+                    return VoterInterface::ACCESS_DENIED;
+                }
+            } else {
+                return VoterInterface::ACCESS_DENIED;
+            }
+        }
     }
 }
