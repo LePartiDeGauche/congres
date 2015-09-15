@@ -31,3 +31,5 @@ parameters:
     paybox_rank: 32
     paybox_login: 107904482
     paybox_hmac_key: 1999888I
+
+    cosecretaire_departement_id: 6

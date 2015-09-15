@@ -30,19 +30,24 @@ class AdherentResponsabilityRepository extends EntityRepository
         ;
     }
 
-    public function findActiveResponsabilityByAdherent(Adherent $adherent, $responsability)
+    /**
+     * @param Adherent $adherent
+     * @param Responsability $responsability
+     *
+     * @return bool
+     */
+    public function hasActiveResponsibility(Adherent $adherent, Responsability $responsability)
     {
-        return $adherentResponsability = $this
+
+        return (int) $this
             ->createQueryBuilder('ar')
-            ->select('ar')
+            ->select('COUNT(ar.id)')
             ->where('ar.adherent = :adherent')
             ->andWhere('ar.responsability = :responsability')
             ->andWhere('ar.isActive = 1')
             ->setParameter('adherent', $adherent)
             ->setParameter('responsability', $responsability)
             ->getQuery()
-            ->getResult()
-            ;
+            ->getSingleScalarResult() >= 1;
     }
-
 }
