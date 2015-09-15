@@ -33,3 +33,4 @@ parameters:
     paybox_hmac_key: 1999888I
 
     cosecretaire_departement_id: 6
+    coTresorier_departement_id: 7

@@ -30,10 +30,6 @@ class DepartmentalController extends Controller
     {
         $adherent = $this->getUser()->getProfile();
 
-//        if(($this->getUser()) == null) {
-//            return $this->redirect($this->generateUrl('homepage'));
-//        }
-
         $this->denyAccessUnlessGranted('DEPARTMENT_ELECTION_REPORT', $adherent);
 
         $formElection = $this->createForm(

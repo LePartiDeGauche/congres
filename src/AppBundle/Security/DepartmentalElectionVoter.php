@@ -5,9 +5,7 @@ namespace AppBundle\Security;
 use AppBundle\Entity\User;
 use Doctrine\ORM\EntityManager;
 use AppBundle\Entity\Responsability;
-use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\AbstractVoter;
-use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
 
 class DepartmentalElectionVoter extends AbstractVoter
 {
