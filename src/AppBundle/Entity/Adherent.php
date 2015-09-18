@@ -18,8 +18,8 @@ class Adherent
     const STATUS_OLD = 'Ancien adhérent';
     const STATUS_EXCLUDED = 'Exclusion';
 
-    const GENDER_MALE    = 'M';
-    const GENDER_FEMALE  = 'F';
+    const GENDER_MALE = 'M';
+    const GENDER_FEMALE = 'F';
     const GENDER_UNKNOWN = '?';
 
     /**
@@ -87,11 +87,11 @@ class Adherent
      */
     private $status;
 
-    /**
-     * @var int$
-     *
-     * @ORM\Column(name="departement", type="integer")
-     */
+/**
+ * @var int$
+ *
+ * @ORM\Column(name="departement", type="integer")
+ */
     // FIXME : Remove this field when organs will be imported
     private $departement;
 
@@ -309,18 +309,19 @@ class Adherent
         return $this->responsabilities;
     }
 
-    /**
-     * Get organs names.
-     *
-     * @return string
-     */
+/**
+ * Get organs names.
+ *
+ * @return string
+ */
     // FIXME cf. getExportFields in AdmendmentAdmin
     public function getOrgansNames()
     {
-        $name = "";
+        $name = '';
         foreach ($this->organParticipations as $organParticipation) {
-            $name .= $organParticipation->getOrgan() . ", ";
+            $name .= $organParticipation->getOrgan().', ';
         }
+
         return $name;
     }
 
@@ -360,6 +361,7 @@ class Adherent
                 return true;
             }
         }
+
         return false;
     }
 
@@ -491,7 +493,7 @@ class Adherent
     }
 
     /**
-     * Set gender
+     * Set gender.
      *
      * @param string $gender
      *
@@ -518,7 +520,7 @@ class Adherent
     }
 
     /**
-     * Get gender
+     * Get gender.
      *
      * @return string
      */
@@ -528,7 +530,7 @@ class Adherent
     }
 
     /**
-     * Set mobilephone
+     * Set mobilephone.
      *
      * @param string $mobilephone
      *
@@ -542,7 +544,7 @@ class Adherent
     }
 
     /**
-     * Get mobilephone
+     * Get mobilephone.
      *
      * @return string
      */

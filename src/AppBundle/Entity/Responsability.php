@@ -27,7 +27,6 @@ class Responsability
     const INSTANCE_COSEC_DEPARTMENT = 'Co-secrétaire de département';
     const INSTANCE_COTRESORIER_DEP = 'Co-trésorier de département';
 
-
     /**
      * @var int
      *
@@ -89,6 +88,7 @@ class Responsability
     public function setName($name)
     {
         $this->name = $name;
+
         return $this;
     }
 

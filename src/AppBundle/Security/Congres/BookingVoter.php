@@ -19,7 +19,6 @@ class BookingVoter implements VoterInterface
         $this->entityManager = $entityManager;
     }
 
-
     /**
      * {@inheritdoc}
      */
@@ -50,10 +49,9 @@ class BookingVoter implements VoterInterface
         $adherent = $object->getAdherent();
         $date = $object->getDate();
 
-
         // Si je suis déjà inscrit à la même date
         $booking = $this->entityManager->getRepository('AppBundle:Event\Booking')->findOneBy(['adherent' => $adherent, 'date' => $date]);
-        if ($booking)  {
+        if ($booking) {
             return VoterInterface::ACCESS_DENIED;
         }
 
@@ -67,7 +65,7 @@ class BookingVoter implements VoterInterface
         //Si la chambre n'est pas dispo à cette date
         $dateStartAvailability = $bedroom->getDateStartAvailability();
         $dateStopAvailability = $bedroom->getDateStopAvailability();
-        if ($date < $dateStartAvailability || $date > $dateStopAvailability){
+        if ($date < $dateStartAvailability || $date > $dateStopAvailability) {
             return VoterInterface::ACCESS_DENIED;
         }
 

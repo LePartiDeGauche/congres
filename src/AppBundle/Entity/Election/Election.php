@@ -98,7 +98,7 @@ class Election
     private $isValid;
 
     /**
-     * Number of voters
+     * Number of voters.
      *
      * @var int
      *
@@ -108,7 +108,7 @@ class Election
     private $numberOfVoters;
 
     /**
-     * Number of valid votes
+     * Number of valid votes.
      *
      * @var int
      *
@@ -118,7 +118,7 @@ class Election
     private $validVotes;
 
     /**
-     * Number of blank votes
+     * Number of blank votes.
      *
      * @var int
      *
@@ -213,7 +213,7 @@ class Election
             self::STATUS_OPEN,
             self::STATUS_CLOSED,
             self::ISVALID_TRUE,
-            self::ISVALID_FALSE
+            self::ISVALID_FALSE,
         ))) {
             throw new \InvalidArgumentException('Invalid status');
         }
@@ -272,7 +272,7 @@ class Election
      */
     public function getElectedNames()
     {
-        return join(', ', $this->elected->toArray());
+        return implode(', ', $this->elected->toArray());
     }
 
     /**
@@ -287,12 +287,11 @@ class Election
         return $this;
     }
 
-
     /**
      * Returns true if election has been checked wether it has been validated
-     * or rejected
+     * or rejected.
      *
-     * @return boolean
+     * @return bool
      */
     public function hasBeenChecked()
     {
@@ -301,7 +300,7 @@ class Election
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isIsValid()
     {
@@ -309,7 +308,7 @@ class Election
     }
 
     /**
-     * @param boolean $isValid
+     * @param bool $isValid
      */
     public function setIsValid($isValid)
     {
@@ -318,7 +317,7 @@ class Election
 
     public function getElectedEmail()
     {
-        return join(', ', $this->elected->map(function (Adherent $elected) {
+        return implode(', ', $this->elected->map(function (Adherent $elected) {
             return $elected->getEmail();
         })->toArray());
     }

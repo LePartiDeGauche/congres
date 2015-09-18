@@ -58,10 +58,10 @@ class ElectionAdmin extends Admin
                     'edit' => array(),
                     'delete' => array(),
                     'valid' => array(
-                        'template' => 'AppBundle:admin:list_action_valid.html.twig'),
+                        'template' => 'AppBundle:admin:list_action_valid.html.twig', ),
                     'reject' => array(
-                        'template' => 'AppBundle:admin:list_action_reject.html.twig'),
-                )
+                        'template' => 'AppBundle:admin:list_action_reject.html.twig', ),
+                ),
             ))
         ;
     }
@@ -87,13 +87,13 @@ class ElectionAdmin extends Admin
             ))
             ->add('elected', 'sonata_type_collection', array(
                 'type_options' => array(
-                    'delete' => true
-                )
+                    'delete' => true,
+                ),
             ), array(
                 'edit' => 'inline',
                 'inline' => 'table',
                 'sortable' => 'position',
-                'required' => false
+                'required' => false,
             ))
         ;
     }
@@ -129,7 +129,7 @@ class ElectionAdmin extends Admin
             'id',
             'organ',
             'electedNames',
-            'electedEmail'
+            'electedEmail',
         );
     }
 

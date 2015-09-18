@@ -1,4 +1,5 @@
 <?php
+
 namespace AppBundle\Admin;
 
 use Sonata\AdminBundle\Admin\Admin;
@@ -8,7 +9,7 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 
 /**
- *  Booking administration
+ *  Booking administration.
  *
  * @author Clément Talleu <clement@les-tilleuls.coop>
  */
@@ -31,11 +32,11 @@ class BookingAdmin extends Admin
     }
 
     /**
-     * Default Datagrid values
+     * Default Datagrid values.
      *
      * @var array
      */
-    protected $datagridValues = array (
+    protected $datagridValues = array(
 
         '_sort_order' => 'DESC',
     );

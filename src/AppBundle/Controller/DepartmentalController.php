@@ -3,7 +3,6 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\AdherentResponsability;
-use AppBundle\Entity\Organ;
 use AppBundle\Entity\Election\Election;
 use AppBundle\Entity\Responsability;
 use AppBundle\Form\Election\DepartmentalElectionType;
@@ -12,15 +11,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Class Departmental Controller
+ * Class Departmental Controller.
  *
  * @Route("/instances-departementales")
  */
 class DepartmentalController extends Controller
 {
-
     /**
-     * @param Request  $request
+     * @param Request $request
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      *
@@ -43,7 +41,6 @@ class DepartmentalController extends Controller
             if ($formElection->isValid()) {
                 $manager = $this->getDoctrine()->getManager();
 
-
                 $departmentalElection = $formElection->getData();
 
 //données du formulaire obligatoires : date, élus
@@ -56,10 +53,9 @@ class DepartmentalController extends Controller
                 $coTreasureWomen = $departmentalElection['coTreasureWomen'];
                 $coTreasureMen = $departmentalElection['coTreasureMen'];
 
-
 //récupérer la responsabilité co sec ou co trésorier
                 $responsabilityCoSec = $this->getDoctrine()->getRepository('AppBundle:Responsability')->findOneByName('Co-secrétaire départemental');
-                $responsabilityCoTreasure= $this->getDoctrine()->getRepository('AppBundle:Responsability')->findOneByName('Co-trésorier départemental');
+                $responsabilityCoTreasure = $this->getDoctrine()->getRepository('AppBundle:Responsability')->findOneByName('Co-trésorier départemental');
 
 //Nombre d'élus de base
                 $numberOfElected = 4;
@@ -67,76 +63,68 @@ class DepartmentalController extends Controller
 //Si d'anciens responsables sont cités, leurs responsabilités sont désactivées
                 if ($departmentalElection['oldCoSecMen']) {
                     $oldCoSecMen = $departmentalElection['oldCoSecMen'];
-                    $numberOfElected++;
+                    ++$numberOfElected;
 
                     $oldAdherentResponsability = $this
                         ->getDoctrine()
                         ->getRepository('AppBundle:AdherentResponsability')
                         ->findOldResponsabilityByAdherentAndResponsability($oldCoSecMen, $date, $responsabilityCoSec);
 
-                    if ($oldAdherentResponsability)
-                    {
-                        foreach($oldAdherentResponsability as $key)
-                        {
+                    if ($oldAdherentResponsability) {
+                        foreach ($oldAdherentResponsability as $key) {
                             $key->setIsActive(false);
                             $manager->persist($key);
                         }
                     }
-                    }
-                    if ($departmentalElection['oldCoSecWomen']) {
-                        $oldCoSecWomen = $departmentalElection['oldCoSecWomen'];
-                        $numberOfElected++;
+                }
+                if ($departmentalElection['oldCoSecWomen']) {
+                    $oldCoSecWomen = $departmentalElection['oldCoSecWomen'];
+                    ++$numberOfElected;
 
-                        $oldAdherentResponsability = $this
+                    $oldAdherentResponsability = $this
                             ->getDoctrine()
                             ->getRepository('AppBundle:AdherentResponsability')
                             ->findOldResponsabilityByAdherentAndResponsability($oldCoSecWomen, $date, $responsabilityCoSec);
 
-                        if ($oldAdherentResponsability)
-                        {
-                            foreach($oldAdherentResponsability as $key)
-                            {
-                                $key->setIsActive(false);
-                                $manager->persist($key);
-                            }
+                    if ($oldAdherentResponsability) {
+                        foreach ($oldAdherentResponsability as $key) {
+                            $key->setIsActive(false);
+                            $manager->persist($key);
                         }
                     }
-                    if ($departmentalElection['oldCoTreasureWomen']) {
-                        $oldCoTreasureWomen = $departmentalElection['oldCoTreasureWomen'];
-                        $numberOfElected++;
+                }
+                if ($departmentalElection['oldCoTreasureWomen']) {
+                    $oldCoTreasureWomen = $departmentalElection['oldCoTreasureWomen'];
+                    ++$numberOfElected;
 
-                        $oldAdherentResponsability = $this
+                    $oldAdherentResponsability = $this
                             ->getDoctrine()
                             ->getRepository('AppBundle:AdherentResponsability')
                             ->findOldResponsabilityByAdherentAndResponsability($oldCoTreasureWomen, $date, $responsabilityCoTreasure);
 
-                        if ($oldAdherentResponsability)
-                        {
-                            foreach($oldAdherentResponsability as $key)
-                            {
-                                $key->setIsActive(false);
-                                $manager->persist($key);
-                            }
+                    if ($oldAdherentResponsability) {
+                        foreach ($oldAdherentResponsability as $key) {
+                            $key->setIsActive(false);
+                            $manager->persist($key);
                         }
                     }
-                    if ($departmentalElection['oldCoTreasureMen']) {
-                        $oldCoTreasureMen = $departmentalElection['oldCoTreasureMen'];
-                        $numberOfElected++;
+                }
+                if ($departmentalElection['oldCoTreasureMen']) {
+                    $oldCoTreasureMen = $departmentalElection['oldCoTreasureMen'];
+                    ++$numberOfElected;
 
-                        $oldAdherentResponsability = $this
+                    $oldAdherentResponsability = $this
                             ->getDoctrine()
                             ->getRepository('AppBundle:AdherentResponsability')
                             ->findOldResponsabilityByAdherentAndResponsability($oldCoTreasureMen, $date, $responsabilityCoTreasure);
 
-                        if ($oldAdherentResponsability)
-                        {
-                            foreach($oldAdherentResponsability as $key)
-                            {
-                                $key->setIsActive(false);
-                                $manager->persist($key);
-                            }
+                    if ($oldAdherentResponsability) {
+                        foreach ($oldAdherentResponsability as $key) {
+                            $key->setIsActive(false);
+                            $manager->persist($key);
                         }
                     }
+                }
 
 // récupération du type d'élection
                 $electionGroup = $this
@@ -157,7 +145,7 @@ class DepartmentalController extends Controller
 
                 // début du mandat 1 jour après l'élection
                 $dateElection = clone $date;
-                $dateElection = $date->modify("+ 1 days");
+                $dateElection = $date->modify('+ 1 days');
 
                 $newCoSecWomen = new AdherentResponsability();
                 $newCoSecWomen->setAdherent($coSecWomen);
@@ -224,7 +212,6 @@ class DepartmentalController extends Controller
                     $responsability3 = $departmentalElection['responsability3'];
                     if ($departmentalElection['responsable3']) {
                         $responsable3 = $departmentalElection['responsable3'];
-
 
                         $adherentResponsability = new AdherentResponsability();
                         $adherentResponsability->setAdherent($responsable3);
@@ -294,12 +281,11 @@ class DepartmentalController extends Controller
 
                 return $this->redirect($this->generateUrl('homepage'));
             }
-
         }
 
         return $this->render('election/departmental_result_submit.html.twig', array(
             'form' => $formElection->createView(),
-            "adherent" => $adherent
+            'adherent' => $adherent,
         ));
     }
 }

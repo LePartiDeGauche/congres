@@ -72,7 +72,7 @@ class AdherentResponsability
      *
      * @ORM\Column(name="isActive", type="boolean")
      */
-    private $isActive=false;
+    private $isActive = false;
 
     /**
      * Get id.

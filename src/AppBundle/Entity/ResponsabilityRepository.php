@@ -2,7 +2,6 @@
 
 namespace AppBundle\Entity;
 
-use AppBundle\Entity\Adherent;
 use Doctrine\ORM\EntityRepository;
 
 /**
@@ -11,5 +10,4 @@ use Doctrine\ORM\EntityRepository;
 class ResponsabilityRepository extends EntityRepository
 {
     protected $classname = 'AppBundle\Entity\Responsability';
-
 }

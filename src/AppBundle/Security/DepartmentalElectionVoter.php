@@ -37,7 +37,6 @@ class DepartmentalElectionVoter extends AbstractVoter
         return [self::DEPARTMENT_ELECTION_CLASS];
     }
 
-
     /**
      * {@inheritdoc}
      */

@@ -31,14 +31,13 @@ class AdherentResponsabilityRepository extends EntityRepository
     }
 
     /**
-     * @param Adherent $adherent
+     * @param Adherent       $adherent
      * @param Responsability $responsability
      *
      * @return bool
      */
     public function hasActiveResponsibility(Adherent $adherent, Responsability $responsability)
     {
-
         return (int) $this
             ->createQueryBuilder('ar')
             ->select('COUNT(ar.id)')

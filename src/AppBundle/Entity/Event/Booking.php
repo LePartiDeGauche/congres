@@ -139,7 +139,7 @@ class Booking
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isIsPayed()
     {
@@ -147,12 +147,10 @@ class Booking
     }
 
     /**
-     * @param boolean $isPayed
+     * @param bool $isPayed
      */
     public function setIsPayed($isPayed)
     {
         $this->isPayed = $isPayed;
     }
-
-
 }

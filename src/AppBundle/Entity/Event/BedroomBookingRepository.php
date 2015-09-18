@@ -20,5 +20,4 @@ class BedroomBookingRepository  extends EntityRepository
             ->getSingleScalarResult()
             ;
     }
-
 }

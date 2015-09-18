@@ -6,7 +6,7 @@ use AppBundle\Entity\Event\Booking;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 
 /**
- * Listener for counting if the total of bookings is more important than the number of places available
+ * Listener for counting if the total of bookings is more important than the number of places available.
  */
 class BookingListener
 {
@@ -29,11 +29,10 @@ class BookingListener
         $this->checkLastPlaceAvailableByBedroom($args);
     }
 
-    private function checkLastAvailablePlace(LifecycleEventArgs $args){
-
+    private function checkLastAvailablePlace(LifecycleEventArgs $args)
+    {
         $entity = $args->getEntity();
         $entityManager = $args->getEntityManager();
-
 
         if ($entity instanceof Booking) {
             $date = $entity->getDate();
@@ -46,11 +45,10 @@ class BookingListener
 
             $numberOfPlaces = 0;
             foreach ($bedrooms as $bedroom) {
-               $numberOfPlaces = $numberOfPlaces + ($bedroom->getRoomType()->getPlaces());
+                $numberOfPlaces = $numberOfPlaces + ($bedroom->getRoomType()->getPlaces());
             }
 
             if ($numberOfPlaces <= $numberOfBookings) {
-
                 $message = \Swift_Message::newInstance()
                     ->setSubject('Hébergement : places manquantes !')
                     ->setFrom('postmaster@example.com')
@@ -63,7 +61,8 @@ class BookingListener
         }
     }
 
-    private function checkLastPlaceAvailableByBedroom(LifecycleEventArgs $args) {
+    private function checkLastPlaceAvailableByBedroom(LifecycleEventArgs $args)
+    {
         $entity = $args->getEntity();
         $entityManager = $args->getEntityManager();
 
