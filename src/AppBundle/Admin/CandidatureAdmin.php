@@ -121,4 +121,20 @@ class CandidatureAdmin extends Admin
             ))
         ;
     }
+    
+    public function getExportFields()
+    {
+        return array(
+            'Prenom'=>'author.firstname',
+            'Nom'=>'author.lastname',
+            'Comité'=>'author.organParticipations',
+            'Status adhérent'=>'author.status',
+            'Responsabilité'=>'responsability',
+            'Profession de foi'=>'professionfoi',
+            'Profession de foi cplt'=>'professionfoicplt',
+            'Est Sortant'=>'isSortant',
+            'Date de candidature'=>'submitDate',
+            'Status de candidature'=>'status',
+            );
+    }
 }
