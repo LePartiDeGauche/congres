@@ -53,10 +53,9 @@ class DepartmentalController extends Controller
                 $coTreasureWomen = $departmentalElection['coTreasureWomen'];
                 $coTreasureMen = $departmentalElection['coTreasureMen'];
 
-
 //récupération de l'id correspondant au secrétaire et au trésorier-e dans parameters
-                $coSecId = $this->container->getParameter("cosecretaire_departement_id");
-                $coTreasId = $this->container->getParameter("coTresorier_departement_id");
+                $coSecId = $this->container->getParameter('coSecretaire_departement_id');
+                $coTreasId = $this->container->getParameter('coTresorier_departement_id');
 
 //récupérer la responsabilité co sec ou co trésorier
                 $responsabilityCoSec = $this->getDoctrine()->getRepository('AppBundle:Responsability')->findOneById($coSecId);
