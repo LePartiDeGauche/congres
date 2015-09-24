@@ -8,10 +8,10 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 
-class OrganAdmin extends Admin
+class OrganParticipationAdmin extends Admin
 {
-    protected $baseRouteName = 'organ_admin';
-    protected $baseRoutePattern = 'organ';
+    protected $baseRouteName = 'organ_participation_admin';
+    protected $baseRoutePattern = 'adherent/organ_participation';
     /**
      * @param DatagridMapper $datagridMapper
      */
@@ -19,9 +19,10 @@ class OrganAdmin extends Admin
     {
         $datagridMapper
             ->add('id')
-            ->add('organType')
-            ->add('name')
-            ->add('description')
+            ->add('organ.name')
+            ->add('start')
+            ->add('end')
+            ->add('isActive')
         ;
     }
 
@@ -32,16 +33,10 @@ class OrganAdmin extends Admin
     {
         $listMapper
             ->add('id')
-            ->add('organType')
-            ->add('name')
-            ->add('description')
-            ->add('_action', 'actions', array(
-                'actions' => array(
-                    'show' => array(),
-                    'edit' => array(),
-                    'delete' => array(),
-                ),
-            ))
+            ->add('organ.name')
+            ->add('start')
+            ->add('end')
+            ->add('isActive')
         ;
     }
 
@@ -51,9 +46,10 @@ class OrganAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('organType')
-            ->add('name')
-            ->add('description')
+            ->add('start')
+            ->add('end')
+            ->add('isActive', null, array('required' => null))
+            ->add('organ', 'sonata_type_model_autocomplete', array('property' => array('name'), 'required' => false))
         ;
     }
 
@@ -64,10 +60,10 @@ class OrganAdmin extends Admin
     {
         $showMapper
             ->add('id')
-            ->add('organType')
-            ->add('name')
-            ->add('description')
-s	    ->add('participants')
+            ->add('organ.name')
+            ->add('start')
+            ->add('end')
+            ->add('isActive')
         ;
     }
 }

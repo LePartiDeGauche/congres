@@ -33,6 +33,18 @@ class AdherentAdmin extends Admin
                 ),
                 'multiple' => false,
             ))
+            ->add('organParticipations', 'sonata_type_collection',
+                array(
+                    'label' => 'Organes',
+                    'by_reference' => false,
+                ), array(
+                    'edit' => 'inline',
+                    'inline' => 'table',
+                    'sortable' => 'position',
+                ), array(
+                    'required' => false,
+                )
+            )
             ->add('responsabilities', 'sonata_type_collection',
                 array(
                     'label' => 'Responsabilités (ces modifications seront écrasé à chaque nouvel import du TGF !)',
