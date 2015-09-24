@@ -187,6 +187,12 @@ services:
         tags:
             - {name: sonata.admin, manager_type: orm, group: admin, label: AdherentResponsability, show_in_dashboard: false}
 
+    sonata.admin.adherent_organ_participation:
+        class: AppBundle\Admin\OrganParticipationAdmin
+        arguments: [~, AppBundle\Entity\Organ\OrganParticipation, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin, label: OrganParticipation, show_in_dashboard: false}
+
     sonata.admin.payment:
         class: AppBundle\Admin\PaymentAdmin
         arguments: [~, AppBundle\Entity\Payment\Payment, SonataAdminBundle:CRUD]

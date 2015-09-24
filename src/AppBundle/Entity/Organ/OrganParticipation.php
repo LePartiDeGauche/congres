@@ -236,4 +236,9 @@ class OrganParticipation
     {
         return $this->allowedBy;
     }
+
+    public function __tostring()
+    {
+        return $this->adherent . '@"' . $this->organ . '"';
+    }
 }
