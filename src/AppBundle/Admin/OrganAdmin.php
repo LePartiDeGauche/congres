@@ -67,7 +67,7 @@ class OrganAdmin extends Admin
             ->add('organType')
             ->add('name')
             ->add('description')
-s	    ->add('participants')
+	        ->add('participants')
         ;
     }
 }
