@@ -331,6 +331,15 @@ class Adherent
     }
 
     /**
+     * Get names of adherent with uppercased lastname
+     * @return string
+     */
+    public function getUpperNames()
+    {
+        return strtoupper($this->lastname) . ' ' . $this->firstname;
+    }
+
+    /**
      * Add responsabilities.
      *
      * @param \AppBundle\Entity\AdherentResponsability $responsabilities

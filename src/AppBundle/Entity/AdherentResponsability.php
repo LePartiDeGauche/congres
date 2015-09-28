@@ -75,6 +75,19 @@ class AdherentResponsability
     private $isActive = false;
 
     /**
+     * Constructor.
+     */
+    public function __construct()
+    {
+        $this->allowsParticipations = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    public function __toString()
+    {
+        return $this->responsability . ': ' . $this->adherent;
+    }
+
+    /**
      * Get id.
      *
      * @return int
@@ -202,13 +215,6 @@ class AdherentResponsability
     public function getIsActive()
     {
         return $this->isActive;
-    }
-    /**
-     * Constructor.
-     */
-    public function __construct()
-    {
-        $this->allowsParticipations = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**

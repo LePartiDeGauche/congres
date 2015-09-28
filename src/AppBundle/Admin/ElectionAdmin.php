@@ -106,8 +106,12 @@ class ElectionAdmin extends Admin
         $showMapper
             ->add('group', null, array('label' => "Type d'élection"))
             ->add('organ', null, array('label' => 'Lieu concerné'))
+            ->add('numberOfVoters', null, array('label' => 'Nombre de votants'))
+            ->add('validVotes', null, array('label' => 'Votes exprimés'))
+            ->add('blankVotes', null, array('label' => 'Votes blancs'))
             ->add('numberOfElected', null, array('label' => 'Nombre d\'élus'))
             ->add('status', null, array('label' => 'Statut de l\'élection'))
+            ->add('elected', null, array('label' => 'Élus'))
         ;
     }
 
