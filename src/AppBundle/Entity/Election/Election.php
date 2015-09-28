@@ -7,6 +7,7 @@ use AppBundle\Entity\Organ\Organ;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use AppBundle\Entity\AdherentResponsability;
 
 /**
  * Election.
@@ -79,7 +80,7 @@ class Election
     /**
      * @var Adherent[]
      *
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Adherent")
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\AdherentResponsability")
      * @Assert\Expression(
      *     "this.getElected().count() <= this.getNumberOfElected()",
      *     message="Trop d'élus selectionnés",
@@ -98,11 +99,48 @@ class Election
     private $isValid;
 
     /**
+     * Number of voters.
+     *
+     * @var int
+     *
+     * @ORM\Column(type="smallint")
+     * @Assert\Range(min=1)
+     */
+    private $numberOfVoters;
+
+    /**
+     * Number of valid votes.
+     *
+     * @var int
+     *
+     * @ORM\Column(type="smallint")
+     * @Assert\Range(min=1)
+     */
+    private $validVotes;
+
+    /**
+     * Number of blank votes.
+     *
+     * @var int
+     *
+     * @ORM\Column(type="smallint")
+     * @Assert\Range(min=1)
+     */
+    private $blankVotes;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date", type="date", nullable=true)
+     */
+    private $date;
+
+    /**
      * @return string
      */
     public function __toString()
     {
-        return '#'.$this->elected;
+        return $this->group . ' - ' . $this->organ;
     }
 
     public function __construct()
@@ -183,7 +221,7 @@ class Election
             self::STATUS_OPEN,
             self::STATUS_CLOSED,
             self::ISVALID_TRUE,
-            self::ISVALID_FALSE
+            self::ISVALID_FALSE,
         ))) {
             throw new \InvalidArgumentException('Invalid status');
         }
@@ -242,7 +280,7 @@ class Election
      */
     public function getElectedNames()
     {
-        return join(', ', $this->elected->toArray());
+        return implode(', ', $this->elected->toArray());
     }
 
     /**
@@ -257,12 +295,25 @@ class Election
         return $this;
     }
 
+    /**
+     * Add responsabilities.
+     *
+     * @param \AppBundle\Entity\AdherentResponsability $responsabilities
+     *
+     * @return Adherent
+     */
+    public function addElected(\AppBundle\Entity\AdherentResponsability $elected)
+    {
+        $this->elected[] = $elected;
+
+        return $this;
+    }
 
     /**
      * Returns true if election has been checked wether it has been validated
-     * or rejected
+     * or rejected.
      *
-     * @return boolean
+     * @return bool
      */
     public function hasBeenChecked()
     {
@@ -271,7 +322,7 @@ class Election
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isIsValid()
     {
@@ -279,7 +330,7 @@ class Election
     }
 
     /**
-     * @param boolean $isValid
+     * @param bool $isValid
      */
     public function setIsValid($isValid)
     {
@@ -288,9 +339,80 @@ class Election
 
     public function getElectedEmail()
     {
-        return join(', ', $this->elected->map(function (Adherent $elected) {
+        return implode(', ', $this->elected->map(function (Adherent $elected) {
             return $elected->getEmail();
         })->toArray());
     }
 
+    /**
+     * @return int
+     */
+    public function getNumberOfVoters()
+    {
+        return $this->numberOfVoters;
+    }
+
+    /**
+     * @param int $numberOfVoters
+     */
+    public function setNumberOfVoters($numberOfVoters)
+    {
+        $this->numberOfVoters = $numberOfVoters;
+    }
+
+    /**
+     * @return int
+     */
+    public function getValidVotes()
+    {
+        return $this->validVotes;
+    }
+
+    /**
+     * @param int $validVotes
+     */
+    public function setValidVotes($validVotes)
+    {
+        $this->validVotes = $validVotes;
+    }
+
+    /**
+     * @return int
+     */
+    public function getBlankVotes()
+    {
+        return $this->blankVotes;
+    }
+
+    /**
+     * @param int $blankVotes
+     */
+    public function setBlankVotes($blankVotes)
+    {
+        $this->blankVotes = $blankVotes;
+    }
+
+    /**
+     * Set date of election.
+     *
+     * @param \DateTime $date
+     *
+     * @return AdherentResponsability
+     */
+    public function setDate($date)
+    {
+        $this->date = isset($date) ? $date : new DateTime();
+
+        return $this;
+    }
+
+    /**
+     * Get date of election.
+     *
+     * @return \DateTime
+     */
+    public function getDate()
+    {
+        return $this->date;
+    }
 }

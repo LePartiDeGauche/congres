@@ -4,14 +4,13 @@ namespace AppBundle\Entity\Event;
 
 use Doctrine\ORM\EntityRepository;
 
-
 /**
  * BedroomRepository.
  */
 class BedroomRepository  extends EntityRepository
 {
-    public function findBedroomsActivesByDate(\DateTime $date) {
-
+    public function findBedroomsActivesByDate(\DateTime $date)
+    {
         return $this
             ->createQueryBuilder('b')
             ->where('b.dateStartAvailability <= :date')
@@ -37,8 +36,8 @@ class BedroomRepository  extends EntityRepository
             ;
     }
 
-    public function findIsBedroomActivateByDate(Bedroom $bedroom ,\DateTime $date) {
-
+    public function findIsBedroomActivateByDate(Bedroom $bedroom, \DateTime $date)
+    {
         return $this
             ->createQueryBuilder('b')
             ->where('b = :bedroom')

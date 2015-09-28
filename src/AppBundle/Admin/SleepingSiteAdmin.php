@@ -1,4 +1,5 @@
 <?php
+
 namespace AppBundle\Admin;
 
 use Sonata\AdminBundle\Admin\Admin;
@@ -8,7 +9,7 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 
 /**
- * Sleeping sites administration
+ * Sleeping sites administration.
  *
  * @author Clément Talleu <clement@les-tilleuls.coop>
  */
@@ -30,7 +31,6 @@ class SleepingSiteAdmin extends Admin
             ->add('latitude', null, array('label' => 'Latitude'))
             ->add('longitude', null, array('label' => 'Longitude'))
             ->add('roomTypes', null, array('label' => 'Type de chambre', 'multiple' => true));
-        ;
     }
 
     /**
@@ -87,7 +87,6 @@ class SleepingSiteAdmin extends Admin
                     )
                 );
         }
-
     }
 
     /**

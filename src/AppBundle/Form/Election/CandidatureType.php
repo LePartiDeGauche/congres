@@ -5,7 +5,6 @@ namespace AppBundle\Form\Election;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-
 use AppBundle\Entity\Responsability;
 use AppBundle\Entity\ResponsabilityRepository;
 
@@ -39,10 +38,10 @@ class CandidatureType extends AbstractType
             ))
             ->add('professionfoi', null, array('label' => 'Profession de foi'))
             ->add('isSortant', 'checkbox', array(
-                'label'     => 'Je suis candidat-e sortant-e d\'une instance nationale.',
-                'required'  => false,
+                'label' => 'Je suis candidat-e sortant-e d\'une instance nationale.',
+                'required' => false,
             ))
-            ->add('professionfoicplt', null, array('label' => 'Complément', 'required'  => false,))
+            ->add('professionfoicplt', null, array('label' => 'Complément', 'required' => false))
             ->add('save', 'submit', array('label' => 'Enregistrer'));
     }
 

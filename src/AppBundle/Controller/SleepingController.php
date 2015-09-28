@@ -4,7 +4,6 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Adherent;
 use AppBundle\Entity\Event\Bedroom;
-use AppBundle\Entity\Event\BedroomBooking;
 use AppBundle\Entity\Event\Booking;
 use AppBundle\Entity\Event\Event;
 use AppBundle\Entity\Event\EventAdherentRegistration;
@@ -14,7 +13,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
-
 
 /**
  * Sleeping\Sleeping controller.
@@ -29,7 +27,6 @@ class SleepingController extends Controller
      * @Route("/liste", name="sleeping_list")
      *
      * @Method("GET")
-     *
      */
     public function sleepingListAction()
     {
@@ -43,11 +40,9 @@ class SleepingController extends Controller
         foreach ($bedrooms as $bedroom) {
             $currentDate = clone $bedroom->getDateStartAvailability();
 
-
             $duration = $bedroom->getDateStopAvailability()->diff($bedroom->getDateStartAvailability(), true)->days;
-            for ($i = 0; $i < $duration; $i++) {
-
-               $bookings[$currentDate->format('Y-m-d')][$bedroom->getId()] = $bookingRepository->findFor($bedroom, $currentDate);
+            for ($i = 0; $i < $duration; ++$i) {
+                $bookings[$currentDate->format('Y-m-d')][$bedroom->getId()] = $bookingRepository->findFor($bedroom, $currentDate);
 
                 $currentDate->add(new \DateInterval('P1D'));
             }
@@ -62,8 +57,7 @@ class SleepingController extends Controller
     }
 
     /**
-     *
-     * @param Request  $request
+     * @param Request $request
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      *
@@ -82,19 +76,17 @@ class SleepingController extends Controller
         $this->denyAccessUnlessGranted('SLEEPING_REPORT', $booking);
 
         $formSleeping = $this->createForm(new BookingType());
-        $formSleeping->setData(array('date'=> $date, 'duration'=>1));
+        $formSleeping->setData(array('date' => $date, 'duration' => 1));
         $formSleeping->handleRequest($request);
 
-
         if ($formSleeping->isSubmitted()) {
-
             $data = $formSleeping->getData();
             $duration = $data['duration'];
             $date = clone $data['date'];
             // ///// A modifier selon le prix de la chambre par nuit
             $price = 0;
 
-            if ($duration <=0) {
+            if ($duration <= 0) {
                 $this
                     ->get('session')
                     ->getFlashBag()
@@ -103,10 +95,11 @@ class SleepingController extends Controller
                         'Indiquez une durée valable, supérieure à 0 jours'
                     )
                 ;
+
                 return $this->redirect($this->generateUrl('sleeping_list'));
             }
 
-            for($i=0; $i < $duration; $i++){
+            for ($i = 0; $i < $duration; ++$i) {
                 $booking = new Booking();
                 $booking->setAdherent($adherent);
                 $booking->setDate($date);
@@ -129,7 +122,6 @@ class SleepingController extends Controller
                 $manager->persist($booking);
 
                 if ($numberOfBookingsByDayAndBedroom > $places || $bookingExist || $isBedroomAvailable < 1) {
-
                     $this
                         ->get('session')
                         ->getFlashBag()
@@ -141,7 +133,7 @@ class SleepingController extends Controller
                     $manager->detach($booking);
                 }
                 $manager->flush();
-                $date->add(new \DateInterval("P1D"));
+                $date->add(new \DateInterval('P1D'));
             }
             $manager->flush();
             $manager->refresh($adherent);
@@ -155,17 +147,16 @@ class SleepingController extends Controller
                 )
             ;
 
-           $paiement = $this->get('session')->get('paiement');
+            $paiement = $this->get('session')->get('paiement');
             $event = $bedroom->getRoomType()->getSleepingSite()->getEvent();
             $eventRegistration = $this->getDoctrine()
                 ->getRepository('AppBundle:Event\EventAdherentRegistration')
                 ->findOneBy(array('adherent' => $adherent, 'event' => $event));
 
             if ($paiement == EventAdherentRegistration::PAYMENT_MODE_ONLINE) {
-
                 $priceComplete = $price * $duration;
 
-                $totalPrice = $eventRegistration->getCost()->getCost()+$priceComplete;
+                $totalPrice = $eventRegistration->getCost()->getCost() + $priceComplete;
                 $eventPayment = $this->createPayment($adherent, $event, $eventRegistration, $totalPrice);
 
                 $manager->persist($eventPayment);
@@ -176,18 +167,19 @@ class SleepingController extends Controller
             } else {
                 return $this->redirect($this->generateUrl('sleeping_list'));
             }
-
         }
+
         return $this->render('event/bedroom_submit.html.twig', array(
             'form' => $formSleeping->createView(),
         ));
     }
 
     /**
-     * @param Adherent $adherent
-     * @param Event $event
+     * @param Adherent                  $adherent
+     * @param Event                     $event
      * @param EventAdherentRegistration $eventRegistration
      * @param $amount
+     *
      * @return EventPayment
      */
     private function createPayment($adherent, $event, EventAdherentRegistration $eventRegistration, $amount)
@@ -207,6 +199,7 @@ class SleepingController extends Controller
 
     /**
      * @param $adherent
+     *
      * @return object
      */
     public function bedroomByAdherentAction(Adherent $adherent, Event $event)
@@ -225,14 +218,15 @@ class SleepingController extends Controller
 
     /**
      * @param Bedroom $bedroom
+     *
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function bookingsByBedroomAction(Bedroom $bedroom)
     {
         $bookings = $this->getDoctrine()->getRepository('AppBundle:Event\Booking')->findBy(['bedroom' => $bedroom]);
+
         return $this->render('admin/bookings_by_bedroom.html.twig', ['bookings' => $bookings, 'nbr' => count($bookings)]);
     }
-
 
     /**
      * Lists all Booking registration.

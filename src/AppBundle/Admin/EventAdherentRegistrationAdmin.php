@@ -61,13 +61,12 @@ class EventAdherentRegistrationAdmin extends Admin
         ;
     }
 
-
     /**
-     * Default Datagrid values
+     * Default Datagrid values.
      *
      * @var array
      */
-    protected $datagridValues = array (
+    protected $datagridValues = array(
 
         '_sort_order' => 'DESC',
     );
@@ -277,8 +276,7 @@ class EventAdherentRegistrationAdmin extends Admin
         //$repo = $this->getDoctrine()->getRepository('AppBundle:Adherent')->findId($user->adherent);
 
         $adherent = $user->getProfile();
-        if(isset($adherent))
-        {
+        if (isset($adherent)) {
             $instance->setAdherent($adherent);
             $instance->setAuthor($adherent);
         }

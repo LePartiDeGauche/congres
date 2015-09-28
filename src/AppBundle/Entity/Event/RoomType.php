@@ -23,7 +23,6 @@ class RoomType
     const PRICE_HIGH = 20;
     const PRICE_MAX = 25;
 
-
     /**
      * @var int
      *
@@ -72,7 +71,7 @@ class RoomType
     /**
      * Number of places.
      *
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="places", type="integer")
      * @Assert\NotNull
@@ -208,7 +207,7 @@ class RoomType
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isCanBookMore()
     {
@@ -216,7 +215,7 @@ class RoomType
     }
 
     /**
-     * @param boolean $canBookMore
+     * @param bool $canBookMore
      */
     public function setCanBookMore($canBookMore)
     {
@@ -240,7 +239,9 @@ class RoomType
      * Add bedrooms.
      *
      * @param Bedroom $bedroom
+     *
      * @return Bedroom
+     *
      * @internal param Bedroom $bedrooms
      */
     public function addBedroom(Bedroom $bedroom)
@@ -257,11 +258,11 @@ class RoomType
      * Remove roomTypes.
      *
      * @param Bedroom $bedrooms
+     *
      * @internal param Bedroom $bedrooms
      */
     public function removeBedroom(Bedroom $bedrooms)
     {
         $this->bedrooms->removeElement($bedrooms);
     }
-
 }

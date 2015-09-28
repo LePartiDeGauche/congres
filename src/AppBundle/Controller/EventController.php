@@ -137,15 +137,14 @@ class EventController extends Controller
             $em->persist($eventRegistration);
             $em->flush();
 
-            if ($needHosting == true){
+            if ($needHosting == true) {
                 /** @var Session $session */
                 $session = $this->get('session');
 
                 $session->set('paiement', $eventRegistration->getPaymentMode());
+
                 return $this->redirect($this->generateUrl('sleeping_list'));
             }
-
-
 
             if ($eventRegistration->getPaymentMode() == EventAdherentRegistration::PAYMENT_MODE_ONLINE) {
                 $eventPayment = $this->createPayment($adherent, $event, $eventRegistration, $eventRegistration->getCost()->getCost());
@@ -173,7 +172,7 @@ class EventController extends Controller
      * @Route("/{event_id}", name="event_show", requirements={
      *     "event_id": "\d+"
      * })
-    )
+     )
      * @Method("GET")
      * @ParamConverter("event", class="AppBundle:Event\Event", options={"id" = "event_id"})
      * @Template("event/show.html.twig")

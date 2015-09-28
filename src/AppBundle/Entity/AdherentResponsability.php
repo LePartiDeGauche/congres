@@ -72,7 +72,20 @@ class AdherentResponsability
      *
      * @ORM\Column(name="isActive", type="boolean")
      */
-    private $isActive=false;
+    private $isActive = false;
+
+    /**
+     * Constructor.
+     */
+    public function __construct()
+    {
+        $this->allowsParticipations = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    public function __toString()
+    {
+        return $this->responsability . ': ' . $this->adherent;
+    }
 
     /**
      * Get id.
@@ -202,13 +215,6 @@ class AdherentResponsability
     public function getIsActive()
     {
         return $this->isActive;
-    }
-    /**
-     * Constructor.
-     */
-    public function __construct()
-    {
-        $this->allowsParticipations = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**

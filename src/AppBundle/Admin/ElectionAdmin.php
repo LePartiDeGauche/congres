@@ -58,10 +58,10 @@ class ElectionAdmin extends Admin
                     'edit' => array(),
                     'delete' => array(),
                     'valid' => array(
-                        'template' => 'AppBundle:admin:list_action_valid.html.twig'),
+                        'template' => 'AppBundle:admin:list_action_valid.html.twig', ),
                     'reject' => array(
-                        'template' => 'AppBundle:admin:list_action_reject.html.twig'),
-                )
+                        'template' => 'AppBundle:admin:list_action_reject.html.twig', ),
+                ),
             ))
         ;
     }
@@ -87,13 +87,13 @@ class ElectionAdmin extends Admin
             ))
             ->add('elected', 'sonata_type_collection', array(
                 'type_options' => array(
-                    'delete' => true
-                )
+                    'delete' => true,
+                ),
             ), array(
                 'edit' => 'inline',
                 'inline' => 'table',
                 'sortable' => 'position',
-                'required' => false
+                'required' => false,
             ))
         ;
     }
@@ -106,8 +106,12 @@ class ElectionAdmin extends Admin
         $showMapper
             ->add('group', null, array('label' => "Type d'élection"))
             ->add('organ', null, array('label' => 'Lieu concerné'))
+            ->add('numberOfVoters', null, array('label' => 'Nombre de votants'))
+            ->add('validVotes', null, array('label' => 'Votes exprimés'))
+            ->add('blankVotes', null, array('label' => 'Votes blancs'))
             ->add('numberOfElected', null, array('label' => 'Nombre d\'élus'))
             ->add('status', null, array('label' => 'Statut de l\'élection'))
+            ->add('elected', null, array('label' => 'Élus'))
         ;
     }
 
@@ -129,7 +133,7 @@ class ElectionAdmin extends Admin
             'id',
             'organ',
             'electedNames',
-            'electedEmail'
+            'electedEmail',
         );
     }
 

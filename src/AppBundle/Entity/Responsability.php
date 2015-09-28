@@ -24,6 +24,8 @@ class Responsability
     const INSTANCE_CRC = 'Commission de résolution des conflits';
     const INSTANCE_CCF = 'Commission de contrôle financier';
     const INSTANCE_CN_NAT = 'Conseil national - part nationale';
+    const INSTANCE_COSEC_DEPARTMENT = 'Co-secrétaire de département';
+    const INSTANCE_COTRESORIER_DEP = 'Co-trésorier de département';
 
     /**
      * @var int
@@ -86,6 +88,7 @@ class Responsability
     public function setName($name)
     {
         $this->name = $name;
+
         return $this;
     }
 
