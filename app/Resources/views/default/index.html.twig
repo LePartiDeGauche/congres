@@ -3,167 +3,25 @@
 {% block body %}
 <div class="container">
     <div class="row">
-        <h1>Bonjour, {{ app.user.profile.firstname}}</h1>
         <div>
-
-            <h2>RETOUR SUR LE CONGRES&nbsp;: TEXTES ADOPTÉS</h2>
-<ul>
-    <li>
-        <a href="{{ path('downloads', {filename: 'EnMouvementCitoyen_ne_s_version def.pdf'}) }}">
-            En mouvement, citoyen-ne-s&nbsp;!
-        </a>
-    </li>
-    <li>
-        <a href="{{ path('downloads', {filename: 'Statuts version def.doc.pdf'}) }}">
-            Statuts
-        </a>
-    </li>
-    <li>
-        <a href="{{ path('downloads', {filename: 'RI version def.pdf'}) }}">
-            Réglement intérieur
-        </a>
-    </li>
-</ul>
-
-            <h2>RETOUR SUR LE CONGRES&nbsp;: VOTES SUR LES TEXTES</h2>
-
-<p style="text-align:justify;margin:0px">
-    <b>
-        <span style="color:green">Vous trouverez ci-dessous les r&eacute;sultats
-        des votes &agrave; main lev&eacute;e sur les rapports pr&eacute;sent&eacute;s
-        devant le Congr&egrave;s, les amendements aux textes soumis au vote ainsi
-        que le vote d&eacute;finitif sur les trois textes:</span>
-    </b>
-</p>
-
-<p><span style="text-decoration:underline">Vote n&deg; 1&nbsp;: </span>Validation de la proposition la Commission des D&eacute;bats pour transmission du texte &laquo;&nbsp;10 jours&nbsp;&raquo; &agrave; une Convention nationale programmatique (texte du rapport en ligne sur le site du Congr&egrave;s)&nbsp; :<br />
-POUR&nbsp;: 388&nbsp;; CONTRE&nbsp;: 7&nbsp;; ABSTENTIONS&nbsp;: 10&nbsp;; NPPV&nbsp;: 1<br />
-<b>La proposition de la Commission des D&eacute;bats est adopt&eacute;e</b></p>
-
-<p style="margin:0px"><span style="text-decoration:underline">Vote n&deg; 2&nbsp;: </span>Vote du rapport de la Commission des D&eacute;bats concernant le traitement des amendements et les amendements soumis au vote du Congr&egrave;s sur le texte d&rsquo;orientation&nbsp;:<br />
-POUR&nbsp;: 355&nbsp;; CONTRE&nbsp;: 38&nbsp;; ABSTENTIONS&nbsp;: 43&nbsp;; NPPV&nbsp;: 1<br />
-<b>Le rapport de la Commission des D&eacute;bats sur le texte d&rsquo;orientation est adopt&eacute;</b></p>
-
-<p style="margin:0px"><span style="text-decoration:underline">Vote n&deg; 3&nbsp;: </span>Vote du rapport de la Commission des D&eacute;bats concernant le traitement des amendements et les amendements soumis au vote du Congr&egrave;s sur les Statuts et le R&egrave;glement Int&eacute;rieur du PG&nbsp;:<br />
-POUR&nbsp;: 390&nbsp;; CONTRE&nbsp;: 2&nbsp;; ABSTENTIONS&nbsp;: 18&nbsp;; NPPV&nbsp;: 1<br />
-<b>Le rapport de la Commission des D&eacute;bats sur les Statuts et le R&egrave;glement Int&eacute;rieur du PG est adopt&eacute;</b></p>
-
-<p style="margin:0px"><span style="text-decoration:underline">Vote n&deg; 4&nbsp;: </span>Vote de quitus sur le rapport financier&nbsp;:<br />
-POUR&nbsp;: 373&nbsp;; CONTRE&nbsp;: 6&nbsp;; ABSTENTIONS&nbsp;: 39&nbsp;; NPPV&nbsp;: 2<br />
-<b>Le Congr&egrave;s donne quitus sur le rapport financier</b></p>
-
-<p style="margin:0px"><i>Pour les votes &agrave; suivre sur les amendements aux textes, pour conna&icirc;tre le d&eacute;tail de chaque amendement, se r&eacute;f&eacute;rer aux textes modifi&eacute;s avec amendements &agrave; soumettre au vote publi&eacute;s par la Commission des D&eacute;bats sur le site du Congr&egrave;s sous l&rsquo;onglet &laquo;&nbsp;Documents&nbsp;&raquo; </i></p>
-
-<p style="margin:0px"><span style="text-decoration:underline">Vote n&deg; 5&nbsp;: </span>Statuts du PG amendement 1, concernant l&rsquo;adh&eacute;sion annuelle<br />
-POUR&nbsp;: 334&nbsp;; CONTRE&nbsp;: 52&nbsp;; ABSTENTIONS&nbsp;: 24&nbsp;: NPPV&nbsp;: 0<br />
-<b>Amendement adopt&eacute;</b></p>
-
-<p style="margin:0px"><span style="text-decoration:underline">Vote n&deg; 6&nbsp;: </span>Statuts du PG amendement 2, concernant la comptabilisation des votes blancs<br />
-POUR&nbsp;: 398&nbsp;; CONTRE&nbsp;: 10&nbsp;; ABSTENTIONS&nbsp;: 13&nbsp;; NPPV&nbsp;: 2<br />
-<b>Amendement adopt&eacute;</b></p>
-
-<p style="margin:0px"><span style="text-decoration:underline">Vote n&deg; 7&nbsp;: </span>Statuts du PG amendement 3, concernant le vote &eacute;lectronique<br />
-POUR&nbsp;: 143&nbsp;; CONTRE&nbsp;: 251&nbsp;; ABSTENTIONS&nbsp;: 41&nbsp;; NPPV&nbsp;: 0<br />
-<b>Amendement rejet&eacute;</b></p>
-
-<p style="margin:0px"><span style="text-decoration:underline">Vote n&deg; 8&nbsp;: </span>Statuts du PG amendement 4, concernant l&rsquo;abandon de la part nationale du CN<br />
-POUR&nbsp;: 379&nbsp;; CONTRE&nbsp;: 16&nbsp;; ABSTENTIONS&nbsp;: 26&nbsp;; NPPV&nbsp;: 2<br />
-<b>Amendement adopt&eacute;</b></p>
-
-<p style="margin:0px"><span style="text-decoration:underline">Vote n&deg; 9&nbsp;: </span>Statuts du PG amendement 5, concernant le maintien du vote sur les plateformes<br />
-POUR&nbsp;: 323&nbsp;; CONTRE&nbsp;: 53&nbsp;; ABSTENTIONS&nbsp;: 29&nbsp;; NPPV&nbsp;: 1<br />
-<b>Amendement adopt&eacute;</b></p>
-
-<p style="margin:0px"><span style="text-decoration:underline">Vote n&deg; 10&nbsp;: </span>Statuts du PG amendement 6, concernant l&rsquo;&eacute;lection du SEN et vote<br />
-POUR&nbsp;: 349&nbsp;; CONTRE&nbsp;: 23&nbsp;; ABSTENTIONS&nbsp;: 46&nbsp;; NPPV&nbsp;: 8<br />
-<b>Amendement adopt&eacute;</b></p>
-
-<p style="margin:0px"><span style="text-decoration:underline">Vote n&deg; 11&nbsp;: </span>Statuts du PG amendement 7, concernant le r&eacute;f&eacute;rendum d&rsquo;initiative militante<br />
-POUR&nbsp;: 378&nbsp;; CONTRE&nbsp;: 18&nbsp;; ABSTENTIONS&nbsp;: 30&nbsp;; NPPV&nbsp;: 4<br />
-<b>Amendement adopt&eacute;</b></p>
-
-<p style="margin:0px"><span style="text-decoration:underline">Vote n&deg; 12&nbsp;: </span>Statuts du PG amendement 8, concernant le nombre minimum d&rsquo;adh&eacute;rent-e-s dans un comit&eacute;<br />
-POUR&nbsp;: 50&nbsp;; CONTRE&nbsp;: 326&nbsp;; ABSTENTIONS&nbsp;: 47&nbsp;; NPPV&nbsp;: 0<br />
-<b>Amendement rejet&eacute;</b></p>
-
-<p style="margin:0px"><span style="text-decoration:underline">Vote n&deg; 13&nbsp;: </span>Vote d&eacute;finitif sur le R&egrave;glement Int&eacute;rieur du PG amend&eacute; par le Congr&egrave;s<br />
-POUR&nbsp;: 344&nbsp;; CONTRE&nbsp;: 23&nbsp;; ABSTENTIONS&nbsp;: 29&nbsp;; NPPV&nbsp;: 4<br />
-<b>Le R&egrave;glement Int&eacute;rieur du PG amend&eacute; par le Congr&egrave;s est adopt&eacute;</b></p>
-
-<p style="margin:0px"><span style="text-decoration:underline">Vote n&deg; 14&nbsp;: </span>Vote d&eacute;finitif sur les Statuts du PG amend&eacute;s par le Congr&egrave;s<br />
-POUR&nbsp;: 381&nbsp;; CONTRE&nbsp;: 10&nbsp;; ABSTENTIONS&nbsp;: 10&nbsp;; NPPV&nbsp;: 2<br />
-<b>Les Statuts du PG amend&eacute;s par le Congr&egrave;s sont adopt&eacute;s</b></p>
-
-<p style="margin:0px"><span style="text-decoration:underline">Vote n&deg; 15&nbsp;: </span>Texte d&rsquo;orientation amendement A, concernant la 6<sup>e</sup> R&eacute;publique et 2017<br />
-VERSION 1 POUR&nbsp;: 148&nbsp;; VERSION 2 POUR&nbsp;: 273&nbsp;; ABSTENTIONS&nbsp;: 22&nbsp;; NPPV&nbsp;: 3<br />
-<b>Amendement version 2 adopt&eacute;</b></p>
-
-<p style="margin:0px"><span style="text-decoration:underline">Vote n&deg; 16&nbsp;: </span>Texte d&rsquo;orientation amendement B, concernant le 2<sup>e</sup> tour<br />
-VERSION 1 POUR&nbsp;: 200&nbsp;; VERSION 2 POUR&nbsp;: 271&nbsp;; ABSTENTIONS&nbsp;: 17&nbsp;; NPPV&nbsp;: 0<br />
-<b>Amendement version 2 adopt&eacute; </b></p>
-
-<p style="margin:0px"><span style="text-decoration:underline">Vote n&deg; 17&nbsp;: </span>Texte d&rsquo;orientation amendement C, concernant la sortie de l&rsquo;UE<br />
-VERSION 1 POUR : 117&nbsp;; VERSION 2 POUR&nbsp;: 361&nbsp;; ABSTENTIONS&nbsp;: 14&nbsp;; NPPV&nbsp;: 2<br />
-<b>Amendement version 2 adopt&eacute;</b></p>
-
-<p style="margin:0px"><span style="text-decoration:underline">Vote n&deg; 18&nbsp;: </span>Texte d&rsquo;orientation amendement D, concernant la t&acirc;che de notre parti<br />
-VERSION 1 POUR&nbsp;: 204&nbsp;; VERSION 2 POUR&nbsp;: 84&nbsp;; ABSTENTIONS&nbsp;: 177&nbsp;; NPPV&nbsp;: 9<br />
-<b>Amendement version 1 adopt&eacute;</b></p>
-
-<p style="margin:0px"><span style="text-decoration:underline">Vote n&deg; 19&nbsp;: </span>Texte d&rsquo;orientation amendement E, concernant les mouvements citoyens<br />
-VERSION 1 POUR&nbsp;: 296&nbsp;; VERSION 2 POUR&nbsp;: 57&nbsp;; ABSTENTIONS&nbsp;: 127&nbsp;; NPPV&nbsp;: 2<br />
-<b>Amendement version 1 adopt&eacute;</b></p>
-
-<p style="margin:0px"><span style="text-decoration:underline">Vote n&deg; 20&nbsp;: </span>Vote d&eacute;finitif sur le texte d&rsquo;orientation amend&eacute; par le Congr&egrave;s<br />
-POUR&nbsp;: 414&nbsp;; CONTRE&nbsp;: 26&nbsp;; ABSTENTIONS&nbsp;: 54&nbsp;; NPPV&nbsp;: 1<br />
-<b>Le texte d&rsquo;orientation amend&eacute; par le Congr&egrave;s est adopt&eacute;</b></p>
-
-<p style="margin:0px">&nbsp;</p>
-
-<p style="margin:0px;text-align:justify"><b><span style="color:#006600">&nbsp;</span></b></p>
-
-<h2>RETOUR SUR LE CONGRES&nbsp;: ELECTION DES INSTANCES</h2>
-
-<p style="text-align:justify;margin:0px">&nbsp;</p>
-
-<p style="text-align:justify;margin:0px"><b><span style="color:green">Instances qui si&egrave;gent uniquement pendant le Congr&egrave;s et &eacute;lues le vendredi 3 juillet&nbsp;:</span></b></p>
-
-<p style="text-align:justify;margin:0px">&nbsp;</p>
-
-<p style="margin:0px"><b>Commission des candidatures&nbsp;: </b><i>6 personnes &agrave; parit&eacute;</i><br />
-Voix coll&egrave;ge femmes&nbsp;: BIZOT C&eacute;cile 277&nbsp;; GUALBERT Karinne 233&nbsp;; FETET Claire 218&nbsp;; GASPARINI Josiane 196&nbsp;; COULOMB Diane 195&nbsp;; LAFONT Val&eacute;rie 139<br />
-Voix coll&egrave;ge hommes&nbsp;: BILIA Boris 221&nbsp;; SERIEYS Guilhem 193&nbsp;; LEANDRI Luc 172&nbsp;; B&OElig;UF Julien 155&nbsp;; SCHIMMEL Christophe 133&nbsp;; FORTUNATO Dominique 118&nbsp;; POIX Julien 106&nbsp;; PETITFILS Marian 85&nbsp;; HANRY Hugo 72<br />
-<b>Ont &eacute;t&eacute; &eacute;lue-e-s par ordre alphab&eacute;tique : BILIA Boris, BIZOT C&eacute;cile, FETET Claire, GUALBERT Karinne, LEANDRI Luc et SERIEYS Guilhem</b></p>
-
-<p style="margin:0px"><b>Bureau du Congr&egrave;s&nbsp;: </b><i>10 personnes &agrave; parit<br />
-En conformit&eacute; avec le RI du Congr&egrave;s, une liste a &eacute;t&eacute; propos&eacute;e par le BN sortant et les d&eacute;l&eacute;gu&eacute;-e-s pouvaient, sur le bulletin de vote, choisir le suivre cette liste ou de panacher parmi toutes les candidatures en pr&eacute;sence. </i><br />
-Voix coll&egrave;ge femmes&nbsp;: ASSILA Maud 395&nbsp;; RAUSZER Sophie 392&nbsp;; DUBOIS Jocelyne 362&nbsp;; LE CACHEUX H&eacute;l&egrave;ne 351&nbsp;; FRANCO H&eacute;l&egrave;ne 339&nbsp;; LEBAS Lidia 220<br />
-Voix coll&egrave;ge hommes&nbsp;: COLDEBOEUF Hugo 362&nbsp;; PRUD&rsquo;HOMEAU Alexandre 355&nbsp;; LALLEMAND Jean-Charles 349&nbsp;; LEVARD Laurent 334&nbsp;; HERNANDO Michel 305&nbsp;; COSKUN Alparslan 174&nbsp;; ROUSSETTE S&eacute;bastien 158<br />
-<b>Ont &eacute;t&eacute; &eacute;lue-e-s par ordre alphab&eacute;tique&nbsp;: ASSILA Maud, COLDEBOEUF Hugo, DUBOIS Jocelyne, FRANCO H&eacute;l&egrave;ne, HERNANDO Michel, LE CACHEUX H&eacute;l&egrave;ne, LALLEMAND Jean-Charles, LEVARD Laurent, PRUD&rsquo;HOMMEAU Alexandre, RAUSZER Sophie</b></p>
-
-<p style="margin:0px">&nbsp;</p>
-
-<p style="margin:0px"><b><span style="color:#006600">Instances qui si&egrave;gent jusqu&rsquo;au Congr&egrave;s suivant, et &eacute;lues le samedi 4 juillet au soir&nbsp;:</span></b></p>
-
-<p style="margin:0px">&nbsp;</p>
-
-<p style="margin:0px"><b>Commission de Contr&ocirc;le Financier&nbsp;: </b><i>5 personnes &agrave; parit&eacute; </i><br />
-Voix coll&egrave;ge femmes&nbsp;: BLANDIOT Jeannine 436&nbsp;; BEAUDOIN St&eacute;phanie 426<br />
-Voix coll&egrave;ge hommes&nbsp;: MAURY Alain 291&nbsp;; ROUZIE Jean-Claude 284&nbsp;; MONNIER Daniel 273&nbsp;; BRANGER Felice 196&nbsp;; ROUSSETTE S&eacute;bastien 170<br />
-<b>Sont &eacute;lue-e-s par ordre alphab&eacute;tique&nbsp;: BEAUDOIN St&eacute;phanie, BLANDIOT Jeannine, MAURY Alain, MONNIER Daniel, ROUZIE Jean-Claude</b></p>
-
-<p style="margin:0px"><b>Commission de R&eacute;solution des Conflits&nbsp;: </b><i>13 personnes &agrave; parit&eacute; </i><br />
-Voix coll&egrave;ge femmes&nbsp;: LE NEOUANNIC Pascale 300&nbsp;; COLEOU Manon 261&nbsp;; PUTHOD V&eacute;ronique 257&nbsp;; RONDEAUX Isabelle H&eacute;l&egrave;ne 221&nbsp;; CAILLE Patricia 215&nbsp;; GRAC Roselyne 200&nbsp;; SIMONIN Catherine 179&nbsp;; LEBAS Lidia 143&nbsp;; ALARCON GARCIA Emmanuelle 129&nbsp;; BOUSSAND Sylvie 112&nbsp;; BOULANGER Anne-Laure 103&nbsp;; AYMARD Marine 102&nbsp;; COMBRES Aline 92&nbsp;; LEBEL Christine 78&nbsp;; MARTI Josette 69<br />
-Voix coll&egrave;ge hommes&nbsp;: PIZARD Thomas 343&nbsp;; POLVECHE S&eacute;bastien 325&nbsp;; BOISSIER Franck 319&nbsp;; BILLON Alain 316&nbsp;; PERRIN Olivier 316&nbsp;; ROQUELET Yves 308&nbsp;; MARCHAND Quentin 222<br />
-<b>Sont &eacute;lue-e-s par ordre alphab&eacute;tique&nbsp;: BILLON Alain, BOISSIER Franck, CAILLE Patricia, COLEOU Manon, GRAC Roselyne, LE NOUANNIC Pascale, PERRIN Olivier, PIZARD Thomas, POLVECHE S&eacute;bastien, PUTHOD V&eacute;ronique, RONDEAUX Isabelle-H&eacute;l&egrave;ne, ROQUELET Yves</b><br />
-<i>Le prochain CN devra statuer sur le nom du / de la 13<sup>e</sup> camarade &eacute;lu-e, le nombre de voix n&rsquo;&eacute;tant pas comparable entre coll&egrave;ges H et F vu le nombre de candidates par rapport au nombre de candidats</i></p>
-
-<p style="margin:0px"><b>Secr&eacute;tariat Ex&eacute;cutif National&nbsp;: </b><i>24 personnes &agrave; parit&eacute; </i><br />
-Voix coll&egrave;ge femmes&nbsp;: MOREL DARLEUX Corinne 377&nbsp;; BILLARD Martine 331&nbsp;; PACHE Laurence 309&nbsp;; SIMONNET Danielle 309&nbsp;; MARTIN Elisa 289&nbsp;; DARRIGADE Marie-Laure 273&nbsp;; ZUDAS Laure 270&nbsp;; TORRECILLA Audrey 269&nbsp;; LEGRAIN Sarah 268&nbsp;; JARZABEK Tatiana 259&nbsp;; NEVEU Nolwenn 248&nbsp;; DUMONT Fr&eacute;d&eacute;rique 218&nbsp;; TAVAN C&eacute;cile 217&nbsp;; ERSOY Selin 171&nbsp;; YAKOUB Layla 167&nbsp;; PRIGENT Pascale 161&nbsp;; LARRERE Mathilde 149&nbsp;; GUARD Monique 106&nbsp;; PIOT Claire 82&nbsp;; MARTI Josette 71<br />
-Voix coll&egrave;ge hommes&nbsp;: COQUEREL 325&nbsp;; JURAVER Philippe 286&nbsp;; AMARD Gabriel 278&nbsp;; CORBIERE Alexis 275&nbsp;; ETIEVANT Guillaume 275&nbsp;; SCHNECKENBURGER Beno&icirc;t 264&nbsp;; LALLEMAND Jean-Charles 235&nbsp;; KUZMANOVIC Djordje 232&nbsp;; BOMPARD Manuel 230&nbsp;; THEVENIEAU Didier 210&nbsp;; VANNIER Paul 186&nbsp;; AGOSTINI Mathieu 165&nbsp;; TOUCEL Hadrien 156&nbsp;; KEBAILI Ramzi 135&nbsp;; LAISNEY Maxime 125&nbsp;; LEVARD Laurent 115&nbsp;; ELBORY Johann 110&nbsp;; LASSERRE Tommy 106&nbsp;; TISSIER Michel 98&nbsp;; RENOUX Jean-Paul 92&nbsp;; PRUD&rsquo;HOMMEAU Alexandre 82&nbsp;; RIVAIL St&eacute;phane 81&nbsp;; SALTEL Guilhem 74&nbsp;; SELLIN Jean-Christophe 60&nbsp;; TERCHI A&iuml;ssa 53&nbsp;; RODRIGUEZ Christian 47&nbsp;; SCHMITT J&eacute;r&ocirc;me 40&nbsp;; GERAUD-LEGROS Geoffroy 38&nbsp;; CALFUQUIR Claudio 37&nbsp;; RAYSSAC Adrien 35&nbsp;; MAGALHAES Anthony 28&nbsp;; FAOUR Anas 27&nbsp;; FIALHO Bruno 23<br />
-<b>Sont &eacute;lus coordinateurs du Parti de Gauche&nbsp;: Eric Coquerel et Danielle Simonnet<br />
-Sont aussi &eacute;lue-e-s au SEN par ordre alphab&eacute;tique&nbsp;: AGOSTINI Mathieu, AMARD Gabriel, BILLARD Martine, BOMPARD Manuel, CORBIERE Alexis, DARIGADE Marie-Laure, DUMONT Fr&eacute;d&eacute;rique, ETIEVANT Guillaume, JARZABEK Tatiana, JURAVER Philippe, KUZMANOVIC Djordje, LALLEMAND Jean-Charles, LEGRAIN Sarah, MARTIN Elisa, MOREL DARLEUX Corinne, NEVEU Nolwenn, PACHE Laurence, SCHNECKENBURGER Beno&icirc;t, THEVENIEAU Didier, TORRECILLA Audrey, VANNIER Paul, ZUDAS Laure</b></p>
-
+            <h3>Retour sur le congrès&nbsp;: textes adoptés</h3>
+            <ul>
+                <li>
+                    <a href="{{ path('downloads', {filename: 'EnMouvementCitoyen_ne_s_version def.pdf'}) }}">
+                        En mouvement, citoyen-ne-s&nbsp;!
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ path('downloads', {filename: 'Statuts version def.doc.pdf'}) }}">
+                        Statuts
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ path('downloads', {filename: 'RI version def.pdf'}) }}">
+                        Réglement intérieur
+                    </a>
+                </li>
+            </ul>
         </div>
     </div>
     <div class="row">
