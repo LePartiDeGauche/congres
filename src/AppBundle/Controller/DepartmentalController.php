@@ -39,6 +39,13 @@ class DepartmentalController extends Controller
             ->getRepository('AppBundle:Responsability')
             ->findOneById($this->container->getParameter('coTresorier_departement_id'));
 
+        $responsabilityDelegateCNTitulaire = $this->getDoctrine()
+                ->getRepository('AppBundle:Responsability')
+                ->findOneByName('Conseil National');
+        $responsabilityDelegateCNSuppleant = $this->getDoctrine()
+                ->getRepository('AppBundle:Responsability')
+                ->findOneByName('Délégué CN suppléant');
+
         foreach ($adherent->getResponsabilities() as $adherentResponsability) {
             if ($adherentResponsability->getResponsability() == $responsabilityCoSec) {
                 $departement = $adherentResponsability->getDesignatedByOrgan();
@@ -126,6 +133,42 @@ class DepartmentalController extends Controller
                     $manager->persist($newAR);
 
                     $election->addElected($newAR);
+                }
+
+                for ($i=1; $i < 18; $i++) {
+                    if (isset($departmentalElection['delegueCNTitulaire' . $i])) {
+                        $responsability = $responsabilityDelegateCNTitulaire;
+                        $responsable = $departmentalElection['delegueCNTitulaire' . $i];
+
+                        $ar = new AdherentResponsability();
+                        $ar->setAdherent($responsable);
+                        $ar->setResponsability($responsability);
+                        $ar->setIsActive(true);
+                        $ar->setStart($dateElection);
+                        $ar->setEnd($dateEndElection);
+                        $ar->setDesignatedByOrgan($departement);
+                        $manager->persist($ar);
+
+                        $election->addElected($ar);
+                    }
+                }
+
+                for ($i=1; $i < 18; $i++) {
+                    if (isset($departmentalElection['delegueCNSuppleant' . $i])) {
+                        $responsability = $responsabilityDelegateCNSuppleant;
+                        $responsable = $departmentalElection['delegueCNSuppleant' . $i];
+
+                        $ar = new AdherentResponsability();
+                        $ar->setAdherent($responsable);
+                        $ar->setResponsability($responsability);
+                        $ar->setIsActive(true);
+                        $ar->setStart($dateElection);
+                        $ar->setEnd($dateEndElection);
+                        $ar->setDesignatedByOrgan($departement);
+                        $manager->persist($ar);
+
+                        $election->addElected($ar);
+                    }
                 }
 
                 // Ajout des postes fonctionnels s'ils existent

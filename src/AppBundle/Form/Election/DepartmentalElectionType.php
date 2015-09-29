@@ -155,8 +155,30 @@ class DepartmentalElectionType extends AbstractType
                     'property' => 'getUpperNames',
                     'class' => 'AppBundle:Adherent',
                     'query_builder' => $adherentMaleQueryBuilder
-                ))
-                ->add('responsability1', 'entity', array(
+                ));
+
+                for ($i=1; $i < 18; $i++) {
+                    $form->add('delegueCNTitulaire' . $i, 'entity', array(
+                        'label' => 'Délégué(e) CN Titulaire ' . $i,
+                        'expanded' => false,
+                        'multiple' => false,
+                        'required' => false,
+                        'property' => 'getUpperNames',
+                        'class' => 'AppBundle:Adherent',
+                        'query_builder' =>  $adherentQueryBuilder
+                    ))
+                    ->add('delegueCNSuppleant' . $i, 'entity', array(
+                        'label' => 'Délégué(e) CN Suppléant(e) ' . $i,
+                        'expanded' => false,
+                        'multiple' => false,
+                        'required' => false,
+                        'property' => 'getUpperNames',
+                        'class' => 'AppBundle:Adherent',
+                        'query_builder' =>  $adherentQueryBuilder
+                    ));
+                }
+
+                $form->add('responsability1', 'entity', array(
                     'label' => 'Poste fonctionnel 1',
                     'required' => false,
                     'expanded' => false,
