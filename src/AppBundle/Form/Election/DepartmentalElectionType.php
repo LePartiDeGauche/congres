@@ -51,6 +51,16 @@ class DepartmentalElectionType extends AbstractType
                 return $repository->getSearchAdherentByOrganQueryBuilder($departement)
                                   ->orderBy('a.lastname', 'ASC');;
             };
+            $responsabilityQueryBuilder = function (ResponsabilityRepository $repository) {
+                return $repository->createQueryBuilder('r')
+                                  ->where('r.name in (:names)')
+                                  ->setParameter('names', array('Matériel',
+                                          'Relations unitaires',
+                                          'Relations presse locale',
+                                          'Medias du parti',
+                                          'Elections',
+                                          'Responsable fichier'));
+            };
 
 
             $form->add('responsableElection', null, array(
@@ -88,7 +98,8 @@ class DepartmentalElectionType extends AbstractType
                     'label' => 'Co-secrétaire femme *',
                     'expanded' => false,
                     'multiple' => false,
-                    'required' => true,
+                    'required' => false,
+                    'placeholder' => 'Poste vacant',
                     'property' => 'getUpperNames',
                     'class' => 'AppBundle:Adherent',
                     'query_builder' => $adherentFemaleQueryBuilder
@@ -98,6 +109,7 @@ class DepartmentalElectionType extends AbstractType
                     'expanded' => false,
                     'multiple' => false,
                     'required' => false,
+                    'placeholder' => 'Poste vacant',
                     'property' => 'getUpperNames',
                     'class' => 'AppBundle:Adherent',
                     'query_builder' => $adherentFemaleQueryBuilder
@@ -106,7 +118,8 @@ class DepartmentalElectionType extends AbstractType
                     'label' => 'Co-secrétaire homme *',
                     'expanded' => false,
                     'multiple' => false,
-                    'required' => true,
+                    'required' => false,
+                    'placeholder' => 'Poste vacant',
                     'property' => 'getUpperNames',
                     'class' => 'AppBundle:Adherent',
                     'query_builder' => $adherentMaleQueryBuilder
@@ -116,6 +129,7 @@ class DepartmentalElectionType extends AbstractType
                     'expanded' => false,
                     'multiple' => false,
                     'required' => false,
+                    'placeholder' => 'Poste vacant',
                     'property' => 'getUpperNames',
                     'class' => 'AppBundle:Adherent',
                     'query_builder' => $adherentMaleQueryBuilder
@@ -124,7 +138,8 @@ class DepartmentalElectionType extends AbstractType
                     'label' => 'Co-trésorière femme *',
                     'expanded' => false,
                     'multiple' => false,
-                    'required' => true,
+                    'required' => false,
+                    'placeholder' => 'Poste vacant',
                     'property' => 'getUpperNames',
                     'class' => 'AppBundle:Adherent',
                     'query_builder' => $adherentFemaleQueryBuilder
@@ -134,6 +149,7 @@ class DepartmentalElectionType extends AbstractType
                     'expanded' => false,
                     'multiple' => false,
                     'required' => false,
+                    'placeholder' => 'Poste vacant',
                     'property' => 'getUpperNames',
                     'class' => 'AppBundle:Adherent',
                     'query_builder' => $adherentFemaleQueryBuilder
@@ -142,7 +158,8 @@ class DepartmentalElectionType extends AbstractType
                     'label' => 'Co Trésorier homme *',
                     'expanded' => false,
                     'multiple' => false,
-                    'required' => true,
+                    'required' => false,
+                    'placeholder' => 'Poste vacant',
                     'property' => 'getUpperNames',
                     'class' => 'AppBundle:Adherent',
                     'query_builder' => $adherentMaleQueryBuilder
@@ -152,6 +169,7 @@ class DepartmentalElectionType extends AbstractType
                     'expanded' => false,
                     'multiple' => false,
                     'required' => false,
+                    'placeholder' => 'Poste vacant',
                     'property' => 'getUpperNames',
                     'class' => 'AppBundle:Adherent',
                     'query_builder' => $adherentMaleQueryBuilder
@@ -178,103 +196,25 @@ class DepartmentalElectionType extends AbstractType
                     ));
                 }
 
-                $form->add('responsability1', 'entity', array(
-                    'label' => 'Poste fonctionnel 1',
-                    'required' => false,
-                    'expanded' => false,
-                    'multiple' => false,
-                    'class' => 'AppBundle:Responsability'
-                ))
-                ->add('responsable1', 'entity', array(
-                    'label' => 'Elu à ce poste',
-                    'expanded' => false,
-                    'multiple' => false,
-                    'required' => false,
-                    'property' => 'getUpperNames',
-                    'class' => 'AppBundle:Adherent',
-                    'query_builder' =>  $adherentQueryBuilder
-                ))
-                ->add('responsability2', 'entity', array(
-                    'label' => 'Poste fonctionnel 2',
-                    'required' => false,
-                    'expanded' => false,
-                    'multiple' => false,
-                    'class' => 'AppBundle:Responsability'
-                ))
-                ->add('responsable2', 'entity', array(
-                    'label' => 'Elu à ce poste',
-                    'expanded' => false,
-                    'multiple' => false,
-                    'required' => false,
-                    'property' => 'getUpperNames',
-                    'class' => 'AppBundle:Adherent',
-                    'query_builder' =>  $adherentQueryBuilder
-                ))
-                ->add('responsability3', 'entity', array(
-                    'label' => 'Poste fonctionnel 3',
-                    'required' => false,
-                    'expanded' => false,
-                    'multiple' => false,
-                    'class' => 'AppBundle:Responsability'
-                ))
-                ->add('responsable3', 'entity', array(
-                    'label' => 'Elu à ce poste',
-                    'expanded' => false,
-                    'multiple' => false,
-                    'required' => false,
-                    'property' => 'getUpperNames',
-                    'class' => 'AppBundle:Adherent',
-                    'query_builder' => $adherentQueryBuilder
-                ))
-                ->add('responsability4', 'entity', array(
-                    'label' => 'Poste fonctionnel 4',
-                    'required' => false,
-                    'expanded' => false,
-                    'multiple' => false,
-                    'class' => 'AppBundle:Responsability'
-                ))
-                ->add('responsable4', 'entity', array(
-                    'label' => 'Elu à ce poste',
-                    'expanded' => false,
-                    'multiple' => false,
-                    'required' => false,
-                    'property' => 'getUpperNames',
-                    'class' => 'AppBundle:Adherent',
-                    'query_builder' => $adherentQueryBuilder
-                ))
-                ->add('responsability5', 'entity', array(
-                    'label' => 'Poste fonctionnel 5',
-                    'required' => false,
-                    'expanded' => false,
-                    'multiple' => false,
-                    'class' => 'AppBundle:Responsability'
-                ))
-                ->add('responsable5', 'entity', array(
-                    'label' => 'Elu à ce poste',
-                    'expanded' => false,
-                    'multiple' => false,
-                    'required' => false,
-                    'property' => 'getUpperNames',
-                    'class' => 'AppBundle:Adherent',
-                    'query_builder' => $adherentQueryBuilder
-                ))
-                ->add('responsability6', 'entity', array(
-                    'label' => 'Poste fonctionnel 6',
-                    'required' => false,
-                    'expanded' => false,
-                    'multiple' => false,
-                    'class' => 'AppBundle:Responsability'
-                ))
-                ->add('responsable6', 'entity', array(
-                    'label' => 'Elu à ce poste',
-                    'expanded' => false,
-                    'multiple' => false,
-                    'required' => false,
-                    'property' => 'getUpperNames',
-                    'class' => 'AppBundle:Adherent',
-                    'query_builder' => $adherentQueryBuilder
-                ))
-            ;
+                for ($i=1; $i < 7; $i++) {
+                    $form->add('responsability' . $i, 'entity', array(
+                        'label' => 'Poste fonctionnel ' . $i,
+                        'required' => false,
+                        'expanded' => false,
+                        'multiple' => false,
+                        'class' => 'AppBundle:Responsability',
+                        'query_builder' => $responsabilityQueryBuilder
+                    ))
+                    ->add('responsable' . $i, 'entity', array(
+                        'label' => 'Elu à ce poste',
+                        'expanded' => false,
+                        'multiple' => false,
+                        'required' => false,
+                        'property' => 'getUpperNames',
+                        'class' => 'AppBundle:Adherent',
+                        'query_builder' =>  $adherentQueryBuilder
+                    ));
+                }
         });
     }
 
