@@ -85,14 +85,14 @@ class DepartmentalElectionType extends AbstractType
                 ->add('validVotes', 'integer', array(
                     'label' => 'Votes exprimés',
                     'attr' => array(
-                        'min' => '1',
+                        'min' => '0',
                     ), ))
                 ->add('blankVotes',
                     'integer', array(
                     'label' => 'Votes blancs',
                     'required' => false,
                         'attr' => array(
-                           'min' => '1',
+                           'min' => '0',
                     ), ))
                 ->add('coSecWomen', 'entity', array(
                     'label' => 'Co-secrétaire femme *',
