@@ -61,13 +61,39 @@ class DepartmentalController extends Controller
                 $departmentalElection = $formElection->getData();
 
 //données du formulaire obligatoires : date, élus
-                $date = $departmentalElection['date'];
-                $numberOfVoters = $departmentalElection['numberOfVoters'];
-                $validVotes = $departmentalElection['validVotes'];
-                $blankVotes = $departmentalElection['blankVotes'];
 
-//Nombre d'élus de base
-                $numberOfElected = 4;
+                $date = isset($departmentalElection['date'])
+                      ? $departmentalElection['date']
+                      : new Date('today');
+
+                //Nombre d'élus de base
+                $numberOfElected = 0;
+
+                if (isset($departmentalElection['numberOfVoters'])) {
+                    $numberOfVoters = $departmentalElection['numberOfVoters'];
+                }
+                if (isset($departmentalElection['validVotes'])) {
+                    $validVotes = $departmentalElection['validVotes'];
+                }
+                if (isset($departmentalElection['blankVotes'])) {
+                    $blankVotes = $departmentalElection['blankVotes'];
+                }
+                if (isset($departmentalElection['coSecWomen'])) {
+                    $coSecWomen =$departmentalElection['coSecWomen'];
+                    $numberOfElected++;
+                }
+                if (isset($departmentalElection['coSecMen'])) {
+                    $coSecMen = $departmentalElection['coSecMen'];
+                    $numberOfElected++;
+                }
+                if (isset($departmentalElection['coTreasureWomen'])) {
+                    $coTreasureWomen = $departmentalElection['coTreasureWomen'];
+                    $numberOfElected++;
+                }
+                if (isset($departmentalElection['coTreasureMen'])) {
+                    $coTreasureMen = $departmentalElection['coTreasureMen'];
+                    $numberOfElected++;
+                }
 
 //Si d'anciens responsables sont cités, leurs responsabilités sont désactivées
                 if (isset($departmentalElection['oldCoSecMen'])) {
@@ -95,9 +121,15 @@ class DepartmentalController extends Controller
                 $election->setGroup($electionGroup);
                 $election->setOrgan($departement);
                 $election->setResponsable($adherent);
-                $election->setNumberOfVoters($numberOfVoters);
-                $election->setValidVotes($validVotes);
-                $election->setBlankVotes($blankVotes);
+                if (isset($numberOfVoters)) {
+                    $election->setNumberOfVoters($numberOfVoters);
+                }
+                if (isset($validVotes)) {
+                    $election->setValidVotes($validVotes);
+                }
+                if (isset($blankVotes)) {
+                    $election->setBlankVotes($blankVotes);
+                }
                 $election->setIsValid(true);
                 $election->setNumberOfElected($numberOfElected);
                 $election->setDate($date);
@@ -116,23 +148,25 @@ class DepartmentalController extends Controller
                 );
 
                 foreach ($newResponsabilities as $newResponsableKey => $newResponsability) {
-                    $newAR = new AdherentResponsability();
-                    $newAR->setAdherent($departmentalElection[$newResponsableKey]);
-                    $newAR->setResponsability($newResponsability);
-                    $newAR->setStart($dateElection);
-                    $newAR->setEnd($dateEndElection);
-                    $newAR->setIsActive(true);
-                    $newAR->setDesignatedByOrgan($departement);
-                    $manager->persist($newAR);
+                    if (isset($departmentalElection[$newResponsableKey])) {
+                        $newAR = new AdherentResponsability();
+                        $newAR->setAdherent($departmentalElection[$newResponsableKey]);
+                        $newAR->setResponsability($newResponsability);
+                        $newAR->setStart($dateElection);
+                        $newAR->setEnd($dateEndElection);
+                        $newAR->setIsActive(true);
+                        $newAR->setDesignatedByOrgan($departement);
+                        $manager->persist($newAR);
 
-                    $election->addElected($newAR);
+                        $election->addElected($newAR);
+                    }
                 }
 
                 // Ajout des postes fonctionnels s'ils existent
                 for ($i=1; $i < 7; $i++) {
                     if (isset($departmentalElection['responsability' . $i])) {
                         $responsability = $departmentalElection['responsability' . $i];
-                        if ($departmentalElection['responsable' . $i]) {
+                        if (isset($departmentalElection['responsable' . $i])) {
                             $responsable = $departmentalElection['responsable' . $i];
 
                             $ar = new AdherentResponsability();
