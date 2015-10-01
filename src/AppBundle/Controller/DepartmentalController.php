@@ -43,15 +43,38 @@ class DepartmentalController extends Controller
 
                 $departmentalElection = $formElection->getData();
 
+                //Nombre d'élus de base
+                $numberOfElected = 0;
+
 //données du formulaire obligatoires : date, élus
+
                 $date = $departmentalElection['date'];
-                $numberOfVoters = $departmentalElection['numberOfVoters'];
-                $validVotes = $departmentalElection['validVotes'];
-                $blankVotes = $departmentalElection['blankVotes'];
-                $coSecWomen = $departmentalElection['coSecWomen'];
-                $coSecMen = $departmentalElection['coSecMen'];
-                $coTreasureWomen = $departmentalElection['coTreasureWomen'];
-                $coTreasureMen = $departmentalElection['coTreasureMen'];
+
+                if (isset($departmentalElection['numberOfVoters'])) {
+                    $numberOfVoters = $departmentalElection['numberOfVoters'];
+                }
+                if (isset($departmentalElection['validVotes'])) {
+                    $validVotes = $departmentalElection['validVotes'];
+                }
+                if (isset($departmentalElection['blankVotes'])) {
+                    $blankVotes = $departmentalElection['blankVotes'];
+                }
+                if (isset($departmentalElection['coSecWomen'])) {
+                    $coSecWomen =$departmentalElection['coSecWomen'];
+                    $numberOfElected++;
+                }
+                if (isset($departmentalElection['coSecMen'])) {
+                    $coSecMen = $departmentalElection['coSecMen'];
+                    $numberOfElected++;
+                }
+                if (isset($departmentalElection['coTreasureWomen'])) {
+                    $coTreasureWomen = $departmentalElection['coTreasureWomen'];
+                    $numberOfElected++;
+                }
+                if (isset($departmentalElection['coTreasureMen'])) {
+                    $coTreasureMen = $departmentalElection['coTreasureMen'];
+                    $numberOfElected++;
+                }
 
 //récupération de l'id correspondant au secrétaire et au trésorier-e dans parameters
                 $coSecId = $this->container->getParameter('coSecretaire_departement_id');
@@ -60,9 +83,6 @@ class DepartmentalController extends Controller
 //récupérer la responsabilité co sec ou co trésorier
                 $responsabilityCoSec = $this->getDoctrine()->getRepository('AppBundle:Responsability')->findOneById($coSecId);
                 $responsabilityCoTreasure = $this->getDoctrine()->getRepository('AppBundle:Responsability')->findOneById($coTreasId);
-
-//Nombre d'élus de base
-                $numberOfElected = 4;
 
 //Si d'anciens responsables sont cités, leurs responsabilités sont désactivées
                 if ($departmentalElection['oldCoSecMen']) {
@@ -141,45 +161,71 @@ class DepartmentalController extends Controller
                 $election->setStatus('Election Fermée');
                 $election->setGroup($electionGroup);
                 $election->setResponsable($adherent);
-                $election->setNumberOfVoters($numberOfVoters);
-                $election->setValidVotes($validVotes);
-                $election->setBlankVotes($blankVotes);
+                if (isset($numberOfVoters)) {
+                    $election->setNumberOfVoters($numberOfVoters);
+                }
+                if (isset($validVotes)) {
+                    $election->setValidVotes($validVotes);
+                }
+                if (isset($blankVotes)) {
+                    $election->setBlankVotes($blankVotes);
+                }
                 $election->setIsValid(true);
                 $election->setNumberOfElected($numberOfElected);
 
                 // début du mandat 1 jour après l'élection
-                $dateElection = clone $date;
-                $dateElection = $date->modify('+ 1 days');
+                if (isset($date)) {
+                    $dateElection = clone $date;
+                    $dateElection = $dateElection->modify('+ 1 days');
+                }
 
-                $newCoSecWomen = new AdherentResponsability();
-                $newCoSecWomen->setAdherent($coSecWomen);
-                $newCoSecWomen->setResponsability($responsabilityCoSec);
-                $newCoSecWomen->setStart($dateElection);
-                $newCoSecWomen->setIsActive(true);
+                if (isset($coSecWomen)) {
+                    $newCoSecWomen = new AdherentResponsability();
+                    $newCoSecWomen->setAdherent($coSecWomen);
+                    $newCoSecWomen->setResponsability($responsabilityCoSec);
+                    if (isset($dateElection)) {
+                        $newCoSecWomen->setStart($dateElection);
+                    }
+                    $newCoSecWomen->setIsActive(true);
 
-                $newCoSecMen = new AdherentResponsability();
-                $newCoSecMen->setAdherent($coSecMen);
-                $newCoSecMen->setResponsability($responsabilityCoSec);
-                $newCoSecMen->setStart($dateElection);
-                $newCoSecMen->setIsActive(true);
+                    $manager->persist($newCoSecWomen);
+                }
 
-                $newCoTreasureWomen = new AdherentResponsability();
-                $newCoTreasureWomen->setAdherent($coTreasureWomen);
-                $newCoTreasureWomen->setResponsability($responsabilityCoTreasure);
-                $newCoTreasureWomen->setStart($dateElection);
-                $newCoTreasureWomen->setIsActive(true);
+                if (isset($coSecMen)) {
+                    $newCoSecMen = new AdherentResponsability();
+                    $newCoSecMen->setAdherent($coSecMen);
+                    $newCoSecMen->setResponsability($responsabilityCoSec);
+                    if (isset($dateElection)) {
+                        $newCoSecMen->setStart($dateElection);
+                    }
+                    $newCoSecMen->setIsActive(true);
 
-                $newCoTreasureMen = new AdherentResponsability();
-                $newCoTreasureMen->setAdherent($coTreasureMen);
-                $newCoTreasureMen->setResponsability($responsabilityCoTreasure);
-                $newCoTreasureMen->setStart($dateElection);
-                $newCoTreasureMen->setIsActive(true);
+                    $manager->persist($newCoSecMen);
+                }
+
+                if (isset($coTreasureWomen)) {
+                    $newCoTreasureWomen = new AdherentResponsability();
+                    $newCoTreasureWomen->setAdherent($coTreasureWomen);
+                    $newCoTreasureWomen->setResponsability($responsabilityCoTreasure);
+                    if (isset($dateElection)) {
+                        $newCoTreasureWomen->setStart($dateElection);
+                    }
+                    $newCoTreasureWomen->setIsActive(true);
+                    $manager->persist($newCoTreasureWomen);
+                }
+
+                if (isset($coTreasureMen)) {
+                    $newCoTreasureMen = new AdherentResponsability();
+                    $newCoTreasureMen->setAdherent($coTreasureMen);
+                    $newCoTreasureMen->setResponsability($responsabilityCoTreasure);
+                    if (isset($dateElection)) {
+                        $newCoTreasureMen->setStart($dateElection);
+                    }
+                    $newCoTreasureMen->setIsActive(true);
+                    $manager->persist($newCoTreasureMen);
+                }
 
                 $manager->persist($election);
-                $manager->persist($newCoSecWomen);
-                $manager->persist($newCoSecMen);
-                $manager->persist($newCoTreasureWomen);
-                $manager->persist($newCoTreasureMen);
 
 // Ajout des postes fonctionnels s'ils existent
                 if ($departmentalElection['responsability1']) {
@@ -191,8 +237,9 @@ class DepartmentalController extends Controller
                         $adherentResponsability->setAdherent($responsable1);
                         $adherentResponsability->setResponsability($responsability1);
                         $adherentResponsability->setIsActive(true);
-                        $adherentResponsability->setStart($dateElection);
-
+                        if (isset($dateElection)) {
+                            $adherentResponsability->setStart($dateElection);
+                        }
                         $manager->persist($adherentResponsability);
                     }
                 }
@@ -206,7 +253,9 @@ class DepartmentalController extends Controller
                         $adherentResponsability->setAdherent($responsable2);
                         $adherentResponsability->setResponsability($responsability2);
                         $adherentResponsability->setIsActive(true);
-                        $adherentResponsability->setStart($dateElection);
+                        if (isset($dateElection)) {
+                            $adherentResponsability->setStart($dateElection);
+                        }
 
                         $manager->persist($adherentResponsability);
                     }
@@ -221,8 +270,9 @@ class DepartmentalController extends Controller
                         $adherentResponsability->setAdherent($responsable3);
                         $adherentResponsability->setResponsability($responsability3);
                         $adherentResponsability->setIsActive(true);
-                        $adherentResponsability->setStart($dateElection);
-
+                        if (isset($dateElection)) {
+                            $adherentResponsability->setStart($dateElection);
+                        }
                         $manager->persist($adherentResponsability);
                     }
                 }
@@ -236,8 +286,9 @@ class DepartmentalController extends Controller
                         $adherentResponsability->setAdherent($responsable4);
                         $adherentResponsability->setResponsability($responsability4);
                         $adherentResponsability->setIsActive(true);
-                        $adherentResponsability->setStart($dateElection);
-
+                        if (isset($dateElection)) {
+                            $adherentResponsability->setStart($dateElection);
+                        }
                         $manager->persist($adherentResponsability);
                     }
                 }
@@ -251,8 +302,9 @@ class DepartmentalController extends Controller
                         $adherentResponsability->setAdherent($responsable5);
                         $adherentResponsability->setResponsability($responsability5);
                         $adherentResponsability->setIsActive(true);
-                        $adherentResponsability->setStart($dateElection);
-
+                        if (isset($dateElection)) {
+                            $adherentResponsability->setStart($dateElection);
+                        }
                         $manager->persist($adherentResponsability);
                     }
                 }
@@ -266,8 +318,9 @@ class DepartmentalController extends Controller
                         $adherentResponsability->setAdherent($responsable5);
                         $adherentResponsability->setResponsability($responsability6);
                         $adherentResponsability->setIsActive(true);
-                        $adherentResponsability->setStart($dateElection);
-
+                        if (isset($dateElection)) {
+                            $adherentResponsability->setStart($dateElection);
+                        }
                         $manager->persist($adherentResponsability);
                     }
                 }
