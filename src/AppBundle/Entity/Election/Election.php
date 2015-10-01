@@ -63,7 +63,7 @@ class Election
     /**
      * @var int
      *
-     * @ORM\Column(type="smallint")
+     * @ORM\Column(type="smallint", nullable=true)
      * @Assert\Range(min=1)
      */
     private $numberOfElected;
@@ -103,7 +103,7 @@ class Election
      *
      * @var int
      *
-     * @ORM\Column(type="smallint")
+     * @ORM\Column(type="smallint", nullable=true)
      * @Assert\Range(min=1)
      */
     private $numberOfVoters;
@@ -113,7 +113,7 @@ class Election
      *
      * @var int
      *
-     * @ORM\Column(type="smallint")
+     * @ORM\Column(type="smallint", nullable=true)
      * @Assert\Range(min=1)
      */
     private $validVotes;
@@ -123,7 +123,7 @@ class Election
      *
      * @var int
      *
-     * @ORM\Column(type="smallint")
+     * @ORM\Column(type="smallint", nullable=true)
      * @Assert\Range(min=1)
      */
     private $blankVotes;

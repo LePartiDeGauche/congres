@@ -70,12 +70,12 @@ class DepartmentalElectionType extends AbstractType
                 'data' => $this->adherent->getFirstname().' '.$this->adherent->getLastname(),
             ))
                 ->add('department', null, array(
-                    'label' => 'Departement *',
+                    'label' => 'Departement',
                     'required' => true,
                     'disabled' => true,
                     'data' => $departement->getDescription(),
             ))
-                ->add('date', 'date', array('label' => "Date de l'élection *"))
+                ->add('date', 'date', array('label' => "Date de l'élection"))
                 ->add('numberOfVoters', 'integer', array(
                     'label' => 'Nombre de votants',
                     'required' => false,
@@ -84,6 +84,7 @@ class DepartmentalElectionType extends AbstractType
                     ), ))
                 ->add('validVotes', 'integer', array(
                     'label' => 'Votes exprimés',
+                    'required' => false,
                     'attr' => array(
                         'min' => '0',
                     ), ))
@@ -95,7 +96,7 @@ class DepartmentalElectionType extends AbstractType
                            'min' => '0',
                     ), ))
                 ->add('coSecWomen', 'entity', array(
-                    'label' => 'Co-secrétaire femme *',
+                    'label' => 'Co-secrétaire femme',
                     'expanded' => false,
                     'multiple' => false,
                     'required' => false,
@@ -115,7 +116,7 @@ class DepartmentalElectionType extends AbstractType
                     'query_builder' => $adherentFemaleQueryBuilder
                 ))
                 ->add('coSecMen', 'entity', array(
-                    'label' => 'Co-secrétaire homme *',
+                    'label' => 'Co-secrétaire homme',
                     'expanded' => false,
                     'multiple' => false,
                     'required' => false,
@@ -135,7 +136,7 @@ class DepartmentalElectionType extends AbstractType
                     'query_builder' => $adherentMaleQueryBuilder
                 ))
                 ->add('coTreasureWomen', 'entity', array(
-                    'label' => 'Co-trésorière femme *',
+                    'label' => 'Co-trésorière femme',
                     'expanded' => false,
                     'multiple' => false,
                     'required' => false,
@@ -155,7 +156,7 @@ class DepartmentalElectionType extends AbstractType
                     'query_builder' => $adherentFemaleQueryBuilder
                 ))
                 ->add('coTreasureMen', 'entity', array(
-                    'label' => 'Co Trésorier homme *',
+                    'label' => 'Co Trésorier homme',
                     'expanded' => false,
                     'multiple' => false,
                     'required' => false,

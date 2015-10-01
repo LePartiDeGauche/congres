@@ -10,6 +10,12 @@
         <link rel="stylesheet" href="{{ asset('css/main.css') }}" />
         {% endblock %}
 
+        {% for flashMessage in app.session.flashbag.get('success') %}
+            <div class="alert alert-success">
+                {{ flashMessage }}
+            </div>
+        {% endfor %}
+        
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
