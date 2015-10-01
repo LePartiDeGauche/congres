@@ -339,8 +339,8 @@ class Election
 
     public function getElectedEmail()
     {
-        return implode(', ', $this->elected->map(function (Adherent $elected) {
-            return $elected->getEmail();
+        return implode(', ', $this->elected->map(function (AdherentResponsability $elected) {
+            return $elected->getAdherent()->getEmail();
         })->toArray());
     }
 
