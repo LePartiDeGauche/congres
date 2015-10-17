@@ -138,6 +138,7 @@ class EventAdherentRegistration
         $this->voteStatus = false;
         $this->attendance = self::ATTENDANCE_NOT_REGISTRED;
         $this->payments = new ArrayCollection();
+        $this->needHosting = false;
     }
     /**
      * Get id.
