@@ -15,7 +15,7 @@
                 {{ flashMessage }}
             </div>
         {% endfor %}
-        
+
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
@@ -80,6 +80,11 @@
                                <li>
                                    <a href="{{ path('departmental_election_result') }}">
                                         Renouvellement instances départementales
+                                    </a>
+                               </li>
+                               <li>
+                                   <a href="{{ path('candidature_create') }}">
+                                        Candidature aux instances nationales
                                     </a>
                                </li>
                            </ul>

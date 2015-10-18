@@ -14,6 +14,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Responsability
 {
     const INSTANCE_CN = 'Conseil National';
+    const INSTANCE_BCN = 'Bureau du Conseil National';
     const INSTANCE_BN = 'Bureau National';
     const INSTANCE_SN = 'Secrétariat National';
     const INSTANCE_COSEC = 'Co-secrétaire de comité';

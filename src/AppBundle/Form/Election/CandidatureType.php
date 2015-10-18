@@ -23,13 +23,9 @@ class CandidatureType extends AbstractType
                     $qb = $er->createQueryBuilder('t');
                     $qb->where('t.name IN (:names)')
                         ->setParameter(':names', array(
-                            Responsability::INSTANCE_BN,
-                            Responsability::INSTANCE_BC,
-                            Responsability::INSTANCE_CDC,
                             Responsability::INSTANCE_SEN,
                             Responsability::INSTANCE_CRC,
-                            Responsability::INSTANCE_CCF,
-                            Responsability::INSTANCE_CN_NAT,
+                            Responsability::INSTANCE_BCN,
                         ));
                     $qb->orderBy('t.name', 'ASC');
 
