@@ -27,6 +27,7 @@ class Responsability
     const INSTANCE_CN_NAT = 'Conseil national - part nationale';
     const INSTANCE_COSEC_DEPARTMENT = 'Co-secrétaire de département';
     const INSTANCE_COTRESORIER_DEP = 'Co-trésorier de département';
+    const INSTANCE_AUTRE = 'Autre';
 
     /**
      * @var int

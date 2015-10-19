@@ -20,24 +20,23 @@ class CandidatureType extends AbstractType
                 'label' => 'Instance',
                 'class' => 'AppBundle:Responsability',
                 'query_builder' => function (ResponsabilityRepository $er) {
-                    $qb = $er->createQueryBuilder('t');
-                    $qb->where('t.name IN (:names)')
+                    $qb = $er->createQueryBuilder('t')
+                        ->where('t.name IN (:names)')
                         ->setParameter(':names', array(
                             Responsability::INSTANCE_SEN,
                             Responsability::INSTANCE_CRC,
                             Responsability::INSTANCE_BCN,
+                            Responsability::INSTANCE_AUTRE,
                         ));
-                    $qb->orderBy('t.name', 'ASC');
-
                     return $qb;
                 },
             ))
             ->add('professionfoi', null, array('label' => 'Profession de foi'))
-            ->add('isSortant', 'checkbox', array(
-                'label' => 'Je suis candidat-e sortant-e d\'une instance nationale.',
-                'required' => false,
-            ))
-            ->add('professionfoicplt', null, array('label' => 'Complément', 'required' => false))
+            // ->add('isSortant', 'checkbox', array(
+            //     'label' => 'Je suis candidat-e sortant-e d\'une instance nationale.',
+            //     'required' => false,
+            // ))
+            // ->add('professionfoicplt', null, array('label' => 'Complément', 'required' => false))
             ->add('save', 'submit', array('label' => 'Enregistrer'));
     }
 
