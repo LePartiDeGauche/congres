@@ -39,7 +39,81 @@
                         {% if is_granted('ROLE_USER') %}
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"
-                                                                role="button" aria-expanded="false">Textes du congrès<span class="caret"></span></a>
+                               role="button" aria-expanded="false">
+                               Conseil National<span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li>
+                                    <a href="{{ path('downloads', {filename: 'Contribution_sommet_plan_B_adopté_CN.pdf'}) }}">
+                                        Contribution au sommet du plan B
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('downloads', {filename: 'Texte_methode_regionales_adopté_CN.pdf'}) }}">
+                                        Méthode de décision pour les Régionales
+                                    </a>
+                               </li>
+                               <li>
+                                   <a href="{{ path('downloads', {filename: 'Commissions et co-responsables PG validées CN.pdf'}) }}">
+                                       Commissions et co-responsables PG validées CN
+                                   </a>
+                               </li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                               role="button" aria-expanded="false">
+                               Instances<span class="caret"></span>
+                           </a>
+                           <ul class="dropdown-menu" role="menu">
+                               <li>
+                                   <a href="{{ path('departmental_election_result') }}">
+                                        Renouvellement instances départementales
+                                    </a>
+                               </li>
+                           </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                            role="button" aria-expanded="false">
+                                Circulaires<span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li>
+                                    <a href="{{ path('downloads', {filename: 'Circulaire 2015-24.pdf'}) }}">
+                                       Circulaire 2015-24.pdf
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('downloads', {filename: 'Circulaire 2015-23.pdf'}) }}">
+                                       Circulaire 2015-23.pdf
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('downloads', {filename: 'Circulaire 2015-22.pdf'}) }}">
+                                       Circulaire 2015-22.pdf
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('downloads', {filename: 'Circulaire 2015-21.pdf'}) }}">
+                                       Circulaire 2015-21.pdf
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('downloads', {filename: 'Circulaire 2015-20.pdf'}) }}">
+                                       Circulaire 2015-20.pdf
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('downloads', {filename: 'Circulaire 2015-19.pdf'}) }}">
+                                       Circulaire 2015-19.pdf
+                                    </a>
+                                </li>
+                           </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                                                                role="button" aria-expanded="false">Congrès<span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
                                 <li>
                                     <a href="{{ path('downloads', {filename: 'EnMouvementCitoyen_ne_s_version def.pdf'}) }}">
@@ -57,60 +131,6 @@
                                     </a>
                                 </li>
                             </ul>
-                        </li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"
-                               role="button" aria-expanded="false">
-                               Conseil National<span class="caret"></span>
-                           </a>
-                           <ul class="dropdown-menu" role="menu">
-                               <li>
-                                   <a href="{{ path('event_registration_create', { event_id: 7 } ) }}">
-                                       CN Octobre 2015
-                                    </a>
-                               </li>
-                           </ul>
-                        </li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"
-                               role="button" aria-expanded="false">
-                               Instances<span class="caret"></span>
-                           </a>
-                           <ul class="dropdown-menu" role="menu">
-                               <li>
-                                   <a href="{{ path('departmental_election_result') }}">
-                                        Renouvellement instances départementales
-                                    </a>
-                               </li>
-                           </ul>
-                        </li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"
-                               role="button" aria-expanded="false">
-                               Circulaires<span class="caret"></span>
-                           </a>
-                           <ul class="dropdown-menu" role="menu">
-                               <li>
-                                   <a href="{{ path('downloads', {filename: 'Circulaire 2015-24.pdf'}) }}">
-                                       Circulaire 2015-24.pdf
-                                   </a>
-                                   <a href="{{ path('downloads', {filename: 'Circulaire 2015-23.pdf'}) }}">
-                                       Circulaire 2015-23.pdf
-                                   </a>
-                                   <a href="{{ path('downloads', {filename: 'Circulaire 2015-22.pdf'}) }}">
-                                       Circulaire 2015-22.pdf
-                                   </a>
-                                   <a href="{{ path('downloads', {filename: 'Circulaire 2015-21.pdf'}) }}">
-                                       Circulaire 2015-21.pdf
-                                   </a>
-                                   <a href="{{ path('downloads', {filename: 'Circulaire 2015-20.pdf'}) }}">
-                                       Circulaire 2015-20.pdf
-                                   </a>
-                                   <a href="{{ path('downloads', {filename: 'Circulaire 2015-19.pdf'}) }}">
-                                       Circulaire 2015-19.pdf
-                                   </a>
-                               </li>
-                           </ul>
                         </li>
                         {% endif %}
                     </ul>
