@@ -232,9 +232,10 @@ class SleepingSite
      * Add roomTypes.
      *
      * @param RoomType $roomType
-     * @return RoomType
-     * @internal param RoomType $roomTypes
      *
+     * @return RoomType
+     *
+     * @internal param RoomType $roomTypes
      */
     public function addRoomType(RoomType $roomType)
     {
@@ -259,13 +260,13 @@ class SleepingSite
     /**
      * @return int
      */
-    public function getTotalCapacity(){
+    public function getTotalCapacity()
+    {
         $total = 0;
-        foreach ($this->getRoomTypes() as $roomType)
-        {
+        foreach ($this->getRoomTypes() as $roomType) {
             $total += count($roomType->getBedrooms()) * $roomType->getPlaces();
         }
+
         return $total;
     }
-
 }

@@ -24,7 +24,6 @@ class DefaultController extends Controller
         return $this->render('default/resultats-plateformes.html.twig');
     }
 
-
     /**
      * @Route("/commission-votes", name="commission_votes")
      */

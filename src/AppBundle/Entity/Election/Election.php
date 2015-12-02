@@ -62,7 +62,7 @@ class Election
     /**
      * @var int
      *
-     * @ORM\Column(type="smallint")
+     * @ORM\Column(type="smallint", nullable=true)
      * @Assert\Range(min=1)
      */
     private $numberOfElected;
@@ -96,6 +96,36 @@ class Election
      * @ORM\Column(name="is_valid", type="boolean")
      */
     private $isValid;
+
+    /**
+     * Number of voters.
+     *
+     * @var int
+     *
+     * @ORM\Column(type="smallint", nullable=true)
+     * @Assert\Range(min=1)
+     */
+    private $numberOfVoters;
+
+    /**
+     * Number of valid votes.
+     *
+     * @var int
+     *
+     * @ORM\Column(type="smallint", nullable=true)
+     * @Assert\Range(min=1)
+     */
+    private $validVotes;
+
+    /**
+     * Number of blank votes.
+     *
+     * @var int
+     *
+     * @ORM\Column(type="smallint", nullable=true)
+     * @Assert\Range(min=1)
+     */
+    private $blankVotes;
 
     /**
      * @return string
@@ -183,7 +213,7 @@ class Election
             self::STATUS_OPEN,
             self::STATUS_CLOSED,
             self::ISVALID_TRUE,
-            self::ISVALID_FALSE
+            self::ISVALID_FALSE,
         ))) {
             throw new \InvalidArgumentException('Invalid status');
         }
@@ -242,7 +272,7 @@ class Election
      */
     public function getElectedNames()
     {
-        return join(', ', $this->elected->toArray());
+        return implode(', ', $this->elected->toArray());
     }
 
     /**
@@ -257,12 +287,11 @@ class Election
         return $this;
     }
 
-
     /**
      * Returns true if election has been checked wether it has been validated
-     * or rejected
+     * or rejected.
      *
-     * @return boolean
+     * @return bool
      */
     public function hasBeenChecked()
     {
@@ -271,7 +300,7 @@ class Election
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isIsValid()
     {
@@ -279,7 +308,7 @@ class Election
     }
 
     /**
-     * @param boolean $isValid
+     * @param bool $isValid
      */
     public function setIsValid($isValid)
     {
@@ -288,9 +317,56 @@ class Election
 
     public function getElectedEmail()
     {
-        return join(', ', $this->elected->map(function (Adherent $elected) {
+        return implode(', ', $this->elected->map(function (Adherent $elected) {
             return $elected->getEmail();
         })->toArray());
     }
 
+    /**
+     * @return int
+     */
+    public function getNumberOfVoters()
+    {
+        return $this->numberOfVoters;
+    }
+
+    /**
+     * @param int $numberOfVoters
+     */
+    public function setNumberOfVoters($numberOfVoters)
+    {
+        $this->numberOfVoters = $numberOfVoters;
+    }
+
+    /**
+     * @return int
+     */
+    public function getValidVotes()
+    {
+        return $this->validVotes;
+    }
+
+    /**
+     * @param int $validVotes
+     */
+    public function setValidVotes($validVotes)
+    {
+        $this->validVotes = $validVotes;
+    }
+
+    /**
+     * @return int
+     */
+    public function getBlankVotes()
+    {
+        return $this->blankVotes;
+    }
+
+    /**
+     * @param int $blankVotes
+     */
+    public function setBlankVotes($blankVotes)
+    {
+        $this->blankVotes = $blankVotes;
+    }
 }

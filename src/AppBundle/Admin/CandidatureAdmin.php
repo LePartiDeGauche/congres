@@ -74,9 +74,9 @@ class CandidatureAdmin extends Admin
                 'placeholder' => 'Rechercher un nom ou un email',
                 'property' => array('firstname', 'lastname', 'email'),
                 'to_string_callback' => function ($adherent, $property) {
-                    return $adherent->getFirstname() . ' '
-                        . $adherent->getLastname() . ' &lt;'
-                        . $adherent->getEmail() . '&gt;';
+                    return $adherent->getFirstname().' '
+                        .$adherent->getLastname().' &lt;'
+                        .$adherent->getEmail().'&gt;';
                 },
             ))
             ->add('responsability')
@@ -114,19 +114,19 @@ class CandidatureAdmin extends Admin
     public function getExportFields()
     {
         return array(
-            'Prenom'=>'author.firstname',
-            'Nom'=>'author.lastname',
-            'Genre'=>'author.gender',
-            'Mail'=>'author.email',
-            'Mobile'=>'author.mobilephone',
-            'Comité'=>'author.organsnames',
-            'Statut adhérent'=>'author.status',
-            'Responsabilité'=>'responsability',
-            'Profession de foi'=>'professionfoi',
-            'Profession de foi cplt'=>'professionfoicplt',
-            'Est Sortant'=>'isSortant',
-            'Date de candidature'=>'submitDate',
-            'Statut de candidature'=>'status',
+            'Prenom' => 'author.firstname',
+            'Nom' => 'author.lastname',
+            'Genre' => 'author.gender',
+            'Mail' => 'author.email',
+            'Mobile' => 'author.mobilephone',
+            'Comité' => 'author.organsnames',
+            'Statut adhérent' => 'author.status',
+            'Responsabilité' => 'responsability',
+            'Profession de foi' => 'professionfoi',
+            'Profession de foi cplt' => 'professionfoicplt',
+            'Est Sortant' => 'isSortant',
+            'Date de candidature' => 'submitDate',
+            'Statut de candidature' => 'status',
             );
     }
 }

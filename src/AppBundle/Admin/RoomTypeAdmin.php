@@ -1,4 +1,5 @@
 <?php
+
 namespace AppBundle\Admin;
 
 use AppBundle\Entity\Event\RoomType;
@@ -9,7 +10,7 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 
 /**
- *  RoomType administration
+ *  RoomType administration.
  *
  * @author Clément Talleu <clement@les-tilleuls.coop>
  */

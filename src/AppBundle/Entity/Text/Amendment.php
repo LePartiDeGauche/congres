@@ -91,7 +91,7 @@ class Amendment
     private $meetingDate;
 
     /**
-     * The number of present
+     * The number of present.
      *
      * @var int
      *
@@ -99,7 +99,6 @@ class Amendment
      * @Assert\Type(type="integer")
      */
     private $numberOfPresent;
-
 
     public function __construct()
     {
