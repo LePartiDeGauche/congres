@@ -143,7 +143,8 @@ class EventController extends Controller
 
                 $session->set('paiement', $eventRegistration->getPaymentMode());
 
-                return $this->redirect($this->generateUrl('sleeping_list'));
+                // @TODO manage spleeping site if no available
+                //return $this->redirect($this->generateUrl('sleeping_list'));
             }
 
             if ($eventRegistration->getPaymentMode() == EventAdherentRegistration::PAYMENT_MODE_ONLINE) {
