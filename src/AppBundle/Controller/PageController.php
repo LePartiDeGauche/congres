@@ -17,32 +17,17 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 class PageController extends Controller {
 
     /**
-     * Lists  active pages.
+     * Show page.
      *
-     * @Route("/liste/{categoryId}", name="list_page")
-     *
-     * @Method("GET")
-     */
-    public function pageListAction($categoryId) {
-
-        return $this->render('page/page_list.html.twig', array(
-            'pageList' => $this->getDoctrine()->getRepository('AppBundle:Page')->findActivePageByCategory(['category' => $categoryId]),
-        ));
-    }
-
-    /**
-     * Lists  active pages.
-     *
-     * @Route("/{pageId}", name="page_show")
+     * @Route("/{id}", name="page_show")
      *
      * @Method("GET")
-     * @param $pageId
+     * @param $id
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function pageShowAction($pageId) {
-
+    public function pageShowAction($id) {
         return $this->render('page/page_show.html.twig', array(
-            'pageShow' => $this->getDoctrine()->getRepository('AppBundle:Page')->findBy(['id' => $pageId]),
+            'pageShow' => $this->getDoctrine()->getRepository('AppBundle:Page')->findBy(['id' => $id]),
         ));
     }
 

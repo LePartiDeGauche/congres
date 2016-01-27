@@ -40,7 +40,7 @@ class MenuBuilder
                     array(
                         'label' => $page->getTitle(),
                         'route' => 'page_show',
-                        'routeParameters' => array('pageId' => $page->getId()),
+                        'routeParameters' => array('id' => $page->getId()),
                     )
                 );
             }

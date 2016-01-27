@@ -11,7 +11,6 @@ use Doctrine\ORM\EntityRepository;
 class PageRepository  extends EntityRepository
 {
     public function findActivePage() {
-
         return $this
             ->createQueryBuilder('p')
             ->select('p')
@@ -22,7 +21,6 @@ class PageRepository  extends EntityRepository
     }
 
     public function findActivePageByCategory(Category $category) {
-
         return $this
             ->createQueryBuilder('p')
             ->select('p')

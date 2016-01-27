@@ -11,7 +11,6 @@ use Doctrine\ORM\EntityRepository;
 class CategoryRepository  extends EntityRepository
 {
     public function findActiveCategory() {
-
         return $this
             ->createQueryBuilder('c')
             ->select('c')
