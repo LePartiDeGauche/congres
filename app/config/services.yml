@@ -91,3 +91,16 @@ services:
         tags:
             - { name: doctrine.event_listener, event: postUpdate }
             - { name: doctrine.event_listener, event: postPersist }
+
+    app.menu_builder:
+        class: AppBundle\Menu\MenuBuilder
+        arguments : ['@knp_menu.factory', '@doctrine.orm.entity_manager']
+
+    app.menu.main:
+        class: Knp\Menu\MenuItem
+        factory_service: app.menu_builder
+        factory_method: createMainMenu
+        arguments: ['@request']
+        scope: request
+        tags:
+            - { name: knp_menu.menu, alias: main}

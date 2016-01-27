@@ -218,3 +218,15 @@ services:
         arguments: [~, AppBundle\Entity\Event\Booking, SonataAdminBundle:CRUD]
         tags:
             - {name: sonata.admin, manager_type: orm, group: "Evenements", label: "Réservations"}
+
+    sonata.admin.category:
+        class: AppBundle\Admin\CategoryAdmin
+        arguments: [~, AppBundle\Entity\Category, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: "Page et menus", label: "Menus"}
+
+    sonata.admin.page:
+        class: AppBundle\Admin\PageAdmin
+        arguments: [~, AppBundle\Entity\Page, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: "Page et menus", label: "Pages"}

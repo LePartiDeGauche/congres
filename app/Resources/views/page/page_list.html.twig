@@ -1,0 +1,44 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Liste des Pages</h1>
+                <div role="tabpanel">
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active" id="validated">
+                            {% if pageList is empty %}
+                                <p>Pas de menus</p>
+                            {% else %}
+                                <table class="table tablesorter" id="table_page">
+                                    <thead>
+                                    <tr>
+                                        <th>Titre</th>
+                                        <th>Description</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for page in pageList %}
+                                        <tr>
+                                            <td>
+                                                <a href="{{ path('show_page', {pageId: page.id}) }}"> {{ page.title }}</a>
+                                            </td>
+                                            <td>
+                                                {{ page.description }}
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div><!-- .col-md-12 -->
+        </div><!-- .row -->
+    </div><!-- .container -->
+{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css" rel="stylesheet" />
+{% endblock %}
