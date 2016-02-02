@@ -3,30 +3,18 @@
 {% block body %}
 <div class="container">
     <div class="row">
-        <div>
-            <h3>Textes adoptés lors du Conseil National du 17 janvier 2016</h3>
-            <p>
-                Les textes adoptés par le Conseil National du du 17 janvier 2016
-                sont également disponibles dans la rubrique Conseil National.
-            </p>
-            <ul>
-                <li>
-                    <a href="{{ path('downloads', {filename: 'Résolution_adoptée_CN.pdf'}) }}">
-                        Résolution politique
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ path('downloads', {filename: 'Réforme_RI_adoptée_CN.pdf'}) }}">
-                        Réforme du Règlement Intérieur
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ path('downloads', {filename: 'Charte_Plateforme_adoptée_CN.pdf'}) }}">
-                        Charte d'utilisation de la plateforme numérique du CN
-                    </a>
-                </li>
-            </ul>
-        </div>
+
+        <div class="col-md-8">
+            {% if pageShow is empty %}
+            <p>Pas de contenu</p>
+            {% else %}
+                {% for page in pageShow %}
+                    <h3>{{ page.title }}</h3>
+                    {{ page.content|raw }}
+                {% endfor %}
+            {% endif %}
+        </div><!-- .col-md-8 -->
+
     </div>
     <div class="row">
         <div class="alert alert-warning text-justify" role="alert">

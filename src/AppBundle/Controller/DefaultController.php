@@ -13,7 +13,15 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
-        return $this->render('default/index.html.twig');
+        $category = $this->getDoctrine()
+                         ->getRepository('AppBundle:Category')
+                         ->findOneByTitle($this->container->getParameter('category_homepage'));
+
+        return $this->render('default/index.html.twig', array(
+            'pageShow' => $this->getDoctrine()
+                               ->getRepository('AppBundle:Page')
+                               ->findActivePageByCategory($category)
+        ));
     }
 
     /**

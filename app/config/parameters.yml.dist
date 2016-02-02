@@ -34,3 +34,5 @@ parameters:
 
     cosecretaire_departement_id: 6
     coTresorier_departement_id: 7
+
+    category_homepage: "Page d'accuel"

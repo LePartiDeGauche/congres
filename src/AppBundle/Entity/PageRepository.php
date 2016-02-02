@@ -13,7 +13,6 @@ class PageRepository  extends EntityRepository
     public function findActivePage() {
         return $this
             ->createQueryBuilder('p')
-            ->select('p')
             ->where('p.isActive = 1')
             ->getQuery()
             ->getResult()
@@ -23,10 +22,9 @@ class PageRepository  extends EntityRepository
     public function findActivePageByCategory(Category $category) {
         return $this
             ->createQueryBuilder('p')
-            ->select('p')
             ->where('p.isActive = 1')
             ->andWhere('p.category = :category')
-            ->setParameters('category', $category)
+            ->setParameter('category', $category)
             ->getQuery()
             ->getResult()
             ;
