@@ -28,6 +28,19 @@ use AppBundle\Form\Vote\IndividualOrganTextVoteType;
 class TextController extends Controller
 {
     /**
+     * _partial controller that list active textgroups
+     */
+    public function _listAction()
+    {
+        $textgroups = $this->getDoctrine()->getManager()
+                           ->getRepository('AppBundle:Text\TextGroup')
+                           ->findAll();
+        return $this->render('text/_list.html.twig', array(
+            'textgroups' => $textgroups,
+        ));
+    }
+
+    /**
      * Lists all Text\Text entities.
      *
      * @Route("/{group_id}/list", name="text_list")
