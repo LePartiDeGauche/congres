@@ -38,9 +38,8 @@ class TextGroupAdmin extends Admin
     {
         $listMapper
             ->add('id')
+            ->addIdentifier('name')
             ->add('author', 'sonata_type_model_autocomplete', array('property' => 'lastname'))
-            ->add('name')
-            ->add('description')
             ->add('submissionOpening')
             ->add('submissionClosing')
             ->add('voteOpening')
@@ -85,10 +84,10 @@ class TextGroupAdmin extends Admin
             ->add('author', 'sonata_type_model_autocomplete', array('property' => array('firstname', 'lastname')))
             ->add('name')
             ->add('description')
-            ->add('submissionOpening')
-            ->add('submissionClosing')
-            ->add('voteOpening')
-            ->add('voteClosing')
+            ->add('submissionOpening', 'sonata_type_date_picker', array('format' => 'd/M/y'))
+            ->add('submissionClosing', 'sonata_type_date_picker', array('format' => 'd/M/y'))
+            ->add('voteOpening', 'sonata_type_date_picker', array('format' => 'd/M/y'))
+            ->add('voteClosing', 'sonata_type_date_picker', array('format' => 'd/M/y'))
             ->add('voteType', 'choice', array(
                 'label' => 'Type de vote',
                 'choices' => array(
