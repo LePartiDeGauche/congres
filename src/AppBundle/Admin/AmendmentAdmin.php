@@ -27,7 +27,10 @@ class AmendmentAdmin extends Admin
             ->add('startLine', null, array('label' => 'Ligne'))
             ->add('type', 'choice', array('label' => 'Type de modification', 'choices' => Amendment::getTypes()))
             ->add('content', null, array('label' => 'Contenu'))
-            ->add('meetingDate', null, array('label' => 'Date de réunion'))
+            ->add('meetingDate', 'sonata_type_date_picker', array(
+                'format' => 'd/M/y',
+                'label' => 'Date de réunion',
+            ))
             ->add('numberOfPresent', null, array('label' => 'Nombre de présents'))
         ;
     }

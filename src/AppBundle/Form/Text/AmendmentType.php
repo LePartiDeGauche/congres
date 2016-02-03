@@ -40,7 +40,10 @@ class AmendmentType extends AbstractType
                     'a' => 'Ajout', 'd' => 'Suppression', 'm' => 'Modification',
                 ), ))
             ->add('content', null, array('label' => 'Nouveau texte'))
-            ->add('meetingDate', null, array('label' => 'Date de réunion'))
+            ->add('meetingDate', 'sonata_type_date_picker', array(
+                'format' => 'd/M/y',
+                'label' => 'Date de réunion',
+            ))
             ->add('numberOfPresent', null, array('label' => 'Nombre de présents'))
             ->add('save', 'submit', array('label' => 'Enregistrer'))
         ;

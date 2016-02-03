@@ -38,10 +38,10 @@ class AmendmentController extends Controller
             new Amendment($this->getUser()),
             array('text_group_id' => $textGroup->getId())
         );
+        $formAmendment->getData()->setAuthor($this->getUser());
 
         $formAmendment->handleRequest($request);
         if ($formAmendment->isSubmitted()) {
-            $formAmendment->getData()->setAuthor($this->getUser());
 
             if ($formAmendment->isValid()) {
                 $manager = $this->getDoctrine()->getManager();
