@@ -22,7 +22,10 @@ class AdherentAdmin extends Admin
             ->add('email')
             ->add('mobilephone', null, array('label' => 'Téléphone'))
             ->add('departement')
-            ->add('birthdate', 'birthday', array('label' => 'Date de naissance'))
+            ->add('birthdate', 'sonata_type_date_picker', array(
+                'label' => 'Date de naissance',
+                'format' => 'd/M/y',
+            ))
             ->add('status', 'choice', array(
                 'label' => 'Statut',
                 'choices' => array(
