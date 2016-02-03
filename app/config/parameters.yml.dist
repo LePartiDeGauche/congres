@@ -21,7 +21,7 @@ parameters:
     mailer_sender_address: postmaster@example.com
     mailer_auth_mode:  ~
 
-    locale:            en
+    locale:            fr
 
     # A secret key that's used to generate certain security-related tokens
     secret:            ThisTokenIsNotSoSecretChangeI
