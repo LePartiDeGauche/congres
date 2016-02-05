@@ -3,12 +3,18 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>{% block title %}Congrès du Parti de Gauche{% endblock %}</title>
+        <title>{% block title %}Site des adhérents du Parti de Gauche{% endblock %}</title>
         {% block stylesheets %}
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
         <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
         <link rel="stylesheet" href="{{ asset('css/main.css') }}" />
         {% endblock %}
+
+        {% for flashMessage in app.session.flashbag.get('success') %}
+            <div class="alert alert-success">
+                {{ flashMessage }}
+            </div>
+        {% endfor %}
 
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
@@ -33,96 +39,156 @@
                         {% if is_granted('ROLE_USER') %}
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"
-                                                                role="button" aria-expanded="false">Textes<span class="caret"></span></a>
+                               role="button" aria-expanded="false">
+                               Conseil National<span class="caret"></span>
+                            </a>
                             <ul class="dropdown-menu" role="menu">
                                 <li>
-                                    <a href="{{ path('downloads', {filename: 'CDV Amendements validés - Classement par comités  site.pdf'}) }}">
-                                        Amendements
+                                    <a href="{{ path('downloads', {filename: 'Résolution_adoptée_CN.pdf'}) }}">
+                                        Résolution politique
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="{{ path('downloads', {filename: 'Tout est possible - numéroté.pdf'}) }}">
-                                        Tout est possible
+                                    <a href="{{ path('downloads', {filename: 'Réforme_RI_adoptée_CN.pdf'}) }}">
+                                        Réforme du Règlement Intérieur
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="{{ path('downloads', {filename: 'RI du PG modifié.pdf'}) }}">
-                                        R.I. du PG modifi&eacute;
+                                    <a href="{{ path('downloads', {filename: 'Charte_Plateforme_adoptée_CN.pdf'}) }}">
+                                        Charte d'utilisation de la plateforme numérique du CN
+                                    </a>
+                                </li>
+                                <li class="divider">
+                                </li>
+                                <li>
+                                    <a href="{{ path('downloads', {filename: 'Contribution_sommet_plan_B_adopté_CN.pdf'}) }}">
+                                        Contribution au sommet du plan B
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="{{ path('downloads', {filename: 'Statuts du PG modifiés.pdf'}) }}">
-                                        Statuts du PG modifi&eacute;s
+                                    <a href="{{ path('downloads', {filename: 'Texte_methode_regionales_adopté_CN.pdf'}) }}">
+                                        Méthode de décision pour les Régionales
                                     </a>
-                                </li>
-                                <li>
-                                    <a href="{{ path('downloads', {filename: 'Les 100 premiers jours.pdf'}) }}">
-                                        Les 100 premiers jours
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                                   aria-expanded="false">Organisation<span class="caret"></span></a>
-                           <ul class="dropdown-menu" role="menu">
-                               <li>
-                                   <a href="{{ path('downloads', {filename: 'Rapport CDD sur texte des 100 jours.pdf'}) }}">
-                                       Rapport CDD sur texte des 100 jours
-                                   </a>
                                </li>
                                <li>
-                                   <a href="{{ path('downloads', {filename: 'Complément RI candidatures adopté.pdf'}) }}">
-                                       Complément RI - candidatures
+                                   <a href="{{ path('downloads', {filename: 'Commissions et co-responsables PG validées CN.pdf'}) }}">
+                                       Commissions et co-responsables PG validées CN
                                    </a>
                                </li>
-                                <li>
-                                    <a href="{{ path('downloads', {filename: 'RI Congrès 2015 phases 2 et 3 adopté CN.pdf'}) }}">
-                                        Phases 2 &amp; 3
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="{{ path('downloads', {filename: 'Règlement Intérieur - Phase 1.pdf'}) }}">
-                                        Phase 1
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="{{ path('commission_votes') }}">
-                                        Commission des votes
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="{{ path('commission_debats') }}">
-                                        Commission des débats
-                                    </a>
-                                </li>
                             </ul>
                         </li>
-
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Congrès<span class="caret"></span></a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="{{ path('candidature_list') }}">Candidatures aux instances</a></li>
-                            </ul>
-                        </li>
-
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                               aria-expanded="false">Archives<span class="caret"></span></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                            role="button" aria-expanded="false">
+                                Circulaires<span class="caret"></span>
+                            </a>
                             <ul class="dropdown-menu" role="menu">
                                 <li>
-                                    <a href="{{ path('resultats_plateformes') }}">
-                                        Vote des plateformes
+                                    <a href="{{ path('downloads', {filename: 'Circulaire 2015-34.pdf'}) }}">
+                                       Circulaire 2015-34.pdf
                                     </a>
                                 </li>
-                                {% if is_granted('CALENDAR_contribution_read') %}
-                                <li><a href="{{ path('contribution_list_valid') }}">Contributions</a></li>
-                                {% endif %}
+                                <li>
+                                    <a href="{{ path('downloads', {filename: 'Circulaire 2015-33.pdf'}) }}">
+                                       Circulaire 2015-33.pdf
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('downloads', {filename: 'Circulaire 2015-32.pdf'}) }}">
+                                       Circulaire 2015-32.pdf
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('downloads', {filename: 'Circulaire 2015-31.pdf'}) }}">
+                                       Circulaire 2015-31.pdf
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('downloads', {filename: 'Circulaire 2015-30.pdf'}) }}">
+                                       Circulaire 2015-30.pdf
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('downloads', {filename: 'Circulaire 2015-29.pdf'}) }}">
+                                       Circulaire 2015-29.pdf
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('downloads', {filename: 'Circulaire 2015-28.pdf'}) }}">
+                                       Circulaire 2015-28.pdf
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('downloads', {filename: 'Circulaire 2015-27.pdf'}) }}">
+                                       Circulaire 2015-27.pdf
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('downloads', {filename: 'Circulaire 2015-26.pdf'}) }}">
+                                       Circulaire 2015-26.pdf
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('downloads', {filename: 'Circulaire 2015-25.pdf'}) }}">
+                                       Circulaire 2015-25.pdf
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('downloads', {filename: 'Circulaire 2015-24.pdf'}) }}">
+                                       Circulaire 2015-24.pdf
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('downloads', {filename: 'Circulaire 2015-23.pdf'}) }}">
+                                       Circulaire 2015-23.pdf
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('downloads', {filename: 'Circulaire 2015-22.pdf'}) }}">
+                                       Circulaire 2015-22.pdf
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('downloads', {filename: 'Circulaire 2015-21.pdf'}) }}">
+                                       Circulaire 2015-21.pdf
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('downloads', {filename: 'Circulaire 2015-20.pdf'}) }}">
+                                       Circulaire 2015-20.pdf
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('downloads', {filename: 'Circulaire 2015-19.pdf'}) }}">
+                                       Circulaire 2015-19.pdf
+                                    </a>
+                                </li>
+                           </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                                                                role="button" aria-expanded="false">Congrès<span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li>
+                                    <a href="{{ path('downloads', {filename: 'EnMouvementCitoyen_ne_s_version def.pdf'}) }}">
+                                        En mouvement, citoyen-ne-s&nbsp;!
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('downloads', {filename: 'Statuts version def.doc.pdf'}) }}">
+                                        Statuts
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('downloads', {filename: 'RI version def.pdf'}) }}">
+                                        Réglement intérieur
+                                    </a>
+                                </li>
                             </ul>
                         </li>
                         {% endif %}
                     </ul>
+                    {{ knp_menu_render('main') }}
                     {% endblock %}
                     <ul class="nav navbar-nav navbar-right">
                         {% if is_granted('ROLE_ADMIN') %}
@@ -135,6 +201,7 @@
                                 <li><a href="{{ path('organ_adherent_list') }}">Mes Instances</a></li>
                                 <li><a href="{{ path('text_user_list') }}">Mes textes</a></li>
                                 <li><a href="{{ path('event_adherent_registration_list') }}">Mes inscriptions</a></li>
+                                <li><a href="{{ path('booking_registration_list') }}">Mes hébergements</a></li>
                                 <li><a href="{{ path('adherent_profile') }}">Mon profil</a></li>
                                 <li><a href="{{ path('fos_user_change_password') }}">Changer de mot de passe</a></li>
                             </ul>

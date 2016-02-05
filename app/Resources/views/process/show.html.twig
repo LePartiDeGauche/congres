@@ -1,0 +1,24 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}Processus d'amendement: {{ amendmentProcess.name }}{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>Textes de {{ amendmentProcess.name }}</h1>
+            <p>
+
+            </p>
+            <h2>Soumettre des amendements</h2>
+            {% for text in amendmentProcess.textgroup.texts %}
+                <li>
+                    <a href="{{ path('process_amendment_create', {id: amendmentProcess.id}) }}">
+                        {{ text.title }}
+                    </a>
+                </li>
+            {% endfor %}
+        </div><!-- .col-md-12 -->
+    </div><!-- .row -->
+</div><!-- .container -->
+{% endblock %}

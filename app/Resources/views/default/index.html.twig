@@ -3,28 +3,22 @@
 {% block body %}
 <div class="container">
     <div class="row">
-        <h1>Bonjour, {{ app.user.profile.firstname}}</h1>
 
-        <h2>Déposer sa candidature pour les postes élus au Congrès</h2>
-        <p>
-            La date limite de dépôt des candidatures est fixée au vendredi 19 juin minuit. <br/>
-            Les candidats doivent être à jour de cotisations et avoir 6 mois d'ancienneté au parti. <br/>
-            Les candidatures sont personnelles et accompagnées d'une profession de foi comprenant 2&nbsp;500 signes maximum, espaces compris.<br/>
-            Pour les sortants, un bilan de mandat  de 1 000 signes maximum doit être joint.<br/>
-            Pour toute question ou difficulté de transmission, appelez au 06 88 95 51 84 ou congres2015@lepartidegauche.fr,
-            pour joindre la Commission des votes : frederique.dumont@lepartidegauche.fr
-        </p>
-        <p>
-            Pour déposer une candidature, se rendre dans le menu <a href="{{ path('candidature_create') }}">Congrès&nbsp;>&nbsp;Candidatures aux instances.</a>
-        </p>
+        <div class="col-md-8">
+            {% if pageShow is empty %}
+            <p>Pas de contenu</p>
+            {% else %}
+                {% for page in pageShow %}
+                    <h3>{{ page.title }}</h3>
+                    {{ page.content|raw }}
+                {% endfor %}
+            {% endif %}
+        </div><!-- .col-md-8 -->
 
-        <h2>Amendements sur les textes soumis au congrès</h2>
-        <p>
-            La liste des amendements votés par les comités, transmise après
-            examen par la Commission des votes réunie le 30 mai 2015 est
-            disponible dans la rubrique <a href="{{ path('downloads', {filename: 'CDV Amendements validés - Classement par comités  site.pdf'}) }}">Textes&nbsp;>&nbsp;Amendements</a>.<br/>
-            Pour toute remarque : frederique.dumont@lepartidegauche.fr
-        </p>
+        <div class="col-md-4">
+            {{ render(controller('AppBundle:AmendmentProcess:fragmentList')) }}
+        </div><!-- .col-md-4 -->
+
     </div>
     <div class="row">
         <div class="alert alert-warning text-justify" role="alert">
@@ -34,5 +28,4 @@
             2.6. Le code source est entièrement disponible <a href="https://github.com/LePartiDeGauche/congres">ici</a>.
         </div>
     </div>
-</div>
 {% endblock %}

@@ -1,0 +1,7 @@
+{% if bookings %}
+    {% for booking in bookings %}
+        {{ booking.bedroom.roomType.sleepingSite.name }} : {{ booking.bedroom.roomType.name }} #{{ booking.bedroom.number }}<br>
+    {% endfor %}
+{% else %}
+    Pas de réservation.
+{% endif %}

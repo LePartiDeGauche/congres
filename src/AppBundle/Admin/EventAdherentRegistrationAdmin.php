@@ -2,12 +2,14 @@
 
 namespace AppBundle\Admin;
 
+use AppBundle\Entity\Event\Event;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 use AppBundle\Entity\Event\EventAdherentRegistration;
+use Doctrine\ORM\EntityRepository;
 
 class EventAdherentRegistrationAdmin extends Admin
 {
@@ -30,6 +32,7 @@ class EventAdherentRegistrationAdmin extends Admin
         true => 'Oui',
         false => 'Non',
     );
+
     /**
      * @param DatagridMapper $datagridMapper
      */
@@ -43,7 +46,7 @@ class EventAdherentRegistrationAdmin extends Admin
             ->add('adherent.email', null, array('label' => 'Courriel'))
             ->add('adherent.departement', null, array('label' => 'Département'))
             ->add('adherent.responsabilities.responsability', null, array('label' => 'Responsabilité', 'multiple' => true))
-            ->add('role', null, array('label' => 'Inscrit en tant que', 'multiple' => true))
+            ->add('role', null, array('label' => 'Inscrit en tant que'))
             ->add('needHosting', null, array('label' => 'Hebergement'))
             ->add('voteStatus', null, array('label' => 'Droit de vote'))
             ->add('paymentMode', null,
@@ -57,6 +60,16 @@ class EventAdherentRegistrationAdmin extends Admin
             ->add('meals', null, array('label' => 'Repas'))
         ;
     }
+
+    /**
+     * Default Datagrid values.
+     *
+     * @var array
+     */
+    protected $datagridValues = array(
+
+        '_sort_order' => 'DESC',
+    );
 
     /**
      * @param ListMapper $listMapper
@@ -95,6 +108,7 @@ class EventAdherentRegistrationAdmin extends Admin
             ))
             //->add('cost', NULL, array('label' => 'Tarif'))
             ->add('meals', null, array('label' => 'Repas', 'multiple' => true))
+            ->add('bedroom', null, array('label' => 'Chambre', 'template' => 'admin/bedroom_custom_list.html.twig'))
         ;
     }
 
@@ -108,7 +122,15 @@ class EventAdherentRegistrationAdmin extends Admin
         if ($isCreate) {
             $formMapper
                 // FIXME Filter event !
-                ->add('event', null, array('label' => 'Événement', 'property' => 'name'))
+                ->add('event', null, array(
+                    'label' => 'Événement',
+                    'property' => 'name',
+                    'query_builder' => function (EntityRepository $er) {
+                        return $er->createQueryBuilder('u')
+                            ->orderBy('u.id', 'DESC')
+                            ->setMaxResults(1);
+                    },
+                ))
                 ->add('adherent', 'sonata_type_model_autocomplete', array(
                     'label' => 'Auteur',
                     'property' => array('firstname', 'lastname', 'email'),
@@ -142,7 +164,14 @@ class EventAdherentRegistrationAdmin extends Admin
             ->add('role') //, null, array('read_only' => !$isCreate, 'disabled' => !$isCreate))
             ->add('needHosting', 'choice', array('label' => 'necessite un hebergement', 'choices' => $this->yesnoChoice))
             // FIXME: filter cost of this event !
-            ->add('cost', null, array('label' => 'Tarif'))
+            ->add('cost', null, array(
+                'label' => 'Tarif',
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('u')
+                        ->orderBy('u.id', 'DESC')
+                        ->setMaxResults(21);
+                },
+            ))
             ->add('paymentMode', 'choice', array(
                 'label' => 'Type de Paiement',
                 'multiple' => false,
@@ -164,7 +193,15 @@ class EventAdherentRegistrationAdmin extends Admin
                 'required' => false,
             ))
             // FIXME: filter meal of this event !
-            ->add('meals', null, array('label' => 'Repas', 'expanded' => true))
+            ->add('meals', null, array(
+                'label' => 'Repas',
+                'expanded' => true,
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('u')
+                        ->orderBy('u.id', 'DESC')
+                        ->setMaxResults(3);
+                },
+            ))
             //->add('voteStatus', 'choice', array('label' => 'Droit de vote', 'choices' => $this->yesnoChoice))
             ->add('attendance', 'choice', array(
                 'label' => 'Présence',
@@ -218,8 +255,10 @@ class EventAdherentRegistrationAdmin extends Admin
             'votestatus',
             'role',
             'needhosting',
+            'cost',
             'meals',
             'attendance',
+            'comment',
         );
     }
 
@@ -237,8 +276,7 @@ class EventAdherentRegistrationAdmin extends Admin
         //$repo = $this->getDoctrine()->getRepository('AppBundle:Adherent')->findId($user->adherent);
 
         $adherent = $user->getProfile();
-        if(isset($adherent))
-        {
+        if (isset($adherent)) {
             $instance->setAdherent($adherent);
             $instance->setAuthor($adherent);
         }

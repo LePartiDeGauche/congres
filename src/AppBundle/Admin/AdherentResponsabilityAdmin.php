@@ -56,8 +56,8 @@ class AdherentResponsabilityAdmin extends Admin
     {
         $formMapper
             ->add('responsability', 'sonata_type_model')
-            ->add('start')
-            ->add('end')
+            ->add('start', 'sonata_type_date_picker', array('format' => 'd/M/y'))
+            ->add('end', 'sonata_type_date_picker', array('format' => 'd/M/y'))
             ->add('isActive', null, array('required' => null))
             ->add('designatedByOrgan', 'sonata_type_model_autocomplete', array('property' => array('name'), 'required' => false))
         ;

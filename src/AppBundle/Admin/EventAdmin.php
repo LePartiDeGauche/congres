@@ -36,6 +36,7 @@ class EventAdmin extends Admin
             ->add('description', null, array('label' => 'Description'))
             ->add('registrationBegin', null, array('label' => 'Début des inscriptions'))
             ->add('registrationEnd', null, array('label' => 'Fin des inscriptions'))
+            ->add('nbRegistrations', null, array('label' => 'Nombre d\'inscriptions'))
             ->add('_action', 'actions', array(
                 'actions' => array(
                     'show' => array(),
@@ -60,7 +61,7 @@ class EventAdmin extends Admin
             ->add('roles', 'sonata_type_collection',
                 array(
                     'type_options' => array(
-                        'delete' => false,
+                        'delete' => true,
                     ),
                 ), array(
                     'edit' => 'inline',
@@ -115,7 +116,6 @@ class EventAdmin extends Admin
             ->add('roles', 'sonata_type_collection')
             ->add('meals', 'sonata_type_collection', array('label' => 'Repas'))
             ->add('costs', 'sonata_type_collection', array('label' => 'Tarifs'))
-            ->add('sleepingFacilities', 'sonata_type_collection')
             ;
     }
 
@@ -132,10 +132,6 @@ class EventAdmin extends Admin
         foreach ($object->getCosts() as $cost) {
             $cost->setEvent($object);
         }
-
-        foreach ($object->getSleepingFacilities() as $sf) {
-            $sf->setEvent($object);
-        }
     }
 
     public function preUpdate($object)
@@ -150,10 +146,6 @@ class EventAdmin extends Admin
 
         foreach ($object->getCosts() as $cost) {
             $cost->setEvent($object);
-        }
-
-        foreach ($object->getSleepingFacilities() as $sf) {
-            $sf->setEvent($object);
         }
     }
 }

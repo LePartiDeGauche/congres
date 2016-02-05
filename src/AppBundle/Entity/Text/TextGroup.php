@@ -3,6 +3,7 @@
 namespace AppBundle\Entity\Text;
 
 use Doctrine\ORM\Mapping as ORM;
+use AppBundle\Entity\Process\AmendmentProcess;
 
 /**
  * TextGroup.
@@ -134,6 +135,13 @@ class TextGroup
      * @ORM\Column(type="boolean")
      */
     private $isVisible;
+
+    /**
+     * @var \stdClass
+     *
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Process\AmendmentProcess", mappedBy="textGroup")
+     */
+    private $amendmentProcesses;
 
     /**
      * Get id.
@@ -416,6 +424,7 @@ class TextGroup
         $this->texts = new \Doctrine\Common\Collections\ArrayCollection();
         $this->organVoteRules = new \Doctrine\Common\Collections\ArrayCollection();
         $this->voteRules = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->amendmentProcesses = new \Doctrine\Common\Collections\ArrayCollection();
         $this->isVisible = false;
     }
 
@@ -612,5 +621,39 @@ class TextGroup
     public function getIsVisible()
     {
         return $this->isVisible;
+    }
+
+    /**
+     * Add amendmentProcess
+     *
+     * @param \AppBundle\Entity\Process\AmendmentProcess $amendmentProcess
+     *
+     * @return TextGroup
+     */
+    public function addAmendmentProcess(\AppBundle\Entity\Process\AmendmentProcess $amendmentProcess)
+    {
+        $this->amendmentProcesses[] = $amendmentProcess;
+
+        return $this;
+    }
+
+    /**
+     * Remove amendmentProcess
+     *
+     * @param \AppBundle\Entity\Process\AmendmentProcess $amendmentProcess
+     */
+    public function removeAmendmentProcess(\AppBundle\Entity\Process\AmendmentProcess $amendmentProcess)
+    {
+        $this->amendmentProcesses->removeElement($amendmentProcess);
+    }
+
+    /**
+     * Get amendmentProcesses
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getAmendmentProcesses()
+    {
+        return $this->amendmentProcesses;
     }
 }

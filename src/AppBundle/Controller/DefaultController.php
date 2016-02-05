@@ -13,7 +13,15 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
-        return $this->render('default/index.html.twig');
+        $category = $this->getDoctrine()
+                         ->getRepository('AppBundle:Category')
+                         ->findOneByTitle($this->container->getParameter('category_homepage'));
+
+        return $this->render('default/index.html.twig', array(
+            'pageShow' => $this->getDoctrine()
+                               ->getRepository('AppBundle:Page')
+                               ->findActivePageByCategory($category)
+        ));
     }
 
     /**
@@ -23,7 +31,6 @@ class DefaultController extends Controller
     {
         return $this->render('default/resultats-plateformes.html.twig');
     }
-
 
     /**
      * @Route("/commission-votes", name="commission_votes")
@@ -39,6 +46,14 @@ class DefaultController extends Controller
     public function commissionDebatsAction()
     {
         return $this->render('commissions/commission-debats.html.twig');
+    }
+
+    /**
+     * @Route("/deleguedesigne", name="election_delegue")
+     */
+    public function delegueDesigneAction()
+    {
+        return $this->render('election/delegue.html.twig');
     }
 
     /**

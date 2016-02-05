@@ -2,7 +2,6 @@
 
 namespace AppBundle\Form\Event;
 
-use AppBundle\Entity\Event\SleepingSiteRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvents;
@@ -18,13 +17,13 @@ class EventAdherentRegistrationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('needHosting', null, array('label' => 'J\'ai besoin d\'un hébergement militant', 'required' => false))
+            ->add('needHosting', null, array('label' => 'Hébergement militant', 'required' => false))
             ->add('comment')
             ->add('paymentMode', 'choice',
                 array(
                     'choices' => array(
                         'online' => 'Carte bleue ( Vous serez redirigé vers la page de paiement à la validation de l\'inscription )',
-                        'onsite' => 'Par chèque ( libellé à l\'ordre du Parti de Gauche et envoyé au siège du PG, 20-22 rue Doudeauville, 75018 PARIS, en précisant sur l\'enveloppe "CN avril 2015" )', ),
+                        'onsite' => 'Par chèque ( libellé à l\'ordre du Parti de Gauche et envoyé au siège du PG, 20-22 rue Doudeauville, 75018 PARIS, en précisant sur l\'enveloppe "CN Janvier 2016" )', ),
                     'expanded' => true,
                     'label' => 'Mode de paiement',
                 ))
@@ -72,7 +71,7 @@ class EventAdherentRegistrationType extends AbstractType
                         'multiple' => false,
 
                     );
-                   $form->add('role', 'entity', $roleOptions);
+                    $form->add('role', 'entity', $roleOptions);
                 }
             } else {
                 throw new \InvalidArgumentException('Invalid Form data expected EventAdherentRegistration, got '.$data->getClassName());

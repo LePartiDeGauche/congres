@@ -20,6 +20,11 @@ class Amendment
         'm' => 'Modification',
     );
 
+    private static $natures = array(
+        'o' => 'Fond',
+        'r' => 'Forme',
+    );
+
     /**
      * @var int
      *
@@ -32,12 +37,24 @@ class Amendment
     /**
      * The author of the contribution.
      *
-     * @var \AppBundle\Entity\User
+     * @var \AppBundle\Entity\Adherent
      *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Adherent")
+     * @ORM\JoinColumn(nullable=false)
      * @Assert\NotNull
      */
     private $author;
+
+    /**
+     * The organ of the contribution.
+     *
+     * @var \AppBundle\Entity\Organ
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Organ\Organ")
+     * @ORM\JoinColumn(nullable=false)
+     * @Assert\NotNull
+     */
+    private $organ;
 
     /**
      * The text concerned by the amendments.
@@ -59,6 +76,28 @@ class Amendment
      * @Assert\Type(type="integer")
      */
     private $startLine;
+
+    /**
+     * The end of line concerned by the amendment.
+     *
+     * @var int
+     *
+     * @ORM\Column(name="end_line", type="integer")
+     * @Assert\NotBlank
+     * @Assert\Type(type="integer")
+     */
+    private $endLine;
+
+    /**
+     * The nature of the amendment : form/fond
+     *
+     * @var string
+     *
+     * @ORM\Column(name="nature")
+     * @Assert\NotBlank
+     * @Assert\Choice(callback = "getNaturesValues")
+     */
+    private $nature;
 
     /**
      * The type of the amendment : add/modify/delete.
@@ -83,6 +122,17 @@ class Amendment
     private $content;
 
     /**
+     * The explanation.
+     *
+     * @var string
+     *
+     * @ORM\Column(name="explanation", type="text")
+     * @Assert\NotBlank
+     * @Assert\Type(type="string")
+     */
+    private $explanation;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="meetingDate", type="date", nullable=true)
@@ -91,7 +141,7 @@ class Amendment
     private $meetingDate;
 
     /**
-     * The number of present
+     * The number of present.
      *
      * @var int
      *
@@ -100,6 +150,27 @@ class Amendment
      */
     private $numberOfPresent;
 
+    /**
+     * The amendment process of the contribution.
+     *
+     * @var \AppBundle\Entity\Process\AmendmentProcess
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Process\AmendmentProcess",
+     *                inversedBy="amendments")
+     * @ORM\JoinColumn(nullable=false)
+     * @Assert\NotNull
+     */
+    private $amendmentProcess;
+
+    /**
+     * The topic concerned by the amendments.
+     *
+     * @var \AppBundle\Entity\Process\AmendmentTopic
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Process\AmendmentTopic")
+     * @Assert\NotNull
+     */
+    private $amendmentTopic;
 
     public function __construct()
     {
@@ -124,6 +195,26 @@ class Amendment
     public static function getTypesValues()
     {
         return array_keys(self::$types);
+    }
+
+    /**
+     * Available natures.
+     *
+     * @return array
+     */
+    public static function getNatures()
+    {
+        return self::$natures;
+    }
+
+    /**
+     * Available values for natures.
+     *
+     * @return array
+     */
+    public static function getNaturesValues()
+    {
+        return array_keys(self::$natures);
     }
 
     /**
@@ -153,7 +244,7 @@ class Amendment
     /**
      * @param User $author
      */
-    public function setAuthor(User $author)
+    public function setAuthor($author)
     {
         $this->author = $author;
     }
@@ -247,10 +338,170 @@ class Amendment
     }
 
     /**
+     * @return int
+     */
+    public function getNumberOfPresent()
+    {
+        return $this->numberOfPresent;
+    }
+
+    /**
      * @param int $numberOfPresent
      */
     public function setNumberOfPresent($numberOfPresent)
     {
         $this->numberOfPresent = $numberOfPresent;
+    }
+
+    /**
+     * Set nature
+     *
+     * @param string $nature
+     *
+     * @return Amendment
+     */
+    public function setNature($nature)
+    {
+        $this->nature = $nature;
+
+        return $this;
+    }
+
+    /**
+     * Get nature
+     *
+     * @return string
+     */
+    public function getNature()
+    {
+        return $this->nature;
+    }
+
+    /**
+     * @return string
+     */
+    public function getHumanReadableNature()
+    {
+        return self::$natures[$this->nature];
+    }
+
+    /**
+     * Set explanation
+     *
+     * @param string $explanation
+     *
+     * @return Amendment
+     */
+    public function setExplanation($explanation)
+    {
+        $this->explanation = $explanation;
+
+        return $this;
+    }
+
+    /**
+     * Get explanation
+     *
+     * @return string
+     */
+    public function getExplanation()
+    {
+        return $this->explanation;
+    }
+
+    /**
+     * Set organ
+     *
+     * @param \AppBundle\Entity\Organ\Organ $organ
+     *
+     * @return Amendment
+     */
+    public function setOrgan(\AppBundle\Entity\Organ\Organ $organ = null)
+    {
+        $this->organ = $organ;
+
+        return $this;
+    }
+
+    /**
+     * Get organ
+     *
+     * @return \AppBundle\Entity\Organ\Organ
+     */
+    public function getOrgan()
+    {
+        return $this->organ;
+    }
+
+    /**
+     * Set amendmentProcess
+     *
+     * @param \AppBundle\Entity\Process\AmendmentProcess $amendmentProcess
+     *
+     * @return Amendment
+     */
+    public function setAmendmentProcess(\AppBundle\Entity\Process\AmendmentProcess $amendmentProcess)
+    {
+        $this->amendmentProcess = $amendmentProcess;
+
+        return $this;
+    }
+
+    /**
+     * Get amendmentProcess
+     *
+     * @return \AppBundle\Entity\Process\AmendmentProcess
+     */
+    public function getAmendmentProcess()
+    {
+        return $this->amendmentProcess;
+    }
+
+    /**
+     * Set endLine
+     *
+     * @param integer $endLine
+     *
+     * @return Amendment
+     */
+    public function setEndLine($endLine)
+    {
+        $this->endLine = $endLine;
+
+        return $this;
+    }
+
+    /**
+     * Get endLine
+     *
+     * @return integer
+     */
+    public function getEndLine()
+    {
+        return $this->endLine;
+    }
+
+    /**
+     * Set amendmentTopic
+     *
+     * @param \AppBundle\Entity\Process\AmendmentTopic $amendmentTopic
+     *
+     * @return Amendment
+     */
+    public function setAmendmentTopic(\AppBundle\Entity\Process\AmendmentTopic $amendmentTopic = null)
+    {
+        $this->amendmentTopic = $amendmentTopic;
+
+        return $this;
+    }
+
+    /**
+     * Get amendmentTopic
+     *
+     * @return \AppBundle\Entity\Process\AmendmentTopic
+     */
+    public function getAmendmentTopic()
+    {
+        return $this->amendmentTopic;
     }
 }

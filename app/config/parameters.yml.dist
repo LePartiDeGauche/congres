@@ -22,7 +22,7 @@ parameters:
     mailer_sender_address: postmaster@example.com
     mailer_auth_mode:  ~
 
-    locale:            en
+    locale:            fr
 
     # A secret key that's used to generate certain security-related tokens
     secret:            ThisTokenIsNotSoSecretChangeI
@@ -32,3 +32,8 @@ parameters:
     paybox_rank: 32
     paybox_login: 107904482
     paybox_hmac_key: 1999888I
+
+    cosecretaire_departement_id: 6
+    coTresorier_departement_id: 7
+
+    category_homepage: "Page d'accueil"

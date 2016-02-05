@@ -23,11 +23,14 @@ class AmendmentAdmin extends Admin
     {
         $form
             ->add('text', null, array('label' => 'Texte'))
-            ->add('author', null, array('label' => 'Auteur'))
+            ->add('author', null, array('label' => 'Rapporteur'))
             ->add('startLine', null, array('label' => 'Ligne'))
             ->add('type', 'choice', array('label' => 'Type de modification', 'choices' => Amendment::getTypes()))
             ->add('content', null, array('label' => 'Contenu'))
-            ->add('meetingDate', null, array('label' => 'Date de réunion'))
+            ->add('meetingDate', 'sonata_type_date_picker', array(
+                'format' => 'd/M/y',
+                'label' => 'Date de réunion',
+            ))
             ->add('numberOfPresent', null, array('label' => 'Nombre de présents'))
         ;
     }
@@ -57,9 +60,9 @@ class AmendmentAdmin extends Admin
         $list
             ->addIdentifier('id')
             ->add('text', null, array('label' => 'Texte'))
-            ->add('author.profile.lastname', null, array('label' => 'Nom'))
-            ->add('author.profile.firstname', null, array('label' => 'Prénom'))
-            ->add('author.profile.organs', 'sonata_type_collection', array('associated_property' => 'organ', 'label' => 'Instance'))
+            ->add('author.lastname', null, array('label' => 'Nom'))
+            ->add('author.firstname', null, array('label' => 'Prénom'))
+            ->add('author.organs', 'sonata_type_collection', array('associated_property' => 'organ', 'label' => 'Instance'))
             ->add('startLine', null, array('label' => 'Ligne'))
             ->add('humanReadableType', null, array('label' => 'Type de modification'))
             ->add('meetingDate', null, array('label' => 'Date de réunion'))
@@ -81,7 +84,7 @@ class AmendmentAdmin extends Admin
     {
         $filter
             ->add('text', null, array('label' => 'Texte'))
-            ->add('author.profile.lastname', null, array('label' => 'Nom autheur'))
+            ->add('author.lastname', null, array('label' => 'Nom auteur'))
             ->add('startLine', null, array('label' => 'Ligne'))
             ->add('type', null, array('label' => 'Type de modification'), 'choice', array('choices' => Amendment::getTypes()))
             ->add('content', null, array('label' => 'Contenu'))
@@ -96,9 +99,9 @@ class AmendmentAdmin extends Admin
     {
         return array(
             'text',
-            'author.profile.lastname',
-            'author.profile.firstname',
-            'author.profile.organsnames',
+            'author.lastname',
+            'author.firstname',
+            'author.organsnames',
             'startLine',
             'humanReadableType',
             'content',

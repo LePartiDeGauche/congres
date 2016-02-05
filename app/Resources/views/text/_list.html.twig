@@ -1,0 +1,14 @@
+<h3>Processus d'amendements</h3>
+{% if textgroups is empty %}
+    <p>Pas de contenu</p>
+{% else %}
+    <ul>
+    {% for textgroup in textgroups %}
+        <li>
+            <a href="{{ path('text_list', {group_id: textgroup.id}) }}">
+                {{ textgroup.name }}
+            </a>
+        </li>
+    {% endfor %}
+    </ul>
+{% endif %}

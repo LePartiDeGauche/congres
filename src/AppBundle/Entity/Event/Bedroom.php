@@ -3,13 +3,12 @@
 namespace AppBundle\Entity\Event;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Sleeping.
  *
  * @ORM\Table(name="bedroom")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="BedroomRepository")
  */
 class Bedroom
 {
@@ -24,7 +23,6 @@ class Bedroom
 
     /**
      * @var \Doctrine\Common\Collections\Collection
-     *
      * @var RoomType
      *
      * @ORM\ManyToOne(targetEntity="RoomType", inversedBy="bedrooms", cascade="persist")
@@ -41,7 +39,7 @@ class Bedroom
     private $number;
 
     /**
-     * Date of beginning
+     * Date of beginning.
      *
      * @var datetime
      *
@@ -58,9 +56,8 @@ class Bedroom
      */
     private $dateStopAvailability;
 
-
     /**
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -68,7 +65,7 @@ class Bedroom
     }
 
     /**
-     * @param integer $id
+     * @param int $id
      */
     public function setId($id)
     {
@@ -137,5 +134,16 @@ class Bedroom
     public function setDateStopAvailability($dateStopAvailability)
     {
         $this->dateStopAvailability = $dateStopAvailability;
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        $sleepingSite = $this->getRoomType()->getSleepingSite();
+        $number = $this->getNumber();
+
+        return $sleepingSite.', chambre : '.$number;
     }
 }

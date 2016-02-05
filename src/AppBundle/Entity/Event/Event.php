@@ -105,9 +105,9 @@ class Event
     private $meals;
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -136,6 +136,16 @@ class Event
     public function getParticipants()
     {
         return $this->participants;
+    }
+
+    /**
+     * Get number of participants/registrations.
+     *
+     * @return int
+     */
+    public function getNbRegistrations()
+    {
+        return count($this->participants);
     }
 
     /**

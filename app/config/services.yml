@@ -46,6 +46,13 @@ services:
         tags:
            - { name: security.voter }
 
+    app.congres.amendment_process_voter:
+        class:      AppBundle\Security\AmendmentProcessVoter
+        public:     false
+        arguments: [@doctrine.orm.entity_manager, @service_container]
+        tags:
+           - { name: security.voter }
+
     app.calendar_voter:
         class:      AppBundle\Security\CalendarVoter
         public:     false
@@ -71,3 +78,36 @@ services:
         public:     false
         tags:
            - { name: security.voter }
+
+    app.congres.event_register_voter:
+        class:      AppBundle\Security\EventRegisterVoter
+        public:     false
+        tags:
+           - { name: security.voter }
+
+    app.election.departmental_voter:
+        class:      AppBundle\Security\DepartmentalElectionVoter
+        arguments: [@doctrine.orm.entity_manager, %cosecretaire_departement_id% ]
+        public:     false
+        tags:
+          - { name : security.voter }
+
+    app.booking_listener:
+        class: AppBundle\EventListener\BookingListener
+        arguments: [@mailer]
+        tags:
+            - { name: doctrine.event_listener, event: postUpdate }
+            - { name: doctrine.event_listener, event: postPersist }
+
+    app.menu_builder:
+        class: AppBundle\Menu\MenuBuilder
+        arguments : ['@knp_menu.factory', '@doctrine.orm.entity_manager']
+
+    app.menu.main:
+        class: Knp\Menu\MenuItem
+        factory_service: app.menu_builder
+        factory_method: createMainMenu
+        arguments: ['@request']
+        scope: request
+        tags:
+            - { name: knp_menu.menu, alias: main}

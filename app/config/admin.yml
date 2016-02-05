@@ -95,6 +95,30 @@ services:
         tags:
             - {name: sonata.admin, manager_type: orm, group: "Texte", label: "Textes"}
 
+    app.admin.amendment_process:
+        class: AppBundle\Admin\AmendmentProcessAdmin
+        arguments: [~, AppBundle\Entity\Process\AmendmentProcess, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: "Texte", label: "Procédures d'amendement"}
+
+    app.admin.participation_rule:
+        class: AppBundle\Admin\ParticipationRuleAdmin
+        arguments: [~, AppBundle\Entity\Process\ParticipationRule, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: "Texte", label: "Règles de participation"}
+
+    app.admin.participation_rule_term:
+        class: AppBundle\Admin\ParticipationRuleTermAdmin
+        arguments: [~, AppBundle\Entity\Process\ParticipationRuleTerm, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: "Texte", label: ParticipationRuleTerm, show_in_dashboard: false}
+
+    app.admin.amendment_topic:
+        class: AppBundle\Admin\AmendmentTopicAdmin
+        arguments: [~, AppBundle\Entity\Process\AmendmentTopic, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: "Texte", label: AmendmentTopic}
+
     app.admin.amendment:
         class: AppBundle\Admin\AmendmentAdmin
         arguments: [~, AppBundle\Entity\Text\Amendment, SonataAdminBundle:CRUD]
@@ -218,3 +242,21 @@ services:
             arguments: [~, AppBundle\Entity\Event\Bedroom, SonataAdminBundle:CRUD]
             tags:
                 - {name: sonata.admin, manager_type: orm, group: "Evenements", label: "Chambres"}
+
+    sonata.admin.booking:
+        class: AppBundle\Admin\BookingAdmin
+        arguments: [~, AppBundle\Entity\Event\Booking, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: "Evenements", label: "Réservations"}
+
+    sonata.admin.category:
+        class: AppBundle\Admin\CategoryAdmin
+        arguments: [~, AppBundle\Entity\Category, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: "Page et menus", label: "Menus"}
+
+    sonata.admin.page:
+        class: AppBundle\Admin\PageAdmin
+        arguments: [~, AppBundle\Entity\Page, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: "Page et menus", label: "Pages"}

@@ -100,6 +100,8 @@ class EventController extends Controller
      */
     public function registerAction(Request $request, Event $event)
     {
+        $this->denyAccessUnlessGranted('event-register', $event, 'Vous ne disposez pas des droits nécessaires pour vous inscrire.');
+
         $adherent = $this->getUser()->getProfile();
         $em = $this->getDoctrine()->getManager();
 
@@ -135,15 +137,15 @@ class EventController extends Controller
             $em->persist($eventRegistration);
             $em->flush();
 
-            if ($needHosting == true){
+            if ($needHosting == true) {
                 /** @var Session $session */
                 $session = $this->get('session');
 
                 $session->set('paiement', $eventRegistration->getPaymentMode());
-                return $this->redirect($this->generateUrl('sleeping_list'));
+
+                // @TODO manage spleeping site if no available
+                //return $this->redirect($this->generateUrl('sleeping_list'));
             }
-
-
 
             if ($eventRegistration->getPaymentMode() == EventAdherentRegistration::PAYMENT_MODE_ONLINE) {
                 $eventPayment = $this->createPayment($adherent, $event, $eventRegistration, $eventRegistration->getCost()->getCost());
@@ -171,7 +173,7 @@ class EventController extends Controller
      * @Route("/{event_id}", name="event_show", requirements={
      *     "event_id": "\d+"
      * })
-    )
+     )
      * @Method("GET")
      * @ParamConverter("event", class="AppBundle:Event\Event", options={"id" = "event_id"})
      * @Template("event/show.html.twig")

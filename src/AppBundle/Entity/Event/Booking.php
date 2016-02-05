@@ -13,15 +13,6 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Booking
 {
-
-    const PRICE_1 = 'Moins de 500 euros';
-    const PRICE_2 = 'Entre 500 et 1000 euros';
-    const PRICE_3 = 'Entre 1000 et 1500 euros';
-    const PRICE_4 = 'Entre 1500 et 2000 euros';
-    const PRICE_5 = 'Entre 2000 et 2500 euros';
-    const PRICE_6 = 'Entre 2500 et 3000 euros';
-    const PRICE_7 = 'Plus de 3000 euros';
-
     /**
      * @var int
      *
@@ -100,7 +91,7 @@ class Booking
     }
 
     /**
-     * @return datetime
+     * @return \DateTime
      */
     public function getDate()
     {
@@ -148,7 +139,7 @@ class Booking
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isIsPayed()
     {
@@ -156,12 +147,10 @@ class Booking
     }
 
     /**
-     * @param boolean $isPayed
+     * @param bool $isPayed
      */
     public function setIsPayed($isPayed)
     {
         $this->isPayed = $isPayed;
     }
-
-
 }

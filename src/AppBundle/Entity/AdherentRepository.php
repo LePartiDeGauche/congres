@@ -47,7 +47,7 @@ class AdherentRepository extends EntityRepository
     {
         $qb =
             $this->createQueryBuilder('a')
-                ->join('a.user', 'u')
+                //->join('a.user', 'u')
                 ->join('a.organParticipations', 'o')
                 ->where('o.organ = :organ')
                 ->setParameter('organ', $organ)
@@ -57,4 +57,19 @@ class AdherentRepository extends EntityRepository
 
         return $qb;
     }
+
+//    public function getSearchAdherentByDepartmentBuilder(Organ $organ)
+//    {
+//        $qb =
+//            $this->createQueryBuilder('a')
+//                ->join('a.user', 'u')
+//                ->join('a.organParticipations', 'o')
+//                ->where('o.organ = :organ')
+//                ->setParameter('organ', $organ)
+//                ->orderBy('a.lastname', 'ASC')
+//                ->setMaxResults(300)
+//        ;
+//
+//        return $qb;
+//    }
 }

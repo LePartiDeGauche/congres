@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity\Organ;
 
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\EntityRepository;
 use AppBundle\Entity\Adherent;
 
@@ -25,6 +26,26 @@ class OrganRepository extends EntityRepository
             ->getQuery();
 
         return $organs->getResult();
+    }
+
+    public function getOrganByAdherentAndTypes(Adherent $participant, $organTypes)
+    {
+        $qb = $this->createQueryBuilder('o');
+        return $qb->select('o')
+            ->leftJoin('o.participants', 'op')
+            ->add('where', $qb->expr()->andX(
+                $qb->expr()->eq('op.adherent', ':adherent'),
+                $qb->expr()->in('o.organType', array_walk($organTypes,
+                    function ($v, $k) {
+                        if ($v instanceof AppBundle\Entity\Organ\OrganType) {
+                            return $v->getId();
+                        }
+                    }
+                ))
+            ))
+            ->setParameter('adherent', $participant)
+            ->getQuery()
+            ->getResult();
     }
 
     public function isMember(Organ $organ, Adherent $adherent)

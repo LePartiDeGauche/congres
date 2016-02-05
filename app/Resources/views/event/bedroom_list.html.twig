@@ -8,6 +8,16 @@
         <div class="row">
             <div class="col-md-12">
                 <h1>Liste des lieux de couchage</h1>
+                {% for flashMessage in app.session.flashbag.get('error') %}
+                    <div class="alert alert-danger">
+                        {{ flashMessage }}
+                    </div>
+                {% endfor %}
+                {% for flashMessage in app.session.flashbag.get('success') %}
+                    <div class="alert alert-success">
+                        {{ flashMessage }}
+                    </div>
+                {% endfor %}
                 <div role="tabpanel">
                     <div class="tab-content">
                         <div role="tabpanel" class="tab-pane active" id="validated">
@@ -17,7 +27,8 @@
                                 <table class="table tablesorter" id="table_bedroom">
                                     <thead>
                                     <tr>
-                                        <th>Nom</th>
+                                        <th>Lieu</th>
+                                        <th>Type</th>
                                         <th>Numéro de chambre</th>
                                         {% for date in bookings|keys %}
                                             <th>{{ date|date }}</th>
@@ -27,6 +38,9 @@
                                     <tbody>
                                     {% for bedroom in bedrooms %}
                                         <tr>
+                                            <td>
+                                                {{ bedroom.roomType.sleepingSite }}
+                                            </td>
                                             <td>
                                                 {{ bedroom.roomType }}
                                             </td>

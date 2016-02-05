@@ -52,7 +52,7 @@ class EventAdherentRegistration
     /**
      * @var \stdClass
      *
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Payment\EventPayment", mappedBy="attachedRegistration",cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Payment\EventPayment", mappedBy="attachedRegistration",cascade={"persist", "remove"})
      */
     private $payments;
 
@@ -138,6 +138,7 @@ class EventAdherentRegistration
         $this->voteStatus = false;
         $this->attendance = self::ATTENDANCE_NOT_REGISTRED;
         $this->payments = new ArrayCollection();
+        $this->needHosting = false;
     }
     /**
      * Get id.
