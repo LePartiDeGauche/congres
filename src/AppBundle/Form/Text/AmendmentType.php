@@ -51,6 +51,7 @@ class AmendmentType extends AbstractType
             ))
             ->add('organ', 'entity', array(
                 'class' => 'AppBundle\Entity\Organ\Organ',
+                'label' => 'Organe',
                 'choices' => $choices
             ))
             ->add('meetingDate', 'sonata_type_date_picker', array(
@@ -80,8 +81,20 @@ class AmendmentType extends AbstractType
                 'expanded' => true,
                 'multiple' => false,
             ))
-            ->add('content', null, array('label' => 'Amendement rédigé'))
-            ->add('explanation', null, array('label' => 'Motivations'))
+            ->add('content', null, array(
+                'label' => 'Amendement rédigé',
+                'attr' => array(
+                    'maxlength' => '1500',
+                    'data-help' => '1500 signes maximum'
+                ),
+            ))
+            ->add('explanation', null, array(
+                'label' => 'Motivations',
+                'attr' => array(
+                    'maxlength' => '600',
+                    'data-help' => '600 signes maximum'
+                ),
+            ))
             ->add('save', 'submit', array('label' => 'Enregistrer'))
             ;
         });
