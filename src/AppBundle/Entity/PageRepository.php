@@ -25,6 +25,7 @@ class PageRepository  extends EntityRepository
             ->where('p.isActive = 1')
             ->andWhere('p.category = :category')
             ->setParameter('category', $category)
+            ->orderBy('p.id', 'DESC')
             ->getQuery()
             ->getResult()
             ;
