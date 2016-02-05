@@ -50,7 +50,7 @@ class AmendmentProcessController extends Controller
      */
     public function createAmendmentAction(AmendmentProcess $amendmentProcess, Request $request)
     {
-        // $this->denyAccessUnlessGranted('report_amend', $amendmentProcess, $this->getUser());
+        $this->denyAccessUnlessGranted('report_amend', $amendmentProcess, $this->getUser());
 
         $amendment = new Amendment();
         $amendment->setAuthor($this->getUser()->getProfile());

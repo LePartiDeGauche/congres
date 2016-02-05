@@ -37,7 +37,9 @@ class OrganRepository extends EntityRepository
                 $qb->expr()->eq('op.adherent', ':adherent'),
                 $qb->expr()->in('o.organType', array_walk($organTypes,
                     function ($v, $k) {
-                        return $v->getId();
+                        if ($v instanceof AppBundle\Entity\Organ\OrganType) {
+                            return $v->getId();
+                        }
                     }
                 ))
             ))

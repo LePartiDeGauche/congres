@@ -1,14 +1,16 @@
-<h3>Processus d'amendements</h3>
+<h3>Processus d'amendement</h3>
 {% if processes is empty %}
     <p>Pas de contenu</p>
 {% else %}
     <ul>
     {% for process in processes %}
-        <li>
-            <a href="{{ path('process_show', {id: process.id}) }}">
-                {{ process.name }}
-            </a>
-        </li>
+        {% if is_granted('report_amend', process) %}
+            <li>
+                <a href="{{ path('process_amendment_create', {id: process.id}) }}">
+                    {{ process.name }}
+                </a>
+            </li>
+        {% endif %}
     {% endfor %}
     </ul>
 {% endif %}

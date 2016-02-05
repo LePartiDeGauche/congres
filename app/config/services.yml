@@ -46,6 +46,13 @@ services:
         tags:
            - { name: security.voter }
 
+    app.congres.amendment_process_voter:
+        class:      AppBundle\Security\AmendmentProcessVoter
+        public:     false
+        arguments: [@doctrine.orm.entity_manager, @service_container]
+        tags:
+           - { name: security.voter }
+
     app.calendar_voter:
         class:      AppBundle\Security\CalendarVoter
         public:     false

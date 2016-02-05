@@ -68,6 +68,13 @@ class AmendmentProcess
     private $amendments;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="isVisible", type="boolean")
+     */
+    private $isVisible;
+
+    /**
      * Get id
      *
      * @return integer
@@ -237,5 +244,29 @@ class AmendmentProcess
     public function getAmendments()
     {
         return $this->amendments;
+    }
+
+    /**
+     * Set isVisible
+     *
+     * @param boolean $isVisible
+     *
+     * @return AmendmentProcess
+     */
+    public function setIsVisible($isVisible)
+    {
+        $this->isVisible = $isVisible;
+
+        return $this;
+    }
+
+    /**
+     * Get isVisible
+     *
+     * @return boolean
+     */
+    public function getIsVisible()
+    {
+        return $this->isVisible;
     }
 }

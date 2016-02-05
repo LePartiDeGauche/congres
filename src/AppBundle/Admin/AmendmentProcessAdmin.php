@@ -20,6 +20,7 @@ class AmendmentProcessAdmin extends Admin
             ->add('name')
             ->add('begin')
             ->add('end')
+            ->add('isVisible')
         ;
     }
 
@@ -31,6 +32,7 @@ class AmendmentProcessAdmin extends Admin
         $listMapper
             ->addIdentifier('id')
             ->addIdentifier('name')
+            ->add('isVisible')
             ->add('begin', 'date')
             ->add('end', 'date')
             ->add('textgroup')
@@ -52,6 +54,7 @@ class AmendmentProcessAdmin extends Admin
     {
         $formMapper
             ->add('name')
+            ->add('isVisible')
             ->add('begin', 'sonata_type_date_picker', array(
                 'format' => 'd/M/y',
             ))
@@ -75,6 +78,7 @@ class AmendmentProcessAdmin extends Admin
         $showMapper
             ->add('id')
             ->add('name')
+            ->add('isVisible')
             ->add('begin')
             ->add('end')
             ->add('textgroup')
