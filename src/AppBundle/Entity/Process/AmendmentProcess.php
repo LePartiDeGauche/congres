@@ -45,10 +45,10 @@ class AmendmentProcess
     /**
      * @var \stdClass
      *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Text\TextGroup", inversedBy="amendmentprocesses")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Text\TextGroup", inversedBy="amendmentProcesses")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $textgroup;
+    private $textGroup;
 
     /**
      * @var \stdClass
@@ -57,6 +57,15 @@ class AmendmentProcess
      *                cascade={"persist"})
      */
     private $participationRule;
+
+    /**
+     * @var \stdClass
+     *
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Text\Amendment",
+     *                mappedBy="amendmentProcess",
+     *                cascade={"persist"})
+     */
+    private $amendments;
 
     /**
      * Get id
@@ -141,15 +150,15 @@ class AmendmentProcess
     }
 
     /**
-     * Set textgroup
+     * Set textGroup
      *
-     * @param \AppBundle\Entity\Text\TextGroup $textgroup
+     * @param \AppBundle\Entity\Text\TextGroup $textGroup
      *
      * @return AmendmentProcess
      */
-    public function setTextgroup(\AppBundle\Entity\Text\TextGroup $textgroup)
+    public function setTextgroup(\AppBundle\Entity\Text\TextGroup $textGroup)
     {
-        $this->textgroup = $textgroup;
+        $this->textGroup = $textGroup;
 
         return $this;
     }
@@ -159,9 +168,9 @@ class AmendmentProcess
      *
      * @return \AppBundle\Entity\Text\TextGroup
      */
-    public function getTextgroup()
+    public function getTextGroup()
     {
-        return $this->textgroup;
+        return $this->textGroup;
     }
 
     /**
@@ -186,5 +195,47 @@ class AmendmentProcess
     public function getParticipationRule()
     {
         return $this->participationRule;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->amendments = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add amendment
+     *
+     * @param \AppBundle\Entity\Process\Amendment $amendment
+     *
+     * @return AmendmentProcess
+     */
+    public function addAmendment(\AppBundle\Entity\Text\Amendment $amendment)
+    {
+        $amendment->setAmendmentProcess($this);
+        $this->amendments[] = $amendment;
+
+        return $this;
+    }
+
+    /**
+     * Remove amendment
+     *
+     * @param \AppBundle\Entity\Process\Amendment $amendment
+     */
+    public function removeAmendment(\AppBundle\Entity\Text\Amendment $amendment)
+    {
+        $this->amendments->removeElement($amendment);
+    }
+
+    /**
+     * Get amendments
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getAmendments()
+    {
+        return $this->amendments;
     }
 }

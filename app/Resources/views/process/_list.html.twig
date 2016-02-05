@@ -1,0 +1,14 @@
+<h3>Processus d'amendements</h3>
+{% if processes is empty %}
+    <p>Pas de contenu</p>
+{% else %}
+    <ul>
+    {% for process in processes %}
+        <li>
+            <a href="{{ path('process_show', {id: process.id}) }}">
+                {{ process.name }}
+            </a>
+        </li>
+    {% endfor %}
+    </ul>
+{% endif %}

@@ -58,7 +58,7 @@ class AmendmentProcessAdmin extends Admin
             ->add('end', 'sonata_type_date_picker', array(
                 'format' => 'd/M/y',
             ))
-            ->add('textgroup', 'sonata_type_model', array(
+            ->add('textGroup', 'sonata_type_model', array(
                 'multiple' => false,
                 'required' => true,
                 'btn_add' => false,

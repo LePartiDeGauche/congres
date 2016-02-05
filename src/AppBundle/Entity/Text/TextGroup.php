@@ -139,7 +139,7 @@ class TextGroup
     /**
      * @var \stdClass
      *
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Process\AmendmentProcess", mappedBy="textgroup")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Process\AmendmentProcess", mappedBy="textGroup")
      */
     private $amendmentProcesses;
 

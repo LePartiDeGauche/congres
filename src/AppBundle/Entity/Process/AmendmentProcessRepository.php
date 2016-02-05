@@ -10,4 +10,16 @@ namespace AppBundle\Entity\Process;
  */
 class AmendmentProcessRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function findOpenedAtDate(\DateTime $date = null)
+    {
+        if (!isset($date)) {
+            $date = new \DateTime('now');
+        }
+        return $this->createQueryBuilder('ap')
+                ->where('ap.begin < :date')
+                ->andWhere('ap.end > :date')
+                ->setParameter(':date', $date)
+            ->getQuery()
+            ->getResult();
+    }
 }
