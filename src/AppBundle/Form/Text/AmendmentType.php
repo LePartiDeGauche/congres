@@ -58,6 +58,10 @@ class AmendmentType extends AbstractType
                 'label' => 'Date de réunion',
             ))
             ->add('numberOfPresent', null, array('label' => 'Nombre de présents'))
+            ->add('amendmentTopic', 'entity', array(
+                'label' => 'Thème',
+                'class' => 'AppBundle\Entity\Process\AmendmentTopic',
+            ))
             ->add('nature', 'choice', array(
                 'label' => 'Nature de la modification',
                 'choices' => array(

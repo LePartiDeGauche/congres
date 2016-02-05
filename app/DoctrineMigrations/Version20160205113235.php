@@ -38,7 +38,7 @@ class Version20160205113235 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('DROP TABLE amendments');
+        $this->addSql('DROP TABLE IF EXISTS amendments');
         $this->addSql('ALTER TABLE amendment_process DROP FOREIGN KEY FK_977AE42357CB7553');
         $this->addSql('DROP INDEX idx_977ae42357cb7553 ON amendment_process');
         $this->addSql('CREATE INDEX IDX_977AE423AEBD1705 ON amendment_process (textgroup_id)');

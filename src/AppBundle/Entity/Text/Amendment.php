@@ -162,6 +162,16 @@ class Amendment
      */
     private $amendmentProcess;
 
+    /**
+     * The topic concerned by the amendments.
+     *
+     * @var \AppBundle\Entity\Process\AmendmentTopic
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Process\AmendmentTopic")
+     * @Assert\NotNull
+     */
+    private $amendmentTopic;
+
     public function __construct()
     {
         $this->meetingDate = new \DateTime();
@@ -469,5 +479,29 @@ class Amendment
     public function getEndLine()
     {
         return $this->endLine;
+    }
+
+    /**
+     * Set amendmentTopic
+     *
+     * @param \AppBundle\Entity\Process\AmendmentTopic $amendmentTopic
+     *
+     * @return Amendment
+     */
+    public function setAmendmentTopic(\AppBundle\Entity\Process\AmendmentTopic $amendmentTopic = null)
+    {
+        $this->amendmentTopic = $amendmentTopic;
+
+        return $this;
+    }
+
+    /**
+     * Get amendmentTopic
+     *
+     * @return \AppBundle\Entity\Process\AmendmentTopic
+     */
+    public function getAmendmentTopic()
+    {
+        return $this->amendmentTopic;
     }
 }

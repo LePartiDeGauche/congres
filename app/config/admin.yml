@@ -113,6 +113,12 @@ services:
         tags:
             - {name: sonata.admin, manager_type: orm, group: "Texte", label: ParticipationRuleTerm, show_in_dashboard: false}
 
+    app.admin.amendment_topic:
+        class: AppBundle\Admin\AmendmentTopicAdmin
+        arguments: [~, AppBundle\Entity\Process\AmendmentTopic, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: "Texte", label: AmendmentTopic}
+
     app.admin.amendment:
         class: AppBundle\Admin\AmendmentAdmin
         arguments: [~, AppBundle\Entity\Text\Amendment, SonataAdminBundle:CRUD]
