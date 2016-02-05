@@ -42,7 +42,8 @@ class AmendmentType extends AbstractType
             $form->add('text', 'entity', array(
                 'label' => 'Texte concerné',
                 'class' => 'AppBundle\Entity\Text\Text',
-                'choices' => $amendment->getAmendmentProcess()->getTextGroup()->getTexts()
+                'choices' => $amendment->getAmendmentProcess()->getTextGroup()->getTexts(),
+                'disabled' => (count($amendment->getAmendmentProcess()->getTextGroup()->getTexts()) == 1),
             ))
             ->add('author', 'text', array(
                 'data_class' => 'AppBundle\Entity\Adherent',
