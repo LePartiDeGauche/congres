@@ -18,7 +18,10 @@ class AdherentAdmin extends Admin
         $formMapper
             ->add('lastname', null, array('label' => 'Nom'))
             ->add('firstname', null, array('label' => 'Prénom'))
-            ->add('gender', null, array('label' => 'Genre'))
+            ->add('gender', 'choice', array(
+                'label' => 'Genre',
+                'choices' => Adherent::getGenderValues(),
+            ))
             ->add('email')
             ->add('mobilephone', null, array('label' => 'Téléphone'))
             ->add('departement')
@@ -28,16 +31,10 @@ class AdherentAdmin extends Admin
             ))
             ->add('status', 'choice', array(
                 'label' => 'Statut',
-                'choices' => array(
-                    Adherent::STATUS_OK => 'À jour.',
-                    Adherent::STATUS_ATTENTE_RENOUVELLEMENT => 'En attente.',
-                    Adherent::STATUS_OLD => 'Ancien adhérent',
-                    Adherent::STATUS_EXCLUDED => 'Exclusion',
-                ),
+                'choices' => Adherent::getStatusValues(),
                 'multiple' => false,
             ))
-            ->add('organParticipations', 'sonata_type_collection',
-                array(
+            ->add('organParticipations', 'sonata_type_collection', array(
                     'label' => 'Organes',
                     'by_reference' => false,
                 ), array(

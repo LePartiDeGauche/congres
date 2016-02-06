@@ -274,13 +274,7 @@ class Adherent
         if ($status === null) {
             $status = self::STATUS_NEW;
         }
-        if (!in_array($status, array(
-            self::STATUS_NEW,
-            self::STATUS_OK,
-            self::STATUS_ATTENTE_RENOUVELLEMENT,
-            self::STATUS_OLD,
-            self::STATUS_EXCLUDED,
-        ))) {
+        if (!in_array($status, self::getStatusValues())) {
             throw new \InvalidArgumentException('Invalid status');
         }
 
@@ -297,6 +291,17 @@ class Adherent
     public function getStatus()
     {
         return $this->status;
+    }
+
+    public static function getStatusValues()
+    {
+        return array(
+            self::STATUS_NEW,
+            self::STATUS_OK,
+            self::STATUS_ATTENTE_RENOUVELLEMENT,
+            self::STATUS_OLD,
+            self::STATUS_EXCLUDED,
+        );
     }
 
     /**
@@ -526,6 +531,15 @@ class Adherent
         $this->gender = $gender;
 
         return $this;
+    }
+
+    public static function getGenderValues()
+    {
+        return array(
+            self::GENDER_MALE,
+            self::GENDER_FEMALE,
+            self::GENDER_UNKNOWN
+        );
     }
 
     /**

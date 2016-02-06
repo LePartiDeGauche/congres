@@ -55,11 +55,14 @@ class AdherentResponsabilityAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
+            ->add('isActive', null, array('required' => null))
             ->add('responsability', 'sonata_type_model')
+            ->add('designatedByOrgan', 'sonata_type_model_autocomplete', array(
+                'property' => array('name'),
+                'required' => false
+            ))
             ->add('start', 'sonata_type_date_picker', array('format' => 'd/M/y'))
             ->add('end', 'sonata_type_date_picker', array('format' => 'd/M/y'))
-            ->add('isActive', null, array('required' => null))
-            ->add('designatedByOrgan', 'sonata_type_model_autocomplete', array('property' => array('name'), 'required' => false))
         ;
     }
 

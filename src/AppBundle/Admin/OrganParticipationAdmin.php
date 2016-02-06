@@ -46,10 +46,19 @@ class OrganParticipationAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('start')
-            ->add('end')
-            ->add('isActive', null, array('required' => null))
-            ->add('organ', 'sonata_type_model_autocomplete', array('property' => array('name'), 'required' => false))
+            ->add('isActive', null, array('required' => false))
+            ->add('organ', 'sonata_type_model_autocomplete', array(
+                'property' => array('name'),
+                'required' => false
+            ))
+            ->add('start', 'sonata_type_date_picker', array(
+                'label' => 'Début',
+                'format' => 'd/M/y',
+            ))
+            ->add('end', 'sonata_type_date_picker', array(
+                'label' => 'Fin',
+                'format' => 'd/M/y',
+            ))
         ;
     }
 
