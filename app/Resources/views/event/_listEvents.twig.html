@@ -1,0 +1,16 @@
+<h3>Événements</h3>
+{% if events is empty %}
+    <p>Pas de contenu</p>
+{% else %}
+    <ul>
+    {% for event in events %}
+        {% if is_granted('event-register', event) %}
+            <li>
+                <a href="{{ path('event_registration_create', {event_id: event.id}) }}">
+                    {{ event.name }}
+                </a>
+            </li>
+        {% endif %}
+    {% endfor %}
+    </ul>
+{% endif %}

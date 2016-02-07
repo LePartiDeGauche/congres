@@ -168,6 +168,19 @@ class EventController extends Controller
     }
 
     /**
+     * _partial controller that list active event
+     */
+    public function fragmentListAction()
+    {
+        $events = $this->getDoctrine()->getManager()
+                    ->getRepository('AppBundle:Event\Event')
+                    ->findOpenedAtDate(date_create('now'));
+        return $this->render('event/_listEvents.twig.html', array(
+            'events' => $events,
+        ));
+    }
+
+    /**
      * Finds and displays a Event\Event entity.
      *
      * @Route("/{event_id}", name="event_show", requirements={

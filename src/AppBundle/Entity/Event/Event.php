@@ -9,7 +9,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  * Event.
  *
  * @ORM\Table(name="event")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Entity\Event\EventRepository")
  */
 class Event
 {
@@ -441,9 +441,9 @@ class Event
      *
      * @return Event
      */
-    public function addMeal(\AppBundle\Entity\Event\EventMeal $meals)
+    public function addMeal(\AppBundle\Entity\Event\EventMeal $meal)
     {
-        $this->meals[] = $meals;
+        $this->meals[] = $meal;
 
         return $this;
     }
@@ -453,9 +453,9 @@ class Event
      *
      * @param \AppBundle\Entity\Event\EventMeal $meals
      */
-    public function removeMeal(\AppBundle\Entity\Event\EventMeal $meals)
+    public function removeMeal(\AppBundle\Entity\Event\EventMeal $meal)
     {
-        $this->meals->removeElement($meals);
+        $this->meals->removeElement($meal);
     }
 
     /**
