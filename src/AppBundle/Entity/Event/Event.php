@@ -70,6 +70,14 @@ class Event
     /**
      * @var \stdClass
      *
+     * @ORM\ManyToMany(targetEntity="EventPriceScale", mappedBy="events",
+     *                cascade={"persist", "remove", "merge"}, orphanRemoval=true)
+     */
+    private $eventPriceScales;
+
+    /**
+     * @var \stdClass
+     *
      * @ORM\OneToMany(targetEntity="ReservationNight", mappedBy="event",
      * cascade={"persist", "remove", "merge"}, orphanRemoval=true)
      */
@@ -532,5 +540,39 @@ class Event
     public function __toString()
     {
         return $this->name;
+    }
+
+    /**
+     * Add eventPriceScale
+     *
+     * @param \AppBundle\Entity\Event\EventPriceScale $eventPriceScale
+     *
+     * @return Event
+     */
+    public function addEventPriceScale(\AppBundle\Entity\Event\EventPriceScale $eventPriceScale)
+    {
+        $this->eventPriceScales[] = $eventPriceScale;
+
+        return $this;
+    }
+
+    /**
+     * Remove eventPriceScale
+     *
+     * @param \AppBundle\Entity\Event\EventPriceScale $eventPriceScale
+     */
+    public function removeEventPriceScale(\AppBundle\Entity\Event\EventPriceScale $eventPriceScale)
+    {
+        $this->eventPriceScales->removeElement($eventPriceScale);
+    }
+
+    /**
+     * Get eventPriceScales
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getEventPriceScales()
+    {
+        return $this->eventPriceScales;
     }
 }

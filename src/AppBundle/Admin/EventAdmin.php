@@ -77,6 +77,24 @@ class EventAdmin extends Admin
                     'required' => false,
                 )
             )
+            ->add('eventPriceScales', 'sonata_type_model', array(
+                'expanded' => true,
+                'multiple' => true,
+            )
+            // ,
+            //     array(
+            //         'type_options' => array(
+            //             'delete' => true,
+            //         ),
+            //         'label' => 'Tarifs',
+            //     ), array(
+            //         'edit' => 'inline',
+            //         'inline' => 'table',
+            //         'sortable' => 'position',
+            //     ), array(
+            //         'required' => false,
+            //     )
+            )
             ->add('meals', 'sonata_type_collection',
                 array(
                     'type_options' => array(
@@ -131,6 +149,10 @@ class EventAdmin extends Admin
             $role->setEvent($object);
         }
 
+        foreach ($object->getEventPriceScales() as $eps) {
+            $eps->addEvent($object);
+        }
+
         foreach ($object->getMeals() as $meal) {
             $meal->setEvent($object);
         }
@@ -144,6 +166,10 @@ class EventAdmin extends Admin
     {
         foreach ($object->getRoles() as $role) {
             $role->setEvent($object);
+        }
+
+        foreach ($object->getEventPriceScales() as $eps) {
+            $eps->addEvent($object);
         }
 
         foreach ($object->getMeals() as $meal) {

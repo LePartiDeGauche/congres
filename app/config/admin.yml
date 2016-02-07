@@ -77,6 +77,12 @@ services:
         tags:
             - {name: sonata.admin, manager_type: orm, group: "Evenements", label: "Inscription des adherents"}
 
+    app.admin.event_price_scale:
+        class: AppBundle\Admin\EventPriceScaleAdmin
+        arguments: [~, AppBundle\Entity\Event\EventPriceScale, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: "Evenements", label: "Barême des tarifs"}
+
     sonata.admin.address:
         class: AppBundle\Admin\AddressAdmin
         arguments: [~, AppBundle\Entity\Address, SonataAdminBundle:CRUD]
