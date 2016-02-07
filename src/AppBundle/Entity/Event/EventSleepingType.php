@@ -5,12 +5,12 @@ namespace AppBundle\Entity\Event;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * EventPriceScale
+ * EventSleepingType
  *
- * @ORM\Table(name="event_price_scale")
- * @ORM\Entity(repositoryClass="AppBundle\Entity\Event\EventPriceScaleRepository")
+ * @ORM\Table(name="event_sleeping_type")
+ * @ORM\Entity(repositoryClass="AppBundle\Entity\Event\EventSleepingTypeRepository")
  */
-class EventPriceScale
+class EventSleepingType
 {
     /**
      * @var integer
@@ -29,9 +29,17 @@ class EventPriceScale
     private $name;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="text")
+     */
+    private $description;
+
+    /**
      * @var \stdClass
      *
-     * @ORM\ManyToMany(targetEntity="Event", inversedBy="priceScales")
+     * @ORM\ManyToMany(targetEntity="Event", inversedBy="sleepingTypes",
+     *                cascade={"persist", "remove", "merge"}, orphanRemoval=true)
      */
     private $events;
 
@@ -55,7 +63,7 @@ class EventPriceScale
      *
      * @param string $name
      *
-     * @return EventPriceScale
+     * @return EventSleepingType
      */
     public function setName($name)
     {
@@ -73,6 +81,30 @@ class EventPriceScale
     {
         return $this->name;
     }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     *
+     * @return EventSleepingType
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
     /**
      * Constructor
      */
@@ -86,7 +118,7 @@ class EventPriceScale
      *
      * @param \AppBundle\Entity\Event\Event $event
      *
-     * @return EventPriceScale
+     * @return EventSleepingType
      */
     public function addEvent(\AppBundle\Entity\Event\Event $event)
     {

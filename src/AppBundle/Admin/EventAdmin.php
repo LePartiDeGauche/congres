@@ -77,24 +77,16 @@ class EventAdmin extends Admin
                     'required' => false,
                 )
             )
-            ->add('eventPriceScales', 'sonata_type_model', array(
+            ->add('priceScales', 'sonata_type_model', array(
+                'label' => 'Barême des tarifs',
                 'expanded' => true,
                 'multiple' => true,
-            )
-            // ,
-            //     array(
-            //         'type_options' => array(
-            //             'delete' => true,
-            //         ),
-            //         'label' => 'Tarifs',
-            //     ), array(
-            //         'edit' => 'inline',
-            //         'inline' => 'table',
-            //         'sortable' => 'position',
-            //     ), array(
-            //         'required' => false,
-            //     )
-            )
+            ))
+            ->add('sleepingTypes', 'sonata_type_model', array(
+                'label' => 'Types d\'hébergement',
+                'expanded' => true,
+                'multiple' => true,
+            ))
             ->add('meals', 'sonata_type_collection',
                 array(
                     'type_options' => array(
@@ -149,8 +141,12 @@ class EventAdmin extends Admin
             $role->setEvent($object);
         }
 
-        foreach ($object->getEventPriceScales() as $eps) {
-            $eps->addEvent($object);
+        foreach ($object->getPriceScales() as $priceScale) {
+            $priceScale->addEvent($object);
+        }
+
+        foreach ($object->getSleepingTypes() as $sleepingType) {
+            $sleepingType->addEvent($object);
         }
 
         foreach ($object->getMeals() as $meal) {
@@ -168,8 +164,12 @@ class EventAdmin extends Admin
             $role->setEvent($object);
         }
 
-        foreach ($object->getEventPriceScales() as $eps) {
-            $eps->addEvent($object);
+        foreach ($object->getPriceScales() as $priceScale) {
+            $priceScale->addEvent($object);
+        }
+
+        foreach ($object->getSleepingTypes() as $sleepingType) {
+            $sleepingType->addEvent($object);
         }
 
         foreach ($object->getMeals() as $meal) {

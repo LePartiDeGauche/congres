@@ -73,7 +73,15 @@ class Event
      * @ORM\ManyToMany(targetEntity="EventPriceScale", mappedBy="events",
      *                cascade={"persist", "remove", "merge"}, orphanRemoval=true)
      */
-    private $eventPriceScales;
+    private $priceScales;
+
+    /**
+     * @var \stdClass
+     *
+     * @ORM\ManyToMany(targetEntity="EventSleepingType", mappedBy="events",
+     *                cascade={"persist", "remove", "merge"}, orphanRemoval=true)
+     */
+    private $sleepingTypes;
 
     /**
      * @var \stdClass
@@ -545,13 +553,13 @@ class Event
     /**
      * Add eventPriceScale
      *
-     * @param \AppBundle\Entity\Event\EventPriceScale $eventPriceScale
+     * @param \AppBundle\Entity\Event\EventPriceScale $priceScale
      *
      * @return Event
      */
-    public function addEventPriceScale(\AppBundle\Entity\Event\EventPriceScale $eventPriceScale)
+    public function addPriceScale(\AppBundle\Entity\Event\EventPriceScale $priceScale)
     {
-        $this->eventPriceScales[] = $eventPriceScale;
+        $this->priceScales[] = $priceScale;
 
         return $this;
     }
@@ -559,11 +567,11 @@ class Event
     /**
      * Remove eventPriceScale
      *
-     * @param \AppBundle\Entity\Event\EventPriceScale $eventPriceScale
+     * @param \AppBundle\Entity\Event\EventPriceScale $priceScale
      */
-    public function removeEventPriceScale(\AppBundle\Entity\Event\EventPriceScale $eventPriceScale)
+    public function removePriceScale(\AppBundle\Entity\Event\EventPriceScale $priceScale)
     {
-        $this->eventPriceScales->removeElement($eventPriceScale);
+        $this->priceScales->removeElement($priceScale);
     }
 
     /**
@@ -571,8 +579,42 @@ class Event
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getEventPriceScales()
+    public function getPriceScales()
     {
-        return $this->eventPriceScales;
+        return $this->priceScales;
+    }
+
+    /**
+     * Add SleepingType
+     *
+     * @param \AppBundle\Entity\Event\EventSleepingType $sleepingType
+     *
+     * @return Event
+     */
+    public function addSleepingType(\AppBundle\Entity\Event\EventSleepingType $sleepingType)
+    {
+        $this->sleepingTypes[] = $sleepingType;
+
+        return $this;
+    }
+
+    /**
+     * Remove SleepingType
+     *
+     * @param \AppBundle\Entity\Event\EventSleepingType $sleepingType
+     */
+    public function removeSleepingType(\AppBundle\Entity\Event\EventSleepingType $sleepingType)
+    {
+        $this->sleepingTypes->removeElement($sleepingType);
+    }
+
+    /**
+     * Get SleepingTypes
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getSleepingTypes()
+    {
+        return $this->sleepingTypes;
     }
 }

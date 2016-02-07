@@ -81,7 +81,13 @@ services:
         class: AppBundle\Admin\EventPriceScaleAdmin
         arguments: [~, AppBundle\Entity\Event\EventPriceScale, SonataAdminBundle:CRUD]
         tags:
-            - {name: sonata.admin, manager_type: orm, group: "Evenements", label: "Barême des tarifs"}
+            - {name: sonata.admin, manager_type: orm, group: "Evenements", label: "Barêmes des tarifs"}
+
+    app.admin.event_sleeping_type:
+        class: AppBundle\Admin\EventSleepingTypeAdmin
+        arguments: [~, AppBundle\Entity\Event\EventSleepingType, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: "Evenements", label: "Types d'hébergement"}
 
     sonata.admin.address:
         class: AppBundle\Admin\AddressAdmin
