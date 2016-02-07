@@ -3,5 +3,11 @@
 {% block javascripts %}
     {{ parent () }}
 
+    {% javascripts
+        '@SonataCoreBundle/Resources/public/vendor/moment/locale/fr.js'
+    %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
     {{ tinymce_init() }}
 {% endblock %}
