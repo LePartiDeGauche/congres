@@ -185,7 +185,7 @@ services:
         class: AppBundle\Admin\EventCostAdmin
         arguments: [~, AppBundle\Entity\Event\EventCost, SonataAdminBundle:CRUD]
         tags:
-            - {name: sonata.admin, manager_type: orm, group: admin, label: EventCost, show_in_dashboard: false }
+            - {name: sonata.admin, manager_type: orm, group: "Evenements", label: "Tarifs", show_in_dashboard: true }
 
     sonata.admin.event_role:
         class: AppBundle\Admin\EventRoleAdmin

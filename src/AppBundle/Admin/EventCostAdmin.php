@@ -21,6 +21,8 @@ class EventCostAdmin extends Admin
         $datagridMapper
             ->add('id')
             ->add('event')
+            ->add('priceScale')
+            ->add('sleepingType')
             ->add('name')
             ->add('cost')
         ;
@@ -32,9 +34,11 @@ class EventCostAdmin extends Admin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->add('id')
+            ->addIdentifier('id')
+            ->addIdentifier('name')
             ->add('event')
-            ->add('name')
+            ->add('priceScale')
+            ->add('sleepingType')
             ->add('cost')
             ->add('_action', 'actions', array(
                 'actions' => array(
@@ -55,6 +59,8 @@ class EventCostAdmin extends Admin
             //->add('id')
             ->add('name')
             ->add('cost')
+            ->add('priceScale')
+            ->add('sleepingType')
         ;
     }
 
