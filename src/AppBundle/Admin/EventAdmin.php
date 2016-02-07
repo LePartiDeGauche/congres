@@ -56,8 +56,14 @@ class EventAdmin extends Admin
             ->add('name', null, array('label' => 'Nom'))
             ->add('normalizedName', null, array('label' => 'Nom affiché dans paybox (sans espace, sans tiret, sans caractères spéciaux)'))
             ->add('description', null, array('label' => 'Description'))
-            ->add('registrationBegin', null, array('label' => 'Début des inscriptions'))
-            ->add('registrationEnd', null, array('label' => 'Fin des inscriptions'))
+            ->add('registrationBegin', 'sonata_type_date_picker', array(
+                'label' => 'Début des inscriptions',
+                'format' => 'd/M/y',
+            ))
+            ->add('registrationEnd', 'sonata_type_date_picker', array(
+                'label' => 'Fin des inscriptions',
+                'format' => 'd/M/y',
+            ))
             ->add('roles', 'sonata_type_collection',
                 array(
                     'type_options' => array(
@@ -74,7 +80,7 @@ class EventAdmin extends Admin
             ->add('meals', 'sonata_type_collection',
                 array(
                     'type_options' => array(
-                        'delete' => false,
+                        'delete' => true,
                     ),
                     'label' => 'Repas',
                 ), array(
@@ -88,7 +94,7 @@ class EventAdmin extends Admin
             ->add('costs', 'sonata_type_collection',
                 array(
                     'type_options' => array(
-                        'delete' => false,
+                        'delete' => true,
                     ),
                     'label' => 'Tarifs',
                 ), array(
@@ -140,8 +146,8 @@ class EventAdmin extends Admin
             $role->setEvent($object);
         }
 
-        foreach ($object->getMeals() as $meals) {
-            $role->setEvent($object);
+        foreach ($object->getMeals() as $meal) {
+            $meal->setEvent($object);
         }
 
         foreach ($object->getCosts() as $cost) {

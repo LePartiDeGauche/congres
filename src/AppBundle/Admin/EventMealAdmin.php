@@ -52,7 +52,9 @@ class EventMealAdmin extends Admin
         $formMapper
             ->add('name', null, array('label' => 'Nom'))
             ->add('description')
-            ->add('mealTime', null, array('label' => 'Jour/Heure du Repas'))
+            ->add('mealTime', 'sonata_type_datetime_picker', array(
+                'label' => 'Jour/Heure du Repas'
+            ))
         ;
     }
 
