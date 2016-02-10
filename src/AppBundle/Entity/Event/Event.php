@@ -60,6 +60,20 @@ class Event
     private $roles;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="is_roles_comment_enabled", type="boolean", options={"default": true})
+     */
+    private $isRolesCommentEnabled;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="roles_comment_help_text", type="text", nullable=true)
+     */
+    private $rolesCommentHelpText;
+
+    /**
      * @var \stdClass
      *
      * @ORM\OneToMany(targetEntity="EventCost", mappedBy="event",
@@ -616,5 +630,53 @@ class Event
     public function getSleepingTypes()
     {
         return $this->sleepingTypes;
+    }
+
+    /**
+     * Set isRolesCommentEnabled
+     *
+     * @param boolean $isRolesCommentEnabled
+     *
+     * @return Event
+     */
+    public function setIsRolesCommentEnabled($isRolesCommentEnabled)
+    {
+        $this->isRolesCommentEnabled = $isRolesCommentEnabled;
+
+        return $this;
+    }
+
+    /**
+     * Get isRolesCommentEnabled
+     *
+     * @return boolean
+     */
+    public function getIsRolesCommentEnabled()
+    {
+        return $this->isRolesCommentEnabled;
+    }
+
+    /**
+     * Set rolesCommentHelpText
+     *
+     * @param string $rolesCommentHelpText
+     *
+     * @return Event
+     */
+    public function setRolesCommentHelpText($rolesCommentHelpText)
+    {
+        $this->rolesCommentHelpText = $rolesCommentHelpText;
+
+        return $this;
+    }
+
+    /**
+     * Get rolesCommentHelpText
+     *
+     * @return string
+     */
+    public function getRolesCommentHelpText()
+    {
+        return $this->rolesCommentHelpText;
     }
 }

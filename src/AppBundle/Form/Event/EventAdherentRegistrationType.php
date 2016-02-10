@@ -51,6 +51,20 @@ class EventAdherentRegistrationType extends AbstractType
                 ));
             }
 
+            if ($curEvent->getIsRolesCommentEnabled()) {
+                $roleCommentOptions = array(
+                    'label' => 'Commentaire sur le rôle',
+                );
+                if ( ($helpText = $curEvent->getRolesCommentHelpText()) &&
+                    !empty($helpText)
+                ) {
+                    $roleCommentOptions['attr'] = array(
+                        'data-help' => $helpText,
+                    );
+                }
+                $form->add('roleComment', 'text', $roleCommentOptions);
+            }
+
             $form->add('meals', 'entity', array(
                 'class' => 'AppBundle\Entity\Event\EventMeal',
                 'choices' => $curEvent->getMeals(),

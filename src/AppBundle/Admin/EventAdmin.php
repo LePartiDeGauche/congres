@@ -75,6 +75,12 @@ class EventAdmin extends Admin
                     'required' => false,
                 )
             )
+            ->add('isRolesCommentEnabled', null, array(
+                'label' => 'Commentaires sur les rôles'
+            ))
+            ->add('rolesCommentHelpText', null, array(
+                'label' => 'Message d\'aide à propos de la case "Commentaire sur le rôle"'
+            ))
             ->add('priceScales', 'sonata_type_model', array(
                 'label' => 'Barême des tarifs',
                 'expanded' => true,

@@ -65,6 +65,13 @@ class EventAdherentRegistration
     private $role;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="role_comment", type="string", length=255, nullable=true)
+     */
+    private $roleComment;
+
+    /**
      * @var \stdClass
      *
      * @ORM\ManyToOne(targetEntity="EventSleepingType")
@@ -527,5 +534,29 @@ class EventAdherentRegistration
     public function getPriceScale()
     {
         return $this->priceScale;
+    }
+
+    /**
+     * Set roleComment
+     *
+     * @param string $roleComment
+     *
+     * @return EventAdherentRegistration
+     */
+    public function setRoleComment($roleComment)
+    {
+        $this->roleComment = $roleComment;
+
+        return $this;
+    }
+
+    /**
+     * Get roleComment
+     *
+     * @return string
+     */
+    public function getRoleComment()
+    {
+        return $this->roleComment;
     }
 }

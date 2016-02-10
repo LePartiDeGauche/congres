@@ -92,6 +92,7 @@ class EventAdherentRegistrationAdmin extends Admin
             ->add('adherent.status', null, array('label' => 'Statut'))
             ->add('adherent.responsabilities', 'sonata_type_collection', array('associated_property' => 'responsability', 'label' => 'Responsabilités au sein du parti'))
             ->add('role', null, array('label' => 'Inscrit en tant que'))
+            ->add('roleComment', null, array('label' => 'Précisions sur le rôle'))
             //->add('registrationDate', null, array('label' => 'Date d\'inscription'))
             ->add('payments', null, array('label' => 'Paiements'))
             ->add('paymentMode', 'choice', array(
@@ -160,6 +161,9 @@ class EventAdherentRegistrationAdmin extends Admin
             ->add('registrationDate', null, array('read_only' => true, 'disabled' => true))
             // FIXME: filter role of this event !
             ->add('role') //, null, array('read_only' => !$isCreate, 'disabled' => !$isCreate))
+            ->add('roleComment', null, array(
+                'label' => 'Précisions sur le rôle',
+            ))
             // FIXME: filter cost of this event !
             ->add('cost', null, array(
                 'label' => 'Tarif',
@@ -221,6 +225,9 @@ class EventAdherentRegistrationAdmin extends Admin
             ->add('adherent.departement', null, array('label' => 'Département', 'read_only' => true))
             ->add('registrationDate', null, array('read_only' => true, 'disabled' => true))
             ->add('role', null, array('read_only' => true, 'disabled' => true))
+            ->add('roleComment', null, array(
+                'label' => 'Précisions sur le rôle',
+            ))
             ->add('cost', null, array('label' => 'Tarif'))
             ->add('paymentMode', 'choice', array(
                 'label' => 'Type de Paiement',
@@ -250,6 +257,7 @@ class EventAdherentRegistrationAdmin extends Admin
             'adherent.responsabilities',
             'votestatus',
             'role',
+            'roleComment',
             'cost',
             'meals',
             'attendance',
