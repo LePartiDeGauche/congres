@@ -67,8 +67,22 @@ class EventAdherentRegistration
     /**
      * @var \stdClass
      *
+     * @ORM\ManyToOne(targetEntity="EventSleepingType")
+     */
+    private $sleepingType;
+
+    /**
+     * @var \stdClass
+     *
+     * @ORM\ManyToOne(targetEntity="EventPriceScale")
+     */
+    private $priceScale;
+
+    /**
+     * @var \stdClass
+     *
      * @ORM\ManyToOne(targetEntity="EventCost")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $cost;
 
@@ -88,15 +102,9 @@ class EventAdherentRegistration
     private $meals;
 
     /**
-     * @var bool
-     * @ORM\Column(type="boolean")
-     */
-    private $needHosting;
-
-    /**
      * @var string
      *
-     * @ORM\Column(name="paymentMode", type="string", length=255, nullable=false)
+     * @ORM\Column(name="paymentMode", type="string", length=255, nullable=true)
      * Online (CB) or At registration desk
      */
     private $paymentMode;
@@ -138,7 +146,6 @@ class EventAdherentRegistration
         $this->voteStatus = false;
         $this->attendance = self::ATTENDANCE_NOT_REGISTRED;
         $this->payments = new ArrayCollection();
-        $this->needHosting = false;
     }
     /**
      * Get id.
@@ -222,28 +229,9 @@ class EventAdherentRegistration
         return $this->event;
     }
 
-    /**
-     * Set needHosting.
-     *
-     * @param bool $needHosting
-     *
-     * @return EventAdherentRegistration
-     */
-    public function setNeedHosting($needHosting)
+    public function isPaid()
     {
-        $this->needHosting = $needHosting;
-
-        return $this;
-    }
-
-    /**
-     * Get needHosting.
-     *
-     * @return bool
-     */
-    public function getNeedHosting()
-    {
-        return $this->needHosting;
+        return (false === is_null($this->getCost()));
     }
 
     /**
@@ -491,5 +479,53 @@ class EventAdherentRegistration
     public function getAttendance()
     {
         return $this->attendance;
+    }
+
+    /**
+     * Set sleepingType
+     *
+     * @param \AppBundle\Entity\Event\EventSleepingType $sleepingType
+     *
+     * @return EventAdherentRegistration
+     */
+    public function setSleepingType(\AppBundle\Entity\Event\EventSleepingType $sleepingType = null)
+    {
+        $this->sleepingType = $sleepingType;
+
+        return $this;
+    }
+
+    /**
+     * Get sleepingType
+     *
+     * @return \AppBundle\Entity\Event\EventSleepingType
+     */
+    public function getSleepingType()
+    {
+        return $this->sleepingType;
+    }
+
+    /**
+     * Set priceScale
+     *
+     * @param \AppBundle\Entity\Event\EventPriceScale $priceScale
+     *
+     * @return EventAdherentRegistration
+     */
+    public function setPriceScale(\AppBundle\Entity\Event\EventPriceScale $priceScale = null)
+    {
+        $this->priceScale = $priceScale;
+
+        return $this;
+    }
+
+    /**
+     * Get priceScale
+     *
+     * @return \AppBundle\Entity\Event\EventPriceScale
+     */
+    public function getPriceScale()
+    {
+        return $this->priceScale;
     }
 }

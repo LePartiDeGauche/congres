@@ -14,11 +14,4 @@ class EventMealRepository extends EntityRepository
 {
     protected $classname = 'AppBundle\Entity\Event\EventMeal';
 
-    public function findByEventQueryBuider(Event $event)
-    {
-        return $this->createQueryBuilder('em')
-            ->where('em.event = :event')
-            ->setParameter('event', $event->getId())
-            ;
-    }
 }

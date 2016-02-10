@@ -8,6 +8,12 @@ use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
+use AppBundle\Form\Type\EntityTableType;
+
+use AppBundle\Entity\Event\EventRoleRepository;
+use AppBundle\Entity\Event\EventMealRepository;
+use AppBundle\Entity\Event\EventCostRepository;
+
 class EventAdherentRegistrationType extends AbstractType
 {
     /**
@@ -16,66 +22,58 @@ class EventAdherentRegistrationType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->add('needHosting', null, array('label' => 'Hébergement militant', 'required' => false))
-            ->add('comment')
-            ->add('paymentMode', 'choice',
-                array(
-                    'choices' => array(
-                        'online' => 'Carte bleue ( Vous serez redirigé vers la page de paiement à la validation de l\'inscription )',
-                        'onsite' => 'Par chèque ( libellé à l\'ordre du Parti de Gauche et envoyé au siège du PG, 20-22 rue Doudeauville, 75018 PARIS, en précisant sur l\'enveloppe "CN Janvier 2016" )', ),
-                    'expanded' => true,
-                    'label' => 'Mode de paiement',
-                ))
-                ;
         $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) use ($builder) {
             $form = $event->getForm();
             $data = $event->getData();
 
             /* Check we're looking at the right data/form */
-            if ($data instanceof \AppBundle\Entity\Event\EventAdherentRegistration) {
-                $curEvent = $data->getEvent();
-                $curAdherent = $data->getAdherent();
-
-                $mealsOptions = array(
-                    'class' => 'AppBundle\Entity\Event\EventMeal',
-                    'query_builder' => function (\AppBundle\Entity\Event\EventMealRepository $er) use ($curEvent) {
-                        return $er->findByEventQueryBuider($curEvent);
-                    },
-                    'expanded' => true,
-                    'multiple' => true,
-                    'label' => 'Repas',
-                );
-
-                $form->add('meals', 'entity', $mealsOptions);
-
-                $costOptions = array(
-                    'class' => 'AppBundle\Entity\Event\EventCost',
-                    'query_builder' => function (\AppBundle\Entity\Event\EventCostRepository $er) use ($curEvent) {
-                        return $er->findByEventQueryBuider($curEvent);
-                    },
-                    'expanded' => true,
-                    'multiple' => false,
-                    'label' => 'Tranche de revenu :',
-                );
-
-                $form->add('cost', 'entity', $costOptions);
-
-                if ($curAdherent != null) {
-                    $roleOptions = array(
-                        'class' => 'AppBundle\Entity\Event\EventRole',
-                        'query_builder' => function (\AppBundle\Entity\Event\EventRoleRepository $er) use ($curEvent, $curAdherent) {
-                            return $er->findByEventAndAdherentQueryBuider($curEvent, $curAdherent);
-                        },
-                        'expanded' => false,
-                        'multiple' => false,
-
-                    );
-                    $form->add('role', 'entity', $roleOptions);
-                }
-            } else {
+            if (false === $data instanceof \AppBundle\Entity\Event\EventAdherentRegistration) {
                 throw new \InvalidArgumentException('Invalid Form data expected EventAdherentRegistration, got '.$data->getClassName());
             }
+
+            $curEvent = $data->getEvent();
+            $curAdherent = $data->getAdherent();
+
+            $form->add('author', 'text', array(
+                'data_class' => 'AppBundle\Entity\Adherent',
+                'label' => 'Utilisateur',
+                'disabled' => 'true'
+            ));
+
+            if ($curAdherent != null) {
+                $form->add('role', 'entity', array(
+                    'class' => 'AppBundle\Entity\Event\EventRole',
+                    'query_builder' => function (EventRoleRepository $er) use ($curEvent, $curAdherent) {
+                        return $er->findByEventAndAdherentQueryBuider($curEvent, $curAdherent);
+                    },
+                    'expanded' => false,
+                    'multiple' => false,
+                ));
+            }
+
+            $form->add('meals', 'entity', array(
+                'class' => 'AppBundle\Entity\Event\EventMeal',
+                'choices' => $curEvent->getMeals(),
+                'expanded' => true,
+                'multiple' => true,
+                'label' => 'Repas',
+                'label_attr' => array(
+                    'class' => 'checkbox-inline'
+                )
+            ));
+
+            $form->add('sleepingType', 'entity', array(
+                'class' => 'AppBundle\Entity\Event\EventSleepingType',
+                'choices' => $curEvent->getSleepingTypes(),
+                'expanded' => true,
+                'multiple' => false,
+                'label' => 'Type d\'hébergement',
+            ));
+
+            $form->add('comment', null, array(
+                'label' => 'Commentaire(s)',
+            ));
+
         });
     }
 

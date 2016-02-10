@@ -14,11 +14,4 @@ class EventCostRepository extends EntityRepository
 {
     protected $classname = 'AppBundle\Entity\Event\EventCost';
 
-    public function findByEventQueryBuider(Event $event)
-    {
-        return $this->createQueryBuilder('ec')
-            ->where('ec.event = :event')
-            ->setParameter('event', $event->getId())
-            ;
-    }
 }

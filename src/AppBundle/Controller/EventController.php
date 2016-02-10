@@ -14,6 +14,8 @@ use AppBundle\Entity\Event\Event;
 use AppBundle\Entity\Adherent;
 use AppBundle\Entity\Event\EventAdherentRegistration;
 use AppBundle\Form\Event\EventAdherentRegistrationType;
+use AppBundle\Form\Event\EventRegistrationPayType;
+use AppBundle\Form\Event\EventCost;
 use AppBundle\Entity\Payment\EventPayment;
 
 /**
@@ -110,14 +112,18 @@ class EventController extends Controller
             ->findOneBy(array('adherent' => $adherent, 'event' => $event));
 
         if ($eventRegistration) {
-            return $this->redirect($this->generateUrl('event_registration_show',
-                array('event_id' => $event->getId(), 'event_reg_id' => $eventRegistration->getId())));
-        }
-
-        // TODO voter (no time for this now...)
-        $now = new \DateTime('now');
-        if ($now < $event->getRegistrationBegin() || $now > $event->getRegistrationEnd()) {
-            throw new AccessDeniedException('Les inscriptions ne sont pas ouvertes');
+            // If it has already payed, redirect to show
+            if ($eventRegistration->isPaid()) {
+                return $this->redirect($this->generateUrl('event_registration_show', array(
+                    'event_id' => $event->getId(),
+                    'event_reg_id' => $eventRegistration->getId()
+                )));
+            } else {
+                // TODO: Redirect to payment
+                return $this->redirect($this->generateUrl('event_registration_pay', array(
+                        'event_registration_id' => $eventRegistration->getId(),
+                    )));
+            }
         }
 
         $eventRegistration = new EventAdherentRegistration($this->getUser()->getProfile(), $event);
@@ -129,7 +135,6 @@ class EventController extends Controller
 
         if ($form->isValid()) {
             $eventRegistration = $form->getData();
-            $needHosting = $eventRegistration->getNeedHosting();
             $eventRegistration->setEvent($event);
             $eventRegistration->setRegistrationDate(new \DateTime('now'));
             $eventRegistration->setAdherent($adherent);
@@ -137,15 +142,58 @@ class EventController extends Controller
             $em->persist($eventRegistration);
             $em->flush();
 
-            if ($needHosting == true) {
-                /** @var Session $session */
-                $session = $this->get('session');
+            return $this->redirect($this->generateUrl('event_registration_pay', array(
+                    'event_registration_id' => $eventRegistration->getId(),
+                )));
 
-                $session->set('paiement', $eventRegistration->getPaymentMode());
+        }
 
-                // @TODO manage spleeping site if no available
-                //return $this->redirect($this->generateUrl('sleeping_list'));
-            }
+        return $this->render('event/registration.html.twig', array(
+            'event' => $event,
+            'event_registration' => $eventRegistration,
+            'form' => $form->createView()
+        ));
+    }
+
+    /**
+     * Pay for an event.
+     *
+     * @Route("/registration/{event_registration_id}/pay", name="event_registration_pay",
+     *         requirements={"event_registration_id": "\d+"})
+     * @ParamConverter("eventRegistration", class="AppBundle:Event\EventAdherentRegistration",
+     *                 options={"id"="event_registration_id"})
+     */
+    public function registrationPayAction(Request $request, EventAdherentRegistration $eventRegistration)
+    {
+        $event = $eventRegistration->getEvent();
+        // $this->denyAccessUnlessGranted('event-register', $event, 'Vous ne disposez pas des droits nécessaires pour vous inscrire.');
+
+        // If it has already payed, redirect to show
+        if ($eventRegistration->isPaid()) {
+            return $this->redirect($this->generateUrl('event_registration_show', array(
+                'event_id' => $event->getId(),
+                'event_reg_id' => $eventRegistration->getId()
+            )));
+        }
+
+        $adherent = $this->getUser()->getProfile();
+        $em = $this->getDoctrine()->getManager();
+
+        $form = $this->createForm(new EventRegistrationPayType(), $eventRegistration, array(
+            'action' => $this->generateUrl('event_registration_pay', array(
+                'event_registration_id' => $eventRegistration->getId()
+            )),
+            'method' => 'POST',
+        ));
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $eventRegistration = $form->getData();
+
+            // $eventRegistration->setPriceScale($eventRegistration->getCost());
+
+            $em->persist($eventRegistration);
+            $em->flush();
 
             if ($eventRegistration->getPaymentMode() == EventAdherentRegistration::PAYMENT_MODE_ONLINE) {
                 $eventPayment = $this->createPayment($adherent, $event, $eventRegistration, $eventRegistration->getCost()->getCost());
@@ -163,8 +211,8 @@ class EventController extends Controller
         return $this->render('event/registration.html.twig', array(
             'event' => $event,
             'event_registration' => $eventRegistration,
-            'form' => $form->createView(), ))
-            ;
+            'form' => $form->createView()
+        ));
     }
 
     /**
@@ -231,8 +279,6 @@ class EventController extends Controller
             'action' => $this->generateUrl('event_registration_create', array('event_id' => $event->getId())),
             'method' => 'POST',
         ));
-
-        $form->add('submit', 'submit', array('label' => 'Create'));
 
         return $form;
     }

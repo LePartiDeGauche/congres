@@ -47,7 +47,6 @@ class EventAdherentRegistrationAdmin extends Admin
             ->add('adherent.departement', null, array('label' => 'Département'))
             ->add('adherent.responsabilities.responsability', null, array('label' => 'Responsabilité', 'multiple' => true))
             ->add('role', null, array('label' => 'Inscrit en tant que'))
-            ->add('needHosting', null, array('label' => 'Hebergement'))
             ->add('voteStatus', null, array('label' => 'Droit de vote'))
             ->add('paymentMode', null,
                 array('label' => 'Modalité de paiement'),
@@ -100,7 +99,6 @@ class EventAdherentRegistrationAdmin extends Admin
                 'multiple' => false,
                 'choices' => $this->paymentModeChoice,
             ))
-            ->add('needHosting', null, array('label' => 'Hebergement'))
             ->add('voteStatus', null, array('label' => 'Droit de vote'))
             ->add('attendance', 'choice', array(
                 'label' => 'Présence',
@@ -162,7 +160,6 @@ class EventAdherentRegistrationAdmin extends Admin
             ->add('registrationDate', null, array('read_only' => true, 'disabled' => true))
             // FIXME: filter role of this event !
             ->add('role') //, null, array('read_only' => !$isCreate, 'disabled' => !$isCreate))
-            ->add('needHosting', 'choice', array('label' => 'necessite un hebergement', 'choices' => $this->yesnoChoice))
             // FIXME: filter cost of this event !
             ->add('cost', null, array(
                 'label' => 'Tarif',
@@ -224,7 +221,6 @@ class EventAdherentRegistrationAdmin extends Admin
             ->add('adherent.departement', null, array('label' => 'Département', 'read_only' => true))
             ->add('registrationDate', null, array('read_only' => true, 'disabled' => true))
             ->add('role', null, array('read_only' => true, 'disabled' => true))
-            ->add('needHosting')
             ->add('cost', null, array('label' => 'Tarif'))
             ->add('paymentMode', 'choice', array(
                 'label' => 'Type de Paiement',
@@ -254,7 +250,6 @@ class EventAdherentRegistrationAdmin extends Admin
             'adherent.responsabilities',
             'votestatus',
             'role',
-            'needhosting',
             'cost',
             'meals',
             'attendance',

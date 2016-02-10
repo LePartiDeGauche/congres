@@ -34,6 +34,13 @@ class EventRegisterVoter implements VoterInterface
         if (!$this->supportsClass(get_class($event)) || !isset($attributes[0]) || !$this->supportsAttribute($attributes[0])) {
             return VoterInterface::ACCESS_ABSTAIN;
         }
+        
+        // TODO voter (no time for this now...)
+        $now = new \DateTime('now');
+        if ($now < $event->getRegistrationBegin() || $now > $event->getRegistrationEnd()) {
+            // throw new AccessDeniedException('Les inscriptions ne sont pas ouvertes');
+            return VoterInterface::ACCESS_DENIED;
+        }
 
         $adherent = $token->getUser()->getProfile();
         foreach ($event->getRoles() as $role) {

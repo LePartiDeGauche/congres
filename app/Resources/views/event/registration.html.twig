@@ -4,46 +4,24 @@
 
 <div class="container">
     <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+
         <h1>Inscription à l'événement {{ event.name }}</h1>
         <p>
         {{event.description}}
         </p>
+
+        {# {{ form(form) }} #}
+
         {{ form_start(form) }}
+        {{ form_widget(form) }}
 
-        <h2>Rôle</h2>
-<p class="text-muted">Quel sera votre rôle durant {{ event.name }} ?</p>
+        <input type="submit" value="Valider l'inscription et payer"
+               class="btn btn-primary btn-lg pull-right" />
 
-
-        {{ form_errors(form.role) }}
-        {{ form_widget(form.role) }}
-       
-        <h2>Hébergement</h2>
-        <p class="text-muted">Avez-vous besoin d'un hébergement ?</p>
-
-        {{ form_widget(form.needHosting)}}
-        <h2>Repas </h2>
-        <p class="text-muted">Cocher si vous souhaitez participer au repas :</p>
-        {{ form_widget(form.meals)}}
-
-        <h2>Tranche de revenu / Participation</h2>
-        <p class="text-muted">Selectionner selon votre revenu mensuel</p>
-
-        {{ form_errors(form.cost) }}
-        {{ form_widget(form.cost) }}
-
-        <h2>Mode de Paiement</h2>
-        <p class="text-muted">Séléctionnez selon votre mode de paiement, si vous choisissez le paiement en ligne, vous
-        serez redirigé sur le site de paiement sécurisé Paybox</p>
-
-        {{ form_errors(form.paymentMode) }}
-        {{ form_widget(form.paymentMode) }}
-
-        <h2>Commentaire</h2>
-        <p class="text-muted">Vous avez une question ou une remarque, c'est ici !</p>
-        {{ form_widget(form.comment) }}
-
-        {{form_rest(form)}}
         {{ form_end(form) }}
+
+        </div>
     </div>
 </div>
 
