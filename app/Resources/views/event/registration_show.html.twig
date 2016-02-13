@@ -4,21 +4,36 @@
 <div class="container">
     <div class="row">
         <h1>Votre inscription à l'évenement {{event.name}}</h1>
-        <p>
-        {{event.description}}
+        <p class="info bg-info">
+            {{event.description}}
         </p>
+    </div>
+
+    <div class="row">
         <h2>Rôle</h2>
-        <ul>
-            <li>{{ eventRegistration.role }}</li>
-        </ul>
-
-
-
-        <h2>Hebergement</h2>
         <p>
-        {{ eventRegistration.sleepingType }}
+            {{ eventRegistration.role }}
         </p>
+        {% if eventRegistration.roleComment is not empty %}
+        <p>
+            <em>Précision:</em> {{ eventRegistration.roleComment }}
+        </p>
+        {% endif %}
+    </div>
 
+    <div class="row">
+        <h2>Hébergement</h2>
+        <p>
+            {{ eventRegistration.sleepingType }}
+        </p>
+        {% if eventRegistration.sleepingTypeComment is not empty %}
+        <p>
+            <em>Précision:</em> {{ eventRegistration.sleepingTypeComment }}
+        </p>
+        {% endif %}
+    </div>
+
+    <div class="row">
         <h2>Repas </h2>
         {% if eventRegistration.meals.count > 0 %}
         <ul>
@@ -29,6 +44,9 @@
         {% else %}
         Pas de repas
         {% endif %}
+    </div>
+
+    <div class="row">
         <h2>Paiement</h2>
         <p>
         {% if payedAmount >= eventRegistration.cost.cost%}
@@ -45,7 +63,9 @@
             {% endif %}
         </strong>
         </p>
+    </div>
 
+    <div class="row">
         <h3>Historique</h3>
         <table class="table">
             <thead>

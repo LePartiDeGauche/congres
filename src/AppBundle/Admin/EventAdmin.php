@@ -76,7 +76,7 @@ class EventAdmin extends Admin
                 )
             )
             ->add('isRolesCommentEnabled', null, array(
-                'label' => 'Commentaires sur les rôles'
+                'label' => 'Activer les commentaires sur les rôles'
             ))
             ->add('rolesCommentHelpText', null, array(
                 'label' => 'Message d\'aide à propos de la case "Commentaire sur le rôle"'
@@ -90,6 +90,12 @@ class EventAdmin extends Admin
                 'label' => 'Types d\'hébergement',
                 'expanded' => true,
                 'multiple' => true,
+            ))
+            ->add('isSleepingTypesCommentEnabled', null, array(
+                'label' => 'Activer les précisions sur les hébergements',
+            ))
+            ->add('sleepingTypesCommentHelpText', null, array(
+                'label' => 'Message d\'aide à propos de la case "Précision sur l\'hébergements"'
             ))
             ->add('meals', 'sonata_type_collection',
                 array(

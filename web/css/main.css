@@ -125,6 +125,10 @@ a:focus {
   }
 }
 
+p.info {
+    padding: 10px;
+}
+
 /**
  * Forms
  */

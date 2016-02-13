@@ -98,6 +98,20 @@ class Event
     private $sleepingTypes;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="is_sleeping_types_comment_enabled", type="boolean", options={"default": true})
+     */
+    private $isSleepingTypesCommentEnabled;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="sleeping_types_comment_help_text", type="text", nullable=true)
+     */
+    private $sleepingTypesCommentHelpText;
+
+    /**
      * @var \stdClass
      *
      * @ORM\OneToMany(targetEntity="ReservationNight", mappedBy="event",
@@ -678,5 +692,53 @@ class Event
     public function getRolesCommentHelpText()
     {
         return $this->rolesCommentHelpText;
+    }
+
+    /**
+     * Set isSleepingTypesCommentEnabled
+     *
+     * @param boolean $isSleepingTypesCommentEnabled
+     *
+     * @return Event
+     */
+    public function setIsSleepingTypesCommentEnabled($isSleepingTypesCommentEnabled)
+    {
+        $this->isSleepingTypesCommentEnabled = $isSleepingTypesCommentEnabled;
+
+        return $this;
+    }
+
+    /**
+     * Get isSleepingTypesCommentEnabled
+     *
+     * @return boolean
+     */
+    public function getIsSleepingTypesCommentEnabled()
+    {
+        return $this->isSleepingTypesCommentEnabled;
+    }
+
+    /**
+     * Set sleepingTypesCommentHelpText
+     *
+     * @param string $sleepingTypesCommentHelpText
+     *
+     * @return Event
+     */
+    public function setSleepingTypesCommentHelpText($sleepingTypesCommentHelpText)
+    {
+        $this->sleepingTypesCommentHelpText = $sleepingTypesCommentHelpText;
+
+        return $this;
+    }
+
+    /**
+     * Get sleepingTypesCommentHelpText
+     *
+     * @return string
+     */
+    public function getSleepingTypesCommentHelpText()
+    {
+        return $this->sleepingTypesCommentHelpText;
     }
 }

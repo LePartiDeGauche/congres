@@ -164,6 +164,12 @@ class EventAdherentRegistrationAdmin extends Admin
             ->add('roleComment', null, array(
                 'label' => 'Précisions sur le rôle',
             ))
+            ->add('sleepingType', null, array(
+                'label' => 'Type d\'hébergement',
+            ))
+            ->add('sleepingTypeComment', null, array(
+                'label' => 'Précision sur l\'hébergement',
+            ))
             // FIXME: filter cost of this event !
             ->add('cost', null, array(
                 'label' => 'Tarif',
@@ -226,7 +232,13 @@ class EventAdherentRegistrationAdmin extends Admin
             ->add('registrationDate', null, array('read_only' => true, 'disabled' => true))
             ->add('role', null, array('read_only' => true, 'disabled' => true))
             ->add('roleComment', null, array(
-                'label' => 'Précisions sur le rôle',
+                'label' => 'Précision sur le rôle',
+            ))
+            ->add('sleepingType', null, array(
+                'label' => 'Type d\'hébergement',
+            ))
+            ->add('sleepingTypeComment', null, array(
+                'label' => 'Précision sur l\'hébergement',
             ))
             ->add('cost', null, array('label' => 'Tarif'))
             ->add('paymentMode', 'choice', array(
@@ -258,6 +270,8 @@ class EventAdherentRegistrationAdmin extends Admin
             'votestatus',
             'role',
             'roleComment',
+            'sleepingType',
+            'sleepingTypeComment',
             'cost',
             'meals',
             'attendance',
