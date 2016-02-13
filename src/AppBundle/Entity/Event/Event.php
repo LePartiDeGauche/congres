@@ -149,6 +149,13 @@ class Event
     private $meals;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="isVisible", type="boolean", options={"default": false}, nullable=true)
+     */
+    private $isVisible;
+
+    /**
      * Get id.
      *
      * @return int
@@ -740,5 +747,29 @@ class Event
     public function getSleepingTypesCommentHelpText()
     {
         return $this->sleepingTypesCommentHelpText;
+    }
+
+    /**
+     * Set isVisible
+     *
+     * @param boolean $isVisible
+     *
+     * @return Event
+     */
+    public function setIsVisible($isVisible)
+    {
+        $this->isVisible = $isVisible;
+
+        return $this;
+    }
+
+    /**
+     * Get isVisible
+     *
+     * @return boolean
+     */
+    public function getIsVisible()
+    {
+        return $this->isVisible;
     }
 }

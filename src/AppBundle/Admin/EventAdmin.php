@@ -32,6 +32,7 @@ class EventAdmin extends Admin
         $listMapper
             ->add('id')
             ->add('name', null, array('label' => 'Nom'))
+            ->add('isVisible')
             ->add('normalizedName', null, array('label' => 'Nom affiché dans paybox'))
             ->add('description', null, array('label' => 'Description'))
             ->add('registrationBegin', null, array('label' => 'Début des inscriptions'))
@@ -54,6 +55,7 @@ class EventAdmin extends Admin
     {
         $formMapper
             ->add('name', null, array('label' => 'Nom'))
+            ->add('isVisible')
             ->add('normalizedName', null, array('label' => 'Nom affiché dans paybox (sans espace, sans tiret, sans caractères spéciaux)'))
             ->add('description', null, array('label' => 'Description'))
             ->add('registrationBegin', 'sonata_type_date_picker', array(

@@ -54,6 +54,7 @@ class EventAdherentRegistrationType extends AbstractType
             if ($curEvent->getIsRolesCommentEnabled()) {
                 $roleCommentOptions = array(
                     'label' => 'Précision sur le rôle',
+                    'required' => false,
                 );
                 if ( ($helpText = $curEvent->getRolesCommentHelpText()) &&
                     !empty($helpText)
@@ -87,6 +88,7 @@ class EventAdherentRegistrationType extends AbstractType
             if ($curEvent->getIsSleepingTypesCommentEnabled()) {
                 $roleCommentOptions = array(
                     'label' => 'Précision sur l\'hébergement',
+                    'required' => false,
                 );
                 if ( ($helpText = $curEvent->getSleepingTypesCommentHelpText()) &&
                     !empty($helpText)

@@ -4,7 +4,7 @@
 {% else %}
     <ul>
     {% for event in events %}
-        {% if is_granted('event-register', event) %}
+        {% if is_granted('view', event) %}
             <li>
                 <a href="{{ path('event_registration_create', {event_id: event.id}) }}">
                     {{ event.name }}

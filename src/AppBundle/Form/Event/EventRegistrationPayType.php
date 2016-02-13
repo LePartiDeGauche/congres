@@ -50,6 +50,9 @@ class EventRegistrationPayType extends AbstractType
                     $costChoices[] = $cost;
                 }
             }
+            if (empty($costChoices)) {
+                throw new \InvalidArgumentException('EventCost for event has not been found.');
+            }
 
             $form->add('cost', 'entity', array(
                 'class' => 'AppBundle\Entity\Event\EventCost',
