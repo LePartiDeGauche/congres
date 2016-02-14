@@ -57,6 +57,13 @@ class EventMeal
      */
     private $mealTime;
 
+    public function __clone()
+    {
+        foreach ($this->getParticipants() as $participant) {
+            $this->removeParticipant($participant);
+        }
+    }
+
     /**
      * Get id.
      *

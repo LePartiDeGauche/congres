@@ -85,7 +85,7 @@ class Event
      * @var \stdClass
      *
      * @ORM\ManyToMany(targetEntity="EventPriceScale", mappedBy="events",
-     *                cascade={"persist", "remove", "merge"}, orphanRemoval=true)
+     *                cascade={"persist"})
      */
     private $priceScales;
 
@@ -93,7 +93,7 @@ class Event
      * @var \stdClass
      *
      * @ORM\ManyToMany(targetEntity="EventSleepingType", mappedBy="events",
-     *                cascade={"persist", "remove", "merge"}, orphanRemoval=true)
+     *                cascade={"persist"})
      */
     private $sleepingTypes;
 
@@ -154,6 +154,33 @@ class Event
      * @ORM\Column(name="isVisible", type="boolean", options={"default": false}, nullable=true)
      */
     private $isVisible;
+
+    public function __clone()
+    {
+        $this->id = null;
+        $this->setName($this->getName() . ' (copie)');
+
+        $roles = $this->getRoles()->toArray();
+        $this->roles = new ArrayCollection();
+        foreach ($roles as $role) {
+            $newRole = clone $role;
+            $this->addRole($newRole);
+        }
+
+        $meals = $this->getMeals()->toArray();
+        $this->meals = new ArrayCollection();
+        foreach ($meals as $meal) {
+            $newMeal = clone $meal;
+            $this->addMeal($newMeal);
+        }
+
+        $costs = $this->getCosts()->toArray();
+        $this->costs = new ArrayCollection();
+        foreach ($costs as $cost) {
+            $newCost = clone $cost;
+            $this->addCost($newCost);
+        }
+    }
 
     /**
      * Get id.
@@ -248,6 +275,7 @@ class Event
     {
         $this->roles->remove($role);
     }
+
     /**
      * Get description.
      *

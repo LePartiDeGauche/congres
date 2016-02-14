@@ -67,7 +67,7 @@ services:
 
     sonata.admin.event:
         class: AppBundle\Admin\EventAdmin
-        arguments: [~, AppBundle\Entity\Event\Event, SonataAdminBundle:CRUD]
+        arguments: [~, AppBundle\Entity\Event\Event, AppBundle:CRUD]
         tags:
             - {name: sonata.admin, manager_type: orm, group: "Evenements", label: "Évenements"}
 

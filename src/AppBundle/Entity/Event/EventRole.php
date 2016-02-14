@@ -54,9 +54,17 @@ class EventRole
     /**
      * @var \stdClass
      *
-     * @ORM\OneToMany(targetEntity="EventAdherentRegistration", mappedBy="role")
+     * @ORM\OneToMany(targetEntity="EventAdherentRegistration", mappedBy="role",
+     *                cascade={"persist", "remove", "merge"}, orphanRemoval=true)
      */
     private $participants;
+
+    public function __clone()
+    {
+        foreach ($this->getParticipants() as $participant) {
+            $this->removeParticipant($participant);
+        }
+    }
 
     /**
      * Get id.

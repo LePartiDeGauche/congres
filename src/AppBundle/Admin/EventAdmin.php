@@ -7,11 +7,18 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
+use Sonata\AdminBundle\Route\RouteCollection;
 
 class EventAdmin extends Admin
 {
     protected $baseRouteName = 'event_admin';
     protected $baseRoutePattern = 'event';
+
+    protected function configureRoutes(RouteCollection $collection)
+    {
+        $collection->add('clone', $this->getRouterIdParameter().'/clone');
+    }
+
     /**
      * @param DatagridMapper $datagridMapper
      */
@@ -43,6 +50,9 @@ class EventAdmin extends Admin
                     'show' => array(),
                     'edit' => array(),
                     'delete' => array(),
+                    'clone' => array(
+                        'template' => 'admin/list__action_clone.html.twig'
+                    )
                 ),
             ))
             ;

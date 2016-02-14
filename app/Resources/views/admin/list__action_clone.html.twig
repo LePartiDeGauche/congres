@@ -1,0 +1,6 @@
+{% if admin.isGranted('CLONE', object) and admin.hasRoute('clone') %}
+    <a href="{{ admin.generateObjectUrl('clone', object) }}" class="btn btn-sm btn-default clone_link" title="Dupliquer">
+        <i class="glyphicon glyphicon-copy"></i>
+        Dupliquer
+    </a>
+{% endif %}

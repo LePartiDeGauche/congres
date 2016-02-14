@@ -96,7 +96,7 @@ class EventAdherentRegistration
      * @var \stdClass
      *
      * @ORM\ManyToOne(targetEntity="EventCost")
-     * @ORM\JoinColumn(nullable=true)
+     * @ORM\JoinColumn(nullable=true, onDelete="SET NULL")
      */
     private $cost;
 
