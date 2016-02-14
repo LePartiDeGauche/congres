@@ -65,7 +65,11 @@ class EventRegistrationPayType extends AbstractType
             $form->add('paymentMode', 'choice', array(
                 'choices' => array(
                     'online' => 'Carte bleue ( Vous serez redirigé vers la page de paiement à la validation de l\'inscription )',
-                    'onsite' => 'Par chèque ( libellé à l\'ordre du Parti de Gauche et envoyé au siège du PG, 20-22 rue Doudeauville, 75018 PARIS, en précisant sur l\'enveloppe "CN Janvier 2016" )', ),
+                    'onsite' => 'Par chèque ( libellé à l\'ordre du Parti de Gauche
+                                 et envoyé au siège du PG, 20-22 rue Doudeauville,
+                                 75018 PARIS, en précisant sur l\'enveloppe "' .
+                                 strtoupper($curEvent->getNormalizedName()) . '" )',
+                ),
                 'expanded' => true,
                 'label' => 'Mode de paiement',
             ));

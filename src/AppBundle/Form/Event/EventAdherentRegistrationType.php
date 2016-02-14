@@ -48,6 +48,7 @@ class EventAdherentRegistrationType extends AbstractType
                     },
                     'expanded' => false,
                     'multiple' => false,
+                    'placeholder' => 'Sélectionner un rôle',
                 ));
             }
 
