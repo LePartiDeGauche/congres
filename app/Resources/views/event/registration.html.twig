@@ -7,14 +7,22 @@
         <div class="col-md-10 col-md-offset-1">
 
         <h1>Inscription à l'événement {{ event.name }}</h1>
-        <p>
-        {{event.description}}
+        <p class="info bg-info">
+            {{event.description}}
         </p>
 
         {# {{ form(form) }} #}
 
         {{ form_start(form) }}
         {{ form_widget(form) }}
+
+        {% if enable_modify %}
+        <a class="btn btn-default btn-lg pull-left"
+           href="{{ path('event_registration_create', {event_id: event.id}) }}"
+           role="button">
+            Modifier l'inscription
+        </a>
+        {% endif %}
 
         <input type="submit" value="Valider l'inscription et payer"
                class="btn btn-primary btn-lg pull-right" />

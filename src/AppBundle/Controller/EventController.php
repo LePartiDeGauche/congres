@@ -118,15 +118,10 @@ class EventController extends Controller
                     'event_id' => $event->getId(),
                     'event_reg_id' => $eventRegistration->getId()
                 )));
-            } else {
-                // TODO: Redirect to payment
-                return $this->redirect($this->generateUrl('event_registration_pay', array(
-                        'event_registration_id' => $eventRegistration->getId(),
-                    )));
             }
+        } else {
+            $eventRegistration = new EventAdherentRegistration($this->getUser()->getProfile(), $event);
         }
-
-        $eventRegistration = new EventAdherentRegistration($this->getUser()->getProfile(), $event);
 
         $eventRegistration->setAdherent($adherent);
         $form = $this->createRegistrationCreateForm($eventRegistration, $event);
@@ -151,7 +146,8 @@ class EventController extends Controller
         return $this->render('event/registration.html.twig', array(
             'event' => $event,
             'event_registration' => $eventRegistration,
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'enable_modify' => false,
         ));
     }
 
@@ -211,7 +207,8 @@ class EventController extends Controller
         return $this->render('event/registration.html.twig', array(
             'event' => $event,
             'event_registration' => $eventRegistration,
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'enable_modify' => true,
         ));
     }
 
