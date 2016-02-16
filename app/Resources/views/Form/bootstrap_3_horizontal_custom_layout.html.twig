@@ -8,7 +8,20 @@
     {% endfor %}
 {%- endblock form_help %}
 
+
 {% block form_errors -%}
     {{ parent() }}
     {{- block('form_help') -}}
 {%- endblock form_errors %}
+
+{#
+ # TODO: apply this in admin form theme only
+ #
+{% block checkbox_row -%}
+    {{ block('form_row') }}
+{%- endblock checkbox_row %}
+
+{% block checkbox_label %}
+    {{ block('form_label') }}
+{% endblock checkbox_label %}
+#}
