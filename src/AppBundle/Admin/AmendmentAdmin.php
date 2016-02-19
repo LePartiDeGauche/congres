@@ -98,15 +98,17 @@ class AmendmentAdmin extends Admin
     public function getExportFields()
     {
         return array(
-            'text',
-            'author.lastname',
-            'author.firstname',
-            'author.organsnames',
-            'startLine',
-            'humanReadableType',
-            'content',
-            'meetingDate',
-            'numberOfPresent',
+            'Texte' => 'text',
+            'Auteur' => 'author',
+            'Organe' => 'organ',
+            'Ligne de début' => 'startLine',
+            'Ligne de fin' => 'endLine',
+            'Nature' => 'humanReadableNature',
+            'Type' => 'humanReadableType',
+            'Contenu' => 'content',
+            'Explication' => 'explanation',
+            'Date' => 'meetingDate',
+            'Nombre de présent' => 'numberOfPresent',
         );
     }
 
