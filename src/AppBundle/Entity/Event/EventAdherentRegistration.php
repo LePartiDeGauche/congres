@@ -360,6 +360,16 @@ class EventAdherentRegistration
     }
 
     /**
+     * Get meals as string
+     *
+     * @return string
+     */
+    public function getMealsAsString()
+    {
+        return join(', ', $this->meals->toArray());
+    }
+
+    /**
      * Set cost.
      *
      * @param \AppBundle\Entity\Event\EventCost $cost

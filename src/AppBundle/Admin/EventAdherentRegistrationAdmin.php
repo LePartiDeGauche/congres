@@ -261,21 +261,21 @@ class EventAdherentRegistrationAdmin extends Admin
     public function getExportFields()
     {
         return array(
-            'adherent.firstname',
-            'adherent.lastname',
-            'adherent.email',
-            'adherent.departement',
-            'event.name',
-            'adherent.responsabilities',
-            'votestatus',
-            'role',
-            'roleComment',
-            'sleepingType',
-            'sleepingTypeComment',
-            'cost',
-            'meals',
-            'attendance',
-            'comment',
+            'Prénom' => 'adherent.firstname',
+            'Nom' => 'adherent.lastname',
+            'Mail' => 'adherent.email',
+            'Département' => 'adherent.departement',
+            'Organes' => 'adherent.organsAsString',
+            'Responsabilités' => 'adherent.responsabilitiesAsString',
+            'Événement' => 'event.name',
+            'Rôle' => 'role',
+            'Rôle - commentaire' => 'roleComment',
+            'Hébergemenent' => 'sleepingType',
+            'Hébergemenent - commentaire' => 'sleepingTypeComment',
+            'Tarif' => 'cost',
+            'Repas' => 'mealsAsString',
+            'Présence' => 'attendance',
+            'Commentaire' => 'comment',
         );
     }
 

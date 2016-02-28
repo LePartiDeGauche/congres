@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use AppBundle\Entity\Organ\OrganParticipation;
 
 /**
  * Adherent.
@@ -314,20 +315,36 @@ class Adherent
         return $this->responsabilities;
     }
 
-/**
- * Get organs names.
- *
- * @return string
- */
-    // FIXME cf. getExportFields in AdmendmentAdmin
-    public function getOrgansNames()
+    /**
+     * Get responsabilities as string
+     * FIXME used by getExportFields in sonata admin
+     *
+     * @return string
+     */
+    public function getResponsabilitiesAsString()
     {
-        $name = '';
-        foreach ($this->organParticipations as $organParticipation) {
-            $name .= $organParticipation->getOrgan().', ';
-        }
+        return join(', ', array_map(
+            function (AdherentResponsability $ar){
+                return $ar->getResponsability();
+            },
+            $this->responsabilities->toArray()
+        ));
+    }
 
-        return $name;
+    /**
+     * Get organs as string.
+     * FIXME used by getExportFields in sonata admin
+     *
+     * @return string
+     */
+    public function getOrgansAsString()
+    {
+        return join(', ', array_map(
+            function (OrganParticipation $op){
+                return $op->getOrgan();
+            },
+            $this->organParticipations->toArray()
+        ));
     }
 
     public function __toString()
