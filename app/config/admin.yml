@@ -169,6 +169,12 @@ services:
         tags:
             - {name: sonata.admin, manager_type: orm, group: "Election", label: "Résultats"}
 
+    app.admin.candidature_call:
+        class: AppBundle\Admin\CandidatureCallAdmin
+        arguments: [~, AppBundle\Entity\Election\CandidatureCall, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: "Election", label: "Appels à candidature"}
+
     app.admin.candidature:
         class: AppBundle\Admin\CandidatureAdmin
         arguments: [~, AppBundle\Entity\Election\Candidature, SonataAdminBundle:CRUD]

@@ -8,8 +8,6 @@ use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-use AppBundle\Form\Type\EntityTableType;
-
 use AppBundle\Entity\Event\EventRoleRepository;
 use AppBundle\Entity\Event\EventMealRepository;
 use AppBundle\Entity\Event\EventCostRepository;

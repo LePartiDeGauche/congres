@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use AppBundle\Entity\Adherent;
 use AppBundle\Entity\Responsability;
+use AppBundle\Entity\Election\CandidatureCall;
 
 /**
  * Candidature.
@@ -100,14 +101,24 @@ class Candidature
     private $status;
 
     /**
+     * @var AppBundle\Entity\Election\CandidatureCall
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Election\CandidatureCall")
+     * @ORM\JoinColumn(name="candidature_call_id", referencedColumnName="id", nullable=true)
+     */
+    private $candidatureCall;
+
+
+    /**
      * Constructor.
      */
-    public function __construct(Adherent $author = null)
+    public function __construct(Adherent $author = null, CandidatureCall $candidatureCall = null)
     {
         $this->setAuthor($author);
         $this->setSubmitDate(new \DateTime('today'));
         $this->setStatus(self::STATUS_NEW);
         $this->setIsSortant(false);
+        $this->setCandidatureCall($candidatureCall);
     }
 
     /**
@@ -286,5 +297,29 @@ class Candidature
     public function getStatus()
     {
         return $this->status;
+    }
+
+    /**
+     * Set candidatureCall
+     *
+     * @param \AppBundle\Entity\Election\CandidatureCall $candidatureCall
+     *
+     * @return Candidature
+     */
+    public function setCandidatureCall(\AppBundle\Entity\Election\CandidatureCall $candidatureCall = null)
+    {
+        $this->candidatureCall = $candidatureCall;
+
+        return $this;
+    }
+
+    /**
+     * Get candidatureCall
+     *
+     * @return \AppBundle\Entity\Election\CandidatureCall
+     */
+    public function getCandidatureCall()
+    {
+        return $this->candidatureCall;
     }
 }

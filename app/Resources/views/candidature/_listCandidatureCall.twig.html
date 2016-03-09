@@ -1,0 +1,16 @@
+<h3>Appels à candidature</h3>
+{% if candidatureCalls is empty %}
+    <p>Pas de contenu</p>
+{% else %}
+    <ul>
+    {% for candidatureCall in candidatureCalls %}
+        {# if is_granted('view', candidatureCall) #}
+            <li>
+                <a href="{{ path('candidature_create', { candidature_call_id : candidatureCall.id }) }}">
+                    {{ candidatureCall.title }}
+                </a>
+            </li>
+        {# endif #}
+    {% endfor %}
+    </ul>
+{% endif %}

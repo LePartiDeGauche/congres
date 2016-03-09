@@ -3,9 +3,14 @@
 namespace AppBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+
 use AppBundle\Entity\Election\Candidature;
+use AppBundle\Entity\Election\CandidatureCall;
 use AppBundle\Form\Election\CandidatureType;
 
 /**
@@ -18,15 +23,18 @@ class CandidatureController extends Controller
     /**
      * Finds and displays a Candidature entity.
      *
-     * @Route("/create", name="candidature_create")
+     * @Route("/{candidature_call_id}/create", name="candidature_create",
+     *        requirements={"event_id": "\d+"})
+     * @ParamConverter("candidatureCall", class="AppBundle:Election\CandidatureCall",
+     *                 options={"id"="candidature_call_id"})
      */
-    public function createAction(Request $request)
+    public function createAction(Request $request, CandidatureCall $candidatureCall)
     {
         //$this->denyAccessUnlessGranted('candidate', $this->getUser());
 
         $form = $this->createForm(
             new CandidatureType(),
-            new Candidature($this->getUser()->getProfile())
+            new Candidature($this->getUser()->getProfile(), $candidatureCall)
         );
 
         $form->handleRequest($request);
