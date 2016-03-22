@@ -160,7 +160,13 @@ class EventAdherentRegistrationAdmin extends Admin
             ->add('adherent.departement', null, array('label' => 'Département d\'adhesion'))
             ->add('registrationDate', 'sonata_type_date_picker', array('read_only' => true, 'disabled' => true))
             // FIXME: filter role of this event !
-            ->add('role') //, null, array('read_only' => !$isCreate, 'disabled' => !$isCreate))
+            ->add('role', null, array(
+                'label' => 'Rôle',
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('u')
+                        ->orderBy('u.id', 'DESC');
+                },
+            ))
             ->add('roleComment', null, array(
                 'label' => 'Précisions sur le rôle',
             ))

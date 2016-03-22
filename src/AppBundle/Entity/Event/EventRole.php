@@ -179,7 +179,7 @@ class EventRole
 
     public function __toString()
     {
-        return $this->name;
+        return '[' . $this->event . '] ' . $this->name;
     }
 
     /**

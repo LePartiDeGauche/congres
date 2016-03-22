@@ -227,7 +227,7 @@ class EventMeal
 
     public function __toString()
     {
-        return '[' . $this->getEvent() . ']' . $this->name;
+        return '[' . $this->getEvent() . '] ' . $this->name;
     }
 
     /**
