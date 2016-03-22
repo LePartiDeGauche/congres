@@ -20,7 +20,7 @@ class AdherentAdmin extends Admin
             ->add('firstname', null, array('label' => 'Prénom'))
             ->add('gender', 'choice', array(
                 'label' => 'Genre',
-                'choices' => Adherent::getGenderValues(),
+                'choices' => array_combine(Adherent::getGenderValues(), Adherent::getGenderValues()),
             ))
             ->add('email')
             ->add('mobilephone', null, array('label' => 'Téléphone'))
@@ -31,7 +31,7 @@ class AdherentAdmin extends Admin
             ))
             ->add('status', 'choice', array(
                 'label' => 'Statut',
-                'choices' => Adherent::getStatusValues(),
+                'choices' => array_combine(Adherent::getStatusValues(), Adherent::getStatusValues()),
                 'multiple' => false,
             ))
             ->add('organParticipations', 'sonata_type_collection', array(
