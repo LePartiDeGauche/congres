@@ -126,12 +126,11 @@ class EventAdherentRegistrationAdmin extends Admin
                     'property' => 'name',
                     'query_builder' => function (EntityRepository $er) {
                         return $er->createQueryBuilder('u')
-                            ->orderBy('u.id', 'DESC')
-                            ->setMaxResults(1);
+                            ->orderBy('u.id', 'DESC');
                     },
                 ))
                 ->add('adherent', 'sonata_type_model_autocomplete', array(
-                    'label' => 'Auteur',
+                    'label' => 'Adhérent',
                     'property' => array('firstname', 'lastname', 'email'),
                     'placeholder' => 'Rechercher un nom ou un email',
                     'callback' => array($this, 'adherentCallback'),
@@ -156,9 +155,10 @@ class EventAdherentRegistrationAdmin extends Admin
                         'sortable' => 'position',
                     ));
         }
+
         $formMapper
             ->add('adherent.departement', null, array('label' => 'Département d\'adhesion'))
-            ->add('registrationDate', null, array('read_only' => true, 'disabled' => true))
+            ->add('registrationDate', 'sonata_type_date_picker', array('read_only' => true, 'disabled' => true))
             // FIXME: filter role of this event !
             ->add('role') //, null, array('read_only' => !$isCreate, 'disabled' => !$isCreate))
             ->add('roleComment', null, array(
@@ -175,8 +175,7 @@ class EventAdherentRegistrationAdmin extends Admin
                 'label' => 'Tarif',
                 'query_builder' => function (EntityRepository $er) {
                     return $er->createQueryBuilder('u')
-                        ->orderBy('u.id', 'DESC')
-                        ->setMaxResults(21);
+                        ->orderBy('u.id', 'DESC');
                 },
             ))
             ->add('paymentMode', 'choice', array(
@@ -205,8 +204,7 @@ class EventAdherentRegistrationAdmin extends Admin
                 'expanded' => true,
                 'query_builder' => function (EntityRepository $er) {
                     return $er->createQueryBuilder('u')
-                        ->orderBy('u.id', 'DESC')
-                        ->setMaxResults(3);
+                        ->orderBy('u.id', 'DESC');
                 },
             ))
             //->add('voteStatus', 'choice', array('label' => 'Droit de vote', 'choices' => $this->yesnoChoice))
