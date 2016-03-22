@@ -227,6 +227,14 @@ class EventMeal
 
     public function __toString()
     {
+        return $this->name;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDisplayName()
+    {
         return '[' . $this->getEvent() . '] ' . $this->name;
     }
 
