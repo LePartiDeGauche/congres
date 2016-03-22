@@ -70,7 +70,9 @@ class Adherent
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Organ\OrganParticipation", mappedBy="adherent")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Organ\OrganParticipation",
+     *                mappedBy="adherent",
+     *                cascade={"persist", "remove"})
      */
     private $organParticipations;
 
