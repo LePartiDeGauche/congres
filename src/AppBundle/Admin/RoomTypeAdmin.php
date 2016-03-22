@@ -72,6 +72,7 @@ class RoomTypeAdmin extends Admin
                     RoomType::ROOM_DOUBLE => 'Chambre double',
                     RoomType::ROOM_OTHER => 'Autre',
                 ),
+                'choices_as_values' => false,
                 'multiple' => false,
             ))
             ->add('description', null, array('label' => 'Description'))

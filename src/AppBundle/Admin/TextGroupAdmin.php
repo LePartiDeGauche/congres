@@ -50,6 +50,7 @@ class TextGroupAdmin extends Admin
                     TextGroup::VOTETYPE_COLLECTIVE => 'Vote collectif rapporté par procès verbal',
                     TextGroup::VOTETYPE_INDIVIDUAL => 'Vote individuel directement sur le site',
                 ),
+                'choices_as_values' => false,
                 'multiple' => false,
             ))
             ->add('voteModality', 'choice', array(
@@ -58,6 +59,7 @@ class TextGroupAdmin extends Admin
                     TextGroup::VOTEMODALITY_VALIDATION => 'Vote de selection des meilleurs textes',
                     TextGroup::VOTEMODALITY_REFERENDUM => 'Vote referendaire',
                 ),
+                'choices_as_values' => false,
                 'multiple' => false,
             ))
             ->add('voteRules', 'sonata_type_collection')
@@ -94,6 +96,7 @@ class TextGroupAdmin extends Admin
                     TextGroup::VOTETYPE_COLLECTIVE => 'Vote collectif rapporté par procès verbal',
                     TextGroup::VOTETYPE_INDIVIDUAL => 'Vote individuel directement sur le site',
                 ),
+                'choices_as_values' => false,
                 'multiple' => false,
             ))
             ->add('voteModality', 'choice', array(
@@ -102,6 +105,7 @@ class TextGroupAdmin extends Admin
                     TextGroup::VOTEMODALITY_VALIDATION => 'Vote de selection des meilleurs textes',
                     TextGroup::VOTEMODALITY_REFERENDUM => 'Vote referendaire',
                 ),
+                'choices_as_values' => false,
                 'multiple' => false,
             ))
             //->add('voteRules', 'sonata_type_collection',
@@ -189,6 +193,7 @@ class TextGroupAdmin extends Admin
                     TextGroup::VOTETYPE_COLLECTIVE => 'Vote collectif rapporté par procès verbal',
                     TextGroup::VOTETYPE_INDIVIDUAL => 'Vote individuel directement sur le site',
                 ),
+                'choices_as_values' => false,
                 'multiple' => false,
             ))
             ->add('voteModality', 'choice', array(
@@ -197,6 +202,7 @@ class TextGroupAdmin extends Admin
                     TextGroup::VOTEMODALITY_VALIDATION => 'Vote de selection des meilleurs textes',
                     TextGroup::VOTEMODALITY_REFERENDUM => 'Vote referendaire',
                 ),
+                'choices_as_values' => false,
                 'multiple' => false,
             ))
             ->add('voteRules', 'sonata_type_collection')

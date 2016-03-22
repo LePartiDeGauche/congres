@@ -36,6 +36,7 @@ class ElectionAdmin extends Admin
                     Election::ISVALID_TRUE => 'Election Validée',
                     Election::ISVALID_FALSE => 'Election Rejetée',
                 ),
+                'choices_as_values' => false,
                 'multiple' => false,
             ))
         ;
@@ -83,6 +84,7 @@ class ElectionAdmin extends Admin
                     Election::ISVALID_TRUE => 'Election Validée',
                     Election::ISVALID_FALSE => 'Election Rejetée',
                 ),
+                'choices_as_values' => false,
                 'multiple' => false,
             ))
             ->add('elected', 'sonata_type_collection', array(

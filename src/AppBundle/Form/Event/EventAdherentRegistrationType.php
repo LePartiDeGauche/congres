@@ -68,6 +68,7 @@ class EventAdherentRegistrationType extends AbstractType
             $form->add('meals', 'entity', array(
                 'class' => 'AppBundle\Entity\Event\EventMeal',
                 'choices' => $curEvent->getMeals(),
+                'choices_as_values' => false,
                 'expanded' => true,
                 'multiple' => true,
                 'label' => 'Repas',
@@ -79,6 +80,7 @@ class EventAdherentRegistrationType extends AbstractType
             $form->add('sleepingType', 'entity', array(
                 'class' => 'AppBundle\Entity\Event\EventSleepingType',
                 'choices' => $curEvent->getSleepingTypes(),
+                'choices_as_values' => false,
                 'expanded' => true,
                 'multiple' => false,
                 'label' => 'Type d\'hébergement',
@@ -107,9 +109,9 @@ class EventAdherentRegistrationType extends AbstractType
     }
 
     /**
-     * @param OptionsResolverInterface $resolver
+     * @param OptionsResolver $resolver
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
             'data_class' => 'AppBundle\Entity\Event\EventAdherentRegistration',

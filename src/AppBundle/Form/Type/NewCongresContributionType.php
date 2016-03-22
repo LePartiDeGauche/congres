@@ -11,6 +11,7 @@ class NewCongresContributionType extends AbstractType
     {
         $builder->add('type', 'choice', array(
                 'choices' => array('generale' => 'Générale', 'thematique' => 'Thématique'),
+                'choices_as_values' => false,
                 'expanded' => true,
                 'mapped' => false,
         ));

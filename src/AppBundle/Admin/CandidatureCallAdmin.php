@@ -67,6 +67,7 @@ class CandidatureCallAdmin extends Admin
             ->add('gender', 'choice', array(
                 'label' => 'Genre',
                 'choices' => array_combine(Adherent::getGenderValues(), Adherent::getGenderValues()),
+                'choices_as_values' => false,
             ))
             ->add('responsability')
             ->add('faithProfessionLength')

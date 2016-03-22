@@ -25,7 +25,11 @@ class AmendmentAdmin extends Admin
             ->add('text', null, array('label' => 'Texte'))
             ->add('author', null, array('label' => 'Rapporteur'))
             ->add('startLine', null, array('label' => 'Ligne'))
-            ->add('type', 'choice', array('label' => 'Type de modification', 'choices' => Amendment::getTypes()))
+            ->add('type', 'choice', array(
+                'label' => 'Type de modification',
+                'choices' => Amendment::getTypes(),
+                'choices_as_values' => false,
+            ))
             ->add('content', null, array('label' => 'Contenu'))
             ->add('meetingDate', 'sonata_type_date_picker', array(
                 'format' => 'd/M/y',
@@ -86,7 +90,11 @@ class AmendmentAdmin extends Admin
             ->add('text', null, array('label' => 'Texte'))
             ->add('author.lastname', null, array('label' => 'Nom auteur'))
             ->add('startLine', null, array('label' => 'Ligne'))
-            ->add('type', null, array('label' => 'Type de modification'), 'choice', array('choices' => Amendment::getTypes()))
+            ->add('type', 'choice', array(
+                'label' => 'Type de modification',
+                'choices' => Amendment::getTypes(),
+                'choices_as_values' => false,
+            ))
             ->add('content', null, array('label' => 'Contenu'))
             ->add('meetingDate', null, array('label' => 'Date de réunion'))
         ;

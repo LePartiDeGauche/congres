@@ -28,6 +28,7 @@ class BookingType extends AbstractType
                     '60' => 'Entre 2500 et 3000 euros',
                     '70' => 'Plus de 3000 euros'
                 ),
+                'choices_as_values' => false,
                 'required' => true,
                 'multiple'  => false,
             ))*/

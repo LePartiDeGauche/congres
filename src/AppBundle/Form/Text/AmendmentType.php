@@ -43,6 +43,7 @@ class AmendmentType extends AbstractType
                 'label' => 'Texte concerné',
                 'class' => 'AppBundle\Entity\Text\Text',
                 'choices' => $amendment->getAmendmentProcess()->getTextGroup()->getTexts(),
+                'choices_as_values' => false,
                 'disabled' => (count($amendment->getAmendmentProcess()->getTextGroup()->getTexts()) == 1),
             ))
             ->add('author', 'text', array(
@@ -53,7 +54,8 @@ class AmendmentType extends AbstractType
             ->add('organ', 'entity', array(
                 'class' => 'AppBundle\Entity\Organ\Organ',
                 'label' => 'Organe',
-                'choices' => $choices
+                'choices' => $choices,
+                'choices_as_values' => false,
             ))
             ->add('meetingDate', 'sonata_type_date_picker', array(
                 'format' => 'd/M/y',
@@ -69,6 +71,7 @@ class AmendmentType extends AbstractType
                 'choices' => array(
                     'o' => 'Fond', 'r' => 'Forme',
                 ),
+                'choices_as_values' => false,
                 'expanded' => true,
                 'multiple' => false,
             ))
@@ -79,6 +82,7 @@ class AmendmentType extends AbstractType
                 'choices' => array(
                     'a' => 'Ajout', 'd' => 'Suppression', 'm' => 'Modification',
                 ),
+                'choices_as_values' => false,
                 'expanded' => true,
                 'multiple' => false,
             ))
@@ -102,9 +106,9 @@ class AmendmentType extends AbstractType
     }
 
     /**
-     * @param OptionsResolverInterface $resolver
+     * @param OptionsResolver $resolver
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
             'data_class' => 'AppBundle\Entity\Text\Amendment',
