@@ -428,6 +428,16 @@ class EventAdherentRegistration
     }
 
     /**
+     * Get payments as string.
+     *
+     * @return string
+     */
+    public function getPaymentsAsString()
+    {
+        return join(', ', $this->payments->toArray());
+    }
+
+    /**
      * Set comment.
      *
      * @param string $comment

@@ -273,6 +273,7 @@ class EventAdherentRegistrationAdmin extends Admin
             'Hébergemenent' => 'sleepingType',
             'Hébergemenent - commentaire' => 'sleepingTypeComment',
             'Tarif' => 'cost',
+            'Paiements' => 'paymentsAsString',
             'Repas' => 'mealsAsString',
             'Présence' => 'attendance',
             'Commentaire' => 'comment',
