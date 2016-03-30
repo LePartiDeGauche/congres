@@ -171,7 +171,6 @@ class EventAdherentRegistrationAdmin extends Admin
                     return $er->createQueryBuilder('u')
                         ->orderBy('u.id', 'DESC');
                 },
-                'group_by' => 'event',
             ))
             ->add('roleComment', null, array(
                 'label' => 'Précisions sur le rôle',
@@ -189,7 +188,6 @@ class EventAdherentRegistrationAdmin extends Admin
                     return $er->createQueryBuilder('u')
                         ->orderBy('u.id', 'DESC');
                 },
-                'group_by' => 'event',
             ))
             ->add('paymentMode', 'choice', array(
                 'label' => 'Type de Paiement',
@@ -220,7 +218,6 @@ class EventAdherentRegistrationAdmin extends Admin
                     return $er->createQueryBuilder('u')
                         ->orderBy('u.id', 'DESC');
                 },
-                'choice_label' => 'getDisplayName',
             ))
             //->add('voteStatus', 'choice', array('label' => 'Droit de vote', 'choices' => $this->yesnoChoice, 'choices_as_values' => false,))
             ->add('attendance', 'choice', array(
