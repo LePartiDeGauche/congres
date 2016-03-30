@@ -35,12 +35,10 @@ class EventPaymentAdmin extends Admin
             ->add('method', 'choice', array(
                 'label' => 'Mode de paiement',
                 'choices' => $this->method_choice,
-                'choices_as_values' => false,
                 'multiple' => false,
             ))
             ->add('status', 'choice', array('label' => 'Status',
                 'choices' => $this->status_choice,
-                'choices_as_values' => false,
                 'multiple' => false,
             ))
             ;
@@ -59,12 +57,10 @@ class EventPaymentAdmin extends Admin
             ->add('method', 'choice', array(
                 'label' => 'Mode de paiement',
                 'choices' => $this->method_choice,
-                'choices_as_values' => false,
                 'multiple' => false,
             ))
             ->add('status', 'choice', array('label' => 'Status',
                 'choices' => $this->status_choice,
-                'choices_as_values' => false,
                 'multiple' => false,
             ))
             ->add('_action', 'actions', array(
@@ -88,12 +84,10 @@ class EventPaymentAdmin extends Admin
             ->add('method', 'choice', array(
                 'label' => 'Mode de paiement',
                 'choices' => $this->method_choice,
-                'choices_as_values' => false,
                 'multiple' => false,
             ))
             ->add('status', 'choice', array('label' => 'Statut',
                 'choices' => $this->status_choice,
-                'choices_as_values' => false,
                 'multiple' => false,
             ))
             ;
@@ -112,12 +106,10 @@ class EventPaymentAdmin extends Admin
             ->add('method', 'choice', array(
                 'label' => 'Mode de paiement',
                 'choices' => $this->method_choice,
-                'choices_as_values' => false,
                 'multiple' => false,
             ))
             ->add('status', 'choice', array('label' => 'Status',
                 'choices' => $this->status_choice,
-                'choices_as_values' => false,
                 'multiple' => false,
             ))
             ->add('date')

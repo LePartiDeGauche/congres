@@ -52,13 +52,10 @@ class EventAdherentRegistrationAdmin extends Admin
                 array('label' => 'Modalité de paiement'),
                 'choice', array(
                     'choices' => $this->paymentModeChoice,
-                    'choices_as_values' => false,
                 ))
             ->add('registrationDate', null, array('label' => 'Date d\'inscription'))
             ->add('attendance', null, array('label' => 'Présence'), 'choice', array(
-                'choices' => $this->attendanceChoice,
-                'choices_as_values' => false,
-            ))
+                'choices' => $this->attendanceChoice, ))
             ->add('meals', null, array('label' => 'Repas'))
         ;
     }
@@ -102,13 +99,11 @@ class EventAdherentRegistrationAdmin extends Admin
                 'label' => 'Type de Paiement',
                 'multiple' => false,
                 'choices' => $this->paymentModeChoice,
-                'choices_as_values' => false,
             ))
             ->add('voteStatus', null, array('label' => 'Droit de vote'))
             ->add('attendance', 'choice', array(
                 'label' => 'Présence',
                 'choices' => $this->attendanceChoice,
-                'choices_as_values' => false,
             ))
             //->add('cost', NULL, array('label' => 'Tarif'))
             ->add('meals', null, array('label' => 'Repas', 'multiple' => true))
@@ -195,7 +190,6 @@ class EventAdherentRegistrationAdmin extends Admin
                 'read_only' => $isCreate,
                 'disabled' => $isCreate,
                 'choices' => $this->paymentModeChoice,
-                'choices_as_values' => false,
             ))
             // FIXME: add a new payment !
             ->add('payments', 'sonata_type_collection', array(
@@ -219,11 +213,10 @@ class EventAdherentRegistrationAdmin extends Admin
                         ->orderBy('u.id', 'DESC');
                 },
             ))
-            //->add('voteStatus', 'choice', array('label' => 'Droit de vote', 'choices' => $this->yesnoChoice, 'choices_as_values' => false,))
+            //->add('voteStatus', 'choice', array('label' => 'Droit de vote', 'choices' => $this->yesnoChoice))
             ->add('attendance', 'choice', array(
                 'label' => 'Présence',
                 'choices' => $this->attendanceChoice,
-                'choices_as_values' => false,
             ))
 
             ->add('comment')
@@ -255,9 +248,7 @@ class EventAdherentRegistrationAdmin extends Admin
             ->add('paymentMode', 'choice', array(
                 'label' => 'Type de Paiement',
                 'multiple' => false,
-                'choices' => $this->paymentModeChoice,
-                'choices_as_values' => false,
-            ))
+                'choices' => $this->paymentModeChoice, ))
             ->add('payments', null, array(
                 'label' => 'Paiements',
                 'read_only' => true,

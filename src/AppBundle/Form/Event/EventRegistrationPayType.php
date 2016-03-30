@@ -57,7 +57,6 @@ class EventRegistrationPayType extends AbstractType
             $form->add('cost', 'entity', array(
                 'class' => 'AppBundle\Entity\Event\EventCost',
                 'choices' => $costChoices,
-                'choices_as_values' => false,
                 'expanded' => true,
                 'multiple' => false,
                 'label' => 'Tarifs',
@@ -71,7 +70,6 @@ class EventRegistrationPayType extends AbstractType
                                  75018 PARIS, en précisant sur l\'enveloppe "' .
                                  strtoupper($curEvent->getNormalizedName()) . '" )',
                 ),
-                'choices_as_values' => false,
                 'expanded' => true,
                 'label' => 'Mode de paiement',
             ));
@@ -79,9 +77,9 @@ class EventRegistrationPayType extends AbstractType
     }
 
     /**
-     * @param OptionsResolver $resolver
+     * @param OptionsResolverInterface $resolver
      */
-    public function configureOptions(OptionsResolver $resolver)
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
             'data_class' => 'AppBundle\Entity\Event\EventAdherentRegistration',

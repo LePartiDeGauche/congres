@@ -31,7 +31,6 @@ final class UserAdmin extends Admin
             ->add('locked', 'checkbox', array('label' => 'Compte Bloqué', 'required' => false))
             ->add('roles', 'choice', array(
                 'choices' => $this->roleChoice,
-                'choices_as_values' => false,
                 'multiple' => true,
                 'required' => false,
                 'expanded' => true,

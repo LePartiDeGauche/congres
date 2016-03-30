@@ -29,7 +29,6 @@ class ResponsabilityAdmin extends Admin
                     Responsability::INSTANCE_SN,
                     Responsability::INSTANCE_CN,
                 ),
-                'choices_as_values' => false,
                 'multiple' => false,
             ))
             ->add('electionDate', null, array('label' => 'Date de renouvellement.'));
@@ -45,7 +44,6 @@ class ResponsabilityAdmin extends Admin
                     Responsability::INSTANCE_SN,
                     Responsability::INSTANCE_CN,
                 ),
-                'choices_as_values' => false,
                 'multiple' => false,
             ))
             ->add('electionDate', null, array('label' => 'Date de renouvellement.'));
@@ -61,7 +59,6 @@ class ResponsabilityAdmin extends Admin
                     Responsability::INSTANCE_SN,
                     Responsability::INSTANCE_CN,
                 ),
-                'choices_as_values' => false,
                 'multiple' => false,
             ))
             ->add('electionDate', null, array('label' => 'Date de renouvellement.'));

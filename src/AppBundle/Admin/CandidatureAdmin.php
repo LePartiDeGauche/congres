@@ -33,7 +33,6 @@ class CandidatureAdmin extends Admin
                 ),
                 'choice', array(
                     'choices' => $this->status_choice,
-                    'choices_as_values' => false,
                     'multiple' => false,
             ))
         ;
@@ -52,7 +51,6 @@ class CandidatureAdmin extends Admin
             ->add('status', 'choice', array(
                 'label' => 'Statut',
                 'choices' => $this->status_choice,
-                'choices_as_values' => false,
                 'multiple' => false,
             ))
             ->add('_action', 'actions', array(
@@ -88,7 +86,6 @@ class CandidatureAdmin extends Admin
             ->add('status', 'choice', array(
                 'label' => 'Statut',
                 'choices' => $this->status_choice,
-                'choices_as_values' => false,
                 'multiple' => false,
             ))
             ;
@@ -109,7 +106,6 @@ class CandidatureAdmin extends Admin
             ->add('status', 'choice', array(
                 'label' => 'Statut',
                 'choices' => $this->status_choice,
-                'choices_as_values' => false,
                 'multiple' => false,
             ))
         ;

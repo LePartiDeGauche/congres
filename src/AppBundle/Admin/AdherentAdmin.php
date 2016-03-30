@@ -21,7 +21,6 @@ class AdherentAdmin extends Admin
             ->add('gender', 'choice', array(
                 'label' => 'Genre',
                 'choices' => array_combine(Adherent::getGenderValues(), Adherent::getGenderValues()),
-                'choices_as_values' => false,
             ))
             ->add('email')
             ->add('mobilephone', null, array('label' => 'Téléphone'))
@@ -33,7 +32,6 @@ class AdherentAdmin extends Admin
             ->add('status', 'choice', array(
                 'label' => 'Statut',
                 'choices' => array_combine(Adherent::getStatusValues(), Adherent::getStatusValues()),
-                'choices_as_values' => false,
                 'multiple' => false,
             ))
             ->add('organParticipations', 'sonata_type_collection', array(
@@ -91,13 +89,7 @@ class AdherentAdmin extends Admin
             ->add('birthdate', null, array('label' => 'Date de naissance'))
             ->add('user', null, array('label' => 'Compte'))
             ->add('status', null, array('Statut'))
-            ->add('responsabilities', 'sonata_type_collection', array(
-                'associated_property' => 'responsability',
-                'label' => 'Responsabilités'
-            ))
-            ->add('organParticipations', 'sonata_type_collection', array(
-                'associated_property' => 'organ',
-                'label' => 'Instances'
-            ));
+            ->add('responsabilities', 'sonata_type_collection', array('associated_property' => 'responsability', 'label' => 'Responsabilités'))
+            ->add('organParticipations', 'sonata_type_collection', array('associated_property' => 'organ', 'label' => 'Instances'));
     }
 }

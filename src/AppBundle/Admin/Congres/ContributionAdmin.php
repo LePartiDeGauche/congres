@@ -49,7 +49,6 @@ class ContributionAdmin extends Admin
                     Contribution::STATUS_SIGNATURES_OPEN => 'Ouverte aux signatures',
                     Contribution::STATUS_NEW => 'Envoyée mais non validée (non publique)',
                 ),
-                'choices_as_values' => false,
                 'multiple' => false,
             ));
     }
@@ -66,7 +65,6 @@ class ContributionAdmin extends Admin
                     Contribution::STATUS_SIGNATURES_OPEN => 'Ouverte aux signatures',
                     Contribution::STATUS_NEW => 'Envoyée mais non validée (non publique)',
                 ),
-                'choices_as_values' => false,
                 'multiple' => false,
             ));
     }
@@ -84,7 +82,6 @@ class ContributionAdmin extends Admin
                     Contribution::STATUS_SIGNATURES_OPEN => 'Ouverte aux signatures',
                     Contribution::STATUS_NEW => 'Envoyée mais non validée (non publique)',
                 ),
-                'choices_as_values' => false,
                 'editable' => true,
             ));
     }

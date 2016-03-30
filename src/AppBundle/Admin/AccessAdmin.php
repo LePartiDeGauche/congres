@@ -32,7 +32,6 @@ final class AccessAdmin extends Admin
             ->add('route', 'choice', array(
                 'label' => 'Chemin d\'acces',
                 'choices' => $this->listRoutes(),
-                'choices_as_values' => false,
             ))
             ->add('begin', null, array('label' => 'Date de début'))
             ->add('end', null, array('label' => 'Date de fin'));
