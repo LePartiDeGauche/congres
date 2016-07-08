@@ -123,6 +123,13 @@ class EventAdherentRegistration
     private $isVeganMealsPreferred;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="is_joining_young_event", type="boolean", options={"default": false})
+     */
+    private $isJoiningYoungEvent;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="paymentMode", type="string", length=255, nullable=true)
@@ -399,6 +406,31 @@ class EventAdherentRegistration
     {
         return $this->isVeganMealsPreferred;
     }
+
+    /**
+     * Set isJoiningYoungEvent
+     *
+     * @param boolean $isJoiningYoungEvent
+     *
+     * @return Event
+     */
+    public function setIsJoiningYoungEvent($isJoiningYoungEvent)
+    {
+        $this->isJoiningYoungEvent = $isJoiningYoungEvent;
+
+        return $this;
+    }
+
+    /**
+     * Get isJoiningYoungEvent
+     *
+     * @return boolean
+     */
+    public function getIsJoiningYoungEvent()
+    {
+        return $this->isJoiningYoungEvent;
+    }
+
 
     /**
      * Set cost.

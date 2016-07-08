@@ -65,6 +65,11 @@ class EventAdherentRegistrationType extends AbstractType
                 $form->add('roleComment', 'text', $roleCommentOptions);
             }
 
+            $form->add('isJoiningYoungEvent', 'checkbox', array(
+                'label' => 'Je participe également au "RM jeunes" du PG les 24 et 25 août (+ 10,00€).',
+                'required' => false,
+            ));
+
             $form->add('meals', 'entity', array(
                 'class' => 'AppBundle\Entity\Event\EventMeal',
                 'choices' => $curEvent->getMeals(),

@@ -54,13 +54,20 @@ class EventRegistrationPayType extends AbstractType
                 throw new \InvalidArgumentException('EventCost for event has not been found.');
             }
 
-            $form->add('cost', 'entity', array(
+            $costOptions = array(
                 'class' => 'AppBundle\Entity\Event\EventCost',
                 'choices' => $costChoices,
                 'expanded' => true,
                 'multiple' => false,
                 'label' => 'Tarifs',
-            ));
+            );
+            if ($eventRegistration->getIsJoiningYoungEvent()) {
+                $costOptions['attr'] = array(
+                    'data-help' => 'Je paye un supplément de 10€ car je suis inscrit au "RM Jeunes".',
+                );
+            }
+            $form->add('cost', 'entity', $costOptions);
+
 
             $form->add('paymentMode', 'choice', array(
                 'choices' => array(
