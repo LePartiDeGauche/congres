@@ -54,6 +54,7 @@ class RegistrationListener implements EventSubscriberInterface
         return array(
             FOSUserEvents::REGISTRATION_INITIALIZE => 'onRegistrationInitialize',
             FOSUserEvents::REGISTRATION_SUCCESS => array('onRegistrationSuccess', -1),
+            FOSUserEvents::REGISTRATION_CONFIRM => 'onRegistrationConfirm',
         );
     }
 
@@ -121,5 +122,21 @@ class RegistrationListener implements EventSubscriberInterface
             'email' => $user->getEmail(),
         ));
         $event->setResponse(new RedirectResponse($url));
+    }
+
+    public function onRegistrationConfirm(GetResponseUserEvent $event)
+    {
+        $profile = $this->em
+            ->getRepository('AppBundle:Adherent')
+            ->findOneByEmail($event->getUser()->getEmail());
+
+        if ($profile !== null) {
+            $event->getUser()->setProfile($profile);
+        } else {
+            //$event->getUser()->setEnabled(false);
+            $url = $this->router->generate('non_adherent_register');
+            $event->setResponse(new RedirectResponse($url));
+            return false;
+        }
     }
 }

@@ -191,6 +191,19 @@ class EventController extends Controller
             $em->persist($eventRegistration);
             $em->flush();
 
+            $message = \Swift_Message::newInstance()
+                ->setFrom(array('remue-meninges@lepartidegauche.fr' => 'Remues Méninges 2015'))
+                ->setSubject('Inscription Remues Méninges 2015')
+                ->setTo($this->getUser()->getEmail())
+                ->setBody(
+                    $this->renderView(
+                        'mail/event_register.txt.twig',
+                        array('email' => $this->getUser()->getEmail())
+                    )
+                );
+            $this->get('mailer')->send($message);
+
+
             if ($eventRegistration->getPaymentMode() == EventAdherentRegistration::PAYMENT_MODE_ONLINE) {
                 $eventPayment = $this->createPayment($adherent, $event, $eventRegistration, $eventRegistration->getCost()->getCost());
                 $em->persist($eventPayment);

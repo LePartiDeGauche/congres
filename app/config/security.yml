@@ -88,7 +88,7 @@ security:
                 users:
                     user:  { password: user, roles: 'ROLE_USER' }
                     admin: { password: admin, roles: 'ROLE_ADMIN' }
-        
+
     access_decision_manager:
         strategy: unanimous
 
@@ -114,4 +114,6 @@ security:
         - { path: ^/inscription, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/mot-de-passe, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin/, role: ROLE_ADMIN_PANEL }
-        - { path: ^/, role: ROLE_USER }
+        - { path: ^/event, role: ROLE_USER }
+        - { path: ^/adherents/register, role: ROLE_USER }
+        - { path: ^/$, role: IS_AUTHENTICATED_ANONYMOUSLY }

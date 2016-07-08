@@ -3,6 +3,9 @@ imports:
     - { resource: admin.yml }
 
 services:
+    fos_user.doctrine_registry:
+        alias: doctrine
+
     app.user.registration.form.type:
         class: AppBundle\Form\Type\RegistrationType
         arguments: [%fos_user.model.user.class%]

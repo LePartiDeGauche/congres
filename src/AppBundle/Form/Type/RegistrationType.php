@@ -9,8 +9,12 @@ class RegistrationType extends RegistrationFormType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        parent::buildForm($builder, $options);
         $builder->remove('username');  // we use email as the username
+    }
+
+    public function getParent()
+    {
+        return 'fos_user_registration';
     }
 
     public function getName()

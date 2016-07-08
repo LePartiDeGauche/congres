@@ -31,7 +31,7 @@ twig:
     strict_variables: "%kernel.debug%"
     form:
         resources:
-            # - 'admin/form_admin_fields.html.twig'
+            - 'admin/form_admin_fields.html.twig'
             - 'SonataCoreBundle:Form:datepicker.html.twig'
     form_themes:
         - ':Form:bootstrap_3_horizontal_custom_layout.html.twig'
@@ -95,7 +95,7 @@ fos_user:
     user_class: AppBundle\Entity\User
     from_email:
         address: %mailer_sender_address%
-        sender_name: "Congrès Parti de Gauche"
+        sender_name: "Remues Méninges 2015"
     registration:
         confirmation:
             enabled: true

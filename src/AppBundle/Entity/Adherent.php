@@ -18,6 +18,7 @@ class Adherent
     const STATUS_ATTENTE_RENOUVELLEMENT = 'En attente de renouvellement.';
     const STATUS_OLD = 'Ancien adhérent';
     const STATUS_EXCLUDED = 'Exclusion';
+    const STATUS_SYMPATHISANT = 'Sympathisant';
 
     const GENDER_MALE = 'M';
     const GENDER_FEMALE = 'F';
@@ -304,6 +305,7 @@ class Adherent
             self::STATUS_ATTENTE_RENOUVELLEMENT,
             self::STATUS_OLD,
             self::STATUS_EXCLUDED,
+            self::STATUS_SYMPATHISANT
         );
     }
 
