@@ -53,7 +53,8 @@ class EventMealAdmin extends Admin
             ->add('name', null, array('label' => 'Nom'))
             ->add('description')
             ->add('mealTime', 'sonata_type_datetime_picker', array(
-                'label' => 'Jour/Heure du Repas'
+                'label' => 'Jour/Heure du Repas',
+                'format' => 'd/M/y HH:mm',
             ))
         ;
     }

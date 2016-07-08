@@ -140,7 +140,7 @@ class EventCost
 
     public function __toString()
     {
-        return '[' . $this->event . '] ' . $this->name.' ('.$this->cost.'€)';
+        return $this->cost.'€' . ' (' . $this->priceScale . ')';
     }
 
     /**

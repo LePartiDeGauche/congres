@@ -71,9 +71,6 @@ class EventAdherentRegistrationType extends AbstractType
                 'expanded' => true,
                 'multiple' => true,
                 'label' => 'Repas',
-                'label_attr' => array(
-                    'class' => 'checkbox-inline'
-                )
             ));
 
             $form->add('sleepingType', 'entity', array(
