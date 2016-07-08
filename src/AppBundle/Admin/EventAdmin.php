@@ -70,9 +70,11 @@ class EventAdmin extends Admin
             ->add('description', null, array('label' => 'Description'))
             ->add('registrationBegin', 'sonata_type_date_picker', array(
                 'label' => 'Début des inscriptions',
+                'format' => 'd/M/y',
             ))
             ->add('registrationEnd', 'sonata_type_date_picker', array(
                 'label' => 'Fin des inscriptions',
+                'format' => 'd/M/y',
             ))
             ->add('roles', 'sonata_type_collection',
                 array(
@@ -105,6 +107,7 @@ class EventAdmin extends Admin
             ))
             ->add('isSleepingTypesCommentEnabled', null, array(
                 'label' => 'Activer les précisions sur les hébergements',
+                'required' => false
             ))
             ->add('sleepingTypesCommentHelpText', null, array(
                 'label' => 'Message d\'aide à propos de la case "Précision sur l\'hébergements"'
