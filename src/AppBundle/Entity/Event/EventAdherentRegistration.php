@@ -116,6 +116,13 @@ class EventAdherentRegistration
     private $meals;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="is_vegan_meals_preferred", type="boolean", options={"default": false})
+     */
+    private $isVeganMealsPreferred;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="paymentMode", type="string", length=255, nullable=true)
@@ -367,6 +374,30 @@ class EventAdherentRegistration
     public function getMealsAsString()
     {
         return join(', ', $this->meals->toArray());
+    }
+
+    /**
+     * Set isVeganMealsPreferred
+     *
+     * @param boolean $isVeganMealsPreferred
+     *
+     * @return Event
+     */
+    public function setIsVeganMealsPreferred($isVeganMealsPreferred)
+    {
+        $this->isVeganMealsPreferred = $isVeganMealsPreferred;
+
+        return $this;
+    }
+
+    /**
+     * Get isSleepingTypesCommentEnabled
+     *
+     * @return boolean
+     */
+    public function getIsVeganMealsPreferred()
+    {
+        return $this->isVeganMealsPreferred;
     }
 
     /**

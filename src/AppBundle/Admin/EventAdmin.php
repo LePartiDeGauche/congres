@@ -126,6 +126,10 @@ class EventAdmin extends Admin
                     'required' => false,
                 )
             )
+            ->add('isVeganMealsEnabled', null, array(
+                'label' => 'Activer les repas végétariens',
+                'required' => false
+            ))
             ->add('costs', 'sonata_type_collection',
                 array(
                     'type_options' => array(

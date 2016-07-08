@@ -73,6 +73,13 @@ class EventAdherentRegistrationType extends AbstractType
                 'label' => 'Repas',
             ));
 
+            if ($curEvent->getIsVeganMealsEnabled()) {
+                $form->add('isVeganMealsPreferred', null, array(
+                    'label' => 'Je souhaite un repas végétarien',
+                    'required' => false,
+                ));
+            }
+
             $form->add('sleepingType', 'entity', array(
                 'class' => 'AppBundle\Entity\Event\EventSleepingType',
                 'choices' => $curEvent->getSleepingTypes(),

@@ -151,6 +151,13 @@ class Event
     /**
      * @var boolean
      *
+     * @ORM\Column(name="is_vegan_meals_enabled", type="boolean", options={"default": false})
+     */
+    private $isVeganMealsEnabled;
+
+    /**
+     * @var boolean
+     *
      * @ORM\Column(name="isVisible", type="boolean", options={"default": false}, nullable=true)
      */
     private $isVisible;
@@ -545,6 +552,31 @@ class Event
     public function getMeals()
     {
         return $this->meals;
+    }
+
+
+    /**
+     * Set isVeganMealsEnabled
+     *
+     * @param boolean $isVeganMealsEnabled
+     *
+     * @return Event
+     */
+    public function setIsVeganMealsEnabled($isVeganMealsEnabled)
+    {
+        $this->isVeganMealsEnabled = $isVeganMealsEnabled;
+
+        return $this;
+    }
+
+    /**
+     * Get isSleepingTypesCommentEnabled
+     *
+     * @return boolean
+     */
+    public function getIsVeganMealsEnabled()
+    {
+        return $this->isVeganMealsEnabled;
     }
 
     /**
