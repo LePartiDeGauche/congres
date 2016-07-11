@@ -29,36 +29,16 @@
                         <span class="icon-bar"></span>
                     </button>
                     <a class="navbar-brand" href="{{path('homepage')}}">
-                        <img src="{{ asset('img/logo.png') }}" alt="Logo du Parti de Gauche"/>
+                        <img src="{{ asset('img/logo.png') }}" alt="Logo du Remue Méninges"/>
                     </a>
                 </div>
                 <div class="collapse navbar-collapse">
                     {% block navbar %}
                     <ul class="nav navbar-nav">
                         {% block navLinks %}
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Programme<span class="caret"></span></a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li>
-                                    <a href="{{ path('downloads', {filename: 'Programme RM definitif.pdf'}) }}">
-                                        Programme complet
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="{{ path('downloads', {filename: 'Educ pop definitif.pdf'}) }}">
-                                        Parcours assemblées citoyennes
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="{{ path('downloads', {filename: 'CommentVenirauRM.pdf'}) }}">
-                                Comment venir&nbsp;?
-                            </a>
-                        </li>
                         {% if is_granted('ROLE_USER') %}
                         <li>
-                            <a href="{{ path('event_registration_create', {event_id: 5}) }}">
+                            <a href="{{ path('event_registration_create', {event_id: 12}) }}">
                                 S'inscrire à l'évènement
                             </a>
                         </li>

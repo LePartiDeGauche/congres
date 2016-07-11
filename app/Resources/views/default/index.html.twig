@@ -5,60 +5,6 @@
 
     <div class="row">
 
-        <h1>Remues méninges 2015</h1>
-
-<div class="col-md-6">
-        <p>
-        Le Remue-Méninges du Parti de Gauche a lieu les 28, 29 et 30 août 2015 à l'Université de Toulouse Jean Jaurès (5 Allée Antonio Machado - 31000 TOULOUSE).
-        </p>
-<ul>
-    <li><a href="{{ path('downloads', {filename: 'Programme RM definitif.pdf'}) }}">Le programme</a></li>
-    <li><a href="{{ path('downloads', {filename: 'CommentVenirauRM.pdf'}) }}">Comment se rendre au remues méninges</a></li>
-    <li><a href="{{ path('downloads', {filename: 'Educ pop definitif.pdf'}) }}">Déroulé du parcours «&nbsp;Assemblées citoyennes, comment s'y prendre concrètement&nbsp;?&nbsp;»</a></li>
-</ul>
-
-<div class="alert alert-warning text-justify" role="alert">
-Merci à celles et ceux qui souhaitent participer au parcours  "Assemblees citoyennes : comment s'y prendre concrètement?" de se signaler à l'adresse:
-<a href="mailto:remue-meninges@lepartidegauche.fr">remue-meninges@lepartidegauche.fr</a>
-</div>
-
-<h2>QUI PEUT S’INSCRIRE ET COMMENT ?</h2>
-<p>
-La participation au Remue-Méninges est ouverte à toutes et à tous, que l'on soit adhérent-e du Parti de Gauche, sympathisant-e ou membre d'un parti partenaire du PG.
-</p>
-<p>
-L'inscription s'effectue au préalable via le <a href="{{ path('event_registration_create', {event_id: 5}) }}">formulaire d'inscription</a>
-Les adhérents étant déjà inscrits sur le site congres2015.lepartidegauche.fr conservent leur identifiant (adresse mail) et mot de passe.
-</p>
-
-<div class="alert alert-warning text-justify" role="alert">
-Si vous n'êtes pas adhérents du Parti de Gauche, vous devez d'abord
-<a href="">créer un compte</a> (en haut à droite de la page d'accueil du site).
-Vous recevrez un mail d'activation et vous devrez ensuite <a href="{{ path('non_adherent_register') }}">compléter vos informations.</a>
-Vous pourrez alors vous connecter et vous inscrire.
-</div>
-
-<h2>PARTICIPATION AUX FRAIS</h2>
-<p>
-Le montant de la participation dépend des revenus des participants et de l'option retenue pour l'hébergement (2 nuits en hôtel accessible à pied, en chambre simple ou à deux).
-</p>
-<p>
-Le dîner du vendredi soir et les 2 repas du samedi sont compris.
-</p>
-<p>
-Si vous demandez un forfait avec hébergement, vous devez vous inscrire impérativement avant le jeudi le 20 août. Aucune nouvelle demande d'hébergement ne pourra être prise en compte après cette date.
-</p>
-<p>
-Pour celles et ceux qui ne souhaitent pas bénéficier des repas pris en commun, ni de l'option hébergement, un tarif "participation simple" de 10 euros par jour le vendredi et le samedi sera demandé. Cette participation peut être réglée à l'avance ou sur place à l'accueil.
-</p>
-<p>
-Pour toute question ou information : <a href="mailto:remue-meninges@lepartidegauche.fr">remue-meninges@lepartidegauche.fr</a>
-</p>
-
-        </div>
-
-    <div class="row">
-
         <div class="col-md-8">
             {% if pageShow is empty %}
             <p>Pas de contenu</p>
@@ -71,16 +17,8 @@ Pour toute question ou information : <a href="mailto:remue-meninges@lepartidegau
         </div><!-- .col-md-8 -->
 
         <div class="col-md-4">
-            {{ render(controller('AppBundle:AmendmentProcess:fragmentList')) }}
-        </div><!-- .col-md-4 -->
-
-        <div class="col-md-4">
-            {{ render(controller('AppBundle:Event:fragmentList')) }}
-        </div><!-- .col-md-4 -->
-
-        <div class="col-md-4">
-            {{ render(controller('AppBundle:CandidatureCall:fragmentList')) }}
-        </div><!-- .col-md-4 -->
+            <img src="{{ asset('img/logo.png') }}" alt="Logo du Remue Méninges" width="250"/>
+        </div><!-- .col-md-8 -->
 
     </div>
     <div class="row">
