@@ -85,13 +85,13 @@ class EventAdherentRegistrationType extends AbstractType
                 ));
             }
 
-            $form->add('sleepingType', 'entity', array(
-                'class' => 'AppBundle\Entity\Event\EventSleepingType',
-                'choices' => $curEvent->getSleepingTypes(),
-                'expanded' => true,
-                'multiple' => false,
-                'label' => 'Type d\'hébergement',
-            ));
+            // $form->add('sleepingType', 'entity', array(
+            //     'class' => 'AppBundle\Entity\Event\EventSleepingType',
+            //     'choices' => $curEvent->getSleepingTypes(),
+            //     'expanded' => true,
+            //     'multiple' => false,
+            //     'label' => 'Type d\'hébergement',
+            // ));
 
             if ($curEvent->getIsSleepingTypesCommentEnabled()) {
                 $roleCommentOptions = array(
