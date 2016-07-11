@@ -52,8 +52,8 @@ class RegistrationListener implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return array(
-            FOSUserEvents::REGISTRATION_INITIALIZE => 'onRegistrationInitialize',
-            FOSUserEvents::REGISTRATION_SUCCESS => array('onRegistrationSuccess', -1),
+            //FOSUserEvents::REGISTRATION_INITIALIZE => 'onRegistrationInitialize',
+            //FOSUserEvents::REGISTRATION_SUCCESS => array('onRegistrationSuccess', -1),
             FOSUserEvents::REGISTRATION_CONFIRM => 'onRegistrationConfirm',
         );
     }
@@ -106,7 +106,7 @@ class RegistrationListener implements EventSubscriberInterface
         // If profile does not exist, we send an email and redirect as if success.
 
         $message = \Swift_Message::newInstance()
-            ->setFrom('congres@lepartidegauche.fr')
+            ->setFrom('remuemeninges@lepartidegauche.fr')
             ->setSubject('Adresse email inconnue.')
             ->setTo($user->getEmail())
             ->setBody(
