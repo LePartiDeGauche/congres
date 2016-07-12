@@ -38,11 +38,13 @@ class EventRegistrationPayType extends AbstractType
                 'disabled' => 'true'
             ));
 
-            // $form->add('sleepingType', 'text', array(
-            //     'data_class' => 'AppBundle\Entity\Event\EventSleepingType',
-            //     'label' => 'Type d\'hébergement',
-            //     'disabled' => 'true'
-            // ));
+            if (count($curEvent->getSleepingTypes()) > 1) {
+                $form->add('sleepingType', 'text', array(
+                    'data_class' => 'AppBundle\Entity\Event\EventSleepingType',
+                    'label' => 'Type d\'hébergement',
+                    'disabled' => 'true'
+                ));
+            }
 
             $costChoices = array();
             foreach ($curEvent->getCosts() as $cost) {

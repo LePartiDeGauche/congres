@@ -133,6 +133,7 @@ class EventController extends Controller
             $eventRegistration->setEvent($event);
             $eventRegistration->setRegistrationDate(new \DateTime('now'));
             $eventRegistration->setAdherent($adherent);
+            $eventRegistration->setSleepingType($event->getSleepingTypes()[0]);
 
             $em->persist($eventRegistration);
             $em->flush();
