@@ -56,4 +56,21 @@ class AppKernel extends Kernel
     {
         $loader->load(__DIR__.'/config/config_'.$this->getEnvironment().'.yml');
     }
+
+    public function getCacheDir() {
+        if (!empty($this->getEnvParameters()['kernel.cache_dir'])) {
+            return $this->getEnvParameters()['kernel.cache_dir'].'/'.$this->environment;
+        } else {
+            return parent::getCacheDir();
+        }
+    }
+
+    public function getLogDir()
+    {
+        if (!empty($this->getEnvParameters()['kernel.logs_dir'])) {
+            return $this->getEnvParameters()['kernel.logs_dir'].'/'.$this->environment;
+        } else {
+            return parent::getLogDir();
+        }
+    }
 }
