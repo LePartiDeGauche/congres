@@ -1,0 +1,34 @@
+server {
+    listen 80;
+    root /vagrant/web;
+    #server_name adherents.lepartidegauche.fr;
+
+    location / {
+        try_files $uri @rewriteapp;
+    }
+
+    location @rewriteapp {
+        # Ici on réécrit toutes les URL de telle sorte qu'elles pointent vers
+        # le fichier app.php
+        # Dans mon cas, mon installation était pour un environnement de
+        # développement, j'ai donc remplacer app.php par app_dev.php
+        rewrite ^(.*)$ /app_dev.php/$1 last;
+    }
+
+    # DEV
+    location ~ ^/(app|app_dev|config)\.php(/|$) {
+        set $script $uri;
+        set $path_info "/";
+        include fastcgi_params;
+        fastcgi_pass 127.0.0.1:9000;
+        fastcgi_param SERVER_NAME $host;
+        fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
+
+        fastcgi_param SYMFONY__KERNEL__LOGS_DIR "/var/lib/php5/logs/";
+        fastcgi_param SYMFONY__KERNEL__CACHE_DIR "/var/lib/php5/cache/";
+
+        #access_log /vagrant/logs/access.log combined buffer=64k;
+        #error_log /logs/error.log;
+    }
+}
+
