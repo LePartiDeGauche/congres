@@ -10,7 +10,11 @@ class NewCongresContributionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('type', 'choice', array(
-                'choices' => array('generale' => 'Générale', 'thematique' => 'Thématique'),
+                'choices' => array(
+                    'generale' => 'Générale',
+                    'thematique' => 'Thématique',
+                    'statutaire' => 'Statutaire',
+                ),
                 'expanded' => true,
                 'mapped' => false,
         ));

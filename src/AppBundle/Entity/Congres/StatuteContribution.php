@@ -6,16 +6,23 @@ use Doctrine\ORM\Mapping as ORM;
 use AppBundle\Entity\User as User;
 
 /**
- * ThematicContribution.
+ * StatuteContribution.
  *
- * @ORM\Entity(repositoryClass="AppBundle\Entity\Congres\ThematicContributionRepository")
+ *  @ORM\Entity(repositoryClass="AppBundle\Entity\Congres\StatuteContributionRepository")
  */
-class ThematicContribution extends Contribution
+class StatuteContribution extends Contribution
 {
     /**
      * @var \Doctrine\Common\Collections\Collection
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\User")
-     * @ORM\JoinTable(name="thematic_votes")
+     * @ORM\JoinTable(name="statute_votes",
+     *                joinColumns={
+     *                  @ORM\JoinColumn(name="contribution_id", referencedColumnName="id")
+     *                },
+     *                inverseJoinColumns={
+     *                  @ORM\JoinColumn(name="user_id", referencedColumnName="id", unique=true)
+     *                }
+     * )
      */
     protected $votes;
 
@@ -33,7 +40,7 @@ class ThematicContribution extends Contribution
      *
      * @param User $votes
      *
-     * @return ThematicContribution
+     * @return StatuteContribution
      */
     public function addVote(User $votes)
     {

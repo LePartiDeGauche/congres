@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Entity\Congres\Contribution;
 use AppBundle\Entity\Congres\GeneralContribution;
 use AppBundle\Entity\Congres\ThematicContribution;
+use AppBundle\Entity\Congres\StatuteContribution;
 use AppBundle\Form\Type\NewCongresContributionType;
 
 /**
@@ -30,17 +31,21 @@ class ContributionController extends Controller
          */
         $formGeneral = $this->createForm(new NewCongresContributionType(), new GeneralContribution($this->getUser()));
         $formThematic = $this->createForm(new NewCongresContributionType(), new ThematicContribution($this->getUser()));
+        $formStatute = $this->createForm(new NewCongresContributionType(), new StatuteContribution($this->getUser()));
 
         $formGeneral->handleRequest($request);
         $formThematic->handleRequest($request);
+        $formStatute->handleRequest($request);
 
-        if ($formGeneral->isSubmitted() || $formThematic->isSubmitted()) {
+        if ($formGeneral->isSubmitted() || $formThematic->isSubmitted() || $formStatute->isSubmitted()) {
             $type = $formGeneral->get('type')->getData();
 
             if ('generale' === $type) {
                 $displayedForm = $formGeneral;
             } elseif ('thematique' === $type) {
                 $displayedForm = $formThematic;
+            } elseif ('statutaire' === $type) {
+                $displayedForm = $formStatute;
             }
 
             if ($displayedForm->isValid()) {
@@ -67,9 +72,13 @@ class ContributionController extends Controller
         $repo = $this->getDoctrine()->getRepository('AppBundle:Congres\ThematicContribution');
         $thematicContribs = $repo->findByAuthor($this->getUser());
 
+        $repo = $this->getDoctrine()->getRepository('AppBundle:Congres\StatuteContribution');
+        $statuteContribs = $repo->findByAuthor($this->getUser());
+
         return $this->render('contribution/my_submissions.html.twig', array(
             'generalContrib' => $generalContrib,
             'thematicContribs' => $thematicContribs,
+            'statuteContribs' => $statuteContribs,
         ));
     }
 
@@ -90,6 +99,11 @@ class ContributionController extends Controller
             $repo = $this->getDoctrine()->getRepository('AppBundle:Congres\ThematicContribution');
             break;
         default:
+        case 'AppBundle\Entity\Congres\StatuteContribution':
+            $type = 'statute';
+            $repo = $this->getDoctrine()->getRepository('AppBundle:Congres\StatuteContribution');
+            break;
+        default:
             return $this->createNotFoundException();
             break;
         }
@@ -104,7 +118,7 @@ class ContributionController extends Controller
     }
 
     /**
-     * @Route("/liste", name="contribution_list")
+     * @Route("/", name="contribution_list")
      */
     public function listAction(Request $request)
     {
@@ -114,18 +128,25 @@ class ContributionController extends Controller
         $generalOpenContribs = $generalRepo->findByStatusWithVotes(Contribution::STATUS_SIGNATURES_OPEN, $this->getUser());
         $generalClosedContribs = $generalRepo->findByStatusWithVotes(Contribution::STATUS_SIGNATURES_CLOSED, $this->getUser());
 
-        $repo = $this->getDoctrine()->getRepository('AppBundle:Congres\ThematicContribution');
-        $thematicOpenContribs = $repo->findByStatusWithVotes(Contribution::STATUS_SIGNATURES_OPEN, $this->getUser());
-        $thematicClosedContribs = $repo->findByStatusWithVotes(Contribution::STATUS_SIGNATURES_CLOSED, $this->getUser());
+        $thematicRepo = $this->getDoctrine()->getRepository('AppBundle:Congres\ThematicContribution');
+        $thematicOpenContribs = $thematicRepo->findByStatusWithVotes(Contribution::STATUS_SIGNATURES_OPEN, $this->getUser());
+        $thematicClosedContribs = $thematicRepo->findByStatusWithVotes(Contribution::STATUS_SIGNATURES_CLOSED, $this->getUser());
+
+        $statuteRepo = $this->getDoctrine()->getRepository('AppBundle:Congres\StatuteContribution');
+        $statuteOpenContribs = $statuteRepo->findByStatusWithVotes(Contribution::STATUS_SIGNATURES_OPEN, $this->getUser());
+        $statuteClosedContribs = $statuteRepo->findByStatusWithVotes(Contribution::STATUS_SIGNATURES_CLOSED, $this->getUser());
 
         shuffle($generalOpenContribs);
         shuffle($thematicOpenContribs);
+        shuffle($statuteOpenContribs);
 
         return $this->render('contribution/list.html.twig', array(
             'generalOpenContribs' => $generalOpenContribs,
             'generalClosedContribs' => $generalClosedContribs,
             'thematicOpenContribs' => $thematicOpenContribs,
             'thematicClosedContribs' => $thematicClosedContribs,
+            'statuteOpenContribs' => $statuteOpenContribs,
+            'statuteClosedContribs' => $statuteClosedContribs,
         ));
     }
 
@@ -139,15 +160,20 @@ class ContributionController extends Controller
         $generalRepo = $this->getDoctrine()->getRepository('AppBundle:Congres\GeneralContribution');
         $generalClosedContribs = $generalRepo->findByStatus(Contribution::STATUS_SIGNATURES_CLOSED);
 
-        $repo = $this->getDoctrine()->getRepository('AppBundle:Congres\ThematicContribution');
-        $thematicClosedContribs = $repo->findByStatus(Contribution::STATUS_SIGNATURES_CLOSED);
+        $thematicRepo = $this->getDoctrine()->getRepository('AppBundle:Congres\ThematicContribution');
+        $thematicClosedContribs = $thematicRepo->findByStatus(Contribution::STATUS_SIGNATURES_CLOSED);
+
+        $statuteRepo = $this->getDoctrine()->getRepository('AppBundle:Congres\StatuteContribution');
+        $statuteClosedContribs = $statuteRepo->findByStatus(Contribution::STATUS_SIGNATURES_CLOSED);
 
         shuffle($generalClosedContribs);
         shuffle($thematicClosedContribs);
+        shuffle($statuteClosedContribs);
 
         return $this->render('contribution/listValid.html.twig', array(
             'generalClosedContribs' => $generalClosedContribs,
             'thematicClosedContribs' => $thematicClosedContribs,
+            'statuteClosedContribs' => $statuteClosedContribs,
         ));
     }
 
@@ -161,8 +187,10 @@ class ContributionController extends Controller
 
         if (is_a($contrib, "AppBundle\Entity\Congres\GeneralContribution")) {
             $type = 'general';
-        } else {
+        } elseif (is_a($contrib, "AppBundle\Entity\Congres\ThematicContribution")) {
             $type = 'thematic';
+        } else {
+            $type = 'statute';
         }
 
         $form = $this->createFormBuilder()
@@ -175,8 +203,10 @@ class ContributionController extends Controller
 
             if ($type === 'general') {
                 $contrib_repo = $em->getRepository("AppBundle:Congres\GeneralContribution");
-            } else {
+            } elseif ($type === 'thematic') {
                 $contrib_repo = $em->getRepository("AppBundle:Congres\ThematicContribution");
+            } else {
+                $contrib_repo = $em->getRepository("AppBundle:Congres\StatuteContribution");
             }
 
             $contrib->addVote($this->getUser());

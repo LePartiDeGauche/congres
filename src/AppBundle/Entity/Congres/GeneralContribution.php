@@ -3,6 +3,7 @@
 namespace AppBundle\Entity\Congres;
 
 use Doctrine\ORM\Mapping as ORM;
+use AppBundle\Entity\User as User;
 
 /**
  * GeneralContribution.
@@ -14,18 +15,17 @@ class GeneralContribution extends Contribution
     /**
      * @var \Doctrine\Common\Collections\Collection
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\User")
-     * @ORM\JoinTable(
-     *                                              name="general_votes",
-     *                                              joinColumns={@ORM\JoinColumn(name="contribution_id", referencedColumnName="id")},
-     *                                              inverseJoinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id", unique=true)}
-     *                                              )
+     * @ORM\JoinTable(name="general_votes",
+     *                joinColumns={@ORM\JoinColumn(name="contribution_id", referencedColumnName="id")},
+     *                inverseJoinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id", unique=true)}
+     * )
      */
     protected $votes;
 
     /**
      * Constructor.
      */
-    public function __construct(\AppBundle\Entity\User $user = null)
+    public function __construct(User $user = null)
     {
         parent::__construct($user);
         $this->votes = new \Doctrine\Common\Collections\ArrayCollection();
@@ -34,11 +34,11 @@ class GeneralContribution extends Contribution
     /**
      * Add votes.
      *
-     * @param \AppBundle\Entity\User $votes
+     * @param User $votes
      *
-     * @return ThematicContribution
+     * @return GeneralContribution
      */
-    public function addVote(\AppBundle\Entity\User $votes)
+    public function addVote(User $votes)
     {
         $this->votes[] = $votes;
 
@@ -48,9 +48,9 @@ class GeneralContribution extends Contribution
     /**
      * Remove votes.
      *
-     * @param \AppBundle\Entity\User $votes
+     * @param User $votes
      */
-    public function removeVote(\AppBundle\Entity\User $votes)
+    public function removeVote(User $votes)
     {
         $this->votes->removeElement($votes);
     }

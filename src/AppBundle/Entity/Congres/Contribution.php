@@ -9,7 +9,9 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity(repositoryClass="AppBundle\Entity\Congres\ContributionRepository")
  * @ORM\InheritanceType("SINGLE_TABLE")
  * @ORM\DiscriminatorColumn(name="contribution_type", type="string")
- * @ORM\DiscriminatorMap({"general" = "GeneralContribution", "thematic" = "ThematicContribution"})
+ * @ORM\DiscriminatorMap({"general" = "GeneralContribution",
+ *                        "thematic" = "ThematicContribution",
+ *                        "statute" = "StatuteContribution"})
  */
 abstract class Contribution
 {

@@ -40,10 +40,20 @@ services:
         calls:
             - [ setTranslationDomain, [AppBundle] ]
             - [ setRouter, [@router] ]
+    sonata.admin.congres.statute_contribution:
+        class: AppBundle\Admin\Congres\StatuteContributionAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Congrès 2018", label: "Contributions statutaires"}
+        arguments:
+            - ~
+            - AppBundle\Entity\Congres\StatuteContribution
+            - sonata.admin.congres.contribution_controller
+        calls:
+            - [ setTranslationDomain, [AppBundle] ]
     sonata.admin.congres.thematic_contribution:
         class: AppBundle\Admin\Congres\ThematicContributionAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: "Congrès 2015", label: "Contributions thématiques"}
+            - { name: sonata.admin, manager_type: orm, group: "Congrès 2018", label: "Contributions thématiques"}
         arguments:
             - ~
             - AppBundle\Entity\Congres\ThematicContribution
@@ -53,7 +63,7 @@ services:
     sonata.admin.congres.general_contribution:
         class: AppBundle\Admin\Congres\GeneralContributionAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: "Congrès 2015", label: "Contributions générales"}
+            - { name: sonata.admin, manager_type: orm, group: "Congrès 2018", label: "Contributions générales"}
         arguments:
             - ~
             - AppBundle\Entity\Congres\GeneralContribution
