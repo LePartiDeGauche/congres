@@ -35,14 +35,16 @@ class MenuBuilder
             $submenu = $menu->addChild($category->getTitle());
             $submenu->setAttribute('dropdown', true);
             foreach ($category->getPages() as $page) {
-                $submenu->addChild(
-                    $page->getTitle(),
-                    array(
-                        'label' => $page->getTitle(),
-                        'route' => 'page_show',
-                        'routeParameters' => array('id' => $page->getId()),
-                    )
-                );
+                if ($page->isIsActive()) {
+                    $submenu->addChild(
+                        $page->getTitle(),
+                        array(
+                            'label' => $page->getTitle(),
+                            'route' => 'page_show',
+                            'routeParameters' => array('id' => $page->getId()),
+                        )
+                    );
+                }
             }
         }
         return $menu;
