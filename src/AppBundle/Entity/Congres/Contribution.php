@@ -3,6 +3,7 @@
 namespace AppBundle\Entity\Congres;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Table(name="contributions")
@@ -33,6 +34,8 @@ abstract class Contribution
      *
      * @var \AppBundle\Entity\User
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User")
+     *
+     * @Assert\NotNull
      */
     protected $author;
 
@@ -40,20 +43,17 @@ abstract class Contribution
      * @var string
      *
      * @ORM\Column(name="title", type="string", length=255)
+     *
+     * @Assert\NotNull
      */
     protected $title;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="content", type="text")
-     */
-    protected $content;
-
-    /**
-     * @var string
-     *
      * @ORM\Column(name="status", type="string", length=255)
+     *
+     * @Assert\NotNull
      */
     protected $status;
 

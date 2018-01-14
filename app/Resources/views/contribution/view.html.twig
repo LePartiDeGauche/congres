@@ -14,7 +14,9 @@
             Auteur :
             {{ contrib.author.profile.firstname }} {{ contrib.author.profile.lastname }}
         </p>
-        <p class="text-justify">{{ contrib.content|nl2br }}</p>
+        <p>
+        {{ contrib.content|raw }}
+        </p>
 
         {% if is_granted('CALENDAR_contribution_vote') %}
             <h3>Signatures</h3>

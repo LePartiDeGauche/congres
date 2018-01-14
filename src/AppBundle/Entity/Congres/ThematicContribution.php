@@ -4,6 +4,7 @@ namespace AppBundle\Entity\Congres;
 
 use Doctrine\ORM\Mapping as ORM;
 use AppBundle\Entity\User as User;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * ThematicContribution.
@@ -12,6 +13,18 @@ use AppBundle\Entity\User as User;
  */
 class ThematicContribution extends Contribution
 {
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="content", type="text")
+     *
+     * @Assert\NotNull
+     * @Assert\Length(
+     *     max=8000
+     * )
+     */
+    protected $content;
+
     /**
      * @var \Doctrine\Common\Collections\Collection
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\User")

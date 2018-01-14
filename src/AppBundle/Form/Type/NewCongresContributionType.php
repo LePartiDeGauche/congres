@@ -19,7 +19,16 @@ class NewCongresContributionType extends AbstractType
                 'mapped' => false,
         ));
         $builder->add('title', null, array('label' => 'Titre'));
-        $builder->add('content', null, array('label' => 'Texte'));
+        $builder->add('content', null, array(
+            'label' => 'Texte',
+            'attr' => array(
+                'class' => 'tinymce',
+                'data-theme' => 'markdown',
+            )
+        ));
+        $builder->add('save', 'submit', array(
+            'attr' => array('class' => 'btn-primary'),
+        ));
     }
 
     public function getName()

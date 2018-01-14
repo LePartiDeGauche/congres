@@ -137,15 +137,13 @@ stfalcon_tinymce:
     tinymce_jquery: true
     selector: ".tinymce"
     language: %locale%
-
     theme:
         markdown:
             plugins:
                 - "autolink lists link charmap hr"
                 - "searchreplace wordcount visualchars code"
                 - "paste"
-            toolbar1: "undo redo | styleselect | bold italic | alignjustify | bullist numlist outdent indent"
-            toolbar2: "link unlink | removeformat cleanup"
+            toolbar1: "undo redo | styleselect | bold italic | alignjustify | bullist numlist outdent indent | link unlink | removeformat cleanup"
             paste_word_valid_elements: "b,strong,i,em,h1,h2,h3,h4,h5,h6,ul,ol,li,a,hr,blockquote,cite,q,code,p"
             paste_merge_formats: true
             paste_webkit_styles: none
@@ -157,7 +155,6 @@ stfalcon_tinymce:
                 "*": ""
             valid_classes:
                 "*": ""
-
             style_formats :
                 - {title : 'Titre 1', block : 'h1'}
                 - {title : 'Titre 2', block : 'h2'}

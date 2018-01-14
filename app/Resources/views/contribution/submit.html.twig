@@ -6,10 +6,12 @@
 <div class="container">
     <div class="row">
         <h1>Soumettre une contribution</h1>
-        <form method="post" action="{{ path('contribution_submit') }}">
-            {{ form_widget(form) }}
-            <input type="submit" class="btn btn-primary" value="Envoyer" />
-        </form>
+        {{ form(form) }}
     </div>
 </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ tinymce_init() }}
 {% endblock %}
