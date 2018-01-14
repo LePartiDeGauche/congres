@@ -7,7 +7,7 @@
     <div class="row">
         <div class="col-md-12">
             <h1>Listes de mes contributions</h1>
-            {% if generalContrib is null and thematicContribs is empty %}
+            {% if generalContrib is null and thematicContribs is empty and statuteContribs is empty %}
                 <p>Pas de contribution envoyée.</p>
             {% else %}
                 <table class="table">
@@ -32,6 +32,22 @@
                         {% for contrib in thematicContribs %}
                             <tr>
                                 <td>Contribution thématique</td>
+                                <td>
+                                    <a href="{{ path('contribution_view', {id: contrib.id}) }}">{{ contrib.title }}</a>
+                                </td>
+                                <td>
+                                    <a class="btn btn-default btn-sm" href="{{ path('contribution_delete', {id: contrib.id}) }}">
+                                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                                        <span class="sr-only">Supprimer</span>
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    {% endif %}
+                    {% if statuteContribs is not empty %}
+                        {% for contrib in statuteContribs %}
+                            <tr>
+                                <td>Contribution statutaires</td>
                                 <td>
                                     <a href="{{ path('contribution_view', {id: contrib.id}) }}">{{ contrib.title }}</a>
                                 </td>
