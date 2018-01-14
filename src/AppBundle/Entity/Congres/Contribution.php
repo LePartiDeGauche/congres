@@ -4,6 +4,7 @@ namespace AppBundle\Entity\Congres;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use \DateTime as DateTime;
 
 /**
  * @ORM\Table(name="contributions")
@@ -58,6 +59,15 @@ abstract class Contribution
     protected $status;
 
     /**
+     * @var DateTime
+     *
+     * @ORM\Column(name="submissionDate", type="datetime")
+     *
+     * @Assert\NotNull
+     */
+    protected $submissionDate;
+
+    /**
      * Constructor.
      *
      * @param \AppBundle\Entity\User $author The author of the contribution.
@@ -66,6 +76,7 @@ abstract class Contribution
     {
         $this->setAuthor($author);
         $this->setStatus(self::STATUS_NEW);
+        $this->setSubmissionDate(new DateTime());
     }
 
     /**
@@ -180,5 +191,29 @@ abstract class Contribution
     public function getStatus()
     {
         return $this->status;
+    }
+
+    /**
+     * Set Submission Date
+     *
+     * @param DateTime $datetime
+     *
+     * @return Contribution
+     */
+    public function setSubmissionDate($datetime) {
+        if (is_null($datetime)) {
+            $datetime = new DateTime();
+        }
+        $this->submissionDate = $datetime;
+        return $this;
+    }
+
+    /**
+     * Get submission date
+     *
+     * @return DateTime
+     */
+    public function getSubmissionDate() {
+        return $this->submissionDate;
     }
 }
