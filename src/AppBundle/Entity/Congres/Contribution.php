@@ -21,6 +21,10 @@ abstract class Contribution
     const STATUS_SIGNATURES_OPEN = 'signatures open';
     const STATUS_NEW = 'new contribution';
 
+    const DEPOSIT_TYPE_INDIVIDUAL = 'individual';
+    const DEPOSIT_TYPE_SEN = 'SEN';
+    const DEPOSIT_TYPE_COMMISSION = 'commission';
+
     /**
      * @var int
      *
@@ -66,6 +70,13 @@ abstract class Contribution
      * @Assert\NotNull
      */
     protected $submissionDate;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="deposit_type", type="string", length=255)
+     */
+    protected $depositTypeValue;
 
     /**
      * Constructor.
@@ -216,4 +227,48 @@ abstract class Contribution
     public function getSubmissionDate() {
         return $this->submissionDate;
     }
+
+    /**
+     * Set type
+     *
+     * @param string $type
+     *
+     * @return Contribution
+     */
+    public function setDepositTypeValue($type = null)
+    {
+        $this->depositTypeValue = $type;
+
+        return $this;
+    }
+
+    /**
+     * Get type value
+     *
+     * @return string
+     */
+    public function getDepositTypeValue()
+    {
+        return $this->depositTypeValue;
+    }
+
+    /**
+     * Get type
+
+     * @return string
+     */
+    public function getDepositType()
+    {
+        $depositTypeValue = $this->getDepositTypeValue();
+
+        if (!isset($depositTypeValue)) {
+            return self::DEPOSIT_TYPE_INDIVIDUAL;
+        } elseif ($depositTypeValue == self::DEPOSIT_TYPE_SEN) {
+            return self::DEPOSIT_TYPE_SEN;
+        } else {
+            return self::DEPOSIT_TYPE_COMMISSION;
+        }
+    }
+
+
 }

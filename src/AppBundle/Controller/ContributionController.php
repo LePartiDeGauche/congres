@@ -48,7 +48,16 @@ class ContributionController extends Controller
                 $displayedForm = $formStatute;
             }
 
-            if ($displayedForm->isValid()) {
+            if ($displayedForm->isSubmitted() && $displayedForm->isValid()) {
+                $contribution = $displayedForm->getData();
+
+                $deposit_type = $displayedForm->get('deposit_type')->getData();
+                if ($deposit_type == Contribution::DEPOSIT_TYPE_COMMISSION) {
+                    $contribution->setDepositTypeValue($displayedForm->get('deposit_type_value')->getData());
+                } else {
+                    $contribution->setDepositTypeValue($deposit_type);
+                }
+
                 $this->getDoctrine()->getManager()->persist($displayedForm->getData());
                 $this->getDoctrine()->getManager()->flush();
 

@@ -75,6 +75,7 @@ class ContributionAdmin extends Admin
             ->addIdentifier('title', null, array('label' => 'Titre'))
             ->add('author.profile', null, array('label' => 'Nom', 'associated_property' => 'lastname'))
             ->add('author.profile.firstname', null, array('label' => 'Prénom'))
+            ->add('deposit_type', null, array('label' => 'Type de dépôt'))
             ->add('status', 'choice', array(
                 'label' => 'Statut',
                 'choices' => array(
