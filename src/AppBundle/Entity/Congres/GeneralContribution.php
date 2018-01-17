@@ -4,6 +4,7 @@ namespace AppBundle\Entity\Congres;
 
 use Doctrine\ORM\Mapping as ORM;
 use AppBundle\Entity\User as User;
+use AppBundle\Validator\Constraints as AppBundleAssert;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -19,9 +20,7 @@ class GeneralContribution extends Contribution
      * @ORM\Column(name="content", type="text")
      *
      * @Assert\NotNull
-     * @Assert\Length(
-     *     max=20000
-     * )
+     * @AppBundleAssert\FormatedLength(max=20000)
      */
     protected $content;
 
