@@ -61,6 +61,15 @@ class ContributionController extends Controller
                 $this->getDoctrine()->getManager()->persist($displayedForm->getData());
                 $this->getDoctrine()->getManager()->flush();
 
+                $this
+                    ->get('session')
+                    ->getFlashBag()
+                    ->add(
+                        'success',
+                        'Contribution enregistrée. Le statut de ton adhésion sera contrôlé par la commission des votes.'
+                    )
+                ;
+
                 return $this->redirect($this->generateUrl('contribution_my_submissions'));
             }
         }

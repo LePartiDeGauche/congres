@@ -6,7 +6,15 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
+            {% for flashMessage in app.session.flashbag.get('success') %}
+                <div class="alert alert-success">
+                    {{ flashMessage }}
+                </div>
+            {% endfor %}
             <h1>Listes de mes contributions</h1>
+            <p>
+                <a href="{{ path('contribution_submit')}}">Déposer une nouvelle contribution</a>
+            </p>
             {% if generalContrib is null and thematicContribs is empty and statuteContribs is empty %}
                 <p>Pas de contribution envoyée.</p>
             {% else %}
