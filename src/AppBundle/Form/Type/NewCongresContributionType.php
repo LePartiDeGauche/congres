@@ -36,6 +36,7 @@ class NewCongresContributionType extends AbstractType
             'mapped' => false,
         ));
         $builder->add('deposit_type_value', 'text', array(
+            'data' => '-',
             'label' => 'Précisez',
             'attr' => array(
                 'data-help' => 'Le cas échéant, merci de préciser le nom de la commission thématique.'
