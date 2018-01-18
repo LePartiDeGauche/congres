@@ -73,8 +73,8 @@ class ContributionAdmin extends Admin
     {
         $listMapper
             ->addIdentifier('title', null, array('label' => 'Titre'))
-            ->add('author.profile', null, array('label' => 'Nom', 'associated_property' => 'lastname'))
-            ->add('author.profile.firstname', null, array('label' => 'Prénom'))
+            ->add('author.profile', null, array('label' => 'Nom, prénom'))
+            ->add('author.profile.departement', null, array('label' => 'Département'))
             ->add('deposit_type', null, array('label' => 'Type de dépôt'))
             ->add('status', 'choice', array(
                 'label' => 'Statut',

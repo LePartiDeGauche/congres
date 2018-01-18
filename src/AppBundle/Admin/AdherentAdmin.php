@@ -24,7 +24,6 @@ class AdherentAdmin extends Admin
             ))
             ->add('email')
             ->add('mobilephone', null, array('label' => 'Téléphone'))
-            ->add('departement')
             ->add('birthdate', 'sonata_type_date_picker', array(
                 'label' => 'Date de naissance',
                 'format' => 'd/M/y',
@@ -85,6 +84,7 @@ class AdherentAdmin extends Admin
             ->addIdentifier('email')
             ->addIdentifier('lastname', null, array('label' => 'Nom'))
             ->addIdentifier('firstname', null, array('label' => 'Prénom'))
+            ->add('departement', null, array('label' => 'Dpt'))
             ->add('gender', null, array('label' => 'Genre'))
             ->add('birthdate', null, array('label' => 'Date de naissance'))
             ->add('user', null, array('label' => 'Compte'))

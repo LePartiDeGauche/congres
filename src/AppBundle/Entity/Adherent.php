@@ -518,10 +518,20 @@ class Adherent
     /**
      * Get departement.
      *
-     * @return int
+     * @return string
      */
     public function getDepartement()
     {
+        if ($this->departement != 0) {
+            return $this->departement;
+        } else {
+            $participations = $this->getOrganParticipations();
+            foreach ($participations as $participation) {
+                if ($participation->getOrgan()->getOrganType()->getName() == "Coordination départementale") {
+                    return $participation->getOrgan()->getName();
+                }
+            }
+        }
         return $this->departement;
     }
 
