@@ -11,14 +11,47 @@ use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBUndle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Show\ShowMapper;
 
 class ContributionAdmin extends Admin
 {
+    /**
+     * @param ShowMapper $showMapper
+     */
+    protected function configureShowFields(ShowMapper $showMapper)
+    {
+        $showMapper
+            ->add('title', null, array('label' => 'Titre'))
+            ->add('author.profile', null, array('label' => 'Auteur'))
+            ->add('author.profile.departement', null, array('label' => 'Département'))
+            ->add('status', 'choice', array(
+                'label' => 'Statut',
+                'choices' => array(
+                    Contribution::STATUS_SIGNATURES_CLOSED => 'Signatures récoltés',
+                    Contribution::STATUS_SIGNATURES_OPEN => 'Ouverte aux signatures',
+                    Contribution::STATUS_NEW => 'Envoyée mais non validée (non publique)',
+                ),
+            ))
+            ->add('deposit_type', 'choice', array(
+                'label' => 'Type de dépôt',
+                'choices' => array(
+                    Contribution::DEPOSIT_TYPE_INDIVIDUAL => 'Individuel',
+                    Contribution::DEPOSIT_TYPE_SEN => 'SEN',
+                    Contribution::DEPOSIT_TYPE_COMMISSION => 'Commission'
+                )
+            ))
+            ->add('deposit_type_value', null, array('label' => 'Complément'))
+            ->add('content', null, array(
+                'label' => 'Contenu',
+                'template' => 'admin/contribution_show.html.twig'
+            ))
+        ;
+    }
+
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
             ->add('title', null, array('label' => 'Titre'))
-            ->add('content', null, array('label' => 'Texte'))
             ->add('author', 'sonata_type_model_autocomplete', array(
                 'label' => 'Auteur',
                 'property' => array('profile.firstname', 'profile.lastname', 'email'),
@@ -42,6 +75,7 @@ class ContributionAdmin extends Admin
                     return $firstname.' '.$lastname.' &lt;'.$email.'&gt;';
                 },
             ))
+            ->add('content', null, array('label' => 'Texte'))
             ->add('status', 'choice', array(
                 'label' => 'Statut',
                 'choices' => array(
@@ -73,9 +107,16 @@ class ContributionAdmin extends Admin
     {
         $listMapper
             ->addIdentifier('title', null, array('label' => 'Titre'))
-            ->add('author.profile', null, array('label' => 'Nom, prénom'))
+            ->add('author.profile', null, array('label' => 'Auteur'))
             ->add('author.profile.departement', null, array('label' => 'Département'))
-            ->add('deposit_type', null, array('label' => 'Type de dépôt'))
+            ->add('deposit_type', 'choice', array(
+                'label' => 'Type de dépôt',
+                'choices' => array(
+                    Contribution::DEPOSIT_TYPE_INDIVIDUAL => 'Individuel',
+                    Contribution::DEPOSIT_TYPE_SEN => 'SEN',
+                    Contribution::DEPOSIT_TYPE_COMMISSION => 'Commission'
+                )
+            ))
             ->add('status', 'choice', array(
                 'label' => 'Statut',
                 'choices' => array(
@@ -84,7 +125,13 @@ class ContributionAdmin extends Admin
                     Contribution::STATUS_NEW => 'Envoyée mais non validée (non publique)',
                 ),
                 'editable' => true,
-            ));
+            ))
+            ->add('_action', 'actions', array(
+                'actions' => array(
+                    'show' => array()
+                ),
+            ))
+            ;
     }
 
     public function getBatchActions()
