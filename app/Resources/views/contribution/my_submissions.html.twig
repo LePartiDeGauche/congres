@@ -6,12 +6,12 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            {% for flashMessage in app.session.flashbag.get('success') %}
-                <div class="alert alert-success">
+            <h1>Listes de mes contributions</h1>
+            {% for flashMessage in app.session.flashbag.get('warning') %}
+                <div class="alert alert-warning">
                     {{ flashMessage }}
                 </div>
             {% endfor %}
-            <h1>Listes de mes contributions</h1>
             <p>
                 <a href="{{ path('contribution_submit')}}">Déposer une nouvelle contribution</a>
             </p>

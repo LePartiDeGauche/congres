@@ -65,8 +65,8 @@ class ContributionController extends Controller
                     ->get('session')
                     ->getFlashBag()
                     ->add(
-                        'success',
-                        'Contribution enregistrée. Le statut de ton adhésion sera contrôlé par la commission des votes.'
+                        'warning',
+                        'Contribution enregistrée. Le statut de ton adhésion et la longueur en caractère de ta contribution seront contrôlés par la commission des votes.'
                     )
                 ;
 
