@@ -20,10 +20,6 @@ class ThematicContribution extends Contribution
      * @ORM\Column(name="content", type="text")
      *
      * @Assert\NotNull
-     * @AppBundleAssert\FormatedLength(
-     *     max=8500,
-     *     maxMessage="Votre contribution ne doit pas dépasser les 8000 caractères (espaces compris)."
-     * )
      */
     protected $content;
 

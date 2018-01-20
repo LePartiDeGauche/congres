@@ -20,10 +20,6 @@ class GeneralContribution extends Contribution
      * @ORM\Column(name="content", type="text")
      *
      * @Assert\NotNull
-     * @AppBundleAssert\FormatedLength(
-     *     max=21000,
-     *     maxMessage="Votre contribution ne doit pas dépasser les 20000 caractères (espaces compris)."
-     * )
      */
     protected $content;
 
