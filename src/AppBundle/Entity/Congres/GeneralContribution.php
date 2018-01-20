@@ -21,7 +21,7 @@ class GeneralContribution extends Contribution
      *
      * @Assert\NotNull
      * @AppBundleAssert\FormatedLength(
-     *     max=20500,
+     *     max=21000,
      *     maxMessage="Votre contribution ne doit pas dépasser les 20000 caractères (espaces compris)."
      * )
      */

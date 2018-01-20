@@ -21,7 +21,7 @@ class ThematicContribution extends Contribution
      *
      * @Assert\NotNull
      * @AppBundleAssert\FormatedLength(
-     *     max=8200,
+     *     max=8500,
      *     maxMessage="Votre contribution ne doit pas dépasser les 8000 caractères (espaces compris)."
      * )
      */
