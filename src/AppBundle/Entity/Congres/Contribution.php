@@ -265,6 +265,8 @@ abstract class Contribution
             return self::DEPOSIT_TYPE_INDIVIDUAL;
         } elseif ($depositTypeValue == self::DEPOSIT_TYPE_SEN) {
             return self::DEPOSIT_TYPE_SEN;
+        } elseif ($depositTypeValue == self::DEPOSIT_TYPE_INDIVIDUAL) {
+            return self::DEPOSIT_TYPE_INDIVIDUAL;
         } else {
             return self::DEPOSIT_TYPE_COMMISSION;
         }
