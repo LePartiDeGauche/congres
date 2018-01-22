@@ -4,9 +4,9 @@
 <table class="table tablesorter">
     <thead>
         <tr>
-            <th>Type</th>
             <th>Titre</th>
             <th>Auteur</th>
+            <th>Type de dépôt</th>
             <th>Signatures</th>
             <th>dont CN</th>
             {% block thead_signed %}
@@ -17,13 +17,23 @@
     <tbody>
     {% for contrib in contribs %}
         <tr>
-            <td>{{ title }}</td>
             <td>
                 <a href="{{ path('contribution_view', {id: contrib.entity.id}) }}">
                     {{ contrib.entity.title }}
                 </a>
             </td>
             <td>{{ contrib.entity.author.profile.firstname }} {{ contrib.entity.author.profile.lastname }}</td>
+            <td>
+                {% if contrib.entity.depositType == constant('DEPOSIT_TYPE_INDIVIDUAL', contrib.entity) %}
+                    individuel
+                {% endif %}
+                {% if contrib.entity.depositType == constant('DEPOSIT_TYPE_SEN', contrib.entity) %}
+                    pour le Secrétariat Exécutif National
+                {% endif %}
+                {% if contrib.entity.depositType == constant('DEPOSIT_TYPE_COMMISSION', contrib.entity) %}
+                    pour la commission {{ contrib.entity.depositTypeValue }}
+                {% endif %}
+            </td>
             <td>{{ contrib.adhvote }}</td>
             <td>{{ contrib.cnvote }}</td>
             {% block contrib_vote %}
