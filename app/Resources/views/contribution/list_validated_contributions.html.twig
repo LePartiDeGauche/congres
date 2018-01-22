@@ -1,0 +1,41 @@
+{% if contribs is empty %}
+    <p>Pas de contribution validée.</p>
+{% else %}
+<table class="table tablesorter">
+    <thead>
+        <tr>
+            <th>Type</th>
+            <th>Titre</th>
+            <th>Auteur</th>
+            <th>Signatures</th>
+            <th>dont CN</th>
+            {% block thead_signed %}
+            <th>Signée</th>
+            {% endblock %}
+        </tr>
+    </thead>
+    <tbody>
+    {% for contrib in contribs %}
+        <tr>
+            <td>{{ title }}</td>
+            <td>
+                <a href="{{ path('contribution_view', {id: contrib.entity.id}) }}">
+                    {{ contrib.entity.title }}
+                </a>
+            </td>
+            <td>{{ contrib.entity.author.profile.firstname }} {{ contrib.entity.author.profile.lastname }}</td>
+            <td>{{ contrib.adhvote }}</td>
+            <td>{{ contrib.cnvote }}</td>
+            {% block contrib_vote %}
+            <td>
+                {% if contrib.uservote %}
+                    <span class="glyphicon glyphicon-check" aria-hidden="true"></span>
+                {% endif %}
+                <span class="sr-only">Signée</span>
+            </td>
+            {% endblock %}
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endif %}

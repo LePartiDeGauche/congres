@@ -154,10 +154,6 @@ class ContributionController extends Controller
         $statuteOpenContribs = $statuteRepo->findByStatusWithVotes(Contribution::STATUS_SIGNATURES_OPEN, $this->getUser());
         $statuteClosedContribs = $statuteRepo->findByStatusWithVotes(Contribution::STATUS_SIGNATURES_CLOSED, $this->getUser());
 
-        shuffle($generalOpenContribs);
-        shuffle($thematicOpenContribs);
-        shuffle($statuteOpenContribs);
-
         return $this->render('contribution/list.html.twig', array(
             'generalOpenContribs' => $generalOpenContribs,
             'generalClosedContribs' => $generalClosedContribs,
@@ -183,10 +179,6 @@ class ContributionController extends Controller
 
         $statuteRepo = $this->getDoctrine()->getRepository('AppBundle:Congres\StatuteContribution');
         $statuteClosedContribs = $statuteRepo->findByStatus(Contribution::STATUS_SIGNATURES_CLOSED);
-
-        shuffle($generalClosedContribs);
-        shuffle($thematicClosedContribs);
-        shuffle($statuteClosedContribs);
 
         return $this->render('contribution/listValid.html.twig', array(
             'generalClosedContribs' => $generalClosedContribs,

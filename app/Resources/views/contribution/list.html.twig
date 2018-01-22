@@ -3,17 +3,14 @@
 {% block title %}Liste des Contributions{% endblock %}
 {% block javascripts %}
 {{ parent() }}
-        <script type="text/javascript" src="{{ asset('js/jquery.tablesorter.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/jquery.tablesorter.min.js') }}"></script>
 <script type="text/javascript">
-$(document).ready(function() 
-    { 
-    $(".tablesorter").tablesorter({ 
-        cssAsc: "glyphicon glyphicon-sort-by-attributes-alt",
-        cssDesc: "glyphicon glyphicon-sort-by-attributes",
-        } 
-); 
-    } 
-); 
+    $(document).ready(function() {
+        $(".tablesorter").tablesorter({
+            cssAsc: "glyphicon glyphicon-sort-by-attributes-alt",
+            cssDesc: "glyphicon glyphicon-sort-by-attributes",
+        });
+    });
 </script>
 {% endblock %}
 
@@ -24,180 +21,61 @@ $(document).ready(function()
             <h1>Liste des contributions</h1>
             <div role="tabpanel">
                 <ul class="nav nav-tabs" role="tablist">
-                    <li role="presentation" class="active"><a href="#validated" aria-controls="validated" role="tab" data-toggle="tab">
-                        Contributions validées
-                    </a></li>
-                    <li role="presentation"><a href="#signatures" aria-controls="signatures" role="tab" data-toggle="tab">
-                        Contributions soumises à signatures
-                    </a></li>
+                    <li role="presentation" class="active">
+                        <a href="#validated" aria-controls="validated" role="tab" data-toggle="tab">
+                            Contributions validées
+                        </a>
+                    </li>
+                    <li role="presentation">
+                        <a href="#signatures" aria-controls="signatures" role="tab" data-toggle="tab">
+                            Contributions soumises à signatures
+                        </a>
+                    </li>
                 </ul>
                 <div class="tab-content">
                     <div role="tabpanel" class="tab-pane active" id="validated">
                         <h2>Contributions générales validées</h2>
-                        {% if generalClosedContribs is empty %}
-                            <p>Pas de contribution validée.</p>
-                        {% else %}
-                            <table class="table tablesorter">
-<thead>
-                                <tr>
-                                    <th>Type</th>
-                                    <th>Titre</th>
-                                    <th>Auteur</th>
-                                    <th>Signatures</th>
-                                    <th>dont CN</th>
-                                    <th>Signée</th>
-                                </tr>
-</thead>
-<tbody>
-                                {% for contrib in generalClosedContribs %}
-                                    <tr>
-                                        <td>Contribution générale</td>
-                                        <td>
-                                            <a href="{{ path('contribution_view', {id: contrib.entity.id}) }}">{{ contrib.entity.title }}</a>
-                                        </td>
-                                        <td>{{ contrib.entity.author.profile.firstname }} {{ contrib.entity.author.profile.lastname }}</td>
-                                        <td>{{ contrib.adhvote }}</td>
-                                        <td>{{ contrib.cnvote }}</td>
-                                        <td>
-                                            {% if contrib.uservote %}
-                                                <span class="glyphicon glyphicon-check" aria-hidden="true"></span>
-                                            {% endif %}
-                                            <span class="sr-only">Signée</span>
-                                        </td>
-                                    </tr>
-                                {% endfor %}
-</tbody>
-                            </table>
-                        {% endif %}
-
+                        {{ include('contribution/list_validated_contributions.html.twig', {
+                                'contribs' : generalClosedContribs,
+                                'title' : 'Contribution générale'
+                            })
+                        }}
                         <h2>Contributions thématiques validées</h2>
-                        {% if thematicClosedContribs is empty %}
-                            <p>Pas de contribution validée.</p>
-                        {% else %}
-                            <table class="table tablesorter">
-<thead>
-                                <tr>
-                                    <th>Type</th><th>Titre</th>
-                                    <th>Auteur</th>
-                                    <th>Signatures</th>
-                                    <th>dont CN</th>
-                                    <th>Signée</th>
-                                </tr>
-</thead>
-<tbody>
-                                {% for contrib in thematicClosedContribs %}
-                                    <tr>
-                                        <td>Contribution thématique</td>
-                                        <td>
-                                            <a href="{{ path('contribution_view', {id: contrib.entity.id}) }}">{{ contrib.entity.title }}</a>
-                                        </td>
-                                        <td>{{ contrib.entity.author.profile.firstname }} {{ contrib.entity.author.profile.lastname }}</td>
-                                        <td>{{ contrib.adhvote}}</td>
-                                        <td>{{ contrib.cnvote}}</td>
-                                        <td>
-                                            {% if contrib.uservote %}
-                                                <span class="glyphicon glyphicon-check" aria-hidden="true"></span>
-                                            {% endif %}
-                                            <span class="sr-only">Signée</span>
-                                        </td>
-                                    </tr>
-                                {% endfor %}
-</tbody>
-                            </table>
-                        {% endif %}
+                        {{ include('contribution/list_validated_contributions.html.twig', {
+                                'contribs' : thematicClosedContribs,
+                                'title' : 'Contribution thématique'
+                            })
+                        }}
+                        <h2>Contributions statutaires validées</h2>
+                        {{ include('contribution/list_validated_contributions.html.twig', {
+                                'contribs' : statuteClosedContribs,
+                                'title' : 'Contribution statutaire'
+                            })
+                        }}
                     </div>
 
                     <div role="tabpanel" class="tab-pane" id="signatures">
                         <h2>Contributions générales soumises à signature</h2>
-                        {% if generalOpenContribs is empty %}
-                            <p>Pas de contribution.</p>
-                        {% else %}
-                            <table class="table tablesorter">
-<thead>
-                                <tr>
-                                    <th>Type</th>
-                                    <th>Titre</th>
-                                    <th>Auteur</th>
-                                    <th>Signatures</th>
-                                    <th>dont CN</th>
-                                    <th>Signer</th>
-                                </tr>
-</thead>
-<tbody>
-                                {% for contrib in generalOpenContribs %}
-                                    <tr>
-                                        <td>Contribution générale</td>
-                                        <td>
-                                            <a href="{{ path('contribution_view', {id: contrib.entity.id}) }}">{{ contrib.entity.title }}</a>
-                                        </td>
-                                        <td>{{ contrib.entity.author.profile.firstname }} {{ contrib.entity.author.profile.lastname }}</td>
-                                        <td>{{ contrib.adhvote }}</td>
-                                        <td>{{ contrib.cnvote }}</td>
-                                        <td>
-                                            {% if contrib.uservote %}
-                                                <span class="glyphicon glyphicon-check" aria-hidden="true"></span>
-                                                <span class="sr-only">Signée</span>
-                                            {% elseif is_granted('vote', contrib.entity) %}
-                                                <a class="btn btn-default btn-sm" href="{{path('contribution_vote', {id: contrib.id}) }}">
-                                                    <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
-                                                    <span class="sr-only">Signer</span>
-                                                </a>
-                                            {% else %}
-                                                <span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span>
-                                                <span class="sr-only">Signature impossible</span>
-                                            {% endif %}
-                                        </td>
-                                    </tr>
-                                {% endfor %}
-</tbody>
-                            </table>
-                        {% endif %}
+                        {{ include('contribution/list_opened_contributions.html.twig', {
+                                'contribs' : generalOpenContribs,
+                                'title' : 'Contribution générale'
+                            })
+                        }}
 
                         <h2>Contributions thématiques soumises à signature</h2>
-                        {% if thematicOpenContribs is empty %}
-                            <p>Pas de contribution.</p>
-                        {% else %}
-                            <table id="open-thematic-contrib" class="table tablesorter">
-<thead>
-                                <tr>
-                                    <th>Type</th>
-                                    <th>Titre</th>
-                                    <th>Auteur</th>
-                                    <th>Signatures</th>
-                                    <th>dont CN</th>
-                                    <th>Signer</th>
-                                </tr>
-</thead>
-<tbody>
+                        {{ include('contribution/list_opened_contributions.html.twig', {
+                                'contribs' : thematicOpenContribs,
+                                'title' : 'Contribution thématique'
+                            })
+                        }}
 
-                                {% for contrib in thematicOpenContribs %}
-                                    <tr>
-                                        <td>Contribution thématique</td>
-                                        <td>
-                                            <a href="{{ path('contribution_view', {id: contrib.entity.id}) }}">{{ contrib.entity.title }}</a>
-                                        </td>
-                                        <td>{{ contrib.entity.author.profile.firstname }} {{ contrib.entity.author.profile.lastname }}</td>
-                                        <td>{{ contrib.adhvote }}</td>
-                                        <td>{{ contrib.cnvote }}</td>
-                                        <td>
-                                            {% if contrib.uservote %}
-                                                <span class="glyphicon glyphicon-check" aria-hidden="true"></span>
-                                                <span class="sr-only">Signée</span>
-                                            {% elseif is_granted('vote', contrib.entity) %}
-                                                <a class="btn btn-default btn-sm" href="{{path('contribution_vote', {id: contrib.id}) }}">
-                                                    <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
-                                                    <span class="sr-only">Signer</span>
-                                                </a>
-                                            {% else %}
-                                                <span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span>
-                                                <span class="sr-only">Signature impossible</span>
-                                            {% endif %}
-                                        </td>
-                                    </tr>
-                                {% endfor %}
-</tbody>
-                            </table>
-                        {% endif %}
+                        <h2>Contributions statutaires soumises à signature</h2>
+                        {{ include('contribution/list_opened_contributions.html.twig', {
+                                'contribs' : statuteOpenContribs,
+                                'title' : 'Contribution statutaire'
+                            })
+                        }}
+
                     </div>
                 </div>
             </div>
