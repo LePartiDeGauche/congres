@@ -4,15 +4,34 @@
 
 {% block body %}
 <div class="container">
-    <div class="row">
+    <div class="row col-md-8">
         <h1>{{ contrib.title }}</h1>
         <p class="small text-muted">
             Type :
-            {% if 'general' == type %}contribution générale{% endif %}
-            {% if 'thematic' == type %}contribution thématique{% endif %}
-            |
-            Auteur :
-            {{ contrib.author.profile.firstname }} {{ contrib.author.profile.lastname }}
+            {% if 'general' == type %} Contribution générale {% endif %}
+            {% if 'thematic' == type %} Contribution thématique {% endif %}
+            {% if 'statute' == type %} Contribution statutaire {% endif %}
+            &nbsp;|&nbsp;
+            {% if contrib.depositType == constant('DEPOSIT_TYPE_INDIVIDUAL', contrib) %}
+                Contribution individuelle de
+                {{ contrib.author.profile.firstname }}
+                {{ contrib.author.profile.lastname }}
+                ({{ contrib.author.profile.departement }})
+            {% endif %}
+            {% if contrib.depositType == constant('DEPOSIT_TYPE_SEN', contrib) %}
+                Contribution de
+                {{ contrib.author.profile.firstname }}
+                {{ contrib.author.profile.lastname }}
+                ({{ contrib.author.profile.departement }})
+                pour le Secrétariat Exécutif National
+            {% endif %}
+            {% if contrib.depositType == constant('DEPOSIT_TYPE_COMMISSION', contrib) %}
+                Contribution de
+                {{ contrib.author.profile.firstname }}
+                {{ contrib.author.profile.lastname }}
+                ({{ contrib.author.profile.departement }})
+                pour la commission {{ contrib.depositTypeValue }}
+            {% endif %}
         </p>
         <p>
         {{ contrib.content|raw }}
@@ -29,6 +48,8 @@
                         <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
                     </a><br/>
                 {% endif %}
+            </p>
+            <p>
                 Signatures : {{ votes.adhvote }} |
                 Dont CN : {{ votes.cnvote }}
             </p>
@@ -38,12 +59,12 @@
                     <ul>
                         {% for user in contrib.votes %}
                             <li>
-                            {{ user.profile.firstname }} {{ user.profile.lastname }}
-                            {% for instance in user.profile.instances%}
-                                {% if instance.name is constant('AppBundle\\Entity\\Instance::INSTANCE_CN') %}
+                            {{ user.profile.firstname }} {{ user.profile.lastname }} - {{ user.profile.departement }}
+                            {% for adhResponsability in user.profile.responsabilities %}
+                                {% if adhResponsability.responsability.name is constant('AppBundle\\Entity\\Responsability::INSTANCE_CN') %}
                                     (CN)
                                 {% endif %}
-                                {% if instance.name is constant('AppBundle\\Entity\\Instance::INSTANCE_SN') %}
+                                {% if adhResponsability.responsability.name is constant('AppBundle\\Entity\\Responsability::INSTANCE_SN') %}
                                     (SEN)
                                 {% endif %}
                             {% endfor %}

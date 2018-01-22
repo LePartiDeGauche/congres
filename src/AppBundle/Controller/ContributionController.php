@@ -108,22 +108,21 @@ class ContributionController extends Controller
         $this->denyAccessUnlessGranted('view', $contrib);
 
         switch (get_class($contrib)) {
-        case 'AppBundle\Entity\Congres\GeneralContribution':
-            $type = 'general';
-            $repo = $this->getDoctrine()->getRepository('AppBundle:Congres\GeneralContribution');
-            break;
-        case 'AppBundle\Entity\Congres\ThematicContribution':
-            $type = 'thematic';
-            $repo = $this->getDoctrine()->getRepository('AppBundle:Congres\ThematicContribution');
-            break;
-        default:
-        case 'AppBundle\Entity\Congres\StatuteContribution':
-            $type = 'statute';
-            $repo = $this->getDoctrine()->getRepository('AppBundle:Congres\StatuteContribution');
-            break;
-        default:
-            return $this->createNotFoundException();
-            break;
+            case 'AppBundle\Entity\Congres\GeneralContribution':
+                $type = 'general';
+                $repo = $this->getDoctrine()->getRepository('AppBundle:Congres\GeneralContribution');
+                break;
+            case 'AppBundle\Entity\Congres\ThematicContribution':
+                $type = 'thematic';
+                $repo = $this->getDoctrine()->getRepository('AppBundle:Congres\ThematicContribution');
+                break;
+            case 'AppBundle\Entity\Congres\StatuteContribution':
+                $type = 'statute';
+                $repo = $this->getDoctrine()->getRepository('AppBundle:Congres\StatuteContribution');
+                break;
+            default:
+                return $this->createNotFoundException();
+                break;
         }
 
         $votes = $repo->getVotes($contrib, $this->getUser());

@@ -75,7 +75,15 @@ class ContributionAdmin extends Admin
                     return $firstname.' '.$lastname.' &lt;'.$email.'&gt;';
                 },
             ))
-            ->add('content', null, array('label' => 'Texte'))
+            ->add('deposit_type', 'choice', array(
+                'label' => 'Type de dépôt',
+                'choices' => array(
+                    Contribution::DEPOSIT_TYPE_INDIVIDUAL => 'Individuel',
+                    Contribution::DEPOSIT_TYPE_SEN => 'SEN',
+                    Contribution::DEPOSIT_TYPE_COMMISSION => 'Commission'
+                )
+            ))
+            ->add('deposit_type_value', 'text', array('label' => 'Complément'))
             ->add('status', 'choice', array(
                 'label' => 'Statut',
                 'choices' => array(
@@ -84,7 +92,9 @@ class ContributionAdmin extends Admin
                     Contribution::STATUS_NEW => 'Envoyée mais non validée (non publique)',
                 ),
                 'multiple' => false,
-            ));
+            ))
+            ->add('content', null, array('label' => 'Texte'))
+            ;
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
@@ -117,6 +127,7 @@ class ContributionAdmin extends Admin
                     Contribution::DEPOSIT_TYPE_COMMISSION => 'Commission'
                 )
             ))
+            ->add('deposit_type_value', null, array('label' => 'Complément'))
             ->add('status', 'choice', array(
                 'label' => 'Statut',
                 'choices' => array(
