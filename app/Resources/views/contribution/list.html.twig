@@ -40,6 +40,11 @@
                 <div class="tab-content">
                     <div role="tabpanel" class="tab-pane active" id="general-contrib">
                         <h2>Contributions générales soumises à signature</h2>
+                        <p>
+                            <a href="{{ path('downloads', { filename : 'Projets de contribution générale.pdf' }) }}">
+                                Télécharger toutes les projets de contributions générales en PDF.
+                            </a>
+                        </p>
                         {{ include('contribution/list_opened_contributions.html.twig', {
                                 'contribs' : generalOpenContribs
                             })
@@ -47,6 +52,11 @@
                     </div>
                     <div role="tabpanel" class="tab-pane" id="thematic-contrib">
                         <h2>Contributions thématiques soumises à signature</h2>
+                        <p>
+                            <a href="{{ path('downloads', { filename : 'Projets de contribution thématique.pdf' }) }}">
+                                Télécharger tous les projets de contributions thématiques en PDF.
+                            </a>
+                        </p>
                         {{ include('contribution/list_opened_contributions.html.twig', {
                                 'contribs' : thematicOpenContribs
                             })
@@ -54,6 +64,11 @@
                     </div>
                     <div role="tabpanel" class="tab-pane" id="statute-contrib">
                         <h2>Contributions statutaires soumises à signature</h2>
+                        <p>
+                            <a href="{{ path('downloads', { filename : 'Projets de contribution statutaire.pdf' }) }}">
+                                Télécharger tous les projets de contributions statutaires en PDF.
+                            </a>
+                        </p>
                         {{ include('contribution/list_opened_contributions.html.twig', {
                                 'contribs' : statuteOpenContribs
                             })
