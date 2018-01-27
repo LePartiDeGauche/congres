@@ -31,7 +31,7 @@ class StatuteContribution extends Contribution
      *                  @ORM\JoinColumn(name="contribution_id", referencedColumnName="id")
      *                },
      *                inverseJoinColumns={
-     *                  @ORM\JoinColumn(name="user_id", referencedColumnName="id", unique=true)
+     *                  @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      *                }
      * )
      */
