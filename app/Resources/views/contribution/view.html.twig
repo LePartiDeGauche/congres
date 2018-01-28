@@ -61,11 +61,10 @@
                             <li>
                             {{ user.profile.firstname }} {{ user.profile.lastname }} - {{ user.profile.departement }}
                             {% for adhResponsability in user.profile.responsabilities %}
-                                {% if adhResponsability.responsability.name is constant('AppBundle\\Entity\\Responsability::INSTANCE_CN') %}
-                                    (CN)
-                                {% endif %}
-                                {% if adhResponsability.responsability.name is constant('AppBundle\\Entity\\Responsability::INSTANCE_SN') %}
+                                {% if adhResponsability.responsability.name is constant('AppBundle\\Entity\\Responsability::INSTANCE_SEN') %}
                                     (SEN)
+                                {% elseif adhResponsability.responsability.name is constant('AppBundle\\Entity\\Responsability::INSTANCE_CN') %}
+                                    (CN)
                                 {% endif %}
                             {% endfor %}
                             </li>

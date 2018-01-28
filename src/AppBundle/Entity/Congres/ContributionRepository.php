@@ -26,7 +26,7 @@ class ContributionRepository extends EntityRepository
             ->where('contrib.id = :contrib')
             ->andWhere('r.name IN (:rname)')
             ->setParameter('contrib', $contrib->getId())
-            ->setParameter('rname', array(Responsability::INSTANCE_CN, Responsability::INSTANCE_SN))
+            ->setParameter('rname', array(Responsability::INSTANCE_CN, Responsability::INSTANCE_SEN))
             ->getQuery()->getSingleScalarResult();
 
         return $CNCount;
@@ -72,7 +72,7 @@ GROUP BY contrib.id
 ORDER BY contrib.submissionDate')
             ->setParameter('user', $user->getId())
             ->setParameter('status', $status)
-            ->setParameter('iname', array(Responsability::INSTANCE_CN, Responsability::INSTANCE_SN))
+            ->setParameter('iname', array(Responsability::INSTANCE_CN, Responsability::INSTANCE_SEN))
             ->execute();
 
         return $contribs;
@@ -101,7 +101,7 @@ LEFT JOIN contrib.votes av
 WHERE contrib.id = :id')
             ->setParameter('user', $user->getId())
             ->setParameter('id', $contrib->getId())
-            ->setParameter('iname', array(Responsability::INSTANCE_CN, Responsability::INSTANCE_SN))
+            ->setParameter('iname', array(Responsability::INSTANCE_CN, Responsability::INSTANCE_SEN))
             ->getSingleResult();
 
         return $contribs;

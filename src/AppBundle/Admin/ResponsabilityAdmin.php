@@ -25,8 +25,7 @@ class ResponsabilityAdmin extends Admin
             ->add('name', 'doctrine_orm_choice', array(
                 'label' => 'Nom',
                 'doctrine_orm_choices' => array(
-                    Responsability::INSTANCE_BN,
-                    Responsability::INSTANCE_SN,
+                    Responsability::INSTANCE_SEN,
                     Responsability::INSTANCE_CN,
                 ),
                 'multiple' => false,
@@ -40,8 +39,7 @@ class ResponsabilityAdmin extends Admin
             ->add('name', 'doctrine_orm_choice', array(
                 'label' => 'Nom',
                 'doctrine_orm_choices' => array(
-                    Responsability::INSTANCE_BN,
-                    Responsability::INSTANCE_SN,
+                    Responsability::INSTANCE_SEN,
                     Responsability::INSTANCE_CN,
                 ),
                 'multiple' => false,
@@ -55,8 +53,7 @@ class ResponsabilityAdmin extends Admin
             ->addIdentifier('name', 'doctrine_orm_choice', array(
                 'label' => 'Nom',
                 'doctrine_orm_choices' => array(
-                    Responsability::INSTANCE_BN,
-                    Responsability::INSTANCE_SN,
+                    Responsability::INSTANCE_SEN,
                     Responsability::INSTANCE_CN,
                 ),
                 'multiple' => false,
