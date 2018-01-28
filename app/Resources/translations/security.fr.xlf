@@ -4,12 +4,12 @@
         <body>
             <trans-unit id="4">
                 <source>Invalid credentials.</source>
-                <target>Identifiant et/ou mot de passe incorrect. Vérifiez que vous avez rempli le formulaire d'inscription, que vous utilisez la bonne adresse courriel (celle saisi lors de votre inscription, dont vous avez reçu confirmation par courriel), que vous utilisez le bon mot de passe. En cas de problème, contactez congres2015@lepartidegauche.fr
+                <target>Identifiant et/ou mot de passe incorrect. Vérifiez que vous avez rempli le formulaire d'inscription, que vous utilisez la bonne adresse courriel (celle saisi lors de votre inscription, dont vous avez reçu confirmation par courriel), que vous utilisez le bon mot de passe. En cas de problème, contactez accueil@lepartidegauche.fr
                 </target>
             </trans-unit>
             <trans-unit id="7">
                 <source>Invalid CSRF token.</source>
-                <target>Le formulaire de connexion était ouvert depuis trop longtemps, pour des raisons de sécurité (Jeton CSRF invalide), nous n'avons pu accepter votre demande de connexion. vous pouvez à présent reéssayer. En cas de problème, rafraichir la page, si cela ne résoud pas le problème, contactez congres2015@lepartidegauche.fr
+                <target>Le formulaire de connexion était ouvert depuis trop longtemps, pour des raisons de sécurité (Jeton CSRF invalide), nous n'avons pu accepter votre demande de connexion. vous pouvez à présent reéssayer. En cas de problème, rafraichir la page, si cela ne résoud pas le problème, contactez accueil@lepartidegauche.fr
                 </target>
             </trans-unit>
         </body>
