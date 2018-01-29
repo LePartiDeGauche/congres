@@ -186,7 +186,7 @@ class Adherent
      */
     public function getLastname()
     {
-        return $this->lastname;
+        return ucwords($this->lastname);
     }
 
     /**
