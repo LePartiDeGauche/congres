@@ -90,4 +90,8 @@ class User extends BaseUser
     {
         return $this->profile;
     }
+
+    public function __toString() {
+        return $this->getProfile() . ' (' . $this->getEmail() . ')';
+    }
 }

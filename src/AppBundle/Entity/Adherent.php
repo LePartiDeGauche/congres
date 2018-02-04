@@ -354,6 +354,18 @@ class Adherent
         return $this->firstname.' '.$this->lastname;
     }
 
+    public function getAdherentWithDepartementAndResponsabilitiesAsString() {
+        $str = $this->getFirstname() . ' ' . $this->getLastname() . ' - ' . $this->getDepartement();
+        foreach ($this->getResponsabilities() as $adhResponsability) {
+            if ($adhResponsability->getResponsability()->getName() == Responsability::INSTANCE_SEN) {
+                $str .= ' (SEN)';
+            } elseif ($adhResponsability->getResponsability()->getName() == Responsability::INSTANCE_CN) {
+                $str .= ' (CN)';
+            }
+        }
+        return $str;
+    }
+
     /**
      * Get names of adherent with uppercased lastname
      * @return string

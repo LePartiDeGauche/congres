@@ -45,6 +45,10 @@ class ContributionAdmin extends Admin
                 'label' => 'Contenu',
                 'template' => 'admin/contribution_show.html.twig'
             ))
+            ->add('votes', 'sonata_type_collection', array(
+                'label' => 'Signataires',
+                'associated_property' => 'profile.getAdherentWithDepartementAndResponsabilitiesAsString'
+            ))
         ;
     }
 
@@ -94,6 +98,9 @@ class ContributionAdmin extends Admin
                 'multiple' => false,
             ))
             ->add('content', null, array('label' => 'Texte'))
+            ->add('votes', null, array(
+                'label' => 'Signataires',
+            ))
             ;
     }
 
