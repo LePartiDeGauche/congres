@@ -105,6 +105,7 @@ class ContributionController extends Controller
      */
     public function viewAction(Contribution $contrib)
     {
+        $this->denyAccessUnlessGranted('CALENDAR_contribution_read');
         $this->denyAccessUnlessGranted('view', $contrib);
 
         switch (get_class($contrib)) {

@@ -39,6 +39,12 @@
                 </ul>
                 <div class="tab-content">
                     <div role="tabpanel" class="tab-pane active" id="general-contrib">
+                        <h2>Contributions générales validées</h2>
+                        {{ include('contribution/list_validated_contributions.html.twig', {
+                                'contribs' : generalClosedContribs
+                            })
+                        }}
+
                         <h2>Contributions générales soumises à signature</h2>
                         <p>
                             <a href="{{ path('downloads', { filename : 'Projets de contribution générale.pdf' }) }}">
@@ -51,6 +57,12 @@
                         }}
                     </div>
                     <div role="tabpanel" class="tab-pane" id="thematic-contrib">
+                        <h2>Contributions thématiques validées</h2>
+                        {{ include('contribution/list_validated_contributions.html.twig', {
+                                'contribs' : thematicClosedContribs
+                            })
+                        }}
+
                         <h2>Contributions thématiques soumises à signature</h2>
                         <p>
                             <a href="{{ path('downloads', { filename : 'Projets de contribution thématique.pdf' }) }}">
@@ -63,6 +75,12 @@
                         }}
                     </div>
                     <div role="tabpanel" class="tab-pane" id="statute-contrib">
+                        <h2>Contributions statutaires soumises validées</h2>
+                        {{ include('contribution/list_validated_contributions.html.twig', {
+                                'contribs' : statuteClosedContribs
+                            })
+                        }}
+
                         <h2>Contributions statutaires soumises à signature</h2>
                         <p>
                             <a href="{{ path('downloads', { filename : 'Projets de contribution statutaire.pdf' }) }}">
