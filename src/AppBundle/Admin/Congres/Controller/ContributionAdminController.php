@@ -20,6 +20,11 @@ class ContributionAdminController extends CRUDCOntroller
         return $this->batchActionEditStatus($selectedModelQuery, Contribution::STATUS_SIGNATURES_CLOSED);
     }
 
+    public function batchActionEditStatusRejected(ProxyQueryInterface $selectedModelQuery)
+    {
+        return $this->batchActionEditStatus($selectedModelQuery, Contribution::STATUS_REJECTED);
+    }
+
     public function batchActionEditStatusOpen(ProxyQueryInterface $selectedModelQuery)
     {
         return $this->batchActionEditStatus($selectedModelQuery, Contribution::STATUS_SIGNATURES_OPEN);

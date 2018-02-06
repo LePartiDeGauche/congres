@@ -18,6 +18,7 @@ use \DateTime as DateTime;
 abstract class Contribution
 {
     const STATUS_SIGNATURES_CLOSED = 'signatures closed';
+    const STATUS_REJECTED = 'rejected contribution';
     const STATUS_SIGNATURES_OPEN = 'signatures open';
     const STATUS_NEW = 'new contribution';
 
@@ -184,6 +185,7 @@ abstract class Contribution
         if (!in_array($status, array(
             self::STATUS_SIGNATURES_OPEN,
             self::STATUS_SIGNATURES_CLOSED,
+            self::STATUS_REJECTED,
             self::STATUS_NEW,
         ))) {
             throw new \InvalidArgumentException('Invalid status');
@@ -272,5 +274,15 @@ abstract class Contribution
         }
     }
 
+    public function setDepositType($value)
+    {
+        if (in_array($value, array(self::DEPOSIT_TYPE_INDIVIDUAL,
+    self::DEPOSIT_TYPE_SEN, self::DEPOSIT_TYPE_COMMISSION))) {
+            $this->depositType = $value;
+        } else {
+            $this->depositType = self::DEPOSIT_TYPE_INDIVIDUAL;
+        }
+        return $this;
+    }
 
 }

@@ -39,12 +39,13 @@
                 </ul>
                 <div class="tab-content">
                     <div role="tabpanel" class="tab-pane active" id="general-contrib">
+                        {% if generalClosedContribs is not empty %}
                         <h2>Contributions générales validées</h2>
                         {{ include('contribution/list_validated_contributions.html.twig', {
                                 'contribs' : generalClosedContribs
                             })
                         }}
-
+                        {% elseif generalOpenContribs is not empty %}
                         <h2>Contributions générales soumises à signature</h2>
                         <p>
                             <a href="{{ path('downloads', { filename : 'Projets de contribution générale.pdf' }) }}">
@@ -55,14 +56,20 @@
                                 'contribs' : generalOpenContribs
                             })
                         }}
+                        {% else %}
+                        <p>
+                            Aucune contribution disponible
+                        </p>
+                        {% endif %}
                     </div>
                     <div role="tabpanel" class="tab-pane" id="thematic-contrib">
+                        {% if thematicClosedContribs is not empty %}
                         <h2>Contributions thématiques validées</h2>
                         {{ include('contribution/list_validated_contributions.html.twig', {
                                 'contribs' : thematicClosedContribs
                             })
                         }}
-
+                        {% elseif thematicOpenContribs is not empty %}
                         <h2>Contributions thématiques soumises à signature</h2>
                         <p>
                             <a href="{{ path('downloads', { filename : 'Projets de contribution thématique.pdf' }) }}">
@@ -73,14 +80,20 @@
                                 'contribs' : thematicOpenContribs
                             })
                         }}
+                        {% else %}
+                        <p>
+                            Aucune contribution disponible
+                        </p>
+                        {% endif %}
                     </div>
                     <div role="tabpanel" class="tab-pane" id="statute-contrib">
-                        <h2>Contributions statutaires soumises validées</h2>
+                        {% if statuteClosedContribs is not empty %}
+                        <h2>Contributions statutaires validées</h2>
                         {{ include('contribution/list_validated_contributions.html.twig', {
                                 'contribs' : statuteClosedContribs
                             })
                         }}
-
+                        {% elseif statuteOpenContribs is not empty %}
                         <h2>Contributions statutaires soumises à signature</h2>
                         <p>
                             <a href="{{ path('downloads', { filename : 'Projets de contribution statutaire.pdf' }) }}">
@@ -91,6 +104,11 @@
                                 'contribs' : statuteOpenContribs
                             })
                         }}
+                        {% else %}
+                        <p>
+                            Aucune contribution disponible
+                        </p>
+                        {% endif %}
                     </div>
                 </div>
             </div>

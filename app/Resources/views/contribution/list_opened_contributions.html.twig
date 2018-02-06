@@ -1,10 +1,23 @@
 {% extends "contribution/list_validated_contributions.html.twig" %}
 
-{% block thead_signed %}
+{% block contribution_empty %}
+Aucune contribution ouverte à la signature.
+{% endblock %}
+
+{% block th_contribution_votes %}
+<th>Signatures</th>
+<th>dont CN</th>
 <th>Signer</th>
 {% endblock %}
 
-{% block contrib_vote %}
+{% block th_contribution_validated %}
+{% endblock %}
+{% block td_contribution_validated %}
+{% endblock %}
+
+{% block td_contribution_votes %}
+<td>{{ contrib.adhvote }}</td>
+<td>{{ contrib.cnvote }}</td>
 <td>
     {% if contrib.uservote %}
         <span class="glyphicon glyphicon-check" aria-hidden="true"></span>

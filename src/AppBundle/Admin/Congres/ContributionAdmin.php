@@ -27,7 +27,8 @@ class ContributionAdmin extends Admin
             ->add('status', 'choice', array(
                 'label' => 'Statut',
                 'choices' => array(
-                    Contribution::STATUS_SIGNATURES_CLOSED => 'Signatures récoltés',
+                    Contribution::STATUS_SIGNATURES_CLOSED => 'Contribution validée',
+                    Contribution::STATUS_REJECTED => 'Contribution rejetée',
                     Contribution::STATUS_SIGNATURES_OPEN => 'Ouverte aux signatures',
                     Contribution::STATUS_NEW => 'Envoyée mais non validée (non publique)',
                 ),
@@ -91,7 +92,8 @@ class ContributionAdmin extends Admin
             ->add('status', 'choice', array(
                 'label' => 'Statut',
                 'choices' => array(
-                    Contribution::STATUS_SIGNATURES_CLOSED => 'Signatures récoltés',
+                    Contribution::STATUS_SIGNATURES_CLOSED => 'Contribution validée',
+                    Contribution::STATUS_REJECTED => 'Contribution rejetée',
                     Contribution::STATUS_SIGNATURES_OPEN => 'Ouverte aux signatures',
                     Contribution::STATUS_NEW => 'Envoyée mais non validée (non publique)',
                 ),
@@ -112,7 +114,8 @@ class ContributionAdmin extends Admin
             ->add('author.profile.firstname', null, array('label' => 'Prénom de l\'auteur'))
             ->add('status', null, array('label' => 'Statut'), 'choice', array(
                 'choices' => array(
-                    Contribution::STATUS_SIGNATURES_CLOSED => 'Signatures récoltés',
+                    Contribution::STATUS_SIGNATURES_CLOSED => 'Contribution validée',
+                    Contribution::STATUS_REJECTED => 'Contribution rejetée',
                     Contribution::STATUS_SIGNATURES_OPEN => 'Ouverte aux signatures',
                     Contribution::STATUS_NEW => 'Envoyée mais non validée (non publique)',
                 ),
@@ -138,7 +141,8 @@ class ContributionAdmin extends Admin
             ->add('status', 'choice', array(
                 'label' => 'Statut',
                 'choices' => array(
-                    Contribution::STATUS_SIGNATURES_CLOSED => 'Signatures récoltés',
+                    Contribution::STATUS_SIGNATURES_CLOSED => 'Contribution validée',
+                    Contribution::STATUS_REJECTED => 'Contribution rejetée',
                     Contribution::STATUS_SIGNATURES_OPEN => 'Ouverte aux signatures',
                     Contribution::STATUS_NEW => 'Envoyée mais non validée (non publique)',
                 ),
@@ -171,7 +175,12 @@ class ContributionAdmin extends Admin
             );
 
             $actions['edit_status_closed'] = array(
-                'label' => 'Modifier le statut : signatures récoltées.',
+                'label' => 'Modifier le statut : contribution validée.',
+                'ask_confirmation' => true,
+            );
+
+            $actions['edit_status_rejected'] = array(
+                'label' => 'Modifier le statut : contribution rejetée.',
                 'ask_confirmation' => true,
             );
         }

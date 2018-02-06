@@ -140,7 +140,7 @@ class ContributionController extends Controller
      */
     public function listAction(Request $request)
     {
-        $this->denyAccessUnlessGranted('CALENDAR_contribution_vote');
+        $this->denyAccessUnlessGranted('CALENDAR_contribution_read');
 
         $generalRepo = $this->getDoctrine()->getRepository('AppBundle:Congres\GeneralContribution');
         $generalOpenContribs = $generalRepo->findByStatusWithVotes(Contribution::STATUS_SIGNATURES_OPEN, $this->getUser());

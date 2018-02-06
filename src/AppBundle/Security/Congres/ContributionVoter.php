@@ -67,7 +67,7 @@ final class ContributionVoter extends AbstractVoter
         }
 
         if ($this->container->get('security.context')->isGranted('CALENDAR_contribution_read')) {
-            return (Contribution::STATUS_SIGNATURES_CLOSED || in_array('ROLE_ADMIN', $user->getRoles(), true));
+            return (Contribution::STATUS_SIGNATURES_CLOSED == $contrib->getStatus() || in_array('ROLE_ADMIN', $user->getRoles(), true));
         }
 
         return false;

@@ -1,22 +1,31 @@
+{% block contribution_list %}
+
 {% if contribs is empty %}
-    <p>Pas de contribution validée.</p>
+    {% block contribution_empty %}
+    <p>Aucune contribution validée.</p>
+    {% endblock %}
 {% else %}
 <table class="table tablesorter">
     <thead>
         <tr>
+            {% block th_contribution_validated %}
+            <th>&nbsp;</th>
+            {% endblock %}
             <th>Titre</th>
             <th>Auteur</th>
             <th>Type de dépôt</th>
-            <th>Signatures</th>
-            <th>dont CN</th>
-            {% block thead_signed %}
-            <th>Signée</th>
+            {% block th_contribution_votes %}
             {% endblock %}
         </tr>
     </thead>
     <tbody>
     {% for contrib in contribs %}
         <tr>
+            {% block td_contribution_validated %}
+            <td>
+                <span class="glyphicon glyphicon-check" aria-hidden="true"></span>&nbsp;Validée
+            </td>
+            {% endblock %}
             <td>
                 <a href="{{ path('contribution_view', {id: contrib.entity.id}) }}">
                     {{ contrib.entity.title }}
@@ -34,18 +43,11 @@
                     pour la commission {{ contrib.entity.depositTypeValue }}
                 {% endif %}
             </td>
-            <td>{{ contrib.adhvote }}</td>
-            <td>{{ contrib.cnvote }}</td>
-            {% block contrib_vote %}
-            <td>
-                {% if contrib.uservote %}
-                    <span class="glyphicon glyphicon-check" aria-hidden="true"></span>
-                {% endif %}
-                <span class="sr-only">Signée</span>
-            </td>
+            {% block td_contribution_votes %}
             {% endblock %}
         </tr>
     {% endfor %}
     </tbody>
 </table>
 {% endif %}
+{% endblock %}
