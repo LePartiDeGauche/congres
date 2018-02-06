@@ -137,7 +137,8 @@ class ContributionAdmin extends Admin
                     Contribution::DEPOSIT_TYPE_COMMISSION => 'Commission'
                 )
             ))
-            ->add('deposit_type_value', null, array('label' => 'Complément'))
+            ->add('votes_count', null, array('label' => 'Votes'))
+            ->add('votes_cn', null, array('label' => 'Dont votes CN'))
             ->add('status', 'choice', array(
                 'label' => 'Statut',
                 'choices' => array(

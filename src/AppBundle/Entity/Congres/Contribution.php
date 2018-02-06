@@ -285,4 +285,25 @@ abstract class Contribution
         return $this;
     }
 
+    public function getVotesCount()
+    {
+        return $this->getVotes()->count();
+    }
+
+    public function getVotesCN()
+    {
+        $count = 0;
+        foreach ($this->getVotes() as $user) {
+            foreach ($user->getProfile()->getResponsabilities() as $adhResponsability) {
+                if (in_array($adhResponsability->getResponsability()->getName(), array(
+                    \AppBundle\Entity\Responsability::INSTANCE_SEN,
+                    \AppBundle\Entity\Responsability::INSTANCE_CN
+                ))) {
+                    $count ++;
+                    break;
+                }
+            }
+        }
+        return $count;
+    }
 }
