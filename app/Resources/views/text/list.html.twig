@@ -5,15 +5,15 @@
 {{ parent() }}
 <script type="text/javascript" src="{{ asset('js/jquery.tablesorter.min.js') }}"></script>
 <script type="text/javascript">
-$(document).ready(function() 
-        { 
-            $(".tablesorter").tablesorter({ 
+$(document).ready(function()
+        {
+            $(".tablesorter").tablesorter({
                 cssAsc: "glyphicon glyphicon-sort-by-attributes-alt",
                 cssDesc: "glyphicon glyphicon-sort-by-attributes",
-            } 
-            ); 
-        } 
-        ); 
+            }
+            );
+        }
+        );
 </script>
 {% endblock %}
 
@@ -23,17 +23,24 @@ $(document).ready(function()
         <div class="col-md-12">
             <h1>Textes de {{ textGroup.name }}</h1>
             <p>
-            {{textGroup.description}}
+                {{textGroup.description}}
+            </p>
+            <p>
+                <a href="{{ path('text_create', {group_id: textGroup.id}) }}">
+                    Déposer un texte pour <em>{{ textGroup.name }}</em>
+                </a>
+            </p>
 
             {%if reportOrgans %}
                 <h2>Soumettre des amendements</h2>
+                <p>
                 {% for organ in reportOrgans %}
                     <a href="{{ path('amendment_submit', {text_group_id: textGroup.id, organ_id: organ.id}) }}">
                         Soumettre pour <strong>{{ organ.name }}</strong>
                     </a>
                 {% endfor %}
+                </p>
             {% endif %}
-            </p>
 
         </div><!-- .col-md-12 -->
     </div><!-- .row -->

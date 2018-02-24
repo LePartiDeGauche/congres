@@ -21,12 +21,7 @@
                 la taille des police ne sera pas conservé !</strong>
             </p>
         </div>
-        <form method="post" action="{{ path('text_create', {'group_id' : textGroup.id}) }}">
-            <label for="title">{{ form_label(form.title)}}</label>
-            {{ form_widget(form.title) }}
-            {{ form_widget(form.rawContent, { 'attr': {'class': 'tinymce', 'data-theme' : 'markdown'} }) }}
-            {{ form_widget(form)}}
-        </form>
+        {{ form(form) }}
     </div>
 </div>
 {% endblock %}

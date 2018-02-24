@@ -34,7 +34,7 @@ class TextController extends Controller
     {
         $textgroups = $this->getDoctrine()->getManager()
                            ->getRepository('AppBundle:Text\TextGroup')
-                           ->findAll();
+                           ->findOpenedAtDate(date_create('now'));
         return $this->render('text/_list.html.twig', array(
             'textgroups' => $textgroups,
         ));

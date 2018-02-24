@@ -13,6 +13,19 @@ class TextGroupRepository extends EntityRepository
 {
     protected $classname;
 
+    public function findOpenedAtDate(\DateTime $date = null)
+    {
+        if (!isset($date)) {
+            $date = new \DateTime('now');
+        }
+        return $this->createQueryBuilder('tg')
+                ->where('tg.submissionOpening < :date')
+                ->andWhere('tg.submissionClosing > :date')
+                ->setParameter(':date', $date)
+            ->getQuery()
+            ->getResult();
+    }
+
     public function getOrganAdherentCanReportFor(Adherent $adherent)
     {
         $organs = $this->createQueryBuilder('tg')
