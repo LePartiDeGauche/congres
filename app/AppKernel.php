@@ -31,11 +31,12 @@ class AppKernel extends Kernel
 
             // Knp
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
-            new Knp\Bundle\MarkdownBundle\KnpMarkdownBundle(),
             new Knp\Bundle\SnappyBundle\KnpSnappyBundle(),
 
             // PayBox
             new Lexik\Bundle\PayboxBundle\LexikPayboxBundle(),
+
+            new PUGX\AutocompleterBundle\PUGXAutocompleterBundle(),
 
             // Our app
             new AppBundle\AppBundle(),

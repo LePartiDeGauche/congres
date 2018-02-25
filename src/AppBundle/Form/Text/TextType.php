@@ -15,6 +15,11 @@ class TextType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('author', 'autocomplete', array(
+                'label' => 'Mandataire',
+                'class' => 'AppBundle:Adherent',
+                'required' => true,
+            ))
             ->add('title', null, array('label' => 'Titre'))
             ->add('rawContent', null, array('label' => 'Contenu', 'required' => true))
         ;

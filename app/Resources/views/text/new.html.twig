@@ -1,5 +1,12 @@
 {% extends '::base.html.twig' %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    {% stylesheets '@jqueryui_css' %}
+    <link rel="stylesheet" type="text/css" media="screen" href="{{ asset_url }}"/>
+    {% endstylesheets %}
+{% endblock %}
+
 {% block title %}Soumettre un texte de {{ textGroup.name }}{% endblock %}
 
 {% block body %}
@@ -25,7 +32,23 @@
     </div>
 </div>
 {% endblock %}
+
 {% block javascripts %}
 {{ parent () }}
+
+{% javascripts '@jquery_js' '@jqueryui_js' '@bootstrap_js' '@pugxautocompleter_js' %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+{% endjavascripts %}
+
 {{ tinymce_init() }}
+
+<script type="text/javascript">
+$(document).ready(function () {
+  'use strict';
+  $('#appbundle_text_text_author').autocompleter({
+      url_list: '/adherents/search',
+      url_get: '/adherents/get/'
+  });
+});
+</script>
 {% endblock %}
