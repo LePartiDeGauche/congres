@@ -46,15 +46,13 @@ class TextAdmin extends Admin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->add('id')
+            ->addIdentifier('title')
+            ->add('author', null, array('label' => 'Mandataire'))
+            ->add('depositor', null, array('label' => 'Déposant'))
             ->add('textGroup', 'sonata_type_model',
                 array('multiple' => false,
                 'required' => true,
             ))
-            ->add('author.firstname', null, array('label' => 'Prénom de l\'auteur'))
-            ->add('author.lastname', null, array('label' => 'Nom de l\'auteur'))
-            ->add('title')
-            //->add('rawContent', 'html')
             ->add('status', 'choice', array(
                 'label' => 'Statut',
                 'choices' => $this->status_choice,
@@ -81,8 +79,8 @@ class TextAdmin extends Admin
                 'required' => true,
                 'btn_add' => false,
             ))
-            ->add('author', 'sonata_type_model_autocomplete', array(
-                'label' => 'Auteur',
+            ->add('depositor', 'sonata_type_model_autocomplete', array(
+                'label' => 'Déposant',
                 'property' => array('firstname', 'lastname', 'email'),
                 'placeholder' => 'Rechercher un nom ou un email',
                 'callback' => function ($admin, $property, $value) {
@@ -103,12 +101,42 @@ class TextAdmin extends Admin
                     return $firstname.' '.$lastname.' &lt;'.$email.'&gt;';
                 },
             ))
-            ->add('title')
-            ->add('rawContent')
+            ->add('author', 'sonata_type_model_autocomplete', array(
+                'label' => 'Mandataire',
+                'property' => array('firstname', 'lastname', 'email'),
+                'placeholder' => 'Rechercher un nom ou un email',
+                'callback' => function ($admin, $property, $value) {
+                    $datagrid = $admin->getDatagrid();
+                    $queryBuilder = $datagrid->getQuery();
+                    $queryBuilder
+                        ->andWhere($queryBuilder->getRootAlias().'.firstname LIKE :value')
+                        ->orWhere($queryBuilder->getRootAlias().'.lastname LIKE :value')
+                        ->orWhere($queryBuilder->getRootAlias().'.email LIKE :value')
+                        ->setParameter('value', '%'.$value.'%')
+                    ;
+                },
+                'to_string_callback' => function ($user, $property) {
+                    $firstname = $user->getFirstname();
+                    $lastname = $user->getLastname();
+                    $email = $user->getEmail();
+
+                    return $firstname.' '.$lastname.' &lt;'.$email.'&gt;';
+                },
+            ))
             ->add('status', 'choice', array(
                 'label' => 'Statut',
                 'choices' => $this->status_choice,
                 'multiple' => false,
+            ))
+            ->add('title', null, array(
+                'label' => 'Titre'
+            ))
+            ->add('rawContent', null, array(
+                'label' => 'Contenu',
+                'attr' => array(
+                    'class' => 'tinymce',
+                    'data-theme' => 'markdown'
+                )
             ))
             ;
     }
@@ -120,14 +148,16 @@ class TextAdmin extends Admin
     {
         $showMapper
             ->add('id')
-            ->add('textGroup')
-            ->add('title')
-            ->add('rawContent', 'html')
+            ->add('textGroup', null, array('label' => 'Groupe de texte'))
+            ->add('author', null, array('label' => 'Mandataire'))
+            ->add('depositor', null, array('label' => 'Déposant'))
             ->add('status', 'choice', array(
                 'label' => 'Statut',
                 'choices' => $this->status_choice,
                 'multiple' => false,
             ))
+            ->add('title')
+            ->add('rawContent', 'html')
         ;
     }
     public function getNewInstance()
