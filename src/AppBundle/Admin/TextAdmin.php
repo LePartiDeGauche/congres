@@ -20,6 +20,13 @@ class TextAdmin extends Admin
                     Text::STATUS_ADOPTED => 'Adopté / Validé',
                     Text::STATUS_REJECTED => 'Rejeté',
                 );
+
+    protected $datagridValues = [
+        '_page' => 1,
+        '_sort_order' => 'DESC',
+        '_sort_by' => 'id',
+    ];
+
     /**
      * @param DatagridMapper $datagridMapper
      */
