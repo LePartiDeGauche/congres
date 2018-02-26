@@ -91,7 +91,7 @@ class TextController extends Controller
         $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
 
-        $texts = $em->getRepository('AppBundle:Text\Text')->findByAuthor($user->getProfile());
+        $texts = $em->getRepository('AppBundle:Text\Text')->findByDepositor($user->getProfile());
 
         return $this->render('text/user_list.html.twig', array(
             'texts' => $texts,
