@@ -10,10 +10,13 @@
         Auteur :
         {{ text.author.firstname }} {{ text.author.lastname }}
         </p>
+        <p class="small text-muted">
+        Déposant :
+        {{ text.depositor.firstname }} {{ text.depositor.lastname }}
+        </p>
         <div class="text-justify">{{ text.rawContent | raw }}</div>
         <hr />
         <h1>Votes</h1>
-
         <table class="table tablesorter">
             <thead>
                 <tr>
