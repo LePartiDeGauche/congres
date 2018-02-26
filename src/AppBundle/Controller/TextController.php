@@ -300,8 +300,10 @@ class TextController extends Controller
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Creer'));
-
+        $form->add('submit', 'submit', array(
+            'label' => 'Déposer',
+            'attr' => array('class' => 'btn-primary'),
+        ));
         return $form;
     }
 

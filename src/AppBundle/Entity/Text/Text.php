@@ -32,7 +32,22 @@ class Text
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Adherent")
      * @ORM\JoinColumn(nullable=false)
      */
+    private $depositor;
+
+    /**
+     * @var \stdClass
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Adherent")
+     * @ORM\JoinColumn(nullable=false)
+     */
     private $author;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="author_info", type="string", length=255, nullable=true)
+     */
+    private $authorInfo;
 
     /**
      * @var \stdClass
@@ -286,6 +301,7 @@ class Text
      */
     public function __construct(\AppBundle\Entity\Adherent $author = null)
     {
+        $this->setDepositor($author);
         $this->setAuthor($author);
         $this->setStatus(self::STATUS_NEW);
         $this->adherentVotes = new \Doctrine\Common\Collections\ArrayCollection();
@@ -434,5 +450,53 @@ class Text
     public function __toString()
     {
         return $this->title;
+    }
+
+    /**
+     * Set depositor
+     *
+     * @param \AppBundle\Entity\Adherent $depositor
+     *
+     * @return Text
+     */
+    public function setDepositor(\AppBundle\Entity\Adherent $depositor)
+    {
+        $this->depositor = $depositor;
+
+        return $this;
+    }
+
+    /**
+     * Get depositor
+     *
+     * @return \AppBundle\Entity\Adherent
+     */
+    public function getDepositor()
+    {
+        return $this->depositor;
+    }
+
+    /**
+     * Set authorInfo
+     *
+     * @param string $authorInfo
+     *
+     * @return Text
+     */
+    public function setAuthorInfo($authorInfo)
+    {
+        $this->authorInfo = $authorInfo;
+
+        return $this;
+    }
+
+    /**
+     * Get authorInfo
+     *
+     * @return string
+     */
+    public function getAuthorInfo()
+    {
+        return $this->authorInfo;
     }
 }

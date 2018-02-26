@@ -13,10 +13,28 @@
 <div class="container">
     <div class="row">
         <h1>Soumettre un texte de {{ textGroup.name }}</h1>
+
+        <div class="alert alert-warning">
+            <p>
+                Rappel: les projets de plateforme doivent comprendre <strong>entre
+                10&nbsp;000 et 80&nbsp;000 signes (espaces compris)</strong>.
+            </p>
+            <p>
+                À l'issue de la période de dépôt des projets de {{ textGroup.name }},
+                la Commission des Votes procédera au contrôle de leur recevabilité
+                pour publication. Elle vérifiera le nombre de signes, le statut
+                de cotisation du déposant et du ou de la mandataire ainsi que le
+                contenu du texte qui ne devra pas contenir de propos contraires
+                aux valeurs du Parti de Gauche (propos racistes, homophobes, etc).
+            </p>
+        </div>
+
+        {{ form(form) }}
+
         <div class="alert alert-info text-justify" role="alert">
             <p>
             <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
-            Le formulaire si dessus permet d'éditer visuellement du texte. L'éditeur est
+            Le formulaire ci-dessus permet d'éditer visuellement du texte. L'éditeur est
             volontairement basique pour rendre plus facile le travail d'amendement en ligne durant
             les phases ulterieures du congrès et uniformiser la mise en forme. Vous pouvez
             <strong>copier-coller</strong> votre texte depuis un logiciel de traitement de
@@ -28,7 +46,6 @@
                 la taille des police ne sera pas conservé !</strong>
             </p>
         </div>
-        {{ form(form) }}
     </div>
 </div>
 {% endblock %}
