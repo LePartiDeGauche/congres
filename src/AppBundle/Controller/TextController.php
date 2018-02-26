@@ -348,4 +348,30 @@ class TextController extends Controller
 
         return $form;
     }
+
+    /**
+    * @Route("/delete/{id}", name="text_delete")
+     */
+    public function deleteAction(Text $text, Request $request)
+    {
+        // $this->denyAccessUnlessGranted('CALENDAR_contribution_submit');
+        $this->denyAccessUnlessGranted('delete', $text);
+
+        $form = $this->createFormBuilder()
+            ->getForm();
+
+        $form->handleRequest($request);
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($text);
+            $em->flush();
+            $this->addFlash('success', 'Texte supprimé avec succès.');
+            return $this->redirect($this->generateUrl('text_user_list'));
+        }
+
+        return $this->render('text/delete.html.twig', array(
+            'text' => $text,
+            'form' => $form->createView(),
+        ));
+    }
 }
