@@ -148,7 +148,7 @@ class TextController extends Controller
 
             $message = (new \Swift_Message())
                 ->setFrom(['congres@lepartidegauche.fr' => 'Parti de Gauche - Congrès 2018'])
-                ->setSubject('Projet de plateforme déposée.')
+                ->setSubject('Projet de plateforme déposé')
                 ->setTo([
                     $text->getDepositor()->getEmail() => (string) $text->getDepositor(),
                     $text->getAuthor()->getEmail() => (string) $text->getAuthor(),
