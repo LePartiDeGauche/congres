@@ -16,15 +16,15 @@ class TextType extends AbstractType
     {
         $builder
             ->add('depositor', 'text', array(
-                'label' => 'Déposant',
+                'label' => 'Déposant-e',
                 'data_class' => 'AppBundle\Entity\Adherent',
                 'disabled' => true
             ))
             ->add('depositorInfo', 'textarea', array(
-                'label' => 'Informations du déposant',
+                'label' => 'Informations du-de la déposant-e',
                 'data' => "Numéro de téléphone: \nAdresse mail: \nDépartement: ",
                 'attr' => array(
-                    'data-help' => 'Merci de renseigner obligatoirement <strong>le numéro de téléphone, l\'adresse mail et le département</strong> du déposant.',
+                    'data-help' => 'Merci de renseigner obligatoirement <strong>le numéro de téléphone, l\'adresse mail et le département</strong> du-de la déposant-e.',
                     'class' => 'contact-info'
                 )
             ))
@@ -38,10 +38,10 @@ class TextType extends AbstractType
                 )
             ))
             ->add('authorInfo', 'textarea', array(
-                'label' => 'Informations du mandataire',
+                'label' => 'Informations du-de la mandataire',
                 'data' => "Numéro de téléphone: \nAdresse mail: \nDépartement: ",
                 'attr' => array(
-                    'data-help' => 'Merci de renseigner obligatoirement <strong>le numéro de téléphone, l\'adresse mail et le département</strong> du mandataire.',
+                    'data-help' => 'Merci de renseigner obligatoirement <strong>le numéro de téléphone, l\'adresse mail et le département</strong> du-de la mandataire.',
                     'class' => 'contact-info'
                 )
             ))
