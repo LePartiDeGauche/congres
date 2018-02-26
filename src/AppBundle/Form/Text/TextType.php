@@ -20,6 +20,14 @@ class TextType extends AbstractType
                 'data_class' => 'AppBundle\Entity\Adherent',
                 'disabled' => true
             ))
+            ->add('depositorInfo', 'textarea', array(
+                'label' => 'Informations du déposant',
+                'data' => "Numéro de téléphone: \nAdresse mail: \nDépartement: ",
+                'attr' => array(
+                    'data-help' => 'Merci de renseigner obligatoirement <strong>le numéro de téléphone, l\'adresse mail et le département</strong> du déposant.',
+                    'class' => 'contact-info'
+                )
+            ))
             ->add('author', 'autocomplete', array(
                 'label' => 'Mandataire',
                 'class' => 'AppBundle:Adherent',
@@ -29,11 +37,12 @@ class TextType extends AbstractType
                                     Vous devez lancer une recherche suivant son nom, son prénom ou son email, puis le sélectionner dans la liste.'
                 )
             ))
-            ->add('authorInfo', null, array(
-                'label' => 'Informations de contact',
-                'required' => false,
+            ->add('authorInfo', 'textarea', array(
+                'label' => 'Informations du mandataire',
+                'data' => "Numéro de téléphone: \nAdresse mail: \nDépartement: ",
                 'attr' => array(
-                    'data-help' => 'Merci de renseigner les informations de contact du <b>mandataire</b>: numéro de téléphone, adresse mail, etc.'
+                    'data-help' => 'Merci de renseigner obligatoirement <strong>le numéro de téléphone, l\'adresse mail et le département</strong> du mandataire.',
+                    'class' => 'contact-info'
                 )
             ))
             ->add('title', null, array('label' => 'Titre'))

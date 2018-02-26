@@ -108,6 +108,10 @@ class TextAdmin extends Admin
                     return $firstname.' '.$lastname.' &lt;'.$email.'&gt;';
                 },
             ))
+            ->add('depositorInfo', 'textarea', array(
+                'label' => 'Informations du déposant',
+                'attr' => array('class' => 'contact-info')
+            ))
             ->add('author', 'sonata_type_model_autocomplete', array(
                 'label' => 'Mandataire',
                 'property' => array('firstname', 'lastname', 'email'),
@@ -129,6 +133,10 @@ class TextAdmin extends Admin
 
                     return $firstname.' '.$lastname.' &lt;'.$email.'&gt;';
                 },
+            ))
+            ->add('authorInfo', 'textarea', array(
+                'label' => 'Informations du mandataire',
+                'attr' => array('class' => 'contact-info')
             ))
             ->add('status', 'choice', array(
                 'label' => 'Statut',
@@ -157,7 +165,9 @@ class TextAdmin extends Admin
             ->add('id')
             ->add('textGroup', null, array('label' => 'Groupe de texte'))
             ->add('author', null, array('label' => 'Mandataire'))
+            ->add('authorInfo', null, array('label' => 'Mandataire'))
             ->add('depositor', null, array('label' => 'Déposant'))
+            ->add('depositorInfo', null, array('label' => 'Déposant'))
             ->add('status', 'choice', array(
                 'label' => 'Statut',
                 'choices' => $this->status_choice,

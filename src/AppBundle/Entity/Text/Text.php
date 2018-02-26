@@ -35,6 +35,13 @@ class Text
     private $depositor;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="depositor_info", type="string", length=255)
+     */
+    private $depositorInfo;
+
+    /**
      * @var \stdClass
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Adherent")
@@ -45,7 +52,7 @@ class Text
     /**
      * @var string
      *
-     * @ORM\Column(name="author_info", type="string", length=255, nullable=true)
+     * @ORM\Column(name="author_info", type="string", length=255)
      */
     private $authorInfo;
 
@@ -498,5 +505,29 @@ class Text
     public function getAuthorInfo()
     {
         return $this->authorInfo;
+    }
+
+    /**
+     * Set depositorInfo
+     *
+     * @param string $depositorInfo
+     *
+     * @return Text
+     */
+    public function setDepositorInfo($depositorInfo)
+    {
+        $this->depositorInfo = $depositorInfo;
+
+        return $this;
+    }
+
+    /**
+     * Get depositorInfo
+     *
+     * @return string
+     */
+    public function getDepositorInfo()
+    {
+        return $this->depositorInfo;
     }
 }
