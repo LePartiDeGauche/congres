@@ -1,14 +1,16 @@
-<h3>Processus d'amendements</h3>
+<h3>Projets de plateforme</h3>
 {% if textgroups is empty %}
     <p>Pas de contenu</p>
 {% else %}
     <ul>
     {% for textgroup in textgroups %}
+        {% if is_granted('view', textgroup) %}
         <li>
             <a href="{{ path('text_list', {group_id: textgroup.id}) }}">
                 {{ textgroup.name }}
             </a>
         </li>
+        {% endif %}
     {% endfor %}
     </ul>
 {% endif %}

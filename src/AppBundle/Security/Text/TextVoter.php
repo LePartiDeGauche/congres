@@ -37,28 +37,33 @@ final class TextVoter extends AbstractVoter
 
         if ($attribute === self::VIEW) {
             if (Text::STATUS_NEW === $text->getStatus()) {
-                return ($user === $text->getAuthor()->getUser() || in_array('ROLE_ADMIN', $user->getRoles(), true));
+                return (
+                    $user === $text->getAuthor()->getUser() ||
+                    $user === $text->getDepositor()->getUser() ||
+                    in_array('ROLE_ADMIN', $user->getRoles(), true)
+                );
             }
-
-            return true;
+            return (Text::STATUS_REJECTED != $text->getStatus());
         }
 
         if ($attribute === self::DELETE) {
             if (Text::STATUS_NEW === $text->getStatus()) {
-                return ($user === $text->getAuthor()->getUser() || in_array('ROLE_ADMIN', $user->getRoles(), true));
+                return (
+                    $user === $text->getAuthor()->getUser() ||
+                    $user === $text->getDepositor()->getUser() ||
+                    in_array('ROLE_ADMIN', $user->getRoles(), true)
+                );
             }
-
             return in_array('ROLE_ADMIN', $user->getRoles(), true);
         }
 
         if ($attribute === self::VOTE) {
             if (Text::STATUS_VOTING === $text->getStatus()) {
-                $hasVoted = $em->getRepository('AppBundle:Vote\IndividualTextVote')->hasVoted($user->getProfile(), $text);
-
+                $hasVoted = $em->getRepository('AppBundle:Vote\IndividualTextVote')
+                               ->hasVoted($user->getProfile(), $text);
                 return !$hasVoted;
             }
-
-            return true;
+            return false;
         }
 
         return false;

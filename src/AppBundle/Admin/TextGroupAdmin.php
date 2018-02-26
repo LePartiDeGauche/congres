@@ -131,7 +131,7 @@ class TextGroupAdmin extends Admin
                     'required' => false,
                 ))
             ->add('maxVotesByAdherent')
-            ->add('isVisible', 'checkbox')
+            ->add('isVisible', 'checkbox', array('required' => false))
             // FIXME : currently impossible to use subclass into subform with sonata bundle
 
             //->add('voteRules', 'sonata_type_collection', array(

@@ -25,13 +25,17 @@ $(document).ready(function()
             <p>
                 {{textGroup.description}}
             </p>
+
+            {% if is_granted('create_text', textGroup) %}
             <p>
                 <a href="{{ path('text_create', {group_id: textGroup.id}) }}">
                     Déposer un texte pour <em>{{ textGroup.name }}</em>
                 </a>
             </p>
+            {% endif %}
 
-            {%if reportOrgans %}
+            {% if reportOrgans %}
+            {% if is_granted('report_amend', textGroup) %}
                 <h2>Soumettre des amendements</h2>
                 <p>
                 {% for organ in reportOrgans %}
@@ -40,6 +44,7 @@ $(document).ready(function()
                     </a>
                 {% endfor %}
                 </p>
+            {% endif %}
             {% endif %}
 
         </div><!-- .col-md-12 -->
