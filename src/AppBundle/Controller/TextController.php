@@ -146,6 +146,26 @@ class TextController extends Controller
             $this->getDoctrine()->getManager()->persist($text);
             $this->getDoctrine()->getManager()->flush();
 
+            $message = (new \Swift_Message())
+                ->setFrom(['congres@lepartidegauche.fr' => 'Parti de Gauche - Congrès 2018'])
+                ->setSubject('Projet de plateforme déposée.')
+                ->setTo([
+                    $text->getDepositor()->getEmail() => (string) $text->getDepositor(),
+                    $text->getAuthor()->getEmail() => (string) $text->getAuthor(),
+                ])
+                ->setBcc([
+                    'commissionvote2018@lepartidegauche.fr' => 'PG - Commission vote 2018'
+                ])
+                ->setBody(
+                    $this->renderView(
+                        'mail/text_deposit_success.txt.twig',
+                        array('text_name' => $text->getTitle())
+                    ),
+                    'text/plain'
+                );
+
+            $this->get('mailer')->send($message);
+
             return $this->redirect($this->generateUrl('text_user_list'));
         }
 
