@@ -1,0 +1,20 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}Supprimer {{ text.title }}{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <h1>Supprimer un texte</h1>
+            <form method="post" action="{{ path('text_delete', {id: text.id}) }}">
+                {{ form_widget(form) }}
+                <p>Veux-tu vraiment supprimer le texte {{ text.title }} ?</p>
+                <div class="pull-right">
+                    <input type="submit" class="btn btn-danger" value="Supprimer" />
+                    <a class="btn btn-default" href="{{ path('text_user_list') }}">Annuler</a>
+                </div>
+            </form>
+        </div>
+</div>
+{% endblock %}
