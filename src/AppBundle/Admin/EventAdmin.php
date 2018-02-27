@@ -65,8 +65,10 @@ class EventAdmin extends Admin
     {
         $formMapper
             ->add('name', null, array('label' => 'Nom'))
-            ->add('isVisible')
-            ->add('normalizedName', null, array('label' => 'Nom affiché dans paybox (sans espace, sans tiret, sans caractères spéciaux)'))
+            ->add('isVisible', null, array('label' => 'Rendre visible le formulaire'))
+            ->add('normalizedName', null, array(
+                'label' => 'Nom affiché dans paybox (sans espace, sans tiret, sans caractères spéciaux)'
+            ))
             ->add('description', null, array('label' => 'Description'))
             ->add('registrationBegin', 'sonata_type_date_picker', array(
                 'label' => 'Début des inscriptions',
@@ -88,7 +90,8 @@ class EventAdmin extends Admin
                 )
             )
             ->add('isRolesCommentEnabled', null, array(
-                'label' => 'Activer les commentaires sur les rôles'
+                'label' => 'Activer les commentaires sur les rôles',
+                'required' => false
             ))
             ->add('rolesCommentHelpText', null, array(
                 'label' => 'Message d\'aide à propos de la case "Commentaire sur le rôle"'
@@ -105,6 +108,7 @@ class EventAdmin extends Admin
             ))
             ->add('isSleepingTypesCommentEnabled', null, array(
                 'label' => 'Activer les précisions sur les hébergements',
+                'required' => false
             ))
             ->add('sleepingTypesCommentHelpText', null, array(
                 'label' => 'Message d\'aide à propos de la case "Précision sur l\'hébergements"'
