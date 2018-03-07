@@ -58,23 +58,13 @@ class TextController extends Controller
         $texts = $em->getRepository('AppBundle:Text\Text')
             ->findTextAndVoteByTextGroup($author, $textGroup);
 
-        $reportOrgans = null;
-        if ($textGroup->getVoteType() == TextGroup::VOTETYPE_COLLECTIVE) {
-            $reportOrgans = $em->getRepository('AppBundle:Text\TextGroup')
-                ->getOrganAdherentCanReportFor($author);
-        }
-
-        $textGroupVoteGranted = $this->isGranted('vote', $textGroup);
-
         $date = new \DateTime('now');
 
         return $this->render('text/list.html.twig', array(
-            'textGroupVoteGranted' => $textGroupVoteGranted,
             'showVotePanel' => ($textGroup->getVoteOpening() < $date && $textGroup->getVoteClosing() > $date),
             'showValidatedPanel' => $textGroup->getVoteOpening() < $date,
             'textGroup' => $textGroup,
             'texts' => $texts,
-            'reportOrgans' => $reportOrgans,
         ));
     }
 
@@ -185,7 +175,6 @@ class TextController extends Controller
         if ($textGroup->getId() != $text->getTextGroup()->getId()) {
             throw \AccessDeniedException();
         }
-        $this->denyAccessUnlessGranted('vote', $textGroup);
         $this->denyAccessUnlessGranted('vote', $text);
 
         $form = $this->createFormBuilder()->getForm();

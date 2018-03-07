@@ -34,7 +34,6 @@ $(document).ready(function()
             </p>
             {% endif %}
 
-            {% if reportOrgans %}
             {% if is_granted('report_amend', textGroup) %}
                 <h2>Soumettre des amendements</h2>
                 <p>
@@ -45,6 +44,48 @@ $(document).ready(function()
                 {% endfor %}
                 </p>
             {% endif %}
+
+            {% if showVotePanel %}
+            <div id="voting">
+                <h2>Textes soumis à signature</h2>
+                <table class="table tablesorter">
+                    <thead>
+                        <tr>
+                            <th>Titre</th>
+                            <th>Auteur</th>
+                            <th>Voter</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for text in texts %}
+                        <tr>
+                            <td>
+                                <a href="{{ path('text_show', {group_id: textGroup.id, text_id: text.entity.id}) }}">{{ text.entity.title }}</a>
+                            </td>
+                            <td>
+                                {{ text.entity.author.firstname }} {{ text.entity.author.lastname }}
+                            </td>
+                            <td>
+                                {% if text.hasVoted > 0 %}
+                                    <span class="glyphicon glyphicon-check" aria-hidden="true"></span>
+                                    <span class="sr-only">Signée</span>
+                                {% elseif is_granted('vote', text.entity) %}
+                                <a class="btn btn-default btn-sm"
+                                   href="{{path('individual_text_vote',
+                                   {group_id: textGroup.id, text_id: text.entity.id}) }}">
+                                    <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+                                    <span class="sr-only">Signer</span>
+                                </a>
+                                {% else %}
+                                    <span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span>
+                                    <span class="sr-only">Signature impossible</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
             {% endif %}
 
         </div><!-- .col-md-12 -->

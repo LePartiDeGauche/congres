@@ -54,14 +54,6 @@ final class TextGroupVoter extends AbstractVoter
             return $this->canVote($textGroup, $user);
         }
 
-        if ($attribute === self::REPORT_VOTE) {
-            return $this->canReportVote($textGroup->getTextGroup(), $user->getProfile(), $textGroup->getOrgan());
-        }
-
-        if ($attribute === self::REPORT_AMEND) {
-            return $this->canReportAmend($textGroup->getTextGroup(), $user->getProfile(), $textGroup->getOrgan());
-        }
-
         return false;
     }
 

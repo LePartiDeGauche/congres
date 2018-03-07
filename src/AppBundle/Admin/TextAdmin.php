@@ -143,6 +143,10 @@ class TextAdmin extends Admin
                 'choices' => $this->status_choice,
                 'multiple' => false,
             ))
+            ->add('adherentVotes', null, array(
+                'label' => 'Signatures',
+                'property' => 'author.getAdherentWithDepartementAndResponsabilitiesAsString'
+            ))
             ->add('title', null, array(
                 'label' => 'Titre'
             ))
@@ -172,6 +176,10 @@ class TextAdmin extends Admin
                 'label' => 'Statut',
                 'choices' => $this->status_choice,
                 'multiple' => false,
+            ))
+            ->add('adherentVotes', null, array(
+                'label' => 'Signatures',
+                'associated_property' => 'author.getAdherentWithDepartementAndResponsabilitiesAsString'
             ))
             ->add('title')
             ->add('rawContent', 'html')
