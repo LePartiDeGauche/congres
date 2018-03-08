@@ -12,6 +12,9 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class OrganType
 {
+    const COORD_DEP_NAME = "Coordination départementale";
+    const COMITE_NAME = "Comité";
+
     /**
      * @var int
      *
