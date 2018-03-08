@@ -19,7 +19,7 @@ class UpdateAdherentCommand extends ContainerAwareCommand
     {
         $this
         // the name of the command (the part after "app/console")
-        ->setName('app:update-adherent')
+        ->setName('app:adherents:update')
 
         // the short description shown while running "php app/console list"
         ->setDescription('Update adherent information.')
@@ -29,24 +29,17 @@ class UpdateAdherentCommand extends ContainerAwareCommand
         ->setHelp('This command allows you to update info about an adherent.')
 
         // configure an argument
-        ->addArgument('email', InputArgument::REQUIRED, 'The e-mail of the adherent.')
+        ->addArgument('emails', InputArgument::IS_ARRAY, 'The e-mail of the adherent.')
 
         ->addOption('responsability', 'r', InputOption::VALUE_REQUIRED, 'Responsability to set on user.', null)
+
+        ->addOption('delete', 'd', InputOption::VALUE_NONE, 'Remove responsability to those adherents that are not provided.', null)
         ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $mail = $input->getArgument('email');
-        $em = $this->getContainer()->get('doctrine')->getManager();
-
-        $adherent = $em->getRepository(Adherent::class)->findOneByEmail($mail);
-
-        if (!$adherent) {
-            $output->writeln("Adherent not found: " . $email);
-            return;
-        }
-        $output->writeln("Adherent found: " . $adherent);
+        $mails = $input->getArgument('emails');
 
         $responsability_name = $input->getOption('responsability');
         if (!isset($responsability_name)) {
@@ -54,18 +47,42 @@ class UpdateAdherentCommand extends ContainerAwareCommand
             return;
         }
 
-        $cn_responsability = $em->getRepository(Responsability::class)
+        $em = $this->getContainer()->get('doctrine')->getManager();
+        $responsability = $em->getRepository(Responsability::class)
                                 ->findOneByName($responsability_name);
-        if ($adherent->hasResponsability($cn_responsability)) {
-            $output->writeln("Adherent already has responsability: " . $cn_responsability);
-        } else {
-            $output->writeln("Setting responsability: " . $cn_responsability);
-            $adherentResponsability = new AdherentResponsability();
-            $adherentResponsability->setResponsability($cn_responsability);
-            $adherent->addResponsability($adherentResponsability);
+
+        foreach ($mails as $mail) {
+            $adherent = $em->getRepository(Adherent::class)->findOneByEmail($mail);
+            if (!$adherent) {
+                $output->writeln("Adherent not found: " . $mail);
+                break;
+            }
+            $output->writeln("Adherent found: " . $adherent);
+            if ($adherent->hasResponsability($responsability)) {
+                $output->writeln("Adherent already has responsability: " . $responsability->getName());
+            } else {
+                $output->writeln("Setting responsability: " . $responsability->getName());
+                $adherentResponsability = new AdherentResponsability();
+                $adherentResponsability->setResponsability($responsability);
+                $adherent->addResponsability($adherentResponsability);
+                $em->persist($adherent);
+            }
         }
 
-        $em->persist($adherent);
+        if ($input->getOption('delete')) {
+            $ars = $em->getRepository(AdherentResponsability::class)->findByResponsability($responsability);
+
+            foreach ($ars as $ar) {
+                $adh = $ar->getAdherent();
+                if (!in_array($adh->getEmail(), $input->getArgument('emails'), true)) {
+                    $output->writeln('Removing responsability to adherent.' . $adh->getEmail());
+                    $adh->removeResponsability($ar);
+                    $em->remove($ar);
+                    $em->persist($adh);
+                }
+            }
+        }
+
         $em->flush();
     }
 }

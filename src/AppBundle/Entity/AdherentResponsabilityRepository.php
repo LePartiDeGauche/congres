@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
+use AppBundle\Entity\Responsability;
 
 /**
  * ContributionRepository.
@@ -29,6 +30,19 @@ class AdherentResponsabilityRepository extends EntityRepository
             ->getResult()
         ;
     }
+
+    public function findByResponsability(Responsability $responsability)
+    {
+        return $adherentResponsability = $this
+            ->createQueryBuilder('ar')
+            ->select('ar')
+            ->andWhere('ar.responsability = :responsability')
+            ->setParameter('responsability', $responsability)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
 
     /**
      * @param Adherent       $adherent
