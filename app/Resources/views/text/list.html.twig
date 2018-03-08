@@ -74,6 +74,9 @@ $(document).ready(function()
                                 {% if text.hasVoted > 0 %}
                                     <span class="glyphicon glyphicon-check" aria-hidden="true"></span>
                                     <span class="sr-only">Signée</span>
+                                {% elseif text.entity.status ==
+                                      constant('AppBundle\\Entity\\Text\\Text::STATUS_ADOPTED') %}
+                                      Texte validé.
                                 {% elseif is_granted('vote', text.entity) %}
                                     <a class="btn btn-default btn-sm"
                                        href="{{path('individual_text_vote',
