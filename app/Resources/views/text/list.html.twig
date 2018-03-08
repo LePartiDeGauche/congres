@@ -58,6 +58,11 @@ $(document).ready(function()
                     </thead>
                     <tbody>
                     {% for text in texts %}
+                    {% if text.entity.status !=
+                          constant('AppBundle\\Entity\\Text\\Text::STATUS_NEW') and
+                          text.entity.status !=
+                          constant('AppBundle\\Entity\\Text\\Text::STATUS_REJECTED')
+                          %}
                         <tr>
                             <td>
                                 <a href="{{ path('text_show', {group_id: textGroup.id, text_id: text.entity.id}) }}">{{ text.entity.title }}</a>
@@ -70,18 +75,19 @@ $(document).ready(function()
                                     <span class="glyphicon glyphicon-check" aria-hidden="true"></span>
                                     <span class="sr-only">Signée</span>
                                 {% elseif is_granted('vote', text.entity) %}
-                                <a class="btn btn-default btn-sm"
-                                   href="{{path('individual_text_vote',
-                                   {group_id: textGroup.id, text_id: text.entity.id}) }}">
-                                    <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
-                                    <span class="sr-only">Signer</span>
-                                </a>
+                                    <a class="btn btn-default btn-sm"
+                                       href="{{path('individual_text_vote',
+                                       {group_id: textGroup.id, text_id: text.entity.id}) }}">
+                                        <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+                                        <span class="sr-only">Signer</span>
+                                    </a>
                                 {% else %}
                                     <span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span>
                                     <span class="sr-only">Signature impossible</span>
                                 {% endif %}
                             </td>
                         </tr>
+                    {% endif %}
                     {% endfor %}
                     </tbody>
                 </table>
