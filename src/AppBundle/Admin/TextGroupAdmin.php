@@ -83,7 +83,9 @@ class TextGroupAdmin extends Admin
             //->add('id')
             ->add('author', 'sonata_type_model_autocomplete', array('property' => array('firstname', 'lastname')))
             ->add('name')
-            ->add('description')
+            ->add('description', null, array(
+                'attr' => ['class' => 'tinymce', 'data-theme' => 'markdown']
+            ))
             ->add('submissionOpening', 'sonata_type_date_picker', array('format' => 'd/M/y'))
             ->add('submissionClosing', 'sonata_type_date_picker', array('format' => 'd/M/y'))
             ->add('voteOpening', 'sonata_type_date_picker', array('format' => 'd/M/y'))

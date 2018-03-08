@@ -23,7 +23,7 @@ $(document).ready(function()
         <div class="col-md-12">
             <h1>Textes de {{ textGroup.name }}</h1>
             <p>
-                {{textGroup.description}}
+                {{textGroup.description | raw}}
             </p>
 
             {% if is_granted('create_text', textGroup) %}
