@@ -14,6 +14,8 @@
     {{- block('form_help') -}}
 {%- endblock form_errors %}
 
+{#
+TODO: Fix that to display checkbox label in admin
 {% block checkbox_row -%}
     {{ block('form_row') }}
 {%- endblock checkbox_row %}
@@ -21,3 +23,4 @@
 {% block checkbox_label %}
     {{ block('form_label') }}
 {% endblock checkbox_label %}
+#}
