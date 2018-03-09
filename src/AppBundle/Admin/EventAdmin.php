@@ -72,9 +72,11 @@ class EventAdmin extends Admin
             ->add('description', null, array('label' => 'Description'))
             ->add('registrationBegin', 'sonata_type_date_picker', array(
                 'label' => 'Début des inscriptions',
+                'format' => 'd/M/y',
             ))
             ->add('registrationEnd', 'sonata_type_date_picker', array(
                 'label' => 'Fin des inscriptions',
+                'format' => 'd/M/y',
             ))
             ->add('roles', 'sonata_type_collection',
                 array(
