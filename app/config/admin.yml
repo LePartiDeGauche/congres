@@ -288,3 +288,9 @@ services:
         arguments: [~, AppBundle\Entity\Page, SonataAdminBundle:CRUD]
         tags:
             - {name: sonata.admin, manager_type: orm, group: "Page et menus", label: "Pages"}
+
+    app.admin.individual_text_vote:
+        class: AppBundle\Admin\IndividualTextVoteAdmin
+        arguments: [~, AppBundle\Entity\Vote\IndividualTextVote, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: "Texte", label: "Votes sur les textes"}
