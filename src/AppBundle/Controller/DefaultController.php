@@ -25,46 +25,6 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/resultats-plateformes", name="resultats_plateformes")
-     */
-    public function resultatsPlateformesAction()
-    {
-        return $this->render('default/resultats-plateformes.html.twig');
-    }
-
-    /**
-     * @Route("/commission-votes", name="commission_votes")
-     */
-    public function commissionVoteAction()
-    {
-        return $this->render('commissions/commission-votes.html.twig');
-    }
-
-    /**
-     * @Route("/commission-debats", name="commission_debats")
-     */
-    public function commissionDebatsAction()
-    {
-        return $this->render('commissions/commission-debats.html.twig');
-    }
-
-    /**
-     * @Route("/deleguedesigne", name="election_delegue")
-     */
-    public function delegueDesigneAction()
-    {
-        return $this->render('election/delegue.html.twig');
-    }
-
-    /**
-     * @Route("/depot-contribution")
-     */
-    public function redirectionDepotContributionAction()
-    {
-        return $this->redirect($this->generateUrl('contribution_submit'));
-    }
-
-    /**
      * @Route("/downloads/{filename}", name="downloads")
      */
     public function downloadAction($filename)
