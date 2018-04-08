@@ -29,6 +29,13 @@ class AmendmentProcess
     private $name;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="text", nullable=true)
+     */
+    private $description;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="begin", type="datetime")
@@ -268,5 +275,29 @@ class AmendmentProcess
     public function getIsVisible()
     {
         return $this->isVisible;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     *
+     * @return AmendmentProcess
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
     }
 }
