@@ -64,6 +64,10 @@ final class AmendmentProcessVoter extends AbstractVoter
         $date = new \DateTime('now');
         $em = $this->entityManager;
 
+        if ($amendmentProcess->getParticipationRule()->getParticipationRuleTerms()->isEmpty()) {
+            return true;
+        }
+
         foreach($amendmentProcess->getParticipationRule()->getParticipationRuleTerms() as $term) {
             $termResponsability = $term->getResponsability();
             $termOrganType = $term->getOrganType();
