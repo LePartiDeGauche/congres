@@ -14,6 +14,7 @@ use AppBundle\Entity\Process\AmendmentProcess;
 use AppBundle\Entity\Text\AmendmentDeposit;
 use AppBundle\Entity\Text\AmendmentItem;
 use AppBundle\Form\Text\AmendmentDepositType;
+use AppBundle\Form\Text\AmendmentDepositValidateType;
 use AppBundle\Form\Text\AmendmentItemType;
 
 /**
@@ -62,7 +63,7 @@ class AmendmentProcessController extends Controller
             ->getRepository('AppBundle:Text\AmendmentDeposit')
             ->findOneBy(array('depositor' => $adherent, 'amendmentProcess' => $amendmentProcess));
 
-        if ($amendmentDeposit) {
+        if ($amendmentDeposit && $amendmentDeposit->getIsValidated() == false) {
             return $this->redirect($this->generateUrl('amendment_deposit_edit', array(
                 'amendment_process_id' => $amendmentProcess->getId(),
                 'amendment_deposit_id' => $amendmentDeposit->getId()
@@ -107,7 +108,7 @@ class AmendmentProcessController extends Controller
             }
         }
 
-        return $this->render('process/amendment_create.html.twig', array(
+        return $this->render('process/amendment_deposit_create.html.twig', array(
             'form' => $form->createView(),
             'amendmentProcess' => $amendmentProcess,
         ));
@@ -126,6 +127,7 @@ class AmendmentProcessController extends Controller
      *
      * @ParamConverter("amendmentProcess", class="AppBundle:Process\AmendmentProcess", options={"id" = "amendment_process_id"})
      * @ParamConverter("amendmentDeposit", class="AppBundle:Text\AmendmentDeposit", options={"id" = "amendment_deposit_id"})
+     *
      * @Template("process/amendment_deposit_edit.html.twig")
      */
     public function editAmendmentDepositAction(AmendmentProcess $amendmentProcess, AmendmentDeposit $amendmentDeposit, Request $request)
@@ -183,6 +185,59 @@ class AmendmentProcessController extends Controller
                 'amendment_process_id' => $amendmentProcess->getId(),
                 'amendment_deposit_id' => $amendmentDeposit->getId()
             )));
+        }
+
+        return array(
+            'form' => $form->createView(),
+            'amendmentDeposit' => $amendmentDeposit,
+            'amendmentProcess' => $amendmentProcess,
+        );
+    }
+
+    /**
+     * @param AmendmentProcess $amendmentProcess
+     * @param AmendmentDeposit $amendmentDeposit
+     *
+     * @Route("/amendment/{amendment_process_id}/deposit/{amendment_deposit_id}/validate",
+     *         name="amendment_deposit_validate",
+     *         requirements={
+     *             "amendment_process_id": "\d+",
+     *             "amendment_deposit_id": "\d+"
+     *  })
+     *
+     * @ParamConverter("amendmentProcess", class="AppBundle:Process\AmendmentProcess", options={"id" = "amendment_process_id"})
+     * @ParamConverter("amendmentDeposit", class="AppBundle:Text\AmendmentDeposit", options={"id" = "amendment_deposit_id"})
+     *
+     * @Template("process/amendment_deposit_validate.html.twig")
+     */
+    public function validateAmendmentDepositAction(AmendmentProcess $amendmentProcess, AmendmentDeposit $amendmentDeposit, Request $request)
+    {
+        $this->denyAccessUnlessGranted('report_amend', $amendmentProcess, $this->getUser());
+
+        $form = $this->createForm(
+            new AmendmentDepositValidateType(),
+            $amendmentDeposit
+        );
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $amendmentDeposit = $form->getData();
+            $amendmentDeposit->setIsValidated(true);
+
+            $manager = $this->getDoctrine()->getManager();
+            $manager->persist($amendmentDeposit);
+            $manager->flush();
+
+            $this
+                ->get('session')
+                ->getFlashBag()
+                ->add(
+                    'success',
+                    'Dépôt d\'amendements réussi. Vous pouvez maintenant déposer une nouvelle série d\'amendements.'
+                )
+            ;
+
+            return $this->redirect($this->generateUrl('homepage'));
         }
 
         return array(

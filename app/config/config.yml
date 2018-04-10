@@ -183,3 +183,11 @@ stfalcon_tinymce:
 knp_menu:
     twig:
         template: menu.html.twig
+
+vich_uploader:
+    db_driver: orm
+    mappings:
+        minutes_document:
+            uri_prefix: /docs/proces-verbaux
+            upload_destination: '%kernel.root_dir%/Resources/downloads'
+            namer:              vich_uploader.namer_uniqid

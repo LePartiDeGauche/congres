@@ -1,0 +1,33 @@
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {% stylesheets '@jqueryui_css' %}
+    <link rel="stylesheet" type="text/css" media="screen" href="{{ asset_url }}"/>
+    {% endstylesheets %}
+{% endblock %}
+
+{% block title %}Clôturer le dépôt d'amendements pour {{ amendmentProcess.textGroup.name }} {% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            {% for flashMessage in app.session.flashbag.get('success') %}
+                <div class="alert alert-success">
+                    {{ flashMessage }}
+                </div>
+            {% endfor %}
+        </div>
+        <div class="row">
+            <h1>Clôturer le dépôt d'amendements pour {{ amendmentProcess.textGroup.name }}</h1>
+            <div class="alert alert-warning">
+                Pour clôturer le dépôt d'amendements, il est nécessaire de téléverser
+                le procès verbal de la réunion qui a statué sur les amendements
+                proposés.
+            </div>
+
+            {{ form(form) }}
+
+        </div>
+    </div>
+{% endblock %}

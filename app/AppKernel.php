@@ -37,6 +37,7 @@ class AppKernel extends Kernel
             new Lexik\Bundle\PayboxBundle\LexikPayboxBundle(),
 
             new PUGX\AutocompleterBundle\PUGXAutocompleterBundle(),
+            new Vich\UploaderBundle\VichUploaderBundle(),
 
             // Our app
             new AppBundle\AppBundle(),

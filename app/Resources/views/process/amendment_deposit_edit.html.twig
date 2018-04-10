@@ -61,7 +61,14 @@
             </table>
 
             <div>
-                <input class="btn btn-primary" type="button" value="Cloturer le dépôt d'amendements">
+                <a class="btn btn-primary"
+                   role="button"
+                   href="{{ path('amendment_deposit_validate', {
+                            amendment_deposit_id: amendmentDeposit.id,
+                            amendment_process_id : amendmentDeposit.amendmentProcess.id
+                        }) }}">
+                    Cloturer le dépôt d'amendements
+                </a>
             </div>
 
             <hr/>

@@ -54,6 +54,7 @@ class AmendmentDepositAdmin extends Admin
             ->add('meetingPlace', null, array('label' => 'Lieu de la réunion'))
             ->add('numberOfPresent', null, array('label' => 'Nombre de présents'))
             ->add('items', null, array('label' => 'Amendements'))
+            ->add('minutesDocumentFilename', null, array('label' => 'Procès verbal'))
         ;
     }
 

@@ -31,7 +31,8 @@
         "components/jquery": "~2.0",
         "components/jqueryui": "~1.11.0",
         "twitter/bootstrap": "~3.3.0",
-        "knplabs/knp-menu-bundle": "~2"
+        "knplabs/knp-menu-bundle": "~2",
+        "vich/uploader-bundle" : "~1.4.2"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3",

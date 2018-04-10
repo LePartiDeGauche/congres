@@ -9,6 +9,7 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 
 use AppBundle\Entity\Text\TextRepository;
+use AppBundle\Entity\Text\AmendmentDeposit;
 
 class AmendmentDepositType extends AbstractType
 {
@@ -62,13 +63,7 @@ class AmendmentDepositType extends AbstractType
             ))
             ->add('origin', 'choice', array(
                 'label' => 'Type d\'origine de l\'amendement',
-                'choices' => array(
-                    'Département',
-                    'SEN',
-                    'Commission',
-                    '6 membres du CN',
-                    '50 adhérent.e.s'
-                )
+                'choices' => AmendmentDeposit::getOrigins()
             ))
             ->add('originInfo', 'text', array(
                 'label' => 'Précision sur l\'origine',

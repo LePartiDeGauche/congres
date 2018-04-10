@@ -5,12 +5,15 @@ namespace AppBundle\Entity\Text;
 use AppBundle\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * And amendment deposit that contains many amendment item
  *
  * @ORM\Table(name="amendment_deposits")
  * @ORM\Entity
+ * @Vich\Uploadable
  */
 class AmendmentDeposit
 {
@@ -115,6 +118,40 @@ class AmendmentDeposit
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Text\AmendmentItem", mappedBy="amendmentDeposit")
      */
     private $items;
+
+
+    /**
+     * NOTE: This is not a mapped field of entity metadata, just a simple property.
+     *
+     * @var File
+     *
+     * @Vich\UploadableField(mapping="minutes_document", fileNameProperty="minutesDocumentFilename")
+     */
+    private $minutesDocumentFile;
+
+    /**
+     * Filename of the minutes document file
+     * @var string
+     *
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $minutesDocumentFilename;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $updatedAt;
+
+    /**
+     * Is validated
+     *
+     * @var bool
+     *
+     * @ORM\Column(name="is_validated", type="boolean", nullable=true)
+     */
+    private $isValidated = false;
 
     public function __construct()
     {
@@ -390,5 +427,125 @@ class AmendmentDeposit
     public function getItems()
     {
         return $this->items;
+    }
+
+    /**
+      * If manually uploading a file (i.e. not using Symfony Form) ensure an instance
+      * of 'UploadedFile' is injected into this setter to trigger the  update. If this
+      * bundle's configuration parameter 'inject_on_load' is set to 'true' this setter
+      * must be able to accept an instance of 'File' as the bundle will inject one here
+      * during Doctrine hydration.
+      *
+      * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $doc
+      *
+      * @return AmendmentDeposit
+      */
+     public function setMinutesDocumentFile(File $file = null)
+     {
+         $this->minutesDocumentFile = $file;
+
+         if ($file) {
+             // It is required that at least one field changes if you are using doctrine
+             // otherwise the event listeners won't be called and the file is lost
+             $this->updatedAt = new \DateTimeImmutable();
+         }
+
+         return $this;
+     }
+
+     /**
+      * @return File|null
+      */
+     public function getMinutesDocumentFile()
+     {
+         return $this->minutesDocumentFile;
+     }
+
+    /**
+     * Set minutesDocumentFilename
+     *
+     * @param string $minutesDocumentFilename
+     *
+     * @return AmendmentDeposit
+     */
+    public function setMinutesDocumentFilename($minutesDocumentFilename)
+    {
+        $this->minutesDocumentFilename = $minutesDocumentFilename;
+
+        return $this;
+    }
+
+    /**
+     * Get minutesDocumentFilename
+     *
+     * @return string
+     */
+    public function getMinutesDocumentFilename()
+    {
+        return $this->minutesDocumentFilename;
+    }
+
+    public function __set($name, $value)
+    {
+        if ($name == '$minutesDocumentFilename') {
+            return $this->setMinutesDocumentFilename($value);
+        }
+        return parent::__set($name, $value);
+    }
+
+    public function __get($name)
+    {
+        if ($name == '$minutesDocumentFilename') {
+            return $this->getMinutesDocumentFilename();
+        }
+        return parent::__get($name);
+    }
+
+    /**
+     * Set updatedAt
+     *
+     * @param \DateTime $updatedAt
+     *
+     * @return AmendmentDeposit
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get updatedAt
+     *
+     * @return \DateTime
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * Set isValidated
+     *
+     * @param boolean $isValidated
+     *
+     * @return AmendmentDeposit
+     */
+    public function setIsValidated($isValidated)
+    {
+        $this->isValidated = $isValidated;
+
+        return $this;
+    }
+
+    /**
+     * Get isValidated
+     *
+     * @return boolean
+     */
+    public function getIsValidated()
+    {
+        return $this->isValidated;
     }
 }
