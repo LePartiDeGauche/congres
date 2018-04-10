@@ -547,6 +547,22 @@ class Adherent
         return $this->departement;
     }
 
+    public function getDepartementNumber()
+    {
+        if ($this->departement != 0) {
+            return $this->departement;
+        } else {
+            $participations = $this->getOrganParticipations();
+            foreach ($participations as $participation) {
+                if ($participation->getOrgan()->getOrganType()->getName() == "Coordination départementale") {
+                    preg_match('/\d+/', $participation->getOrgan()->getDescription(), $id);
+                    return $id[0];
+                }
+            }
+        }
+        return $this->departement;
+    }
+
     /**
      * Set gender.
      *

@@ -10,7 +10,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * The amendment items proposed to the congress.
  *
  * @ORM\Table(name="amendment_items")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Entity\Text\AmendmentItemRepository")
  */
 class AmendmentItem
 {
@@ -28,6 +28,13 @@ class AmendmentItem
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="reference", type="string", length=255)
+     */
+    private $reference;
 
     /**
      * The global amendment for which this item relates to
@@ -158,16 +165,7 @@ class AmendmentItem
      */
     public function __toString()
     {
-        return '#'.$this->getReference ?: '';
-    }
-
-    public function getReference()
-    {
-        return sprintf('%s/%s/%s',
-            substr($this->getText(), 0, 1),
-            $this->getAmendmentDeposit()->getOrigin(),
-            $this->getAmendmentDeposit()->getDepositor()->getDepartement()
-        );
+        return '#'.$this->getReference() ?: '';
     }
 
     /**
@@ -470,5 +468,29 @@ class AmendmentItem
     public function getText()
     {
         return $this->text;
+    }
+
+    /**
+     * Set reference
+     *
+     * @param string $reference
+     *
+     * @return AmendmentItem
+     */
+    public function setReference($reference)
+    {
+        $this->reference = $reference;
+
+        return $this;
+    }
+
+    /**
+     * Get reference
+     *
+     * @return string
+     */
+    public function getReference()
+    {
+        return $this->reference;
     }
 }

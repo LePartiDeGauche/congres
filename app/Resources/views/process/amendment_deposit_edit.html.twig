@@ -42,8 +42,8 @@
                     <th>Référence</th>
                     <th>Texte</th>
                     <th>Type</th>
-                    <th>Ligne de début</th>
-                    <th>Ligne de fin</th>
+                    <th>Début</th>
+                    <th>Fin</th>
                     <th>Contenu</th>
                 </thead>
                 <tbody>
@@ -54,7 +54,7 @@
                             <td>{{ item.humanReadableType }}</td>
                             <td>{{ item.startLine }}</td>
                             <td>{{ item.endLine }}</td>
-                            <td>{{ item.content | truncate(10) }}</td>
+                            <td>{{ item.content | truncate(20) }}</td>
                         </tr>
                     {% endfor %}
                 </tbody>

@@ -155,6 +155,17 @@ class AmendmentProcessController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $amendmentItem = $form->getData();
 
+            $repository = $this->getDoctrine()->getRepository('AppBundle:Text\AmendmentItem');
+
+            $amendmentItem->setReference(
+                sprintf('%s/%s/%s/%s',
+                    substr($amendmentItem->getText(), 0, 1),
+                    $amendmentItem->getAmendmentDeposit()->getOrigin(),
+                    $amendmentItem->getAmendmentDeposit()->getDepositor()->getDepartementNumber(),
+                    $repository->getCountByText($amendmentItem->getText()) + 1
+                )
+            );
+
             $manager = $this->getDoctrine()->getManager();
             $manager->persist($amendmentItem);
             $manager->flush();
