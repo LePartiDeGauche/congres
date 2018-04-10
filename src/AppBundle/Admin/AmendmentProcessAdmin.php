@@ -54,6 +54,9 @@ class AmendmentProcessAdmin extends Admin
     {
         $formMapper
             ->add('name')
+            ->add('description', null, array(
+                'attr' => ['class' => 'tinymce', 'data-theme' => 'markdown']
+            ))
             ->add('isVisible')
             ->add('begin', 'sonata_type_date_picker', array(
                 'format' => 'd/M/y',

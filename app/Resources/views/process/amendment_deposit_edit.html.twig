@@ -1,0 +1,79 @@
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {% stylesheets '@jqueryui_css' %}
+    <link rel="stylesheet" type="text/css" media="screen" href="{{ asset_url }}"/>
+    {% endstylesheets %}
+{% endblock %}
+
+{% block title %}Déposer d'amendements pour {{ amendmentProcess.textGroup.name }} {% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            {% for flashMessage in app.session.flashbag.get('success') %}
+                <div class="alert alert-success">
+                    {{ flashMessage }}
+                </div>
+            {% endfor %}
+        </div>
+        <div class="row">
+            <h1>Déposer des amendements pour {{ amendmentProcess.textGroup.name }}</h1>
+            <h2>Dépôt d'amendements #{{ amendmentDeposit.id }} en cours</h2>
+            <dl class="dl-horizontal">
+                <dt>Déposant</dt>
+                <dd>{{ amendmentDeposit.depositor }}</dd>
+                <dt>Mandataire</dt>
+                <dd>{{ amendmentDeposit.mandatary }}</dd>
+                <dt>Fonction du mandataire</dt>
+                <dd>{{ amendmentDeposit.mandataryInfo }}</dd>
+                <dt>Origine</dt>
+                <dd>{{ amendmentDeposit.humanReadableOrigin }} (Précisions: {{ amendmentDeposit.originInfo }})</dd>
+                <dt>Réunion</dt>
+                <dd>Le {{ amendmentDeposit.meetingDate | localizeddate('long', 'none') }} ({{ amendmentDeposit.meetingPlace }})</dd>
+                <dt>Nombre de présents</dt>
+                <dd>{{ amendmentDeposit.numberOfPresent }}</dd>
+            </dl>
+
+            <h3>Amendements enregistrés</h3>
+            <table class="table table-stripped">
+                <thead>
+                    <th>Référence</th>
+                    <th>Texte</th>
+                    <th>Type</th>
+                    <th>Ligne de début</th>
+                    <th>Ligne de fin</th>
+                    <th>Contenu</th>
+                </thead>
+                <tbody>
+                    {% for item in amendmentDeposit.items %}
+                        <tr>
+                            <td>{{ item.reference }}</td>
+                            <td>{{ item.text }}</td>
+                            <td>{{ item.humanReadableType }}</td>
+                            <td>{{ item.startLine }}</td>
+                            <td>{{ item.endLine }}</td>
+                            <td>{{ item.content | truncate(10) }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <div>
+                <input class="btn btn-primary" type="button" value="Cloturer le dépôt d'amendements">
+            </div>
+
+            <hr/>
+
+            <h2>Ajouter un amendement</h2>
+
+            {{ form(form) }}
+
+            <div class="alert alert-warning">
+                {{ amendmentProcess.description | raw }}
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

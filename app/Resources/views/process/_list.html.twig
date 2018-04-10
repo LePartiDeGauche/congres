@@ -1,16 +1,13 @@
 <h3>Processus d'amendement</h3>
-{% if processes is empty %}
-    <p>Pas de contenu</p>
+<ul>
+{% for process in processes %}
+    {% if is_granted('view', process) %}
+        <li>
+            <a href="{{ path('amendment_deposit_create', {id: process.id}) }}">
+                {{ process.name }}
+            </a>
+        </li>
+    {% endif %}
 {% else %}
-    <ul>
-    {% for process in processes %}
-        {% if is_granted('view', process) %}
-            <li>
-                <a href="{{ path('process_amendment_create', {id: process.id}) }}">
-                    {{ process.name }}
-                </a>
-            </li>
-        {% endif %}
-    {% endfor %}
-    </ul>
-{% endif %}
+    <li>Pas de contenu</li>
+{% endfor %}

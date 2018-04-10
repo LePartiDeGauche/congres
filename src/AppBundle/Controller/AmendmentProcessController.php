@@ -5,11 +5,16 @@ namespace AppBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+
 use Symfony\Component\HttpFoundation\Request;
 
 use AppBundle\Entity\Process\AmendmentProcess;
-use AppBundle\Entity\Text\Amendment;
-use AppBundle\Form\Text\AmendmentType;
+use AppBundle\Entity\Text\AmendmentDeposit;
+use AppBundle\Entity\Text\AmendmentItem;
+use AppBundle\Form\Text\AmendmentDepositType;
+use AppBundle\Form\Text\AmendmentItemType;
 
 /**
  * Amendment Process controller.
@@ -46,30 +51,44 @@ class AmendmentProcessController extends Controller
     /**
      * @param AmendmentProcess $amendmentProcess
      *
-     * @Route("/amendment/create/{id}", requirements={"id" = "\d+"}, name="process_amendment_create")
+     * @Route("/amendment/{id}/deposit/create", requirements={"id" = "\d+"}, name="amendment_deposit_create")
      */
-    public function createAmendmentAction(AmendmentProcess $amendmentProcess, Request $request)
+    public function createAmendmentDepositAction(AmendmentProcess $amendmentProcess, Request $request)
     {
         $this->denyAccessUnlessGranted('report_amend', $amendmentProcess, $this->getUser());
 
-        $amendment = new Amendment();
-        $amendment->setAuthor($this->getUser()->getProfile());
-        $amendmentProcess->addAmendment($amendment);
+        $adherent = $this->getUser()->getProfile();
+        $amendmentDeposit = $this->getDoctrine()
+            ->getRepository('AppBundle:Text\AmendmentDeposit')
+            ->findOneBy(array('depositor' => $adherent, 'amendmentProcess' => $amendmentProcess));
 
-        $formAmendment = $this->createForm(
-            new AmendmentType(),
-            $amendment,
+        if ($amendmentDeposit) {
+            return $this->redirect($this->generateUrl('amendment_deposit_edit', array(
+                'amendment_process_id' => $amendmentProcess->getId(),
+                'amendment_deposit_id' => $amendmentDeposit->getId()
+            )));
+        }
+
+        // No amendment deposit found, then process
+        $amendmentDeposit = new AmendmentDeposit();
+        $amendmentDeposit->setDepositor($this->getUser()->getProfile());
+        $amendmentDeposit->setMandatary($this->getUser()->getProfile());
+        $amendmentProcess->addAmendmentDeposit($amendmentDeposit);
+
+        $form = $this->createForm(
+            new AmendmentDepositType(),
+            $amendmentDeposit,
             array('em' => $this->getDoctrine()->getManager())
         );
 
+        $form->handleRequest($request);
+        if ($form->isSubmitted()) {
+            if ($form->isValid()) {
+                $amendmentDeposit = $form->getData();
+                $amendmentDeposit->setDepositor($this->getUser()->getProfile());
 
-        $formAmendment->handleRequest($request);
-        if ($formAmendment->isSubmitted()) {
-
-            if ($formAmendment->isValid()) {
-                $formAmendment->getData()->setAuthor($this->getUser()->getProfile());
                 $manager = $this->getDoctrine()->getManager();
-                $manager->persist($formAmendment->getData());
+                $manager->persist($amendmentDeposit);
                 $manager->flush();
 
                 $this
@@ -77,19 +96,88 @@ class AmendmentProcessController extends Controller
                     ->getFlashBag()
                     ->add(
                         'success',
-                        'Amendement bien enregistré. Remplissez à nouveau ce formulaire pour en proposer un autre.'
+                        'Dépôt d\'amendement bien enregistré. Vous pouvez maintenant ajouter des amendements.'
                     )
                 ;
 
-                return $this->redirectToRoute(
-                    'process_amendment_create',
-                    array('id' => $amendmentProcess->getId())
-                );
+                return $this->redirect($this->generateUrl('amendment_deposit_edit', array(
+                    'amendment_process_id' => $amendmentProcess->getId(),
+                    'amendment_deposit_id' => $amendmentDeposit->getId()
+                )));
             }
         }
 
         return $this->render('process/amendment_create.html.twig', array(
-            'form' => $formAmendment->createView(),
+            'form' => $form->createView(),
+            'amendmentProcess' => $amendmentProcess,
         ));
+    }
+
+    /**
+     * @param AmendmentProcess $amendmentProcess
+     * @param AmendmentDeposit $amendmentDeposit
+     *
+     * @Route("/amendment/{amendment_process_id}/deposit/{amendment_deposit_id}/edit",
+     *         name="amendment_deposit_edit",
+     *         requirements={
+     *             "amendment_process_id": "\d+",
+     *             "amendment_deposit_id": "\d+"
+     *  })
+     *
+     * @ParamConverter("amendmentProcess", class="AppBundle:Process\AmendmentProcess", options={"id" = "amendment_process_id"})
+     * @ParamConverter("amendmentDeposit", class="AppBundle:Text\AmendmentDeposit", options={"id" = "amendment_deposit_id"})
+     * @Template("process/amendment_deposit_edit.html.twig")
+     */
+    public function editAmendmentDepositAction(AmendmentProcess $amendmentProcess, AmendmentDeposit $amendmentDeposit, Request $request)
+    {
+        $this->denyAccessUnlessGranted('report_amend', $amendmentProcess, $this->getUser());
+
+        // Checks if amendment deposit is validated
+        // if ($amendmentDeposit->isValidated()) {
+        //     return $this->redirect($this->generateUrl('amendement_deposit_show', array(
+        //         'amendment_process_id' => $amendmentProcess->getId(),
+        //         'amendment_deposit_id' => $amendmentDeposit->getId()
+        //     )));
+        // }
+
+        // Checks if amendmentitem already exists
+        //
+        // else
+        $amendmentItem = new AmendmentItem();
+        $amendmentItem->setAmendmentDeposit($amendmentDeposit);
+
+        $form = $this->createForm(
+            new AmendmentItemType(),
+            $amendmentItem
+        );
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $amendmentItem = $form->getData();
+
+            $manager = $this->getDoctrine()->getManager();
+            $manager->persist($amendmentItem);
+            $manager->flush();
+
+            $this
+                ->get('session')
+                ->getFlashBag()
+                ->add(
+                    'success',
+                    'Amendement ajouté. Vous pouvez maintenant em ajouter d\'autres.'
+                )
+            ;
+
+            return $this->redirect($this->generateUrl('amendment_deposit_edit', array(
+                'amendment_process_id' => $amendmentProcess->getId(),
+                'amendment_deposit_id' => $amendmentDeposit->getId()
+            )));
+        }
+
+        return array(
+            'form' => $form->createView(),
+            'amendmentDeposit' => $amendmentDeposit,
+            'amendmentProcess' => $amendmentProcess,
+        );
     }
 }

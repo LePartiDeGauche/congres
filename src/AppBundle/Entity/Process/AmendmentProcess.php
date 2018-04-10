@@ -68,18 +68,26 @@ class AmendmentProcess
     /**
      * @var \stdClass
      *
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Text\Amendment",
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Text\AmendmentDeposit",
      *                mappedBy="amendmentProcess",
      *                cascade={"persist"})
      */
-    private $amendments;
+    private $amendmentDeposits;
 
     /**
      * @var boolean
      *
      * @ORM\Column(name="isVisible", type="boolean")
      */
-    private $isVisible;
+    private $isVisible = false;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->amendmentDeposits = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
@@ -210,48 +218,6 @@ class AmendmentProcess
     {
         return $this->participationRule;
     }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->amendments = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    /**
-     * Add amendment
-     *
-     * @param \AppBundle\Entity\Process\Amendment $amendment
-     *
-     * @return AmendmentProcess
-     */
-    public function addAmendment(\AppBundle\Entity\Text\Amendment $amendment)
-    {
-        $amendment->setAmendmentProcess($this);
-        $this->amendments[] = $amendment;
-
-        return $this;
-    }
-
-    /**
-     * Remove amendment
-     *
-     * @param \AppBundle\Entity\Process\Amendment $amendment
-     */
-    public function removeAmendment(\AppBundle\Entity\Text\Amendment $amendment)
-    {
-        $this->amendments->removeElement($amendment);
-    }
-
-    /**
-     * Get amendments
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getAmendments()
-    {
-        return $this->amendments;
-    }
 
     /**
      * Set isVisible
@@ -299,5 +265,40 @@ class AmendmentProcess
     public function getDescription()
     {
         return $this->description;
+    }
+
+    /**
+     * Add amendmentDeposit
+     *
+     * @param \AppBundle\Entity\Text\AmendmentDeposit $amendmentDeposit
+     *
+     * @return AmendmentProcess
+     */
+    public function addAmendmentDeposit(\AppBundle\Entity\Text\AmendmentDeposit $amendmentDeposit)
+    {
+        $amendmentDeposit->setAmendmentProcess($this);
+        $this->amendmentDeposits[] = $amendmentDeposit;
+
+        return $this;
+    }
+
+    /**
+     * Remove amendmentDeposit
+     *
+     * @param \AppBundle\Entity\Text\AmendmentDeposit $amendmentDeposit
+     */
+    public function removeAmendmentDeposit(\AppBundle\Entity\Text\AmendmentDeposit $amendmentDeposit)
+    {
+        $this->amendmentDeposits->removeElement($amendmentDeposit);
+    }
+
+    /**
+     * Get amendmentDeposits
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getAmendmentDeposits()
+    {
+        return $this->amendmentDeposits;
     }
 }

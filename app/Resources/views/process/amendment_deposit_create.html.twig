@@ -1,0 +1,49 @@
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {% stylesheets '@jqueryui_css' %}
+    <link rel="stylesheet" type="text/css" media="screen" href="{{ asset_url }}"/>
+    {% endstylesheets %}
+{% endblock %}
+
+{% block title %}Déposer des amendements pour {{ amendmentProcess.textGroup.name }} {% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            {% for flashMessage in app.session.flashbag.get('success') %}
+                <div class="alert alert-success">
+                    {{ flashMessage }}
+                </div>
+            {% endfor %}
+        </div>
+        <div class="row">
+            <h1>Déposer des amendements pour {{ amendmentProcess.textGroup.name }}</h1>
+            <div class="alert alert-warning">
+                {{ amendmentProcess.description | raw }}
+            </div>
+
+            {{ form(form) }}
+
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+{{ parent () }}
+
+{% javascripts '@jquery_js' '@jqueryui_js' '@bootstrap_js' '@pugxautocompleter_js' %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+{% endjavascripts %}
+
+<script type="text/javascript">
+$(document).ready(function () {
+  'use strict';
+  $('#appbundle_text_amendment_deposit_mandatary').autocompleter({
+      url_list: '/adherents/search',
+      url_get: '/adherents/get/'
+  });
+});
+</script>
+{% endblock %}

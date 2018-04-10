@@ -135,15 +135,15 @@ services:
         tags:
             - {name: sonata.admin, manager_type: orm, group: "Texte", label: ParticipationRuleTerm, show_in_dashboard: false}
 
-    app.admin.amendment_topic:
-        class: AppBundle\Admin\AmendmentTopicAdmin
-        arguments: [~, AppBundle\Entity\Process\AmendmentTopic, SonataAdminBundle:CRUD]
+    app.admin.amendment_deposit:
+        class: AppBundle\Admin\AmendmentDepositAdmin
+        arguments: [~, AppBundle\Entity\Text\AmendmentDeposit, SonataAdminBundle:CRUD]
         tags:
-            - {name: sonata.admin, manager_type: orm, group: "Texte", label: AmendmentTopic}
+            - {name: sonata.admin, manager_type: orm, group: "Texte", label: "Dépôts d'amendement"}
 
-    app.admin.amendment:
-        class: AppBundle\Admin\AmendmentAdmin
-        arguments: [~, AppBundle\Entity\Text\Amendment, SonataAdminBundle:CRUD]
+    app.admin.amendment_item:
+        class: AppBundle\Admin\AmendmentItemAdmin
+        arguments: [~, AppBundle\Entity\Text\AmendmentItem, SonataAdminBundle:CRUD]
         tags:
             - {name: sonata.admin, manager_type: orm, group: "Texte", label: "Amendements"}
 

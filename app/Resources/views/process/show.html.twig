@@ -13,7 +13,7 @@
             <h2>Soumettre des amendements</h2>
             {% for text in amendmentProcess.textgroup.texts %}
                 <li>
-                    <a href="{{ path('process_amendment_create', {id: amendmentProcess.id}) }}">
+                    <a href="{{ path('amendment_deposit_create', {id: amendmentProcess.id}) }}">
                         {{ text.title }}
                     </a>
                 </li>

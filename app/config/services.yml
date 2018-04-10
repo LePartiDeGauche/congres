@@ -3,6 +3,10 @@ imports:
     - { resource: admin.yml }
 
 services:
+    twig.extension.intl:
+        class: Twig_Extensions_Extension_Intl
+        tags:
+            - { name: twig.extension }
     app.user.registration.form.type:
         class: AppBundle\Form\Type\RegistrationType
         arguments: [%fos_user.model.user.class%]
