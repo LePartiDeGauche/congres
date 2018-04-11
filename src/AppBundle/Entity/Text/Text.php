@@ -308,8 +308,10 @@ class Text
      */
     public function __construct(\AppBundle\Entity\Adherent $author = null)
     {
-        $this->setDepositor($author);
-        $this->setAuthor($author);
+        if (isset($author)) {
+            $this->setDepositor($author);
+            $this->setAuthor($author);
+        }
         $this->setStatus(self::STATUS_NEW);
         $this->adherentVotes = new \Doctrine\Common\Collections\ArrayCollection();
     }
