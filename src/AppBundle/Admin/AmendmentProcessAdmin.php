@@ -57,7 +57,9 @@ class AmendmentProcessAdmin extends Admin
             ->add('description', null, array(
                 'attr' => ['class' => 'tinymce', 'data-theme' => 'markdown']
             ))
-            ->add('isVisible')
+            ->add('isVisible', null, array(
+                'required' => false,
+            ))
             ->add('begin', 'sonata_type_date_picker', array(
                 'format' => 'd/M/y',
             ))
