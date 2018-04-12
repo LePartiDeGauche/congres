@@ -119,7 +119,6 @@ class AmendmentDeposit
      */
     private $items;
 
-
     /**
      * NOTE: This is not a mapped field of entity metadata, just a simple property.
      *
@@ -136,6 +135,23 @@ class AmendmentDeposit
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $minutesDocumentFilename;
+
+    /**
+     * NOTE: This is not a mapped field of entity metadata, just a simple property.
+     *
+     * @var File
+     *
+     * @Vich\UploadableField(mapping="minutes_document", fileNameProperty="tallySheetFilename")
+     */
+    private $tallySheetFile;
+
+    /**
+     * Filename of the tally sheet file
+     * @var string
+     *
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $tallySheetFilename;
 
     /**
      * @var \DateTime
@@ -547,5 +563,61 @@ class AmendmentDeposit
     public function getIsValidated()
     {
         return $this->isValidated;
+    }
+
+    /**
+     * Set tallySheetFilename
+     *
+     * @param string $tallySheetFilename
+     *
+     * @return AmendmentDeposit
+     */
+    public function setTallySheetFilename($tallySheetFilename)
+    {
+        $this->tallySheetFilename = $tallySheetFilename;
+
+        return $this;
+    }
+
+    /**
+     * Get tallySheetFilename
+     *
+     * @return string
+     */
+    public function getTallySheetFilename()
+    {
+        return $this->tallySheetFilename;
+    }
+
+    /**
+    * If manually uploading a file (i.e. not using Symfony Form) ensure an instance
+    * of 'UploadedFile' is injected into this setter to trigger the  update. If this
+    * bundle's configuration parameter 'inject_on_load' is set to 'true' this setter
+    * must be able to accept an instance of 'File' as the bundle will inject one here
+    * during Doctrine hydration.
+    *
+    * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $file
+    *
+    * @return AmendmentDeposit
+    */
+    public function setTallySheetFile(File $file = null)
+    {
+        $this->tallySheetFile = $file;
+
+        if ($file) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->updatedAt = new \DateTimeImmutable();
+        }
+
+        return $this;
+    }
+
+    /**
+    * @return File|null
+    */
+    public function getTallySheetFile()
+    {
+        return $this->tallySheetFile;
     }
 }

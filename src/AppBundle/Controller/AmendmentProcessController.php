@@ -177,7 +177,7 @@ class AmendmentProcessController extends Controller
                 ->getFlashBag()
                 ->add(
                     'success',
-                    'Amendement ajouté. Vous pouvez maintenant em ajouter d\'autres.'
+                    'Amendement ajouté. Vous pouvez maintenant en ajouter d\'autres.'
                 )
             ;
 

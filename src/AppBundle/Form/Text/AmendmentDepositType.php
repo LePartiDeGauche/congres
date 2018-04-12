@@ -42,7 +42,7 @@ class AmendmentDepositType extends AbstractType
 
             $form->add('depositor', 'text', array(
                 'data_class' => 'AppBundle\Entity\Adherent',
-                'label' => 'Rapporteur',
+                'label' => 'Déposant-e',
                 'disabled' => 'true'
             ))
             ->add('mandatary', 'autocomplete', array(
@@ -50,7 +50,7 @@ class AmendmentDepositType extends AbstractType
                 'class' => 'AppBundle:Adherent',
                 'required' => true,
                 'attr' => array(
-                    'data-help' => 'Merci de renseigner le nom du mandataire, le cas échéant.
+                    'data-help' => 'Merci de renseigner le nom du-de la mandataire, le cas échéant.
                                     Vous devez lancer une recherche suivant son nom, son prénom ou son email, puis le sélectionner dans la liste.'
                 )
             ))
@@ -68,7 +68,7 @@ class AmendmentDepositType extends AbstractType
             ->add('originInfo', 'text', array(
                 'label' => 'Précision sur l\'origine',
                 'attr' => array(
-                    'data-help' => 'Merci de préciser l\'origine de l\'amendement: nom du département ou de la commission notamment',
+                    'data-help' => 'Merci de préciser l\'origine de l\'amendement: nom de l\'AG départementale ou de la commission notamment',
                     'class' => 'contact-info'
                 )
             ))
@@ -80,7 +80,7 @@ class AmendmentDepositType extends AbstractType
                 'label' => 'Lieu de la réunion',
             ))
             ->add('numberOfPresent', null, array(
-                'label' => 'Nombre de présents'
+                'label' => 'Nombre de présent-e-s'
             ))
 
 

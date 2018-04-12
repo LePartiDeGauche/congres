@@ -31,7 +31,19 @@ class AmendmentDepositValidateType extends AbstractType
 
             $form->add('minutesDocumentFile', 'file', array(
                 'label' => 'Déposer le procès verbal',
-                'required' => true
+                'required' => false,
+                'attr' => array(
+                    'data-help' => 'Fichier de type image, document ou tableur',
+                    'class' => 'contact-info'
+                )
+            ))
+            ->add('tallySheetFile', 'file', array(
+                'label' => 'Déposer la liste d\'émargement',
+                'required' => false,
+                'attr' => array(
+                    'data-help' => 'Fichier de type image, document ou tableur',
+                    'class' => 'contact-info'
+                )
             ))
             ->add('save', 'submit', array('label' => 'Valider le dépôt d\'amendements'))
             ;
