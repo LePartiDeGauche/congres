@@ -188,6 +188,6 @@ vich_uploader:
     db_driver: orm
     mappings:
         minutes_document:
-            uri_prefix: /docs/proces-verbaux
-            upload_destination: '%kernel.root_dir%/Resources/downloads'
+            uri_prefix: /docs
+            upload_destination: '%kernel.root_dir%/Resources/downloads/docs'
             namer:              vich_uploader.namer_uniqid

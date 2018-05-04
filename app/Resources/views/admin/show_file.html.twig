@@ -1,0 +1,7 @@
+{% extends 'SonataAdminBundle:CRUD:base_show_field.html.twig' %}
+
+{% block field %}
+<a href="{{ vich_uploader_asset(object, field_description.getFieldName()) }}">
+    {{ attribute(object, field_description.options.file_name_field) }}
+</a>
+{% endblock %}

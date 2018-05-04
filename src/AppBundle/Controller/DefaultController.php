@@ -39,6 +39,20 @@ class DefaultController extends Controller
     }
 
     /**
+     * @Route("/docs/{filename}", name="downloads_docs")
+     */
+    public function downloadDocsAction($filename)
+    {
+        $filename = str_replace('../', '', $filename);
+        $filename = __DIR__.'/../../../app/Resources/downloads/docs/'.$filename;
+        if (!file_exists($filename)) {
+            throw $this->createNotFoundException('Ce fichier n\'existe pas.');
+        }
+
+        return new BinaryFileResponse($filename);
+    }
+
+    /**
      * @Route("inscription/check-email/{email}", name="custom_user_registration_check_email")
      * Replace default FOSUserBundle check email controller to work even if user does not exist.
      */

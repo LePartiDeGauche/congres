@@ -6,6 +6,7 @@ use AppBundle\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
@@ -506,7 +507,9 @@ class AmendmentDeposit
         if ($name == '$minutesDocumentFilename') {
             return $this->setMinutesDocumentFilename($value);
         }
-        return parent::__set($name, $value);
+        if ($name == '$tallySheetFilename') {
+            return $this->setTallySheetFilename($value);
+        }
     }
 
     public function __get($name)
@@ -514,7 +517,9 @@ class AmendmentDeposit
         if ($name == '$minutesDocumentFilename') {
             return $this->getMinutesDocumentFilename();
         }
-        return parent::__get($name);
+        if ($name == '$tallySheetFilename') {
+            return $this->getTallySheetFilename();
+        }
     }
 
     /**
