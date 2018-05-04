@@ -44,6 +44,7 @@ class AmendmentItemAdmin extends Admin
     {
         $showMapper
             ->add('id')
+            ->add('reference')
             ->add('text', null, array('label' => 'Texte concerné'))
             ->add('humanReadableType', 'null', array('label' => 'Type de modification'))
             ->add('startLine', null, array('label' => 'Ligne de début'))
@@ -63,7 +64,7 @@ class AmendmentItemAdmin extends Admin
     protected function configureListFields(ListMapper $list)
     {
         $list
-            ->addIdentifier('id')
+            ->addIdentifier('reference')
             ->add('text', null, array('label' => 'Texte concerné'))
             ->add('humanReadableType', 'null', array('label' => 'Type de modification'))
             ->add('startLine', null, array('label' => 'Ligne de début'))
@@ -106,8 +107,17 @@ class AmendmentItemAdmin extends Admin
     public function getExportFields()
     {
         return array(
-            'Texte' => 'text',
+            'Référence' => 'reference',
+            'Déposant' => 'amendmentDeposit.depositor.getAdherentWithDepartementAndResponsabilitiesAsString',
+            'Mandataire' => 'amendmentDeposit.mandatary.getAdherentWithDepartementAndResponsabilitiesAsString',
+            'Fonction du mandataire' => 'amendmentDeposit.mandataryInfo',
+            'Origine du dépôt' => 'amendmentDeposit.humanReadableOrigin',
+            'Précisions sur l\'origine' => 'amendmentDeposit.originInfo',
+            'Date de réunion' => 'amendmentDeposit.meetingDate',
+            'Lieu de réunion' => 'amendmentDeposit.meetingPlace',
+            'Nombre de présents' => 'amendmentDeposit.numberOfPresent',
             'Type' => 'humanReadableType',
+            'Texte concerné' => 'text',
             'Ligne de début' => 'startLine',
             'Ligne de fin' => 'endLine',
             'Contenu' => 'content',
@@ -115,7 +125,7 @@ class AmendmentItemAdmin extends Admin
             'Votes pour' => 'forVote',
             'Votes contre' => 'againstVote',
             'Abstention' => 'abstentionVote',
-            'NPPV' => 'forVote',
+            'NPPV' => 'dtpvVote',
         );
     }
 

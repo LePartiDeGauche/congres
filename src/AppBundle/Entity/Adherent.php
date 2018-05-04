@@ -355,7 +355,7 @@ class Adherent
     }
 
     public function getAdherentWithDepartementAndResponsabilitiesAsString() {
-        $str = $this->getFirstname() . ' ' . $this->getLastname() . ' - ' . $this->getDepartement();
+        $str = $this->getFirstname() . ' ' . $this->getLastname() . ' - ' . $this->getDepartementNumber();
         foreach ($this->getResponsabilities() as $adhResponsability) {
             if ($adhResponsability->getResponsability()->getName() == Responsability::INSTANCE_SEN) {
                 $str .= ' (SEN)';
