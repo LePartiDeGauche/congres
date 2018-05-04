@@ -59,14 +59,11 @@ class AmendmentDepositAdmin extends Admin
                 'template' => '::admin/show_file.html.twig',
                 'file_name_field' => 'minutesDocumentFilename'
             ))
-            ->add('tallySheetFilename', null, array(
+            ->add('tallySheetFile', null, array(
                 'label' => 'Feuille d\'émargement',
+                'template' => '::admin/show_file.html.twig',
+                'file_name_field' => 'tallySheetFilename'
             ))
-            // ->add('tallySheetFile', null, array(
-            //     'label' => 'Feuille d\'émargement',
-            //     'template' => '::admin/show_file.html.twig',
-            //     'file_name_field' => 'tallySheetFilename'
-            // ))
         ;
     }
 
