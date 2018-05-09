@@ -33,7 +33,7 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    {% for election in electionList %}
+                                    {% for election in electionList if is_granted('ELECTION_REPORT', election) %}
                                         <tr>
                                             <td>
                                                 {{ election.group }}

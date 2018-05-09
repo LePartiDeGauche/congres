@@ -59,12 +59,29 @@ class ElectionController extends Controller
     }
 
     /**
+     * _partial controller that list active amendment process
+     */
+    public function fragmentListAction()
+    {
+        $elections = $this->getDoctrine()->getManager()
+                           ->getRepository('AppBundle:Election\Election')
+                           ->findByStatus(Election::STATUS_OPEN);
+        return $this->render('election/_list.html.twig', array(
+            'elections' => $elections,
+        ));
+    }
+
+
+    /**
      * @Route("/liste", name="election_list")
      */
     public function listAction()
     {
+        $list = $this->getDoctrine()
+                     ->getRepository('AppBundle:Election\Election')
+                     ->findByStatus(Election::STATUS_OPEN);
         return $this->render('election/list.html.twig', array(
-            'electionList' => $this->getDoctrine()->getRepository('AppBundle:Election\Election')->findAll(),
+            'electionList' => $list,
         ));
     }
 }

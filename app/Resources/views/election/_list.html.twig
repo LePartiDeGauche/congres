@@ -1,0 +1,11 @@
+<h3>Élections</h3>
+<ul>
+{% if elections|length > 0 %}
+    <li>
+        <a href="{{ path('election_list') }}">
+            Rapporter un résultat d'élection
+        </a>
+    </li>
+{% else %}
+    <li>Pas de contenu</li>
+{% endif %}

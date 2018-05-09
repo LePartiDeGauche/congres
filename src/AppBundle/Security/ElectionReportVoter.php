@@ -45,6 +45,13 @@ class ElectionReportVoter implements VoterInterface
             }
         }
 
+        $organParticipations = $token->getUser()->getProfile()->getOrganParticipations();
+        foreach ($organParticipations as $organParticipation) {
+            if ($organParticipation->getOrgan() == $object->getOrgan()) {
+                return VoterInterface::ACCESS_GRANTED;
+            }
+        }
+
         if (in_array('ROLE_ADMIN', $token->getUser()->getRoles(), true)) {
             return VoterInterface::ACCESS_GRANTED;
         }
