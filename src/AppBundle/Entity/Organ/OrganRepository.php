@@ -5,6 +5,7 @@ namespace AppBundle\Entity\Organ;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\EntityRepository;
 use AppBundle\Entity\Adherent;
+use AppBundle\Entity\Organ\OrganType;
 
 /**
  * OrganRepository.
@@ -15,6 +16,20 @@ use AppBundle\Entity\Adherent;
 class OrganRepository extends EntityRepository
 {
     protected $classname;
+
+    public function getOrganByTypeAndDescription(OrganType $organType, $search)
+    {
+        $organ = $this->createQueryBuilder('o')
+            ->setMaxResults(1)
+            ->select('o')
+            ->where('o.description LIKE :search')
+            ->andWhere('o.organType = :organType')
+            ->setParameter('search', '%' . $search . '%')
+            ->setParameter('organType', $organType)
+            ->getQuery();
+
+        return $organ->getResult();
+    }
 
     public function getOrganByAdherent(Adherent $participant)
     {
