@@ -28,8 +28,7 @@ class ElectionAdmin extends Admin
         $datagridMapper
             ->add('group', null, array('label' => 'Type d\'élection'))
             ->add('organ', null, array('label' => 'Lieu concerné'))
-            ->add('status', null, array(
-                'label' => 'Statut',
+            ->add('status', null, array('label' => 'Statut'), 'choice', array(
                 'choices' => array(
                     Election::STATUS_OPEN => 'Election Ouverte.',
                     Election::STATUS_CLOSED => 'Election fermée.',
@@ -145,5 +144,37 @@ class ElectionAdmin extends Admin
         return array(
             'xls',
         );
+    }
+
+    public function getBatchActions()
+    {
+        $actions = parent::getBatchActions();
+
+        if (
+          $this->hasRoute('edit') && $this->isGranted('EDIT') &&
+          $this->hasRoute('delete') && $this->isGranted('DELETE')
+        ) {
+            $actions['edit_status_open'] = array(
+                'label' => 'Modifier le statut : élection ouverte.',
+                'ask_confirmation' => true,
+            );
+
+            $actions['edit_status_closed'] = array(
+                'label' => 'Modifier le statut : élection fermée.',
+                'ask_confirmation' => true,
+            );
+
+            $actions['edit_status_validated'] = array(
+                'label' => 'Modifier le statut : élection validée.',
+                'ask_confirmation' => true,
+            );
+
+            $actions['edit_status_rejected'] = array(
+                'label' => 'Modifier le statut : élection annulée.',
+                'ask_confirmation' => true,
+            );
+        }
+
+        return $actions;
     }
 }

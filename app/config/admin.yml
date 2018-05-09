@@ -161,9 +161,17 @@ services:
         calls:
             - [setSubClasses, [{threshold: AppBundle\Entity\Vote\ThresholdVoteRule}]]
 
+    sonata.admin.election_controller:
+        class: AppBundle\Admin\Controller\ElectionAdminController
+        calls:
+            - [ setContainer, [@service_container] ]
+
     sonata.admin.election:
         class: AppBundle\Admin\ElectionAdmin
-        arguments: [~, AppBundle\Entity\Election\Election, AppBundle:IsValid]
+        arguments:
+            - ~
+            - AppBundle\Entity\Election\Election
+            - sonata.admin.election_controller
         tags:
             - {name: sonata.admin, manager_type: orm, group: "Election", label: "Elections" }
 
