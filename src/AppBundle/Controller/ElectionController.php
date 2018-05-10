@@ -27,6 +27,7 @@ class ElectionController extends Controller
      */
     public function submitAction(Request $request, Election $election)
     {
+        $election->setResponsable($this->getUser()->getProfile());
         $formElection = $this->createForm(new ElectionType(), $election);
 
         $formElection->handleRequest($request);

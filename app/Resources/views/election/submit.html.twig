@@ -12,18 +12,8 @@
                 </div>
             {% endfor %}
 
-            {{ form_start(form) }}
-            {{ form_errors(form) }}
-
-            <div>
-                {{ form_label(form.elected) }}
-                {{ form_errors(form.elected) }}
-                {{ form_widget(form.elected) }} ({{ election.numberOfElected }} élus)
-            </div>
-
-            <input type="submit" />
-
-            {{ form_end(form) }}
+            {{ form(form) }}
+            
         </div>
         <a href="{{ path('election_list') }}">Retourner à la liste des élections</a>
     </div>

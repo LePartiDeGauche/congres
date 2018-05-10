@@ -146,6 +146,7 @@ class Election
     public function __construct()
     {
         $this->elected = new ArrayCollection();
+        $this->setIsValid(false);
     }
 
     /**
