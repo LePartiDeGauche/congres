@@ -82,10 +82,10 @@ class Election
      *
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Election\MaleElectionResult",
      *                mappedBy="election", cascade={"persist"})
-     * //Assert\Expression(
-     * //    "this.getElected().count() <= this.getNumberOfElected()",
-     * //    message="Trop d'élus selectionnés",
-     * //    groups={"report_election"}
+     * Assert\Expression(
+     *     "this.getElected().count() <= this.getNumberOfElected()",
+     *     message="Trop d'élus selectionnés",
+     *     groups={"report_election"}
      * )
      */
     private $maleElectionResults;

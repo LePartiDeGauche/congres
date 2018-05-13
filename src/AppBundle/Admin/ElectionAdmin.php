@@ -50,7 +50,8 @@ class ElectionAdmin extends Admin
             ->add('group', null, array('label' => 'Type d\'élection'))
             ->add('organ', null, array('label' => 'Lieu concerné'))
             ->add('status', null, array('label' => 'Status'))
-            ->add('elected', null, array('label' => 'Elus'))
+            ->add('maleElectionResults', null, array('label' => 'Élus'))
+            ->add('femaleElectionResults', null, array('label' => 'Élues'))
             ->add('_action', 'actions', array(
                 'actions' => array(
                     'show' => array(),
@@ -72,7 +73,8 @@ class ElectionAdmin extends Admin
     {
         $form
             ->add('group', null, array('label' => 'Type d\'élection'))
-            ->add('organ', null, array('label' => 'Lieu concerné'))
+            ->add('organ', null, array('label' => 'Organe concerné'))
+            // ->add('responsable', null, array('label' => 'Responsable de l\'élection'))
             ->add('numberOfElected', null, array('label' => 'Nombre d\'élus'))
             ->add('status', 'choice', array(
                 'label' => 'Statut',
@@ -84,15 +86,12 @@ class ElectionAdmin extends Admin
                 ),
                 'multiple' => false,
             ))
-            ->add('elected', 'sonata_type_collection', array(
-                'type_options' => array(
-                    'delete' => true,
-                ),
-            ), array(
-                'edit' => 'inline',
-                'inline' => 'table',
-                'sortable' => 'position',
-                'required' => false,
+            ->add('numberOfVoters', null, array('label' => 'Nombre de votants'))
+            ->add('validVotes', null, array('label' => 'Votes valides'))
+            ->add('blankVotes', null, array('label' => 'Votes blancs'))
+            ->add('date', 'sonata_type_date_picker', array(
+                'label' => 'Date de dépôt',
+                'format' => 'd/M/y',
             ))
         ;
     }
@@ -105,12 +104,14 @@ class ElectionAdmin extends Admin
         $showMapper
             ->add('group', null, array('label' => "Type d'élection"))
             ->add('organ', null, array('label' => 'Lieu concerné'))
+            ->add('responsable', null, array('label' => 'Responsable'))
             ->add('numberOfVoters', null, array('label' => 'Nombre de votants'))
             ->add('validVotes', null, array('label' => 'Votes exprimés'))
             ->add('blankVotes', null, array('label' => 'Votes blancs'))
             ->add('numberOfElected', null, array('label' => 'Nombre d\'élus'))
             ->add('status', null, array('label' => 'Statut de l\'élection'))
-            ->add('elected', null, array('label' => 'Élus'))
+            ->add('maleElectionResults', null, array('label' => 'Élus'))
+            ->add('femaleElectionResults', null, array('label' => 'Élues'))
         ;
     }
 

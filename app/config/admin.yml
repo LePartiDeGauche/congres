@@ -175,17 +175,19 @@ services:
         tags:
             - {name: sonata.admin, manager_type: orm, group: "Election", label: "Elections" }
 
+    app.admin.election_result:
+        class: AppBundle\Admin\ElectionResultAdmin
+        arguments: [~, AppBundle\Entity\Election\ElectionResult, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: "Election", label: "Résultats"}
+        calls:
+            - [setSubclasses, [{ 'male': AppBundle\Entity\Election\MaleElectionResult, 'female': AppBundle\Entity\Election\FemaleElectionResult }]]
+
     sonata.admin.election_group:
         class: AppBundle\Admin\ElectionGroupAdmin
         arguments : [~, AppBundle\Entity\Election\ElectionGroup, SonataAdminBundle:CRUD]
         tags:
             - {name: sonata.admin, manager_type: orm, group: "Election", label: "Type d'élection"}
-
-    sonata.admin.result:
-        class: AppBundle\Admin\ResultAdmin
-        arguments : [~, AppBundle\Entity\Election\Result, SonataAdminBundle:CRUD]
-        tags:
-            - {name: sonata.admin, manager_type: orm, group: "Election", label: "Résultats"}
 
     app.admin.candidature_call:
         class: AppBundle\Admin\CandidatureCallAdmin

@@ -48,12 +48,12 @@ class ElectionController extends Controller
 
                 $election = $formElection->getData();
                 foreach ($election->getMaleElectionResults() as $maleResult) {
-                    if ($maleResult->getElected() == null || $maleResult->getNumberOfVote() == null) {
+                    if ($maleResult->getElected() == null && $maleResult->getNumberOfVote() == null) {
                         $election->removeMaleElectionResult($maleResult);
                     }
                 }
                 foreach ($election->getFemaleElectionResults() as $femaleResult) {
-                    if ($femaleResult->getElected() == null || $femaleResult->getNumberOfVote() == null) {
+                    if ($femaleResult->getElected() == null && $femaleResult->getNumberOfVote() == null) {
                         $election->removeFemaleElectionResult($femaleResult);
                     }
                 }
