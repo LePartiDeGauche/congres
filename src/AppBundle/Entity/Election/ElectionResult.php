@@ -11,8 +11,11 @@ use AppBundle\Entity\Adherent;
  *
  * @ORM\Table(name="election_result")
  * @ORM\Entity
+ * @ORM\InheritanceType("SINGLE_TABLE")
+ * @ORM\DiscriminatorColumn(name="type", type="string")
+ * @ORM\DiscriminatorMap({"male" = "MaleElectionResult", "female" = "FemaleElectionResult"})
  */
-class ElectionResult
+abstract class ElectionResult
 {
     /**
      * @var integer

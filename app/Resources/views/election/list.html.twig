@@ -25,8 +25,8 @@
                                     <tr>
                                         <th>Organe</th>
                                         <th>Lieu</th>
-                                        <th>Responsable de l'élection</th>
-                                        <th>Elus</th>
+                                        <th>Élus</th>
+                                        <th>Élues</th>
                                         <th>Election ouverte</th>
                                         <th>Rapporter le résultat</th>
                                         <th>Validée/Rejetée</th>
@@ -40,11 +40,6 @@
                                             </td>
                                             <td>
                                                 {{ election.organ }}
-                                            </td>
-                                            <td>
-                                                {% for responsability in election.organ.designatedParticipants %}
-                                                    {{ responsability.adherent }}
-                                                {% endfor %}
                                             </td>
                                             <td>{{ election.maleElectionResults|join(', ') }}</td>
                                             <td>{{ election.femaleElectionResults|join(', ') }}</td>

@@ -3,7 +3,8 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Election\Election;
-use AppBundle\Entity\Election\ElectionResult;
+use AppBundle\Entity\Election\MaleElectionResult;
+use AppBundle\Entity\Election\FemaleElectionResult;
 use AppBundle\Form\Election\ElectionType;
 use AppBundle\Form\Election\ElectionResultType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -32,8 +33,8 @@ class ElectionController extends Controller
         $election->setResponsable($this->getUser()->getProfile());
         $max = ceil($election->getNumberOfElected() / 2);
         for ($i=0; $i < $max; $i++) {
-            $election->addMaleElectionResult(new ElectionResult());
-            $election->addFemaleElectionResult(new ElectionResult());
+            $election->addMaleElectionResult(new MaleElectionResult());
+            $election->addFemaleElectionResult(new FemaleElectionResult());
         }
 
         $formElection = $this->createForm(new ElectionType(), $election);
@@ -100,7 +101,7 @@ class ElectionController extends Controller
     {
         $list = $this->getDoctrine()
                      ->getRepository('AppBundle:Election\Election')
-                     ->findByStatus(Election::STATUS_CLOSED);
+                     ->findByStatus(Election::STATUS_OPEN);
         return $this->render('election/list.html.twig', array(
             'electionList' => $list,
         ));

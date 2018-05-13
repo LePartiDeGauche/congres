@@ -80,7 +80,7 @@ class Election
     /**
      * @var ElectionResult[]
      *
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Election\ElectionResult",
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Election\MaleElectionResult",
      *                mappedBy="election", cascade={"persist"})
      * //Assert\Expression(
      * //    "this.getElected().count() <= this.getNumberOfElected()",
@@ -93,7 +93,7 @@ class Election
     /**
      * @var ElectionResult[]
      *
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Election\ElectionResult",
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Election\FemaleElectionResult",
      *                mappedBy="election", cascade={"persist"})
      */
     private $femaleElectionResults;
