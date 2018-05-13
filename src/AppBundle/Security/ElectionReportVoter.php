@@ -56,6 +56,10 @@ class ElectionReportVoter implements VoterInterface
             return VoterInterface::ACCESS_GRANTED;
         }
 
+        if ($token->getUser()->getProfile()) {
+            return VoterInterface::ACCESS_GRANTED;
+        }
+
         return VoterInterface::ACCESS_DENIED;
     }
 }
