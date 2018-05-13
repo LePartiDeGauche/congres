@@ -3,7 +3,9 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Election\Election;
+use AppBundle\Entity\Election\ElectionResult;
 use AppBundle\Form\Election\ElectionType;
+use AppBundle\Form\Election\ElectionResultType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -28,6 +30,12 @@ class ElectionController extends Controller
     public function submitAction(Request $request, Election $election)
     {
         $election->setResponsable($this->getUser()->getProfile());
+        $max = ceil($election->getNumberOfElected() / 2);
+        for ($i=0; $i < $max; $i++) {
+            $election->addMaleElectionResult(new ElectionResult());
+            $election->addFemaleElectionResult(new ElectionResult());
+        }
+
         $formElection = $this->createForm(new ElectionType(), $election);
 
         $formElection->handleRequest($request);
@@ -37,7 +45,19 @@ class ElectionController extends Controller
             if ($formElection->isValid()) {
                 $manager = $this->getDoctrine()->getManager();
 
-                $manager->persist($formElection->getData());
+                $election = $formElection->getData();
+                foreach ($election->getMaleElectionResults() as $maleResult) {
+                    if ($maleResult->getElected() == null || $maleResult->getNumberOfVote() == null) {
+                        $election->removeMaleElectionResult($maleResult);
+                    }
+                }
+                foreach ($election->getFemaleElectionResults() as $femaleResult) {
+                    if ($femaleResult->getElected() == null || $femaleResult->getNumberOfVote() == null) {
+                        $election->removeFemaleElectionResult($femaleResult);
+                    }
+                }
+
+                $manager->persist($election);
                 $manager->flush();
 
                 $this
@@ -80,7 +100,7 @@ class ElectionController extends Controller
     {
         $list = $this->getDoctrine()
                      ->getRepository('AppBundle:Election\Election')
-                     ->findByStatus(Election::STATUS_OPEN);
+                     ->findByStatus(Election::STATUS_CLOSED);
         return $this->render('election/list.html.twig', array(
             'electionList' => $list,
         ));

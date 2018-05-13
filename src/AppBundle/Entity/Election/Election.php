@@ -78,16 +78,25 @@ class Election
     private $responsable;
 
     /**
-     * @var Adherent[]
+     * @var ElectionResult[]
      *
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\AdherentResponsability")
-     * @Assert\Expression(
-     *     "this.getElected().count() <= this.getNumberOfElected()",
-     *     message="Trop d'élus selectionnés",
-     *     groups={"report_election"}
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Election\ElectionResult",
+     *                mappedBy="election", cascade={"persist"})
+     * //Assert\Expression(
+     * //    "this.getElected().count() <= this.getNumberOfElected()",
+     * //    message="Trop d'élus selectionnés",
+     * //    groups={"report_election"}
      * )
      */
-    private $elected;
+    private $maleElectionResults;
+
+    /**
+     * @var ElectionResult[]
+     *
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Election\ElectionResult",
+     *                mappedBy="election", cascade={"persist"})
+     */
+    private $femaleElectionResults;
 
     /**
      * Is the election validate by an admin.
@@ -145,8 +154,10 @@ class Election
 
     public function __construct()
     {
-        $this->elected = new ArrayCollection();
+        $this->maleElectionResults = new ArrayCollection();
+        $this->femaleElectionResults = new ArrayCollection();
         $this->setIsValid(false);
+        $this->setDate(new \DateTimeImmutable());
     }
 
     /**
@@ -269,11 +280,11 @@ class Election
     }
 
     /**
-     * @return Adherent[]
+     * @return ElectionResult[]
      */
-    public function getElected()
+    public function getMaleElectionResults()
     {
-        return $this->elected;
+        return $this->maleElectionResults;
     }
 
     /**
@@ -281,31 +292,32 @@ class Election
      */
     public function getElectedNames()
     {
-        return implode(', ', $this->elected->toArray());
+        return implode(', ', $this->maleElectionResults->toArray());
     }
 
     /**
-     * @param Adherent[] $elected
+     * @param ElectionResult[] $maleElectionResults
      *
      * @return $this
      */
-    public function setElected($elected)
+    public function setMaleElectionResults($maleElectionResults)
     {
-        $this->elected = $elected;
+        $this->maleElectionResults = $maleElectionResults;
 
         return $this;
     }
 
     /**
-     * Add responsabilities.
+     * Add an election result.
      *
-     * @param \AppBundle\Entity\AdherentResponsability $responsabilities
+     * @param ElectionResult $electionResult
      *
      * @return Adherent
      */
-    public function addElected(\AppBundle\Entity\AdherentResponsability $elected)
+    public function addMaleElectionResult(ElectionResult $electionResult)
     {
-        $this->elected[] = $elected;
+        $electionResult->setElection($this);
+        $this->maleElectionResults[] = $electionResult;
 
         return $this;
     }
@@ -340,8 +352,9 @@ class Election
 
     public function getElectedEmail()
     {
-        return implode(', ', $this->elected->map(function (AdherentResponsability $elected) {
-            return $elected->getAdherent()->getEmail();
+        return implode(', ', $this->maleElectionResults->map(
+            function (ElectionResult $electionResult) {
+                return $electionResult->getElected()->getEmail();
         })->toArray());
     }
 
@@ -398,7 +411,7 @@ class Election
      *
      * @param \DateTime $date
      *
-     * @return AdherentResponsability
+     * @return Election
      */
     public function setDate($date)
     {
@@ -415,5 +428,60 @@ class Election
     public function getDate()
     {
         return $this->date;
+    }
+
+    /**
+     * Get isValid
+     *
+     * @return boolean
+     */
+    public function getIsValid()
+    {
+        return $this->isValid;
+    }
+
+    /**
+     * Remove electionResult
+     *
+     * @param \AppBundle\Entity\Election\ElectionResult $electionResult
+     */
+    public function removeMaleElectionResult(ElectionResult $electionResult)
+    {
+        $this->maleElectionResults->removeElement($electionResult);
+    }
+
+    /**
+     * Add femaleElectionResult
+     *
+     * @param \AppBundle\Entity\Election\ElectionResult $femaleElectionResult
+     *
+     * @return Election
+     */
+    public function addFemaleElectionResult(ElectionResult $femaleElectionResult)
+    {
+        $femaleElectionResult->setElection($this);
+        $this->femaleElectionResults[] = $femaleElectionResult;
+
+        return $this;
+    }
+
+    /**
+     * Remove femaleElectionResult
+     *
+     * @param \AppBundle\Entity\Election\ElectionResult $femaleElectionResult
+     */
+    public function removeFemaleElectionResult(ElectionResult $femaleElectionResult)
+    {
+        $this->femaleElectionResults->removeElement($femaleElectionResult);
+    }
+
+    /**
+     * Get femaleElectionResults
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getFemaleElectionResults()
+    {
+        return $this->femaleElectionResults;
     }
 }

@@ -46,7 +46,8 @@
                                                     {{ responsability.adherent }}
                                                 {% endfor %}
                                             </td>
-                                            <td>{{ election.elected|join(', ') }}</td>
+                                            <td>{{ election.maleElectionResults|join(', ') }}</td>
+                                            <td>{{ election.femaleElectionResults|join(', ') }}</td>
                                             <td>{{ election.status }}</td>
                                             <td>
                                                 {% if is_granted('ELECTION_REPORT', election) %}

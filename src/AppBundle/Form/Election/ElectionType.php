@@ -2,8 +2,9 @@
 
 namespace AppBundle\Form\Election;
 
-use AppBundle\Entity\AdherentRepository;
+use AppBundle\Entity\Election\Election;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -50,15 +51,26 @@ class ElectionType extends AbstractType
                 'label' => 'Nombre de votes exprimés',
             ));
 
-            $form->add('elected', 'entity',  array(
+            $form->add('maleElectionResults', 'collection',  array(
                 'label' => 'Adhérents élus',
-                'expanded' => false,
-                'multiple' => true,
-                'class' => 'AppBundle\Entity\Adherent',
-                'query_builder' => function (AdherentRepository $repository) use ($organ) {
-                    return $repository->getSearchAdherentByOrganQueryBuilder($organ);
-                },
+                'type' => new ElectionResultType(),
+                'options' => array('label' => false),
+                'by_reference' => false,
+                'prototype' => true,
             ));
+
+            $form->add('femaleElectionResults', 'collection',  array(
+                'label' => 'Adhérentes élues',
+                'type' => new ElectionResultType(),
+                'options' => array('label' => false),
+                'by_reference' => false,
+                'prototype' => true,
+            ));
+
+            $form->add('submit', 'submit', array(
+                'label' => 'Valider les résultats',
+            ));
+
         });
     }
 
@@ -68,7 +80,7 @@ class ElectionType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Election\Election',
+            'data_class' => Election::class,
             'validation_groups' => array('report_election'),
         ));
     }
