@@ -112,6 +112,16 @@ class ElectionAdmin extends Admin
             ->add('status', null, array('label' => 'Statut de l\'élection'))
             ->add('maleElectionResults', null, array('label' => 'Élus'))
             ->add('femaleElectionResults', null, array('label' => 'Élues'))
+            ->add('minutesDocumentFile', null, array(
+                'label' => 'Procès verbal',
+                'template' => '::admin/show_file.html.twig',
+                'file_name_field' => 'minutesDocumentFilename'
+            ))
+            ->add('tallySheetFile', null, array(
+                'label' => 'Feuille d\'émargement',
+                'template' => '::admin/show_file.html.twig',
+                'file_name_field' => 'tallySheetFilename'
+            ))
         ;
     }
 

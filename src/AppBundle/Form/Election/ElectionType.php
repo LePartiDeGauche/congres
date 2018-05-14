@@ -44,11 +44,29 @@ class ElectionType extends AbstractType
             ));
 
             $form->add('blankVotes', null, array(
-                'label' => 'Nombre de votes blancs ou nuls',
+                'label' => 'Nombre de votes nuls',
             ));
 
             $form->add('validVotes', null, array(
-                'label' => 'Nombre de votes exprimés',
+                'label' => 'Nombre de votes exprimés (y compris les blancs)',
+            ));
+
+            $form->add('minutesDocumentFile', 'file', array(
+                'label' => 'Déposer le procès verbal',
+                'required' => false,
+                'attr' => array(
+                    'data-help' => 'Fichier de type image, document ou tableur',
+                    'class' => 'contact-info'
+                )
+            ));
+
+            $form->add('tallySheetFile', 'file', array(
+                'label' => 'Déposer la liste d\'émargement',
+                'required' => false,
+                'attr' => array(
+                    'data-help' => 'Fichier de type image, document ou tableur',
+                    'class' => 'contact-info'
+                )
             ));
 
             $form->add('maleElectionResults', 'collection',  array(
