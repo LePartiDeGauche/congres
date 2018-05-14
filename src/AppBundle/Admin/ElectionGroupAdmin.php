@@ -50,6 +50,9 @@ class ElectionGroupAdmin extends Admin
             ->add('name', null, array('label' => 'Nom'))
             ->add('organType', null, array('label' => 'Organe Concerné'))
             ->add('responsableResponsability', null, array('label' => "Responsable de l'élection"))
+            ->add('description', null, array(
+                'attr' => ['class' => 'tinymce', 'data-theme' => 'markdown']
+            ))
         ;
     }
 
@@ -60,6 +63,7 @@ class ElectionGroupAdmin extends Admin
     {
         $showMapper
             ->add('name', null, array('label' => 'Nom'))
+            ->add('description', null, array('label' => 'Description'))
             ->add('organType', null, array('label' => 'Organe Concerné'))
             ->add('responsableResponsability', null, array('label' => "Responsable de l'élection"))
         ;

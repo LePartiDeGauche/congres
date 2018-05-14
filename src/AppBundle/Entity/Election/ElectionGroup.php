@@ -35,6 +35,15 @@ class ElectionGroup
     private $name;
 
     /**
+     * The name of the Election.
+     *
+     * @var string
+     *
+     * @ORM\Column(name="description", type="text", nullable=true)
+     */
+    private $description;
+
+    /**
      * The type of the organ.
      *
      * @var \AppBundle\Entity\Organ\OrganType
@@ -151,5 +160,29 @@ class ElectionGroup
     public function __toString()
     {
         return $this->name;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     *
+     * @return ElectionGroup
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
     }
 }

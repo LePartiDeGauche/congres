@@ -29,12 +29,20 @@
 {% block body %}
     <div class="container">
         <div class="row">
-            <h1>Rapporter un résultat</h1>
             {% for flashMessage in app.session.flashbag.get('success') %}
                 <div class="alert alert-success">
                     {{ flashMessage }}
                 </div>
             {% endfor %}
+        </div>
+        <div class="row">
+            <h1>{{ election.group }} -  {{ election.organ }}</h1>
+            <h2>Rapporter un résultat</h2>
+            {% if election.group.description is not empty %}
+            <div class="alert alert-warning">
+                {{ election.group.description | raw }}
+            </div>
+            {% endif %}
 
             {{ form(form) }}
 

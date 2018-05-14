@@ -71,6 +71,10 @@ class ElectionType extends AbstractType
 
             $form->add('maleElectionResults', 'collection',  array(
                 'label' => 'Adhérents élus',
+                'attr' => array(
+                    'data-help' => 'Sélectionner le nom de l\'élu et son nombre de voix obtenues',
+                    'class' => 'contact-info'
+                ),
                 'type' => new ElectionResultType(),
                 'options' => array('label' => false),
                 'by_reference' => false,
@@ -79,6 +83,10 @@ class ElectionType extends AbstractType
 
             $form->add('femaleElectionResults', 'collection',  array(
                 'label' => 'Adhérentes élues',
+                'attr' => array(
+                    'data-help' => 'Sélectionner le nom de l\'élu et son nombre de voix obtenues',
+                    'class' => 'contact-info'
+                ),
                 'type' => new ElectionResultType(),
                 'options' => array('label' => false),
                 'by_reference' => false,
