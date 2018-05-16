@@ -140,10 +140,19 @@ class ElectionAdmin extends Admin
     public function getExportFields()
     {
         return array(
-            'id',
-            'organ',
-            'electedNames',
-            'electedEmail',
+            'id' => 'id',
+            'Type d\'élection' => 'group',
+            'Organe' => 'organ',
+            'Statut' => 'status',
+            'Nombre d\'élus possibles' => 'numberOfElected',
+            'Responsable' => 'responsable',
+            'Nombre de votants' => 'validVotes',
+            'Nombre de votes blancs' => 'blankVotes',
+            'Date' => 'updatedAt',
+            'Élus' => 'maleElectedNames',
+            'Élues' => 'femaleElectedNames',
+            'Mail des élus' => 'maleElectedEmail',
+            'Mail des élues' => 'femaleElectedEmail',
         );
     }
 

@@ -336,9 +336,17 @@ class Election
     /**
      * @return string
      */
-    public function getElectedNames()
+    public function getMaleElectedNames()
     {
         return implode(', ', $this->maleElectionResults->toArray());
+    }
+
+    /**
+     * @return string
+     */
+    public function getFemaleElectedNames()
+    {
+        return implode(', ', $this->femaleElectionResults->toArray());
     }
 
     /**
@@ -396,9 +404,17 @@ class Election
         $this->isValid = $isValid;
     }
 
-    public function getElectedEmail()
+    public function getMaleElectedEmail()
     {
         return implode(', ', $this->maleElectionResults->map(
+            function (ElectionResult $electionResult) {
+                return $electionResult->getElected()->getEmail();
+        })->toArray());
+    }
+
+    public function getFemaleElectedEmail()
+    {
+        return implode(', ', $this->femaleElectionResults->map(
             function (ElectionResult $electionResult) {
                 return $electionResult->getElected()->getEmail();
         })->toArray());
