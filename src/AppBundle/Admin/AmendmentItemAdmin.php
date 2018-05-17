@@ -22,6 +22,7 @@ class AmendmentItemAdmin extends Admin
     {
         $form
             ->add('text', null, array('label' => 'Texte concerné'))
+            ->add('reference', null, array('label' => 'Référence'))
             ->add('type', 'choice', array(
                 'label' => 'Type de modification',
                 'choices' => AmendmentItem::getTypes())
