@@ -11,6 +11,10 @@
         </tr>
     </thead>
     <tbody>
+        <tr><th>Référence</th><td>{{ amendment.reference }}</td></tr>
+        <tr><th>Déposant</th><td>{{ amendment.amendmentDeposit.depositor }}</td></tr>
+        <tr><th>Mandataire</th><td>{{ amendment.amendmentDeposit.mandatary }} ({{ amendment.amendmentDeposit.mandataryInfo }})</td></tr>
+        <tr><th>Origine</th><td>{{ amendment.amendmentDeposit.getHumanReadableOrigin }} ({{ amendment.amendmentDeposit.originInfo }})</td></tr>
         <tr><th>Texte concerné</th><td>{{ amendment.text }}</td></tr>
         <tr><th>Type de modification</th><td>{{ amendment.humanReadableType }}</td></tr>
         <tr><th>Ligne de début</th><td>{{ amendment.startLine }}</td></tr>
