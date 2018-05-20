@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Entity\Process\AmendmentProcess;
 use AppBundle\Entity\Text\AmendmentDeposit;
 use AppBundle\Entity\Text\AmendmentItem;
+use AppBundle\Entity\Text\Text;
 use AppBundle\Form\Text\AmendmentDepositType;
 use AppBundle\Form\Text\AmendmentDepositValidateType;
 use AppBundle\Form\Text\AmendmentItemType;
@@ -45,6 +46,36 @@ class AmendmentProcessController extends Controller
     public function showAction(AmendmentProcess $amendmentProcess)
     {
         return $this->render('process/show.html.twig', array(
+            'amendmentProcess' => $amendmentProcess,
+        ));
+    }
+
+    /**
+     * @param Request   $request
+     * @param AmendmentProcess $amendmentProcess
+     * @param TextGroup $textGroup
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     *
+     * @Route("/{amendment_process_id}/list/{text_id}",
+     *        requirements={"amendment_process_id" = "\d+", "text_id" = "\d+"},
+     *        name="amendments_list")
+     * @ParamConverter("amendmentProcess", class="AppBundle:Process\AmendmentProcess", options={"id" = "amendment_process_id"})
+     * @ParamConverter("text", class="AppBundle:Text\Text", options={"id" = "text_id"})
+     */
+    public function listAmendmentsAction(Request $request, AmendmentProcess $amendmentProcess, Text $text)
+    {
+        $this->denyAccessUnlessGranted('view', $amendmentProcess, $this->getUser());
+        if ($this->container->has('profiler')) {
+            $this->container->get('profiler')->disable();
+        }
+
+        $amendments = $this->getDoctrine()
+            ->getRepository('AppBundle:Text\AmendmentItem')
+            ->findBy(array('text' => $text));
+
+        return $this->render('process/listAmendments.html.twig', array(
+            'amendments' => $amendments,
             'amendmentProcess' => $amendmentProcess,
         ));
     }

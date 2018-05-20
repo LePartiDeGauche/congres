@@ -1,0 +1,32 @@
+<html>
+<body>
+
+{% for amendment in amendments %}
+<table>
+    <thead>
+        <tr>
+            <th colspan="2">
+                Amendment {{ amendment.reference }}
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr><th>Texte concerné</th><td>{{ amendment.text }}</td></tr>
+        <tr><th>Type de modification</th><td>{{ amendment.humanReadableType }}</td></tr>
+        <tr><th>Ligne de début</th><td>{{ amendment.startLine }}</td></tr>
+        <tr><th>Ligne de fin</th><td>{{ amendment.endLine }}</td></tr>
+        <tr><th>Contenu</th><td>{{ amendment.content | raw }}</td></tr>
+        <tr><th>Motif</th><td>{{ amendment.explanation | raw }}</td></tr>
+        <tr><th>Vote pour</th><td>{{ amendment.forVote }}</td></tr>
+        <tr><th>Vote contre</th><td>{{ amendment.againstVote }}</td></tr>
+        <tr><th>Abstention</th><td>{{ amendment.abstentionVote }}</td></tr>
+        <tr><th>NPPV</th><td>{{ amendment.dtpvVote }}</td></tr>
+    </tbody>
+</table>
+
+<hr/>
+
+{% endfor %}
+</body>
+
+</html>
