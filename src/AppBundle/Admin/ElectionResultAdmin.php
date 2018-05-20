@@ -73,19 +73,19 @@ class ElectionResultAdmin extends Admin
     public function getExportFields()
     {
         return array(
-            'id',
-            'elected',
-            'numberOfVote',
-            'election',
-            'election.group',
-            'election.organ',
-            'election.responsable',
-            'election.status',
-            'election.date',
-            'election.numberOfElected',
-            'election.numberOfVoters',
-            'election.validVotes',
-            'election.blankVotes',
+            'Id' => 'id',
+            'Élu-e-s' => 'elected',
+            'Nombre de suffrages obtenus' => 'numberOfVote',
+            'Élection' => 'election',
+            'Type d\'élection' => 'election.group',
+            'Organe' => 'election.organ',
+            'Rapporteur' => 'election.responsable',
+            'Statut' => 'election.status',
+            'Date' => 'election.date',
+            'Postes à pourvoir' => 'election.numberOfElected',
+            'Votants' => 'election.numberOfVoters',
+            'Votes exprimés' => 'election.validVotes',
+            'Votes nuls' => 'election.blankVotes',
         );
     }
 

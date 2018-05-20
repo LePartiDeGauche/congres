@@ -144,7 +144,7 @@ class ElectionAdmin extends Admin
             'Type d\'élection' => 'group',
             'Organe' => 'organ',
             'Statut' => 'status',
-            'Nombre d\'élus possibles' => 'numberOfElected',
+            'Nombre de postes à pourvoir' => 'numberOfElected',
             'Responsable' => 'responsable',
             'Nombre de votants' => 'validVotes',
             'Nombre de votes blancs' => 'blankVotes',
