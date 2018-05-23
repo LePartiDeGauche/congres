@@ -50,11 +50,19 @@ class ElectionController extends Controller
                 foreach ($election->getMaleElectionResults() as $maleResult) {
                     if ($maleResult->getElected() == null && $maleResult->getNumberOfVote() == null) {
                         $election->removeMaleElectionResult($maleResult);
+                    } elseif ($maleResult->getNumberOfVote() == null) {
+                        $maleResult->setNumberOfVote(0);
+                    } elseif ($maleResult->getElected() == null) {
+                        $election->removeMaleElectionResult($maleResult);
                     }
                 }
                 foreach ($election->getFemaleElectionResults() as $femaleResult) {
                     if ($femaleResult->getElected() == null && $femaleResult->getNumberOfVote() == null) {
                         $election->removeFemaleElectionResult($femaleResult);
+                    } elseif ($femaleResult->getNumberOfVote() == null) {
+                        $femaleResult->setNumberOfVote(0);
+                    } elseif ($femaleResult->getElected() == null) {
+                        $election->removeMaleElectionResult($femaleResult);
                     }
                 }
 

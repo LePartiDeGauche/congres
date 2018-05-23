@@ -50,3 +50,21 @@
         <a href="{{ path('election_list') }}">Retourner à la liste des élections</a>
     </div>
 {% endblock %}
+
+{% block javascripts %}
+{{ parent () }}
+
+{% javascripts '@jquery_js' '@jqueryui_js' '@bootstrap_js' '@pugxautocompleter_js' %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+{% endjavascripts %}
+
+<script type="text/javascript">
+$(document).ready(function () {
+  'use strict';
+  $('.adherent-autocomplete').autocompleter({
+      url_list: '/adherents/search',
+      url_get: '/adherents/get/'
+  });
+});
+</script>
+{% endblock %}

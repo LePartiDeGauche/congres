@@ -30,16 +30,15 @@ class ElectionResultType extends AbstractType
         $election = $electionResult->getElection();
         $organ = $election->getOrgan();
 
-        $form->add('elected', 'entity',  array(
+        $form->add('elected', 'autocomplete', array(
             'label' => 'Adhérent-e-s élu-e-s',
-            'expanded' => false,
-            'multiple' => false,
+            'class' => 'AppBundle:Adherent',
             'required' => false,
-            'placeholder' => 'Sélectionner un-e adhérent-e',
-            'class' => 'AppBundle\Entity\Adherent',
-            'query_builder' => function (AdherentRepository $repository) use ($organ) {
-                return $repository->getSearchAdherentByOrganQueryBuilder($organ);
-            },
+            'attr' => array(
+                'data-help' => 'Merci de renseigner le nom de l\'adhérent-e élu-e.
+                                Vous devez lancer une recherche suivant son nom, son prénom ou son email, puis le sélectionner dans la liste.',
+                'class' => 'adherent-autocomplete'
+            )
         ));
 
         $form->add('numberOfVote', null, array(
