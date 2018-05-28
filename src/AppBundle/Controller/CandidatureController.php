@@ -62,6 +62,7 @@ class CandidatureController extends Controller
 
         return $this->render('candidature/candidature_create.html.twig', array(
             'form' => isset($displayedForm) ? $displayedForm->createView() : $form->createView(),
+            'candidatureCall' => $candidatureCall
         ));
     }
 

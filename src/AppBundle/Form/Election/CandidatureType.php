@@ -30,7 +30,12 @@ class CandidatureType extends AbstractType
 
             $candidature->setResponsability($candidature->getCandidatureCall()->getResponsability());
 
-            $form->add('responsability', 'entity', array(
+            $form->add('author', 'text', array(
+                    'data_class' => 'AppBundle\Entity\Adherent',
+                    'label' => 'Déposant-e',
+                    'disabled' => 'true'
+                ))
+                ->add('responsability', 'entity', array(
                     'label' => 'Instance',
                     'class' => 'AppBundle:Responsability',
                     'disabled' => 'true',
@@ -42,11 +47,17 @@ class CandidatureType extends AbstractType
                         'data-help' => $candidature->getCandidatureCall()->getFaithProfessionLength() . ' signes maximum',
                     ),
                 ))
-                // ->add('isSortant', 'checkbox', array(
-                //     'label' => 'Je suis candidat-e sortant-e d\'une instance nationale.',
-                //     'required' => false,
-                // ))
-                // ->add('professionfoicplt', null, array('label' => 'Complément', 'required' => false))
+                ->add('isSortant', 'checkbox', array(
+                    'label' => 'Je suis un candidat-e sortant-e de cette instance.',
+                    'required' => false,
+                ))
+                ->add('professionfoicplt', null, array(
+                    'label' => 'Complément',
+                    'required' => false,
+                    'attr' => array(
+                        'data-help' => 'En tant que candidat-e sortant-e, merci de justifier de votre activité de mandat en cours.',
+                    )
+                ))
                 ->add('save', 'submit', array('label' => 'Enregistrer'));
         });
     }

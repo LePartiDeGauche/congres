@@ -1,12 +1,15 @@
 {% extends '::base.html.twig' %}
 
+{% block title %}
+    {{ candidatureCall.title }}
+{% endblock %}
+
 {% block body %}
 <div class="container">
     <div class="row">
-        <h1>Candidature aux instances</h1>
+        <h1>{{ candidatureCall.title }}</h1>
         <p>
-        Les candidatures sont personnelles et accompagnées d'une profession de foi comprenant
-        2&nbsp;500 signes maximum, espaces compris. <br/>
+        {{ candidatureCall.description }}
         </p>
         {{ form(form) }}
     </div>
