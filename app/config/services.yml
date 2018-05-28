@@ -89,6 +89,12 @@ services:
         tags:
            - { name: security.voter }
 
+    app.congres.candidature_call_voter:
+        class:      AppBundle\Security\CandidatureCallVoter
+        public:     false
+        tags:
+           - { name: security.voter }
+
     app.election.departmental_voter:
         class:      AppBundle\Security\DepartmentalElectionVoter
         arguments: [@doctrine.orm.entity_manager, %cosecretaire_departement_id% ]

@@ -15,7 +15,7 @@ class CandidatureCallController extends Controller
     {
         $candidatureCalls = $this->getDoctrine()->getManager()
                     ->getRepository('AppBundle:Election\CandidatureCall')
-                    ->findOpenedAtDate(date_create('now'));
+                    ->findAll();
         return $this->render('candidature/_listCandidatureCall.twig.html', array(
             'candidatureCalls' => $candidatureCalls,
         ));

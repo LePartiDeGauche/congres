@@ -4,13 +4,13 @@
 {% else %}
     <ul>
     {% for candidatureCall in candidatureCalls %}
-        {# if is_granted('view', candidatureCall) #}
+        {% if is_granted('view', candidatureCall) %}
             <li>
                 <a href="{{ path('candidature_create', { candidature_call_id : candidatureCall.id }) }}">
                     {{ candidatureCall.title }}
                 </a>
             </li>
-        {# endif #}
+        {% endif %}
     {% endfor %}
     </ul>
 {% endif %}

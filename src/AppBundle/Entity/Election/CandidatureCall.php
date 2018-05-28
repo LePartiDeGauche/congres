@@ -86,6 +86,13 @@ class CandidatureCall
     private $faithProfessionDescription;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="isVisible", type="boolean", options={"default": false}, nullable=true)
+     */
+    private $isVisible;
+
+    /**
      */
     public function __construct()
     {
@@ -332,5 +339,29 @@ class CandidatureCall
     public function getResponsability()
     {
         return $this->responsability;
+    }
+
+    /**
+     * Set isVisible
+     *
+     * @param boolean $isVisible
+     *
+     * @return CandidatureCall
+     */
+    public function setIsVisible($isVisible)
+    {
+        $this->isVisible = $isVisible;
+
+        return $this;
+    }
+
+    /**
+     * Get isVisible
+     *
+     * @return boolean
+     */
+    public function getIsVisible()
+    {
+        return $this->isVisible;
     }
 }

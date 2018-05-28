@@ -30,7 +30,7 @@ class CandidatureController extends Controller
      */
     public function createAction(Request $request, CandidatureCall $candidatureCall)
     {
-        //$this->denyAccessUnlessGranted('candidate', $this->getUser());
+        $this->denyAccessUnlessGranted('create', $candidatureCall, 'Autorisation refusée.');
 
         $form = $this->createForm(
             new CandidatureType(),
@@ -74,6 +74,8 @@ class CandidatureController extends Controller
      */
     public function listAction(Request $request)
     {
+        // $this->denyAccessUnlessGranted('view', $this->getUser());
+
         $id = $this->getUser()->getProfile();
         $repository = $this->getDoctrine()->getRepository('AppBundle:Election\Candidature');
 
@@ -92,6 +94,8 @@ class CandidatureController extends Controller
      */
     public function deleteAction(Candidature $candidature)
     {
+        // $this->denyAccessUnlessGranted('delete', $this->getUser());
+
         if ($candidature->getAuthor() == $this->getUser()->getProfile()) {
             $em = $this->getDoctrine()->getManager();
             $em->remove($candidature);
