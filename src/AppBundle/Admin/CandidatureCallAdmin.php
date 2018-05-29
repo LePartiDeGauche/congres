@@ -61,7 +61,9 @@ class CandidatureCallAdmin extends Admin
     {
         $formMapper
             ->add('title')
-            ->add('description')
+            ->add('description', null, array(
+                'attr' => ['class' => 'tinymce', 'data-theme' => 'markdown']
+            ))
             ->add('isVisible')
             ->add('openingDate', 'sonata_type_datetime_picker')
             ->add('closingDate', 'sonata_type_datetime_picker')
@@ -73,6 +75,8 @@ class CandidatureCallAdmin extends Admin
             ->add('responsability')
             ->add('faithProfessionLength')
             ->add('faithProfessionDescription')
+            ->add('isTaskEnabled')
+            ->add('taskDescription')
         ;
     }
 

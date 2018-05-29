@@ -108,6 +108,26 @@ class Candidature
      */
     private $candidatureCall;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="commission_contact", type="string", length=255)
+     */
+    private $commissionContact;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="public_contact", type="string", length=255)
+     */
+    private $publicContact;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="task", type="string", length=255, nullable=true)
+     */
+    private $task;
 
     /**
      * Constructor.
@@ -321,5 +341,77 @@ class Candidature
     public function getCandidatureCall()
     {
         return $this->candidatureCall;
+    }
+
+    /**
+     * Set commissionContact
+     *
+     * @param string $commissionContact
+     *
+     * @return Candidature
+     */
+    public function setCommissionContact($commissionContact)
+    {
+        $this->commissionContact = $commissionContact;
+
+        return $this;
+    }
+
+    /**
+     * Get commissionContact
+     *
+     * @return string
+     */
+    public function getCommissionContact()
+    {
+        return $this->commissionContact;
+    }
+
+    /**
+     * Set publicContact
+     *
+     * @param string $publicContact
+     *
+     * @return Candidature
+     */
+    public function setPublicContact($publicContact)
+    {
+        $this->publicContact = $publicContact;
+
+        return $this;
+    }
+
+    /**
+     * Get publicContact
+     *
+     * @return string
+     */
+    public function getPublicContact()
+    {
+        return $this->publicContact;
+    }
+
+    /**
+     * Set task
+     *
+     * @param string $task
+     *
+     * @return Candidature
+     */
+    public function setTask($task)
+    {
+        $this->task = $task;
+
+        return $this;
+    }
+
+    /**
+     * Get task
+     *
+     * @return string
+     */
+    public function getTask()
+    {
+        return $this->task;
     }
 }

@@ -93,6 +93,20 @@ class CandidatureCall
     private $isVisible;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="is_task_enabled", type="boolean", options={"default": false}, nullable=true)
+     */
+    private $isTaskEnabled;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="task_description", type="string", length=255, nullable=true)
+     */
+    private $taskDescription;
+
+    /**
      */
     public function __construct()
     {
@@ -363,5 +377,53 @@ class CandidatureCall
     public function getIsVisible()
     {
         return $this->isVisible;
+    }
+
+    /**
+     * Set isTaskEnabled
+     *
+     * @param boolean $isTaskEnabled
+     *
+     * @return CandidatureCall
+     */
+    public function setIsTaskEnabled($isTaskEnabled)
+    {
+        $this->isTaskEnabled = $isTaskEnabled;
+
+        return $this;
+    }
+
+    /**
+     * Get isTaskEnabled
+     *
+     * @return boolean
+     */
+    public function getIsTaskEnabled()
+    {
+        return $this->isTaskEnabled;
+    }
+
+    /**
+     * Set taskDescription
+     *
+     * @param string $taskDescription
+     *
+     * @return CandidatureCall
+     */
+    public function setTaskDescription($taskDescription)
+    {
+        $this->taskDescription = $taskDescription;
+
+        return $this;
+    }
+
+    /**
+     * Get taskDescription
+     *
+     * @return string
+     */
+    public function getTaskDescription()
+    {
+        return $this->taskDescription;
     }
 }

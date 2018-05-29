@@ -35,16 +35,38 @@ class CandidatureType extends AbstractType
                     'label' => 'Déposant-e',
                     'disabled' => 'true'
                 ))
+                ->add('commissionContact', null, array(
+                    'label' => 'Téléphone',
+                    'attr' => array(
+                        'data-help' => 'Téléphone (pour la commission des votes uniquement)'
+                    )
+                ))
+                ->add('publicContact', null, array(
+                    'label' => 'Contact',
+                    'attr' => array(
+                        'data-help' => 'Mail et/ou téléphone (Ce contact sera publié dans le recueil des professions de foi)'
+                    )
+                ))
                 ->add('responsability', 'entity', array(
                     'label' => 'Instance',
                     'class' => 'AppBundle:Responsability',
                     'disabled' => 'true',
-                ))
-                ->add('professionfoi', null, array(
+                ));
+
+                if ($candidature->getCandidatureCall()->getIsTaskEnabled()) {
+                    $form->add('task', null, array(
+                        'label' => 'Tâche(s)',
+                        'attr' => array(
+                            'data-help' => $candidature->getCandidatureCall()->getTaskDescription()
+                        )
+                    ));
+                }
+
+                $form->add('professionfoi', null, array(
                     'label' => 'Profession de foi',
                     'attr' => array(
                         'maxlength' => $candidature->getCandidatureCall()->getFaithProfessionLength(),
-                        'data-help' => $candidature->getCandidatureCall()->getFaithProfessionLength() . ' signes maximum',
+                        'data-help' => $candidature->getCandidatureCall()->getFaithProfessionLength() . ' signes maximum (espaces compris)',
                     ),
                 ))
                 ->add('isSortant', 'checkbox', array(
