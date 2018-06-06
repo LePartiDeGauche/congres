@@ -80,10 +80,30 @@ class CandidatureAdmin extends Admin
                         .$adherent->getEmail().'&gt;';
                 },
             ))
-            ->add('responsability')
-            ->add('professionfoi')
-            ->add('isSortant')
-            ->add('professionfoicplt')
+            ->add('candidatureCall', null, array(
+                'label' => 'Appel à candidature',
+            ))
+            ->add('responsability', null, array(
+                'label' => 'Instance',
+            ))
+            ->add('commissionContact', null, array(
+                'label' => 'Contact pour la commission',
+            ))
+            ->add('publicContact', null, array(
+                'label' => 'Contact public',
+            ))
+            ->add('task', null, array(
+                'label' => 'Tâche',
+            ))
+            ->add('professionfoi', null, array(
+                'label' => 'Profession de foi',
+            ))
+            ->add('isSortant', null, array(
+                'label' => 'Sortant ?',
+            ))
+            ->add('professionfoicplt', null, array(
+                'label' => 'Profession de foi (complément)',
+            ))
             ->add('status', 'choice', array(
                 'label' => 'Statut',
                 'choices' => $this->status_choice,
