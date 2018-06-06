@@ -113,6 +113,11 @@ class CandidatureCall
         $this->responsabilities = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
+    public function __toString()
+    {
+        return $this->title;
+    }
+
     /**
      * Get id
      *

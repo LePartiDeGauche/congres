@@ -24,10 +24,10 @@ class CandidatureAdmin extends Admin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
+            ->add('candidatureCall', null, array('label' => 'Appel à candidature'))
             ->add('id')
             ->add('author.firstname', null, array('label' => 'Prénom de l\'auteur'))
             ->add('author.lastname', null, array('label' => 'Nom de l\'auteur'))
-            ->add('responsability', null, array('label' => 'Instance'))
             ->add('status', null, array(
                     'label' => 'Statut',
                 ),
@@ -46,8 +46,10 @@ class CandidatureAdmin extends Admin
         $listMapper
             ->add('author.firstname', null, array('label' => 'Prénom de l\'auteur'))
             ->add('author.lastname', null, array('label' => 'Nom de l\'auteur'))
-            ->add('responsability', null, array('label' => 'Instance'))
-            ->add('submitDate', null, array('label' => 'Date d\'envoi'))
+            ->add('candidatureCall', null, array('label' => 'Appel à candidature'))
+            ->add('submitDate', 'date', array('label' => 'Date d\'envoi'))
+            ->add('isSortant', null, array('label' => 'Sortant ?'))
+            ->add('task', null, array('label' => 'Tâche'))
             ->add('status', 'choice', array(
                 'label' => 'Statut',
                 'choices' => $this->status_choice,
@@ -57,7 +59,6 @@ class CandidatureAdmin extends Admin
                 'actions' => array(
                     'show' => array(),
                     'edit' => array(),
-                    'delete' => array(),
                 ),
             ))
         ;
@@ -100,14 +101,20 @@ class CandidatureAdmin extends Admin
             ->add('id')
             ->add('author.firstname', null, array('label' => 'Prénom de l\'auteur'))
             ->add('author.lastname', null, array('label' => 'Nom de l\'auteur'))
+            ->add('commissionContact', null, array('label' => 'Contacts pour la commission'))
+            ->add('publicContact', null, array('label' => 'Contact public'))
+            ->add('candidatureCall', null, array('label' => 'Appel à candidature'))
             ->add('responsability', null, array('label' => 'Instance'))
-            ->add('professionfoi', null, array('label' => 'Profession de foi'))
             ->add('submitDate', null, array('label' => 'Date d\'envoi'))
             ->add('status', 'choice', array(
                 'label' => 'Statut',
                 'choices' => $this->status_choice,
                 'multiple' => false,
             ))
+            ->add('task', null, array('label' => 'Tâche'))
+            ->add('professionfoi', null, array('label' => 'Profession de foi'))
+            ->add('isSortant', null, array('label' => 'Sortant ?'))
+            ->add('professionfoicplt', null, array('label' => 'Complément'))
         ;
     }
 
@@ -117,16 +124,31 @@ class CandidatureAdmin extends Admin
             'Prenom' => 'author.firstname',
             'Nom' => 'author.lastname',
             'Genre' => 'author.gender',
-            'Mail' => 'author.email',
-            'Mobile' => 'author.mobilephone',
-            'Comité' => 'author.organsnames',
+            'Contact pour la commission' => 'commissionContact',
+            'Contact public' => 'publicContact',
+            'Mail connu' => 'author.email',
+            'Mobile connu' => 'author.mobilephone',
+            'Département' => 'author.departement',
+            'Comité(s)' => 'author.OrgansAsString',
             'Statut adhérent' => 'author.status',
-            'Responsabilité' => 'responsability',
-            'Profession de foi' => 'professionfoi',
-            'Profession de foi cplt' => 'professionfoicplt',
-            'Est Sortant' => 'isSortant',
             'Date de candidature' => 'submitDate',
             'Statut de candidature' => 'status',
+            'Appel à candidature' => 'candidatureCall',
+            'Responsabilité' => 'responsability',
+            'Tâche' => 'task',
+            'Profession de foi' => 'professionfoi',
+            'Est Sortant' => 'isSortant',
+            'Profession de foi cplt' => 'professionfoicplt',
             );
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getExportFormats()
+    {
+        return array(
+            'xls',
+        );
     }
 }
