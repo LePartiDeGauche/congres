@@ -59,7 +59,7 @@ class PaymentController extends Controller
                 'url' => $paybox->getUrl(),
                 'form' => $paybox->getForm()->createView(),
                 'payment' => $payment,
-                'paybox_enabled' => false, // TODO: set a parameter to enable/disable paybox payment
+                'paybox_enabled' => true, // TODO: set a parameter to enable/disable paybox payment
             ));
         }
     }
